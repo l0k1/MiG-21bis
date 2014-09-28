@@ -1,0 +1,49 @@
+COMBINED  REMBRANDT/NON REMBRANDT LIGHTING KIT.
+
+This lighting kit lets use add both rembrandt and non rembrandt external lighting to an aircraft with only one XML file per light required.
+The XML files contained in this archive contain an auto switching code to change between   rembrandt and non rembrandt lighting.
+NOTE:- once applied to an aircraft it will be suitable for Flight Gear versions 2.8+ only.
+
+INSTRUCTIONS:-
+
+You only need to alter that paths in the XML files contained in the top level to suit your aircraft and location of the "Lights" folder.  You do not need to change anything in the sub folders.
+
+To apply the lights to an aircraft you add the code to the Aircraft.XML found in the models folder and use that to set the position of the lights.
+
+The code you add to the aircraft.xml would look something like this:-
+
+<model>
+
+<path>Aircraft/YOUR AIRCRAFT FOLDER HERE/Models/Lights/GreenLight.xml</path>
+
+<offsets>
+
+<x-m>0</x-m>
+ - Value to position the lights forward or back
+<y-m>0</y-m>
+ - value to position the lights left or right
+<z-m>0</z-m>
+ - value to position the lights up or down in height
+<pitch-deg>0</pitch-deg>
+ - value to angle the light up or down ( for landing lights )
+<heading-deg>0</heading-deg> - Value to angle the lights left or right ( for landing lights )
+</offsets>
+
+</model> 
+
+The Contents of the NASAL folder should be copied into your aircrafts own NASAL folder and addressed in the SET.XML fils under the nasal tags, something like this:-
+
+<nasal>
+
+ 
+<YOUR AIRCRAFT NAME>
+
+<file>Aircraft/YOUR AIRCRAFT FOLDER/Nasal/light.nas</file>
+ 
+
+</YOUR AIRCRAFT NAME>
+
+
+
+ 
+</nasal>

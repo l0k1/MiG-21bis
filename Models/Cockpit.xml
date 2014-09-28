@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+    <path>Cockpit.ac</path>
+    
+	<!-- Submodels -->
+
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Pilot/Pilot.xml</path>
+		<offsets>
+			<x-m>-3.25</x-m>
+			<y-m> 0.00 </y-m>
+			<z-m> 0.59</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+		<condition>
+			<not>
+				<property>/sim/current-view/internal</property>
+			</not>
+		</condition>
+	</model>
+
+	<model>
+		<name>Panel</name>
+		<path>Aircraft/MiG-21bis/Models/Panel.xml</path>
+	</model>
+
+</PropertyList>

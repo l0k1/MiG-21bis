@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!-- for our friend Toanphuc -->
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">SR of Vietnam Air Force</name>
+                <texture>Liveries/Vietnam.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/Vietnam.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<system name="dump">
+
+  <channel name="Fuel_Dump">
+
+     <switch name="systems/dump/valve">
+          <default value="0"/>
+          <test value="1">
+                systems/dump/armed == 1
+          </test>
+          <output>propulsion/fuel_dump</output>
+     </switch>
+
+  </channel>
+
+</system>

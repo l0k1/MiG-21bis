@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<system name="flaps">
+
+  <channel name="Flaps">
+
+   <kinematic name="Flaps Control">
+     <input>fcs/flap-cmd-norm</input>
+     <traverse>
+       <setting>
+          <position>  0 </position>
+          <time>      0 </time>
+       </setting>
+       <setting>
+          <position> 22.5</position>
+          <time>      4 </time>
+       </setting>
+       <setting>
+          <position> 45 </position>
+          <time>      3 </time>
+       </setting>
+     </traverse>
+     <output>fcs/flap-pos-deg</output>
+   </kinematic>
+
+   <aerosurface_scale name="flaps normalized">
+      <input>fcs/flap-pos-deg</input>
+      <domain>
+        <min>  0.0</min>
+        <max> 45.0</max>
+      </domain>
+      <range>
+        <min> 0</min>
+        <max> 1</max>
+      </range>
+      <output>fcs/flap-pos-norm</output>
+   </aerosurface_scale>
+
+  </channel>
+
+</system>

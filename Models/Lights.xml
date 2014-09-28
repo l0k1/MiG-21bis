@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <model>
+        <name>RedLight</name>
+        <path>Aircraft/MiG-21bis/Models/Lights/RedLight.xml</path>
+        <offsets>
+            <x-m> 0.10</x-m>
+            <y-m>-2.38</y-m>
+            <z-m> 0.09</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>GreenLight</name>
+        <path>Aircraft/MiG-21bis/Models/Lights/GreenLight.xml</path>
+        <offsets>
+            <x-m> 0.10</x-m>
+            <y-m> 2.38</y-m>
+            <z-m> 0.09</z-m>
+        </offsets>
+    </model>
+    
+    <model>
+        <name>LandingLights</name>
+        <path>Aircraft/MiG-21bis/Models/Lights/light-cone.xml</path>
+        <offsets>
+            <x-m> -1.00 </x-m>
+            <y-m> -1.00 </y-m>
+            <z-m> -0.30 </z-m>
+        </offsets>
+    </model>
+	
+	 <model>
+        <name>LandingLights</name>
+        <path>Aircraft/MiG-21bis/Models/Lights/light-cone.xml</path>
+        <offsets>
+            <x-m> -1.00 </x-m>
+            <y-m> 1.00 </y-m>
+            <z-m> -0.30 </z-m>
+        </offsets>
+    </model>
+    
+</PropertyList>

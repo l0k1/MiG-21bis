@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+    <path>RedLight.ac</path>
+	
+	<animation>
+    <type>light</type>
+    <light-type>spot</light-type>
+    <object-name>light</object-name>
+    <position>
+      <x> 0 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </position>
+    <direction>
+      <x>  0.0 </x>
+      <y>  1.0 </y>
+      <z> -0.4 </z>
+    </direction>
+    <ambient>
+      <r>  0.0 </r>
+      <g>  0.8 </g>
+      <b>  0.0 </b>
+      <a>  1.0 </a>
+    </ambient>
+    <diffuse>
+      <r>  0.0 </r>
+      <g>  1.0 </g>
+      <b>  0.0 </b>
+      <a>  1.0 </a>
+    </diffuse>
+    <specular>
+      <r>  0.5 </r>
+      <g>  0.5 </g>
+      <b>  0.5 </b>
+      <a>  1.0 </a>
+    </specular>
+    <dim-factor>
+      <property>dimming/property</property>
+      <!-- optional begin -->
+      <factor>0.04</factor>
+      <offset>0</offset>
+      <min>0</min>
+      <max>1</max>
+      <!-- optional end -->
+    </dim-factor>
+    <attenuation>
+      <c>  0.8 </c>
+      <l>  0.2 </l>
+      <q>  2.0 </q>
+    </attenuation>
+    <exponent>  1.0   </exponent>
+    <cutoff>   50.0   </cutoff>
+    <near-m>    0.0   </near-m>
+    <far-m>     8.0 </far-m>
+  </animation>
+
+    <animation>
+        <type>noshadow</type>
+        <object-name>Light</object-name>
+    </animation>
+
+    <animation>
+        <type>alpha-test</type>
+        <alpha-factor>0.01</alpha-factor>
+    </animation>
+
+    <animation>
+        <type>billboard</type>
+        <object-name>Light</object-name>
+        <spherical type="bool">true</spherical>
+    </animation>
+
+   <animation>
+    <type>select</type>
+    <object-name>Light</object-name>
+    <condition>
+      <property>/sim/model/lights/beacon/state</property>
+    </condition>
+  </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>Light</object-name>
+        <interpolation>
+            <entry>
+                <ind>0</ind>
+                <dep>0.25</dep>
+            </entry>
+            <entry>
+                <ind>20</ind>
+                <dep>0.5</dep>
+            </entry>
+            <entry>
+                <ind>1500</ind>
+                <dep>5</dep>
+            </entry>
+        </interpolation>
+    </animation>
+
+</PropertyList>

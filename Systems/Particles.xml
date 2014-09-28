@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<system name="particles">
+
+  <channel>
+     <switch name="contrail test">
+          <default value="0"/>
+          <test value="1">
+                /ai/submodels/contrails == 1
+          </test>
+          <output>/sim/multiplay/generic/int[5]</output>
+     </switch>
+  </channel>
+
+  <channel>
+     <switch name="vortex test">
+          <default value="0"/>
+          <test value="1">
+                aero/alpha-rad gt 0.1573
+                velocities/mach gt 0.1
+          </test>
+          <output>/sim/multiplay/generic/int[4]</output>
+     </switch>
+  </channel>
+
+</system>

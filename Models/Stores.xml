@@ -1,0 +1,69 @@
+<PropertyList>
+
+	<!-- Stores -->
+    
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Stores/Chute.xml</path>
+		<offsets>
+			<x-m>6.44</x-m>
+			<y-m>0.00</y-m>
+			<z-m>0.70</z-m>
+			<pitch-deg>0.00</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>Fuel Tank</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Tank.xml</path>
+	</model>
+
+	<model>
+		<name>GSh-23 Gun</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/GSh-23.xml</path>
+	</model>
+    
+	<model>
+		<name>Bomb Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/BombL.xml</path>
+		<offsets>
+			<x-m> 0.28</x-m>
+			<y-m>-2.11 </y-m>
+			<z-m>-0.19</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>Bomb Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/BombR.xml</path>
+		<offsets>
+			<x-m> 0.28</x-m>
+			<y-m> 2.11 </y-m>
+			<z-m>-0.19</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>R-60 Missile Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60L.xml</path>
+		<offsets>
+			<x-m> 1.13</x-m>
+			<y-m>-2.73 </y-m>
+			<z-m>-0.22</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>R-60 Missile Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60R.xml</path>
+		<offsets>
+			<x-m> 1.13</x-m>
+			<y-m> 2.73 </y-m>
+			<z-m>-0.22</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+</PropertyList>

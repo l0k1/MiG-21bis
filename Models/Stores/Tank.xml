@@ -1,0 +1,21 @@
+<PropertyList>
+
+    <path>Tank.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>tank</object-name>
+        <condition>
+            <not>
+                <property>fdm/jsbsim/systems/armament/station3/released</property>
+            </not>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>range</type>
+        <min-m>0</min-m>
+        <max-m>12000</max-m>
+    </animation>
+
+</PropertyList>

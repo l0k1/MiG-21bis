@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ########################################
+
+ # DR400-jsbSim by PAF team
+ # April 2012 : Modified by PAF team
+ # http://equipe-flightgear.forumactif.com
+
+##########################################-->
+
+<PropertyList>
+  <path>LandingLightPlate.ac</path>
+
+  <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+    <object-name>LHLNDlight</object-name>
+  </effect>
+
+  <animation>
+    <type>flash</type>
+    <object-name>LHLNDlight</object-name>
+    <axis>
+      <x> -1 </x>
+      <y>  0 </y>
+      <z>  0 </z>
+    </axis>
+    <power>2</power>
+    <factor>2</factor>
+    <offset>0</offset>
+    <two-sides type="bool">false</two-sides>
+    <min>0.5</min>
+    <max>2</max>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>LHLNDlight</object-name>
+    <condition>
+      <equals>
+        <property>gear/gear[0]/position-norm</property>
+        <value> 1 </value>
+      </equals>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>LHLNDlight</object-name>
+    <emission>
+      <red>   0.027 </red>
+      <green> 0.027 </green>
+      <blue>  0.027 </blue>
+      <factor-prop>sim/multiplay/generic/float[5]</factor-prop>
+    </emission>
+  </animation>
+
+</PropertyList>

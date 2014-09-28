@@ -1,0 +1,26 @@
+AC3Db
+MATERIAL "DefaultWhite" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.5 0.5 0.5  shi 64  trans 0
+MATERIAL "lit" rgb 1 1 1 amb 1 1 1 emis 1 1 1 spec 1 1 1 shi 0 trans 0
+OBJECT world
+kids 1
+OBJECT poly
+name "LHLNDlight"
+data 10
+LHLNDlight
+texture "lights.png"
+texrep 1 1
+crease 30.000000
+numvert 4
+0 0.6 0.6
+0 -0.6 0.6
+0 -0.6 -0.6
+0 0.6 -0.599999
+numsurf 1
+SURF 0x00
+mat 1
+refs 4
+0 0.549164414406 0.950835585594
+3 0.950835585594 0.950835585594
+2 0.950835585594 0.549164414406
+1 0.549164414406 0.549164414406
+kids 0

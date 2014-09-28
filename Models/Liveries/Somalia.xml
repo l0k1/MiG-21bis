@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!-- for our friend jeffb -->
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">Somali Air Corps</name>
+                <texture>Liveries/Somalia.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/Somalia.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>

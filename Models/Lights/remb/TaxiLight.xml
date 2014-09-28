@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ########################################
+
+ # DR400-jsbSim by PAF team
+ # April 2012 : Modified by PAF team
+ # http://equipe-flightgear.forumactif.com
+
+##########################################-->
+
+<PropertyList>
+
+  <path>Taxilight.ac</path>
+  <nopreview/>
+
+   <animation>
+    <type>light</type>
+    <light-type>spot</light-type>
+    <object-name>light</object-name>
+    <position>
+      <x> 0 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </position>
+    <direction>
+      <x> -0.998 </x>
+      <y>  0.000 </y>
+      <z> -0.125 </z>
+    </direction>
+    <ambient>
+      <r>  0.3 </r>
+      <g>  0.3 </g>
+      <b>  0.3 </b>
+      <a>  1.0 </a>
+    </ambient>
+    <diffuse>
+      <r>  0.8 </r>
+      <g>  0.8 </g>
+      <b>  0.8 </b>
+      <a>  1.0 </a>
+    </diffuse>
+    <specular>
+      <r>  0.5 </r>
+      <g>  0.5 </g>
+      <b>  0.5 </b>
+      <a>  1.0 </a>
+    </specular>
+    <dim-factor>
+      <property>sim/multiplay/generic/float[6]</property>
+      <!-- optional begin -->
+      <factor>0.04</factor>
+      <offset>0</offset>
+      <min>0</min>
+      <max>1</max>
+      <!-- optional end -->
+    </dim-factor>
+    <attenuation>
+      <c>  0.600 </c>
+      <l>  0.200 </l>
+      <q>  0.002 </q>
+    </attenuation>
+    <exponent> 20.0 </exponent>
+    <cutoff>   60.0 </cutoff>
+    <near-m>    2.5 </near-m>
+    <far-m>    45.0 </far-m>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>light</object-name>
+    <condition>
+      <greater-than>
+        <property>sim/multiplay/generic/float[6]</property>
+        <value>9</value>
+      </greater-than>
+    </condition>
+  </animation>
+
+  <model>
+    <path>TaxiLightPlate.xml</path>
+    <offsets>
+      <heading-deg> 20.0 </heading-deg>
+    </offsets>
+  </model>
+
+<!-- If you need to change scale of the light source, use and adapt : -->
+  <!--<animation>
+    <type>scale</type>
+    <object-name>light</object-name>
+    <x-offset> 1.0 </x-offset>
+    <y-offset> 1.0 </y-offset>
+    <z-offset> 1.0 </z-offset>
+  </animation>-->
+
+
+</PropertyList>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	
+	<path>Impact.ac</path>
+	
+	<animation>
+		<enable-hot type="bool">false</enable-hot>
+	</animation>
+	
+	<animation>
+		<type>billboard</type>
+		<object-name>puff-black2</object-name>
+		<spherical>true</spherical>
+	</animation>
+	
+	<animation>
+		<type>scale</type>
+		<object-name>puff-black2</object-name>
+		<property>sim/time/elapsed-sec</property>
+		<x-min>0</x-min>
+		<y-min>0</y-min>
+		<z-min>0</z-min>
+		<x-max>3</x-max>
+		<y-max>3</y-max>
+		<z-max>3</z-max>
+		<x-factor>1</x-factor>
+		<y-factor>1</y-factor>
+		<z-factor>1</z-factor>
+	</animation>
+	
+	<animation>
+		<type>dist-scale</type>
+		<object-name>puff-black2</object-name>
+		<interpolation>
+		<entry><ind>0</ind><dep>1</dep></entry>
+		<entry><ind>3000</ind><dep>4</dep></entry>
+		</interpolation>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<object-name>puff-black2</object-name>
+		<emission>
+		<red>0.5</red>
+		<green>0.5</green>
+		<blue>0.5</blue>
+		</emission>
+	</animation>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Bomb/Fire.xml</path>
+		<offsets>
+		  <x-m> 2.00</x-m>
+		  <y-m> 0.00</y-m>
+		  <z-m> 0.00</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Bomb/Fire.xml</path>
+		<offsets> 
+		  <x-m>-0.88</x-m>
+		  <y-m> 0.00</y-m>
+		  <z-m> 1.77</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Bomb/Fire.xml</path>
+		<offsets>
+		  <x-m>-0.82</x-m>
+		  <y-m> 0.00</y-m>
+		  <z-m>-1.72</z-m>
+		</offsets>
+	</model>
+
+</PropertyList>

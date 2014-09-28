@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+     ************************************************************************
+     Tecnam P92 Echo
+     January 2012 created by Clément de l'Hamaide : http://equipe-flightgear.forumactif.com/u115
+     ************************************************************************
+-->
+
+<PropertyList>
+
+  <path>light.ac</path>
+  <nopreview/>
+
+   <animation>
+    <type>light</type>
+    <light-type>point</light-type>
+    <object-name>light</object-name>
+    <position>
+      <x> 0 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </position>
+    <ambient>
+      <r>  0.3 </r>
+      <g>  0.3 </g>
+      <b>  0.3 </b>
+      <a>  1.0 </a>
+    </ambient>
+    <diffuse>
+      <r>  0.8 </r>
+      <g>  0.8 </g>
+      <b>  0.8 </b>
+      <a>  1.0 </a>
+    </diffuse>
+    <specular>
+      <r>  0.5 </r>
+      <g>  0.5 </g>
+      <b>  0.5 </b>
+      <a>  1.0 </a>
+    </specular>
+    <dim-factor>
+      <property>sim/multiplay/generic/float[7]</property>
+      <!-- optional begin -->
+      <factor>0.008</factor>
+      <offset>0</offset>
+      <min>0</min>
+      <max>1</max>
+      <!-- optional end -->
+    </dim-factor>
+    <attenuation>
+      <c>  0.4 </c>
+      <l>  0.1 </l>
+      <q>  0.6 </q>
+    </attenuation>
+    <near-m> 0.0  </near-m>
+    <far-m> 30.0  </far-m>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>light</object-name>
+    <condition>
+      <property>sim/multiplay/generic/int[13]</property>
+    </condition>
+  </animation>
+
+  <model>
+    <path>TailLightPlate.xml</path>
+  </model>
+
+<!-- If you need to change scale of the light source, use and adapt : -->
+
+  <animation>
+    <type>scale</type>
+    <object-name>light</object-name>
+    <x-offset> 3.0 </x-offset>
+    <y-offset> 3.0 </y-offset>
+    <z-offset> 3.0 </z-offset>
+  </animation>
+
+
+</PropertyList>
