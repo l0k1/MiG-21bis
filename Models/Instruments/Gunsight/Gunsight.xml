@@ -1,6 +1,37 @@
 <PropertyList>
 
     <path>Gunsight.ac</path>
+	
+	<!-- Rembrandt -->
+	
+    <effect>
+        <inherits-from>Effects/model-transparent</inherits-from>
+        <condition>
+            <greater-than>
+                <property>sim/multiplay/generic/float[6]</property>
+                <value>9</value>
+            </greater-than>
+            <property>/sim/rendering/rembrandt/enabled</property>
+       	 	</condition>
+			<object-name>sight</object-name>
+			<object-name>gunsight-glass</object-name>
+    </effect>
+	
+	<!-- Shaders -->
+
+	<animation>
+		<type>shader</type>
+		<shader>chrome</shader>
+		<texture>Aircraft/Generic/Effects/glass_shader.png</texture>
+		<object-name>sight</object-name>
+		<object-name>gunsight-glass</object-name>
+	</animation>
+	
+	<animation>
+		<type>noshadow</type>
+		<object-name>sight</object-name>
+		<object-name>gunsight-glass</object-name>
+	</animation>
 
     <animation>
         <type>material</type>
@@ -12,6 +43,8 @@
             <property>controls/armament/gunsight/power-on</property>
         </emission> 
     </animation>
+	
+	<!-- Animations -->
     
     <animation>
         <type>material</type>

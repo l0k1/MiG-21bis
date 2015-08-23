@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+  <!-- nav lights -->
+  <!-- green and red navigation lights, usually mounted on the wingtips -->
+  <!-- note: default orientation is up -->
+  <model>
+    <name>GreenLight</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/GreenLight.xml</path>
+    <offsets>
+        <x-m> 0.10</x-m>
+        <y-m> 2.38</y-m>
+        <z-m> 0.09</z-m>
+      <roll-deg>-90</roll-deg>
+      <pitch-deg>-5</pitch-deg> <!-- due to roll, this tunes heading - I want it to point 5 deg more forward -->
+    </offsets>
+  </model>
+  
+  <model>
+    <name>RedLight</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/RedLight.xml</path>
+    <offsets>
+        <x-m> 0.10</x-m>
+        <y-m>-2.38</y-m>
+        <z-m> 0.09</z-m>
+      <roll-deg>90</roll-deg>
+      <pitch-deg>-5</pitch-deg> <!-- due to roll, this tunes heading - I want it to point 5 deg more forward -->
+    </offsets>
+  </model>
+  
+  <!-- beacon -->
+  <!-- bright red flashing light -->
+  <!-- note: default orientation is up -->
+  <!--
+  <model>
+    <name>Beacon1</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/Beacon.xml</path>
+    <offsets>
+      <x-m>0.5584</x-m>
+      <y-m>0.0087</y-m>
+      <z-m>0.6006</z-m>
+      <pitch-deg>6</pitch-deg>
+    </offsets>
+  </model>
+  
+  <model>
+    <name>Beacon2</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/Beacon.xml</path>
+    <offsets>
+      <x-m>3.3324</x-m>
+      <y-m>0.0085</y-m>
+      <z-m>-0.9267</z-m>
+      <pitch-deg>174</pitch-deg>
+    </offsets>
+  </model>
+  -->
+  <!-- landing lights -->
+  <!-- a powerful front facing spotlight -->
+  <model>
+    <name>LandingLight1</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/LandingLight.xml</path>
+    <offsets>
+        <x-m> -0.8866 </x-m>
+        <y-m> -0.7958 </y-m>
+        <z-m> -0.0551 </z-m>
+      <pitch-deg>-5.7</pitch-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>LandingLight2</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/LandingLight.xml</path>
+    <offsets>
+        <x-m> -0.8866 </x-m>
+        <y-m>  0.7958 </y-m>
+        <z-m> -0.0551 </z-m>
+      <pitch-deg>-5.7</pitch-deg>
+    </offsets>
+  </model>
+  
+  <animation>
+    <type>select</type>
+    <object-name>LandingLight1</object-name>
+	<object-name>LandingLight2</object-name>
+    <condition>
+      <equals>
+        <property>gear/gear[1]/position-norm</property>
+        <value>1</value>
+      </equals>
+    </condition>
+  </animation>
+  <!-- taxi light -->
+  <!-- a weaker front facing spotlight, often mounted on the front gear -->
+  <model>
+    <name>TaxiLight</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/TaxiLight.xml</path>
+    <offsets>
+      <x-m>-4.4910</x-m>
+      <y-m> 0</y-m>
+      <z-m>-0.5637</z-m>
+      <pitch-deg>-1.5</pitch-deg>
+    </offsets>
+  </model>
+  <!-- front gear turning: include TaxiLight in the list of animated objects in the rotate animation of the gear in the top-level model XML file -->
+  <!-- retracted gear makes it dissapear - use only if mounted on front gear -->
+  <animation>
+    <type>select</type>
+    <object-name>TaxiLight</object-name>
+    <condition>
+      <equals>
+        <property>gear/gear[0]/position-norm</property>
+        <value>1</value>
+      </equals>
+    </condition>
+  </animation>
+  <!-- probe light --> 
+  <!-- this is best included in the probe model xml file, not here - just an example -->
+  <!-- if you have an extendable/optional fuel probe, including this in its own model file makes sure the light moves/disappears together with the probe -->
+  <!-- in case of extendable probe, you might want to add a select animation (to turn off the light when not fully extended), similar as for the taxi light on the front gear -->
+  <!--
+<model>
+    <path>Aircraft/MiG-21bis/Models/Lights/ProbeLight.xml</path>
+    <offsets>
+      <x-m>-4.4867</x-m>
+      <y-m>0.4922</y-m>
+      <z-m>-0.4929</z-m>
+    </offsets>
+  </model>
+-->
+  <!-- strobes -->
+  <!-- a bright briefly flashing white light -->
+  <!-- note: default orientation is up -->
+  <!--
+  <model>
+    <name>Strobe1</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/Strobe.xml</path>
+    <offsets>
+      <x-m>2.1656</x-m>
+      <y-m>2.0577</y-m>
+      <z-m>0.2277</z-m>
+      <roll-deg>-90</roll-deg>
+      <pitch-deg>-3</pitch-deg>
+    </offsets>
+  </model>
+  
+  <model>
+    <name>Strobe2</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/Strobe.xml</path>
+    <offsets>
+        <x-m> 2.1656</x-m>
+        <y-m>-2.0577</y-m>
+        <z-m> 0.2277</z-m>
+      <roll-deg>90</roll-deg>
+      <pitch-deg>-3</pitch-deg> 
+	</offsets>
+  </model>
+-->
+  <!-- white light -->
+  <!-- a white stable light, usually used as a visibility feature on the tail -->
+  <!-- note: default orientation is up -->
+  <model>
+    <name>WhiteLight</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/WhiteLight.xml</path>
+    <offsets>
+      <x-m>7.5770</x-m>
+      <y-m>0</y-m>
+      <z-m>2.7049</z-m>
+      <pitch-deg>93</pitch-deg>
+    </offsets>
+  </model>
+  
+</PropertyList>

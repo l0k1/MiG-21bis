@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">Hungarian Air Force</name>
+                <texture>Liveries/Hungary.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/Hungary.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>

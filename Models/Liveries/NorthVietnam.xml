@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">North Vietnam Air Force</name>
+                <texture>Liveries/NorthVietnam.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/NorthVietnam.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>

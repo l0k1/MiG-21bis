@@ -7,8 +7,8 @@
 		<!-- Info -->
 	
 		<description>Mikoyan-Gurevich MiG-21bis YASim</description>
-		<author>Petar Jedvaj, David Culp, Raptor, Stuart Cassie, Gary Brown, Brendan Black and Tomaskom</author>
-		<status>1.3.2</status>
+		<author>Petar Jedvaj, David Culp, Raptor, Stuart Cassie, Gary Brown, Brendan Black, bugman and Tomaskom</author>
+		<status>1.4.3</status>
 	
 		<rating>
 			<FDM type="int">3</FDM>
@@ -138,11 +138,15 @@
 				<desc>Toggle canopy</desc>
 			</key>
 			<key>
+				<name>e</name>
+				<desc>Eject</desc>
+			</key>
+			<key>
 				<name>f</name>
 				<desc>Gun trigger</desc>
 			</key>
 			<key>
-				<name>e</name>
+				<name>q</name>
 				<desc>Fire selected weapon</desc>
 			</key>
 			<key>
@@ -421,19 +425,11 @@
 	    
 			<key n="101">
 				<name>e</name>
-				<desc>Release selected store</desc>
+				<desc>Eject</desc>
 				<binding>
-					<command>property-assign</command>
-					<property>fdm/jsbsim/systems/armament/release</property>
-					<value>1</value>
+					<command>nasal</command>
+					<script>Eject.eject();</script>
 				</binding>
-				<mod-up>
-					<binding>
-						<command>property-assign</command>
-						<property>fdm/jsbsim/systems/armament/release</property>
-						<value>0</value> 
-					</binding>
-				</mod-up>
 			</key>
 
 			<key n="102">
@@ -480,6 +476,23 @@
 					<binding>
 						<command>property-assign</command>
 						<property>fdm/jsbsim/systems/NWS/engaged</property>
+						<value>0</value> 
+					</binding>
+				</mod-up>
+			</key>
+			
+			<key n="113">
+				<name>q</name>
+				<desc>Release selected store</desc>
+				<binding>
+					<command>property-assign</command>
+					<property>fdm/jsbsim/systems/armament/release</property>
+					<value>1</value>
+				</binding>
+				<mod-up>
+					<binding>
+						<command>property-assign</command>
+						<property>fdm/jsbsim/systems/armament/release</property>
 						<value>0</value> 
 					</binding>
 				</mod-up>
@@ -539,8 +552,13 @@
 	<nasal>
 		<MiG-21bis>
 			<file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>
-			<file>Aircraft/MiG-21bis/Nasal/lights.nas</file>
 		</MiG-21bis>
+	    <lights>
+	    	<file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>
+	    </lights>
+		<Eject>
+			<file>Aircraft/MiG-21bis/Nasal/eject.nas</file>
+		</Eject>
 		<tyresmoke>
 			<file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>
 		</tyresmoke>

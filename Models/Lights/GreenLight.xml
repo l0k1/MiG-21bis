@@ -2,52 +2,26 @@
 
 <PropertyList>
 
- <!-- gree navigation lighting -->
-
- <!-- rembrandt auto switching for glass -->
-  <effect>
-  <inherits-from>Effects/model-transparent</inherits-from>
-  <condition>
-    <property>sim/rendering/rembrandt/enabled</property>
-  </condition>
-  
-  <object-name>light</object-name>
-   <object-name>Light</object-name>
-  
-  
-</effect>
-
-<!-- Turns off non rembrant lighting  -->
-<animation>
-        <type>select</type>
-         
-	<object-name>GreenLight</object-name>
-	
-		<condition>
-            <not>
-            <property>/sim/rendering/rembrandt/enabled</property>
-            </not>
-        </condition>
-    </animation>		
-
- <model>
-  <name>GreenLight</name>
-    <path>Aircraft/Mig-21bis/Models/Lights/normal/GreenLight.xml</path>
-    <offsets>
-      <x-m>0</x-m>
-      <y-m>0</y-m>
-      <z-m> 0 </z-m>
-    </offsets>
-  </model>
-  
   <model>
-  <name>GreenLight2</name>
-    <path>Aircraft/Mig-21bis/Models/Lights/remb/NavLightR.xml</path>
-    <offsets>
-      <x-m>0</x-m>
-      <y-m>0</y-m>
-      <z-m>0 </z-m>
-    </offsets>
+    <name>GreenLightFlare</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/Flares/GreenLight-flare.xml</path>
   </model>
+
+  <model>
+    <name>GreenLightRemb</name>
+    <path>Aircraft/MiG-21bis/Models/Lights/Rembrandt/GreenLight-remb.xml</path>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>GreenLightFlare</object-name>
+    <object-name>GreenLightRemb</object-name>
+    <condition>
+      <and>
+        <property>lightpack/nav-lights-intensity</property>
+        <not><property>sim/crashed</property></not>
+      </and>
+    </condition>
+  </animation>
 
 </PropertyList>

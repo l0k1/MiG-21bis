@@ -7,7 +7,7 @@
     <sim>
         <model>
             <livery>
-                <name type="string">SR of Vietnam Air Force</name>
+                <name type="string">Vietnam Air Force</name>
                 <texture>Liveries/Vietnam.png</texture>
             </livery>
             <livery-logo>
