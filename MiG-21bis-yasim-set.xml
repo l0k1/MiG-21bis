@@ -3,13 +3,13 @@
 <PropertyList>
 
 	<sim>
-    
+
 		<!-- Info -->
-	
+
 		<description>Mikoyan-Gurevich MiG-21bis YASim</description>
 		<author>Petar Jedvaj, David Culp, Raptor, Stuart Cassie, Gary Brown, Brendan Black, bugman and Tomaskom</author>
 		<status>1.4.3</status>
-	
+
 		<rating>
 			<FDM type="int">3</FDM>
 			<systems type="int">2</systems>
@@ -17,24 +17,27 @@
 			<model type="int">5</model>
 		</rating>
 
+		<!-- JSBsim is the default version for now -->
+		<variant-of>MiG-21bis</variant-of>
+
 		<flight-model>yasim</flight-model>
 		<aero>MiG-21bis-yasim</aero>
 
 		<startup>
 			<splash-texture>Aircraft/MiG-21bis/Splash.png</splash-texture>
 		</startup>
-	
+
 		<!-- Models -->
-	
+
 		<model>
 			<path>Aircraft/MiG-21bis/Models/MiG-21bis.xml</path>
 		</model>
 
-		<submodels> 
+		<submodels>
 			<serviceable type="bool">true</serviceable>
 			<path>Aircraft/MiG-21bis/Submodels.xml</path>
 		</submodels>
-	
+
 		<!-- System Settings -->
 
 		<systems>
@@ -42,26 +45,26 @@
 				<path>Aircraft/MiG-21bis/Systems/Autopilot.xml</path>
 			</autopilot>
 		</systems>
-	
+
 		<sound>
 			<path>Aircraft/MiG-21bis/Sounds/Sound.xml</path>
 		</sound>
-	
+
 		<virtual-cockpit archive="y">true</virtual-cockpit>
 		<allow-toggle-cockpit archive="y">false</allow-toggle-cockpit>
 
 		<panel>
 			<visibility archive="y">false</visibility>
 		</panel>
-	
+
 		<flaps>
 			<setting>0.000</setting>
-			<setting>0.500</setting> 
-			<setting>1.000</setting> 
+			<setting>0.500</setting>
+			<setting>1.000</setting>
 		</flaps>
-	
+
 		<!-- View Settings -->
-	
+
 		<view n="0">
 			<internal archive="y">true</internal>
 			<config>
@@ -74,18 +77,18 @@
 		</view>
 
 		<chase-distance-m>-20</chase-distance-m>
-	
+
 		<rendering>
 			<redout>
 				<parameters>
 					<blackout-onset-g>4.0</blackout-onset-g>
 					<blackout-complete-g>8.0</blackout-complete-g>
-				</parameters> 
+				</parameters>
 			</redout>
 		</rendering>
-	
+
 		<!-- Menu -->
-	
+
 		<menubar>
 			<default>
 				<menu n="100">
@@ -103,7 +106,7 @@
 		</menubar>
 
 		<!-- Help -->
-	
+
 		<help>
 			<key>
 				<name>}</name>
@@ -184,7 +187,7 @@
 	</sim>
 
 	<!-- Misc Settings -->
-    
+
 	<controls>
 		<flight>
 			<flaps>0</flaps>
@@ -204,7 +207,7 @@
 			</gunsight>
 		</armament>
 	</controls>
-	
+
 	<consumables>
 		<fuel>
 			<tank n="0">
@@ -228,7 +231,7 @@
 				<tank-num type="int">4</tank-num>
 				<level-gal_us archive="y">85.33</level-gal_us>
 			</tank>
-	  
+
 			<tank n="5">
 				<tank-num type="int">5</tank-num>
 				<level-gal_us archive="y">85.33</level-gal_us>
@@ -249,7 +252,7 @@
 			<running>true</running>
 		</engine>
 	</engines>
-    
+
 	<instrumentation>
 		<marker-beacon>
 			<volume type="double" archive="y">0.0</volume>
@@ -326,7 +329,7 @@
 	<!-- Keyboard Shortcuts -->
 	<input>
 		<keyboard>
-	
+
 			<key n="4">
 				<name>Ctrl-d</name>
 				<desc>Deselect All Stations</desc>
@@ -346,7 +349,7 @@
 					<value type="int">0</value>
 				</binding>
 			</key>
-	
+
 			<key n="33">
 				<name>Shift 1</name>
 				<desc>Add Station 2</desc>
@@ -391,7 +394,7 @@
 					<value type="int">1</value>
 				</binding>
 			</key>
-       
+
 			<key n="81">
 				<name>Shift-Q</name>
 				<desc>Fuel cut off</desc>
@@ -422,7 +425,7 @@
 					<value type="int">1</value>
 				</binding>
 			</key>
-	    
+
 			<key n="101">
 				<name>e</name>
 				<desc>Eject</desc>
@@ -434,7 +437,7 @@
 
 			<key n="102">
 				<name>f</name>
-				<desc>Gun trigger</desc> 
+				<desc>Gun trigger</desc>
 				<binding>
 					<command>property-assign</command>
 					<property>controls/armament/trigger</property>
@@ -445,7 +448,7 @@
 						<command>property-assign</command>
 						<property>controls/armament/trigger</property>
 						<value>false</value>
-					</binding> 
+					</binding>
 				</mod-up>
 			</key>
 
@@ -470,17 +473,17 @@
 				<binding>
 					<command>property-assign</command>
 					<property>fdm/jsbsim/systems/NWS/engaged</property>
-					<value>1</value> 
+					<value>1</value>
 				</binding>
 				<mod-up>
 					<binding>
 						<command>property-assign</command>
 						<property>fdm/jsbsim/systems/NWS/engaged</property>
-						<value>0</value> 
+						<value>0</value>
 					</binding>
 				</mod-up>
 			</key>
-			
+
 			<key n="113">
 				<name>q</name>
 				<desc>Release selected store</desc>
@@ -493,11 +496,11 @@
 					<binding>
 						<command>property-assign</command>
 						<property>fdm/jsbsim/systems/armament/release</property>
-						<value>0</value> 
+						<value>0</value>
 					</binding>
 				</mod-up>
 			</key>
-	    
+
 			<key n="115">
 				<name>s</name>
 				<desc>Toggle starter valves</desc>
@@ -515,7 +518,7 @@
 					</binding>
 				</mod-up>
 			</key>
-			
+
 			<key n="125">
 				<name>}</name>
 				<desc>Engine Autostart</desc>
@@ -564,7 +567,7 @@
 		</tyresmoke>
 		<rwr>
 			<file>Aircraft/Instruments-3d/rwr/rwr.nas</file>
-		</rwr> 
+		</rwr>
 		<radardist>
 			<file>Aircraft/Instruments-3d/radardist/radardist.nas</file>
 		</radardist>
