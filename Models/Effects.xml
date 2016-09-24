@@ -126,10 +126,28 @@
 
 	<model>
 		<path>Aircraft/MiG-21bis/Models/Effects/Afterburner/EJ200.xml</path>
+		<condition>
+			<not>
+				<property>/sim/rendering/shaders/skydome</property>
+			</not>
+        </condition>
 		<offsets>
 			<x-m>  7.5</x-m>
 			<y-m> 0 </y-m>
 			<z-m> 0.12</z-m>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Afterburner/als-afterburner.xml</path>
+		<condition>
+			<property>/sim/rendering/shaders/skydome</property>
+        </condition>
+		<offsets>
+			<x-m>  5.0</x-m>
+			<y-m> 0 </y-m>
+			<z-m> 0.18</z-m>
 			<pitch-deg>0</pitch-deg>
 		</offsets>
 	</model>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+	<path>thrust_flame.ac</path>
+	
+	<effect>
+        <inherits-from>Aircraft/MiG-21bis/Models/Effects/Afterburner/ab-flame</inherits-from>
+        <object-name>bounding_box</object-name>
+    </effect>
+	
+    <nopreview/>
+    <animation>
+        <type>select</type>
+        <object-name>bounding_box</object-name>
+        <condition>
+			<property>sim/multiplay/generic/float[8]</property>
+        </condition>
+    </animation>
+	
+	
+	<animation>
+		<type>scale</type>
+		<object-name>bounding_box</object-name>
+		<nopreview/>
+		<x-offset>1.0</x-offset>
+		<y-offset>0.68</y-offset>
+		<z-offset>0.68</z-offset>
+	</animation>
+	
+
+</PropertyList>

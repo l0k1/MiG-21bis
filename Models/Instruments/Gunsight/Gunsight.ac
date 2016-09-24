@@ -13034,7 +13034,7 @@ OBJECT poly
 name "sight"
 data 14
 sight.mesh.002
-loc -4.1454358 1.0887500 0.0007011
+loc -4.0293241 1.0887500 0.0007011
 crease 45.0
 texture "Sight.png"
 texrep 1 1
