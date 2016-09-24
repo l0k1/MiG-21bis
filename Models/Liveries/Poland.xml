@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!-- for our friend Ernest1984 -->
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">Polish Air Force</name>
+                <texture>Liveries/Poland.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/Poland.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>

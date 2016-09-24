@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">Croatian Air Force (Vukovar Avenger)</name>
+                <texture>Liveries/CRO.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/CRO.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>

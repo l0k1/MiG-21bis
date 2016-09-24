@@ -1,0 +1,137 @@
+<PropertyList>
+	
+	<!-- Effects -->
+
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Vapour/Vapour2.xml</path>
+		<offsets>
+			<x-m>1.0</x-m>
+			<y-m>-2</y-m>
+			<z-m>0.9</z-m>
+			<roll-deg>0</roll-deg>
+			<pitch-deg>0</pitch-deg>
+			<heading-deg>45</heading-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Vapour/Vapour2.xml</path>
+		<offsets>
+			<x-m>1.0</x-m>
+			<y-m>2</y-m>
+			<z-m>0.9</z-m>
+			<roll-deg>0</roll-deg>
+			<pitch-deg>0</pitch-deg>
+			<heading-deg>-45</heading-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>sonicboom</name>
+		<path>Aircraft/MiG-21bis/Models/Effects/Boom/fx.xml</path>
+		<offsets>
+			<x-m>1</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+    
+	<model>
+		<name>engine-on-fire</name>
+		<path>Aircraft/MiG-21bis/Models/Effects/Engine/Fire.xml</path>
+		<condition>
+			<equals>
+				<property>sim/crashed</property>
+				<value type="bool">true</value>
+			</equals>
+		</condition>
+		<offsets>
+			<x-m> 4.21</x-m>
+			<y-m> 0.00</y-m>
+			<z-m> 0.16</z-m>
+			<heading-deg>0</heading-deg>
+			<roll-deg>0</roll-deg>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+    
+	<model>
+		<name>flame</name>
+		<path>Aircraft/MiG-21bis/Models/Effects/Gun/Flame.xml</path>
+		<condition>
+			<equals>
+				<property>controls/armament/trigger</property>
+				<value type="bool">true</value>
+			</equals>
+		</condition>
+	</model>
+
+	<model>
+		<path>Aircraft/Generic/Effects/tyre-smoke-nose.xml</path>
+		<name>tyre-smoke-n</name>
+		<offsets>
+			<x-m>-4.17</x-m>
+			<y-m> 0.00</y-m>
+			<z-m>-1.12</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Generic/Effects/tyre-smoke-port.xml</path>
+		<name>tyre-smoke-p</name>
+		<offsets>
+			<x-m> 0.62</x-m>
+			<y-m>-1.47</y-m>
+			<z-m>-0.97</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/Generic/Effects/tyre-smoke-stbd.xml</path>
+		<name>tyre-smoke-s</name>
+		<offsets>
+			<x-m> 0.62</x-m>
+			<y-m> 1.47</y-m>
+			<z-m>-0.97</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Wing/Condensation-Left.xml</path>
+		<offsets>
+			<x-m> 2.77</x-m>
+			<y-m>-3.73</y-m>
+			<z-m> 0.02</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Wing/Condensation-Right.xml</path>
+		<offsets>
+			<x-m>2.77</x-m>
+			<y-m>3.73</y-m>
+			<z-m>0.02</z-m>
+		</offsets>
+	</model>
+    
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Wing/Contrail.xml</path>
+		<offsets>
+			<x-m> 5.60 </x-m>
+			<y-m> 0.00 </y-m>
+			<z-m> 0.18 </z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Afterburner/EJ200.xml</path>
+		<offsets>
+			<x-m>  7.5</x-m>
+			<y-m> 0 </y-m>
+			<z-m> 0.12</z-m>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+	
+</PropertyList>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>           
+<PropertyList>
+	<scenario>
+		<description>
+            This scenario put 2X MiG-21bis 60 degs 8000ft Inbound for EGOD
+            They are 5:30mins out so scramble quick or reloading the parkign posision will reset them.
+        </description>
+		
+<!-- Jaguar -->
+
+    <entry>
+      <type>aircraft</type>
+      <callsign>RED-1</callsign>
+      <name>MiG-1</name>
+      <model type="string">Aircraft/MiG-21bis/Models/MiG-21bis.xml</model>
+      <latitude type="double">53.104643</latitude>
+			<longitude type="double">-3.208808</longitude>
+			<altitude type="double">8000</altitude>
+      <speed>550</speed>
+      <heading type="double">241</heading>
+      <bank type="double">20</bank>
+    </entry>
+    
+    <entry>
+      <type>aircraft</type>
+      <callsign>RED-2</callsign>
+      <name>MiG-2</name>
+      <model type="string">Aircraft/MiG-21bis/Models/MiG-21bis.xml</model>
+      <latitude type="double">53.104543</latitude>
+			<longitude type="double">-3.208608</longitude>
+			<altitude type="double">8015</altitude>
+      <speed>550</speed>
+      <heading type="double">241</heading>
+      <bank type="double">20</bank>
+    </entry>
+    
+    <!--entry>
+      <type>aircraft</type>
+      <callsign>ANGEL-3</callsign>
+			<name>>Hawk3</name>
+      <model type="string">AI/Aircraft/AI-BAE-Hawk/Models/Hawk_T2_S151-Bombable.xml</model>
+      <latitude type="double">53.104443</latitude>
+			<longitude type="double">-3.208408</longitude>
+			<altitude type="double">8030</altitude>
+      <speed>350</speed>
+      <heading type="double">241</heading>
+      <bank type="double">20</bank>
+    </entry>
+    
+    <entry>
+      <type>aircraft</type>
+      <callsign>ANGEL-4</callsign>
+			<name>>Hawk4</name>
+      <model type="string">AI/Aircraft/AI-BAE-Hawk/Models/Hawk_T2_S151-Bombable.xml</model>
+      <latitude type="double">53.104343</latitude>
+			<longitude type="double">-3.208208</longitude>
+			<altitude type="double">8045</altitude>
+      <speed>350</speed>
+      <heading type="double">241</heading>
+      <bank type="double">20</bank>
+    </entry-->
+
+    
+        
+	</scenario>
+</PropertyList>

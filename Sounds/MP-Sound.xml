@@ -1,0 +1,341 @@
+<?xml version="1.0"?>
+ 
+<PropertyList>
+
+	<fx>
+	
+<!-- Engine -->
+
+ <engine>
+      <name>engine-start-outside</name>
+      <mode>once</mode>
+      <path>Aircraft/MiG-21bis/Sounds/Samples/mig21startup.wav</path>
+      <condition>
+<and>
+  <greater-than>  
+   <property>engines/engine[0]/rpm</property>
+   <value>0.5</value>
+  </greater-than>
+  <not>
+   <property>sim/current-view/internal</property>
+  </not>
+</and>
+</condition>
+      <volume>
+        <property>engines/engine[0]/n2</property>
+        <factor> 0.09 </factor>
+        <min> 0.3 </min>
+        <max> 0.9 </max>
+      </volume>
+      <pitch>
+        <property>engines/engine[0]/n2</property>
+        <factor> 0.01 </factor>
+	<min> 0.0 </min>
+	<max> 0.9 </max>
+      </pitch>
+      <reference-dist>100</reference-dist>
+      <max-dist>1000</max-dist>
+    </engine>
+
+<engine>
+      <name>turbine</name>
+      <mode>looped</mode>
+      <path>Aircraft/MiG-21bis/Sounds/Samples/mig21whine.wav</path>
+      <condition>
+        <property>engines/engine/running</property>
+        <not>
+          <property>sim/current-view/internal</property>
+        </not>
+      </condition>
+      <orientation>
+        <x>   0 </x>
+        <y>   0 </y>
+        <z> 180 </z>
+        <inner-cone> 180.0 </inner-cone>
+        <outer-cone> 360.0 </outer-cone>
+        <outer-gain>   0.2 </outer-gain>
+      </orientation>
+      <volume>
+        <property>engines/engine/n2</property>
+        <factor>0.09</factor>
+        <min>0.3</min>
+        <max>0.9</max>
+      </volume>
+      <pitch>
+        <property>engines/engine/n2</property>
+        <factor>0.01</factor>
+	<min>0</min>
+	<max>0.9</max>
+      </pitch>
+      <reference-dist>100</reference-dist>
+      <max-dist>1000</max-dist>
+    </engine>
+
+ 
+		<jet>
+			<name>jet</name>
+			<path>Sounds/jet.wav</path>
+			<mode>looped</mode>
+			<condition>
+			<equals>
+			<property>engines/engine/running</property>
+			<value>1</value>	
+			</equals>
+			</condition>
+			<volume>
+			<property>engines/engine[0]/thrust_lb</property>
+			<factor type="double">0.00016</factor>
+			</volume>
+			<pitch>
+			<property>engines/engine[0]/n1</property>
+			<factor>0.2</factor>
+			</pitch>
+			<position>
+			<x> 5.185 </x>
+			<y>  0.0 </y>
+			<z>  0.0 </z>
+			</position>
+			<orientation>
+			<x>1.0</x>
+			<y>0.0</y>
+			<z>0.0</z>
+			<inner-angle>180.0</inner-angle>
+			<outer-angle>360.0</outer-angle>
+			<outer-gain>0.5</outer-gain>
+			</orientation>
+		</jet>
+		
+		   <engine>
+      <name>engine</name>
+      <path>Aircraft/MiG-21bis/Sounds/Samples/jet-blast.wav</path>
+      <mode>looped</mode>
+      <condition>
+        <property>engines/engine[0]/running</property>
+		<not>
+        	<property>sim/current-view/internal</property>
+		<property>engines/engine/out-of-fuel</property>
+     	</not>
+      </condition>
+       <position>
+    <x>18.6</x>
+	<y>0</y>
+	<z>2.37</z>
+   </position>
+   <orientation>
+	<x>1.0</x>
+    <y>0.0</y>
+    <z>0</z>
+    <inner-angle>35.0</inner-angle>
+    <outer-angle>90</outer-angle>
+    <outer-gain>0.45</outer-gain>
+   </orientation>
+ 
+   <volume>
+    <property>engines/engine[0]/n1</property>
+    <factor>0.014</factor>
+    <offset>-0.45</offset>
+   </volume>
+ 
+   <reference-dist>20</reference-dist>
+   <max-dist>3000</max-dist>
+    </engine>
+	
+		<engine>
+			<name>engine</name>
+			<mode>looped</mode>
+			<path>Sounds/turbine_loop.wav</path>
+			<condition>
+			<property>engines/engine[0]/running</property>
+			<not>
+			  <property>sim/current-view/internal</property>
+			</not>
+			<not>
+			  <property>engines/engine[0]/out-of-fuel</property>
+			</not>
+			<not>
+			  <property>fdm/jsbsim/systems/crash-detect/crashed</property>
+			</not>
+			</condition>
+			<orientation>
+			<x>0.0</x>
+			<y>0.0</y>
+			<z>180.0</z>
+			<inner-cone>180.0</inner-cone>
+			<outer-cone>360.0</outer-cone>
+			<outer-gain>0.2</outer-gain>
+			</orientation>
+			<volume>
+			<property>controls/engines/engine[0]/throttle</property>
+			<factor>0.5</factor>
+			<min>0.1</min>
+			<max>0.5</max>
+			</volume>
+		</engine>
+	
+		
+	
+		<engine>
+			<name>burner</name>
+			<mode>looped</mode>
+			<path>Aircraft/MiG-21bis/Sounds/Samples/reheat.wav</path>
+			<condition>
+			 <property>engines/engine/afterburner</property>
+			<not>
+			 <property>sim/current-view/internal</property>
+			</not>
+			<not>
+			 <property>engines/engine[0]/out-of-fuel</property>
+			</not>
+			<not>
+			  <property>fdm/jsbsim/systems/crash-detect/crashed</property>
+			</not>
+			</condition>
+			<orientation>
+			<x>0.0</x>
+			<y>0.0</y>
+			<z>180.0</z>
+			<inner-cone>180.0</inner-cone>
+			<outer-cone>360.0</outer-cone>
+			<outer-gain>0.2</outer-gain>
+			</orientation>
+			<volume>
+			<property>controls/throttle[0]</property>
+			<factor>1</factor>
+			<min>0.4</min>
+			<max>0.5</max>
+			</volume>
+		</engine>
+		
+		
+		
+		<engine>
+			<name>compressor whine</name>
+			<path>Sounds/turbojet_fan.wav</path>
+			<mode>looped</mode>
+			<condition>
+			<not>
+			 <property>sim/current-view/internal</property>
+			</not>
+			<not>
+			 <property>engines/engine[0]/out-of-fuel</property>
+			</not>
+			<not>
+			  <property>fdm/jsbsim/systems/crash-detect/crashed</property>
+			</not>
+			<property>engines/engine[0]/running</property>
+			</condition>
+			<orientation>
+			<x> 0.0</x>
+			<y> 0.0</y>
+			<z> 180.0</z>
+			<inner-cone>50.0</inner-cone>
+			<outer-cone>180.0</outer-cone>
+			<outer-gain>0.5</outer-gain>
+			</orientation>
+			<pitch>
+			<property>engines/engine[0]/n1</property>
+			<offset>0.7</offset>
+			<factor>.003</factor>
+			</pitch>
+			<volume>
+			<property>engines/engine[0]/n1</property>
+			<offset>0.15</offset>
+			<factor>-0.003</factor>
+			<min>0.05</min>
+			<max>0.15</max>
+			</volume>
+		</engine>
+		
+
+		
+		<squeal>
+			<name>squeal</name>
+			<path>Sounds/squeal.wav</path>
+			<condition>
+			<or>
+			 <property>gear/gear[0]/wow</property>
+			 <property>gear/gear[1]/wow</property>
+			 <property>gear/gear[2]/wow</property>
+			</or>
+			</condition>
+			<volume>
+			<property>velocities/speed-down-fps</property>
+			<factor>0.05</factor>
+			<max>1.0</max>
+			</volume>
+			<volume>
+			<property>velocities/airspeed-kt</property>
+			<factor>0.01</factor>
+			<max>1.0</max>
+			</volume>
+			<volume>
+			<internal>dt_stop</internal>
+			<factor>0.05</factor>
+			<max>1.0</max>
+			</volume>
+			<pitch>
+			<property>velocities/airspeed-kt</property>
+			<factor>0.0025</factor>
+			<offset>1.2</offset>
+			</pitch>
+		</squeal>
+		
+
+		
+<!-- Sonic boom -->
+	  
+		<sonicboom>
+			<name>Sonic Boom</name>
+			<mode>once</mode>
+			<path>Aircraft/MiG-21bis/Sounds/Samples/Sonic-Boom.wav</path>
+			<condition>
+				<and>
+					<greater-than>
+						<property>velocities/mach</property>
+						<value>1.0</value>
+					</greater-than>
+					<equals>
+						<property>sim/current-view/internal</property>
+						<value>false</value>
+					</equals>
+					<not>
+						<property>sim/crashed</property>
+						<value>true</value>
+					</not>
+				</and>
+			</condition>
+		</sonicboom>
+		
+
+		 
+		 <!-- flyby -->
+		<flyby>
+			<name>fly-by</name>
+			<mode>once</mode>
+			<path>Aircraft/MiG-21bis/Sounds/Samples/flyby.wav</path>
+			<condition>
+			<and>
+	    <greater-than>
+	     	<property>velocities/mach</property>
+	     	<value>0.8</value>
+	    </greater-than>
+				<equals>
+					<property>sim/current-view/view-number</property>
+					<value>6</value>
+				</equals>
+				</and>
+				<not>
+         	<property>sim/current-view/internal</property>
+	 	<property>engines/engine/out-of-fuel</property>
+     	</not>
+		</condition>
+			<volume>
+				<property>velocities/airspeed-kt</property>
+				<factor>0.001</factor>
+			</volume>
+			
+		</flyby>
+
+	</fx>
+ 
+</PropertyList>

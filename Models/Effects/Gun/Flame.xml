@@ -1,0 +1,15 @@
+<PropertyList>
+
+	<path>Flame.ac</path>
+	
+	<animation>
+		<type>material</type>
+		<object-name>flame</object-name>
+		<emission>
+			<red>255</red>
+			<green>255</green>
+			<blue>254</blue>
+			</emission>
+	</animation>
+
+</PropertyList>

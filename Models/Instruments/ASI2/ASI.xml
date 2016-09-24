@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>ASI.ac</path>
+
+	<animation>
+  		<type>scale</type>
+  		<x-offset>1.4</x-offset>
+  		<y-offset>1.4</y-offset>
+  		<z-offset>1.4</z-offset>
+ 	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>needle</object-name>
+		<object-name>face</object-name>
+		<object-name>disk</object-name>
+   		<emission>
+     			<red>0.6</red>
+     			<green>0.3</green>
+     			<blue>0.3</blue>
+    			<factor-prop>controls/lighting/instruments-norm</factor-prop>
+   		</emission>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>needle</object-name>
+		<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+		<interpolation>
+			<entry><ind>  0</ind><dep>     0</dep></entry>
+			<entry><ind> 54</ind><dep>   10</dep></entry>
+			<entry><ind> 162</ind><dep>  90</dep></entry>
+			<entry><ind> 270</ind><dep>  180</dep></entry>
+			<entry><ind> 378</ind><dep>  240</dep></entry>
+			<entry><ind> 486</ind><dep>  292</dep></entry>
+			<entry><ind> 594</ind><dep>  352</dep></entry>
+		</interpolation>
+		<axis>
+			<x>-1.0</x>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>disk</object-name>
+		<property>velocities/airspeed-kt</property>
+		<interpolation>
+			<entry><ind>  0</ind><dep>    0</dep></entry>
+			<entry><ind> 54</ind><dep>   27</dep></entry>
+			<entry><ind> 162</ind><dep>  81</dep></entry>
+			<entry><ind> 270</ind><dep>  180</dep></entry>
+			<entry><ind> 378</ind><dep>  234</dep></entry>
+			<entry><ind> 486</ind><dep>  288</dep></entry>
+			<entry><ind> 540</ind><dep>  360</dep></entry>
+		</interpolation>
+		<axis>
+			<x>-1.0</x>
+		</axis>
+	</animation>
+
+<!-- Label text -->
+
+<text>
+        <name>LabelText</name>
+        <type type="string">literal</type>
+                <text type="string">Air Speed Indicator</text>
+        <draw-text type="bool">true</draw-text>
+        <font>Helvetica.txf</font>
+                <character-size type="double">0.012</character-size>
+                <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <axis-alignment>yz-plane</axis-alignment>
+        <max-height>0.2</max-height>
+        <max-width>0.07</max-width>
+        <font-resolution>
+                <width type="int">32</width>
+                <height type="int">32</height>
+        </font-resolution>
+        <alignment>center-center</alignment>
+        <offsets>
+                <x-m> 0.01</x-m>
+                <y-m> 0.0 </y-m>
+                <z-m> 0.0 </z-m>
+        </offsets>
+</text>
+
+<animation>
+        <type>material</type>
+                <object-name>LabelText</object-name>
+        <emission>
+                <red>1.0</red>
+                <green>0.8</green>
+                <blue>0.0</blue>
+        </emission>
+</animation>
+
+<animation>
+        <type>select</type>
+                <object-name>LabelText</object-name>
+        <condition>
+                <property>/sim/panel-hotspots</property>
+        </condition>
+</animation>
+
+
+</PropertyList>

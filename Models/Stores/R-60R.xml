@@ -1,0 +1,25 @@
+<PropertyList>
+
+    <path>R-60.ac</path>
+    
+    <animation>
+        <type>select</type>
+        <object-name>r-60</object-name>
+        <condition>
+            <!--not>
+                <property>fdm/jsbsim/systems/armament/station5/released</property>
+            </not-->
+            <equals>
+                  <property>sim/multiplay/generic/string[15]</property>
+                  <value>R-60</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>range</type>
+        <min-m>0</min-m>
+        <max-m>12000</max-m>
+    </animation>
+
+</PropertyList>

@@ -1,0 +1,169 @@
+<PropertyList>
+
+	<!-- Stores -->
+    
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Stores/Chute.xml</path>
+		<offsets>
+			<x-m>6.44</x-m>
+			<y-m>0.00</y-m>
+			<z-m>0.70</z-m>
+			<pitch-deg>0.00</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>Centre Drop Tank</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Tank.xml</path>
+
+	</model>
+
+	<model>
+		<name>Centre PTB-800 Drop Tank</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/PTB-800.xml</path>
+                <offsets>
+                        <x-m>-0.3</x-m>
+                        <y-m>0.00</y-m>
+                        <z-m>-0.83</z-m>
+                        <pitch-deg>0.00</pitch-deg>
+                </offsets>
+	</model>
+
+	<model>
+		<name>Left Drop Tank</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/TankL.xml</path>
+                <offsets>
+                        <x-m>1.33</x-m>
+                        <y-m>-2.73</y-m>
+                        <z-m>0.51</z-m>
+                        <pitch-deg>0.00</pitch-deg>
+                </offsets>
+	</model>
+
+	<model>
+		<name>Right Drop Tank</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/TankR.xml</path>
+                <offsets>
+                        <x-m>1.33</x-m>
+                        <y-m>2.73</y-m>
+                        <z-m>0.51</z-m>
+                        <pitch-deg>0.00</pitch-deg>
+                </offsets>
+	</model>
+
+	<model>
+		<name>GSh-23 Gun</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/GSh-23.xml</path>
+	</model>
+    
+	<model>
+		<name>Bomb Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/BombL.xml</path>
+		<offsets>
+			<x-m> 0.28</x-m>
+			<y-m>-2.11 </y-m>
+			<z-m>-0.19</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>Bomb Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/BombR.xml</path>
+		<offsets>
+			<x-m> 0.28</x-m>
+			<y-m> 2.11 </y-m>
+			<z-m>-0.19</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>Kh-25 Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Kh-25L.xml</path>
+		<offsets>
+			<x-m> 0.28</x-m>
+			<y-m>-2.11 </y-m>
+			<z-m>-0.35</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>Kh-25 Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Kh-25R.xml</path>
+		<offsets>
+			<x-m> 0.28</x-m>
+			<y-m> 2.11 </y-m>
+			<z-m>-0.35</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>UB-32 Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-32L.xml</path>
+		<offsets>
+			<x-m> -0.3</x-m>
+			<y-m>-2.11 </y-m>
+			<z-m>-0.35</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>UB-32 Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-32R.xml</path>
+		<offsets>
+			<x-m> -0.3</x-m>
+			<y-m> 2.11 </y-m>
+			<z-m>-0.35</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>R-60 Missile Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60L.xml</path>
+		<offsets>
+			<x-m> 1.13</x-m>
+			<y-m>-2.73 </y-m>
+			<z-m>-0.22</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>R-60 Missile Left Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60LI.xml</path>
+		<offsets>
+			<x-m> -0.35</x-m>
+			<y-m>-2.11 </y-m>
+			<z-m>-0.20</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>R-60 Missile Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60R.xml</path>
+		<offsets>
+			<x-m> 1.13</x-m>
+			<y-m> 2.73 </y-m>
+			<z-m>-0.22</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>R-60 Missile Right Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60RI.xml</path>
+		<offsets>
+			<x-m> -0.35</x-m>
+			<y-m> 2.11 </y-m>
+			<z-m>-0.20</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+</PropertyList>
