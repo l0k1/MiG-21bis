@@ -13,6 +13,8 @@ var startViewZ = getprop(viewZ);
 var ghosting_x = "/controls/armament/gunsight/ghosting-x";
 var ghosting_y = "/controls/armament/gunsight/ghosting-y";
 var scaling = "/controls/armament/gunsight/scaling";
+var sight_align_elevation = "/controls/armament/gunsight/elevation";
+var sight_align_windage = "/controls/armament/gunsight/windage";
 
 var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 
@@ -210,11 +212,14 @@ var gun_sight = {
 		var ghostx = getprop(ghosting_x);
 		var ghosty = getprop(ghosting_y);
 		
+		var s_ele = getprop(sight_align_elevation);
+		var s_win = getprop(sight_align_windage);
+		
 		var changeViewX = (startViewX-getprop(viewX))*ghostx;
 		var changeViewY = (startViewY-getprop(viewY))*ghosty;
 	
 		for (var i = 0; i < size(me.child); i += 1 ) {
-			me.child[i].setTranslation(-1 * (me.centers[i][0]+changeViewX),me.centers[i][1]+changeViewY);
+			me.child[i].setTranslation(-1 * (me.centers[i][0]+changeViewX)+s_win,me.centers[i][1]+changeViewY+s_ele);
 		}
 		settimer(func { me.update(); }, 0.00);
     },

@@ -212,6 +212,8 @@
 				<ghosting-x type="double">7000</ghosting-x>
 				<ghosting-y type="double">7000</ghosting-y>
 				<scaling type="double">0</scaling>
+				<elevation type="int">-158</elevation>
+				<windage type="int">0</windage>
 			</gunsight>
 		</armament>
 	</controls>
