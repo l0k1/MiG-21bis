@@ -4,17 +4,6 @@
 
 	<path>EJ200.ac</path>
 
-	<animation>
-		<type>spin</type>
-		<object-name>Post-Combustion2</object-name>
-		<property>engines/engine[0]/n2</property>
-		<factor>-1</factor>
-		<axis>
-			<x>1</x>
-			<y>0</y>
-			<z>0</z>
-		</axis>
-	</animation>
 	<effect>
 		<inherits-from>Effects/model-transparent</inherits-from>
 		<condition>

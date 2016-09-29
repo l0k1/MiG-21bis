@@ -563,7 +563,7 @@
 			<condition>
 			<property>controls/armament/trigger</property>
 			</condition>
-			<path>Sounds/gatling.wav</path>
+			<path>Aircraft/MiG-21bis/Sounds/Samples/gun.wav</path>
 		</guns>
 	
 <!-- Missile fire -->

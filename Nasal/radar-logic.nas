@@ -34,8 +34,8 @@ input = {
         roll:             "/orientation/roll-deg",
         ai_models:        "/ai/models",
         lookThrough:      "/instrumentation/radar/look-through-terrain",
-        dopplerOn:        "/instrumentation/radar/radar/doppler-enabled",
-        dopplerSpeed:     "/instrumentation/radar/radar/min-doppler-speed-kt",
+        dopplerOn:        "/instrumentation/radar/doppler-enabled",
+        dopplerSpeed:     "/instrumentation/radar/min-doppler-speed-kt",
 };
 
 foreach(var name; keys(input)) {

@@ -206,16 +206,56 @@
 			<instruments-norm>0.3</instruments-norm>
 		</lighting>
 		<armament>
+			<panel>
+				<!--switches, knobbins and buttons-->
+				<reload n="0" type="bool">false</reload>
+				<reload n="1" type="bool">false</reload>
+				<reload n="2" type="bool">false</reload>
+				<air-gnd-switch type="int">1</air-gnd-switch>
+				<ir-sar-switch type="int">1</ir-sar-switch>
+				<pylon-knob type="int">0</pylon-knob>
+				<!-- lights -->
+				<gun-ready type="bool">1</gun-ready>
+			</panel>
 			<gunsight>
-				<power-on type="bool">true</power-on>
-				<intensity type="double">0.8</intensity>
+				<!--fixed net options-->
 				<ghosting-x type="double">7000</ghosting-x>
 				<ghosting-y type="double">7000</ghosting-y>
 				<scaling type="double">0</scaling>
 				<elevation type="int">-158</elevation>
 				<windage type="int">0</windage>
+				<!--fixed net fade value is set under gunsights below-->
+				<!--fixed net/pipper options-->
+				<red type="int">237</red>
+				<blue type="int">52</blue>
+				<green type="int">193</green>
+				<thickness type="int">8</thickness>
+				<font-size type="int">60</font-size>
+				<!--gunsight switches and knobbins-->
+				<gun-missile-switch type="int">0</gun-missile-switch>
+				<pip-mode-select-switch type="int">0</pip-mode-select-switch>
+				<auto-man-switch type="int">0</auto-man-switch>
+				<pipper-mode-switch type="int">0</pipper-mode-switch>
+				<fixed-net-power-switch type="int">0</fixed-net-power-switch>
+				<pipper-power-switch type="int">0</pipper-power-switch>
+				<target-size-knob type="float">0</target-size-knob>
+				<pipper-angular-correction-knob type="float">0</pipper-angular-correction-knob>
+				<pipper-brightness-knob type="float">1</pipper-brightness-knob>
+				<fixed-net-brightness-knob type="float">1</fixed-net-brightness-knob>
 			</gunsight>
 		</armament>
+		<radar>
+			<control-panel>
+				<continuous-jam type="bool">0</continuous-jam>
+				<intermittent-jam type="bool">0</intermittent-jam>
+				<passive-jam type="bool">0</passive-jam>
+				<weather-filter type="bool">0</weather-filter>
+				<iff type="bool">0</iff>
+				<lst-mode type="bool">0</lst-mode>
+				<selftest type="bool">0</selftest>
+				<reset type="bool">0</reset>
+			</control-panel>
+		<radar>
 	</controls>
 
 	<engines>
@@ -690,6 +730,9 @@
 		<gunsight_canvas>
 			<file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>
 		</gunsight_canvas>
+		<blackout>
+			<file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>
+		</blackout>
 	</nasal>
 
 </PropertyList>

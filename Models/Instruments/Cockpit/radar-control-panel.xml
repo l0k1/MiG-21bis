@@ -1,0 +1,339 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>radarControlPanel.ac</path>
+
+	<!--lights-->
+	
+	<continuous-jam type="bool">0</continuous-jam>
+	<intermittent-jam type="bool">0</intermittent-jam>
+	<passive-jam type="bool">0</passive-jam>
+	<weather-filter type="bool">0</weather-filter>
+	<iff type="bool">0</iff>
+	<lst-mode type="bool">0</lst-mode>
+	<selftest type="bool">0</selftest>
+	<reset type="bool">0</reset>
+	
+	<animation>
+        <type>material</type>
+        <object-name>light</object-name>
+		<ambient>
+			<red>1.0</red>
+			<green>0.2</green>
+			<blue>0.0</blue>
+		</ambient>
+        <emission>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+            <factor-prop>controls/armament/panel/gun-ready</factor-prop>
+        </emission> 
+    </animation>
+	
+    <!--<animation>
+        <type>material</type>
+        <object-name>labelAir</object-name>
+        <object-name>labelReloading</object-name>
+        <emission>
+            <red>0.9</red>
+            <green>0.1</green>
+            <blue>0.1</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission> 
+    </animation>-->
+	
+	<!-- RELOAD BUTTONS -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>reload1</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-assign</command>
+				<property>controls/armament/panel/reload[0]</property>
+				<value>1</value>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-assign</command>
+					<property>controls/armament/panel/reload[0]</property>
+					<value>0</value>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>reload1</object-name>
+		<property>controls/armament/panel/reload[0]</property>
+		<factor>0.004</factor>
+		<axis>
+			<x>-0.00412</x>
+			<y>-0.00073</y>
+			<z> 0.00000</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>reload2</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-assign</command>
+				<property>controls/armament/panel/reload[1]</property>
+				<value>1</value>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-assign</command>
+					<property>controls/armament/panel/reload[1]</property>
+					<value>0</value>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>reload2</object-name>
+		<property>controls/armament/panel/reload[1]</property>
+		<factor>0.004</factor>
+		<axis>
+			<x>-0.00412</x>
+			<y>-0.00073</y>
+			<z> 0.00000</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>reload3</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-cycle</command>
+				<property>controls/armament/panel/reload[2]</property>
+				<value>1</value>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-cycle</command>
+					<property>controls/armament/panel/reload[2]</property>
+					<value>0</value>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>reload3</object-name>
+		<property>controls/armament/panel/reload[2]</property>
+		<factor>0.004</factor>
+		<axis>
+			<x>-0.00412</x>
+			<y>-0.00073</y>
+			<z> 0.00000</z>
+		</axis>
+	</animation>
+	
+	<!-- SWITCHES -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>airGndSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/panel/air-gnd-switch</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>2</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/panel/air-gnd-switch</property>
+				<step>1</step>
+				<min>0</min>
+				<max>2</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>airGndSwitch</object-name>
+		<type>rotate</type>
+		<property>controls/armament/panel/air-gnd-switch</property>
+		<factor>35</factor>
+		<offset-deg>-35</offset-deg>
+		<center>
+			<x-m>-3.87843</x-m>
+			<y-m>-0.33518</y-m>
+			<z-m> 0.83899</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	
+	<animation>
+		<type>pick</type>
+		<object-name>irSarSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/panel/ir-sar-switch</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>2</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/panel/ir-sar-switch</property>
+				<step>1</step>
+				<min>0</min>
+				<max>2</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>irSarSwitch</object-name>
+		<type>rotate</type>
+		<property>controls/armament/panel/ir-sar-switch</property>
+		<factor>35</factor>
+		<offset-deg>-35</offset-deg>
+		<center>
+			<x-m>-3.88583</x-m>
+			<y-m>-0.30205</y-m>
+			<z-m> 0.83899</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<!-- KNOB -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>weaponSelectorKnob</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/panel/pylon-knob</property>
+				<step>1</step>
+				<min>0</min>
+				<max>11</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/panel/pylon-knob</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>11</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>weaponSelectorKnob</object-name>
+		<property>controls/armament/panel/pylon-knob</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind> <!-- actual value -->
+				<dep>0</dep> <!-- value in degrees -->
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>20</dep>
+			</entry>
+			<entry>
+				<ind>2</ind>
+				<dep>40</dep>
+			</entry>
+			<entry>
+				<ind>3</ind>
+				<dep>79</dep>
+			</entry>
+			<entry>
+				<ind>4</ind>
+				<dep>109</dep>
+			</entry>
+			<entry>
+				<ind>5</ind>
+				<dep>156</dep>
+			</entry>
+			<entry>
+				<ind>6</ind>
+				<dep>176</dep>
+			</entry>
+			<entry>
+				<ind>7</ind>
+				<dep>226</dep>
+			</entry>
+			<entry>
+				<ind>8</ind>
+				<dep>242</dep>
+			</entry>
+			<entry>
+				<ind>9</ind>
+				<dep>262</dep>
+			</entry>
+			<entry>
+				<ind>10</ind>
+				<dep>280</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>-3.89615</x-m>
+			<y-m>-0.25594</y-m>
+			<z-m> 0.88658</z-m>
+		</center>
+		<axis>
+			<x>-10</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>	
+
+</PropertyList>

@@ -390,5 +390,25 @@
             <z-m>0</z-m>
         </offsets>
     </model>
+	
+	<model>
+		<name>Weapons Panel</name>
+		<path>Aircraft/MiG-21bis/Models/Instruments/Cockpit/weapons-panel.xml</path>
+		<offsets>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </offsets>
+	</model>
+	
+	<model>
+		<name>Radar Control Panel</name>
+		<path>Aircraft/MiG-21bis/Models/Instruments/Cockpit/radar-control-panel.xml</path>
+		<offsets>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </offsets>
+	</model>
 
 </PropertyList>

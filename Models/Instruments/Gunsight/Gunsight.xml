@@ -2,6 +2,31 @@
 
     <path>Gunsight.ac</path>
 	
+	<!-- list of objects in Gunsight.ac:
+	angleDisplay - front right angle display next to knob
+	bottomNeedle - needle for bottomScale
+	bottomScale - glass bottom scale
+	gunsight - main housing
+	gunsight-glass - hud glass
+	knobFixedNetBrightness
+	knobPipperAngularCorrection
+	knobPipperBrightness
+	knobTargetSize
+	lightLaunch
+	lightNoLaunch
+	projector-cover (glass)
+	sight - actual canvas sight
+	switchAutoMan
+	switchFixedNet
+	switchGunMissile
+	switchPipModeSel - Missiles/Bombs or Gunsaa
+	switchPipper
+	switchPipperMode - Gyro or Non Gyro
+	targetSizeDisplay
+	topNeedle
+	topScale
+	-->
+	
 	<!-- Rembrandt -->
 	
     <effect>
@@ -16,6 +41,16 @@
 		<object-name>sight</object-name>
 		<object-name>gunsight-glass</object-name>
     </effect>
+	
+	<animation>
+		<type>material</type> 
+		<object-name>sight</object-name>
+		<emission>	
+			<red>1</red>	
+			<green>1</green>	
+			<blue>1</blue>
+		</emission>
+	</animation>
 	
 	<!-- Shaders -->
 
@@ -32,184 +67,326 @@
 		<object-name>sight</object-name>
 		<object-name>gunsight-glass</object-name>
 	</animation>
-
-    <animation>
-        <type>material</type>
-        <object-name>light</object-name>
-        <emission>
-            <red>1</red>
-            <green>0</green>
-            <blue>0</blue>
-            <property>controls/armament/gunsight/power-on</property>
-        </emission> 
-    </animation>
 	
 	<!-- Animations -->
-    
-    <animation>
-        <type>material</type>
-        <object-name>too-slow2</object-name>
-        <object-name>on-speed2</object-name>
-        <object-name>too-fast2</object-name>
-        <emission>
-            <red>0.6</red>
-            <green>0.3</green>
-            <blue>0.3</blue>
-        </emission> 
-    </animation>
-    
-    <animation>
-        <type>material</type>
-        <object-name>sight</object-name>
-        <emission>
-            <red>1.0</red>
-            <green>1.0</green>
-            <blue>1.0</blue>
-            <factor-prop>controls/armament/gunsight/intensity</factor-prop>
-        </emission>
-    </animation>
+	
+	<!-- left four switches -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>switchGunMissile</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/armament/gunsight/gun-missile-switch</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>switchGunMissile</object-name>
+		<type>rotate</type>
+		<property>controls/armament/gunsight/gun-missile-switch</property>
+		<factor>50</factor>
+		<offset-deg>-25</offset-deg>
+		<center>
+			<x-m>-3.93359</x-m>
+			<y-m>-0.12332</y-m>
+			<z-m> 0.96043</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>switchPipModeSelect</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/armament/gunsight/pip-mode-select-switch</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>switchPipModeSelect</object-name>
+		<type>rotate</type>
+		<property>controls/armament/gunsight/pip-mode-select-switch</property>
+		<factor>50</factor>
+		<offset-deg>-25</offset-deg>
+		<center>
+			<x-m>-3.93359</x-m>
+			<y-m>-0.12332</y-m>
+			<z-m> 0.93381</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>switchAutoMan</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/armament/gunsight/auto-man-switch</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>switchAutoMan</object-name>
+		<type>rotate</type>
+		<property>controls/armament/gunsight/auto-man-switch</property>
+		<factor>50</factor>
+		<offset-deg>-25</offset-deg>
+		<center>
+			<x-m>-3.93359</x-m>
+			<y-m>-0.12332</y-m>
+			<z-m> 0.90836</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>switchPipperMode</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/armament/gunsight/pipper-mode-switch</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>switchPipperMode</object-name>
+		<type>rotate</type>
+		<property>controls/armament/gunsight/pipper-mode-switch</property>
+		<factor>70</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>-3.93578</x-m>
+			<y-m>-0.07046</y-m>
+			<z-m> 0.91165</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
 
-    <animation>
-        <type>select</type>
-        <object-name>light</object-name>
-        <condition>
-            <property>controls/armament/gunsight/power-on</property>
-        </condition>
-    </animation>
-    
-    <animation> 
-        <type>select</type>
-        <object-name>indicator</object-name>
-        <condition>
-            <not>
-                <property>controls/armament/gunsight/power-on</property>
-            </not>
-        </condition>
-    </animation>
+	<!-- power switches -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>switchFixedNetPower</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/armament/gunsight/fixed-net-power-switch</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>switchFixedNetPower</object-name>
+		<type>rotate</type>
+		<property>controls/armament/gunsight/fixed-net-power-switch</property>
+		<factor>50</factor>
+		<offset-deg>-25</offset-deg>
+		<center>
+			<x-m>-3.90404</x-m>
+			<y-m> 0.02677</y-m>
+			<z-m> 0.86791</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>switchPipperPower</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/armament/gunsight/pipper-power-switch</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>switchPipperPower</object-name>
+		<type>rotate</type>
+		<property>controls/armament/gunsight/pipper-power-switch</property>
+		<factor>50</factor>
+		<offset-deg>-25</offset-deg>
+		<center>
+			<x-m>-3.90346</x-m>
+			<y-m> 0.05298</y-m>
+			<z-m> 0.88300</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<!-- knobbins -->
+	
+	<!-- <pipper-angular-correction-knob type="float">0</pipper-angular-correction-knob>
+		<pipper-brightness-knob type="float">1</pipper-brightness-knob>
+		<fixed-net-brightness-knob type="float">1</fixed-net-brightness-knob>
+		<target-size-knob type="float">0</target-size-knob>	-->
+				
+	<animation>
+		<type>pick</type>
+		<object-name>knobTargetSize</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.3</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/gunsight/target-size-knob</property>
+				<step>1</step>
+				<min>0</min>
+				<max>10</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.3</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/gunsight/target-size-knob</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>10</max>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>knobPipperAngularCorrection</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.3</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/gunsight/pipper-angular-correction-knob</property>
+				<step>1</step>
+				<min>0</min>
+				<max>10</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.3</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/gunsight/pipper-angular-correction-knob</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>10</max>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>knobPipperBrightness</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/gunsight/pipper-brightness-knob</property>
+				<step>0.05</step>
+				<min>0</min>
+				<max>1.05</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/gunsight/pipper-brightness-knob</property>
+				<step>-0.05</step>
+				<min>0</min>
+				<max>1.05</max>
+			</binding>
+		</action>
+	</animation>
 
-    <animation>
-        <type>select</type>
-        <object-name>sight</object-name>
-        <condition>
-            <property>controls/armament/gunsight/power-on</property>
-        </condition>
-    </animation>  
-
-    <animation> 
-        <type>select</type>
-        <object-name>switch-on</object-name>
-        <condition>
-            <property>controls/armament/gunsight/power-on</property>
-        </condition>
-    </animation>
-
-    <animation> 
-        <type>select</type>
-        <object-name>switch-off</object-name>
-        <condition>
-            <not>
-                <property>controls/armament/gunsight/power-on</property>
-            </not>
-        </condition>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>switch-on</object-name>
-        <object-name>switch-off</object-name>
-        <visible>true</visible>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-toggle</command>
-                <property>controls/armament/gunsight/power-on</property>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>too-slow2</object-name>
-        <condition>
-            <greater-than>
-                <property>orientation/alpha-deg</property>
-                <property>sim/aoa-indexer/slow-deg</property>
-            </greater-than>
-        </condition>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>on-speed2</object-name>
-        <condition>
-            <not>
-                <or>
-                    <greater-than>
-                        <property>orientation/alpha-deg</property>
-                        <property>sim/aoa-indexer/too-slow-deg</property>
-                    </greater-than>
-                    <less-than>
-                        <property>orientation/alpha-deg</property>
-                        <property>sim/aoa-indexer/too-fast-deg</property>
-                    </less-than>
-                </or>
-            </not>
-        </condition>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>too-fast2</object-name>
-        <condition>
-            <less-than>
-                <property>orientation/alpha-deg</property>
-                <property>sim/aoa-indexer/fast-deg</property>
-            </less-than>
-        </condition>
-    </animation>
-    
-<!-- Label text -->
-
-<text>
-	<name>LabelText</name>
-	<type type="string">literal</type>
-		<text type="string">Gunsight</text>
-	<draw-text type="bool">true</draw-text>
-	<font>Helvetica.txf</font>
-		<character-size type="double">0.012</character-size>
-		<character-aspect-ratio type="double">1.0</character-aspect-ratio>
-	<axis-alignment>yz-plane</axis-alignment>
-	<max-height>0.2</max-height>
-	<max-width>0.07</max-width>
-	<font-resolution>
-		<width type="int">32</width>
-		<height type="int">32</height>
-	</font-resolution>
-	<alignment>center-center</alignment>
-	<offsets>
-		<x-m> 0.15</x-m>
-		<y-m> 0.10 </y-m>
-		<z-m> 0.0 </z-m>
-	</offsets>
-</text>
-
-<animation>
-	<type>material</type>
-		<object-name>LabelText</object-name>
-	<emission>
-		<red>1.0</red>
-		<green>0.8</green>
-		<blue>0.0</blue>
-	</emission>
-</animation>
-
-<animation>
-	<type>select</type>
-		<object-name>LabelText</object-name>
-	<condition>
-		<property>/sim/panel-hotspots</property>
-	</condition>
-</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>knobFixedNetBrightness</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/gunsight/fixed-net-brightness-knob</property>
+				<step>0.05</step>
+				<min>0</min>
+				<max>1.05</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/gunsight/fixed-net-brightness-knob</property>
+				<step>-0.05</step>
+				<min>0</min>
+				<max>1.05</max>
+			</binding>
+		</action>
+	</animation>
 
 </PropertyList>

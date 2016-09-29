@@ -1,0 +1,56 @@
+AC3Db
+MATERIAL "DefaultWhite" rgb 1.0000 1.0000 1.0000  amb 0.2000 0.2000 0.2000  emis 0.0000 0.0000 0.0000  spec 0.5000 0.5000 0.5000  shi 10 trans 0.0000
+OBJECT world
+name "Blender_export__label.ac"
+kids 1
+OBJECT poly
+name "label"
+data 8
+Cube.001
+crease 35.0
+numvert 8
+-0.00143 -0.00305 0.00959
+-0.00143 0.00305 0.00959
+-0.00143 -0.00305 -0.00959
+-0.00143 0.00305 -0.00959
+0.00042 -0.00305 0.00959
+0.00042 0.00305 0.00959
+0.00042 -0.00305 -0.00959
+0.00042 0.00305 -0.00959
+numsurf 5
+SURF 0X0
+mat 0
+refs 4
+3 0 0
+7 0 0
+6 0 0
+2 0 0
+SURF 0X0
+mat 0
+refs 4
+7 0 0
+5 0 0
+4 0 0
+6 0 0
+SURF 0X0
+mat 0
+refs 4
+5 0 0
+1 0 0
+0 0 0
+4 0 0
+SURF 0X0
+mat 0
+refs 4
+0 0 0
+2 0 0
+6 0 0
+4 0 0
+SURF 0X0
+mat 0
+refs 4
+5 0 0
+7 0 0
+3 0 0
+1 0 0
+kids 0

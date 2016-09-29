@@ -353,7 +353,6 @@ var radar_screen = {
 			   .arcSmallCW(40,40,0,-80,0)
                .setStrokeLineWidth(lW)
                .setColor(dR, dG, dB);
-		print("done setting up canvaso!");
 		m.update();
 	},
 	update: func() {

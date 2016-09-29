@@ -31,9 +31,9 @@
         <type>material</type>
         <object-name>radarDisplay</object-name>
         <emission>
-            <red>0.5</red>
-            <green>0.6</green>
-            <blue>0.3</blue>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
             <factor-prop>controls/lighting/instruments-norm</factor-prop>
         </emission> 
 </animation>

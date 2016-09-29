@@ -1,20 +1,24 @@
-var dR = 0.523; #display red value
-var dG = 0.902; #display green value
-var dB = 0.118; #display blue value
-var fS = 60;	#font size
-var lL = 80;	#line length (it's a little case L, not a [one])
-var lW = 5;		#line width
+#todo: make sure we have enough voltage. update me.power() for that.
+
+var fixednetswitch = "/controls/armament/gunsight/fixed-net-power-switch";
+var redpath = "/controls/armament/gunsight/red";
+var bluepath = "/controls/armament/gunsight/blue";
+var greenpath = "/controls/armament/gunsight/green";
+var alphapath = "/controls/armament/gunsight/fixed-net-brightness-knob";
+var fontsizepath = "/controls/armament/gunsight/font-size";
+var linewidthpath = "/controls/armament/gunsight/thickness";
 var viewX = "/sim/current-view/x-offset-m";
 var viewY = "/sim/current-view/y-offset-m";
 var viewZ = "/sim/current-view/z-offset-m";
-var startViewX = getprop(viewX);
-var startViewY = getprop(viewY);
-var startViewZ = getprop(viewZ);
 var ghosting_x = "/controls/armament/gunsight/ghosting-x";
 var ghosting_y = "/controls/armament/gunsight/ghosting-y";
 var scaling = "/controls/armament/gunsight/scaling";
 var sight_align_elevation = "/controls/armament/gunsight/elevation";
 var sight_align_windage = "/controls/armament/gunsight/windage";
+
+var startViewX = getprop(viewX);
+var startViewY = getprop(viewY);
+var startViewZ = getprop(viewZ);
 
 var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 
@@ -42,16 +46,23 @@ var gun_sight = {
 		#gunsight settings
 				
 		#gunsight canvas
+		
+		var dR = m.getColor(redpath);
+		var dG = m.getColor(greenpath);
+		var dB = m.getColor(bluepath);
+		var dA = getprop(alphapath);
+		var fS = getprop(fontsizepath);	#font size
+		var lW = getprop(linewidthpath);		#line width
 	
 		m.gunsight.addPlacement(placement);
 		m.gunsight.setColorBackground(0,0,0,0);
 
 		m.gsight = m.gunsight.createGroup();
-		m.child = [];
+		m.gschild = [];
 		m.centers = [];
 		
-		append(m.child, m.gsight.createChild("path", "mainvert")
-			.setColor(dR,dG,dB)
+		append(m.gschild, m.gsight.createChild("path", "straights")
+			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
 			.moveTo(512,326)
@@ -61,12 +72,7 @@ var gun_sight = {
 			.moveTo(512,595)
 			.lineTo(512,617)
 			.moveTo(512,637)
-			.lineTo(512,946));
-			
-		append(m.child, m.gsight.createChild("path", "minverts")
-			.setColor(dR,dG,dB)
-			.setStrokeLineWidth(lW)
-			.setStrokeLineCap("round")
+			.lineTo(512,946)
 			.moveTo(345,500)
 			.lineTo(345,527)
 			.moveTo(428,500)
@@ -74,12 +80,7 @@ var gun_sight = {
 			.moveTo(593,500)
 			.lineTo(593,527)
 			.moveTo(676,500)
-			.lineTo(676,527));
-			
-		append(m.child, m.gsight.createChild("path", "minhoriz")
-			.setColor(dR,dG,dB)
-			.setStrokeLineWidth(lW)
-			.setStrokeLineCap("round")
+			.lineTo(676,527)
 			.moveTo(501,346)
 			.lineTo(523,346)
 			.moveTo(501,432)
@@ -89,12 +90,7 @@ var gun_sight = {
 			.moveTo(501,823)
 			.lineTo(523,823)
 			.moveTo(501,886)
-			.lineTo(523,886));
-			
-		append(m.child, m.gsight.createChild("path", "dishoriz")
-			.setColor(dR,dG,dB)
-			.setStrokeLineWidth(lW)
-			.setStrokeLineCap("round")
+			.lineTo(523,886)
 			.moveTo(489,555)
 			.lineTo(501,555)
 			.moveTo(523,555)
@@ -106,12 +102,7 @@ var gun_sight = {
 			.moveTo(489,637)
 			.lineTo(501,637)
 			.moveTo(523,637)
-			.lineTo(535,637));
-		
-		append(m.child, m.gsight.createChild("path", "majhoriz")
-			.setColor(dR,dG,dB)
-			.setStrokeLineWidth(lW)
-			.setStrokeLineCap("round")
+			.lineTo(535,637)
 			.moveTo(489,680)
 			.lineTo(535,680)
 			.moveTo(489,761)
@@ -119,12 +110,7 @@ var gun_sight = {
 			.moveTo(489,844)
 			.lineTo(535,844)
 			.moveTo(489,924)
-			.lineTo(535,924));
-			
-		append(m.child, m.gsight.createChild("path", "othhoriz")
-			.setColor(dR,dG,dB)
-			.setStrokeLineWidth(lW)
-			.setStrokeLineCap("round")
+			.lineTo(535,924)
 			.moveTo(428,514)
 			.lineTo(448,514)
 			.moveTo(468,514)
@@ -132,12 +118,7 @@ var gun_sight = {
 			.moveTo(533,514)
 			.lineTo(553,514)
 			.moveTo(573,514)
-			.lineTo(593,514));
-			
-		append(m.child, m.gsight.createChild("path", "diags")
-			.setColor(dR,dG,dB)
-			.setStrokeLineWidth(lW)
-			.setStrokeLineCap("round")
+			.lineTo(593,514)
 			.moveTo(198,826)
 			.lineTo(424,600)
 			.moveTo(341,922)
@@ -161,50 +142,67 @@ var gun_sight = {
 			.moveTo(650,662)
 			.lineTo(655,657)
 			.moveTo(739,751)
-			.lineTo(744,746));
-			
-		append(m.child, m.gsight.createChild("path", "bigx")
-			.setColor(dR,dG,dB)
-			.setStrokeLineWidth(lW)
-			.setStrokeLineCap("round")
+			.lineTo(744,746)
 			.moveTo(499,573)
 			.lineTo(525,547)
 			.moveTo(499,547)
-			.lineTo(525,573));
-			
-		append(m.child, m.gsight.createChild("path", "lilx")
-			.setColor(dR,dG,dB)
-			.setStrokeLineWidth(lW)
-			.setStrokeLineCap("round")
+			.lineTo(525,573)
 			.moveTo(505,622)
 			.lineTo(519,608)
 			.moveTo(505,608)
 			.lineTo(519,622));
 			
-		append(m.child, m.gsight.createChild("path", "inarc")
-			.setColor(dR,dG,dB)
+		append(m.gschild, m.gsight.createChild("path", "inarc")
+			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
 			.moveTo(259,479)
 			.arcLargeCCWTo(255,255,0,765,479)
 			.setStrokeDashArray([69,38,38,38,38,38,38,38,38,116,38,38,38,38,38,38,38,38,69])); # curve is 868 pixels 362
 			
-		append(m.child, m.gsight.createChild("path", "outarc")
-			.setColor(dR,dG,dB)
+		append(m.gschild, m.gsight.createChild("path", "outarc")
+			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
 			.moveTo(195,782)
 			.arcSmallCCWTo(416,416,0,821,782)
-			.setStrokeDashArray([40,40,40,40,40,40,40,80,40,40,40,40,40,40,40]));
+			.setStrokeDashArray([40,40,40,40,40,40,40,147,40,40,40,40,40,40,40]));
 		
-		for (var i = 0; i < size(m.child); i += 1 ) {
-			append(m.centers, m.child[i].getCenter());
+		for (var i = 0; i < size(m.gschild); i += 1 ) {
+			append(m.centers, m.gschild[i].getCenter());
 		}
-			
-
+		
+		setlistener(fixednetswitch,func { m.power() });
+		
+		setlistener(viewX,func { m.updateXY() });
+		setlistener(viewY,func { m.updateXY() });
+		
+		setlistener(redpath,func { m.updateColor() });
+		setlistener(bluepath,func { m.updateColor() });
+		setlistener(greenpath,func { m.updateColor() });
+		setlistener(alphapath,func { m.updateColor() });
+		
+		setlistener(linewidthpath,func { m.updateWidth() });
+		
+		m.power();
 		m.update();
 	},
 	update: func() {
+		settimer(func { me.update(); }, 100); #no auto updates yet, will be when the pipper gets implemented tho
+	},
+	power: func() {
+		var switch_state = getprop(fixednetswitch);
+		if ( switch_state == 1 ) {
+			for (var i = 0; i < size(me.gschild); i += 1 ) {
+				me.gschild[i].show();
+			}
+		} else {
+			for (var i = 0; i < size(me.gschild); i += 1 ) {
+				me.gschild[i].hide();
+			}	
+		}
+	},
+	updateXY: func() {
 		
 		var curViewX = getprop(viewX);
 		var curViewY = getprop(viewY);
@@ -218,11 +216,30 @@ var gun_sight = {
 		var changeViewX = (startViewX-getprop(viewX))*ghostx;
 		var changeViewY = (startViewY-getprop(viewY))*ghosty;
 	
-		for (var i = 0; i < size(me.child); i += 1 ) {
-			me.child[i].setTranslation(-1 * (me.centers[i][0]+changeViewX)+s_win,me.centers[i][1]+changeViewY+s_ele);
+		for (var i = 0; i < size(me.gschild); i += 1 ) {
+			me.gschild[i].setTranslation(-1 * (me.centers[i][0]+changeViewX)+s_win,me.centers[i][1]+changeViewY+s_ele);
 		}
-		settimer(func { me.update(); }, 0.00);
     },
+	updateColor: func() {
+		var dR = me.getColor(redpath);
+		var dB = me.getColor(bluepath);
+		var dG = me.getColor(greenpath);
+		var dA = getprop(alphapath);
+		for (var i = 0; i < size(me.gschild); i += 1 ) {
+			me.gschild[i].setColor(dR,dG,dB,dA);
+		}
+	},
+	updateWidth: func() {
+		var lW = getprop(linewidthpath);
+		for (var i = 0; i < size(me.gschild); i += 1 ) {
+			me.gschild[i].setStrokeLineWidth(lW);
+		}
+	},
+	getColor: func(path) {
+		x = getprop(path);
+		y = x == 0 ? 0 : x > 0 ? x / 255 : x; # if x == 0 return 0 else return x / 255
+		return y;
+	}
 };
 
 var init = setlistener("/sim/signals/fdm-initialized", func() {
