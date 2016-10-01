@@ -22,17 +22,17 @@
    <vtailarea unit="FT2">   29.70 </vtailarea>
    <vtailarm  unit="FT" >   20.68 </vtailarm>
    <location name="AERORP" unit="IN">
-     <x> 297.00 </x>
+     <x> 0.00 </x>
      <y>   0.00 </y>
      <z>  -3.00 </z>
    </location>
-   <location name="EYEPOINT" unit="IN">
-     <x> 124.08 </x>
+   <location name="EYEPOINT" unit="M">
+     <x>-3.28217 </x>
      <y>   0.00 </y>
-     <z>  36.00 </z>
+     <z>  0.9944 </z>
    </location>
    <location name="VRP" unit="IN">
-     <x>297</x>
+     <x>0</x>
      <y>0</y>
      <z>0</z>
    </location>
@@ -48,7 +48,7 @@
    <emptywt unit="LBS" >     12882 </emptywt>
    
    <location name="CG" unit="IN">
-     <x> 297.00 </x>
+     <x>   0.00 </x>
      <y>   0.00 </y>
      <z>  -4.00 </z>
    </location>
@@ -56,7 +56,7 @@
    <pointmass name="station1"><!-- left wing outboard pylon pointmass 0 -->
       <weight unit="LBS"> 0 </weight>
       <location name="POINTMASS" unit="IN">
-          <x>  308 </x>
+          <x>   11 </x>
           <y> -120 </y>
           <z>  -10 </z>
       </location>
@@ -65,7 +65,7 @@
    <pointmass name="station2"><!-- left wing inboard pylon pointmass 1 -->
       <weight unit="LBS"> 0 </weight>
       <location name="POINTMASS" unit="IN">
-          <x>  300 </x>
+          <x>    3 </x>
           <y> -100 </y>
           <z>  -10 </z>
       </location>
@@ -74,7 +74,7 @@
    <pointmass name="station3"><!-- empty centerline fuel tank pointmass 2 -->
       <weight unit="LBS"> 0 </weight>
       <location name="POINTMASS" unit="IN">
-          <x>  290 </x>
+          <x>   -7 </x>
           <y>    0 </y>
           <z>  -30 </z>
       </location>
@@ -83,7 +83,7 @@
    <pointmass name="station4"><!-- right wing inboard pylon pointmass 3 -->
       <weight unit="LBS"> 0 </weight>
       <location name="POINTMASS" unit="IN">
-          <x>  300 </x>
+          <x>    3 </x>
           <y>  100 </y>
           <z>  -10 </z>
       </location>
@@ -92,7 +92,7 @@
    <pointmass name="station5"><!-- right wing outboard pylon pointmass 4 -->
       <weight unit="LBS"> 0 </weight>
       <location name="POINTMASS" unit="IN">
-          <x>  308 </x>
+          <x>   11 </x>
           <y>  120 </y>
           <z>  -10 </z>
       </location>
@@ -103,7 +103,7 @@
 
   <contact type="BOGEY" name="NOSE">
    <location unit="IN">
-     <x>  60 </x>
+     <x>-237 </x>
      <y>   0 </y>
      <z> -47 </z>
    </location>
@@ -119,7 +119,7 @@
 
   <contact type="BOGEY" name="LEFT_MAIN">
    <location unit="IN">
-     <x>  310.13 </x>
+     <x>   13.13 </x>
      <y>  -70.00 </y>
      <z>  -60.00 </z>
    </location>
@@ -134,7 +134,7 @@
 
   <contact type="BOGEY" name="RIGHT_MAIN">
    <location unit="IN">
-     <x> 310.13 </x>
+     <x>  13.13 </x>
      <y>  70.00 </y>
      <z> -60.00 </z>
    </location>
@@ -149,7 +149,7 @@
 
   <contact type="STRUCTURE" name="LEFT_WING">
     <location unit="IN">
-     <x>  322.24 </x>
+     <x>   25.24 </x>
      <y> -132.00 </y>
      <z>  0 </z>
     </location>
@@ -161,7 +161,7 @@
 
   <contact type="STRUCTURE" name="RIGHT_WING">
     <location unit="IN">
-     <x> 322.24 </x>
+     <x>  25.24 </x>
      <y> 132.00 </y>
      <z>  0 </z>
     </location>
@@ -173,7 +173,7 @@
 
   <contact type="STRUCTURE" name="AFT_FUSELAGE">
     <location unit="IN">
-     <x> 500 </x>
+     <x> 203 </x>
      <y>   0 </y>
      <z>   0 </z>
     </location>
@@ -185,7 +185,7 @@
 
   <contact type="STRUCTURE" name="FWD_FUSELAGE">
     <location unit="IN">
-     <x>  50 </x>
+     <x> -247 </x>
      <y>   0 </y>
      <z> -20 </z>
     </location>
@@ -199,14 +199,14 @@
  <propulsion>
    <engine file="Tumansky">
     <location unit="IN">
-      <x> 560.40 </x>
+      <x> 263.40 </x>
       <y>   0.00 </y>
       <z>   0.00 </z>
     </location>
     <feed>2</feed>
     <thruster file="direct">
      <location unit="IN">
-       <x> 560.40 </x>
+       <x> 263.40 </x>
        <y>   0.00 </y>
        <z>   0.00 </z>
      </location>
@@ -274,27 +274,27 @@
   <!-- internal fuel 1 -->
   <tank type="FUEL" number="0">
      <location unit="M">
-       <x> -2.2477 </x>
+       <x> -2.0477 </x>
        <y>   0.00 </y>
-       <z> 0.98312 </z>
+       <z> 0.74312 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 320 </capacity>
+     <capacity unit="LBS"> 370 </capacity>
      <contents unit="LBS"> 300 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
   
   <tank type="FUEL" number="1">
      <location unit="M">
-       <x> -1.5977 </x>
+       <x> -0.5977 </x>
        <y>   0.00 </y>
        <z> 0.88205 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 1520 </capacity>
-     <contents unit="LBS"> 1500 </contents>
+     <capacity unit="LBS"> 870 </capacity>
+     <contents unit="LBS"> 850 </contents>
      <standpipe unit="LBS"> 400 </standpipe> 
   </tank>
   
@@ -306,7 +306,7 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 140 </capacity>
+     <capacity unit="LBS"> 240 </capacity>
      <contents unit="LBS"> 130 </contents>
      <standpipe unit="LBS"> 100 </standpipe> 
   </tank>
@@ -315,11 +315,11 @@
      <location unit="M">
        <x> 2.47969 </x>
        <y>   0.00 </y>
-       <z>   0.56241 </z>
+       <z>   0.39241 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 365 </capacity>
+     <capacity unit="LBS"> 515 </capacity>
      <contents unit="LBS"> 360 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
@@ -328,11 +328,11 @@
      <location unit="M">
        <x> 3.23313 </x>
        <y>   0.00 </y>
-       <z>   0.56241 </z>
+       <z>   0.39241 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 365 </capacity>
+     <capacity unit="LBS"> 515 </capacity>
      <contents unit="LBS"> 360 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
@@ -341,7 +341,7 @@
      <location unit="M">
        <x> 4.18064 </x>
        <y>   0.00 </y>
-       <z>   0.56241 </z>
+       <z> 0.28241 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
@@ -360,7 +360,7 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 345 </capacity>
+     <capacity unit="LBS"> 395 </capacity>
      <contents unit="LBS"> 320 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
@@ -373,7 +373,7 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 300 </capacity>
+     <capacity unit="LBS"> 350 </capacity>
      <contents unit="LBS"> 250 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
@@ -386,7 +386,7 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 345 </capacity>
+     <capacity unit="LBS"> 395 </capacity>
      <contents unit="LBS"> 320 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
@@ -399,7 +399,7 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 300 </capacity>
+     <capacity unit="LBS"> 350 </capacity>
      <contents unit="LBS"> 250 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
@@ -407,7 +407,7 @@
   <!-- drop tanks -->
   <tank type="FUEL" number="10">
      <location unit="IN">
-       <x> 300.00 </x>
+       <x>   3.00 </x>
        <y>   0.00 </y>
        <z> -30.00 </z>
      </location>
@@ -419,8 +419,8 @@
 
   <tank type="FUEL" number="11">
      <location unit="IN">
-       <x> 318.00 </x>
-       <y> -120.00 </y>
+       <x>  21.00 </x>
+       <y>-120.00 </y>
        <z> -10.00 </z>
      </location>
      <density>6.5</density>
@@ -430,7 +430,7 @@
 
   <tank type="FUEL" number="12">
      <location unit="IN">
-       <x> 318.00 </x>
+       <x>  21.00 </x>
        <y> 120.00 </y>
        <z> -10.00 </z>
      </location>
