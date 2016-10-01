@@ -1,20 +1,22 @@
 <?xml version="1.0"?>
 
+<!-- info gleaned from mig-21bis pilot flight operating instruction (blue cover) has been annotated -->
+
 <turbine_engine name="Tumansky">
-  <milthrust>    9050.0 </milthrust>
-  <maxthrust>   15650.0 </maxthrust>
-  <bypassratio>     1.0 </bypassratio>
-  <tsfc>            0.96</tsfc>
-  <atsfc>           2.21</atsfc>
+  <milthrust>    9050.0 </milthrust> <!-- max milthrust, 4100 kgf per page 5, line (a) -->
+  <maxthrust>   15100.0 </maxthrust> <!-- max thrust without second reheat, 6850 kgf per page 5, line (a) -->
+  <bypassratio>     0.8 </bypassratio> <!-- just used for spool up, so setting to 0.8 for not-instantaneous spooling. may change later. -->
+  <tsfc>            0.96</tsfc> <!-- source - wikipedia :( -->
+  <atsfc>           2.25</atsfc> <!-- source - wikipedia :( this is without second reheat -->
   <bleed>           0.03</bleed>
   <idlen1>         30.0 </idlen1>
   <idlen2>         65.0 </idlen2>
-  <maxn1>         100.0 </maxn1>
-  <maxn2>         105.0 </maxn2>
-  <augmented>         1 </augmented>
-  <augmethod>         1 </augmethod>
-  <injected>          1 </injected>
-  <injection-time> 180.0 </injection-time>
+  <maxn1>         103.5 </maxn1> <!-- page 25, powerpland (in flight), line 15(b) -->
+  <maxn2>         107.5 </maxn2> <!-- page 25, powerpland (in flight), line 16 -->
+  <augmented>         1 </augmented> 
+  <augmethod>         1 </augmethod> <!-- will be changing this to method 2 when i can get around to writing better throttle code -->
+  <injected>          1 </injected> <!-- currently used for second reheat, but i don't like this method as it doesn't produce accurate results. the second reheat only engages when the switch is on AND the throttle is in afterburner. leaving it for now. -->
+  <injection-time> 1800.0 </injection-time> <!-- 3 minutes is operational maximum, not actual maximum -->
 
   <function name="IdleThrust">
    <table>
@@ -72,6 +74,9 @@
    </table>
   </function>
 
+  <!-- the manual states that this'll produce 7100 kgf, or 9900 kgf near sealevel at mach one. 
+		in other words, these numbers are offffffffffffffff-->
+  
   <function name="Injection">
    <table>
     <independentVar lookup="row">velocities/mach</independentVar>

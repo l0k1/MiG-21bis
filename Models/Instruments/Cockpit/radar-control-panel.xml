@@ -5,335 +5,370 @@
 
 	<!--lights-->
 	
-	<continuous-jam type="bool">0</continuous-jam>
+	<!--<continuous-jam type="bool">0</continuous-jam>
 	<intermittent-jam type="bool">0</intermittent-jam>
 	<passive-jam type="bool">0</passive-jam>
 	<weather-filter type="bool">0</weather-filter>
 	<iff type="bool">0</iff>
 	<lst-mode type="bool">0</lst-mode>
 	<selftest type="bool">0</selftest>
-	<reset type="bool">0</reset>
+	<reset type="bool">0</reset>-->
 	
 	<animation>
         <type>material</type>
-        <object-name>light</object-name>
+        <object-name>ledCont</object-name>
 		<ambient>
-			<red>1.0</red>
-			<green>0.2</green>
+			<red>0.2</red>
+			<green>0.0</green>
 			<blue>0.0</blue>
 		</ambient>
         <emission>
             <red>1</red>
             <green>0</green>
             <blue>0</blue>
-            <factor-prop>controls/armament/panel/gun-ready</factor-prop>
+            <factor-prop>controls/radar/panel/continuous-jam</factor-prop>
         </emission> 
     </animation>
 	
-    <!--<animation>
+	<animation>
         <type>material</type>
-        <object-name>labelAir</object-name>
-        <object-name>labelReloading</object-name>
+        <object-name>ledInter</object-name>
+		<ambient>
+			<red>0.2</red>
+			<green>0.0</green>
+			<blue>0.0</blue>
+		</ambient>
         <emission>
-            <red>0.9</red>
-            <green>0.1</green>
-            <blue>0.1</blue>
-            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+            <factor-prop>controls/radar/panel/intermittent-jam</factor-prop>
         </emission> 
-    </animation>-->
+    </animation>
 	
-	<!-- RELOAD BUTTONS -->
+	<animation>
+        <type>material</type>
+        <object-name>ledPas</object-name>
+		<ambient>
+			<red>0.2</red>
+			<green>0.0</green>
+			<blue>0.0</blue>
+		</ambient>
+        <emission>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+            <factor-prop>controls/radar/panel/passive-jam</factor-prop>
+        </emission> 
+    </animation>
+	
+	<animation>
+        <type>material</type>
+        <object-name>ledWeat</object-name>
+		<ambient>
+			<red>0.2</red>
+			<green>0.0</green>
+			<blue>0.0</blue>
+		</ambient>
+        <emission>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+            <factor-prop>controls/radar/panel/weather-filter</factor-prop>
+        </emission> 
+    </animation>
+	
+	<animation>
+        <type>material</type>
+        <object-name>ledIff</object-name>
+		<ambient>
+			<red>0.2</red>
+			<green>0.0</green>
+			<blue>0.0</blue>
+		</ambient>
+        <emission>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+            <factor-prop>controls/radar/panel/iff</factor-prop>
+        </emission> 
+    </animation>
+	
+	<animation>
+        <type>material</type>
+        <object-name>ledLst</object-name>
+		<ambient>
+			<red>0.2</red>
+			<green>0.0</green>
+			<blue>0.0</blue>
+		</ambient>
+        <emission>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+            <factor-prop>controls/radar/panel/lst-mode</factor-prop>
+        </emission> 
+    </animation>
+	
+	<animation>
+        <type>material</type>
+        <object-name>ledSelfTest</object-name>
+		<ambient>
+			<red>0.2</red>
+			<green>0.0</green>
+			<blue>0.0</blue>
+		</ambient>
+        <emission>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+            <factor-prop>controls/radar/panel/selftest</factor-prop>
+        </emission> 
+    </animation>
+	
+	<animation>
+        <type>material</type>
+        <object-name>ledReset</object-name>
+		<ambient>
+			<red>0.2</red>
+			<green>0.0</green>
+			<blue>0.0</blue>
+		</ambient>
+        <emission>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+            <factor-prop>controls/radar/panel/reset</factor-prop>
+        </emission> 
+    </animation>
+	
+	
+	<!-- picks and translations -->
 	
 	<animation>
 		<type>pick</type>
-		<object-name>reload1</object-name>
+		<object-name>buttonCont</object-name>
+		<object-name>ledCont</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
 			<repeatable>false</repeatable>
 			<binding>
-				<command>property-assign</command>
-				<property>controls/armament/panel/reload[0]</property>
-				<value>1</value>
+				<command>property-toggle</command>
+				<property>controls/radar/panel/continuous-jam</property>
 			</binding>
-			<mod-up>
-				<binding>
-					<command>property-assign</command>
-					<property>controls/armament/panel/reload[0]</property>
-					<value>0</value>
-				</binding>
-			</mod-up>
 		</action>
 	</animation>
 	
 	<animation>
 		<type>translate</type>
-		<object-name>reload1</object-name>
-		<property>controls/armament/panel/reload[0]</property>
+		<object-name>buttonCont</object-name>
+		<object-name>ledCont</object-name>
+		<property>controls/radar/panel/continuous-jam</property>
 		<factor>0.004</factor>
 		<axis>
 			<x>-0.00412</x>
-			<y>-0.00073</y>
+			<y> 0.00000</y>
 			<z> 0.00000</z>
 		</axis>
 	</animation>
 	
 	<animation>
 		<type>pick</type>
-		<object-name>reload2</object-name>
+		<object-name>buttonInter</object-name>
+		<object-name>ledInter</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
 			<repeatable>false</repeatable>
 			<binding>
-				<command>property-assign</command>
-				<property>controls/armament/panel/reload[1]</property>
-				<value>1</value>
+				<command>property-toggle</command>
+				<property>controls/radar/panel/intermittent-jam</property>
 			</binding>
-			<mod-up>
-				<binding>
-					<command>property-assign</command>
-					<property>controls/armament/panel/reload[1]</property>
-					<value>0</value>
-				</binding>
-			</mod-up>
 		</action>
 	</animation>
 	
 	<animation>
 		<type>translate</type>
-		<object-name>reload2</object-name>
-		<property>controls/armament/panel/reload[1]</property>
+		<object-name>buttonInter</object-name>
+		<object-name>ledInter</object-name>
+		<property>controls/radar/panel/intermittent-jam</property>
 		<factor>0.004</factor>
 		<axis>
 			<x>-0.00412</x>
-			<y>-0.00073</y>
+			<y> 0.00000</y>
 			<z> 0.00000</z>
 		</axis>
 	</animation>
 	
 	<animation>
 		<type>pick</type>
-		<object-name>reload3</object-name>
+		<object-name>buttonPas</object-name>
+		<object-name>ledPas</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
 			<repeatable>false</repeatable>
 			<binding>
-				<command>property-cycle</command>
-				<property>controls/armament/panel/reload[2]</property>
-				<value>1</value>
+				<command>property-toggle</command>
+				<property>controls/radar/panel/passive-jam</property>
 			</binding>
-			<mod-up>
-				<binding>
-					<command>property-cycle</command>
-					<property>controls/armament/panel/reload[2]</property>
-					<value>0</value>
-				</binding>
-			</mod-up>
 		</action>
 	</animation>
 	
 	<animation>
 		<type>translate</type>
-		<object-name>reload3</object-name>
-		<property>controls/armament/panel/reload[2]</property>
+		<object-name>buttonPas</object-name>
+		<object-name>ledPas</object-name>
+		<property>controls/radar/panel/passive-jam</property>
 		<factor>0.004</factor>
 		<axis>
 			<x>-0.00412</x>
-			<y>-0.00073</y>
+			<y> 0.00000</y>
 			<z> 0.00000</z>
 		</axis>
 	</animation>
 	
-	<!-- SWITCHES -->
-	
 	<animation>
 		<type>pick</type>
-		<object-name>airGndSwitch</object-name>
+		<object-name>buttonWeat</object-name>
+		<object-name>ledWeat</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>
-			<binding>
-				<command>property-adjust</command>
-				<property>controls/armament/panel/air-gnd-switch</property>
-				<step>-1</step>
-				<min>0</min>
-				<max>2</max>
-				<wrap>false</wrap>
-			</binding>
-		</action>
-		<action>
 			<button>1</button>
 			<repeatable>false</repeatable>
 			<binding>
-				<command>property-adjust</command>
-				<property>controls/armament/panel/air-gnd-switch</property>
-				<step>1</step>
-				<min>0</min>
-				<max>2</max>
-				<wrap>false</wrap>
+				<command>property-toggle</command>
+				<property>controls/radar/panel/weather-filter</property>
 			</binding>
 		</action>
 	</animation>
 	
 	<animation>
-		<object-name>airGndSwitch</object-name>
-		<type>rotate</type>
-		<property>controls/armament/panel/air-gnd-switch</property>
-		<factor>35</factor>
-		<offset-deg>-35</offset-deg>
-		<center>
-			<x-m>-3.87843</x-m>
-			<y-m>-0.33518</y-m>
-			<z-m> 0.83899</z-m>
-		</center>
+		<type>translate</type>
+		<object-name>buttonWeat</object-name>
+		<object-name>ledWeat</object-name>
+		<property>controls/radar/panel/weather-filter</property>
+		<factor>0.004</factor>
 		<axis>
-			<x>0</x>
-			<y>1</y>
-			<z>0</z>
+			<x>-0.00412</x>
+			<y> 0.00000</y>
+			<z> 0.00000</z>
 		</axis>
 	</animation>
-	
 	
 	<animation>
 		<type>pick</type>
-		<object-name>irSarSwitch</object-name>
+		<object-name>buttonIff</object-name>
+		<object-name>ledIff</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>
-			<binding>
-				<command>property-adjust</command>
-				<property>controls/armament/panel/ir-sar-switch</property>
-				<step>-1</step>
-				<min>0</min>
-				<max>2</max>
-				<wrap>false</wrap>
-			</binding>
-		</action>
-		<action>
 			<button>1</button>
 			<repeatable>false</repeatable>
 			<binding>
-				<command>property-adjust</command>
-				<property>controls/armament/panel/ir-sar-switch</property>
-				<step>1</step>
-				<min>0</min>
-				<max>2</max>
-				<wrap>false</wrap>
+				<command>property-toggle</command>
+				<property>controls/radar/panel/iff</property>
 			</binding>
 		</action>
 	</animation>
 	
 	<animation>
-		<object-name>irSarSwitch</object-name>
-		<type>rotate</type>
-		<property>controls/armament/panel/ir-sar-switch</property>
-		<factor>35</factor>
-		<offset-deg>-35</offset-deg>
-		<center>
-			<x-m>-3.88583</x-m>
-			<y-m>-0.30205</y-m>
-			<z-m> 0.83899</z-m>
-		</center>
+		<type>translate</type>
+		<object-name>buttonIff</object-name>
+		<object-name>ledIff</object-name>
+		<property>controls/radar/panel/iff</property>
+		<factor>0.004</factor>
 		<axis>
-			<x>0</x>
-			<y>1</y>
-			<z>0</z>
+			<x>-0.00412</x>
+			<y> 0.00000</y>
+			<z> 0.00000</z>
 		</axis>
 	</animation>
-	
-	<!-- KNOB -->
 	
 	<animation>
 		<type>pick</type>
-		<object-name>weaponSelectorKnob</object-name>
+		<object-name>buttonLst</object-name>
+		<object-name>ledLst</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>
-			<binding>
-				<command>property-adjust</command>
-				<property>controls/armament/panel/pylon-knob</property>
-				<step>1</step>
-				<min>0</min>
-				<max>11</max>
-				<wrap>true</wrap>
-			</binding>
-		</action>
-		<action>
 			<button>1</button>
 			<repeatable>false</repeatable>
 			<binding>
-				<command>property-adjust</command>
-				<property>controls/armament/panel/pylon-knob</property>
-				<step>-1</step>
-				<min>0</min>
-				<max>11</max>
-				<wrap>true</wrap>
+				<command>property-toggle</command>
+				<property>controls/radar/panel/lst-mode</property>
 			</binding>
 		</action>
 	</animation>
 	
 	<animation>
-		<type>rotate</type>
-		<object-name>weaponSelectorKnob</object-name>
-		<property>controls/armament/panel/pylon-knob</property>
-		<interpolation>
-			<entry>
-				<ind>0</ind> <!-- actual value -->
-				<dep>0</dep> <!-- value in degrees -->
-			</entry>
-			<entry>
-				<ind>1</ind>
-				<dep>20</dep>
-			</entry>
-			<entry>
-				<ind>2</ind>
-				<dep>40</dep>
-			</entry>
-			<entry>
-				<ind>3</ind>
-				<dep>79</dep>
-			</entry>
-			<entry>
-				<ind>4</ind>
-				<dep>109</dep>
-			</entry>
-			<entry>
-				<ind>5</ind>
-				<dep>156</dep>
-			</entry>
-			<entry>
-				<ind>6</ind>
-				<dep>176</dep>
-			</entry>
-			<entry>
-				<ind>7</ind>
-				<dep>226</dep>
-			</entry>
-			<entry>
-				<ind>8</ind>
-				<dep>242</dep>
-			</entry>
-			<entry>
-				<ind>9</ind>
-				<dep>262</dep>
-			</entry>
-			<entry>
-				<ind>10</ind>
-				<dep>280</dep>
-			</entry>
-		</interpolation>
-		<center>
-			<x-m>-3.89615</x-m>
-			<y-m>-0.25594</y-m>
-			<z-m> 0.88658</z-m>
-		</center>
+		<type>translate</type>
+		<object-name>buttonLst</object-name>
+		<object-name>ledLst</object-name>
+		<property>controls/radar/panel/lst-mode</property>
+		<factor>0.004</factor>
 		<axis>
-			<x>-10</x>
-			<y>-1</y>
-			<z>0</z>
+			<x>-0.00412</x>
+			<y> 0.00000</y>
+			<z> 0.00000</z>
 		</axis>
-	</animation>	
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>buttonSelfTest</object-name>
+		<object-name>ledSelfTest</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/radar/panel/selftest</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>buttonSelfTest</object-name>
+		<object-name>ledSelfTest</object-name>
+		<property>controls/radar/panel/selftest</property>
+		<factor>0.004</factor>
+		<axis>
+			<x>-0.00412</x>
+			<y> 0.00000</y>
+			<z> 0.00000</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>buttonReset</object-name>
+		<object-name>ledReset</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/radar/panel/reset</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>buttonReset</object-name>
+		<object-name>ledReset</object-name>
+		<property>controls/radar/panel/reset</property>
+		<factor>0.004</factor>
+		<axis>
+			<x>-0.00412</x>
+			<y> 0.00000</y>
+			<z> 0.00000</z>
+		</axis>
+	</animation>
+	
+
 
 </PropertyList>

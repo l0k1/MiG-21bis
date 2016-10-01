@@ -190,6 +190,24 @@
 		</multiplay>
 
 	</sim>
+	
+	<consumables>
+		<fuel>
+			<tank n="0"><name>Dorsal</name></tank>
+			<tank n="1"><name>Front</name></tank>
+			<tank n="2"><name>Main</name></tank>
+			<tank n="3"><name>Aft 1</name></tank>
+			<tank n="4"><name>Aft 2</name></tank>
+			<tank n="5"><name>Aft 3</name></tank>
+			<tank n="6"><name>Left Wing Front</name></tank>
+			<tank n="7"><name>Left Wing Rear</name></tank>
+			<tank n="8"><name>Right Wing Front</name></tank>
+			<tank n="9"><name>Right Wing Rear</name></tank>
+			<tank n="10"><name>Ventral Drop Tank</name></tank>
+			<tank n="11"><name>Left Drop Tank</name></tank>
+			<tank n="12"><name>Right Drop Tank</name></tank>
+		</fuel>
+	</consumables>
 
 	<!-- Misc Settings -->
 	
@@ -245,7 +263,7 @@
 			</gunsight>
 		</armament>
 		<radar>
-			<control-panel>
+			<panel>
 				<continuous-jam type="bool">0</continuous-jam>
 				<intermittent-jam type="bool">0</intermittent-jam>
 				<passive-jam type="bool">0</passive-jam>
@@ -254,8 +272,13 @@
 				<lst-mode type="bool">0</lst-mode>
 				<selftest type="bool">0</selftest>
 				<reset type="bool">0</reset>
-			</control-panel>
-		<radar>
+			</panel>
+			<power-panel>
+				<run>0</run>
+				<low-alt>0</low-alt>
+				<fixed-beam>0</fixed-beam>
+			</power-panel>
+		</radar>
 	</controls>
 
 	<engines>

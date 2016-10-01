@@ -52,10 +52,11 @@
         <name>Radar</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Radar/Radar.xml</path>
         <offsets>
-            <pitch-deg>-25</pitch-deg>
-            <x-m>-3.86</x-m>
-            <y-m> 0.10</y-m>
-            <z-m> 0.67</z-m>
+			<heading-deg>-6</heading-deg>
+            <pitch-deg>-20</pitch-deg>
+            <x-m>-3.95644</x-m>
+            <y-m> 0.11291</y-m>
+            <z-m> 0.61686</z-m>
         </offsets>
     </model>
     
@@ -404,6 +405,16 @@
 	<model>
 		<name>Radar Control Panel</name>
 		<path>Aircraft/MiG-21bis/Models/Instruments/Cockpit/radar-control-panel.xml</path>
+		<offsets>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </offsets>
+	</model>
+	
+	<model>
+		<name>Radar Power Panel</name>
+		<path>Aircraft/MiG-21bis/Models/Instruments/Cockpit/radar-power-panel.xml</path>
 		<offsets>
             <x-m>0</x-m>
             <y-m>0</y-m>

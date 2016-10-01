@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>radarPowerPanel.ac</path>
+
+	<!--lights-->
+	
+	<!--<continuous-jam type="bool">0</continuous-jam>
+	<intermittent-jam type="bool">0</intermittent-jam>
+	<passive-jam type="bool">0</passive-jam>
+	<weather-filter type="bool">0</weather-filter>
+	<iff type="bool">0</iff>
+	<lst-mode type="bool">0</lst-mode>
+	<selftest type="bool">0</selftest>
+	<reset type="bool">0</reset>-->
+	
+	<animation>
+        <type>material</type>
+        <object-name>lightPower</object-name>
+		<ambient>
+			<red>0.2</red>
+			<green>0.0</green>
+			<blue>0.0</blue>
+		</ambient>
+        <emission>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+            <factor-prop>controls/radar/power-panel/run</factor-prop>
+        </emission> 
+    </animation>
+	
+	<animation>
+        <type>material</type>
+        <object-name>lightLowAlt</object-name>
+		<ambient>
+			<red>0.2</red>
+			<green>0.0</green>
+			<blue>0.0</blue>
+		</ambient>
+        <emission>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+            <factor-prop>controls/radar/power-panel/low-alt</factor-prop>
+        </emission> 
+    </animation>
+	
+	<animation>
+        <type>material</type>
+        <object-name>lightFixedBeam</object-name>
+		<ambient>
+			<red>0.2</red>
+			<green>0.0</green>
+			<blue>0.0</blue>
+		</ambient>
+        <emission>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+            <factor-prop>controls/radar/power-panel/fixed-beam</factor-prop>
+        </emission> 
+    </animation>
+	
+	<!-- picks and translations -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>switchPower</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/radar/power-panel/run</property>
+				<step>1</step>
+				<min>0</min>
+				<max>2</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/radar/power-panel/run</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>2</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>switchPower</object-name>
+		<type>rotate</type>
+		<property>controls/radar/power-panel/run</property>
+		<factor>-35</factor>
+		<offset-deg>35</offset-deg>
+		<center>
+			<x-m>-3.79061</x-m>
+			<y-m> 0.36293</y-m>
+			<z-m> 0.46639</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>switchLowAlt</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/radar/power-panel/low-alt</property>
+				<step>1</step>
+				<min>0</min>
+				<max>2</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/radar/power-panel/low-alt</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>2</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>switchLowAlt</object-name>
+		<type>rotate</type>
+		<property>controls/radar/power-panel/low-alt</property>
+		<factor>-35</factor>
+		<offset-deg>35</offset-deg>
+		<center>
+			<x-m>-3.75325</x-m>
+			<y-m> 0.36293</y-m>
+			<z-m> 0.46639</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>switchFixedBeam</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>controls/radar/power-panel/fixed-beam</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>switchFixedBeam</object-name>
+		<type>rotate</type>
+		<property>controls/radar/power-panel/fixed-beam</property>
+		<factor>-70</factor>
+		<offset-deg>35</offset-deg>
+		<center>
+			<x-m>-3.71814</x-m>
+			<y-m> 0.36293</y-m>
+			<z-m> 0.46639</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+</PropertyList>

@@ -120,21 +120,21 @@ var update_loop = func {
         }
         if(i==0) {
         # no drop tank attached, clear tank
-	setprop("/consumables/fuel/tank[2]/selected",0);
-	setprop("/consumables/fuel/tank[2]/jettisoned",1);
-	setprop("/consumables/fuel/tank[2]/level-norm",0);
+	setprop("/consumables/fuel/tank[11]/selected",0);
+	setprop("/consumables/fuel/tank[11]/jettisoned",1);
+	setprop("/consumables/fuel/tank[11]/level-norm",0);
         }
         if(i==2) {
         # no drop tank attached, clear tank
-	setprop("/consumables/fuel/tank[1]/selected",0);
-	setprop("/consumables/fuel/tank[1]/jettisoned",1);
-	setprop("/consumables/fuel/tank[1]/level-norm",0);
+	setprop("/consumables/fuel/tank[10]/selected",0);
+	setprop("/consumables/fuel/tank[10]/jettisoned",1);
+	setprop("/consumables/fuel/tank[10]/level-norm",0);
         }
         if(i==4) {
         # no drop tank attached, clear tank
-	setprop("/consumables/fuel/tank[3]/selected",0);
-	setprop("/consumables/fuel/tank[3]/jettisoned",1);
-	setprop("/consumables/fuel/tank[3]/level-norm",0);
+	setprop("/consumables/fuel/tank[12]/selected",0);
+	setprop("/consumables/fuel/tank[12]/jettisoned",1);
+	setprop("/consumables/fuel/tank[12]/level-norm",0);
         }
       } elsif (selected == "R-60") {
         # the pylon has a misile, give it a pointmass
