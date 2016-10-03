@@ -44,163 +44,112 @@ input = {
   impact:           "/ai/models/model-impact",
 };
 
+var payloads = {
+	"none":					  0,
+	"R-60":					 96,
+	"FAB-250":				520,
+	"Kh-25":				659,
+	"UB-32":				582,
+	"PTB-490 Droptank":		180,
+	"PTB-800 Droptank":		230
+};
+
 var update_loop = func {
 
-  # End stuff
+	# End stuff
 
-  if(input.replay.getValue() == TRUE) {
-    # replay is active, skip rest of loop.
-    settimer(update_loop, UPDATE_PERIOD);
-  } else {
-    # set the full-init property
-    if(input.elapsed.getValue() > input.elapsedInit.getValue() + 5) {
-      input.fullInit.setValue(TRUE);
-    } else {
-      input.fullInit.setValue(FALSE);
-    }
+	if(input.replay.getValue() == TRUE) {
+		# replay is active, skip rest of loop.
+		settimer(update_loop, UPDATE_PERIOD);
+	} else {
+	# set the full-init property
+		if(input.elapsed.getValue() > input.elapsedInit.getValue() + 5) {
+			input.fullInit.setValue(TRUE);
+		} else {
+			input.fullInit.setValue(FALSE);
+		}
 
-    }
+	}
 
-    # pylon payloads
-    for(var i=0; i<=4; i=i+1) {
-      if(getprop("payload/weight["~ (i) ~"]/selected") != "none" and getprop("payload/weight["~ (i) ~"]/weight-lb") == 0) {
-        setprop("controls/armament/station["~(i)~"]/released", FALSE);
-      }
-    }
+	# pylon payloads
+	for(var i=0; i<=4; i=i+1) {
+		if(getprop("payload/weight["~ (i) ~"]/selected") != "none" and getprop("payload/weight["~ (i) ~"]/weight-lb") == 0) {
+			setprop("controls/armament/station["~(i)~"]/released", FALSE);
+		}
+	}
 
-    var selected = nil;
-    for(var i=0; i<=4; i=i+1) { # set JSBSim mass
-      selected = getprop("payload/weight["~i~"]/selected");
-      if(selected == "none") {
-        # the pylon is empty, set its pointmass to zero
-        if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 0) {
-          setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 0);
-        }
-        if(i==0) {
-        # no drop tank attached, clear tank
-	setprop("/consumables/fuel/tank[11]/selected",0);
-	setprop("/consumables/fuel/tank[11]/jettisoned",1);
-	setprop("/consumables/fuel/tank[11]/level-norm",0);
-        }
-        if(i==2) {
-        # no drop tank attached, clear tank
-	setprop("/consumables/fuel/tank[10]/selected",0);
-	setprop("/consumables/fuel/tank[10]/jettisoned",1);
-	setprop("/consumables/fuel/tank[10]/level-norm",0);
-        }
-        if(i==4) {
-        # no drop tank attached, clear tank
-	setprop("/consumables/fuel/tank[12]/selected",0);
-	setprop("/consumables/fuel/tank[12]/jettisoned",1);
-	setprop("/consumables/fuel/tank[12]/level-norm",0);
-        }
-      } elsif (selected == "R-60") {
-        # the pylon has a misile, give it a pointmass
-        if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 96) {
-          setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 96);
-        }
-        if(i==0) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[11]/selected",0);
-        setprop("/consumables/fuel/tank[11]/jettisoned",1);
-        setprop("/consumables/fuel/tank[11]/level-norm",0);
-        }
-        if(i==2) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[10]/selected",0);
-        setprop("/consumables/fuel/tank[10]/jettisoned",1);
-        setprop("/consumables/fuel/tank[10]/level-norm",0);
-        }
-        if(i==4) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[12]/selected",0);
-        setprop("/consumables/fuel/tank[12]/jettisoned",1);
-        setprop("/consumables/fuel/tank[12]/level-norm",0);
-        }
-      } elsif (selected == "FAB-250") {
-        # the pylon has a bomb, give it a pointmass
-        if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 520) {
-          setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 520);
-        }
-        if(i==0) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[11]/selected",0);
-        setprop("/consumables/fuel/tank[11]/jettisoned",1);
-        setprop("/consumables/fuel/tank[11]/level-norm",0);
-        }
-        if(i==2) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[10]/selected",0);
-        setprop("/consumables/fuel/tank[10]/jettisoned",1);
-        setprop("/consumables/fuel/tank[10]/level-norm",0);
-        }
-        if(i==4) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[12]/selected",0);
-        setprop("/consumables/fuel/tank[12]/jettisoned",1);
-        setprop("/consumables/fuel/tank[12]/level-norm",0);
-        }
-      } elsif (selected == "Kh-25") {
-        # the pylon has a bomb, give it a pointmass
-        if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 659) {
-          setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 659);
-        }
-        if(i==0) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[11]/selected",0);
-        setprop("/consumables/fuel/tank[11]/jettisoned",1);
-        setprop("/consumables/fuel/tank[11]/level-norm",0);
-        }
-        if(i==2) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[10]/selected",0);
-        setprop("/consumables/fuel/tank[10]/jettisoned",1);
-        setprop("/consumables/fuel/tank[10]/level-norm",0);
-        }
-        if(i==4) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[12]/selected",0);
-        setprop("/consumables/fuel/tank[12]/jettisoned",1);
-        setprop("/consumables/fuel/tank[12]/level-norm",0);
-        }
-      } elsif (selected == "UB-32") {
-        # the pylon has a bomb, give it a pointmass
-        if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 582) {
-          setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 582);
-        }
-        if(i==0) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[11]/selected",0);
-        setprop("/consumables/fuel/tank[11]/jettisoned",1);
-        setprop("/consumables/fuel/tank[11]/level-norm",0);
-        }
-        if(i==2) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[10]/selected",0);
-        setprop("/consumables/fuel/tank[10]/jettisoned",1);
-        setprop("/consumables/fuel/tank[10]/level-norm",0);
-        }
-        if(i==4) {
-        # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[12]/selected",0);
-        setprop("/consumables/fuel/tank[12]/jettisoned",1);
-        setprop("/consumables/fuel/tank[12]/level-norm",0);
-        }
-      } elsif (selected == "PTB-490 Droptank") {
-        # the pylon has a drop tank, give it a pointmass
-        if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 180) {
-          setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 180);
-        }
-      } elsif (selected == "PTB-800 Droptank") {
-        # the pylon has a drop tank, give it a pointmass
-        if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 230) {
-          setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 230);
-        }
-      }
-    }
+	var selected = nil;
+	for(var i=0; i<=4; i=i+1) { # set JSBSim mass
+		selected = getprop("payload/weight["~i~"]/selected");
+		
+		if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != payloads[selected]) {
+			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", payloads[selected]);
+		}
+		
+#		if(selected == "none") {
+#			# the pylon is empty, set its pointmass to zero
+#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 0) {
+#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 0);
+#			}
+#		} elsif (selected == "R-60") {
+#		# the pylon has a misile, give it a pointmass
+#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 96) {
+#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 96);
+#			}
+#		} elsif (selected == "FAB-250") {
+#		# the pylon has a bomb, give it a pointmass
+#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 520) {
+#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 520);
+#			}
+#		} elsif (selected == "Kh-25") {
+#		# the pylon has a bomb, give it a pointmass
+#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 659) {
+#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 659);
+#			}
+#		} elsif (selected == "UB-32") {
+#			# the pylon has a bomb, give it a pointmass
+#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 582) {
+#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 582);
+#			}
+#		} elsif (selected == "PTB-490 Droptank") {
+#			# the pylon has a drop tank, give it a pointmass
+#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 180) {
+#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 180);
+#			}
+#		} elsif (selected == "PTB-800 Droptank") {
+#		# the pylon has a drop tank, give it a pointmass
+#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 230) {
+#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 230);
+#			}
+#		}
+		if ( selected != "PTB-800 Droptank" and selected != "PTB-490 Droptank" ) {
+			#print("selected: " ~ selected);
+			if(i==0) {
+				#print("jettisoning 0");
+				# no drop tank attached, clear tank
+				setprop("/consumables/fuel/tank[11]/selected",0);
+				setprop("/consumables/fuel/tank[11]/jettisoned",1);
+				setprop("/consumables/fuel/tank[11]/level-norm",0);
+			}
+			if(i==2) {
+				#print("jettisoning 2");;
+				# no drop tank attached, clear tank
+				setprop("/consumables/fuel/tank[10]/selected",0);
+				setprop("/consumables/fuel/tank[10]/jettisoned",1);
+				setprop("/consumables/fuel/tank[10]/level-norm",0);
+			}
+			if(i==4) {
+				#print("jettisoning 4");
+				# no drop tank attached, clear tank
+				setprop("/consumables/fuel/tank[12]/selected",0);
+				setprop("/consumables/fuel/tank[12]/jettisoned",1);
+				setprop("/consumables/fuel/tank[12]/level-norm",0);
+			}
+		}
+	}
 
-    settimer(update_loop, UPDATE_PERIOD);
-  }
+	settimer(update_loop, UPDATE_PERIOD);
+}
 
 
 ############################# main init ###############
@@ -234,16 +183,16 @@ var main_init = func {
 var load_interior = func{
     setprop("/sim/current-view/view-number", 0);
     print("..Done!");
-  }
+}
 
 var main_init_listener = setlistener("sim/signals/fdm-initialized", func {
 	main_init();
 	removelistener(main_init_listener);
- }, 0, 0);
+}, 0, 0);
 
 var re_init_listener = setlistener("/sim/signals/reinit", func {
   re_init();
- }, 0, 0);
+}, 0, 0);
 
 
 var noop = func {
