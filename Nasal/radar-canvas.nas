@@ -5,10 +5,21 @@ var fS = 60;	#font size
 var lL = 80;	#line length (it's a little case L, not a [one])
 var lW = 4;		#line width
 
+var lock_bars_scale = "/controls/radar/lock-bars-scale";
+var lock_bars_pos = "/controls/radar/lock-bars-pos";
+var radar_mode = "/controls/radar/mode";
+
+var RADAR_BOTTOM_LIMIT = -30;
+var RADAR_TOP_LIMIT = 30;
+var RADAR_LEFT_LIMIT = -30;
+var RADAR_RIGHT_LIMIT = 30;
+
 var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 
 var FALSE = 0;
 var TRUE  = 1;
+
+var locked_target = nil;
 
 
 var radar_screen = {
@@ -39,15 +50,19 @@ var radar_screen = {
 		m.radar_canvas.setColorBackground(0.100,0.161,0.106,1);
 
 		m.radar_group = m.radar_canvas.createGroup();
+		m.blips = m.radar_canvas.createGroup();
+		m.dumb = m.radar_canvas.createGroup();
+		
+		m.gschild = [];
 
-		m.pinto_rulez = m.radar_group.createChild("text", "pinto rulez")
+		m.pinto_rulez = m.dumb.createChild("text", "pinto rulez")
 			.setTranslation(506, 200)      # The origin is in the top left corner
 			.setAlignment("center-center") # All values from osgText are supported (see $FG_ROOT/Docs/README.osgtext)
 			.setFont("LiberationFonts/LiberationMono-Regular.ttf") # Fonts are loaded either from $AIRCRAFT_DIR/Fonts or $FG_ROOT/Fonts
 			.setFontSize(64, 1.2)        # Set fontsize and optionally character aspect ratio
 			.setColor(dR,dG,dB)             # Text color
 			.setText("pinto rulez");
-		m.xruler = m.radar_group.createChild("text", "pinto rulez 2")
+		m.xruler = m.dumb.createChild("text", "pinto rulez 2")
 			.setTranslation(506, 170)      # The origin is in the top left corner
 			.setAlignment("center-center") # All values from osgText are supported (see $FG_ROOT/Docs/README.osgtext)
 			.setFont("LiberationFonts/LiberationMono-Regular.ttf") # Fonts are loaded either from $AIRCRAFT_DIR/Fonts or $FG_ROOT/Fonts
@@ -309,13 +324,30 @@ var radar_screen = {
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
 			.setTranslation(834,900);
+		
+		#lock bars
+		m.lowerBar = m.radar_group.createChild("path","lowerBar")
+			.move(-50,0)
+			.line(100,0)
+			.setColor(dR,dG,dB)
+			.setStrokeLineWidth(lW + 2)
+			.setStrokeLineCap("round")
+			.setTranslation(506,950);
 			
+		m.upperBar = m.radar_group.createChild("path","upperBar")
+			.move(-50,0)
+			.line(100,0)
+			.setColor(dR,dG,dB)
+			.setStrokeLineWidth(lW + 2)
+			.setStrokeLineCap("round")
+			.setTranslation(506,750);
+		
 		# radar contacts
 		m.below_blip = [];
 		m.even_blip = [];
 		m.above_blip = [];
 		for(var i=0; i < m.no_blip; i = i+1) {
-			var b_blip = m.radar_group.createChild("path")
+			var b_blip = m.blips.createChild("path", "b_blip" ~ i)
 			.move(-30,0)
 			.line(60,0)
 			.move(-30,0)
@@ -323,7 +355,7 @@ var radar_screen = {
 			.setStrokeLineWidth(lW)
 			.setColor(dR, dG, dB);
 			
-			var e_blip = m.radar_group.createChild("path")
+			var e_blip = m.blips.createChild("path", "e_blip" ~ i)
 			.move(-30,0)
 			.line(60,0)
 			.move(-30,-30)
@@ -331,7 +363,7 @@ var radar_screen = {
 			.setStrokeLineWidth(lW)
 			.setColor(dR, dG, dB);
 			
-			var a_blip = m.radar_group.createChild("path")
+			var a_blip = m.blips.createChild("path", "a_blip" ~ i)
 			.move(-30,0)
 			.line(60,0)
 			.move(-30,0)
@@ -347,7 +379,7 @@ var radar_screen = {
 			append(m.even_blip,e_blip);
 			append(m.above_blip,a_blip);
 		}
-		m.lock = m.radar_group.createChild("path")
+		m.lock = m.radar_group.createChild("path") #probably will never use this
                .move(-40,0)
 			   .arcSmallCW(40,40,0,80,0)
 			   .arcSmallCW(40,40,0,-80,0)
@@ -356,70 +388,190 @@ var radar_screen = {
 		m.update();
 	},
 	update: func() {
-		#used from Necolatis' Saab 37 Viggen
-		#print("updating radar screen");
-        var b_i=0;
-        var lock = FALSE;
-        foreach (var mp; radar_logic.tracks) {	
-			#print("found contact");
-			# Node with valid position data (and "distance!=nil").
-
-			var distance = mp.get_polar()[0];
-			var xa_rad = mp.get_polar()[1];
-			var alt_diff = mp.get_altitude() - getprop("/position/altitude-ft");
-
-			#make blip
-			if (b_i < me.no_blip and distance != nil and distance < me.radar_range ){#and alt-100 > getprop("/environment/ground-elevation-m")){
-				#print("contact is valid");
-				#aircraft is within the radar ray cone
-				var locked = FALSE;
-				if (mp.isPainted() == TRUE) {
-					lock = TRUE;
-					locked = TRUE;
-				}
-				#aircraft is between the current stroke and the previous stroke position
-				# plot the blip on the radar screen
-				var pixelDistance = -distance*((950-90)/me.radar_range); #distance in pixels
-
-				#translate from polar coords to cartesian coords
-				var pixelX =  pixelDistance * math.cos(xa_rad + math.pi/2) + 1024/2;
-				var pixelY =  pixelDistance * math.sin(xa_rad + math.pi/2) + 950;
-				#print("pixel blip ("~pixelX~", "~pixelY);
-				if ( alt_diff > 1000 ) {
-					me.above_blip[b_i].setTranslation(pixelX, pixelY);
-					me.above_blip[b_i].show();
-					me.even_blip[b_i].hide();
-					me.below_blip[b_i].hide();
-				} elsif ( alt_diff < -1000 ) {
-					me.below_blip[b_i].setTranslation(pixelX, pixelY);
-					me.below_blip[b_i].show();
-					me.even_blip[b_i].hide();
-					me.above_blip[b_i].hide();
-				} else {
-					me.even_blip[b_i].setTranslation(pixelX, pixelY);
-					me.even_blip[b_i].show();
-					me.below_blip[b_i].hide();
-					me.above_blip[b_i].hide();
-				}
-				if (locked == TRUE) {
-					pixelXL = pixelX;
-					pixelYL = pixelY;
-				}
-			}
-			b_i += 1;
-        }
-        if (lock == FALSE) {
-			me.lock.hide();
-        } else {
-			me.lock.setTranslation(pixelXL, pixelYL);
-			me.lock.show();
-        }
-		for ( i = b_i; i < me.no_blip; i += 1 ) {
-			me.even_blip[b_i].hide();
-			me.below_blip[b_i].hide();
-			me.above_blip[b_i].hide();
-		}
+	
+		var mode = getprop(radar_mode);
 		
+		if ( mode == "off" ) {
+		
+			foreach(var elem; me.radar_group.getChildren()) {
+				elem.hide();
+			}
+			
+			foreach(var elem; me.blips.getChildren()) {
+				elem.hide();
+			}
+			
+			foreach(var elem; me.dumb.getChildren()) {
+				elem.hide();
+			}
+	
+		} elsif ( mode == "test" ) {
+		
+		} elsif ( mode == "normal-init" ) {
+		
+			foreach(var elem; me.radar_group.getChildren()) {
+				elem.show();
+			}
+			setprop(radar_mode, "normal");
+		
+		} elsif ( mode == "normal" ) {
+		
+			#used from Necolatis' Saab 37 Viggen
+			#print("updating radar screen");
+			var b_i=0;
+			var lock = FALSE;
+			
+			#process locking bars
+			#950 is bottom limit
+			#377 is upper limit
+			
+			#precalculate requested position
+			#scale takes precedence over position
+			#lower limit is lpos = 0
+			#upper limit is upper-bound = 377
+			var lscale = getprop(lock_bars_scale);
+			var lpos = getprop(lock_bars_pos);
+			
+			lscale = clamp(lscale, 50, 250);
+			lpos = clamp(lpos, 0, 900);
+
+			if ( 950 - ( lscale + lpos ) < 376 ) {
+				lpos = 377 + lscale;
+			} elsif ( lpos < 0 ) {
+				lpos = 0;
+			}
+			
+			setprop(lock_bars_scale, lscale);
+			setprop(lock_bars_pos, lpos);
+			
+			me.lowerBar.setTranslation(506, 950 - lpos);
+			me.upperBar.setTranslation(506, 950 - ( lpos + lscale ));
+			
+			
+			foreach (var mp; radar_logic.tracks) {	
+				#print("found contact");
+				# Node with valid position data (and "distance!=nil").
+				var p = mp.get_polar();
+				var distance = p[0];
+				var xa_rad = p[1];
+				var ya_ang = p[2] * R2D;
+
+				#make blip
+				if (b_i < me.no_blip and distance != nil and distance < me.radar_range ){#and alt-100 > getprop("/environment/ground-elevation-m")){
+					#print("contact is valid");
+					#aircraft is within the radar ray cone
+					#var locked = FALSE;
+					#if (mp.isPainted() == TRUE) {
+					#	lock = TRUE;
+					#	locked = TRUE;
+					#}
+					# plot the blip on the radar screen
+					var pixelDistance = -distance*((950-90)/me.radar_range); #distance in pixels
+
+					#translate from polar coords to cartesian coords
+					#var pixelX =  pixelDistance * math.cos(xa_rad + math.pi/2) + 1024/2;
+					#var pixelY =  pixelDistance * math.sin(xa_rad + math.pi/2) + 950;
+					var pixelX = ((xa_rad * R2D / RADAR_LEFT_LIMIT) * -506) + 506; #506 is half width of radar screen
+					var pixelY = pixelDistance + 950;
+					pixelX = clamp(pixelX, 180, 836);
+					pixelY = clamp(pixelY, 100,950);
+					
+					#print("X,Y: " ~ pixelX ~ "," ~ pixelY);
+					#print("pixel blip ("~pixelX~", "~pixelY);
+					if ( ya_ang > 1.5 ) {
+						me.above_blip[b_i].setTranslation(pixelX, pixelY);
+						me.above_blip[b_i].show();
+						me.even_blip[b_i].hide();
+						me.below_blip[b_i].hide();
+					} elsif ( ya_ang < 1.5 ) {
+						me.below_blip[b_i].setTranslation(pixelX, pixelY);
+						me.below_blip[b_i].show();
+						me.even_blip[b_i].hide();
+						me.above_blip[b_i].hide();
+					} else {
+						me.even_blip[b_i].setTranslation(pixelX, pixelY);
+						me.even_blip[b_i].show();
+						me.below_blip[b_i].hide();
+						me.above_blip[b_i].hide();
+					}
+					#if (locked == TRUE) {
+					#	pixelXL = pixelX;
+					#	pixelYL = pixelY;
+					#}
+				}
+				b_i += 1;
+			}
+			#if (lock == FALSE) {
+			#	me.lock.hide();
+			#} else {
+			#	me.lock.setTranslation(pixelXL, pixelYL);
+			#	me.lock.show();
+			#}
+			for ( i = b_i; i < me.no_blip; i += 1 ) {
+				me.even_blip[b_i].hide();
+				me.below_blip[b_i].hide();
+				me.above_blip[b_i].hide();
+			}
+			
+		} elsif ( mode == "locked-init" ) {
+			foreach(var elem; me.radar_group.getChildren()) {
+				elem.hide();
+			}
+			
+			foreach(var elem; me.blips.getChildren()) {
+				elem.hide();
+			}
+			
+			foreach(var elem; me.dumb.getChildren()) {
+				elem.hide();
+			}
+			
+			setprop(radar_mode, "locked");
+			
+		} elsif ( mode == "locked" ) {
+			#locked-on radar screen
+			var locked_target = radar_logic.selection;
+			if ( locked_target != nil ) {
+				var dist_rad = locked_target.get_polar();
+				if ( dist_rad[0] > me.radar_range or math.abs(dist_rad[1] * R2D) > 15 or math.abs(dist_rad[2] * R2D) > 15 or locked_target.isValid() == 0 ) { #if the target is out of lockon range, then exit locked-mode
+					setprop(radar_mode,"normal-init");
+					radar_logic.unlockTarget();
+				} else {
+					var ya_ang = dist_rad[2];
+					#switch from an overhead view to a forward facing view.
+					#the blip will move according to angle, instead of distance
+					#ar pixelX = ((xa_rad * R2D / RADAR_LEFT_LIMIT) * -506) + 506; #506 is half width of radar screen
+					var pixelX = ((dist_rad[1] * R2D / 15) * -506) + 506; #506 is half width of radar screen, and 180 is starting from the left, go over this much
+					#var pixelY = ((ya_ang * R2D) / 5) * 425 + 100; #425 is half vertically, 100 is starting from the top
+					var pixelY = ((ya_ang * R2D / 15) * -425) + 425; #506 is half width of radar screen
+					pixelX = clamp(pixelX, 180, 836);
+					pixelY = clamp(pixelY, 100,950);
+					
+					#print("X,Y: " ~ pixelX ~ "," ~ pixelY);
+					#print("pixel blip ("~pixelX~", "~pixelY);
+					if ( ya_ang > 1.5 ) {
+						me.above_blip[1].setTranslation(pixelX, pixelY);
+						me.above_blip[1].show();
+						me.even_blip[1].hide();
+						me.below_blip[1].hide();
+					} elsif ( ya_ang < 1.5 ) {
+						me.below_blip[1].setTranslation(pixelX, pixelY);
+						me.below_blip[1].show();
+						me.even_blip[1].hide();
+						me.above_blip[1].hide();
+					} else {
+						me.even_blip[1].setTranslation(pixelX, pixelY);
+						me.even_blip[1].show();
+						me.below_blip[1].hide();
+						me.above_blip[1].hide();
+					}
+				}
+			} else {
+				setprop(radar_mode,"normal-init");
+				radar_logic.unlockTarget();
+			}
+		}
+			
 		settimer(func { me.update(); }, 0.15);
     },
 };

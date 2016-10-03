@@ -278,6 +278,9 @@
 				<low-alt>0</low-alt>
 				<fixed-beam>0</fixed-beam>
 			</power-panel>
+			<lock-bars-scale type="int">100</lock-bars-scale>
+			<lock-bars-pos type="int">0</lock-bars-pos>
+			<mode type="string">normal</mode>
 		</radar>
 	</controls>
 
@@ -667,10 +670,6 @@
 					<command>property-toggle</command>
 					<property>controls/engines/engine[0]/starter</property>
 				</binding>
-				<binding>
-					<command>property-toggle</command>
-					<property>controls/engines/engine[1]/starter</property>
-				</binding>
 				<mod-up>
 					<binding>
 						<command>null</command>
@@ -686,8 +685,108 @@
 					<property>fdm/jsbsim/propulsion/engine[0]/injection_cmd</property>
 				</binding>
 			</key>
+			
+			<key n="110">
+				<name>n</name>
+				<desc>Lock on target</desc>
+				<binding>
+					<command>nasal</command>
+					<script>radar_logic.lockTarget();</script>
+				</binding>
+			</key>
+			
+			<key n="78">
+				<name>N</name>
+				<desc>Unlock Target</desc>
+				<binding>
+					<command>nasal</command>
+					<script>radar_logic.unlockTarget();</script>
+				</binding>
+			</key>
 
-
+			<key n="105">
+				<name>i</name>
+				<desc>Move locking box up</desc>
+				<repeatable>true</repeatable>
+				<binding>
+					<command>property-adjust</command>
+					<property>controls/radar/lock-bars-pos</property>
+					<step>10</step>
+					<min>0</min>
+					<max>900</max>
+					<wrap>false</wrap>
+				</binding>
+			</key>
+			
+			<key n="73">
+				<name>I</name>
+				<desc>Move locking box up - fine</desc>
+				<repeatable>true</repeatable>
+				<binding>
+					<command>property-adjust</command>
+					<property>controls/radar/lock-bars-pos</property>
+					<step>2</step>
+					<min>0</min>
+					<max>900</max>
+					<wrap>false</wrap>
+				</binding>
+			</key>
+			
+			<key n="107">
+				<name>k</name>
+				<desc>Move locking box down</desc>
+				<repeatable>true</repeatable>
+				<binding>
+					<command>property-adjust</command>
+					<property>controls/radar/lock-bars-pos</property>
+					<step>-10</step>
+					<min>0</min>
+					<max>900</max>
+					<wrap>false</wrap>
+				</binding>
+			</key>
+			
+			<key n="75">
+				<name>K</name>
+				<desc>Move locking box down - fine</desc>
+				<repeatable>true</repeatable>
+				<binding>
+					<command>property-adjust</command>
+					<property>controls/radar/lock-bars-pos</property>
+					<step>-2</step>
+					<min>0</min>
+					<max>900</max>
+					<wrap>false</wrap>
+				</binding>
+			</key>
+			
+			<key n="106">
+				<name>j</name>
+				<desc>Compress locking box</desc>
+				<repeatable>true</repeatable>
+				<binding>
+					<command>property-adjust</command>
+					<property>controls/radar/lock-bars-scale</property>
+					<step>-5</step>
+					<min>50</min>
+					<max>250</max>
+					<wrap>false</wrap>
+				</binding>
+			</key>
+			
+			<key n="108">
+				<name>l</name>
+				<desc>Widen locking box</desc>
+				<repeatable>true</repeatable>
+				<binding>
+					<command>property-adjust</command>
+					<property>controls/radar/lock-bars-scale</property>
+					<step>5</step>
+					<min>50</min>
+					<max>250</max>
+					<wrap>false</wrap>
+				</binding>
+			</key>
 
 		</keyboard>
 	</input>
@@ -726,24 +825,9 @@
 		<tyresmoke>
 			<file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>
 		</tyresmoke>
-		<rwr>
-			<file>Aircraft/Instruments-3d/rwr/rwr.nas</file>
-		</rwr>
-		<radardist>
-			<file>Aircraft/Instruments-3d/radardist/radardist.nas</file>
-		</radardist>
-		<radar>
-			<file>Aircraft/MiG-21bis/Nasal/radar.nas</file>
-		</radar>
-		<radar2>
-			<file>Aircraft/Instruments-3d/radar2/radar2.nas</file>
-		</radar2>
 		<payloads>
 			<file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>
 		</payloads>
-   		<formation>
-     			<file>Aircraft/Generic/formation.nas</file>
-   		</formation>
 		<radar_logic>
 			<file>Aircraft/MiG-21bis/Nasal/radar-logic.nas</file>
 		</radar_logic>

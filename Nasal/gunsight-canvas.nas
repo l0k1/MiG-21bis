@@ -57,6 +57,8 @@ var gun_sight = {
 		m.gunsight.addPlacement(placement);
 		m.gunsight.setColorBackground(0,0,0,0);
 
+		#shouldn't've used an array. should've used getChildren properly. will fix eventually.
+		
 		m.gsight = m.gunsight.createGroup();
 		m.gschild = [];
 		m.centers = [];

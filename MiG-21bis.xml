@@ -274,7 +274,7 @@
   <!-- internal fuel 1 -->
   <tank type="FUEL" number="0">
      <location unit="M">
-       <x> -2.0477 </x>
+       <x> -2.1477 </x>
        <y>   0.00 </y>
        <z> 0.74312 </z>
      </location>
@@ -287,7 +287,7 @@
   
   <tank type="FUEL" number="1">
      <location unit="M">
-       <x> -0.5977 </x>
+       <x> -0.8977 </x>
        <y>   0.00 </y>
        <z> 0.88205 </z>
      </location>
@@ -300,7 +300,7 @@
   
   <tank type="FUEL" number="2">
      <location unit="M">
-       <x> -0.19161 </x>
+       <x> -0.39161 </x>
        <y>   0.00 </y>
        <z>  0.67657 </z>
      </location>
@@ -313,9 +313,9 @@
   
   <tank type="FUEL" number="3">
      <location unit="M">
-       <x> 2.47969 </x>
+       <x> 2.37969 </x>
        <y>   0.00 </y>
-       <z>   0.39241 </z>
+       <z>   0.43241 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
@@ -326,9 +326,9 @@
   
   <tank type="FUEL" number="4">
      <location unit="M">
-       <x> 3.23313 </x>
+       <x> 3.03313 </x>
        <y>   0.00 </y>
-       <z>   0.39241 </z>
+       <z>   0.41241 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
@@ -339,9 +339,9 @@
   
   <tank type="FUEL" number="5">
      <location unit="M">
-       <x> 4.18064 </x>
+       <x> 3.98064 </x>
        <y>   0.00 </y>
-       <z> 0.28241 </z>
+       <z> 0.33241 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>

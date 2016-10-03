@@ -27,6 +27,11 @@ var MARINE = 1;
 var SURFACE = 2;
 var ORDNANCE = 3;
 
+var RADAR_BOTTOM_LIMIT = -30;
+var RADAR_TOP_LIMIT = 30;
+var RADAR_LEFT_LIMIT = -30;
+var RADAR_RIGHT_LIMIT = 30;
+
 input = {
         radar_serv:       "/instrumentation/radar/serviceable",
         hdgReal:          "/orientation/heading-deg",
@@ -36,6 +41,7 @@ input = {
         lookThrough:      "/instrumentation/radar/look-through-terrain",
         dopplerOn:        "/instrumentation/radar/doppler-enabled",
         dopplerSpeed:     "/instrumentation/radar/min-doppler-speed-kt",
+		radarMode:        "/controls/radar/mode"
 };
 
 foreach(var name; keys(input)) {
@@ -173,10 +179,10 @@ var processTracks = func (vector, carrier, missile = 0, mp = 0, type = -1) {
         append(tracks, trackInfo);
 		#print("size of tracks: " ~ size(tracks));
         if(selection == nil) {
-          #this is first tracks in radar field, so will be default selection
-          selection = trackInfo;
-          selection_updated = TRUE;
-          paint(selection.getNode(), TRUE);
+        #  #this is first tracks in radar field, so will be default selection
+        #  selection = trackInfo;
+        #  selection_updated = TRUE;
+          #paint(selection.getNode(), TRUE);
         #} elsif (track.getChild("name") != nil and track.getChild("name").getValue() == "RB-24J") {
           #for testing that selection view follows missiles
         #  selection = trackInfo;
@@ -185,7 +191,7 @@ var processTracks = func (vector, carrier, missile = 0, mp = 0, type = -1) {
           # this track is already selected, updating it
           #print("updating target");
           selection = trackInfo;
-          paint(selection.getNode(), TRUE);
+          #paint(selection.getNode(), TRUE);
           selection_updated = TRUE;
         } else {
           #print("end2 "~selection.getUnique()~"=="~unique.getValue());
@@ -310,7 +316,10 @@ var trackCalc = func (aircraftPos, range, carrier, mp, type, node) {
       ya_rad = ya_rad + 2*math.pi;
     }
 	#print("ready to see if in cone");
-    if(ya_rad > -61.5 * D2R and ya_rad < 61.5 * D2R and xa_rad_corr > -61.5 * D2R and xa_rad_corr < 61.5 * D2R) {
+    if(ya_rad > RADAR_BOTTOM_LIMIT * D2R and ya_rad < RADAR_TOP_LIMIT * D2R and xa_rad_corr > RADAR_LEFT_LIMIT * D2R and xa_rad_corr < RADAR_RIGHT_LIMIT * D2R) {
+	  #print("xa_rad_corr: " ~ xa_rad_corr);
+	  #print("xa_rad_corr_deg: " ~ xa_rad_corr * R2D);
+	  #print("ya_rad_deg: " ~ ya_rad * R2D);
       #is within the radar cone
       # AJ37 manual: 61.5 deg sideways.
 
@@ -336,14 +345,14 @@ var trackCalc = func (aircraftPos, range, carrier, mp, type, node) {
       var hud_pos_y = 0;#canvas_HUD.centerOffset + canvas_HUD.pixelPerDegreeY * -ya_rad * rad2deg;
 
       var contact = Contact.new(node, type);
-      contact.setPolar(distanceRadar, xa_rad_corr);
+      contact.setPolar(distanceRadar, xa_rad_corr, ya_rad);
       contact.setCartesian(hud_pos_x, hud_pos_y);
       return contact;
 
     } elsif (carrier == TRUE) {
       # need to return carrier even if out of radar cone, due to carrierNear calc
       var contact = Contact.new(node, type);
-      contact.setPolar(900000, xa_rad_corr);
+      contact.setPolar(900000, xa_rad_corr, 0);
       contact.setCartesian(900000, 900000);# 900000 used in hud to know if out of radar cone.
       return contact;
     }
@@ -578,46 +587,89 @@ var get_closure_rate_from_Coord = func(t_coord, t_node) {
     return cr;
 }
 
-var nextTarget = func () {
-  var max_index = size(tracks)-1;
-  if(max_index > -1) {
-    if(tracks_index < max_index) {
-      tracks_index += 1;
-    } else {
-      tracks_index = 0;
-    }
-    selection = tracks[tracks_index];
-    paint(selection.getNode(), TRUE);
-  } else {
-    tracks_index = -1;
-    if (selection != nil) {
-      paint(selection.getNode(), FALSE);
-    }
-  }
+var lockTarget = func() {
+	print("attempting lock");
+	var c_dist = 999999;
+	var c_most = nil;
+	var i = -1;
+	var lowerBar = (getprop("/controls/radar/lock-bars-pos")/950) * radarRange;
+	var upperBar = ((getprop("/controls/radar/lock-bars-pos")+getprop("controls/radar/lock-bars-scale")) / 950) * radarRange;
+	var centerBar = (upperBar + lowerBar) / 2;
+	foreach(var track; tracks) {
+		print("inside for loop");
+		i += 1;
+		var dist_rad = track.get_polar();
+		print("distance: " ~ dist_rad[0]);
+		print("x_ang: " ~ (dist_rad[1] * R2D));
+		print("y_ang: " ~ (dist_rad[2] * R2D));
+		print("lowerBar: " ~ lowerBar);
+		print("upperBar: " ~ upperBar);
+		print("centerBar: " ~ centerBar);
+		if ( dist_rad[0] != 900000 and dist_rad[0] > lowerBar and dist_rad[0] < upperBar and math.abs(dist_rad[1] * R2D) < 5 and math.abs(dist_rad[2] * R2D) < 5) { # if the target is between lowerbar and upperbar on the radar, and is no more than 5* off centerline in all directions (left, up, right, down)
+			if ( math.abs(dist_rad[0] - centerBar) < c_dist ) {
+				c_dist = dist_rad[0];
+				c_most = track;
+			}
+		}
+	}
+	if ( c_most != nil ) {
+		print("we have lock!");
+		input.radarMode.setValue("locked-init");
+		selection = c_most;
+		paint(c_most.getNode(), TRUE);
+		tracks_index = i;
+	}
 }
 
-var centerTarget = func () {
-  var centerMost = nil;
-  var centerDist = 99999;
-  var centerIndex = -1;
-  var i = -1;
-  foreach(var track; tracks) {
-    i += 1;
-    if(track.get_cartesian()[0] != 900000) {
-      var dist = math.abs(track.get_cartesian()[0]) + math.abs(track.get_cartesian()[1]);
-      if(dist < centerDist) {
-        centerDist = dist;
-        centerMost = track;
-        centerIndex = i;
-      }
-    }
-  }
-  if (centerMost != nil) {
-    selection = centerMost;
-    paint(selection.getNode(), TRUE);
-    tracks_index = centerIndex;
-  }
+var unlockTarget = func() {
+	if ( selection != nil ) {
+		paint(selection.getNode(), FALSE);
+		selection = nil;
+		input.radarMode.setValue("normal-init");
+	}
 }
+
+#targetting logic for the Viggen, saved for posterity.			
+#var nextTarget = func () {
+#  var max_index = size(tracks)-1;
+#  if(max_index > -1) {
+#    if(tracks_index < max_index) {
+#      tracks_index += 1;
+#    } else {
+#      tracks_index = 0;
+#    }
+#    selection = tracks[tracks_index];
+#    paint(selection.getNode(), TRUE);
+#  } else {
+#    tracks_index = -1;
+#    if (selection != nil) {
+#      paint(selection.getNode(), FALSE);
+#    }
+#  }
+#}
+
+#var centerTarget = func () {
+#  var centerMost = nil;
+#  var centerDist = 99999;
+#  var centerIndex = -1;
+#  var i = -1;
+#  foreach(var track; tracks) {
+#    i += 1;
+#    if(track.get_cartesian()[0] != 900000) {
+#      var dist = math.abs(track.get_cartesian()[0]) + math.abs(track.get_cartesian()[1]);
+#      if(dist < centerDist) {
+#        centerDist = dist;
+#        centerMost = track;
+#        centerIndex = i;
+#      }
+#    }
+#  }
+#  if (centerMost != nil) {
+#    selection = centerMost;
+#    paint(selection.getNode(), TRUE);
+#    tracks_index = centerIndex;
+#  }
+#}
 
 #loop
 var loop = func () {
@@ -689,7 +741,7 @@ var Contact = {
         obj.node            = c;
         obj.class           = class;
 
-        obj.polar           = [0,0];
+        obj.polar           = [0,0,0];
         obj.cartesian       = [0,0];
         
         return obj;
@@ -749,8 +801,8 @@ var Contact = {
       return me.node.getNode("sim/multiplay/generic/string[10]");
     },
 
-    setPolar: func(dist, angle) {
-      me.polar = [dist,angle];
+    setPolar: func(dist, angle, angle2 = 0) {
+      me.polar = [dist,angle,angle2];
     },
 
     setCartesian: func(x, y) {

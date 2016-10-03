@@ -19,9 +19,9 @@ input = {
   tank0LvlNorm:     "/consumables/fuel/tank[0]/level-norm",
   tank8LvlNorm:     "/consumables/fuel/tank[8]/level-norm",
   tank0LvlGal:      "/consumables/fuel/tank[0]/level-gal_us",
-  tank1LvlGal:      "/consumables/fuel/tank[1]/level-gal_us",
-  tank2LvlGal:      "/consumables/fuel/tank[2]/level-gal_us",
-  tank3LvlGal:      "/consumables/fuel/tank[3]/level-gal_us",
+  tank1LvlGal:      "/consumables/fuel/tank[10]/level-gal_us",
+  tank2LvlGal:      "/consumables/fuel/tank[11]/level-gal_us",
+  tank3LvlGal:      "/consumables/fuel/tank[12]/level-gal_us",
   tank4LvlGal:      "/consumables/fuel/tank[4]/level-gal_us",
   tank5LvlGal:      "/consumables/fuel/tank[5]/level-gal_us",
   tank6LvlGal:      "/consumables/fuel/tank[6]/level-gal_us",
@@ -64,51 +64,9 @@ var update_loop = func {
     # pylon payloads
     for(var i=0; i<=4; i=i+1) {
       if(getprop("payload/weight["~ (i) ~"]/selected") != "none" and getprop("payload/weight["~ (i) ~"]/weight-lb") == 0) {
-        # missile was loaded manually through payload/fuel dialog, so setting the pylon to not released
         setprop("controls/armament/station["~(i)~"]/released", FALSE);
-        #print("adding "~i);
-        #if(i != 2) {
-        #  if (getprop("payload/weight["~ (i) ~"]/selected") == "R-60") {
-            #is not center pylon and is RB24
-        #    if(armament.AIM9.new(i) == -1 and armament.AIM9.active[i].status == MISSILE_FLYING) {
-              #missile added through menu while another from that pylon is still flying.
-              #to handle this we have to ignore that addition.
-        #      setprop("controls/armament/station["~(i+1)~"]/released", TRUE);
-        #      setprop("payload/weight["~ (i) ~"]/selected", "none");
-              #print("refusing to mount new missile yet "~i);
-        #    }
-          #} elsif (getprop("payload/weight["~ (i) ~"]/selected") == "M70") {
-          #    setprop("ai/submodels/submodel["~(5+i)~"]/count", 6);
-        #  }
-        #}
       }
-      #if(i!=0 and getprop("payload/weight["~ (i-1) ~"]/selected") == "none" and getprop("payload/weight["~ (i-1) ~"]/weight-lb") != 0) {
-      #  if(armament.AIM9.active[i-1] != nil) {
-          # pylon emptied through menu, so remove the logic
-          #print("removing "~i);
-      #    armament.AIM9.active[i-1].del();
-      #  }
-      #}
     }
-
-    #activate searcher on selected pylon if missile mounted
-    #var armSelect = input.stationSelect.getValue();
-    #for(i = 0; i <= 4; i += 1) {
-    #  if(armament.AIM9.active[i] != nil) {
-    #    #missile is mounted on pylon
-    #    if(armSelect != i+1 and armament.AIM9.active[i].status != MISSILE_FLYING) {
-    #      #pylon not selected, and not flying set missile on standby
-    #      armament.AIM9.active[i].status = MISSILE_STANDBY;#print("not sel "~(i));
-    #    } elsif (input.combat.getValue() != 2 or (armament.AIM9.active[i].status != MISSILE_STANDBY and armament.AIM9.active[i].status != MISSILE_FLYING and getprop("payload/weight["~ (i) ~"]/selected") == "none")) {
-    #      #pylon has logic but missile not mounted and not flying or not in tactical mode
-    #      armament.AIM9.active[i].status = MISSILE_STANDBY;#print("empty "~(i));
-    #    } elsif (armSelect == i+1 and armament.AIM9.active[i].status == MISSILE_STANDBY and getprop("payload/weight["~ (i) ~"]/selected") != "none" and input.combat.getValue() == 2) {
-    #      #pylon selected, missile mounted, in tactical mode, activate search
-    #      armament.AIM9.active[i].status = MISSILE_SEARCH;#print("active "~(i));
-    #      armament.AIM9.active[i].search();
-    #    }
-    #  }
-    #}
 
     var selected = nil;
     for(var i=0; i<=4; i=i+1) { # set JSBSim mass
@@ -143,21 +101,21 @@ var update_loop = func {
         }
         if(i==0) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[2]/selected",0);
-        setprop("/consumables/fuel/tank[2]/jettisoned",1);
-        setprop("/consumables/fuel/tank[2]/level-norm",0);
+        setprop("/consumables/fuel/tank[11]/selected",0);
+        setprop("/consumables/fuel/tank[11]/jettisoned",1);
+        setprop("/consumables/fuel/tank[11]/level-norm",0);
         }
         if(i==2) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[1]/selected",0);
-        setprop("/consumables/fuel/tank[1]/jettisoned",1);
-        setprop("/consumables/fuel/tank[1]/level-norm",0);
+        setprop("/consumables/fuel/tank[10]/selected",0);
+        setprop("/consumables/fuel/tank[10]/jettisoned",1);
+        setprop("/consumables/fuel/tank[10]/level-norm",0);
         }
         if(i==4) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[3]/selected",0);
-        setprop("/consumables/fuel/tank[3]/jettisoned",1);
-        setprop("/consumables/fuel/tank[3]/level-norm",0);
+        setprop("/consumables/fuel/tank[12]/selected",0);
+        setprop("/consumables/fuel/tank[12]/jettisoned",1);
+        setprop("/consumables/fuel/tank[12]/level-norm",0);
         }
       } elsif (selected == "FAB-250") {
         # the pylon has a bomb, give it a pointmass
@@ -166,21 +124,21 @@ var update_loop = func {
         }
         if(i==0) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[2]/selected",0);
-        setprop("/consumables/fuel/tank[2]/jettisoned",1);
-        setprop("/consumables/fuel/tank[2]/level-norm",0);
+        setprop("/consumables/fuel/tank[11]/selected",0);
+        setprop("/consumables/fuel/tank[11]/jettisoned",1);
+        setprop("/consumables/fuel/tank[11]/level-norm",0);
         }
         if(i==2) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[1]/selected",0);
-        setprop("/consumables/fuel/tank[1]/jettisoned",1);
-        setprop("/consumables/fuel/tank[1]/level-norm",0);
+        setprop("/consumables/fuel/tank[10]/selected",0);
+        setprop("/consumables/fuel/tank[10]/jettisoned",1);
+        setprop("/consumables/fuel/tank[10]/level-norm",0);
         }
         if(i==4) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[3]/selected",0);
-        setprop("/consumables/fuel/tank[3]/jettisoned",1);
-        setprop("/consumables/fuel/tank[3]/level-norm",0);
+        setprop("/consumables/fuel/tank[12]/selected",0);
+        setprop("/consumables/fuel/tank[12]/jettisoned",1);
+        setprop("/consumables/fuel/tank[12]/level-norm",0);
         }
       } elsif (selected == "Kh-25") {
         # the pylon has a bomb, give it a pointmass
@@ -189,21 +147,21 @@ var update_loop = func {
         }
         if(i==0) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[2]/selected",0);
-        setprop("/consumables/fuel/tank[2]/jettisoned",1);
-        setprop("/consumables/fuel/tank[2]/level-norm",0);
+        setprop("/consumables/fuel/tank[11]/selected",0);
+        setprop("/consumables/fuel/tank[11]/jettisoned",1);
+        setprop("/consumables/fuel/tank[11]/level-norm",0);
         }
         if(i==2) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[1]/selected",0);
-        setprop("/consumables/fuel/tank[1]/jettisoned",1);
-        setprop("/consumables/fuel/tank[1]/level-norm",0);
+        setprop("/consumables/fuel/tank[10]/selected",0);
+        setprop("/consumables/fuel/tank[10]/jettisoned",1);
+        setprop("/consumables/fuel/tank[10]/level-norm",0);
         }
         if(i==4) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[3]/selected",0);
-        setprop("/consumables/fuel/tank[3]/jettisoned",1);
-        setprop("/consumables/fuel/tank[3]/level-norm",0);
+        setprop("/consumables/fuel/tank[12]/selected",0);
+        setprop("/consumables/fuel/tank[12]/jettisoned",1);
+        setprop("/consumables/fuel/tank[12]/level-norm",0);
         }
       } elsif (selected == "UB-32") {
         # the pylon has a bomb, give it a pointmass
@@ -212,21 +170,21 @@ var update_loop = func {
         }
         if(i==0) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[2]/selected",0);
-        setprop("/consumables/fuel/tank[2]/jettisoned",1);
-        setprop("/consumables/fuel/tank[2]/level-norm",0);
+        setprop("/consumables/fuel/tank[11]/selected",0);
+        setprop("/consumables/fuel/tank[11]/jettisoned",1);
+        setprop("/consumables/fuel/tank[11]/level-norm",0);
         }
         if(i==2) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[1]/selected",0);
-        setprop("/consumables/fuel/tank[1]/jettisoned",1);
-        setprop("/consumables/fuel/tank[1]/level-norm",0);
+        setprop("/consumables/fuel/tank[10]/selected",0);
+        setprop("/consumables/fuel/tank[10]/jettisoned",1);
+        setprop("/consumables/fuel/tank[10]/level-norm",0);
         }
         if(i==4) {
         # no drop tank attached, clear tank
-        setprop("/consumables/fuel/tank[3]/selected",0);
-        setprop("/consumables/fuel/tank[3]/jettisoned",1);
-        setprop("/consumables/fuel/tank[3]/level-norm",0);
+        setprop("/consumables/fuel/tank[12]/selected",0);
+        setprop("/consumables/fuel/tank[12]/jettisoned",1);
+        setprop("/consumables/fuel/tank[12]/level-norm",0);
         }
       } elsif (selected == "PTB-490 Droptank") {
         # the pylon has a drop tank, give it a pointmass
@@ -241,11 +199,7 @@ var update_loop = func {
       }
     }
 
-    settimer(
-      #func debug.benchmark("j37 loop",
-        update_loop
-        #)
-    , UPDATE_PERIOD);
+    settimer(update_loop, UPDATE_PERIOD);
   }
 
 
@@ -255,9 +209,9 @@ var update_loop = func {
 var main_init = func {
   setprop("sim/time/elapsed-at-init-sec", getprop("sim/time/elapsed-sec"));
 
-  setprop("/consumables/fuel/tank[1]/jettisoned", FALSE);
-  setprop("/consumables/fuel/tank[2]/jettisoned", FALSE);
-  setprop("/consumables/fuel/tank[3]/jettisoned", FALSE);
+  setprop("/consumables/fuel/tank[10]/jettisoned", FALSE);
+  setprop("/consumables/fuel/tank[11]/jettisoned", FALSE);
+  setprop("/consumables/fuel/tank[12]/jettisoned", FALSE);
 
   # Load exterior at startup to avoid stale sim at first external view selection. ( taken from TU-154B )
   print("Loading exterior, wait...");
