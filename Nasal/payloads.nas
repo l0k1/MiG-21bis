@@ -85,43 +85,7 @@ var update_loop = func {
 		if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != payloads[selected]) {
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", payloads[selected]);
 		}
-		
-#		if(selected == "none") {
-#			# the pylon is empty, set its pointmass to zero
-#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 0) {
-#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 0);
-#			}
-#		} elsif (selected == "R-60") {
-#		# the pylon has a misile, give it a pointmass
-#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 96) {
-#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 96);
-#			}
-#		} elsif (selected == "FAB-250") {
-#		# the pylon has a bomb, give it a pointmass
-#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 520) {
-#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 520);
-#			}
-#		} elsif (selected == "Kh-25") {
-#		# the pylon has a bomb, give it a pointmass
-#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 659) {
-#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 659);
-#			}
-#		} elsif (selected == "UB-32") {
-#			# the pylon has a bomb, give it a pointmass
-#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 582) {
-#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 582);
-#			}
-#		} elsif (selected == "PTB-490 Droptank") {
-#			# the pylon has a drop tank, give it a pointmass
-#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 180) {
-#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 180);
-#			}
-#		} elsif (selected == "PTB-800 Droptank") {
-#		# the pylon has a drop tank, give it a pointmass
-#			if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != 230) {
-#				setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", 230);
-#			}
-#		}
+
 		if ( selected != "PTB-800 Droptank" and selected != "PTB-490 Droptank" ) {
 			#print("selected: " ~ selected);
 			if(i==0) {
