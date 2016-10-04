@@ -44,37 +44,48 @@ input = {
   impact:           "/ai/models/model-impact",
 };
 
+var pos_arm = {
+	new: func(long_name, weight, type = "missile", ammo_count = 0) {
+		var m = {parents:[pos_arm]};
+		m.long_name = long_name;
+		m.weight = weight;
+		m.type = type;
+		m.ammo_count = ammo_count;
+		return m;
+	}
+};
+
 var payloads = {
-	"none":					  0,
-	"R-60":					 96,
-	"FAB-250":				520,
-	"Kh-25":				659,
-	"UB-32":				582,
-	"PTB-490 Droptank":		180,
-	"PTB-800 Droptank":		230
+	"none":					pos_arm.new("none",0),
+	"R-60":					pos_arm.new("R-60",960),
+	"FAB-250":				pos_arm.new("FAB-250",520),
+	"Kh-25":				pos_arm.new("Kh-25",659),
+	"UB-32":				pos_arm.new("UB-32",582,"rocket",32),
+	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank",180,"tank"),
+	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank",230,"tank")
 };
 
 var update_loop = func {
 
-	# End stuff
-
 	if(input.replay.getValue() == TRUE) {
 		# replay is active, skip rest of loop.
 		settimer(update_loop, UPDATE_PERIOD);
-	} else {
-	# set the full-init property
-		if(input.elapsed.getValue() > input.elapsedInit.getValue() + 5) {
-			input.fullInit.setValue(TRUE);
-		} else {
-			input.fullInit.setValue(FALSE);
-		}
-
 	}
-
+	
 	# pylon payloads
 	for(var i=0; i<=4; i=i+1) {
-		if(getprop("payload/weight["~ (i) ~"]/selected") != "none" and getprop("payload/weight["~ (i) ~"]/weight-lb") == 0) {
+		var selected = getprop("payload/weight["~ (i) ~"]/selected");
+		if(selected != "none" and getprop("payload/weight["~ (i) ~"]/weight-lb") == 0) {
 			setprop("controls/armament/station["~(i)~"]/released", FALSE);
+			if (payloads[selected].type == "missile") {
+				if(armament.AIM.active[i] != nil and armament.AIM.active[i].type != selected) {
+					armament.AIM.active[i].del();
+				}
+				if(armament.AIM.new(i, selected, payloads[selected].long_name) == -1 and armament.AIM.active[i].status == MISSILE_FLYING) {
+					setprop("controls/armament/station["~(i+1)~"]/released", TRUE);
+					setprop("payload/weight["~ (i) ~"]/selected", "none");
+				}
+			}
 		}
 	}
 
@@ -82,8 +93,8 @@ var update_loop = func {
 	for(var i=0; i<=4; i=i+1) { # set JSBSim mass
 		selected = getprop("payload/weight["~i~"]/selected");
 		
-		if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != payloads[selected]) {
-			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", payloads[selected]);
+		if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != payloads[selected].weight) {
+			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", payloads[selected].weight);
 		}
 
 		if ( selected != "PTB-800 Droptank" and selected != "PTB-490 Droptank" ) {
