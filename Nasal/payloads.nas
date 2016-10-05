@@ -146,6 +146,7 @@ var update_loop = func {
 	############ MISSILE ARMING LOGIC ################
 	var armSelect = pylon_select();
 	for ( i = 0; i <= 4; i += 1 ) {
+		#print("in arming logic");
 		var payloadName = getprop("/payload/weight[" ~ i ~ "]/selected");
 		if ( armament.AIM.active[i] != nil ) {
 			if ( armSelect[0] != i and armSelect[1] != i and armament.AIM.active[i].status != MISSILE_FLYING ) {
@@ -153,6 +154,7 @@ var update_loop = func {
 			} elsif ( armament.AIM.active[i].status != MISSILE_STANDBY and armament.AIM.active[i] != MISSILE_FLYING and payloadName == "none" ) {
 				armament.AIM.active[i].status = MISSILE_STANDBY;
 			} elsif ( (armSelect[0] == i or armSelect[1] == i) and armament.AIM.active[i].status == MISSILE_STANDBY ) {
+				#print("missile " ~i~ " should be searching.");
 				armament.AIM.active[i].status = MISSILE_SEARCH;
 				armament.AIM.active[i].search();
 			}
@@ -198,17 +200,20 @@ var update_loop = func {
 
 ###########  listener for handling the trigger #########
 
+var round2 = 0;
+
 var missile_release_listener = func {
 
 	var armSelect = pylon_select();
-	print("listener triggered");
-	
-	if ( getprop("controls/armament/missile-release") == 1 ) {
-	
+	if ( getprop("/fdm/jsbsim/systems/armament/release") == 1 or round2 == 1) {
+		round2 = 0;
 		missile_release(armSelect[0]);
 		
 		if ( armSelect[1] != -1 and getprop("payload/weight["~(armSelect[1])~"]/selected") != "none") {
-			settimer(func { missile_release(armSelect[1]); }, 1.5);
+			settimer(func { 
+				round2 = 1;
+				missile_release(armSelect[1]); 
+				}, 1.5);
 		}
 		
 	}
@@ -244,16 +249,29 @@ var missile_release_listener = func {
 #    }
 #  }
 var missile_release = func(pylon) {
-	print("in missile release");
 	if(getprop("payload/weight["~(pylon)~"]/selected") != "none") { 
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on. The gear check is prevent missiles from firing when changing airport location.
+		#if ( armament.AIM.active[pylon] != nil ) {
+		#	var am = 1;
+		#}else{
+		#	var am = 0;
+		#}
+		#print("arma: " ~ am);
+		#print("status: " ~ armament.AIM.active[pylon].status);
+		#if ( radar_logic.selection != nil ) {
+		#	var rs = 1;
+		#}else{
+		#	var rs = 0;
+		#}
+		#print("selection: " ~ rs);
+		#print("target: " ~armament.AIM.active[pylon].callsign);
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
 			#missile locked, fire it.
 
-			#print("firing missile: "~armSelect~" "~getprop("controls/armament/station["~armSelect~"]/released"));
+			print("firing missile: "~pylon);
 			var callsign = armament.AIM.active[pylon].callsign;
 			var brevity = armament.AIM.active[pylon].brevity;
-			armament.AIM.active[pylon].release();#print("release "~(armSelect-1));
+			armament.AIM.active[pylon].release();
 
 			var phrase = brevity ~ " at: " ~ callsign;
 			if (getprop("payload/armament/msg")) {
@@ -361,7 +379,6 @@ var main_init = func {
   }
 
   screen.log.write("Welcome to MiG-21bis!", 1.0, 0.2, 0.2);
-	print("youze here");
   setlistener("/fdm/jsbsim/systems/armament/release", missile_release_listener);
 
   # setup impact listener

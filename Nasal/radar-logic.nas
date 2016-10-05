@@ -215,9 +215,9 @@ var paint = func (node, painted) {
     attr = node.addChild("painted");
   }
   attr.setBoolValue(painted);
-  #if(painted == TRUE) { 
-    #print("painted "~attr.getPath()~" "~painted);
-  #}
+  if(painted == TRUE) { 
+    print("painted "~attr.getPath()~" "~painted);
+  }
 }
 
 var remove_suffix = func(s, x) {
@@ -588,7 +588,6 @@ var get_closure_rate_from_Coord = func(t_coord, t_node) {
 }
 
 var lockTarget = func() {
-	print("attempting lock");
 	var c_dist = 999999;
 	var c_most = nil;
 	var i = -1;
@@ -596,15 +595,14 @@ var lockTarget = func() {
 	var upperBar = ((getprop("/controls/radar/lock-bars-pos")+getprop("controls/radar/lock-bars-scale")) / 950) * radarRange;
 	var centerBar = (upperBar + lowerBar) / 2;
 	foreach(var track; tracks) {
-		print("inside for loop");
 		i += 1;
 		var dist_rad = track.get_polar();
-		print("distance: " ~ dist_rad[0]);
-		print("x_ang: " ~ (dist_rad[1] * R2D));
-		print("y_ang: " ~ (dist_rad[2] * R2D));
-		print("lowerBar: " ~ lowerBar);
-		print("upperBar: " ~ upperBar);
-		print("centerBar: " ~ centerBar);
+		#print("distance: " ~ dist_rad[0]);
+		#print("x_ang: " ~ (dist_rad[1] * R2D));
+		#print("y_ang: " ~ (dist_rad[2] * R2D));
+		#print("lowerBar: " ~ lowerBar);
+		#print("upperBar: " ~ upperBar);
+		#print("centerBar: " ~ centerBar);
 		if ( dist_rad[0] != 900000 and dist_rad[0] > lowerBar and dist_rad[0] < upperBar and math.abs(dist_rad[1] * R2D) < 5 and math.abs(dist_rad[2] * R2D) < 5) { # if the target is between lowerbar and upperbar on the radar, and is no more than 5* off centerline in all directions (left, up, right, down)
 			if ( math.abs(dist_rad[0] - centerBar) < c_dist ) {
 				c_dist = dist_rad[0];
@@ -613,11 +611,12 @@ var lockTarget = func() {
 		}
 	}
 	if ( c_most != nil ) {
-		print("we have lock!");
 		input.radarMode.setValue("locked-init");
 		selection = c_most;
 		paint(c_most.getNode(), TRUE);
 		tracks_index = i;
+		armament.contact = selection;
+		#print(selection.get_callsign());
 	}
 }
 
@@ -625,6 +624,7 @@ var unlockTarget = func() {
 	if ( selection != nil ) {
 		paint(selection.getNode(), FALSE);
 		selection = nil;
+		armament.contact = nil;
 		input.radarMode.setValue("normal-init");
 	}
 }

@@ -262,6 +262,49 @@
 				<fixed-net-brightness-knob type="float">1</fixed-net-brightness-knob>
 			</gunsight>
 			<missile-release type="int" alias="/fdm/jsbsim/systems/armament/release">0</missile-release>
+			           <trigger type="bool">false</trigger>
+            <station n="0"> <!-- left outer wing -->
+                <offsets>
+                    <x-m type="double">  1.33</x-m>
+                    <y-m type="double"> -2.73</y-m>
+                    <z-m type="double"> -0.51</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+            </station>
+            <station n="1"> <!-- left inner wing -->
+                <offsets>
+                    <x-m type="double"> -0.35</x-m>
+                    <y-m type="double"> -2.11</y-m>
+                    <z-m type="double"> -0.20</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+            </station>
+            <station n="2"><!--center-->
+                <offsets>
+                    <x-m type="double">  -0.3</x-m>
+                    <y-m type="double">  0.00</y-m>
+                    <z-m type="double"> -0.83</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+                <trigger-m70 type="bool">false</trigger-m70>
+            </station>
+            <station n="3"> <!-- right inner wing -->
+                <offsets>
+                    <x-m type="double"> -0.35</x-m>
+                    <y-m type="double">  2.11</y-m>
+                    <z-m type="double"> -0.20</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+                <trigger-m70 type="bool">false</trigger-m70>
+            </station>
+            <station n="4"><!-- right outer wing -->
+                <offsets>
+                    <x-m type="double">  1.33</x-m>
+                    <y-m type="double"> 2.73</y-m>
+                    <z-m type="double"> -0.51</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+            </station>
 		</armament>
 		<radar>
 			<panel>
@@ -368,6 +411,9 @@
 			<propulsion>
 				<clr type="int">0</clr>
 			</propulsion>
+			<fcs>
+				<pitch-gearing-enable>1</pitch-gearing-enable>
+			</fcs>
 		</jsbsim>
 	</fdm>
         <!-- Payload -->

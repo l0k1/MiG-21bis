@@ -519,13 +519,19 @@
             <independentVar lookup="row">aero/alpha-rad</independentVar>
             <tableData>
               -0.20 -0.620
-               0.00  0.030
-               0.26  0.880
+               0.00  0.007
+               0.36  0.690
                0.60  0.448
             </tableData>
           </table>
       </product>
     </function>
+	<!-- table was:
+			   -0.20 -0.620
+               0.00  0.030
+               0.26  0.880
+               0.60  0.448
+	-->
 
     <function name="aero/coefficient/dCLflap">
        <description>Delta_Lift_due_to_flaps</description>
@@ -536,8 +542,8 @@
              <independentVar lookup="row">fcs/flap-pos-norm</independentVar>
              <tableData>
                0.00  0.00
-               0.50  0.10
-               1.00  0.25
+               0.50  0.07
+               1.00  0.19
              </tableData>
            </table>
        </product>

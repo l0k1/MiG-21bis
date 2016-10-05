@@ -436,7 +436,7 @@ var radar_screen = {
 			lpos = clamp(lpos, 0, 900);
 
 			if ( 950 - ( lscale + lpos ) < 376 ) {
-				lpos = 377 + lscale;
+				lpos =(950 - 377) - lscale;
 			} elsif ( lpos < 0 ) {
 				lpos = 0;
 			}
@@ -483,7 +483,7 @@ var radar_screen = {
 						me.above_blip[b_i].show();
 						me.even_blip[b_i].hide();
 						me.below_blip[b_i].hide();
-					} elsif ( ya_ang < 1.5 ) {
+					} elsif ( ya_ang < -1.5 ) {
 						me.below_blip[b_i].setTranslation(pixelX, pixelY);
 						me.below_blip[b_i].show();
 						me.even_blip[b_i].hide();
@@ -541,7 +541,7 @@ var radar_screen = {
 					#switch from an overhead view to a forward facing view.
 					#the blip will move according to angle, instead of distance
 					#ar pixelX = ((xa_rad * R2D / RADAR_LEFT_LIMIT) * -506) + 506; #506 is half width of radar screen
-					var pixelX = -1 * (((dist_rad[1] * R2D / 15) * -506) + 506); #506 is half width of radar screen, and 180 is starting from the left, go over this much
+					var pixelX = ((dist_rad[1] * R2D / 15) * 506) + 506; #506 is half width of radar screen, and 180 is starting from the left, go over this much
 					#var pixelY = ((ya_ang * R2D) / 5) * 425 + 100; #425 is half vertically, 100 is starting from the top
 					var pixelY = ((ya_ang * R2D / 15) * -425) + 425; #506 is half width of radar screen
 					pixelX = clamp(pixelX, 180, 836);
@@ -554,7 +554,7 @@ var radar_screen = {
 						me.above_blip[1].show();
 						me.even_blip[1].hide();
 						me.below_blip[1].hide();
-					} elsif ( ya_ang < 1.5 ) {
+					} elsif ( ya_ang < -1.5 ) {
 						me.below_blip[1].setTranslation(pixelX, pixelY);
 						me.below_blip[1].show();
 						me.even_blip[1].hide();
@@ -572,7 +572,7 @@ var radar_screen = {
 			}
 		}
 			
-		settimer(func { me.update(); }, 0.15);
+		settimer(func { me.update(); }, 0.10);
     },
 };
 

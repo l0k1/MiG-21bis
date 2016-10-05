@@ -1411,6 +1411,13 @@ var AIM = {
 		# search.
 		if (1==1 or contact != me.Tgt) {
 			#print("search2");
+			#if ( contact != nil ) { print("contact valid");
+				#print("isValid() = " ~ contact.isValid());
+				#print("contact.get_type() = " ~ contact.get_type());
+				#print("me.target_gnd = " ~ me.target_gnd);
+				#print("me.target_air = " ~ me.target_air);
+				#print("me.target_sea = " ~ me.target_sea);
+			#}
 			if (contact != nil and contact.isValid() == TRUE and
 				(  (contact.get_type() == SURFACE and me.target_gnd == TRUE)
                 or (contact.get_type() == AIR and me.target_air == TRUE)
