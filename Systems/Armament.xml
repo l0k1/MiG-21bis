@@ -2,8 +2,6 @@
 
 <system name="armament">
 
-  <property value="0">systems/armament/release</property>
-
   <channel name="Armament">
 
      <!-- release station 1 -->

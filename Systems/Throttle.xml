@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<system name="throttle">
+
+	<channel name="Throttle">
+
+		<!-- throttle distributions, split milthrust, augthrust and clrthrust -->
+		
+		<fcs_function name="trash/asdf1234">
+			<function>
+				<table>
+					<independentVar lookup="row">fcs/throttle-cmd-norm</independentVar>
+					<tableData>
+						0.00	0.00
+						0.80	1.00
+						1.00	2.00
+					</tableData>
+				</table>
+			</function>
+			<output>fcs/throttle-pos-norm</output>
+		</fcs_function>
+
+
+	</channel>
+
+</system>
+

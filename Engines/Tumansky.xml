@@ -14,9 +14,9 @@
   <maxn1>         103.5 </maxn1> <!-- page 25, powerpland (in flight), line 15(b) -->
   <maxn2>         107.5 </maxn2> <!-- page 25, powerpland (in flight), line 16 -->
   <augmented>         1 </augmented> 
-  <augmethod>         1 </augmethod> <!-- will be changing this to method 2 when i can get around to writing better throttle code -->
-  <injected>          1 </injected> <!-- currently used for second reheat, but i don't like this method as it doesn't produce accurate results. the second reheat only engages when the switch is on AND the throttle is in afterburner. leaving it for now. -->
-  <injection-time> 1800.0 </injection-time> <!-- 3 minutes is operational maximum, not actual maximum -->
+  <augmethod>         2 </augmethod> <!-- will be changing this to method 2 when i can get around to writing better throttle code -->
+  <injected>          0 </injected> <!-- currently used for second reheat, but i don't like this method as it doesn't produce accurate results. the second reheat only engages when the switch is on AND the throttle is in afterburner. leaving it for now. -->
+  <injection-time> 0.0 </injection-time> <!-- 3 minutes is operational maximum, not actual maximum -->
 
   <function name="IdleThrust">
    <table>
@@ -52,41 +52,45 @@
    </table>
   </function>
 
-  <function name="AugThrust">
-   <table>
-    <independentVar lookup="row">velocities/mach</independentVar>
-    <independentVar lookup="column">atmosphere/density-altitude</independentVar>
-    <tableData>
-           -10000       0   10000   20000   30000   40000   50000   60000
-     0.0    1.1816  1.0000  0.8184  0.6627  0.5280  0.3756  0.2327  0
-     0.2    1.1308  0.9599  0.7890  0.6406  0.5116  0.3645  0.2258  0
-     0.4    1.1150  0.9474  0.7798  0.6340  0.5070  0.3615  0.2240  0
-     0.6    1.1284  0.9589  0.7894  0.6420  0.5134  0.3661  0.2268  0
-     0.8    1.1707  0.9942  0.8177  0.6647  0.5309  0.3784  0.2345  0
-     1.0    1.2411  1.0529  0.8648  0.7017  0.5596  0.3983  0.2467  0
-     1.2    1.3287  1.1254  0.9221  0.7462  0.6236  0.4219  0.2614  0
-     1.4    1.4365  1.2149  0.9933  0.8021  0.7360  0.4509  0.2794  0
-     1.6    0       0       1.0809  0.8700  0.8874  0.4860  0.3011  0
-     1.8    0       0       0       0.7600  0.7500  0.5300  0.3300  0
-     2.0    0       0       0       0       0       0.6400  0.5700  0
-     2.2    0       0       0       0       0       0       0.5740  0
-    </tableData>
-   </table>
-  </function>
+	<function name="AugThrust">
+		<product>
+			<table>
+				<independentVar lookup="row">velocities/mach</independentVar>
+				<independentVar lookup="column">atmosphere/density-altitude</independentVar>
+				<tableData>
+						-10000       0   10000   20000   30000   40000   50000   60000
+					0.0    1.1816  1.0000  0.8184  0.6627  0.5280  0.3756  0.2327  0
+					0.2    1.1308  0.9599  0.7890  0.6406  0.5116  0.3645  0.2258  0
+					0.4    1.1150  0.9474  0.7798  0.6340  0.5070  0.3615  0.2240  0
+					0.6    1.1284  0.9589  0.7894  0.6420  0.5134  0.3661  0.2268  0
+					0.8    1.1707  0.9942  0.8177  0.6647  0.5309  0.3784  0.2345  0
+					1.0    1.2411  1.0529  0.8648  0.7017  0.5596  0.3983  0.2467  0
+					1.2    1.3287  1.1254  0.9221  0.7462  0.6236  0.4219  0.2614  0
+					1.4    1.4365  1.2149  0.9933  0.8021  0.7360  0.4509  0.2794  0
+					1.6    0       0       1.0809  0.8700  0.8874  0.4860  0.3011  0
+					1.8    0       0       0       0.7600  0.7500  0.5300  0.3300  0
+					2.0    0       0       0       0       0       0.6400  0.5700  0
+					2.2    0       0       0       0       0       0       0.5740  0
+				</tableData>
+			</table>
+			<table>
+				<!-- 7100kg at ~10000 ft, 9900kg at sealevel -->
+				<independentVar lookup="row">velocities/mach</independentVar>
+				<independentVar lookup="column">atmosphere/density-altitude</independentVar>
+				<independentVar lookup="table">propulsion/clr</independentVar>
+				<tableData breakPoint="0">
+							0			10000		15000	
+					0.0		1.0			1.0			1.0
+					1.0		1			1			1
+				</tableData>
+				<tableData breakPoint="1">
+							-10000		0			6000		10000		15000
+					0.0		1.52		1.44		1.30		1.03		1.0
+					1.0		1.54		1.46		1.33		1.04		1.0
+				</tableData>
+			</table>
+		</product>
+	</function>
 
-  <!-- the manual states that this'll produce 7100 kgf, or 9900 kgf near sealevel at mach one. 
-		in other words, these numbers are offffffffffffffff-->
-  
-  <function name="Injection">
-   <table>
-    <independentVar lookup="row">velocities/mach</independentVar>
-    <independentVar lookup="column">atmosphere/density-altitude</independentVar>
-    <tableData>
-            0       10000    15000	
-     0.0    1.41    1.41     1.0
-     1.0    1.41    1.41     1.0
-    </tableData>
-   </table>
-  </function>
 
 </turbine_engine>

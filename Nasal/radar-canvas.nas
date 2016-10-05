@@ -541,7 +541,7 @@ var radar_screen = {
 					#switch from an overhead view to a forward facing view.
 					#the blip will move according to angle, instead of distance
 					#ar pixelX = ((xa_rad * R2D / RADAR_LEFT_LIMIT) * -506) + 506; #506 is half width of radar screen
-					var pixelX = ((dist_rad[1] * R2D / 15) * -506) + 506; #506 is half width of radar screen, and 180 is starting from the left, go over this much
+					var pixelX = -1 * (((dist_rad[1] * R2D / 15) * -506) + 506); #506 is half width of radar screen, and 180 is starting from the left, go over this much
 					#var pixelY = ((ya_ang * R2D) / 5) * 425 + 100; #425 is half vertically, 100 is starting from the top
 					var pixelY = ((ya_ang * R2D / 15) * -425) + 425; #506 is half width of radar screen
 					pixelX = clamp(pixelX, 180, 836);

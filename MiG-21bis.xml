@@ -455,6 +455,7 @@
  <system file="Canopy"/>
  <system file="Particles"/>
  <system file="fuel"/>
+ <system file="throttle"/>
 
  <flight_control name="none"/>
 

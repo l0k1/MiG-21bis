@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <system name="particles">
-
+  <property value="0">/ai/submodels/contrails</property>
   <channel>
      <switch name="contrail test">
           <default value="0"/>
