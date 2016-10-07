@@ -451,7 +451,7 @@
  <system file="Alpha-Buffet"/>
  <system file="Chute"/>
  <system file="Dump"/>
- <system file="Armament"/>
+ <!--<system file="Armament"/>-->
  <system file="Canopy"/>
  <system file="Particles"/>
  <system file="fuel"/>
@@ -519,8 +519,8 @@
             <independentVar lookup="row">aero/alpha-rad</independentVar>
             <tableData>
               -0.20 -0.620
-               0.00  0.007
-               0.36  0.690
+               0.00  0.010
+               0.30  0.740
                0.60  0.448
             </tableData>
           </table>

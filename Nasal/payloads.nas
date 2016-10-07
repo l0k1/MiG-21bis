@@ -94,9 +94,9 @@ input = {
 };
 
 var pos_arm = {
-	new: func(long_name, weight, type = "missile", ammo_count = 0) {
+	new: func(brevity, weight, type = "missile", ammo_count = 0) {
 		var m = {parents:[pos_arm]};
-		m.long_name = long_name;
+		m.brevity = brevity;
 		m.weight = weight;
 		m.type = type;
 		m.ammo_count = ammo_count;
@@ -105,6 +105,8 @@ var pos_arm = {
 };
 
 var payloads = {
+	#payload format is:
+	#name: pos_arm.new(brevity code, weight, type (optional), ammo count (optional)
 	"none":					pos_arm.new("none",0,"none"),
 	"R-60":					pos_arm.new("R-60",960),
 	"FAB-250":				pos_arm.new("FAB-250",520),
@@ -130,7 +132,7 @@ var update_loop = func {
 				if(armament.AIM.active[i] != nil and armament.AIM.active[i].type != selected) {
 					armament.AIM.active[i].del();
 				}
-				if(armament.AIM.new(i, selected, payloads[selected].long_name) == -1 and armament.AIM.active[i].status == MISSILE_FLYING) {
+				if(armament.AIM.new(i, selected, payloads[selected].brevity) == -1 and armament.AIM.active[i].status == MISSILE_FLYING) {
 					setprop("controls/armament/station["~(i+1)~"]/released", TRUE);
 					setprop("payload/weight["~ (i) ~"]/selected", "none");
 				}
@@ -272,7 +274,8 @@ var missile_release = func(pylon) {
 			var callsign = armament.AIM.active[pylon].callsign;
 			var brevity = armament.AIM.active[pylon].brevity;
 			armament.AIM.active[pylon].release();
-
+			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+			setprop("payload/weight["~(pylon)~"]/selected", "none");
 			var phrase = brevity ~ " at: " ~ callsign;
 			if (getprop("payload/armament/msg")) {
 				armament.defeatSpamFilter(phrase);

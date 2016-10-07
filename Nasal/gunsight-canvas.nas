@@ -4,7 +4,7 @@ var fixednetswitch = "/controls/armament/gunsight/fixed-net-power-switch";
 var redpath = "/controls/armament/gunsight/red";
 var bluepath = "/controls/armament/gunsight/blue";
 var greenpath = "/controls/armament/gunsight/green";
-var alphapath = "/controls/armament/gunsight/fixed-net-brightness-knob";
+var fixed_net_alphapath = "/controls/armament/gunsight/fixed-net-brightness-knob";
 var fontsizepath = "/controls/armament/gunsight/font-size";
 var linewidthpath = "/controls/armament/gunsight/thickness";
 var viewX = "/sim/current-view/x-offset-m";
@@ -50,18 +50,24 @@ var gun_sight = {
 		var dR = m.getColor(redpath);
 		var dG = m.getColor(greenpath);
 		var dB = m.getColor(bluepath);
-		var dA = getprop(alphapath);
+		var dA = getprop(fixed_net_alphapath);
 		var fS = getprop(fontsizepath);	#font size
 		var lW = getprop(linewidthpath);		#line width
 	
 		m.gunsight.addPlacement(placement);
 		m.gunsight.setColorBackground(0,0,0,0);
 
-		#shouldn't've used an array. should've used getChildren properly. will fix eventually.
+		
+		
+		############################################################
+		## GUNSIGHT CANVAS + LISTENERS ####################################
+		############################################################
+		
+		#shouldn't've used an array. should've used getChildren properly. will fix eventually. maybe.
 		
 		m.gsight = m.gunsight.createGroup();
 		m.gschild = [];
-		m.centers = [];
+		m.fixed_net_centers = [];
 		
 		append(m.gschild, m.gsight.createChild("path", "straights")
 			.setColor(dR,dG,dB,dA)
@@ -171,28 +177,135 @@ var gun_sight = {
 			.setStrokeDashArray([40,40,40,40,40,40,40,147,40,40,40,40,40,40,40]));
 		
 		for (var i = 0; i < size(m.gschild); i += 1 ) {
-			append(m.centers, m.gschild[i].getCenter());
+			append(m.fixed_net_centers, m.gschild[i].getCenter());
 		}
 		
-		setlistener(fixednetswitch,func { m.power() });
-		
+		setlistener(fixednetswitch,func { m.fixed_net_power() });
+				
+		m.fixed_net_power();
 		setlistener(viewX,func { m.updateXY() });
 		setlistener(viewY,func { m.updateXY() });
+		
+		############################################################
+		## PIPPER CANVAS + LISTENERS ######################################
+		############################################################
+		
+		m.pipper = m.gunsight.createGroup();
+		
+		m.pipper.createChild("path", "center")
+			.setColor(dR,dG,dB,dA)
+			.setStrokeLineWidth(lW * 2)
+			.setStrokeLineCap("round")
+			.moveTo(-7,0)
+			.arcSmallCW(7,7,0,14,0)
+			.arcSmallCW(7,7,0,-14,0)
+			.setTranslation(512,512);
+			
+		m.pipper.createChild("path","diamond 270")
+			.setColor(dR,dG,dB,dA)
+			.setStrokeLineWidth(lW * 0.95)
+			.setStrokeLineCap("round")
+			.line(-24,9)
+			.line(-6,-9)
+			.line(6,-9)
+			.line(24,9)
+			.setTranslation(412,512)
+			.setRotation(0,0);
+			
+		m.pipper.createChild("path","diamond 335")
+			.setColor(dR,dG,dB,dA)
+			.setStrokeLineWidth(lW * 0.95)
+			.setStrokeLineCap("round")
+			.line(-24,9)
+			.line(-6,-9)
+			.line(6,-9)
+			.line(24,9)
+			.setTranslation(441,441)
+			.setRotation(45 * D2R,0);
+			
+		m.pipper.createChild("path","diamond 360")
+			.setColor(dR,dG,dB,dA)
+			.setStrokeLineWidth(lW * 0.95)
+			.setStrokeLineCap("round")
+			.line(-24,9)
+			.line(-6,-9)
+			.line(6,-9)
+			.line(24,9)
+			.setTranslation(512,412)
+			.setRotation(90 * D2R,0);
+			
+		m.pipper.createChild("path","diamond 45")
+			.setColor(dR,dG,dB,dA)
+			.setStrokeLineWidth(lW * 0.95)
+			.setStrokeLineCap("round")
+			.line(-24,9)
+			.line(-6,-9)
+			.line(6,-9)
+			.line(24,9)
+			.setTranslation(583,441)
+			.setRotation(135 * D2R,0);
+			
+		m.pipper.createChild("path","diamond 90")
+			.setColor(dR,dG,dB,dA)
+			.setStrokeLineWidth(lW * 0.95)
+			.setStrokeLineCap("round")
+			.line(-24,9)
+			.line(-6,-9)
+			.line(6,-9)
+			.line(24,9)
+			.setTranslation(612,512)
+			.setRotation(180 * D2R,0);
+			
+		m.pipper.createChild("path","diamond 135")
+			.setColor(dR,dG,dB,dA)
+			.setStrokeLineWidth(lW * 0.95)
+			.setStrokeLineCap("round")
+			.line(-24,9)
+			.line(-6,-9)
+			.line(6,-9)
+			.line(24,9)
+			.setTranslation(583,583)
+			.setRotation(235 * D2R,0);
+			
+		m.pipper.createChild("path","diamond 180")
+			.setColor(dR,dG,dB,dA)
+			.setStrokeLineWidth(lW * 0.95)
+			.setStrokeLineCap("round")
+			.line(-24,9)
+			.line(-6,-9)
+			.line(6,-9)
+			.line(24,9)
+			.setTranslation(512,612)
+			.setRotation(270 * D2R,0);
+			
+		m.pipper.createChild("path","diamond 235")
+			.setColor(dR,dG,dB,dA)
+			.setStrokeLineWidth(lW * 0.95)
+			.setStrokeLineCap("round")
+			.line(-24,9)
+			.line(-6,-9)
+			.line(6,-9)
+			.line(24,9)
+			.setTranslation(441,583)
+			.setRotation(335 * D2R,0);
+		
+		############################################################
+		## JOINT LISTENERS ##############################################
+		############################################################
 		
 		setlistener(redpath,func { m.updateColor() });
 		setlistener(bluepath,func { m.updateColor() });
 		setlistener(greenpath,func { m.updateColor() });
-		setlistener(alphapath,func { m.updateColor() });
+		setlistener(fixed_net_alphapath,func { m.updateColor() });
 		
 		setlistener(linewidthpath,func { m.updateWidth() });
 		
-		m.power();
 		m.update();
 	},
 	update: func() {
 		settimer(func { me.update(); }, 100); #no auto updates yet, will be when the pipper gets implemented tho
 	},
-	power: func() {
+	fixed_net_power: func() {
 		var switch_state = getprop(fixednetswitch);
 		if ( switch_state == 1 ) {
 			for (var i = 0; i < size(me.gschild); i += 1 ) {
@@ -219,14 +332,14 @@ var gun_sight = {
 		var changeViewY = (startViewY-getprop(viewY))*ghosty;
 	
 		for (var i = 0; i < size(me.gschild); i += 1 ) {
-			me.gschild[i].setTranslation(-1 * (me.centers[i][0]+changeViewX)+s_win,me.centers[i][1]+changeViewY+s_ele);
+			me.gschild[i].setTranslation(-1 * (me.fixed_net_centers[i][0]+changeViewX)+s_win,me.fixed_net_centers[i][1]+changeViewY+s_ele);
 		}
     },
 	updateColor: func() {
 		var dR = me.getColor(redpath);
 		var dB = me.getColor(bluepath);
 		var dG = me.getColor(greenpath);
-		var dA = getprop(alphapath);
+		var dA = getprop(fixed_net_alphapath);
 		for (var i = 0; i < size(me.gschild); i += 1 ) {
 			me.gschild[i].setColor(dR,dG,dB,dA);
 		}

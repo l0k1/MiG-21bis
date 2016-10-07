@@ -8,6 +8,7 @@ var lW = 4;		#line width
 var lock_bars_scale = "/controls/radar/lock-bars-scale";
 var lock_bars_pos = "/controls/radar/lock-bars-pos";
 var radar_mode = "/controls/radar/mode";
+var show_callsigns = "/controls/radar/panel/iff";
 
 var RADAR_BOTTOM_LIMIT = -30;
 var RADAR_TOP_LIMIT = 30;
@@ -346,6 +347,7 @@ var radar_screen = {
 		m.below_blip = [];
 		m.even_blip = [];
 		m.above_blip = [];
+		m.blip_text = [];
 		for(var i=0; i < m.no_blip; i = i+1) {
 			var b_blip = m.blips.createChild("path", "b_blip" ~ i)
 			.move(-30,0)
@@ -370,14 +372,21 @@ var radar_screen = {
 			.line(0,-60)
 			.setStrokeLineWidth(lW)
 			.setColor(dR, dG, dB);
+			
+			var blip_text = m.blips.createChild("text", "blip_text" ~ i)
+				.setFont("liberationFonts/LiberationMono-Regular.ttf")
+				.setColor(dR, dG, dB)
+				.setFontSize(fS);
 
 			b_blip.hide();
 			e_blip.hide();
 			a_blip.hide();
+			blip_text.hide();
 			
 			append(m.below_blip,b_blip);
 			append(m.even_blip,e_blip);
 			append(m.above_blip,a_blip);
+			append(m.blip_text,blip_text);
 		}
 		m.lock = m.radar_group.createChild("path") #probably will never use this
                .move(-40,0)
@@ -494,6 +503,22 @@ var radar_screen = {
 						me.below_blip[b_i].hide();
 						me.above_blip[b_i].hide();
 					}
+					if ( getprop(show_callsigns) == 1 ) {
+						#print("pixelX = " ~ pixelX);
+						if ( pixelX <= 506 ) {
+							me.blip_text[b_i].setTranslation(pixelX - 50, pixelY);
+							me.blip_text[b_i].setText(mp.get_Callsign());
+							me.blip_text[b_i].setAlignment("right-center");
+							me.blip_text[b_i].show();
+						} else {
+						me.blip_text[b_i].setTranslation(pixelX + 50, pixelY);
+							me.blip_text[b_i].setText(mp.get_Callsign());
+							me.blip_text[b_i].setAlignment("left-center");
+							me.blip_text[b_i].show();
+						}
+					} else {
+						me.blip_text[b_i].hide();
+					}
 					#if (locked == TRUE) {
 					#	pixelXL = pixelX;
 					#	pixelYL = pixelY;
@@ -511,6 +536,7 @@ var radar_screen = {
 				me.even_blip[b_i].hide();
 				me.below_blip[b_i].hide();
 				me.above_blip[b_i].hide();
+				me.blip_text[b_i].hide();
 			}
 			
 		} elsif ( mode == "locked-init" ) {
@@ -537,18 +563,19 @@ var radar_screen = {
 					setprop(radar_mode,"normal-init");
 					radar_logic.unlockTarget();
 				} else {
-					var ya_ang = dist_rad[2];
+					var ya_ang = dist_rad[2] * R2D;
 					#switch from an overhead view to a forward facing view.
 					#the blip will move according to angle, instead of distance
 					#ar pixelX = ((xa_rad * R2D / RADAR_LEFT_LIMIT) * -506) + 506; #506 is half width of radar screen
 					var pixelX = ((dist_rad[1] * R2D / 15) * 506) + 506; #506 is half width of radar screen, and 180 is starting from the left, go over this much
 					#var pixelY = ((ya_ang * R2D) / 5) * 425 + 100; #425 is half vertically, 100 is starting from the top
-					var pixelY = ((ya_ang * R2D / 15) * -425) + 425; #506 is half width of radar screen
+					var pixelY = ((ya_ang / 15) * -425) + 425; #506 is half width of radar screen
 					pixelX = clamp(pixelX, 180, 836);
 					pixelY = clamp(pixelY, 100,950);
 					
 					#print("X,Y: " ~ pixelX ~ "," ~ pixelY);
 					#print("pixel blip ("~pixelX~", "~pixelY);
+					print(ya_ang);
 					if ( ya_ang > 1.5 ) {
 						me.above_blip[1].setTranslation(pixelX, pixelY);
 						me.above_blip[1].show();
@@ -564,6 +591,22 @@ var radar_screen = {
 						me.even_blip[1].show();
 						me.below_blip[1].hide();
 						me.above_blip[1].hide();
+					}
+					if ( getprop(show_callsigns) == 1 ) {
+						#print("pixelX = " ~ pixelX);
+						if ( pixelX <= 506 ) {
+							me.blip_text[1].setTranslation(pixelX - 50, pixelY);
+							me.blip_text[1].setText(locked_target.get_Callsign());
+							me.blip_text[1].setAlignment("right-center");
+							me.blip_text[1].show();
+						} else {
+							me.blip_text[1].setTranslation(pixelX + 50, pixelY);
+							me.blip_text[1].setText(locked_target.get_Callsign());
+							me.blip_text[1].setAlignment("left-center");
+							me.blip_text[1].show();
+						}
+					} else {
+						me.blip_text[1].hide();
 					}
 				}
 			} else {

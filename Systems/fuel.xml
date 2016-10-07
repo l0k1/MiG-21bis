@@ -70,7 +70,7 @@
 			<default value="0"/>
 			<test logic="AND" value="-15">
 				propulsion/tank[3]/contents-lbs gt 1
-				propulsion/tank[3]/contents-lbs != propulsion/tank[4]/contents-lbs
+				propulsion/tank[3]/contents-lbs gt propulsion/tank[4]/contents-lbs
 				propulsion/tank[4]/contents-lbs lt 510
 			</test>
 			<output>propulsion/tank[3]/levelling-flow-to-4</output>
@@ -80,7 +80,7 @@
 			<default value="0"/>
 			<test logic="AND" value="-15">
 				propulsion/tank[4]/contents-lbs gt 1
-				propulsion/tank[4]/contents-lbs != propulsion/tank[3]/contents-lbs
+				propulsion/tank[4]/contents-lbs gt propulsion/tank[3]/contents-lbs
 				propulsion/tank[3]/contents-lbs lt 510
 			</test>
 			<output>propulsion/tank[4]/levelling-flow-to-3</output>
@@ -90,7 +90,7 @@
 			<default value="0"/>
 			<test logic="AND" value="-15">
 				propulsion/tank[4]/contents-lbs gt 1
-				propulsion/tank[4]/contents-lbs != propulsion/tank[5]/contents-lbs
+				propulsion/tank[4]/contents-lbs gt propulsion/tank[5]/contents-lbs
 				propulsion/tank[5]/contents-lbs lt 597
 			</test>
 			<output>propulsion/tank[4]/levelling-flow-to-5</output>
@@ -100,7 +100,7 @@
 			<default value="0"/>
 			<test logic="AND" value="-15">
 				propulsion/tank[5]/contents-lbs gt 1
-				propulsion/tank[5]/contents-lbs != propulsion/tank[4]/contents-lbs
+				propulsion/tank[5]/contents-lbs gt propulsion/tank[4]/contents-lbs
 				propulsion/tank[4]/contents-lbs lt 510
 			</test>
 			<output>propulsion/tank[5]/levelling-flow-to-4</output>
@@ -144,7 +144,7 @@
 			<default value="0"/>
 			<test logic="AND" value="-15">
 				propulsion/tank[10]/contents-lbs lt 1
-				propulsion/tank[12]/contents-lbs eq 1
+				propulsion/tank[12]/contents-lbs gt 1
 				propulsion/tank[1]/contents-lbs lt 817
 			</test>
 			<output>propulsion/tank[12]/pumping-flow-to-1</output>
