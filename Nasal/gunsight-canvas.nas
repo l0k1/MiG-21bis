@@ -1,6 +1,8 @@
 #todo: make sure we have enough voltage. update me.power() for that.
 
 var fixednetswitch = "/controls/armament/gunsight/fixed-net-power-switch";
+var pipperpowerswitch = "/controls/armament/gunsight/pipper-power-switch";
+var pipperscale = "/controls/armament/gunsight/pipper-scale";
 var redpath = "/controls/armament/gunsight/red";
 var bluepath = "/controls/armament/gunsight/blue";
 var greenpath = "/controls/armament/gunsight/green";
@@ -62,8 +64,6 @@ var gun_sight = {
 		############################################################
 		## GUNSIGHT CANVAS + LISTENERS ####################################
 		############################################################
-		
-		#shouldn't've used an array. should've used getChildren properly. will fix eventually. maybe.
 		
 		m.gsight = m.gunsight.createGroup();
 		m.gschild = [];
@@ -183,8 +183,8 @@ var gun_sight = {
 		setlistener(fixednetswitch,func { m.fixed_net_power() });
 				
 		m.fixed_net_power();
-		setlistener(viewX,func { m.updateXY() });
-		setlistener(viewY,func { m.updateXY() });
+		setlistener(viewX,func { m.fixednet_updateXY() });
+		setlistener(viewY,func { m.fixednet_updateXY() });
 		
 		############################################################
 		## PIPPER CANVAS + LISTENERS ######################################
@@ -192,16 +192,18 @@ var gun_sight = {
 		
 		m.pipper = m.gunsight.createGroup();
 		
-		m.pipper.createChild("path", "center")
+		m.pipper_elems = [];
+		
+		append(m.pipper_elems, m.pipper.createChild("path", "center")
 			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW * 2)
 			.setStrokeLineCap("round")
 			.moveTo(-7,0)
 			.arcSmallCW(7,7,0,14,0)
 			.arcSmallCW(7,7,0,-14,0)
-			.setTranslation(512,512);
+			.setTranslation(512,512));
 			
-		m.pipper.createChild("path","diamond 270")
+		append(m.pipper_elems, m.pipper.createChild("path","diamond 270")
 			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
@@ -210,9 +212,9 @@ var gun_sight = {
 			.line(6,-9)
 			.line(24,9)
 			.setTranslation(412,512)
-			.setRotation(0,0);
+			.setRotation(0,0));
 			
-		m.pipper.createChild("path","diamond 335")
+		append(m.pipper_elems, m.pipper.createChild("path","diamond 315")
 			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
@@ -221,9 +223,9 @@ var gun_sight = {
 			.line(6,-9)
 			.line(24,9)
 			.setTranslation(441,441)
-			.setRotation(45 * D2R,0);
+			.setRotation(45 * D2R,0));
 			
-		m.pipper.createChild("path","diamond 360")
+		append(m.pipper_elems, m.pipper.createChild("path","diamond 360")
 			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
@@ -232,9 +234,9 @@ var gun_sight = {
 			.line(6,-9)
 			.line(24,9)
 			.setTranslation(512,412)
-			.setRotation(90 * D2R,0);
+			.setRotation(90 * D2R,0));
 			
-		m.pipper.createChild("path","diamond 45")
+		append(m.pipper_elems, m.pipper.createChild("path","diamond 45")
 			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
@@ -243,9 +245,9 @@ var gun_sight = {
 			.line(6,-9)
 			.line(24,9)
 			.setTranslation(583,441)
-			.setRotation(135 * D2R,0);
+			.setRotation(135 * D2R,0));
 			
-		m.pipper.createChild("path","diamond 90")
+		append(m.pipper_elems, m.pipper.createChild("path","diamond 90")
 			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
@@ -254,9 +256,9 @@ var gun_sight = {
 			.line(6,-9)
 			.line(24,9)
 			.setTranslation(612,512)
-			.setRotation(180 * D2R,0);
+			.setRotation(180 * D2R,0));
 			
-		m.pipper.createChild("path","diamond 135")
+		append(m.pipper_elems, m.pipper.createChild("path","diamond 135")
 			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
@@ -265,9 +267,9 @@ var gun_sight = {
 			.line(6,-9)
 			.line(24,9)
 			.setTranslation(583,583)
-			.setRotation(235 * D2R,0);
+			.setRotation(225 * D2R,0));
 			
-		m.pipper.createChild("path","diamond 180")
+		append(m.pipper_elems, m.pipper.createChild("path","diamond 180")
 			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
@@ -276,9 +278,9 @@ var gun_sight = {
 			.line(6,-9)
 			.line(24,9)
 			.setTranslation(512,612)
-			.setRotation(270 * D2R,0);
+			.setRotation(270 * D2R,0));
 			
-		m.pipper.createChild("path","diamond 235")
+		append(m.pipper_elems, m.pipper.createChild("path","diamond 225")
 			.setColor(dR,dG,dB,dA)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
@@ -287,7 +289,14 @@ var gun_sight = {
 			.line(6,-9)
 			.line(24,9)
 			.setTranslation(441,583)
-			.setRotation(335 * D2R,0);
+			.setRotation(315 * D2R,0));
+			
+		m.pipper_center = [512,512];
+			
+		setlistener(pipperpowerswitch, func { m.pipper_power(); } );
+		setlistener(pipperscale, func { m.pipper_move(); } );
+		
+		m.pipper_power();
 		
 		############################################################
 		## JOINT LISTENERS ##############################################
@@ -303,7 +312,8 @@ var gun_sight = {
 		m.update();
 	},
 	update: func() {
-		settimer(func { me.update(); }, 100); #no auto updates yet, will be when the pipper gets implemented tho
+		me.pipper_move();
+		settimer(func { me.update(); }, 0);
 	},
 	fixed_net_power: func() {
 		var switch_state = getprop(fixednetswitch);
@@ -317,7 +327,7 @@ var gun_sight = {
 			}	
 		}
 	},
-	updateXY: func() {
+	fixednet_updateXY: func() {
 		
 		var curViewX = getprop(viewX);
 		var curViewY = getprop(viewY);
@@ -332,9 +342,35 @@ var gun_sight = {
 		var changeViewY = (startViewY-getprop(viewY))*ghosty;
 	
 		for (var i = 0; i < size(me.gschild); i += 1 ) {
-			me.gschild[i].setTranslation(-1 * (me.fixed_net_centers[i][0]+changeViewX)+s_win,me.fixed_net_centers[i][1]+changeViewY+s_ele);
+			me.gschild[i].setTranslation(-1 * changeViewX + s_win, changeViewY + s_ele);
 		}
     },
+	
+	pipper_power: func() {
+		var switch_state = getprop(pipperpowerswitch);
+		if ( switch_state == 1 ) {
+			foreach ( var elem; me.pipper.getChildren() ) {
+				elem.show();
+			}
+		} else {
+		foreach ( var elem; me.pipper.getChildren() ) {
+				elem.hide();
+			}
+		}
+	},
+	
+	pipper_move: func() {
+		var scale = getprop(pipperscale);
+		for ( var i = 0; i < size(me.pipper_elems); i += 1 ) {
+			#only translate the outside elements.
+			if ( i != 0 ) {
+				var angle = (180 - (45 * (i - 1))) * D2R;
+				me.pipper_elems[i].setTranslation(me.pipper_center[0] + scale * math.cos(angle), me.pipper_center[1] + -1 * scale * math.sin(angle));
+			}
+		}
+	},
+	
+	
 	updateColor: func() {
 		var dR = me.getColor(redpath);
 		var dB = me.getColor(bluepath);
