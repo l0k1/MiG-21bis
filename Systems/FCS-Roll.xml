@@ -16,8 +16,8 @@
    <aerosurface_scale name="Left Aileron Control">
       <input>fcs/roll-trim-sum</input>
       <range>
-        <min> -0.35 </min>
-        <max>  0.35 </max>
+        <min> -0.349 </min>
+        <max>  0.349 </max>
       </range>
       <output>fcs/left-aileron-pos-rad</output>
    </aerosurface_scale>
@@ -25,8 +25,8 @@
    <aerosurface_scale name="Right Aileron Control">
       <input>fcs/roll-trim-sum</input>
       <range>
-        <min> -0.35 </min>
-        <max>  0.35 </max>
+        <min> -0.349 </min>
+        <max>  0.349 </max>
       </range>
       <output>fcs/right-aileron-pos-rad</output>
    </aerosurface_scale>
@@ -34,8 +34,8 @@
    <aerosurface_scale name="left aileron normalized">
       <input>fcs/left-aileron-pos-rad</input>
       <domain>
-        <min>-0.35</min>
-        <max> 0.35</max>
+        <min>-0.349</min>
+        <max> 0.349</max>
       </domain>
       <range>
         <min>-1</min>
@@ -47,8 +47,8 @@
    <aerosurface_scale name="right aileron normalized">
       <input>fcs/right-aileron-pos-rad</input>
       <domain>
-        <min>-0.35</min>
-        <max> 0.35</max>
+        <min>-0.349</min>
+        <max> 0.349</max>
       </domain>
       <range>
         <min>-1</min>

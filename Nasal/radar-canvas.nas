@@ -1,3 +1,6 @@
+# todo: ground clutter - not sure on best way to do this. rapidly moving circles? might be code intensive.
+# todo: fixed-beam, side-compensation, and low-alt switch operation (i.e. get radar angular limits working)
+
 var dR = 0.823; #display red value
 var dG = 0.902; #display green value
 var dB = 0.118; #display blue value

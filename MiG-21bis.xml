@@ -459,7 +459,7 @@
 
  <flight_control name="none"/>
 
- <aerodynamics>
+<aerodynamics>
 
         <function name="aero/function/kCDge">
             <description>Change_in_drag_due_to_ground_effect</description>
@@ -508,9 +508,9 @@
 
 
   <axis name="LIFT">
-
     <function name="aero/coefficient/CLalpha">
-      <description>Lift_due_to_alpha</description>
+      <description>Lift_due_to_alpha</description> -->
+	  <!-- source: http://ethesis.nitrkl.ac.in/6406/1/E-97.pdf maybe-->
       <product>
           <property>aero/qbar-psf</property>
           <property>metrics/Sw-sqft</property>
@@ -519,8 +519,8 @@
             <independentVar lookup="row">aero/alpha-rad</independentVar>
             <tableData>
               -0.20 -0.620
-               0.00  0.010
-               0.30  0.740
+               0.00  0.009
+               0.32  0.740
                0.60  0.448
             </tableData>
           </table>

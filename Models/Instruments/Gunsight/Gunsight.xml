@@ -106,7 +106,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>switchPipModeSelect</object-name>
+		<object-name>switchPipperMode</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -119,7 +119,7 @@
 	</animation>
 	
 	<animation>
-		<object-name>switchPipModeSelect</object-name>
+		<object-name>switchPipperMode</object-name>
 		<type>rotate</type>
 		<property>controls/armament/gunsight/pip-mode-select-switch</property>
 		<factor>50</factor>
@@ -170,22 +170,22 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>switchPipperMode</object-name>
+		<object-name>switchPipperAccuracy</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/armament/gunsight/pipper-mode-switch</property>
+				<property>controls/armament/gunsight/pipper-accuracy-switch</property>
 			</binding>
 		</action>
 	</animation>
 	
 	<animation>
-		<object-name>switchPipperMode</object-name>
+		<object-name>switchPipperAccuracy</object-name>
 		<type>rotate</type>
-		<property>controls/armament/gunsight/pipper-mode-switch</property>
+		<property>controls/armament/gunsight/pipper-accuracy-switch</property>
 		<factor>70</factor>
 		<offset-deg>0</offset-deg>
 		<center>

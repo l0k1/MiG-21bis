@@ -1,4 +1,5 @@
 #to update - radarRange
+#todo: update radar_bottom_limit, ... etc.
 
 var FALSE = 0;
 var TRUE = 1;

@@ -12,15 +12,6 @@
         <max>  1 </max>
       </clipto>
    </summer>
-
-   <aerosurface_scale name="Elevator Control">
-      <input>fcs/pitch-gearing</input>
-      <range>
-        <min> -0.35 </min>
-        <max>  0.30 </max>
-      </range>
-      <output>fcs/elevator-pos-rad</output>
-   </aerosurface_scale>
    
       <fcs_function name="pitch-gearing">
 		<function>
@@ -39,11 +30,20 @@
 		</function>
 	</fcs_function>
 
+   <aerosurface_scale name="Elevator Control">
+      <input>fcs/pitch-gearing</input>
+      <range>
+        <min> -0.287 </min>
+        <max>  0.122 </max>
+      </range>
+      <output>fcs/elevator-pos-rad</output>
+   </aerosurface_scale>
+
    <aerosurface_scale name="elevator normalized">
       <input>fcs/elevator-pos-rad</input>
       <domain>
-        <min>-0.35</min>
-        <max> 0.35</max>
+        <min>-0.287</min>
+        <max> 0.122</max>
       </domain>
       <range>
         <min>-1</min>

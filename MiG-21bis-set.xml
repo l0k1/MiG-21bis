@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-
+	<aax type="int">0</aax>
+	<aay type="int">0</aay>
 	<sim>
 
 		<!-- Info -->
@@ -247,14 +248,13 @@
 				<red type="int">237</red>
 				<blue type="int">52</blue>
 				<green type="int">193</green>
-				<thickness type="int">8</thickness>
+				<thickness type="int">6</thickness>
 				<font-size type="int">60</font-size>
 				<!--gunsight switches and knobbins-->
 				<gun-missile-switch type="int">0</gun-missile-switch>
-				<pip-mode-select-switch type="int">0</pip-mode-select-switch>
+				<pipper-mode-select-switch type="int">0</pipper-mode-select-switch>
 				<auto-man-switch type="int">0</auto-man-switch>
-				<pipper-mode-switch type="int">0</pipper-mode-switch>
-				<fixed-net-power-switch type="int">0</fixed-net-power-switch>
+				<pipper-accuracy-switch type="int">0</pipper-accuracy-switch>
 				<pipper-power-switch type="int">0</pipper-power-switch>
 				<target-size-knob type="float">0</target-size-knob>
 				<pipper-angular-correction-knob type="float">0</pipper-angular-correction-knob>

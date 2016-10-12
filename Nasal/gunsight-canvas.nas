@@ -1,8 +1,7 @@
 #todo: make sure we have enough voltage. update me.power() for that.
+#todo: the other fixed gunsight thingy. scale-sight?
 
 var fixednetswitch = "/controls/armament/gunsight/fixed-net-power-switch";
-var pipperpowerswitch = "/controls/armament/gunsight/pipper-power-switch";
-var pipperscale = "/controls/armament/gunsight/pipper-scale";
 var redpath = "/controls/armament/gunsight/red";
 var bluepath = "/controls/armament/gunsight/blue";
 var greenpath = "/controls/armament/gunsight/green";
@@ -17,6 +16,20 @@ var ghosting_y = "/controls/armament/gunsight/ghosting-y";
 var scaling = "/controls/armament/gunsight/scaling";
 var sight_align_elevation = "/controls/armament/gunsight/elevation";
 var sight_align_windage = "/controls/armament/gunsight/windage";
+
+#pipper modes and info
+var pipperpowerswitch = "/controls/armament/gunsight/pipper-power-switch";
+var pipperscale = "/controls/armament/gunsight/pipper-scale";
+var pipperaccuracy = "/controls/armament/gunsight/pipper-accuracy-switch";
+var pippergunmissile = "/controls/armament/gunsight/gun-missile-switch";
+var pippermode = "/controls/armament/gunsight/pipper-mode-select-switch";
+var targetsizeknob = "/controls/armament/gunsight/target-size-knob";
+var pipperangularcorrection = "/controls/armament/gunsight/pipper-angular-correction-knob";
+var pipperbrightness = "/controls/armament/gunsight/pipper-brightness-knob";
+var pipperautomanual = "/controls/armament/gunsight/auto-man-switch";
+
+var pipper_scale_degree_per_pixel = 0.018229508; # amount of degrees per pixel of pipperscale
+var pipper_translation_degree_per_pixel = 0.009989712; # degrees to translate the pipper with
 
 var startViewX = getprop(viewX);
 var startViewY = getprop(viewY);
@@ -52,7 +65,8 @@ var gun_sight = {
 		var dR = m.getColor(redpath);
 		var dG = m.getColor(greenpath);
 		var dB = m.getColor(bluepath);
-		var dA = getprop(fixed_net_alphapath);
+		var dAf = getprop(fixed_net_alphapath);
+		var dAp = getprop(pipperbrightness);
 		var fS = getprop(fontsizepath);	#font size
 		var lW = getprop(linewidthpath);		#line width
 	
@@ -70,7 +84,7 @@ var gun_sight = {
 		m.fixed_net_centers = [];
 		
 		append(m.gschild, m.gsight.createChild("path", "straights")
-			.setColor(dR,dG,dB,dA)
+			.setColor(dR,dG,dB,dAf)
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
 			.moveTo(512,326)
@@ -161,7 +175,7 @@ var gun_sight = {
 			.lineTo(519,622));
 			
 		append(m.gschild, m.gsight.createChild("path", "inarc")
-			.setColor(dR,dG,dB,dA)
+			.setColor(dR,dG,dB,dAf)
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
 			.moveTo(259,479)
@@ -169,7 +183,7 @@ var gun_sight = {
 			.setStrokeDashArray([69,38,38,38,38,38,38,38,38,116,38,38,38,38,38,38,38,38,69])); # curve is 868 pixels 362
 			
 		append(m.gschild, m.gsight.createChild("path", "outarc")
-			.setColor(dR,dG,dB,dA)
+			.setColor(dR,dG,dB,dAf)
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
 			.moveTo(195,782)
@@ -183,8 +197,6 @@ var gun_sight = {
 		setlistener(fixednetswitch,func { m.fixed_net_power() });
 				
 		m.fixed_net_power();
-		setlistener(viewX,func { m.fixednet_updateXY() });
-		setlistener(viewY,func { m.fixednet_updateXY() });
 		
 		############################################################
 		## PIPPER CANVAS + LISTENERS ######################################
@@ -195,16 +207,18 @@ var gun_sight = {
 		m.pipper_elems = [];
 		
 		append(m.pipper_elems, m.pipper.createChild("path", "center")
-			.setColor(dR,dG,dB,dA)
-			.setStrokeLineWidth(lW * 2)
+			.setColor(dR,dG,dB,dAp)
+			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
 			.moveTo(-7,0)
 			.arcSmallCW(7,7,0,14,0)
 			.arcSmallCW(7,7,0,-14,0)
-			.setTranslation(512,512));
+			.setTranslation(512,240)
+			.setColorFill(dR,dG,dB,dAp));
+			
 			
 		append(m.pipper_elems, m.pipper.createChild("path","diamond 270")
-			.setColor(dR,dG,dB,dA)
+			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
 			.line(-24,9)
@@ -215,7 +229,7 @@ var gun_sight = {
 			.setRotation(0,0));
 			
 		append(m.pipper_elems, m.pipper.createChild("path","diamond 315")
-			.setColor(dR,dG,dB,dA)
+			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
 			.line(-24,9)
@@ -226,7 +240,7 @@ var gun_sight = {
 			.setRotation(45 * D2R,0));
 			
 		append(m.pipper_elems, m.pipper.createChild("path","diamond 360")
-			.setColor(dR,dG,dB,dA)
+			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
 			.line(-24,9)
@@ -237,7 +251,7 @@ var gun_sight = {
 			.setRotation(90 * D2R,0));
 			
 		append(m.pipper_elems, m.pipper.createChild("path","diamond 45")
-			.setColor(dR,dG,dB,dA)
+			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
 			.line(-24,9)
@@ -248,7 +262,7 @@ var gun_sight = {
 			.setRotation(135 * D2R,0));
 			
 		append(m.pipper_elems, m.pipper.createChild("path","diamond 90")
-			.setColor(dR,dG,dB,dA)
+			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
 			.line(-24,9)
@@ -259,7 +273,7 @@ var gun_sight = {
 			.setRotation(180 * D2R,0));
 			
 		append(m.pipper_elems, m.pipper.createChild("path","diamond 135")
-			.setColor(dR,dG,dB,dA)
+			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
 			.line(-24,9)
@@ -270,7 +284,7 @@ var gun_sight = {
 			.setRotation(225 * D2R,0));
 			
 		append(m.pipper_elems, m.pipper.createChild("path","diamond 180")
-			.setColor(dR,dG,dB,dA)
+			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
 			.line(-24,9)
@@ -281,7 +295,7 @@ var gun_sight = {
 			.setRotation(270 * D2R,0));
 			
 		append(m.pipper_elems, m.pipper.createChild("path","diamond 225")
-			.setColor(dR,dG,dB,dA)
+			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
 			.line(-24,9)
@@ -291,7 +305,7 @@ var gun_sight = {
 			.setTranslation(441,583)
 			.setRotation(315 * D2R,0));
 			
-		m.pipper_center = [512,512];
+		m.pipper_center = [512,240];
 			
 		setlistener(pipperpowerswitch, func { m.pipper_power(); } );
 		setlistener(pipperscale, func { m.pipper_move(); } );
@@ -308,6 +322,11 @@ var gun_sight = {
 		setlistener(fixed_net_alphapath,func { m.updateColor() });
 		
 		setlistener(linewidthpath,func { m.updateWidth() });
+		
+		setlistener(viewX,func { m.fixednet_updateXY();
+											m.pipper_move();});
+		setlistener(viewY,func { m.fixednet_updateXY();
+											m.pipper_move();});
 		
 		m.update();
 	},
@@ -328,21 +347,16 @@ var gun_sight = {
 		}
 	},
 	fixednet_updateXY: func() {
-		
-		var curViewX = getprop(viewX);
-		var curViewY = getprop(viewY);
-		
-		var ghostx = getprop(ghosting_x);
-		var ghosty = getprop(ghosting_y);
-		
+		#sight alignment
 		var s_ele = getprop(sight_align_elevation);
 		var s_win = getprop(sight_align_windage);
 		
-		var changeViewX = (startViewX-getprop(viewX))*ghostx;
-		var changeViewY = (startViewY-getprop(viewY))*ghosty;
+		#ghosting
+		var changeViewX = -1 * (startViewX-getprop(viewX))*getprop(ghosting_x);
+		var changeViewY = (startViewY-getprop(viewY))*getprop(ghosting_y);
 	
-		for (var i = 0; i < size(me.gschild); i += 1 ) {
-			me.gschild[i].setTranslation(-1 * changeViewX + s_win, changeViewY + s_ele);
+		forindex ( var i; me.gschild ) {
+			me.gschild[i].setTranslation(changeViewX + s_win, changeViewY + s_ele);
 		}
     },
 	
@@ -360,12 +374,115 @@ var gun_sight = {
 	},
 	
 	pipper_move: func() {
+		#get current center coords
+		var pip_cen_x = me.pipper_center[0] + getprop("aax"); #use aax and aay for manual testing
+		var pip_cen_y = me.pipper_center[1] + getprop("aay");
+		
+		var pipper_adjust_x = 0;
+		var pipper_adjust_y = 0;
+		
+		#center element ghosting
+		var ghost_x = -1 * (startViewX-getprop(viewX))*getprop(ghosting_x);
+		var ghost_y = (startViewY-getprop(viewY))*getprop(ghosting_y);
+	
+		#calculate range to target
+		#if radar is on and locked, we can use that range. (auto)
+		#if radar is set to ground mode, we can calculate range ourselves (auto)
+		#otherwise, distance knob and pipper will be our friend. (manual)
+		var range = 10000; #decrease me for more accuracy.
+		if ( getprop(pipperautomanual) == 0 ) {
+			if ( getprop("/controls/radar/mode") == "locked" ) {
+				#this should only be valid if we have an IR lock too.
+				range = radar_logic.selection.get_polar()[0];
+			} elsif (  getprop("controls/radar/power-panel/fixed-beam") == 1 ) {
+				#find range here. radar locked to -1.5*. it's going to be code intensive-ish. =\
+				#orientation/heading-deg
+				#orientation/pitch-deg
+				#position/altitude-ft
+				#var my_coord = geo.aircraft_position();
+				pipper_adjust_y = -1.5; 
+				var test_coord = geo.Coord.new();
+				var altitude = getprop("/position/altitude-ft") * FT2M;
+				#the 1.5 in the below to variables is to account for the fact that the radar is offset 1.5* below aircraft nose.
+				var angle = (getprop("/orientation/pitch-deg") * D2R) - ((1.5 * math.cos(getprop("orientation/roll-deg") * D2R)) * D2R);
+				var heading = (getprop("/orientation/heading-deg") * D2R) - ((1.5 * math.sin(getprop("orientation/roll-deg") * D2R)) * D2R);
+				
+				#print("angle: " ~ (angle * R2D) ~ " | angle_corr: " ~ (1.5 * math.cos(getprop("orientation/roll-deg") * D2R)) ~ " | heading: " ~ (heading * R2D) ~ " | heading_corr: " ~ (1.5 * math.sin(getprop("orientation/roll-deg") * D2R)));
+				
+				var max_loop = 15;
+				var search_tolerance = 0.1;
+				# regarding the tolerance value:
+				# at shallow angles, we need high accuracy to get close to the correct range.
+				# this value is good for 10k meters, if your max range is shorter consider
+				# making this 0.01. if this fails, however, it will return a range of (max_r).
+				# at really low values ( less than 0.01), if you do not decrease the max range
+				# consider increasing iterations considerably.
+				# it might be good to vary the tolerance based on the pitch, but i'll leave that
+				# up to you.
+				
+				var max_range = range;
+				var min_range = 0;
+				
+				var i = 0; #for verification
+				
+				#print("my_lat: " ~ my_coord.lat() ~ " | my_lon: " ~ my_coord.lon());
+				
+				for ( i = 0; i < max_loop; i = i + 1 ) {
+					var mid = min_range + (max_range - min_range) / 2;
+					var alt_to_check = altitude - (mid * math.cos(angle + (90 * D2R)));
+					var distance_for_elev_calc = math.sin(angle + (90 * D2R)) * mid;
+					
+					test_coord = geo.aircraft_position().apply_course_distance(heading, distance_for_elev_calc);
+					#print("test_lat: " ~ test_coord.lat() ~ " | test_lon: " ~ test_coord.lon());
+					var elevation_at_coord = geo.elevation(test_coord.lat(), test_coord.lon());
+					
+					if ( math.abs(alt_to_check - elevation_at_coord) < search_tolerance ) {
+						range = mid;
+						break;
+					} elsif ( angle < 0 ) {
+						if ( alt_to_check < elevation_at_coord ) {
+							max_range = mid + 1;
+						} else {
+							min_range = mid - 1;
+						}
+					}else{
+						if ( alt_to_check < elevation_at_coord ) {
+							min_range = mid - 1
+						} else {
+							max_range = mid + 1;
+						}
+					}
+					#print("iter: " ~ i ~ " | mid: " ~ mid ~ " | min_range: " ~ min_range ~ " | max_range: " ~ max_range ~ " | alt_calc: " ~ alt_to_check ~ " | elev_at: " ~ elevation_at_coord ~ " | dist: " ~ distance_for_elev_calc);
+				}
+				#print("range: " ~ range ~ " | iters: " ~ i ~ " | alt: " ~ alt_to_check);
+			}
+			#calculate pipper scale based on range value
+			#currently assuming a width of 15m, need to fix when the correct instrument is implemented.
+			var ang_diam = 2 * (math.atan2(15,2*range));
+			var scale = math.clamp((ang_diam * R2D) / pipper_scale_degree_per_pixel,5,220);
+			setprop(pipperscale, scale);
+			#print("range: " ~ range ~ " | angular diamater: " ~ (ang_diam * R2D) ~ " | scale: " ~  scale);
+		} else {
+			#pipper calculation
+		}
+	
+	
+		#translate center to proper position
+		pipper_adjust_x = pipper_adjust_x / pipper_translation_degree_per_pixel;
+		pipper_adjust_y = -1 * pipper_adjust_y / pipper_translation_degree_per_pixel;
+		
+		pip_cen_x = pip_cen_x + ghost_x + pipper_adjust_x;
+		pip_cen_y = pip_cen_y + ghost_y + pipper_adjust_y;
+		
+		me.pipper_elems[0].setTranslation(pip_cen_x, pip_cen_y);
+		
+		#translate diamonds based on center element
 		var scale = getprop(pipperscale);
-		for ( var i = 0; i < size(me.pipper_elems); i += 1 ) {
+		forindex ( var i ; me.pipper_elems ) {
 			#only translate the outside elements.
 			if ( i != 0 ) {
 				var angle = (180 - (45 * (i - 1))) * D2R;
-				me.pipper_elems[i].setTranslation(me.pipper_center[0] + scale * math.cos(angle), me.pipper_center[1] + -1 * scale * math.sin(angle));
+				me.pipper_elems[i].setTranslation(pip_cen_x + scale * math.cos(angle), pip_cen_y + -1 * scale * math.sin(angle));
 			}
 		}
 	},
