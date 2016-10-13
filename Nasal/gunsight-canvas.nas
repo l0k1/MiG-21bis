@@ -28,6 +28,10 @@ var pipperangularcorrection = "/controls/armament/gunsight/pipper-angular-correc
 var pipperbrightness = "/controls/armament/gunsight/pipper-brightness-knob";
 var pipperautomanual = "/controls/armament/gunsight/auto-man-switch";
 
+var air_gnd_switch = "/controls/armament/panel/air-gnd-switch";
+var ir_sar_switch = "/controls/armament/panel/ir-sar-switch";
+var gun_missile_switch = "/controls/armament/gunsight/gun-missile-switch";
+
 var pipper_scale_degree_per_pixel = 0.018229508; # amount of degrees per pixel of pipperscale
 var pipper_translation_degree_per_pixel = 0.009989712; # degrees to translate the pipper with
 
@@ -390,80 +394,103 @@ var gun_sight = {
 		#if radar is set to ground mode, we can calculate range ourselves (auto)
 		#otherwise, distance knob and pipper will be our friend. (manual)
 		var range = 10000; #decrease me for more accuracy.
-		if ( getprop(pipperautomanual) == 0 ) {
-			if ( getprop("/controls/radar/mode") == "locked" ) {
-				#this should only be valid if we have an IR lock too.
-				range = radar_logic.selection.get_polar()[0];
-			} elsif (  getprop("controls/radar/power-panel/fixed-beam") == 1 ) {
-				#find range here. radar locked to -1.5*. it's going to be code intensive-ish. =\
-				#orientation/heading-deg
-				#orientation/pitch-deg
-				#position/altitude-ft
-				#var my_coord = geo.aircraft_position();
-				pipper_adjust_y = -1.5; 
-				var test_coord = geo.Coord.new();
-				var altitude = getprop("/position/altitude-ft") * FT2M;
-				#the 1.5 in the below to variables is to account for the fact that the radar is offset 1.5* below aircraft nose.
-				var angle = (getprop("/orientation/pitch-deg") * D2R) - ((1.5 * math.cos(getprop("orientation/roll-deg") * D2R)) * D2R);
-				var heading = (getprop("/orientation/heading-deg") * D2R) - ((1.5 * math.sin(getprop("orientation/roll-deg") * D2R)) * D2R);
+		
+		#calculate range and pipper location via fixed beam
+		
+		if ( getprop(ir_sar_switch) != 0 and getprop("controls/radar/power-panel/fixed-beam") == 1 and getprop(air_gnd_switch) == 0) {
+			#find range here. radar locked to -1.5*. it's going to be code intensive-ish. =\
+			#orientation/heading-deg
+			#orientation/pitch-deg
+			#position/altitude-ft
+			#var my_coord = geo.aircraft_position();
+			pipper_adjust_y = -1.5; 
+			var test_coord = geo.Coord.new();
+			var altitude = getprop("/position/altitude-ft") * FT2M;
+			#the 1.5 in the below to variables is to account for the fact that the radar is offset 1.5* below aircraft nose.
+			var angle = (getprop("/orientation/pitch-deg") * D2R) - ((1.5 * math.cos(getprop("orientation/roll-deg") * D2R)) * D2R);
+			var heading = (getprop("/orientation/heading-deg") * D2R) - ((1.5 * math.sin(getprop("orientation/roll-deg") * D2R)) * D2R);
+			
+			#print("angle: " ~ (angle * R2D) ~ " | angle_corr: " ~ (1.5 * math.cos(getprop("orientation/roll-deg") * D2R)) ~ " | heading: " ~ (heading * R2D) ~ " | heading_corr: " ~ (1.5 * math.sin(getprop("orientation/roll-deg") * D2R)));
+			
+			var max_loop = 15;
+			var search_tolerance = 0.1;
+			# regarding the tolerance value:
+			# at shallow angles, we need high accuracy to get close to the correct range.
+			# this value is good for 10k meters, if your max range is shorter consider
+			# making this 0.01. if this fails, however, it will return a range of (max_r).
+			# at really low values ( less than 0.01), if you do not decrease the max range
+			# consider increasing iterations considerably.
+			# it might be good to vary the tolerance based on the pitch, but i'll leave that
+			# up to you.
+			
+			var max_range = range;
+			var min_range = 0;
+			
+			var i = 0; #for verification
+			
+			#print("my_lat: " ~ my_coord.lat() ~ " | my_lon: " ~ my_coord.lon());
+			
+			for ( i = 0; i < max_loop; i = i + 1 ) {
+				var mid = min_range + (max_range - min_range) / 2;
+				var alt_to_check = altitude - (mid * math.cos(angle + (90 * D2R)));
+				var distance_for_elev_calc = math.sin(angle + (90 * D2R)) * mid;
 				
-				#print("angle: " ~ (angle * R2D) ~ " | angle_corr: " ~ (1.5 * math.cos(getprop("orientation/roll-deg") * D2R)) ~ " | heading: " ~ (heading * R2D) ~ " | heading_corr: " ~ (1.5 * math.sin(getprop("orientation/roll-deg") * D2R)));
+				test_coord = geo.aircraft_position().apply_course_distance(heading, distance_for_elev_calc);
+				#print("test_lat: " ~ test_coord.lat() ~ " | test_lon: " ~ test_coord.lon());
+				var elevation_at_coord = geo.elevation(test_coord.lat(), test_coord.lon());
 				
-				var max_loop = 15;
-				var search_tolerance = 0.1;
-				# regarding the tolerance value:
-				# at shallow angles, we need high accuracy to get close to the correct range.
-				# this value is good for 10k meters, if your max range is shorter consider
-				# making this 0.01. if this fails, however, it will return a range of (max_r).
-				# at really low values ( less than 0.01), if you do not decrease the max range
-				# consider increasing iterations considerably.
-				# it might be good to vary the tolerance based on the pitch, but i'll leave that
-				# up to you.
-				
-				var max_range = range;
-				var min_range = 0;
-				
-				var i = 0; #for verification
-				
-				#print("my_lat: " ~ my_coord.lat() ~ " | my_lon: " ~ my_coord.lon());
-				
-				for ( i = 0; i < max_loop; i = i + 1 ) {
-					var mid = min_range + (max_range - min_range) / 2;
-					var alt_to_check = altitude - (mid * math.cos(angle + (90 * D2R)));
-					var distance_for_elev_calc = math.sin(angle + (90 * D2R)) * mid;
-					
-					test_coord = geo.aircraft_position().apply_course_distance(heading, distance_for_elev_calc);
-					#print("test_lat: " ~ test_coord.lat() ~ " | test_lon: " ~ test_coord.lon());
-					var elevation_at_coord = geo.elevation(test_coord.lat(), test_coord.lon());
-					
-					if ( math.abs(alt_to_check - elevation_at_coord) < search_tolerance ) {
-						range = mid;
-						break;
-					} elsif ( angle < 0 ) {
-						if ( alt_to_check < elevation_at_coord ) {
-							max_range = mid + 1;
-						} else {
-							min_range = mid - 1;
-						}
-					}else{
-						if ( alt_to_check < elevation_at_coord ) {
-							min_range = mid - 1
-						} else {
-							max_range = mid + 1;
-						}
+				if ( math.abs(alt_to_check - elevation_at_coord) < search_tolerance ) {
+					range = mid;
+					break;
+				} elsif ( angle < 0 ) {
+					if ( alt_to_check < elevation_at_coord ) {
+						max_range = mid + 1;
+					} else {
+						min_range = mid - 1;
 					}
-					#print("iter: " ~ i ~ " | mid: " ~ mid ~ " | min_range: " ~ min_range ~ " | max_range: " ~ max_range ~ " | alt_calc: " ~ alt_to_check ~ " | elev_at: " ~ elevation_at_coord ~ " | dist: " ~ distance_for_elev_calc);
+				}else{
+					if ( alt_to_check < elevation_at_coord ) {
+						min_range = mid - 1
+					} else {
+						max_range = mid + 1;
+					}
 				}
-				#print("range: " ~ range ~ " | iters: " ~ i ~ " | alt: " ~ alt_to_check);
+				#print("iter: " ~ i ~ " | mid: " ~ mid ~ " | min_range: " ~ min_range ~ " | max_range: " ~ max_range ~ " | alt_calc: " ~ alt_to_check ~ " | elev_at: " ~ elevation_at_coord ~ " | dist: " ~ distance_for_elev_calc);
 			}
-			#calculate pipper scale based on range value
+			#print("range: " ~ range ~ " | iters: " ~ i ~ " | alt: " ~ alt_to_check);
+			
+		# calculate pipper position if IR seeking is active
+			
+		} elsif (getprop(ir_sar_switch) == 0 and getprop(gun_missile_switch) == 1) {
+			# IR won't calculate range, so putting it seperate from the auto-range functions.
+			# in theory, the pipper could "surround" the heat source, so letting the range thing slide for now.
+			var locked_target = radar_logic.selection;
+			if ( locked_target != nil ) {
+				var dist_rad = locked_target.get_polar();
+				#var x_ang = dist_rad[1] * R2D;
+				#var y_ang = dist_rad[2] * R2D;
+				range = dist_rad[0];
+				pipper_adjust_x = (dist_rad[1] * R2D);
+				pipper_adjust_y = (dist_rad[2] * R2D);
+				#print("x deg: " ~ (dist_rad[1] * R2D) ~ " |y deg: " ~ (dist_rad[2] * R2D) ~ " |adjust x: " ~ math.cos(getprop("orientation/roll-deg") * D2R) ~ " |adjust y: " ~ ( -1 * math.sin(getprop("orientation/roll-deg") * D2R)) ~ " |finalx: " ~ pipper_adjust_x ~ " |finaly: " ~ pipper_adjust_y);
+			}
+		}
+		
+		if ( getprop(pipperautomanual) == 0 ) {
+			#calculate pipper scale based on range value (i.e. automatically)
 			#currently assuming a width of 15m, need to fix when the correct instrument is implemented.
 			var ang_diam = 2 * (math.atan2(15,2*range));
 			var scale = math.clamp((ang_diam * R2D) / pipper_scale_degree_per_pixel,5,220);
 			setprop(pipperscale, scale);
 			#print("range: " ~ range ~ " | angular diamater: " ~ (ang_diam * R2D) ~ " | scale: " ~  scale);
 		} else {
-			#pipper calculation
+			#calculate range based on pipperscale and inputted diameter.
+			#still assuming a width of 15m, still need to fix.
+			var scale = getprop(pipperscale);
+			var ang_diam = (scale * pipper_scale_degree_per_pixel) * D2R;
+			print("ang_diam " ~ ang_diam);
+			range = (15 / 2) / math.tan(ang_diam / 2);
+			print("range " ~ range);
 		}
 	
 	
