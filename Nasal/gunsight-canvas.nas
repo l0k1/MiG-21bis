@@ -488,9 +488,9 @@ var gun_sight = {
 			#still assuming a width of 15m, still need to fix.
 			var scale = getprop(pipperscale);
 			var ang_diam = (scale * pipper_scale_degree_per_pixel) * D2R;
-			print("ang_diam " ~ ang_diam);
+			#print("ang_diam " ~ ang_diam);
 			range = (15 / 2) / math.tan(ang_diam / 2);
-			print("range " ~ range);
+			#print("range " ~ range);
 		}
 	
 	
