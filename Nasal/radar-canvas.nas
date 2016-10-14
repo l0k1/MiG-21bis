@@ -565,7 +565,6 @@ var radar_screen = {
 				if ( dist_rad[0] > me.radar_range or math.abs(dist_rad[1] * R2D) > 15 or math.abs(dist_rad[2] * R2D) > 15 or locked_target.isValid() == 0 ) { #if the target is out of lockon range, then exit locked-mode
 					setprop(radar_mode,"normal-init");
 					radar_logic.unlockTarget();
-					print("unlocking 2");
 				} else {
 					var ya_ang = dist_rad[2] * R2D;
 					#switch from an overhead view to a forward facing view.
@@ -616,7 +615,6 @@ var radar_screen = {
 			} else {
 				setprop(radar_mode,"normal-init");
 				radar_logic.unlockTarget();
-				print("unlocking 3");
 			}
 		}
 			

@@ -257,7 +257,7 @@
 				<pipper-accuracy-switch type="int">0</pipper-accuracy-switch>
 				<pipper-power-switch type="int">0</pipper-power-switch>
 				<target-size-knob type="float">0</target-size-knob>
-				<pipper-angular-correction-knob type="float">0</pipper-angular-correction-knob>
+				<pipper-angular-correction-knob type="int">0</pipper-angular-correction-knob> <!-- 0 for gun -->
 				<pipper-brightness-knob type="float">1</pipper-brightness-knob>
 				<pipper-scale type="float">5</pipper-scale>
 				<fixed-net-brightness-knob type="float">1</fixed-net-brightness-knob>

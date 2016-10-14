@@ -298,19 +298,12 @@ var trackCalc = func (aircraftPos, range, carrier, mp, type, node) {
     #aircraft angle
     var ya_rad = xg_rad * math.sin(myRoll) + yg_rad * math.cos(myRoll);
     var xa_rad = xg_rad * math.cos(myRoll) - yg_rad * math.sin(myRoll);
-    var xa_rad_corr = xg_rad * math.cos(0) - yg_rad * math.sin(0);
 
     while (xa_rad < -math.pi) {
       xa_rad = xa_rad + 2*math.pi;
     }
     while (xa_rad > math.pi) {
       xa_rad = xa_rad - 2*math.pi;
-    }
-    while (xa_rad_corr < -math.pi) {
-      xa_rad_corr = xa_rad_corr + 2*math.pi;
-    }
-    while (xa_rad_corr > math.pi) {
-      xa_rad_corr = xa_rad_corr - 2*math.pi;
     }
     while (ya_rad > math.pi) {
       ya_rad = ya_rad - 2*math.pi;
@@ -319,7 +312,7 @@ var trackCalc = func (aircraftPos, range, carrier, mp, type, node) {
       ya_rad = ya_rad + 2*math.pi;
     }
 	#print("ready to see if in cone");
-    if(ya_rad > RADAR_BOTTOM_LIMIT * D2R and ya_rad < RADAR_TOP_LIMIT * D2R and xa_rad_corr > RADAR_LEFT_LIMIT * D2R and xa_rad_corr < RADAR_RIGHT_LIMIT * D2R) {
+    if(ya_rad > RADAR_BOTTOM_LIMIT * D2R and ya_rad < RADAR_TOP_LIMIT * D2R and xa_rad > RADAR_LEFT_LIMIT * D2R and xa_rad < RADAR_RIGHT_LIMIT * D2R) {
 	  #print("xa_rad_corr: " ~ xa_rad_corr);
 	  #print("xa_rad_corr_deg: " ~ xa_rad_corr * R2D);
 	  #print("ya_rad_deg: " ~ ya_rad * R2D);
@@ -348,14 +341,14 @@ var trackCalc = func (aircraftPos, range, carrier, mp, type, node) {
       var hud_pos_y = 0;#canvas_HUD.centerOffset + canvas_HUD.pixelPerDegreeY * -ya_rad * rad2deg;
 
       var contact = Contact.new(node, type);
-      contact.setPolar(distanceRadar, xa_rad_corr, ya_rad);
+      contact.setPolar(distanceRadar, xa_rad, ya_rad);
       contact.setCartesian(hud_pos_x, hud_pos_y);
       return contact;
 
     } elsif (carrier == TRUE) {
       # need to return carrier even if out of radar cone, due to carrierNear calc
       var contact = Contact.new(node, type);
-      contact.setPolar(900000, xa_rad_corr, 0);
+      contact.setPolar(900000, xa_rad, 0);
       contact.setCartesian(900000, 900000);# 900000 used in hud to know if out of radar cone.
       return contact;
     }
@@ -570,7 +563,7 @@ var get_closure_rate_from_Coord = func(t_coord, t_node) {
 }
 
 var lockTarget = func() {
-	if ( getprop(ir_sar_switc0) == 0 ) {
+	if ( getprop(ir_sar_switch) == 0 ) {
 		var c_dist = 999999;
 		var c_most = nil;
 		var i = -1;

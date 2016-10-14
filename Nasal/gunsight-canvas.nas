@@ -61,6 +61,10 @@ var gun_sight = {
 			parents: [gun_sight],
 			gunsight: canvas.new(gun_sight.canvas_settings)
 		};
+		
+		#pipper delta
+		m.pDx = 0;
+		m.pDy = 0;
 	
 		#gunsight settings
 				
@@ -393,9 +397,9 @@ var gun_sight = {
 		#if radar is on and locked, we can use that range. (auto)
 		#if radar is set to ground mode, we can calculate range ourselves (auto)
 		#otherwise, distance knob and pipper will be our friend. (manual)
-		var range = 10000; #decrease me for more accuracy.
+		var range = 5000; #decrease me for more accuracy.
 		
-		#calculate range and pipper location via fixed beam
+		#calculate range and pipper location
 		
 		if ( getprop(ir_sar_switch) != 0 and getprop("controls/radar/power-panel/fixed-beam") == 1 and getprop(air_gnd_switch) == 0) {
 			#find range here. radar locked to -1.5*. it's going to be code intensive-ish. =\
@@ -461,7 +465,7 @@ var gun_sight = {
 			
 		# calculate pipper position if IR seeking is active
 			
-		} elsif (getprop(ir_sar_switch) == 0 and getprop(gun_missile_switch) == 1) {
+		} elsif ( getprop(ir_sar_switch) == 0 ) {
 			# IR won't calculate range, so putting it seperate from the auto-range functions.
 			# in theory, the pipper could "surround" the heat source, so letting the range thing slide for now.
 			var locked_target = radar_logic.selection;
@@ -470,8 +474,10 @@ var gun_sight = {
 				#var x_ang = dist_rad[1] * R2D;
 				#var y_ang = dist_rad[2] * R2D;
 				range = dist_rad[0];
-				pipper_adjust_x = (dist_rad[1] * R2D);
-				pipper_adjust_y = (dist_rad[2] * R2D);
+				if ( getprop(gun_missile_switch) == 1 ) {
+					pipper_adjust_x = (dist_rad[1] * R2D);
+					pipper_adjust_y = (dist_rad[2] * R2D);
+				}
 				#print("x deg: " ~ (dist_rad[1] * R2D) ~ " |y deg: " ~ (dist_rad[2] * R2D) ~ " |adjust x: " ~ math.cos(getprop("orientation/roll-deg") * D2R) ~ " |adjust y: " ~ ( -1 * math.sin(getprop("orientation/roll-deg") * D2R)) ~ " |finalx: " ~ pipper_adjust_x ~ " |finaly: " ~ pipper_adjust_y);
 			}
 		}
@@ -492,11 +498,37 @@ var gun_sight = {
 			range = (15 / 2) / math.tan(ang_diam / 2);
 			#print("range " ~ range);
 		}
+		
+		if ( getprop(gun_missile_switch) == 0 ) {
+			#gun pipper movement logic. need to do it after range has been calculated.
+			#2840 ft/sec if we are calculating for gun.
+			var airspeed = getprop("/velocities/airspeed-kt") * KT2MPS;
+			var b_speed = 3000 + airspeed; #projectile speed
+			var l_angle = 0;    #launch angle adjustment
+			if ( getprop(pipperangularcorrection) == 0 ) { 
+				b_speed = (2840 * FT2M) + airspeed; 
+				l_angle = -1;
+			}
+			#adjust launch angle to account for aircraft roll
+			#assuming heading variation is 0, otherwise we will need to account for that.
+			#using angle of reach formula, hopefully this is accurate enough. adjusted for initial down pitch of -1.
+			#print("range: " ~ range ~ " | b_speed: " ~ b_speed);
+			angle_of_reach = l_angle + -1 * (0.5 * math.asin((9.81 * range) / math.pow(b_speed,2)) * R2D);
+			#adjust x,y for hud
+			pipper_adjust_x = -1 * angle_of_reach * math.sin(getprop("/orientation/roll-deg") * D2R);
+			pipper_adjust_y = angle_of_reach * math.cos(getprop("/orientation/roll-deg") * D2R);
+		}
+			
 	
 	
 		#translate center to proper position
+		# ^ if that works, we can easily do a clamp to set the max amount of movement based on the gyro/miss switch
+		
 		pipper_adjust_x = pipper_adjust_x / pipper_translation_degree_per_pixel;
 		pipper_adjust_y = -1 * pipper_adjust_y / pipper_translation_degree_per_pixel;
+		
+		me.pDx = pipper_adjust_x;
+		me.pDy = pipper_adjust_y;
 		
 		pip_cen_x = pip_cen_x + ghost_x + pipper_adjust_x;
 		pip_cen_y = pip_cen_y + ghost_y + pipper_adjust_y;
