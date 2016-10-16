@@ -94,7 +94,7 @@ input = {
 };
 
 var pos_arm = {
-	new: func(brevity, weight, type = "missile", ammo_count = 0) {
+	new: func(brevity, weight, type, ammo_count = 0) {
 		var m = {parents:[pos_arm]};
 		m.brevity = brevity;
 		m.weight = weight;
@@ -106,14 +106,26 @@ var pos_arm = {
 
 var payloads = {
 	#payload format is:
-	#name: pos_arm.new(brevity code, weight, type (optional), ammo count (optional)
+	#name: pos_arm.new(brevity code, weight, type/guidance, ammo count (optional)
+	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad
 	"none":					pos_arm.new("none",0,"none"),
-	"R-60":					pos_arm.new("R-60",960),
-	"FAB-250":				pos_arm.new("FAB-250",520),
-	"Kh-25":				pos_arm.new("Kh-25",659),
+	# ir missiles
+	"R-60":					pos_arm.new("R-60",96,"ir"),
+	# radar missiles
+	
+	# bombs
+	"FAB-250":				pos_arm.new("FAB-250",520,"bomb"),
+	# anti-radiation
+	"Kh-25":				pos_arm.new("Kh-25",695,"antirad"),
+	# beam
+	"Kh-66":				pos_arm.new("Kh-66",632,"beam"),
+	# rockets
+	"UB-16":				pos_arm.new("UB-32",475,"rocket",16),
 	"UB-32":				pos_arm.new("UB-32",582,"rocket",32),
-	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank",180,"tank"),
-	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank",230,"tank")
+	"S-21":					pos_arm.new("S-21",341,"rocket"), #no real info found (yet)
+	"S-24":					pos_arm.new("S-24",518,"rocket"),
+	"PTB-490 Droptank":			pos_arm.new("PTB-490 Droptank",180,"tank"),
+	"PTB-800 Droptank":			pos_arm.new("PTB-800 Droptank",230,"tank")
 };
 
 var update_loop = func {
@@ -128,7 +140,7 @@ var update_loop = func {
 		var selected = getprop("payload/weight["~ (i) ~"]/selected");
 		if(selected != "none" and getprop("payload/weight["~ (i) ~"]/weight-lb") == 0) {
 			setprop("controls/armament/station["~(i)~"]/released", FALSE);
-			if (payloads[selected].type == "missile") {
+			if (payloads[selected].type == "ir" or payloads[selected].type == "radar" or payloads[selected].type == "antirad") {
 				if(armament.AIM.active[i] != nil and armament.AIM.active[i].type != selected) {
 					armament.AIM.active[i].del();
 				}
@@ -156,7 +168,7 @@ var update_loop = func {
 			} elsif ( armament.AIM.active[i].status != MISSILE_STANDBY and armament.AIM.active[i] != MISSILE_FLYING and payloadName == "none" ) {
 				armament.AIM.active[i].status = MISSILE_STANDBY;
 			} elsif ( (armSelect[0] == i or armSelect[1] == i) and armament.AIM.active[i].status == MISSILE_STANDBY ) {
-				#print("missile " ~i~ " should be searching.");
+				print("missile " ~i~ " should be searching.");
 				armament.AIM.active[i].status = MISSILE_SEARCH;
 				armament.AIM.active[i].search();
 			}
@@ -266,7 +278,9 @@ var missile_release = func(pylon) {
 		#	var rs = 0;
 		#}
 		#print("selection: " ~ rs);
-		#print("target: " ~armament.AIM.active[pylon].callsign);
+		print("target: " ~armament.AIM.active[pylon].callsign);
+		print("status: " ~ armament.AIM.active[pylon].status);
+		print("selection: " ~radar_logic.selection.get_Callsign());
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
 			#missile locked, fire it.
 

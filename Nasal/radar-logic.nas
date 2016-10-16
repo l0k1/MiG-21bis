@@ -218,9 +218,9 @@ var paint = func (node, painted) {
     attr = node.addChild("painted");
   }
   attr.setBoolValue(painted);
-  if(painted == TRUE) { 
-    print("painted "~attr.getPath()~" "~painted);
-  }
+ # if(painted == TRUE) { 
+    #print("painted "~attr.getPath()~" "~painted);
+  #}
 }
 
 var remove_suffix = func(s, x) {
@@ -563,7 +563,7 @@ var get_closure_rate_from_Coord = func(t_coord, t_node) {
 }
 
 var lockTarget = func() {
-	if ( getprop(ir_sar_switch) == 0 ) {
+	if ( getprop(ir_sar_switch) == 2 ) {
 		var c_dist = 999999;
 		var c_most = nil;
 		var i = -1;
@@ -598,36 +598,36 @@ var lockTarget = func() {
 }
 
 var ir_seekTarget= func() {
-	#print("checking for IR target");
-	var c_dist = 999999;
-	var c_most = nil;
-	var i = -1;
-	var ir_seek_limit = 10000; # ir seek can't see past 5km (for now)
-	foreach(var track; tracks) {
-		i += 1;
-		var dist_rad = track.get_polar();
-		#print("distance: " ~ dist_rad[0]);
-		#print("x_ang: " ~ (dist_rad[1] * R2D));
-		#print("y_ang: " ~ (dist_rad[2] * R2D));
-		if ( dist_rad[0] != 900000 and dist_rad[0] < ir_seek_limit and math.abs(dist_rad[1] * R2D) < 5 and dist_rad[2] * R2D < 3 and dist_rad[2] > -7 * R2D) { # target distance < seek range, no more than 5* left/right, 3* up and 7* down
-			if ( dist_rad[0] < c_dist ) {
-				c_dist = dist_rad[0];
-				c_most = track;
+	if ( getprop(ir_sar_switch) == 0 ) {
+		#print("checking for IR target");
+		var c_dist = 999999;
+		var c_most = nil;
+		var i = -1;
+		var ir_seek_limit = 10000; # ir seek can't see past 5km (for now)
+		foreach(var track; tracks) {
+			i += 1;
+			var dist_rad = track.get_polar();
+			#print("distance: " ~ dist_rad[0]);
+			#print("x_ang: " ~ (dist_rad[1] * R2D));
+			#print("y_ang: " ~ (dist_rad[2] * R2D));
+			if ( dist_rad[0] != 900000 and dist_rad[0] < ir_seek_limit and math.abs(dist_rad[1] * R2D) < 5 and dist_rad[2] * R2D < 3 and dist_rad[2] > -7 * R2D) { # target distance < seek range, no more than 5* left/right, 3* up and 7* down
+				if ( dist_rad[0] < c_dist ) {
+					c_dist = dist_rad[0];
+					c_most = track;
+				}
 			}
 		}
-	}
-	if ( c_most != nil and c_most != selection ) {
-		#input.radarMode.setValue("locked-init");
-		selection = c_most;
-		paint(c_most.getNode(), TRUE);
-		tracks_index = i;
-		armament.contact = selection;
-		print("found target: " ~ selection.get_Callsign());
-	} elsif ( c_most == nil ) {
-		#print("unlocking 1");
-		unlockTarget();
-	}
-	if ( getprop(ir_sar_switch) == 0 ) {
+		if ( c_most != nil and c_most != selection ) {
+			#input.radarMode.setValue("locked-init");
+			selection = c_most;
+			paint(c_most.getNode(), TRUE);
+			tracks_index = i;
+			armament.contact = selection;
+			#print("found target: " ~ selection.get_Callsign());
+		} elsif ( c_most == nil ) {
+			#print("unlocking 1");
+			unlockTarget();
+		}
 		settimer( func { ir_seekTarget(); }, 0.1);
 	}
 }

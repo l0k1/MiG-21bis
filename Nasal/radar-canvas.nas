@@ -578,7 +578,7 @@ var radar_screen = {
 					
 					#print("X,Y: " ~ pixelX ~ "," ~ pixelY);
 					#print("pixel blip ("~pixelX~", "~pixelY);
-					print(ya_ang);
+					#print(ya_ang);
 					if ( ya_ang > 1.5 ) {
 						me.above_blip[1].setTranslation(pixelX, pixelY);
 						me.above_blip[1].show();
