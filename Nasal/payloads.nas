@@ -168,7 +168,7 @@ var update_loop = func {
 			} elsif ( armament.AIM.active[i].status != MISSILE_STANDBY and armament.AIM.active[i] != MISSILE_FLYING and payloadName == "none" ) {
 				armament.AIM.active[i].status = MISSILE_STANDBY;
 			} elsif ( (armSelect[0] == i or armSelect[1] == i) and armament.AIM.active[i].status == MISSILE_STANDBY ) {
-				print("missile " ~i~ " should be searching.");
+				#print("missile " ~i~ " should be searching.");
 				armament.AIM.active[i].status = MISSILE_SEARCH;
 				armament.AIM.active[i].search();
 			}
@@ -278,9 +278,9 @@ var missile_release = func(pylon) {
 		#	var rs = 0;
 		#}
 		#print("selection: " ~ rs);
-		print("target: " ~armament.AIM.active[pylon].callsign);
-		print("status: " ~ armament.AIM.active[pylon].status);
-		print("selection: " ~radar_logic.selection.get_Callsign());
+		#print("target: " ~armament.AIM.active[pylon].callsign);
+		#print("status: " ~ armament.AIM.active[pylon].status);
+		#print("selection: " ~radar_logic.selection.get_Callsign());
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
 			#missile locked, fire it.
 
