@@ -574,6 +574,9 @@
                     <max-report-distance type="double">65</max-report-distance>
                     <class type="string">A</class>
                     <fire-msg>Fox 2</fire-msg>
+					<flags>
+						<smoke-id-0 type="bool">false</smoke-id-0>
+					</flags>
                 </r-60>
                 <rb-74>             <!-- RB-74 (Swedish version of aim-9L sidewinder) mach 2.5 -->
                     <sound-on-off type="bool">false</sound-on-off>

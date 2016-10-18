@@ -16,10 +16,28 @@
         </condition>
     </animation>
 
-    <animation>
-        <type>range</type>
-        <min-m>0</min-m>
-        <max-m>12000</max-m>
-    </animation>
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/motor-smoke-3.xml</path>
+		<offsets>
+			<x-m>1.44</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<name>explosion</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/explosion-3.xml</path>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<animation>
+  		<object-name>r-60</object-name>
+  		<enable-hot type="bool">false</enable-hot>
+ 	</animation>
 
 </PropertyList>

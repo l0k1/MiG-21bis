@@ -124,7 +124,7 @@
 
 	<model>
 		<name>R-60 Missile Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60L.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-0.xml</path>
 		<offsets>
 			<x-m> 1.13</x-m>
 			<y-m>-2.73 </y-m>
@@ -135,7 +135,7 @@
 
 	<model>
 		<name>R-60 Missile Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60LI.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-1.xml</path>
 		<offsets>
 			<x-m> -0.35</x-m>
 			<y-m>-2.11 </y-m>
@@ -146,7 +146,7 @@
 
 	<model>
 		<name>R-60 Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60R.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-4.xml</path>
 		<offsets>
 			<x-m> 1.13</x-m>
 			<y-m> 2.73 </y-m>
@@ -157,7 +157,7 @@
 	
 	<model>
 		<name>R-60 Missile Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60RI.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-3.xml</path>
 		<offsets>
 			<x-m> -0.35</x-m>
 			<y-m> 2.11 </y-m>
