@@ -5,6 +5,51 @@
 
 	<!--lights-->
 	
+	<effect>
+	<inherits-from>Effects/model-transparent</inherits-from>
+	<condition>
+		<greater-than>
+			<property>sim/multiplay/generic/float[6]</property>
+			<value>9</value>
+		</greater-than>
+		<property>/sim/rendering/rembrandt/enabled</property>
+	</condition>
+	<object-name>label1</object-name>
+	<object-name>label2</object-name>
+	<object-name>label3</object-name>
+	<object-name>labelAir</object-name>
+	<object-name>labelIr</object-name>
+	<object-name>labelGnd</object-name>
+	<object-name>labelMaster</object-name>
+	<object-name>labelNeut</object-name>
+	<object-name>labelReady</object-name>
+	<object-name>labelReloading</object-name>
+	<object-name>labelSar</object-name>
+	<object-name>labelSelector</object-name>	
+</effect>
+
+	<animation>
+			<type>material</type>
+				<object-name>label1</object-name>
+				<object-name>label2</object-name>
+				<object-name>label3</object-name>
+				<object-name>labelAir</object-name>
+				<object-name>labelGnd</object-name>
+				<object-name>labelIr</object-name>
+				<object-name>labelMaster</object-name>
+				<object-name>labelNeut</object-name>
+				<object-name>labelReady</object-name>
+				<object-name>labelReloading</object-name>
+				<object-name>labelSar</object-name>
+				<object-name>labelSelector</object-name>	
+			<emission>
+				 <red>0.6</red>
+				 <green>0.3</green>
+				 <blue>0.3</blue>
+				<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			</emission> 
+	</animation>
+	
 	<animation>
         <type>material</type>
         <object-name>light</object-name>
@@ -19,6 +64,20 @@
             <blue>0</blue>
             <factor-prop>controls/armament/panel/gun-ready</factor-prop>
         </emission> 
+    </animation>
+	
+	<animation>
+        <type>textranslate</type>
+        <object-name>light</object-name>
+        <property>controls/armament/panel/gun-ready</property>
+		<bias>0.0001</bias>
+		<factor>0.01757</factor>
+		  <step>1</step>
+		  <axis>
+		   <x>0</x>
+		   <y>1</y>
+		  </axis>
+
     </animation>
 	
     <!--<animation>

@@ -53,6 +53,31 @@
 	</animation>
 	
 	<!-- Shaders -->
+	
+  <animation>
+			<type>material</type>
+				<object-name>labelAngle</object-name>
+				<object-name>labelAuto</object-name>
+				<object-name>labelBomb</object-name>
+				<object-name>labelBreak</object-name>
+				<object-name>labelContback</object-name>
+				<object-name>labelFixedNetReticle</object-name>
+				<object-name>labelGun</object-name>
+				<object-name>labelGyro</object-name>
+				<object-name>labelLnc</object-name>
+				<object-name>labelMan</object-name>
+				<object-name>labelMissle</object-name>
+				<object-name>labelReticle</object-name>
+				<object-name>labelShoot</object-name>
+				<object-name>labelSize</object-name>
+				<object-name>labelVLnch</object-name>	
+			<emission>
+				 <red>0.6</red>
+				 <green>0.3</green>
+				 <blue>0.3</blue>
+				<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			</emission> 
+	</animation>
 
 	<animation>
 		<type>shader</type>

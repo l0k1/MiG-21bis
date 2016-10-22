@@ -15,6 +15,24 @@
 	<reset type="bool">0</reset>-->
 	
 	<animation>
+			<type>material</type>
+				<object-name>labelFBOff</object-name>
+				<object-name>labelFixedBeam</object-name>
+				<object-name>labelHSignal</object-name>
+				<object-name>labelLAOff</object-name>
+				<object-name>labelLowAlt</object-name>
+				<object-name>labelOff</object-name>
+				<object-name>labelOn</object-name>
+				<object-name>labelStandby</object-name>
+			<emission>
+				 <red>0.6</red>
+				 <green>0.3</green>
+				 <blue>0.3</blue>
+				<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			</emission> 
+	</animation>
+	
+	<animation>
         <type>material</type>
         <object-name>lightPower</object-name>
 		<ambient>
@@ -28,6 +46,19 @@
             <blue>0</blue>
             <factor-prop>controls/radar/power-panel/run</factor-prop>
         </emission> 
+    </animation>
+	
+	<animation>
+        <type>textranslate</type>
+        <object-name>lightPower</object-name>
+        <property>controls/radar/power-panel/run</property>
+		<bias>0.0001</bias>
+		<factor>0.01757</factor>
+		  <step>1</step>
+		  <axis>
+		   <x>0</x>
+		   <y>1</y>
+		  </axis>
     </animation>
 	
 	<animation>
@@ -47,6 +78,19 @@
     </animation>
 	
 	<animation>
+        <type>textranslate</type>
+        <object-name>lightLowAlt</object-name>
+        <property>controls/radar/power-panel/low-alt</property>
+		<bias>0.0001</bias>
+		<factor>0.01757</factor>
+		  <step>1</step>
+		  <axis>
+		   <x>0</x>
+		   <y>1</y>
+		  </axis>
+    </animation>
+	
+	<animation>
         <type>material</type>
         <object-name>lightFixedBeam</object-name>
 		<ambient>
@@ -60,6 +104,19 @@
             <blue>0</blue>
             <factor-prop>controls/radar/power-panel/fixed-beam</factor-prop>
         </emission> 
+    </animation>
+	
+	<animation>
+        <type>textranslate</type>
+        <object-name>lightFixedBeam</object-name>
+        <property>controls/radar/power-panel/fixed-beam</property>
+		<bias>0.0001</bias>
+		<factor>0.01757</factor>
+		  <step>1</step>
+		  <axis>
+		   <x>0</x>
+		   <y>1</y>
+		  </axis>
     </animation>
 	
 	<!-- picks and translations -->

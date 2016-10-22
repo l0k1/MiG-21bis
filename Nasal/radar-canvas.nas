@@ -459,75 +459,76 @@ var radar_screen = {
 			me.lowerBar.setTranslation(506, 950 - lpos);
 			me.upperBar.setTranslation(506, 950 - ( lpos + lscale ));
 			
-			
-			foreach (var mp; radar_logic.tracks) {	
-				#print("found contact");
-				# Node with valid position data (and "distance!=nil").
-				var p = mp.get_polar();
-				var distance = p[0];
-				var xa_rad = p[1];
-				var ya_ang = p[2] * R2D;
+			if ( getprop("controls/radar/power-panel/fixed-beam") == 0 ) {
+				foreach (var mp; radar_logic.tracks) {	
+					#print("found contact");
+					# Node with valid position data (and "distance!=nil").
+					var p = mp.get_polar();
+					var distance = p[0];
+					var xa_rad = p[1];
+					var ya_ang = p[2] * R2D;
 
-				#make blip
-				if (b_i < me.no_blip and distance != nil and distance < me.radar_range ){#and alt-100 > getprop("/environment/ground-elevation-m")){
-					#print("contact is valid");
-					#aircraft is within the radar ray cone
-					#var locked = FALSE;
-					#if (mp.isPainted() == TRUE) {
-					#	lock = TRUE;
-					#	locked = TRUE;
-					#}
-					# plot the blip on the radar screen
-					var pixelDistance = -distance*((950-90)/me.radar_range); #distance in pixels
+					#make blip
+					if (b_i < me.no_blip and distance != nil and distance < me.radar_range ){#and alt-100 > getprop("/environment/ground-elevation-m")){
+						#print("contact is valid");
+						#aircraft is within the radar ray cone
+						#var locked = FALSE;
+						#if (mp.isPainted() == TRUE) {
+						#	lock = TRUE;
+						#	locked = TRUE;
+						#}
+						# plot the blip on the radar screen
+						var pixelDistance = -distance*((950-90)/me.radar_range); #distance in pixels
 
-					#translate from polar coords to cartesian coords
-					#var pixelX =  pixelDistance * math.cos(xa_rad + math.pi/2) + 1024/2;
-					#var pixelY =  pixelDistance * math.sin(xa_rad + math.pi/2) + 950;
-					var pixelX = ((xa_rad * R2D / RADAR_LEFT_LIMIT) * -506) + 506; #506 is half width of radar screen
-					var pixelY = pixelDistance + 950;
-					pixelX = clamp(pixelX, 180, 836);
-					pixelY = clamp(pixelY, 100,950);
-					
-					#print("X,Y: " ~ pixelX ~ "," ~ pixelY);
-					#print("pixel blip ("~pixelX~", "~pixelY);
-					if ( ya_ang > 1.5 ) {
-						me.above_blip[b_i].setTranslation(pixelX, pixelY);
-						me.above_blip[b_i].show();
-						me.even_blip[b_i].hide();
-						me.below_blip[b_i].hide();
-					} elsif ( ya_ang < -1.5 ) {
-						me.below_blip[b_i].setTranslation(pixelX, pixelY);
-						me.below_blip[b_i].show();
-						me.even_blip[b_i].hide();
-						me.above_blip[b_i].hide();
-					} else {
-						me.even_blip[b_i].setTranslation(pixelX, pixelY);
-						me.even_blip[b_i].show();
-						me.below_blip[b_i].hide();
-						me.above_blip[b_i].hide();
-					}
-					if ( getprop(show_callsigns) == 1 ) {
-						#print("pixelX = " ~ pixelX);
-						if ( pixelX <= 506 ) {
-							me.blip_text[b_i].setTranslation(pixelX - 50, pixelY);
-							me.blip_text[b_i].setText(mp.get_Callsign());
-							me.blip_text[b_i].setAlignment("right-center");
-							me.blip_text[b_i].show();
+						#translate from polar coords to cartesian coords
+						#var pixelX =  pixelDistance * math.cos(xa_rad + math.pi/2) + 1024/2;
+						#var pixelY =  pixelDistance * math.sin(xa_rad + math.pi/2) + 950;
+						var pixelX = ((xa_rad * R2D / RADAR_LEFT_LIMIT) * -506) + 506; #506 is half width of radar screen
+						var pixelY = pixelDistance + 950;
+						pixelX = clamp(pixelX, 180, 836);
+						pixelY = clamp(pixelY, 100,950);
+						
+						#print("X,Y: " ~ pixelX ~ "," ~ pixelY);
+						#print("pixel blip ("~pixelX~", "~pixelY);
+						if ( ya_ang > 1.5 ) {
+							me.above_blip[b_i].setTranslation(pixelX, pixelY);
+							me.above_blip[b_i].show();
+							me.even_blip[b_i].hide();
+							me.below_blip[b_i].hide();
+						} elsif ( ya_ang < -1.5 ) {
+							me.below_blip[b_i].setTranslation(pixelX, pixelY);
+							me.below_blip[b_i].show();
+							me.even_blip[b_i].hide();
+							me.above_blip[b_i].hide();
 						} else {
-						me.blip_text[b_i].setTranslation(pixelX + 50, pixelY);
-							me.blip_text[b_i].setText(mp.get_Callsign());
-							me.blip_text[b_i].setAlignment("left-center");
-							me.blip_text[b_i].show();
+							me.even_blip[b_i].setTranslation(pixelX, pixelY);
+							me.even_blip[b_i].show();
+							me.below_blip[b_i].hide();
+							me.above_blip[b_i].hide();
 						}
-					} else {
-						me.blip_text[b_i].hide();
+						if ( getprop(show_callsigns) == 1 ) {
+							#print("pixelX = " ~ pixelX);
+							if ( pixelX <= 506 ) {
+								me.blip_text[b_i].setTranslation(pixelX - 50, pixelY);
+								me.blip_text[b_i].setText(mp.get_Callsign());
+								me.blip_text[b_i].setAlignment("right-center");
+								me.blip_text[b_i].show();
+							} else {
+							me.blip_text[b_i].setTranslation(pixelX + 50, pixelY);
+								me.blip_text[b_i].setText(mp.get_Callsign());
+								me.blip_text[b_i].setAlignment("left-center");
+								me.blip_text[b_i].show();
+							}
+						} else {
+							me.blip_text[b_i].hide();
+						}
+						#if (locked == TRUE) {
+						#	pixelXL = pixelX;
+						#	pixelYL = pixelY;
+						#}
 					}
-					#if (locked == TRUE) {
-					#	pixelXL = pixelX;
-					#	pixelYL = pixelY;
-					#}
+					b_i += 1;
 				}
-				b_i += 1;
 			}
 			#if (lock == FALSE) {
 			#	me.lock.hide();
@@ -629,3 +630,15 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
 #  var hud_copilot = HUD.new({"node": "HUD.l.canvas.001"});
 #  hud_copilot.update();
 });
+
+var on_off = func() {
+	if ( getprop("controls/radar/power-panel/run") == 0 ) {
+		setprop(radar_mode, "off");
+	} else {
+		setprop(radar_mode, "normal-init");
+	}
+}
+
+setlistener("controls/radar/power-panel/run", func { on_off(); });
+on_off();
+	

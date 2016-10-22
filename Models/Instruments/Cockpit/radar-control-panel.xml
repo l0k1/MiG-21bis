@@ -15,6 +15,25 @@
 	<reset type="bool">0</reset>-->
 	
 	<animation>
+			<type>material</type>
+				<object-name>labelCont</object-name>
+				<object-name>labelIff</object-name>
+				<object-name>labelInter</object-name>
+				<object-name>labelLst</object-name>
+				<object-name>labelPas</object-name>
+				<object-name>labelReset</object-name>
+				<object-name>labelSelfTest</object-name>
+				<object-name>labelWeat</object-name>
+			<emission>
+				 <red>0.6</red>
+				 <green>0.3</green>
+				 <blue>0.3</blue>
+				<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			</emission> 
+	</animation>
+	
+	
+	<animation>
         <type>material</type>
         <object-name>ledCont</object-name>
 		<ambient>
@@ -296,6 +315,12 @@
 			<binding>
 				<command>property-toggle</command>
 				<property>controls/radar/panel/lst-mode</property>
+			</binding>
+			<binding>
+				<command>property-cycle</command>
+				<property>instrumentation/radar/min-doppler-speed-kt</property>
+				<value>80</value>
+				<value>20</value>
 			</binding>
 		</action>
 	</animation>

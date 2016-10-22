@@ -15,6 +15,8 @@ var MISSILE_STANDBY = -1;
 var MISSILE_SEARCH = 0;
 var MISSILE_LOCK = 1;
 var MISSILE_FLYING = 2;
+var ir_sar_switch = "/controls/armament/panel/ir-sar-switch";
+
 ############### Main loop ###############
 
 input = {
@@ -51,16 +53,12 @@ input = {
   acInstrVolt:      "systems/electrical/outputs/ac-instr-voltage",
   acMainVolt:       "systems/electrical/outputs/ac-main-voltage",
   asymLoad:         "fdm/jsbsim/inertia/asymmetric-wing-load",
-  combat:           "/ja37/hud/current-mode",
   dcVolt:           "systems/electrical/outputs/dc-voltage",
   elapsed:          "sim/time/elapsed-sec",
   elecMain:         "controls/electric/main",
   engineRunning:    "engines/engine/running",
   gearCmdNorm:      "/fdm/jsbsim/gear/gear-cmd-norm",
   gearsPos:         "gear/gear/position-norm",
-  hz05:             "ja37/blink/five-Hz/state",
-  hz10:             "ja37/blink/ten-Hz/state",
-  hzThird:          "ja37/blink/third-Hz/state",
   impact:           "/ai/models/model-impact",
   mass1:            "fdm/jsbsim/inertia/pointmass-weight-lbs[1]",
   mass3:            "fdm/jsbsim/inertia/pointmass-weight-lbs[3]",
@@ -214,20 +212,23 @@ var update_loop = func {
 
 ###########  listener for handling the trigger #########
 
-var round2 = 0;
-
 var missile_release_listener = func {
-
 	var armSelect = pylon_select();
-	if ( getprop("/fdm/jsbsim/systems/armament/release") == 1 or round2 == 1) {
-		round2 = 0;
-		missile_release(armSelect[0]);
-		
+	
+	selected0 = payloads[getprop("payload/weight["~(armSelect[0])~"]/selected") ];
+	selected1 = payloads[getprop("payload/weight["~(armSelect[1])~"]/selected") ];
+	
+	if (getprop("/fdm/jsbsim/systems/armament/release") == 1 )  {
+		if ( (selected0.type = "ir" and getprop(ir_sar_switch) == 0 ) or ( selected0.type = "radar" and getprop(ir_sar_switch) == 2 )) {
+			round2 = 0;
+			missile_release(armSelect[0]);
+		}
 		if ( armSelect[1] != -1 and getprop("payload/weight["~(armSelect[1])~"]/selected") != "none") {
+			if ( (selected1.type = "ir" and getprop(ir_sar_switch) == 0 ) or ( selected1.type = "radar" and getprop(ir_sar_switch) == 2 )) {
 			settimer(func { 
-				round2 = 1;
 				missile_release(armSelect[1]); 
-				}, 1.5);
+				}, 0.75);
+			}
 		}
 		
 	}
