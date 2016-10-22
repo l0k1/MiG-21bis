@@ -12,9 +12,23 @@
         <max>  1 </max>
       </clipto>
    </summer>
+   
+   <kinematic name="Aileron Delay">
+     <input>fcs/roll-trim-sum</input>
+	 <traverse>
+		<setting>
+			<position>-1</position>
+			<time>0.0</time>
+		</setting>
+		<setting>
+			<position>1</position>
+			<time>0.55</time>
+		</setting>
+	  </traverse>
+	</kinematic>
 
    <aerosurface_scale name="Left Aileron Control">
-      <input>fcs/roll-trim-sum</input>
+      <input>fcs/aileron-delay</input>
       <range>
         <min> -0.349 </min>
         <max>  0.349 </max>
@@ -23,7 +37,7 @@
    </aerosurface_scale>
 
    <aerosurface_scale name="Right Aileron Control">
-      <input>fcs/roll-trim-sum</input>
+      <input>fcs/aileron-delay</input>
       <range>
         <min> -0.349 </min>
         <max>  0.349 </max>

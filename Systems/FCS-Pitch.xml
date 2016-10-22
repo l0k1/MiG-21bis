@@ -29,9 +29,23 @@
 			</product>
 		</function>
 	</fcs_function>
+	
+	<kinematic name="Elevator Delay">
+     <input>fcs/pitch-gearing</input>
+	 <traverse>
+		<setting>
+			<position>-1</position>
+			<time>0.0</time>
+		</setting>
+		<setting>
+			<position>1</position>
+			<time>0.55</time>
+		</setting>
+	  </traverse>
+	</kinematic>
 
    <aerosurface_scale name="Elevator Control">
-      <input>fcs/pitch-gearing</input>
+      <input>fcs/elevator-delay</input>
       <range>
         <min> -0.287 </min>
         <max>  0.122 </max>

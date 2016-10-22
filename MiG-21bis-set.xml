@@ -216,7 +216,7 @@
 		<flight>
 			<flaps>0</flaps>
 			<elevator-trim>0.00</elevator-trim>
-			<chute_jettisoned type="int">0</chute_jettisoned>
+			<chute_jettisoned type="int">0</chute_jettisoned>z
 		</flight>
 		<gear>
 			<brake-parking type="double">1</brake-parking>

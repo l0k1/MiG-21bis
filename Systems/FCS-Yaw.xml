@@ -32,9 +32,23 @@
         <max>  1 </max>
       </limit>
    </summer>
+   
+   <kinematic name="Rudder Delay">
+     <input>fcs/rudder-sum</input>
+	 <traverse>
+		<setting>
+			<position>-1</position>
+			<time>0.0</time>
+		</setting>
+		<setting>
+			<position>1</position>
+			<time>0.55</time>
+		</setting>
+	  </traverse>
+	</kinematic>
 
    <aerosurface_scale name="Rudder Control">
-      <input>fcs/rudder-sum</input>
+      <input>fcs/rudder-delay</input>
       <domain>
         <min>-1.0</min>
         <max> 1.0</max>
