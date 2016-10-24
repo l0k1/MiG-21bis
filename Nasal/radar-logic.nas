@@ -194,6 +194,7 @@ var processTracks = func (vector, carrier, missile = 0, mp = 0, type = -1) {
           # this track is already selected, updating it
           #print("updating target");
           selection = trackInfo;
+		  setprop("instrumentation/gunsight/distance-to-lock",selection.get_range());
           #paint(selection.getNode(), TRUE);
           selection_updated = TRUE;
         } else {

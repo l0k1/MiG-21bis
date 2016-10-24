@@ -19,8 +19,9 @@
     <animation>
         <type>rotate</type>
         <object-name>needle</object-name>
-        <property>consumables/fuel/tank[0]/level-lbs</property>
-        <factor>0.03</factor>
+        <property>instrumentation/fuel/knob-level</property>
+        <factor>0.0527962876</factor> <!--ish-->
+		<offset-deg>-66</offset-deg>
         <center>
             <x-m>0.02</x-m>
             <y-m>0</y-m>
@@ -32,6 +33,77 @@
             <z>0</z>
         </axis>
     </animation>
+	
+	<animation>
+        <type>rotate</type>
+        <object-name>needle</object-name>
+        <property>fdm/jsbsim/propulsion/engine/fuel-used-lbs</property>
+        <factor>-0.0527962876</factor> <!--ish-->
+        <center>
+            <x-m>0.02</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>knob</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.20</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>instrumentation/fuel/knob-level</property>
+				<step>50</step>
+				<min>0</min>
+				<max>999999</max>
+				<wrap>false</wrap>
+			</binding>
+			<mod-shift>
+				<binding>
+					<command>property-adjust</command>
+					<property>instrumenation/fuel/knob-level</property>
+					<step>500</step>
+					<min>0</min>
+					<max>999999</max>
+					<wrap>false</wrap>
+				</binding>
+			</mod-shift>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.20</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>instrumentation/fuel/knob-level</property>
+				<step>-50</step>
+				<min>0</min>
+				<max>999999</max>
+				<wrap>false</wrap>
+			</binding>
+			<mod-shift>
+				<binding>
+					<command>property-adjust</command>
+					<property>instrumentation/fuel/knob-level</property>
+					<step>-500</step>
+					<min>0</min>
+					<max>999999</max>
+					<wrap>false</wrap>
+				</binding>
+			</mod-shift>
+		</action>
+	</animation>
+			
     
 <!-- Label text -->
 
