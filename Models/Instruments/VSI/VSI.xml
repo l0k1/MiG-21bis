@@ -6,7 +6,8 @@
     <animation>
         <type>material</type>
         <object-name>face</object-name>
-        <object-name>needle</object-name>
+        <object-name>vspeedneedle</object-name>
+		<object-name>turnneedle</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -17,14 +18,14 @@
     
     <animation>
         <type>rotate</type>
-        <object-name>needle</object-name>
-        <property>autopilot/internal/vert-speed-fpm</property>
+        <object-name>vspeedneedle</object-name>
+        <property>velocities/vertical-speed-fps</property>
         <interpolation>
-            <entry><ind>-4000.0</ind><dep>-173.0</dep></entry>
-            <entry><ind>-1000.0</ind><dep>-76.0</dep></entry>
+            <entry><ind>656.168</ind><dep>136.0</dep></entry>
+            <entry><ind>-65.6168</ind><dep>-68.0</dep></entry>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1000.0</ind><dep>76.0</dep></entry>
-            <entry><ind>4000.0</ind><dep>173.0</dep></entry>
+            <entry><ind>65.6168</ind><dep>68.0</dep></entry>
+            <entry><ind>656.168</ind><dep>136.0</dep></entry>
         </interpolation>
         <center>
             <x-m>-0.0060</x-m>
@@ -37,6 +38,43 @@
             <z>0.0</z>
         </axis>
     </animation>
+	
+	<animation>
+        <type>rotate</type>
+        <object-name>turnneedle</object-name>
+        <property>orientation/roll-deg</property>
+        <interpolation>
+            <entry><ind>45.0</ind><dep>30.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>-45.0</ind><dep>-30.0</dep></entry>
+        </interpolation>
+        <center>
+            <x-m>-0.00764</x-m>
+            <y-m> 0.00224</y-m>
+            <z-m>-0.0190</z-m>
+        </center>
+        <axis>
+            <x>-1.0</x>
+            <y>0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>ball</object-name>
+		<property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
+		<interpolation>
+            <entry><ind>3.0</ind><dep>0.0115</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>-3.0</ind><dep>-0.0115</dep></entry>
+        </interpolation>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0.0044</z>
+		</axis>
+	</animation>
     
 <!-- Label text -->
 

@@ -20,8 +20,8 @@
         <type>rotate</type>
         <object-name>needle</object-name>
         <property>fdm/jsbsim/accelerations/Nz</property>
-        <factor>-22.5</factor>
-        <offset-deg>22.5</offset-deg>
+        <factor>22.5</factor>
+        <offset-deg>-22.5</offset-deg>
         <center>
             <x-m> 0.0000</x-m>
             <y-m>-0.0020</y-m>
