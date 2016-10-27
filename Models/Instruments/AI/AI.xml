@@ -2,14 +2,19 @@
 
 <PropertyList>
 
-<path>AI.ac</path>
+<path>ai_new.ac</path>
 
     <animation>
         <type>material</type>
         <object-name>face</object-name>
-        <object-name>attitude</object-name>
-        <object-name>pointer</object-name>
-        <object-name>airplane</object-name>
+		<object-name>pitchTape</object-name>
+		<object-name>aircraftMarker</object-name>
+		<object-name>azimuthLittleNeedle</object-name>
+		<object-name>azimuthNeedle</object-name>
+		<object-name>gsLittleNeedle</object-name>
+		<object-name>gsNeedle</object-name>
+		<object-name>rollNeedles</object-name>
+		<object-name>sideslipCage</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -20,13 +25,13 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>attitude</object-name>
+        <object-name>rollNeedles</object-name>
         <property>orientation/roll-deg</property>
         <factor>1</factor>
         <center>
-            <x-m>-0.0375</x-m>
+            <x-m>0.01659</x-m>
             <y-m>0</y-m>
-            <z-m>-0.0030</z-m>
+            <z-m>-0.00298</z-m>
         </center>
         <axis>
             <x>1</x>
@@ -36,40 +41,35 @@
     </animation>  
 
     <animation>
-        <type>rotate</type>
-        <object-name>attitude</object-name>
+        <type>textranslate</type>
+        <object-name>pitchTape</object-name>
         <property>orientation/pitch-deg</property>
-        <factor>1</factor>
-        <center>
-            <x-m>-0.0375</x-m>
-            <y-m>0</y-m>
-            <z-m>-0.0030</z-m>
-        </center>
-        <axis>
-            <x>0</x>
-            <y>1</y>
-            <z>0</z>
-        </axis>
-    </animation>  
+		<bias>0.0001</bias>
+		<factor>0.0051</factor>
+		<step>.1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+    </animation> 
+	
+	<animation>
+		<type>translate</type>
+		<object-name>sideslipBall</object-name>
+		<property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
+		<interpolation>
+            <entry><ind>3.0</ind><dep>0.02</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>-3.0</ind><dep>-0.02</dep></entry>
+        </interpolation>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0.0025</z>
+		</axis>
+	</animation>
 
-    <animation>
-        <type>rotate</type>
-        <object-name>pointer</object-name>
-        <property>orientation/roll-deg</property>
-        <factor>1</factor>
-        <center>
-            <x-m>0.0012</x-m>
-            <y-m>0</y-m>
-            <z-m>-0.0030</z-m>
-        </center>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
+    <!--<animation>
         <type>rotate</type>
         <object-name>ball</object-name>
         <property>/instrumentation/slip-skid-ball/indicated-slip-skid</property>
@@ -86,7 +86,7 @@
             <y>0</y>
             <z>0</z>
         </axis>
-    </animation>
+    </animation> -->
     
 <!-- Label text -->
 

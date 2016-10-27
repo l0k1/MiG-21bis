@@ -293,7 +293,7 @@ var missile_release = func(pylon) {
 			setprop("payload/weight["~(pylon)~"]/selected", "none");
 			var phrase = brevity ~ " at: " ~ callsign;
 			if (getprop("payload/armament/msg")) {
-				armament.defeatSpamFilter(phrase);
+				defeatSpamFilter(phrase);
 			} else {
 				setprop("/sim/messages/atc", phrase);
 			}
