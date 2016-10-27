@@ -1372,7 +1372,7 @@ var AIM = {
 
 	sendMessage: func (str) {
 		if (getprop("payload/armament/msg")) {
-			armament.defeatSpamFilter(str);
+			defeatSpamFilter(str);
 		} else {
 			setprop("/sim/messages/atc", str);
 		}
@@ -1834,3 +1834,19 @@ var nextGeoloc = func(lat, lon, heading, speed, dt, alt=100){
 }
 
 #var AIM_instance = [nil, nil,nil,nil];#init aim-9
+
+var defeatSpamFilter = func (str) {
+  spams += 1;
+  if (spams == 15) {
+    spams = 1;
+  }
+  str = str~":";
+  for (var i = 1; i <= spams; i+=1) {
+    str = str~".";
+  }
+  var newList = [str];
+  for (var i = 0; i < size(spamList); i += 1) {
+    append(newList, spamList[i]);
+  }
+  spamList = newList;  
+}
