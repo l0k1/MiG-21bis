@@ -106,7 +106,7 @@
         <offsets>
             <x-m>-3.9049</x-m>
             <y-m>-0.1708</y-m>
-            <z-m> 0.5898</z-m>
+            <z-m> 0.5698</z-m>
         </offsets>
     </model>
     
@@ -115,7 +115,7 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/Mach/Mach.xml</path>
         <offsets>
             <x-m>-3.9096</x-m>
-            <y-m>-0.0718</y-m>
+            <y-m>-0.0600</y-m>
             <z-m> 0.5717</z-m>
         </offsets>
     </model>
@@ -125,7 +125,7 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/Clock/Clock.xml</path>
         <offsets>
             <x-m>-3.9050</x-m>
-            <y-m>-0.0650</y-m>
+            <y-m>-0.0630</y-m>
             <z-m> 0.4705</z-m>
         </offsets>
     </model>
@@ -348,16 +348,6 @@
             <x-m>-3.8951</x-m>
             <y-m>-0.1715</y-m>
             <z-m> 0.9392</z-m>
-        </offsets>
-    </model>
-    
-    <model>
-        <name>Null Indicator</name>
-        <path>Aircraft/MiG-21bis/Models/Instruments/Null/Null.xml</path>
-        <offsets>
-            <x-m>-3.9050</x-m>
-            <y-m>-0.1737</y-m>
-            <z-m> 0.4868</z-m>
         </offsets>
     </model>
     
