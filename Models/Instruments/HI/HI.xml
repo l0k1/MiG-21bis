@@ -2,13 +2,21 @@
 
 <PropertyList>
 
-    <path>HI.ac</path>
+    <path>hi_new.ac</path>
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-        <object-name>front</object-name>
-        <object-name>hdgbug</object-name>
+        <object-name>adfBack</object-name>
+		<object-name>adfFwd</object-name>
+		<object-name>azimuth</object-name>
+		<object-name>azimuthNeedle</object-name>
+		<object-name>compass</object-name>
+		<object-name>courseBack</object-name>
+		<object-name>courseFwd</object-name>
+		<object-name>fromFlag</object-name>
+		<object-name>glideslopeNeedle</object-name>
+		<object-name>innerPlate</object-name>
+		<object-name>toFlag</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -18,21 +26,9 @@
     </animation>
 
     <animation>
-        <type>material</type>
-        <object-name>obs-knob</object-name>
-        <object-name>hdg-knob</object-name>
-        <emission>
-            <red>0.45</red>
-            <green>0.09</green>
-            <blue>0.00001</blue>
-            <factor-prop>/sim/model//material/instruments/factor</factor-prop>
-        </emission>
-    </animation>
-
-    <animation>
         <type>rotate</type>
-        <object-name>face</object-name>
-        <property>/instrumentation/heading-indicator/indicated-heading-deg</property>
+        <object-name>compass</object-name>
+        <property>/orientation/heading-deg</property>
         <factor>-1</factor>
         <axis>
             <x>-1</x>
@@ -41,7 +37,7 @@
         </axis>
     </animation>
 
-    <animation>
+ <!--   <animation>
         <type>rotate</type>
         <object-name>hdgbug</object-name>
         <property>/instrumentation/heading-indicator/indicated-heading-deg</property>
@@ -72,7 +68,7 @@
         <y>0</y>
         <z>0</z>
         </axis>
-    </animation>
+    </animation>-->
     
 <!-- Label text -->
 
