@@ -1246,7 +1246,7 @@ OBJECT poly
 name "knob"
 data 17
 switches.mesh.001
-loc -0.0010104 -0.0500888 -0.0612948
+loc -0.0010104 -0.0478292 -0.0495860
 crease 45.0
 numvert 37
 0.00234 -0.00717 -0.00001
