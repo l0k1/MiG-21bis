@@ -22,7 +22,7 @@
         <type>rotate</type>
         <object-name>100-needle</object-name>
         <property>instrumentation/altimeter/indicated-altitude-ft</property>
-        <factor>-0.36</factor>
+        <factor>-0.1097279</factor>
         <axis>
             <x1-m>-0.0254</x1-m>
             <y1-m> 0.0000</y1-m>
@@ -37,7 +37,7 @@
         <type>rotate</type>
         <object-name>1000-needle</object-name>
         <property>instrumentation/altimeter/indicated-altitude-ft</property>
-        <factor>-0.036</factor>
+        <factor>-0.01097279</factor>
         <axis>
             <x1-m>-0.0254</x1-m>
             <y1-m> 0.0000</y1-m>
@@ -48,11 +48,11 @@
         </axis>
     </animation>  
 
-    <animation>
+    <animation> <!--using for singles, not 10000 (which is pretty much useless for meters -->
         <type>rotate</type>
         <object-name>10000-needle</object-name>
         <property>instrumentation/altimeter/indicated-altitude-ft</property>
-        <factor>-0.0036</factor>
+        <factor>-1.097279</factor>
         <axis>
             <x1-m>-0.0254</x1-m>
             <y1-m> 0.0000</y1-m>
@@ -68,7 +68,7 @@
 <text>
 	<name>LabelText</name>
 	<type type="string">literal</type>
-		<text type="string">Altimeter</text>
+		<text type="string">Altimeter (meters)</text>
 	<draw-text type="bool">true</draw-text>
 	<font>Helvetica.txf</font>
 		<character-size type="double">0.012</character-size>

@@ -28,7 +28,7 @@
         <emission>
             <red>0.7</red>
             <green>0.3</green>
-            <blue>0.4</blue>
+            <blue>0.3</blue>
             <factor-prop>controls/lighting/instruments-norm</factor-prop>
         </emission> 
     </animation> 
