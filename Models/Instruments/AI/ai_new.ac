@@ -4272,7 +4272,7 @@ OBJECT poly
 name "sideslipBall"
 data 6
 Sphere
-loc 0.0031145 -0.0637907 0.0200148
+loc 0.0031145 -0.0642862 0.0000000
 crease 35.0
 texture "ai_new.png"
 texrep 1 1

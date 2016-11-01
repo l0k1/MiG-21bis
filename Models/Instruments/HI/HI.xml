@@ -28,15 +28,80 @@
     <animation>
         <type>rotate</type>
         <object-name>compass</object-name>
+		<object-name>courseFwd</object-name>
+		<object-name>courseBack</object-name>
         <property>/orientation/heading-deg</property>
-        <factor>-1</factor>
+        <factor>1</factor>
         <axis>
-            <x>-1</x>
+            <x>1</x>
             <y>0</y>
             <z>0</z>
         </axis>
     </animation>
 
+	<animation>
+        <type>rotate</type>
+        <object-name>courseFwd</object-name>
+		<object-name>courseBack</object-name>
+        <property>/instrumentation/nav[0]/radials/selected-deg</property>
+        <factor>-1</factor>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+	
+	<animation>
+        <type>translate</type>
+        <object-name>azimuthNeedle</object-name>
+        <property>/instrumentation/nav[0]/heading-needle-deflection-norm</property>
+        <factor>.03</factor>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+	
+	<animation>
+        <type>translate</type>
+        <object-name>azimuthNeedle</object-name>
+        <property>/instrumentation/nav[1]/gs-needle-deflection-norm</property>
+        <factor>.03</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>toFlag</object-name>
+		<property>/instrumentation/nav[0]/to-flag</property>
+		<bias>0.0001</bias>
+		<factor>0.029296875</factor>
+		<step>1</step>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>fromFlag</object-name>
+		<property>/instrumentation/nav[0]/from-flag</property>
+		<bias>0.0001</bias>
+		<factor>0.029296875</factor>
+		<step>1</step>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+		</axis>
+	</animation>
+	
  <!--   <animation>
         <type>rotate</type>
         <object-name>hdgbug</object-name>
@@ -69,6 +134,63 @@
         <z>0</z>
         </axis>
     </animation>-->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>knob</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/nav[0]/radials/selected-deg</property>
+				<step>1</step>
+				<min>0</min>
+				<max>360</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>3</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/nav[0]/radials/selected-deg</property>
+				<step>10</step>
+				<min>0</min>
+				<max>360</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/nav[0]/radials/selected-deg</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>360</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>4</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/nav[0]/radials/selected-deg</property>
+				<step>-10</step>
+				<min>0</min>
+				<max>360</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+	</animation>
     
 <!-- Label text -->
 

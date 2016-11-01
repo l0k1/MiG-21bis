@@ -8,17 +8,27 @@
         <type>material</type>
         <object-name>face</object-name>
 		<object-name>pitchTape</object-name>
-		<object-name>aircraftMarker</object-name>
 		<object-name>azimuthLittleNeedle</object-name>
-		<object-name>azimuthNeedle</object-name>
 		<object-name>gsLittleNeedle</object-name>
-		<object-name>gsNeedle</object-name>
-		<object-name>rollNeedles</object-name>
 		<object-name>sideslipCage</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
             <blue>0.3</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission> 
+    </animation> 
+	
+	    <animation>
+        <type>material</type>
+		<object-name>aircraftMarker</object-name>
+		<object-name>azimuthNeedle</object-name>
+		<object-name>gsNeedle</object-name>
+		<object-name>rollNeedles</object-name>
+        <emission>
+            <red>0.7</red>
+            <green>0.3</green>
+            <blue>0.4</blue>
             <factor-prop>controls/lighting/instruments-norm</factor-prop>
         </emission> 
     </animation> 
@@ -38,7 +48,24 @@
             <y>0</y>
             <z>0</z>
         </axis>
-    </animation>  
+    </animation> 
+
+	<animation>
+        <type>rotate</type>
+        <object-name>azimuthNeedle</object-name>
+        <property>/instrumentation/nav[0]/intercept-norm</property>
+        <factor>4</factor>
+        <center>
+            <x-m>0.00061</x-m>
+            <y-m>-0.00002</y-m>
+            <z-m>-0.04319</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>  	
 
     <animation>
         <type>textranslate</type>

@@ -90,6 +90,13 @@
 							<script>aircraft.livery.dialog.toggle()</script>
 						</binding>
 					</item>
+					<item>
+						<label>VOR/ILS Radio</label>
+						<binding>
+							<command>nasal</command>
+							<script>mig21.radio_dialog.open()</script>
+						</binding>
+					</item>
 				</menu>
 			</default>
 		</menubar>
@@ -336,6 +343,11 @@
 	</engines>
 
 	<instrumentation>
+		<nav n="0">
+			<radials>
+				<selected-deg>0</selected-deg>
+			</radials>
+		</nav>
 		<marker-beacon>
 			<volume type="double" archive="y">0.0</volume>
 		</marker-beacon>
@@ -381,6 +393,52 @@
 		<fuel>
 			<knob-level type="float">0</knob-level>
 		</fuel>
+		<vor-radio>
+			<selection type="int" archive="y">0</selection>
+			<preset type="double" n="0" archive="y">101.00</preset>
+			<preset type="double" n="1" archive="y">101.00</preset>
+			<preset type="double" n="2" archive="y">101.00</preset>
+			<preset type="double" n="3" archive="y">101.00</preset>
+			<preset type="double" n="4" archive="y">101.00</preset>
+			<preset type="double" n="5" archive="y">101.00</preset>
+			<preset type="double" n="6" archive="y">101.00</preset>
+			<preset type="double" n="7" archive="y">101.00</preset>
+			<preset type="double" n="8" archive="y">101.00</preset>
+			<preset type="double" n="9" archive="y">101.00</preset>
+			<preset type="double" n="10" archive="y">101.00</preset>
+			<preset type="double" n="11" archive="y">101.00</preset>
+			<preset type="double" n="12" archive="y">101.00</preset>
+			<preset type="double" n="13" archive="y">101.00</preset>
+			<preset type="double" n="14" archive="y">101.00</preset>
+			<preset type="double" n="15" archive="y">101.00</preset>
+			<preset type="double" n="16" archive="y">101.00</preset>
+			<preset type="double" n="17" archive="y">101.00</preset>
+			<preset type="double" n="18" archive="y">101.00</preset>
+			<preset type="double" n="19" archive="y">101.00</preset>
+		</vor-radio>
+		<ils-radio>
+			<selection type="int" archive="y">0</selection>
+			<preset type="double" n="0" archive="y">101.00</preset>
+			<preset type="double" n="1" archive="y">101.00</preset>
+			<preset type="double" n="2" archive="y">101.00</preset>
+			<preset type="double" n="3" archive="y">101.00</preset>
+			<preset type="double" n="4" archive="y">101.00</preset>
+			<preset type="double" n="5" archive="y">101.00</preset>
+			<preset type="double" n="6" archive="y">101.00</preset>
+			<preset type="double" n="7" archive="y">101.00</preset>
+			<preset type="double" n="8" archive="y">101.00</preset>
+			<preset type="double" n="9" archive="y">101.00</preset>
+			<preset type="double" n="10" archive="y">101.00</preset>
+			<preset type="double" n="11" archive="y">101.00</preset>
+			<preset type="double" n="12" archive="y">101.00</preset>
+			<preset type="double" n="13" archive="y">101.00</preset>
+			<preset type="double" n="14" archive="y">101.00</preset>
+			<preset type="double" n="15" archive="y">101.00</preset>
+			<preset type="double" n="16" archive="y">101.00</preset>
+			<preset type="double" n="17" archive="y">101.00</preset>
+			<preset type="double" n="18" archive="y">101.00</preset>
+			<preset type="double" n="19" archive="y">101.00</preset>
+		</ils-radio>
 	</instrumentation>
 
 	<fdm>
@@ -947,6 +1005,9 @@
 
 	<!-- Nasal Scripts -->
 	<nasal>
+		<mig21>
+			<file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>
+		</mig21>
 		<MiG-21bis>
 			<file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>
 		</MiG-21bis>

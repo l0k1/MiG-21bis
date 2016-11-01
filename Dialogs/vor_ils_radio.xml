@@ -1,0 +1,440 @@
+<PropertyList>
+
+ <name>vor_ils_radio</name>
+ <modal>false</modal>
+ <layout>vbox</layout>
+ <width>520</width>
+ <height>390</height>
+  <group>
+   <text>
+    <label>VOR and ILS Radio Presets</label>
+	<x>170</x>
+	<y>365</y>
+  </text>
+  
+  <!-- ********************************* VOR Presets  ************************************ -->
+  
+  <text>
+    <label>VOR Presets</label>
+	<x>75</x>
+   <y>345</y>
+  </text>
+  
+  <input>
+   <x>10</x>
+   <y>320</y>
+   <width>75</width>
+   <height>25</height>
+   <label>00</label>
+   <property>/instrumentation/vor-radio/preset[0]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>320</y>
+   <width>75</width>
+   <height>25</height>
+   <label>01</label>
+   <property>/instrumentation/vor-radio/preset[1]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>290</y>
+   <width>75</width>
+   <height>25</height>
+   <label>02</label>
+   <property>/instrumentation/vor-radio/preset[2]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>290</y>
+   <width>75</width>
+   <height>25</height>
+   <label>03</label>
+   <property>/instrumentation/vor-radio/preset[3]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>260</y>
+   <width>75</width>
+   <height>25</height>
+   <label>04</label>
+   <property>/instrumentation/vor-radio/preset[4]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>260</y>
+   <width>75</width>
+   <height>25</height>
+   <label>05</label>
+   <property>/instrumentation/vor-radio/preset[5]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>230</y>
+   <width>75</width>
+   <height>25</height>
+   <label>06</label>
+   <property>/instrumentation/vor-radio/preset[6]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>230</y>
+   <width>75</width>
+   <height>25</height>
+   <label>07</label>
+   <property>/instrumentation/vor-radio/preset[7]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>200</y>
+   <width>75</width>
+   <height>25</height>
+   <label>08</label>
+   <property>/instrumentation/vor-radio/preset[8]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>200</y>
+   <width>75</width>
+   <height>25</height>
+   <label>09</label>
+   <property>/instrumentation/vor-radio/preset[9]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>170</y>
+   <width>75</width>
+   <height>25</height>
+   <label>10</label>
+   <property>/instrumentation/vor-radio/preset[10]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>170</y>
+   <width>75</width>
+   <height>25</height>
+   <label>11</label>
+   <property>/instrumentation/vor-radio/preset[11]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>140</y>
+   <width>75</width>
+   <height>25</height>
+   <label>12</label>
+   <property>/instrumentation/vor-radio/preset[12]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>140</y>
+   <width>75</width>
+   <height>25</height>
+   <label>13</label>
+   <property>/instrumentation/vor-radio/preset[13]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>110</y>
+   <width>75</width>
+   <height>25</height>
+   <label>14</label>
+   <property>/instrumentation/vor-radio/preset[14]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>110</y>
+   <width>75</width>
+   <height>25</height>
+   <label>15</label>
+   <property>/instrumentation/vor-radio/preset[15]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>80</y>
+   <width>75</width>
+   <height>25</height>
+   <label>16</label>
+   <property>/instrumentation/vor-radio/preset[16]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>80</y>
+   <width>75</width>
+   <height>25</height>
+   <label>17</label>
+   <property>/instrumentation/vor-radio/preset[17]</property>
+  </input>
+  
+    <input>
+   <x>10</x>
+   <y>50</y>
+   <width>75</width>
+   <height>25</height>
+   <label>18</label>
+   <property>/instrumentation/vor-radio/preset[18]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>50</y>
+   <width>75</width>
+   <height>25</height>
+   <label>19</label>
+   <property>/instrumentation/vor-radio/preset[19]</property>
+  </input>
+  
+ <!-- ********************************* ILS Presets ************************************ -->
+  
+  <text>
+    <label>ILS Presets</label>
+	<x>350</x>
+   <y>345</y>
+  </text>
+  
+  <input>
+   <x>280</x>
+   <y>320</y>
+   <width>75</width>
+   <height>25</height>
+   <label>00</label>
+   <property>/instrumentation/ils-radio/preset[0]</property>
+  </input>
+  <input>
+   <x>400</x>
+   <y>320</y>
+   <width>75</width>
+   <height>25</height>
+   <label>01</label>
+   <property>/instrumentation/ils-radio/preset[1]</property>
+  </input>
+  
+  <input>
+   <x>280</x>
+   <y>290</y>
+   <width>75</width>
+   <height>25</height>
+   <label>02</label>
+   <property>/instrumentation/ils-radio/preset[2]</property>
+  </input>
+  <input>
+   <x>400</x>
+   <y>290</y>
+   <width>75</width>
+   <height>25</height>
+   <label>03</label>
+   <property>/instrumentation/ils-radio/preset[3]</property>
+  </input>
+  
+  <input>
+   <x>280</x>
+   <y>260</y>
+   <width>75</width>
+   <height>25</height>
+   <label>04</label>
+   <property>/instrumentation/ils-radio/preset[4]</property>
+  </input>
+  <input>
+   <x>400</x>
+   <y>260</y>
+   <width>75</width>
+   <height>25</height>
+   <label>05</label>
+   <property>/instrumentation/ils-radio/preset[5]</property>
+  </input>
+  
+  <input>
+   <x>280</x>
+   <y>230</y>
+   <width>75</width>
+   <height>25</height>
+   <label>06</label>
+   <property>/instrumentation/ils-radio/preset[6]</property>
+  </input>
+  <input>
+   <x>400</x>
+   <y>230</y>
+   <width>75</width>
+   <height>25</height>
+   <label>07</label>
+   <property>/instrumentation/ils-radio/preset[7]</property>
+  </input>
+  
+  <input>
+   <x>280</x>
+   <y>200</y>
+   <width>75</width>
+   <height>25</height>
+   <label>08</label>
+   <property>/instrumentation/ils-radio/preset[8]</property>
+  </input>
+  <input>
+   <x>400</x>
+   <y>200</y>
+   <width>75</width>
+   <height>25</height>
+   <label>09</label>
+   <property>/instrumentation/ils-radio/preset[9]</property>
+  </input>
+  
+  <input>
+   <x>280</x>
+   <y>170</y>
+   <width>75</width>
+   <height>25</height>
+   <label>10</label>
+   <property>/instrumentation/ils-radio/preset[10]</property>
+  </input>
+  <input>
+   <x>400</x>
+   <y>170</y>
+   <width>75</width>
+   <height>25</height>
+   <label>11</label>
+   <property>/instrumentation/ils-radio/preset[11]</property>
+  </input>
+  
+  <input>
+   <x>280</x>
+   <y>140</y>
+   <width>75</width>
+   <height>25</height>
+   <label>12</label>
+   <property>/instrumentation/ils-radio/preset[12]</property>
+  </input>
+  <input>
+   <x>400</x>
+   <y>140</y>
+   <width>75</width>
+   <height>25</height>
+   <label>13</label>
+   <property>/instrumentation/ils-radio/preset[13]</property>
+  </input>
+  
+  <input>
+   <x>280</x>
+   <y>110</y>
+   <width>75</width>
+   <height>25</height>
+   <label>14</label>
+   <property>/instrumentation/ils-radio/preset[14]</property>
+  </input>
+  <input>
+   <x>400</x>
+   <y>110</y>
+   <width>75</width>
+   <height>25</height>
+   <label>15</label>
+   <property>/instrumentation/ils-radio/preset[15]</property>
+  </input>
+  
+  <input>
+   <x>280</x>
+   <y>80</y>
+   <width>75</width>
+   <height>25</height>
+   <label>16</label>
+   <property>/instrumentation/ils-radio/preset[16]</property>
+  </input>
+  <input>
+   <x>400</x>
+   <y>80</y>
+   <width>75</width>
+   <height>25</height>
+   <label>17</label>
+   <property>/instrumentation/ils-radio/preset[17]</property>
+  </input>
+  
+    <input>
+   <x>280</x>
+   <y>50</y>
+   <width>75</width>
+   <height>25</height>
+   <label>18</label>
+   <property>/instrumentation/ils-radio/preset[18]</property>
+  </input>
+  <input>
+   <x>400</x>
+   <y>50</y>
+   <width>75</width>
+   <height>25</height>
+   <label>19</label>
+   <property>/instrumentation/ils-radio/preset[19]</property>
+  </input>
+  
+  <!-- ********************************* CLOSE BUTTON ************************************* -->
+  
+   <button>
+    <legend>Apply</legend>
+	<y>10</y>
+	<x>90</x>
+    <binding>
+     <command>dialog-apply</command>
+    </binding>
+   </button>
+  
+  <button>
+    <legend>Close</legend>
+	<y>10</y>
+	<x>350</x>
+    <binding>
+     <command>dialog-apply</command>
+    </binding>
+	<binding>
+     <command>dialog-close</command>
+    </binding>
+   </button>
+  
+  </group>
+
+
+  <!--<text>
+    <label>Weapon Management</label>
+  </text>
+	  
+	  var tlat = getprop("ai/guided/bay"~ b ~"/bomb["~ n ~"]/target-latitude-deg");
+var tlong = getprop("ai/guided/bay"~ b ~"/bomb["~ n ~"]/target-longitude-deg");
+	  
+ <hrule/>
+ 
+  <nasal>
+    <open>
+	#nasal
+    </open>
+  </nasal>
+
+
+    <text>
+    <label>Load Weapons</label>
+   </text>
+    <text>
+    <label></label>
+   </text>
+  <group>
+   <layout>vbox</layout>
+    
+    <text>
+    <label>Load bays with 8 guidable GBU-31 2000lb bombs</label>
+    <halign>left</halign>
+   </text>
+   
+  <button>
+	<legend>Load Guided Ordonance - FWD</legend>
+	<default>true</default>
+	<pref-width>230</pref-width>
+	  <binding>
+		<command>nasal</command>
+		<script>weapons.wpn_load(0)</script>
+	  </binding>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+  </button>-->
+
+</PropertyList>

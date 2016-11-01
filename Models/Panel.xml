@@ -411,5 +411,15 @@
             <z-m>0</z-m>
         </offsets>
 	</model>
+	
+	<model>
+		<name>Radar Power Panel</name>
+		<path>Aircraft/MiG-21bis/Models/Instruments/Radio/radio.xml</path>
+		<offsets>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </offsets>
+	</model>
 
 </PropertyList>
