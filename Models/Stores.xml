@@ -146,7 +146,7 @@
 
 	<model>
 		<name>R-60 Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-4.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-3.xml</path>
 		<offsets>
 			<x-m> 1.13</x-m>
 			<y-m> 2.73 </y-m>
@@ -157,11 +157,99 @@
 	
 	<model>
 		<name>R-60 Missile Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-3.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-4.xml</path>
 		<offsets>
 			<x-m> -0.35</x-m>
 			<y-m> 2.11 </y-m>
 			<z-m>-0.20</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>R-27R1 Missile Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1-0.xml</path>
+		<offsets>
+			<x-m> 0.70</x-m>
+			<y-m>-2.73 </y-m>
+			<z-m>-0.26</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>R-27R1 Missile Left Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1-1.xml</path>
+		<offsets>
+			<x-m> -0.15</x-m>
+			<y-m>-2.11 </y-m>
+			<z-m>-0.23</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>R-27R1 Missile Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1-3.xml</path>
+		<offsets>
+			<x-m> 0.70</x-m>
+			<y-m>2.73 </y-m>
+			<z-m>-0.26</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>R-27R1 Missile Right Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1-4.xml</path>
+		<offsets>
+			<x-m> -0.15</x-m>
+			<y-m> 2.11 </y-m>
+			<z-m>-0.23</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+		<model>
+		<name>R-27T1 Missile Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1-0.xml</path>
+		<offsets>
+			<x-m> 0.70</x-m>
+			<y-m>-2.73 </y-m>
+			<z-m>-0.26</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>R-27T1 Missile Left Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1-1.xml</path>
+		<offsets>
+			<x-m> -0.15</x-m>
+			<y-m>-2.11 </y-m>
+			<z-m>-0.23</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>R-27T1 Missile Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1-3.xml</path>
+		<offsets>
+			<x-m> 0.70</x-m>
+			<y-m>2.73 </y-m>
+			<z-m>-0.26</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>R-27T1 Missile Right Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1-4.xml</path>
+		<offsets>
+			<x-m> -0.15</x-m>
+			<y-m> 2.11 </y-m>
+			<z-m>-0.23</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>

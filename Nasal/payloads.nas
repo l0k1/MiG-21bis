@@ -109,8 +109,9 @@ var payloads = {
 	"none":					pos_arm.new("none",0,"none"),
 	# ir missiles
 	"R-60":					pos_arm.new("R-60",96,"ir"),
+	"R-27T1":					pos_arm.new("R-27T1",550,"ir"),
 	# radar missiles
-	
+	"R-27R1":					pos_arm.new("R-27R1",560,"radar"),
 	# bombs
 	"FAB-250":				pos_arm.new("FAB-250",520,"bomb"),
 	# anti-radiation
@@ -219,12 +220,12 @@ var missile_release_listener = func {
 	selected1 = payloads[getprop("payload/weight["~(armSelect[1])~"]/selected") ];
 	
 	if (getprop("/fdm/jsbsim/systems/armament/release") == 1 )  {
-		if ( (selected0.type = "ir" and getprop(ir_sar_switch) == 0 ) or ( selected0.type = "radar" and getprop(ir_sar_switch) == 2 )) {
+		if ( ((selected0.type = "ir" and getprop(ir_sar_switch) == 0 ) or ( selected0.type = "radar" and getprop(ir_sar_switch) == 2 )) and armSelect[2] >= 5 ) {
 			round2 = 0;
 			missile_release(armSelect[0]);
 		}
 		if ( armSelect[1] != -1 and getprop("payload/weight["~(armSelect[1])~"]/selected") != "none") {
-			if ( (selected1.type = "ir" and getprop(ir_sar_switch) == 0 ) or ( selected1.type = "radar" and getprop(ir_sar_switch) == 2 )) {
+			if ( ((selected1.type = "ir" and getprop(ir_sar_switch) == 0 ) or ( selected1.type = "radar" and getprop(ir_sar_switch) == 2 )) and armSelect[2] >= 5 ) { #if is IR/Radar missile, and weapon selector is in missile range
 			settimer(func { 
 				missile_release(armSelect[1]); 
 				}, 0.75);
@@ -359,19 +360,19 @@ var pylon_select = func() {
 	
 	var knobpos = getprop("controls/armament/panel/pylon-knob");
 	if ( knobpos == 0 or knobpos == 3 or knobpos == 6 ) {
-		return [0,4];
+		return [0,4,knobpos];
 	} elsif ( knobpos == 2 ) {
-		return [0,3]
+		return [0,3,knobpos]
 	} elsif ( knobpos == 1 or knobpos == 4 or knobpos == 5 ) { #3,4
-		return [1,3]
+		return [1,3,knobpos]
 	} elsif ( knobpos == 7 ) {
-		return [0,-1]
+		return [0,-1,knobpos]
 	} elsif ( knobpos == 8 ) {
-		return [4,-1]
+		return [4,-1,knobpos]
 	} elsif ( knobpos == 9 ) {
-		return [1,-1]
+		return [1,-1,knobpos]
 	} elsif ( knobpos == 10 ) {
-		return [3,-1]
+		return [3,-1,knobpos]
 	}
 }
 	
