@@ -644,8 +644,8 @@
         	</weight>
 			<armament>
                 <models type="string">Aircraft/MiG-21bis/Models/Stores/</models>
-                <msg type="bool">false</msg>
-                <damage type="bool">false</damage>
+                <msg type="bool">true</msg>
+                <damage type="bool">true</damage>
                 <r-60>
                     <sound-on-off type="bool">false</sound-on-off>
                     <sound-volume type="double">0.0</sound-volume>

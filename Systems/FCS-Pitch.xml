@@ -21,7 +21,7 @@
 					<independentVar lookup="column">accelerations/Nz</independentVar>
 					<independentVar lookup="row">fcs/pitch-gearing-enable</independentVar>
 					<tableData>
-								1		5			7			9			11		12
+								1		7			9			11			13		14
 						0.0		1.0		1.0			1.0			1.0			1.0		1.0
 						1.0		1.0		0.75		0.45		0.34		0.25	0
 					</tableData>
