@@ -141,6 +141,7 @@ var update_loop = func {
 			setprop("controls/armament/station["~(i)~"]/released", FALSE);
 			if (payloads[selected].type == "ir" or payloads[selected].type == "radar" or payloads[selected].type == "antirad") {
 				if(armament.AIM.active[i] != nil and armament.AIM.active[i].type != selected) {
+					#print("deleting "~i~" due to type != selected");
 					armament.AIM.active[i].del();
 				}
 				if(armament.AIM.new(i, selected, payloads[selected].brevity) == -1 and armament.AIM.active[i].status == MISSILE_FLYING) {
@@ -150,6 +151,7 @@ var update_loop = func {
 			}
 		} elsif (selected == "none") {
 			if ( armament.AIM.active[i] != nil ) {
+				#print("deleting "~i~" due to pylon being none.");
 				armament.AIM.active[i].del();
 			}
 		}
@@ -163,8 +165,10 @@ var update_loop = func {
 		var payloadName = getprop("/payload/weight[" ~ i ~ "]/selected");
 		if ( armament.AIM.active[i] != nil ) {
 			if ( armSelect[0] != i and armSelect[1] != i and armament.AIM.active[i].status != MISSILE_FLYING ) {
+				#print("setting pylon " ~ i ~ " to standby");
 				armament.AIM.active[i].status = MISSILE_STANDBY;
 			} elsif ( armament.AIM.active[i].status != MISSILE_STANDBY and armament.AIM.active[i] != MISSILE_FLYING and payloadName == "none" ) {
+				#print("setting pylon " ~ i ~ " to standby");
 				armament.AIM.active[i].status = MISSILE_STANDBY;
 			} elsif ( (armSelect[0] == i or armSelect[1] == i) and armament.AIM.active[i].status == MISSILE_STANDBY ) {
 				#print("missile " ~i~ " should be searching.");
@@ -217,9 +221,17 @@ var missile_release_listener = func {
 	var armSelect = pylon_select();
 	
 	selected0 = payloads[getprop("payload/weight["~(armSelect[0])~"]/selected") ];
-	selected1 = payloads[getprop("payload/weight["~(armSelect[1])~"]/selected") ];
-	
+	if ( armSelect[1] != -1 ) {	
+		selected1 = payloads[getprop("payload/weight["~(armSelect[1])~"]/selected") ];
+	}
+	#print("in listener");
+	#print("armselect0: " ~ armSelect[0]);
+	#print("armselect1: " ~ armSelect[1]);
+	#print("armselect2: " ~ armSelect[2]);
+	#print("release prop: " ~ getprop("/fdm/jsbsim/systems/armament/release"));
 	if (getprop("/fdm/jsbsim/systems/armament/release") == 1 )  {
+		#print("selected0.type: " ~ selected0.type);
+		#print("iar_sar_switch: " ~ getprop(ir_sar_switch));
 		if ( ((selected0.type = "ir" and getprop(ir_sar_switch) == 0 ) or ( selected0.type = "radar" and getprop(ir_sar_switch) == 2 )) and armSelect[2] >= 5 ) {
 			round2 = 0;
 			missile_release(armSelect[0]);
@@ -280,8 +292,9 @@ var missile_release = func(pylon) {
 		#	var rs = 0;
 		#}
 		#print("selection: " ~ rs);
-		#print("target: " ~armament.AIM.active[pylon].callsign);
+		#print("pylon: " ~pylon);
 		#print("status: " ~ armament.AIM.active[pylon].status);
+		#print("target: " ~armament.AIM.active[pylon].callsign);
 		#print("selection: " ~radar_logic.selection.get_Callsign());
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
 			#missile locked, fire it.
