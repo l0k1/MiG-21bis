@@ -55,7 +55,7 @@
     <submodel>
         <name>Left Barrel</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Tracer.xml</model>
-        <trigger>controls/armament/trigger</trigger>
+        <trigger>controls/armament/GSh-30/trigger</trigger>
         <speed>2840.0</speed>
         <repeat>true</repeat>
         <delay>0.15</delay>
@@ -73,9 +73,9 @@
     </submodel>
 
     <submodel>
-        <name>Ammo L</name>
+        <name>GSh-30</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Null.ac</model>
-        <trigger>controls/armament/trigger</trigger>
+        <trigger>controls/armament/GSh-30/trigger</trigger>
         <speed>2840.0</speed>
         <repeat>true</repeat>
         <delay>0</delay>
@@ -99,7 +99,7 @@
     <submodel>
         <name>Right Barrel</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Tracer.xml</model>
-        <trigger>controls/armament/trigger</trigger>
+        <trigger>controls/armament/GSh-30/trigger</trigger>
         <speed>2840.0</speed>
         <repeat>true</repeat>
         <delay>0.15</delay>
@@ -117,9 +117,9 @@
     </submodel>
 
     <submodel>
-        <name>Ammo R</name>
+        <name>GSh-30</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Null.ac</model>
-        <trigger>controls/armament/trigger</trigger>
+        <trigger>controls/armament/GSh-30/trigger</trigger>
         <speed>2840.0</speed>
         <repeat>true</repeat>
         <delay>0</delay>

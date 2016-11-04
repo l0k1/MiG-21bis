@@ -212,8 +212,43 @@ var update_loop = func {
 			}
 		}
 	}
+	
+	#cannon ammo counter and jamming
+	if ( getprop("controls/armament/trigger") == 1 ) {
+		var cur_ammo = getprop("controls/armament/GSh-30/ammo");
+		if (cur_ammo > 0) {
+			var jam_prob = rand();
+			if (jam_prob < 0.01) {
+				setprop("controls/armament/GSh-30/jammed",1);
+				setprop("controls/armament/GSh-30/trigger",0);
+			}
+			cur_ammo = math.clamp(cur_ammo - 4,0,200);
+			setprop("controls/armament/GSh-30/trigger",1);
+		} else {
+			setprop("controls/armament/GSh-30/trigger",0);
+			setprop("controls/armament/panel/gun-ready",0);
+		}
+	} else {
+		setprop("controls/armament/GSh-30/trigger",0);
+	}
+	
 	settimer(update_loop, UPDATE_PERIOD);
 }
+
+########### listener for handling unjamming #########
+
+var charge_used = [0,0,0];
+
+var unjam = func(button) {
+	if ( charge_used[button] == 0 ) {
+		charge_used[button] = 1;
+		setprop("controls/armament/GSh-30/jammed",0);
+	}
+}
+
+setlistener("controls/armament/panel/reload[0]", func { unjam(0); } );
+setlistener("controls/armament/panel/reload[1]", func { unjam(1); } );
+setlistener("controls/armament/panel/reload[2]", func { unjam(2); } );
 
 ###########  listener for handling the trigger #########
 

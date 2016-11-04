@@ -646,6 +646,11 @@
                 <models type="string">Aircraft/MiG-21bis/Models/Stores/</models>
                 <msg type="bool">true</msg>
                 <damage type="bool">true</damage>
+				<GSh-30>
+					<ammo type="int">200</ammo>
+					<trigger type="bool">false</trigger>
+					<jammed type="bool">false</jammed>
+				</GSh-30>
                 <r-60>
                     <sound-on-off type="bool">false</sound-on-off>
                     <sound-volume type="double">0.0</sound-volume>
