@@ -8,7 +8,7 @@
    <lighting type="bool">true</lighting>
 
    <condition>
-         <property>payload/armament/r-60/flags/smoke-id-4</property>
+         <property>payload/armament/r-27r1/flags/smoke-id-4</property>
    </condition>
 
    <attach>world</attach>
@@ -100,7 +100,7 @@
    <lighting type="bool">false</lighting>
 
    <condition>
-         <property>payload/armament/r-60/flags/smoke-id-4</property>
+         <property>payload/armament/r-27r1/flags/smoke-id-4</property>
    </condition>
 
    <attach>world</attach>
