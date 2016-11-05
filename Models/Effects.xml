@@ -61,7 +61,7 @@
 		<path>Aircraft/MiG-21bis/Models/Effects/Gun/Flame.xml</path>
 		<condition>
 			<equals>
-				<property>controls/armament/trigger</property>
+				<property>payload/armament/GSh-30/trigger</property>
 				<value type="bool">true</value>
 			</equals>
 		</condition>

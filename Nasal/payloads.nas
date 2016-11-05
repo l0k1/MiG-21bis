@@ -214,22 +214,25 @@ var update_loop = func {
 	}
 	
 	#cannon ammo counter and jamming
-	if ( getprop("controls/armament/trigger") == 1 ) {
-		var cur_ammo = getprop("controls/armament/GSh-30/ammo");
+	if ( getprop("controls/armament/trigger") == 1 and  getprop("payload/armament/GSh-30/jammed") == 0 ) {
+		var cur_ammo = getprop("payload/armament/GSh-30/ammo");
 		if (cur_ammo > 0) {
 			var jam_prob = rand();
-			if (jam_prob < 0.01) {
-				setprop("controls/armament/GSh-30/jammed",1);
-				setprop("controls/armament/GSh-30/trigger",0);
+			#print("jam_prob: " ~ jam_prob);
+			if (jam_prob < 0.005) {
+				setprop("payload/armament/GSh-30/jammed",1);
+				setprop("payload/armament/GSh-30/trigger",0);
+				print("GSh-30 has jammed!");
 			}
 			cur_ammo = math.clamp(cur_ammo - 4,0,200);
-			setprop("controls/armament/GSh-30/trigger",1);
+			setprop("payload/armament/GSh-30/trigger",1);
+			setprop("payload/armament/GSh-30/ammo",cur_ammo);
 		} else {
-			setprop("controls/armament/GSh-30/trigger",0);
+			setprop("payload/armament/GSh-30/trigger",0);
 			setprop("controls/armament/panel/gun-ready",0);
 		}
 	} else {
-		setprop("controls/armament/GSh-30/trigger",0);
+		setprop("payload/armament/GSh-30/trigger",0);
 	}
 	
 	settimer(update_loop, UPDATE_PERIOD);
@@ -240,9 +243,12 @@ var update_loop = func {
 var charge_used = [0,0,0];
 
 var unjam = func(button) {
+	print("inside unjam");
+	print("button: " ~ button);
+	print("button value: " ~ charge_used[button]);
 	if ( charge_used[button] == 0 ) {
 		charge_used[button] = 1;
-		setprop("controls/armament/GSh-30/jammed",0);
+		setprop("payload/armament/GSh-30/jammed",0);
 	}
 }
 
