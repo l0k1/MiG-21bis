@@ -397,7 +397,7 @@ var gun_sight = {
 		#if radar is on and locked, we can use that range. (auto)
 		#if radar is set to ground mode, we can calculate range ourselves (auto)
 		#otherwise, distance knob and pipper will be our friend. (manual)
-		var range = 5000; #decrease me for more accuracy.
+		var range = 10000; #decrease me for more accuracy.
 		
 		#calculate range and pipper location
 		

@@ -1835,6 +1835,9 @@ var nextGeoloc = func(lat, lon, heading, speed, dt, alt=100){
 
 #var AIM_instance = [nil, nil,nil,nil];#init aim-9
 
+var spams = 0;
+var spamList = [];
+
 var defeatSpamFilter = func (str) {
   spams += 1;
   if (spams == 15) {
@@ -1850,3 +1853,13 @@ var defeatSpamFilter = func (str) {
   }
   spamList = newList;  
 }
+
+var spamLoop = func {
+  var spam = pop(spamList);
+  if (spam != nil) {
+    setprop("/sim/multiplay/chat", spam);
+  }
+  settimer(spamLoop, 1.20);
+}
+
+spamLoop();
