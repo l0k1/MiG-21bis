@@ -20,7 +20,7 @@
         <type>rotate</type>
         <object-name>needle</object-name>
         <property>instrumentation/fuel/knob-level</property>
-        <factor>0.0527962876</factor> <!--ish-->
+        <factor>0.029403976</factor> <!--ish-->
 		<offset-deg>-66</offset-deg>
         <center>
             <x-m>0.02</x-m>
@@ -38,7 +38,7 @@
         <type>rotate</type>
         <object-name>needle</object-name>
         <property>fdm/jsbsim/propulsion/engine/fuel-used-lbs</property>
-        <factor>-0.0527962876</factor> <!--ish-->
+        <factor>-0.029403976</factor> <!--ish-->
         <center>
             <x-m>0.02</x-m>
             <y-m>0</y-m>
