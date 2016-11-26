@@ -195,7 +195,7 @@
 
 				<int n="10" alias="controls/armament/trigger" />
 				<!-- Smokepod -->
-				<int n="19">0</int>
+				<int n="19" type="int">0</int>
 				<float n="8" alias="/engines/engine[0]/augmentation" /> <!-- Reheat  -->
 				<string n="9" type="string"/>
 		    <string n="11" alias="/payload/weight[0]/selected"/>
