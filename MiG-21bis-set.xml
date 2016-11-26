@@ -97,6 +97,13 @@
 							<script>mig21.radio_dialog.open()</script>
 						</binding>
 					</item>
+					<item>
+						<label>Smokepod Color</label>
+						<binding>
+							<command>nasal</command>
+							<script>mig21.smokepod_dialog.open()</script>
+						</binding>
+					</item>
 				</menu>
 			</default>
 		</menubar>
@@ -187,6 +194,8 @@
 				<int n="7" alias="/sim/crashed" />
 
 				<int n="10" alias="controls/armament/trigger" />
+				<!-- Smokepod -->
+				<int n="19">0</int>
 				<float n="8" alias="/engines/engine[0]/augmentation" /> <!-- Reheat  -->
 				<string n="9" type="string"/>
 		    <string n="11" alias="/payload/weight[0]/selected"/>
@@ -334,6 +343,10 @@
 			<lock-bars-pos type="int">0</lock-bars-pos>
 			<mode type="string">normal</mode>
 		</radar>
+		<smokepod>
+			<color type="string">white</color>
+			<trigger type="bool">0</trigger>
+		</smokepod>
 	</controls>
 
 	<engines>
@@ -480,6 +493,7 @@
 			</propulsion>
 			<fcs>
 				<pitch-gearing-enable>1</pitch-gearing-enable>
+				<roll-damping-enable>1</roll-damping-enable>
 			</fcs>
 		</jsbsim>
 	</fdm>
@@ -570,6 +584,11 @@
                 		<name>PTB-800 Droptank</name>
                                 <lbs>230</lbs>
                 		<weight-lb>230</weight-lb>
+                        </opt>
+						<opt>
+                		<name>Smokepod</name>
+                                <lbs>157</lbs>
+                		<weight-lb>157</weight-lb>
                         </opt>
                 </weight>
                 <weight n="3">
@@ -1098,6 +1117,16 @@
 					<min>50</min>
 					<max>250</max>
 					<wrap>false</wrap>
+				</binding>
+			</key>
+			
+			<key n="83">
+				<name>S</name>
+				<desc>Activate Smokepod</desc>
+				<repeatable>true</repeatable>
+				<binding>
+					<command>property-toggle</command>
+					<property>/controls/smokepod/trigger</property>
 				</binding>
 			</key>
 

@@ -152,4 +152,84 @@
 		</offsets>
 	</model>
 	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Smokepod/smoke white.xml</path>
+		<offsets>
+			<x-m>1.2</x-m>
+            <y-m>0.00</y-m>
+            <z-m>-0.68</z-m>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Smokepod/smoke red.xml</path>
+		<offsets>
+			<x-m>1.2</x-m>
+            <y-m>0.00</y-m>
+            <z-m>-0.68</z-m>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Smokepod/smoke orange.xml</path>
+		<offsets>
+			<x-m>1.2</x-m>
+            <y-m>0.00</y-m>
+            <z-m>-0.68</z-m>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Smokepod/smoke yellow.xml</path>
+		<offsets>
+			<x-m>1.2</x-m>
+            <y-m>0.00</y-m>
+            <z-m>-0.68</z-m>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Smokepod/smoke green.xml</path>
+		<offsets>
+			<x-m>1.2</x-m>
+            <y-m>0.00</y-m>
+            <z-m>-0.68</z-m>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Smokepod/smoke blue.xml</path>
+		<offsets>
+			<x-m>1.2</x-m>
+            <y-m>0.00</y-m>
+            <z-m>-0.68</z-m>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Smokepod/smoke purple.xml</path>
+		<offsets>
+			<x-m>1.2</x-m>
+            <y-m>0.00</y-m>
+            <z-m>-0.68</z-m>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Smokepod/smoke black.xml</path>
+		<offsets>
+			<x-m>1.2</x-m>
+            <y-m>0.00</y-m>
+            <z-m>-0.68</z-m>
+			<pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+	
 </PropertyList>

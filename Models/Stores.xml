@@ -28,6 +28,17 @@
                         <pitch-deg>0.00</pitch-deg>
                 </offsets>
 	</model>
+	
+	<model>
+		<name>Centre Smokepod</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Smokepod/smokepod.xml</path>
+                <offsets>
+                        <x-m>-0.1</x-m>
+                        <y-m>0.00</y-m>
+                        <z-m>-0.68</z-m>
+                        <pitch-deg>0.00</pitch-deg>
+                </offsets>
+	</model>
 
 	<model>
 		<name>Left Drop Tank</name>

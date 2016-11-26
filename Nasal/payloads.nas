@@ -124,7 +124,8 @@ var payloads = {
 	"S-21":					pos_arm.new("S-21",341,"rocket"), #no real info found (yet)
 	"S-24":					pos_arm.new("S-24",518,"rocket"),
 	"PTB-490 Droptank":			pos_arm.new("PTB-490 Droptank",180,"tank"),
-	"PTB-800 Droptank":			pos_arm.new("PTB-800 Droptank",230,"tank")
+	"PTB-800 Droptank":			pos_arm.new("PTB-800 Droptank",230,"tank"),
+	"Smokepod":		pos_arm.new("smokepod",157,"tank")
 };
 
 var update_loop = func {
@@ -389,6 +390,66 @@ var impact_listener = func {
       }
     }
   }
+}
+
+############ Smokepod Cannon Trigger Controller##############
+
+setlistener("/controls/smokepod/trigger", func() {
+	trig = getprop("/controls/smokepod/trigger");
+	if ( trig ) {
+		var color = getprop("/controls/smokepod/color");
+		if (color == "white") { 
+			var cn = 1
+		}
+		elsif (color == "red") { 
+			var cn = 2 
+		}
+		elsif (color == "orange") {
+			var cn = 3
+		}
+		elsif (color == "yellow") {
+			var cn = 4
+		}
+		elsif (color == "green") {
+			var cn = 5 
+		}
+		elsif (color == "blue") { 
+			var cn = 6
+		}
+		elsif (color == "purple") { 
+			var cn = 7 
+		}
+		elsif (color == "rainbow (2 sec)"){
+			paint_the_rainbow(2.0);
+			return;
+		}
+		elsif (color == "rainbow (4 sec)"){
+			paint_the_rainbow(4.0);
+			return;
+		}
+		else { 
+			var cn = 8 
+		}
+		setprop("/sim/multiplay/generic/int[19]",cn);
+	} else {
+		setprop("/sim/multiplay/generic/int[19]",0);
+	}
+});
+
+var paint_the_rainbow = func(timer) {
+	if (getprop("/controls/smokepod/trigger") ) {
+		var cc = getprop("/sim/multiplay/generic/int[19]");
+		if ( cc > 1 and cc < 7 ) {
+			cc = cc + 1;
+		} else {
+			cc = 2;
+		}
+		setprop("/sim/multiplay/generic/int[19]",cc);
+		settimer( func { paint_the_rainbow(timer); }, timer);
+	}	else {
+		setprop("/sim/multiplay/generic/int[19]",0);
+		return;
+	}
 }
 
 ############################# main init ###############
