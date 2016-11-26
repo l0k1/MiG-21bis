@@ -519,9 +519,19 @@
             <independentVar lookup="row">aero/alpha-rad</independentVar>
             <tableData>
               -0.20 -0.620
-               0.00  0.018
-               0.32  0.780
-               0.60  0.448
+			  0.087	0.28
+			  0.175	0.60
+			  0.262	0.85
+			  0.349	0.93
+			  0.436	0.89
+			  0.524	0.91
+			  0.611	0.95
+			  0.698	0.97
+			  0.785	0.89
+			  0.873	0.85
+			  0.960	0.79
+			  1.050	0.70
+			  1.396	0.20
             </tableData>
           </table>
       </product>
@@ -756,8 +766,8 @@
           <table>
             <independentVar lookup="row">velocities/mach</independentVar>
             <tableData>
-              0.0    0.11
-              2.0    0.04
+              0.0    0.21
+              2.0    0.03
             </tableData>
           </table>
        </product>
@@ -798,9 +808,13 @@
           <property>fcs/elevator-pos-rad</property>
           <table>
             <independentVar lookup="row">velocities/mach</independentVar>
-            <tableData>
+            <!--<tableData>
               0.0     -0.600
               2.0     -0.200
+            </tableData>-->
+			<tableData>
+              0.0     -0.700
+              2.0     -0.320
             </tableData>
           </table>
        </product>

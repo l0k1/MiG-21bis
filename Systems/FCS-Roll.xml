@@ -13,8 +13,23 @@
       </clipto>
    </summer>
    
+   <fcs_function name="roll-damping">
+	  <!--This isn't present in the real aircraft. But as the high roll rate + small joystick can make things unsteady, this should help.-->
+		<function>
+			<table>
+				<independentVar lookup="column">fcs/roll-trim-sum</independentVar>
+				<independentVar lookup="row">fcs/roll-damping-enable</independentVar>
+				 <tableData breakPoint="0">
+								-1.0		-0.50	-0.25	-0.10	0.00		0.10		0.25		0.50		1.0
+					0.0		-1.0		-0.50	-0.25	-0.10	0.00		0.10		0.25		0.50		1.0
+					1.0		-1.0		-0.40	-0.14	-0.07	0.00		0.07		0.14		0.40		1.0
+				</tableData>
+			</table>
+		</function>
+	</fcs_function>
+   
    <kinematic name="Aileron Delay">
-     <input>fcs/roll-trim-sum</input>
+     <input>fcs/roll-damping</input>
 	 <traverse>
 		<setting>
 			<position>-1</position>

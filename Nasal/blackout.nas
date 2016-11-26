@@ -69,7 +69,7 @@ var blackout_loop = func {
 	var g = 0;
 	if (fdm == "jsb") {
 		# JSBSim
-		g = getprop("fdm/jsbsim/accelerations/Nz");
+		g = -getprop("/accelerations/pilot/z-accel-fps_sec")/32.174;
 	} else {
 		# Yasim
 		g = getprop("/accelerations/pilot-g[0]");
