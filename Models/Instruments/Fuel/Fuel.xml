@@ -62,7 +62,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>instrumentation/fuel/knob-level</property>
-				<step>50</step>
+				<step>200</step>
 				<min>0</min>
 				<max>999999</max>
 				<wrap>false</wrap>
@@ -86,7 +86,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>instrumentation/fuel/knob-level</property>
-				<step>-50</step>
+				<step>-200</step>
 				<min>0</min>
 				<max>999999</max>
 				<wrap>false</wrap>
