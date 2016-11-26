@@ -47,7 +47,7 @@
 
     <counter>
       <particles-per-sec>
-        <value>400</value>
+        <value>250</value>
         <spread>2</spread>
       </particles-per-sec>
     </counter>
@@ -73,7 +73,7 @@
           <alpha><value>0.5</value></alpha>
         </color>
         <size>
-          <value>20</value>
+          <value>45</value>
         </size>
       </end>
 
@@ -82,7 +82,7 @@
       </life-sec>
        
       <mass-kg>0.001</mass-kg>
-      <radius-m>0.6</radius-m>
+      <radius-m>1.0</radius-m>
     </particle>
      
     <program>
