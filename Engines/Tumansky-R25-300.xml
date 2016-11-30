@@ -5,7 +5,7 @@
 <turbine_engine name="Tumansky">
   <milthrust>    9050.0 </milthrust> <!-- max milthrust, 4100 kgf per page 5, line (a) -->
   <maxthrust>   15100.0 </maxthrust> <!-- max thrust without second reheat, 6850 kgf per page 5, line (a) -->
-  <bypassratio>     0.8 </bypassratio> <!-- just used for spool up, so setting to 0.8 for not-instantaneous spooling. may change later. -->
+  <bypassratio>     9.0 </bypassratio> <!-- lots of references to a "very long" spool time, but no actual data available. changing it to 9 seconds for now. -->
   <tsfc>            0.96</tsfc> <!-- source - wikipedia :( -->
   <atsfc>           2.25</atsfc> <!-- source - wikipedia :( this is without second reheat -->
   <bleed>           0.03</bleed>

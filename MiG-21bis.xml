@@ -197,7 +197,7 @@
  </ground_reactions>
 
  <propulsion>
-   <engine file="Tumansky">
+   <engine file="Tumansky-R25-300">
     <location unit="IN">
       <x> 263.40 </x>
       <y>   0.00 </y>
@@ -510,7 +510,7 @@
   <axis name="LIFT">
     <function name="aero/coefficient/CLalpha">
       <description>Lift_due_to_alpha</description> -->
-	  <!-- source: http://ethesis.nitrkl.ac.in/6406/1/E-97.pdf maybe-->
+	  
       <product>
           <property>aero/qbar-psf</property>
           <property>metrics/Sw-sqft</property>
@@ -518,6 +518,7 @@
           <table>
             <independentVar lookup="row">aero/alpha-rad</independentVar>
             <tableData>
+			<!-- source: http://ethesis.nitrkl.ac.in/6406/1/E-97.pdf maybe
               -0.20 -0.620
 			  0.087	0.28
 			  0.175	0.60
@@ -531,7 +532,24 @@
 			  0.873	0.85
 			  0.960	0.79
 			  1.050	0.70
+			  1.396	0.20-->
+			  <!-- 0 degrees to 20 degrees: source: http://www.uotechnology.edu.iq/tec_magaz/volume272009/No.7,2009/researches/Text_11.pdf page 12 -->
+			  -0.20 -0.620
+			  0.000	-0.01
+			  0.087	0.25
+			  0.175	0.502
+			  0.262	0.70
+			  0.349  0.899
+			  0.436	0.89
+			  0.524	0.91
+			  0.611	0.95
+			  0.698	0.97
+			  0.785	0.89
+			  0.873	0.85
+			  0.960	0.79
+			  1.050	0.70
 			  1.396	0.20
+			  
             </tableData>
           </table>
       </product>
