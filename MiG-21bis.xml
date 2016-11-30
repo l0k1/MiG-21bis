@@ -221,6 +221,7 @@
   <!--
   from http://www.topedge.com/panels/aircraft/sites/kraft/fuel.htm
   cutaway to locate tanks: https://s-media-cache-ak0.pinimg.com/originals/d8/41/4a/d8414a7cafc3e42dc42b2f390e1ea563.jpg
+  more source: mig-21 civil air worthiness doc, item 281.
   #1 - cutaway of fuel tanks
   #142 - port external fuel tank
   #150 - port wing integral fuel tank
@@ -239,7 +240,7 @@
   - flow -
   
   all the time:
-  level the fuel between 1 and 2
+  level the fuel between 1 and 2 and 7
   level the fuel between 4, 5, and 6
   fuel in 2 pumps into 3
   fuel in 3 goes straight to engine
@@ -253,19 +254,20 @@
   -->
   
   	<!-- Tanks:
-	0 - internal 1  7 %
-	1 - internal 2  33 %
-	2 - internal 3  3 % 
-	3 - internal 4  8 
-	4 - internal 5  8 
-	5 - internal 6  13 
-	6 - wing 1 left front 7.5 
-	7 - wing 2 left rear  6.5 
-	8 - wing 3 right front 7.5 
-	9 - wing 4 right rear 6.5 
-	10 - ventral drop tank
-	11 - left drop tank
-	12 - right drop tank
+	0 - internal
+	1 - internal
+	2 - internal
+	3 - internal
+	4 - internal
+	5 - internal
+	6 - saddle (bis only)
+	7 - wing 1 left front
+	8 - wing 2 left rear
+	9 - wing 3 right front
+	10 - wing 4 right rear
+	11 - ventral drop tank
+	12 - left drop tank
+	13 - right drop tank
 	
 	***** FUEL AMOUNTS PER TANK ARE FICTIONAL ******* but the total fuel matches
 	***** LOCATIONS ARE ESTIMATES ***** i didn't have a map of tank 1 is here, tank 2 is there. just a cutaway.
@@ -274,85 +276,98 @@
   <!-- internal fuel 1 -->
   <tank type="FUEL" number="0">
      <location unit="M">
-       <x> -2.1477 </x>
+       <x> -2.50 </x>
        <y>   0.00 </y>
-       <z> 0.74312 </z>
+       <z> 0.50 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 370 </capacity>
-     <contents unit="LBS"> 300 </contents>
+     <capacity unit="LBS"> 413.6 </capacity>
+     <contents unit="LBS"> 400 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
   
   <tank type="FUEL" number="1">
      <location unit="M">
-       <x> -0.8977 </x>
+       <x> -1.75 </x>
        <y>   0.00 </y>
-       <z> 0.88205 </z>
+       <z> 0.50 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 870 </capacity>
-     <contents unit="LBS"> 850 </contents>
+     <capacity unit="LBS"> 1267.2 </capacity>
+     <contents unit="LBS"> 1200 </contents>
      <standpipe unit="LBS"> 400 </standpipe> 
   </tank>
   
   <tank type="FUEL" number="2">
      <location unit="M">
-       <x> -0.39161 </x>
+       <x> -0.50 </x>
        <y>   0.00 </y>
-       <z>  0.67657 </z>
+       <z>  0.50 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 240 </capacity>
-     <contents unit="LBS"> 130 </contents>
+     <capacity unit="LBS"> 466.4 </capacity>
+     <contents unit="LBS"> 440 </contents>
      <standpipe unit="LBS"> 100 </standpipe> 
   </tank>
   
   <tank type="FUEL" number="3">
      <location unit="M">
-       <x> 2.37969 </x>
+       <x> 0.55 </x>
        <y>   0.00 </y>
-       <z>   0.43241 </z>
+       <z>   0.45 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 515 </capacity>
-     <contents unit="LBS"> 360 </contents>
+     <capacity unit="LBS"> 352 </capacity>
+     <contents unit="LBS"> 330 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
   
   <tank type="FUEL" number="4">
      <location unit="M">
-       <x> 3.03313 </x>
+       <x> 1.50 </x>
        <y>   0.00 </y>
-       <z>   0.41241 </z>
+       <z>   0.45 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 515 </capacity>
-     <contents unit="LBS"> 360 </contents>
+     <capacity unit="LBS"> 422.4 </capacity>
+     <contents unit="LBS"> 400 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
   
   <tank type="FUEL" number="5">
      <location unit="M">
-       <x> 3.98064 </x>
+       <x> 2.55 </x>
        <y>   0.00 </y>
-       <z> 0.33241 </z>
+       <z> 0.45 </z>
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 600 </capacity>
-     <contents unit="LBS"> 550 </contents>
+     <capacity unit="LBS"> 422.4 </capacity>
+     <contents unit="LBS"> 400 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+  
+  <tank type="FUEL" number="6">
+     <location unit="M">
+       <x> -1.25 </x>
+       <y>   0.00 </y>
+       <z> 1.12 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 1003.2 </capacity>
+     <contents unit="LBS"> 950 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
   
   <!-- wing tanks -->
   
-  <tank type="FUEL" number="6">
+  <tank type="FUEL" number="7">
      <location unit="M">
        <x> -0.29435 </x>
        <y>   -1.75428</y>
@@ -360,12 +375,12 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 395 </capacity>
-     <contents unit="LBS"> 320 </contents>
+     <capacity unit="LBS"> 308 </capacity>
+     <contents unit="LBS"> 225 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
   
-  <tank type="FUEL" number="7">
+  <tank type="FUEL" number="8">
      <location unit="M">
        <x> 1.09838 </x>
        <y>   -1.27481 </y>
@@ -373,12 +388,12 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 350 </capacity>
-     <contents unit="LBS"> 250 </contents>
+     <capacity unit="LBS"> 193.6 </capacity>
+     <contents unit="LBS"> 100 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
   
-  <tank type="FUEL" number="8">
+  <tank type="FUEL" number="9">
      <location unit="M">
        <x> -0.29435 </x>
        <y>   1.75428</y>
@@ -386,12 +401,12 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 395 </capacity>
-     <contents unit="LBS"> 320 </contents>
+     <capacity unit="LBS"> 308 </capacity>
+     <contents unit="LBS"> 225 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
   
-  <tank type="FUEL" number="9">
+  <tank type="FUEL" number="10">
      <location unit="M">
        <x> 1.09838 </x>
        <y>   1.27481 </y>
@@ -399,13 +414,13 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 350 </capacity>
-     <contents unit="LBS"> 250 </contents>
+     <capacity unit="LBS"> 193.6 </capacity>
+     <contents unit="LBS"> 100 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
 
   <!-- drop tanks -->
-  <tank type="FUEL" number="10">
+  <tank type="FUEL" number="11">
      <location unit="IN">
        <x>   3.00 </x>
        <y>   0.00 </y>
@@ -414,10 +429,10 @@
      <priority>1</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 1400 </capacity>
-     <contents unit="LBS"> 1380 </contents>
+     <contents unit="LBS"> 0 </contents>
   </tank>
 
-  <tank type="FUEL" number="11">
+  <tank type="FUEL" number="12">
      <location unit="IN">
        <x>  21.00 </x>
        <y>-120.00 </y>
@@ -425,10 +440,10 @@
      </location>
      <density>6.5</density>
      <capacity unit="LBS"> 850 </capacity>
-     <contents unit="LBS"> 830 </contents>
+     <contents unit="LBS"> 0 </contents>
   </tank>
 
-  <tank type="FUEL" number="12">
+  <tank type="FUEL" number="13">
      <location unit="IN">
        <x>  21.00 </x>
        <y> 120.00 </y>
@@ -436,7 +451,7 @@
      </location>
      <density>6.5</density>
      <capacity unit="LBS"> 850 </capacity>
-     <contents unit="LBS"> 830 </contents>
+     <contents unit="LBS"> 0 </contents>
   </tank>
 
   <dump-rate unit="LBS/MIN"> 1500 </dump-rate>

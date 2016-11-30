@@ -216,13 +216,14 @@
 			<tank n="3"><name>Aft 1</name></tank>
 			<tank n="4"><name>Aft 2</name></tank>
 			<tank n="5"><name>Aft 3</name></tank>
-			<tank n="6"><name>Left Wing Front</name></tank>
-			<tank n="7"><name>Left Wing Rear</name></tank>
-			<tank n="8"><name>Right Wing Front</name></tank>
-			<tank n="9"><name>Right Wing Rear</name></tank>
-			<tank n="10"><name>Ventral Drop Tank</name></tank>
-			<tank n="11"><name>Left Drop Tank</name></tank>
-			<tank n="12"><name>Right Drop Tank</name></tank>
+			<tank n="6"><name>Saddle</name></tank>
+			<tank n="7"><name>Left Wing Front</name></tank>
+			<tank n="8"><name>Left Wing Rear</name></tank>
+			<tank n="9"><name>Right Wing Front</name></tank>
+			<tank n="10"><name>Right Wing Rear</name></tank>
+			<tank n="11"><name>Ventral Drop Tank</name></tank>
+			<tank n="12"><name>Left Drop Tank</name></tank>
+			<tank n="13"><name>Right Drop Tank</name></tank>
 		</fuel>
 	</consumables>
 
@@ -500,167 +501,172 @@
         <!-- Payload -->
 
     	<payload>
-        	<weight n="0">
-            		<name>Left wing outboard pylon</name>
-            		<selected>none</selected>
-			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]"/>
-            		<opt>
-                		<name>none</name>
-                		<lbs>0</lbs>
-                		<weight-lb>0</weight-lb>
-            		</opt>
-            		<opt>
-                		<name>R-60</name>
-                		<lbs>96</lbs>
-                		<weight-lb>96</weight-lb>
-            		</opt>
-					<opt>
-                		<name>R-27R1</name>
-                		<lbs>560</lbs>
-                		<weight-lb>560</weight-lb>
-            		</opt>
-					<opt>
-                		<name>R-27T1</name>
-                		<lbs>550</lbs>
-                		<weight-lb>550</weight-lb>
-            		</opt>
-            		<opt>
-                		<name>PTB-490 Droptank</name>
-                		<lbs>180</lbs>
-                		<weight-lb>180</weight-lb>
-            		</opt>
-        	</weight>
-                <weight n="1">
-                        <name>Left wing inboard pylon</name>
-                        <selected>none</selected>
-			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]"/>
-                        <opt>
-                                <name>none</name>
-                                <lbs>0</lbs>
-                		<weight-lb>0</weight-lb>
-                        </opt>
-                        <opt>
-                                <name>R-60</name>
-                                <lbs>96</lbs>
-                		<weight-lb>96</weight-lb>
-                        </opt>
-						<opt>
-                		<name>R-27R1</name>
-                		<lbs>560</lbs>
-                		<weight-lb>560</weight-lb>
-            		</opt>
-					<opt>
-                		<name>R-27T1</name>
-                		<lbs>550</lbs>
-                		<weight-lb>550</weight-lb>
-            		</opt>
-                        <!--<opt>
-                                <name>FAB-250</name>
-                                <lbs>520</lbs>
-                		<weight-lb>520</weight-lb>
-                        </opt>
-                        <opt>
-                                <name>Kh-25</name>
-                                <lbs>659</lbs>
-                		<weight-lb>659</weight-lb>
-                        </opt>
-                        <opt>
-                                <name>UB-32</name>
-                                <lbs>582</lbs>
-                		<weight-lb>582</weight-lb>
-                        </opt>-->
-                </weight>
-                <weight n="2">
-                        <name>Fuselage pylon</name>
-                        <selected>none</selected>
-			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]"/>
-                        <tank>1</tank>
-                        <opt>
-                                <name>none</name>
-                                <lbs>0</lbs>
-                		<weight-lb>0</weight-lb>
-                        </opt>
-                        <opt>
-                		<name>PTB-800 Droptank</name>
-                                <lbs>230</lbs>
-                		<weight-lb>230</weight-lb>
-                        </opt>
-						<opt>
-                		<name>Smokepod</name>
-                                <lbs>157</lbs>
-                		<weight-lb>157</weight-lb>
-                        </opt>
-                </weight>
-                <weight n="3">
-                        <name>Right wing inboard pylon</name>
-                        <selected>none</selected>
-			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[3]"/>
-                        <opt>
-                                <name>none</name>
-                                <lbs>0</lbs>
-                		<weight-lb>0</weight-lb>
-                        </opt>
-                        <opt>
-                                <name>R-60</name>
-                                <lbs>96</lbs>
-                		<weight-lb>96</weight-lb>
-                        </opt>
-						<opt>
-                		<name>R-27R1</name>
-                		<lbs>560</lbs>
-                		<weight-lb>560</weight-lb>
-            		</opt>
-					<opt>
-                		<name>R-27T1</name>
-                		<lbs>550</lbs>
-                		<weight-lb>550</weight-lb>
-            		</opt>
-                        <!--<opt>
-                                <name>FAB-250</name>
-                                <lbs>520</lbs>
-                		<weight-lb>520</weight-lb>
-                        </opt>
-                        <opt>
-                                <name>Kh-25</name>
-                                <lbs>659</lbs>
-                		<weight-lb>659</weight-lb>
-                        </opt>
-                        <opt>
-                                <name>UB-32</name>
-                                <lbs>582</lbs>
-                		<weight-lb>582</weight-lb>
-                        </opt>-->
-                </weight>
-        	<weight n="4">
-            		<name>Right wing outboard pylon</name>
-            		<selected>none</selected>
-			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[4]"/>
-            		<opt>
-                		<name>none</name>
-                		<lbs>0</lbs>
-                		<weight-lb>0</weight-lb>
-            		</opt>
-            		<opt>
-                		<name>R-60</name>
-                		<lbs>96</lbs>
-                		<weight-lb>96</weight-lb>
-            		</opt>
-					<opt>
-                		<name>R-27R1</name>
-                		<lbs>560</lbs>
-                		<weight-lb>560</weight-lb>
-            		</opt>
-					<opt>
-                		<name>R-27T1</name>
-                		<lbs>550</lbs>
-                		<weight-lb>550</weight-lb>
-            		</opt>
-            		<opt>
-                		<name>PTB-490 Droptank</name>
-                		<lbs>180</lbs>
-                		<weight-lb>180</weight-lb>
-            		</opt>
-        	</weight>
+			<weight n="0">
+				<name>Left wing outboard pylon</name>
+				<selected>none</selected>
+				<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]"/>
+				<opt>
+					<name>none</name>
+					<lbs>0</lbs>
+					<weight-lb>0</weight-lb>
+				</opt>
+				<opt>
+					<name>R-60</name>
+					<lbs>96</lbs>
+					<weight-lb>96</weight-lb>
+				</opt>
+				<opt>
+					<name>R-27R1</name>
+					<lbs>560</lbs>
+					<weight-lb>560</weight-lb>
+				</opt>
+				<opt>
+					<name>R-27T1</name>
+					<lbs>550</lbs>
+					<weight-lb>550</weight-lb>
+				</opt>
+				<opt>
+					<name>PTB-490 Droptank</name>
+					<lbs>180</lbs>
+					<weight-lb>180</weight-lb>
+				</opt>
+			</weight>
+			<weight n="1">
+				<name>Left wing inboard pylon</name>
+				<selected>none</selected>
+				<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]"/>
+				<opt>
+					<name>none</name>
+					<lbs>0</lbs>
+					<weight-lb>0</weight-lb>
+				</opt>
+				<opt>
+					<name>R-60</name>
+					<lbs>96</lbs>
+					<weight-lb>96</weight-lb>
+				</opt>
+				<opt>
+					<name>R-27R1</name>
+					<lbs>560</lbs>
+					<weight-lb>560</weight-lb>
+				</opt>
+				<opt>
+					<name>R-27T1</name>
+					<lbs>550</lbs>
+					<weight-lb>550</weight-lb>
+				</opt>
+				<!--<opt>
+					<name>FAB-250</name>
+					<lbs>520</lbs>
+				<weight-lb>520</weight-lb>
+				</opt>
+				<opt>
+					<name>Kh-25</name>
+					<lbs>659</lbs>
+				<weight-lb>659</weight-lb>
+				</opt>
+				<opt>
+					<name>UB-32</name>
+					<lbs>582</lbs>
+				<weight-lb>582</weight-lb>
+				</opt>-->
+			</weight>
+			<weight n="2">
+				<name>Fuselage pylon</name>
+				<selected>none</selected>
+				<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]"/>
+				<tank>1</tank>
+				<opt>
+					<name>none</name>
+					<lbs>0</lbs>
+					<weight-lb>0</weight-lb>
+				</opt>
+				<opt>
+					<name>PTB-490 Droptank</name>
+					<lbs>180</lbs>
+					<weight-lb>180</weight-lb>
+				</opt>
+				<opt>
+					<name>PTB-800 Droptank</name>
+					<lbs>230</lbs>
+					<weight-lb>230</weight-lb>
+				</opt>
+				<opt>
+					<name>Smokepod</name>
+					<lbs>157</lbs>
+					<weight-lb>157</weight-lb>
+				</opt>
+			</weight>
+			<weight n="3">
+				<name>Right wing inboard pylon</name>
+				<selected>none</selected>
+				<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[3]"/>
+				<opt>
+					<name>none</name>
+					<lbs>0</lbs>
+					<weight-lb>0</weight-lb>
+				</opt>
+				<opt>
+					<name>R-60</name>
+					<lbs>96</lbs>
+					<weight-lb>96</weight-lb>
+				</opt>
+				<opt>
+					<name>R-27R1</name>
+					<lbs>560</lbs>
+					<weight-lb>560</weight-lb>
+				</opt>
+				<opt>
+					<name>R-27T1</name>
+					<lbs>550</lbs>
+					<weight-lb>550</weight-lb>
+				</opt>
+				<!--<opt>
+						<name>FAB-250</name>
+						<lbs>520</lbs>
+				<weight-lb>520</weight-lb>
+				</opt>
+				<opt>
+						<name>Kh-25</name>
+						<lbs>659</lbs>
+				<weight-lb>659</weight-lb>
+				</opt>
+				<opt>
+						<name>UB-32</name>
+						<lbs>582</lbs>
+				<weight-lb>582</weight-lb>
+				</opt>-->
+			</weight>
+			<weight n="4">
+				<name>Right wing outboard pylon</name>
+				<selected>none</selected>
+				<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[4]"/>
+				<opt>
+					<name>none</name>
+					<lbs>0</lbs>
+					<weight-lb>0</weight-lb>
+				</opt>
+				<opt>
+					<name>R-60</name>
+					<lbs>96</lbs>
+					<weight-lb>96</weight-lb>
+				</opt>
+				<opt>
+					<name>R-27R1</name>
+					<lbs>560</lbs>
+					<weight-lb>560</weight-lb>
+				</opt>
+				<opt>
+					<name>R-27T1</name>
+					<lbs>550</lbs>
+					<weight-lb>550</weight-lb>
+				</opt>
+				<opt>
+					<name>PTB-490 Droptank</name>
+					<lbs>180</lbs>
+					<weight-lb>180</weight-lb>
+				</opt>
+			</weight>
 			<armament>
                 <models type="string">Aircraft/MiG-21bis/Models/Stores/</models>
                 <msg type="bool">true</msg>

@@ -193,23 +193,36 @@ var update_loop = func {
 			if(i==0) {
 				#print("jettisoning 0");
 				# no drop tank attached, clear tank
-				setprop("/consumables/fuel/tank[11]/selected",0);
-				setprop("/consumables/fuel/tank[11]/jettisoned",1);
-				setprop("/consumables/fuel/tank[11]/level-norm",0);
+				setprop("/consumables/fuel/tank[12]/selected",0);
+				setprop("/consumables/fuel/tank[12]/jettisoned",1);
+				setprop("/consumables/fuel/tank[12]/level-norm",0);
 			}
 			if(i==2) {
 				#print("jettisoning 2");;
 				# no drop tank attached, clear tank
-				setprop("/consumables/fuel/tank[10]/selected",0);
-				setprop("/consumables/fuel/tank[10]/jettisoned",1);
-				setprop("/consumables/fuel/tank[10]/level-norm",0);
+				setprop("/consumables/fuel/tank[11]/selected",0);
+				setprop("/consumables/fuel/tank[11]/jettisoned",1);
+				setprop("/consumables/fuel/tank[11]/level-norm",0);
 			}
 			if(i==4) {
 				#print("jettisoning 4");
 				# no drop tank attached, clear tank
-				setprop("/consumables/fuel/tank[12]/selected",0);
-				setprop("/consumables/fuel/tank[12]/jettisoned",1);
-				setprop("/consumables/fuel/tank[12]/level-norm",0);
+				setprop("/consumables/fuel/tank[13]/selected",0);
+				setprop("/consumables/fuel/tank[13]/jettisoned",1);
+				setprop("/consumables/fuel/tank[13]/level-norm",0);
+			}
+		} elsif ( selected == "PTB-800 Droptank" or selected == "PTB-490 Droptank" ) {
+			if(i==0) {
+				setprop("/consumables/fuel/tank[12]/selected",1);
+			}
+			if(i==2) {
+				setprop("/consumables/fuel/tank[11]/selected",1);
+				if ( selected == "PTB-490 Droptank" and getprop("/consumables/fuel/tank[11]/level-lbs") > 850 ) {
+					setprop("/consumables/fuel/tank[11]/level-lbs",850)
+				}
+			}
+			if(i==4) {
+				setprop("/consumables/fuel/tank[13]/selected",1);
 			}
 		}
 	}
@@ -500,9 +513,9 @@ var main_init = func {
   print("initting!");
   setprop("sim/time/elapsed-at-init-sec", getprop("sim/time/elapsed-sec"));
 
-  setprop("/consumables/fuel/tank[10]/jettisoned", FALSE);
   setprop("/consumables/fuel/tank[11]/jettisoned", FALSE);
   setprop("/consumables/fuel/tank[12]/jettisoned", FALSE);
+  setprop("/consumables/fuel/tank[13]/jettisoned", FALSE);
 
   # Load exterior at startup to avoid stale sim at first external view selection. ( taken from TU-154B )
   print("Loading exterior, wait...");

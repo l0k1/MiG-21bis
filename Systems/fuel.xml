@@ -2,8 +2,6 @@
 
 
 <system name="fuel">
-    <!--<property>/consumables/fuel/total-fuel-gals</property>-->
-    <!--<property>/systems/refuel/type</property>-->
 
 	<!-- Tanks:
 	0 - internal 1
@@ -12,17 +10,19 @@
 	3 - internal 4
 	4 - internal 5
 	5 - internal 6
-	6 - wing 1 left front
-	7 - wing 2 left rear
-	8 - wing 3 right front
-	9 - wing 4 right rear
-	10 - ventral drop tank
-	11 - left drop tank
-	12 - right drop tank
+	6 - spine tank (bis only)
+	7 - wing 1 left front
+	8 - wing 2 left rear
+	9 - wing 3 right front
+	10 - wing 4 right rear
+	11 - ventral drop tank
+	12 - left drop tank
+	13 - right drop tank
 	-->
 	
 	  <!--all the time:
   level the fuel between 1 and 2
+  fuel flows from 7 to 2
   level the fuel between 4, 5, and 6
   fuel in 2 pumps into 3
   fuel in 3 goes straight to engine
@@ -49,7 +49,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[0]/contents-lbs gt 1
 				propulsion/tank[0]/contents-lbs gt propulsion/tank[1]/contents-lbs
-				propulsion/tank[1]/contents-lbs lt 817
+				propulsion/tank[1]/contents-lbs lt 1264
 			</test>
 			<output>propulsion/tank[0]/levelling-flow-to-1</output>
 		</switch>
@@ -59,9 +59,21 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[1]/contents-lbs gt 1
 				propulsion/tank[0]/contents-lbs lt propulsion/tank[1]/contents-lbs
-				propulsion/tank[0]/contents-lbs lt 367
+				propulsion/tank[0]/contents-lbs lt 410
 			</test>
 			<output>propulsion/tank[1]/levelling-flow-to-0</output>
+		</switch>
+		
+		<!-- flow flow from 6 to 1 -->
+		
+		<switch name="trash/fuelrefuelas0">
+			<default value="0"/>
+			<test logic="AND" value="-15">
+				propulsion/tank[6]/contents-lbs gt 1
+				propulsion/tank[6]/contents-lbs gt propulsion/tank[1]/contents-lbs
+				propulsion/tank[1]/contents-lbs lt 1264
+			</test>
+			<output>propulsion/tank[6]/levelling-flow-to-1</output>
 		</switch>
 		
 		<!-- flow levelling between 3,4,5 -->
@@ -71,7 +83,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[3]/contents-lbs gt 1
 				propulsion/tank[3]/contents-lbs gt propulsion/tank[4]/contents-lbs
-				propulsion/tank[4]/contents-lbs lt 510
+				propulsion/tank[4]/contents-lbs lt 419
 			</test>
 			<output>propulsion/tank[3]/levelling-flow-to-4</output>
 		</switch>
@@ -81,7 +93,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[4]/contents-lbs gt 1
 				propulsion/tank[4]/contents-lbs gt propulsion/tank[3]/contents-lbs
-				propulsion/tank[3]/contents-lbs lt 510
+				propulsion/tank[3]/contents-lbs lt 349
 			</test>
 			<output>propulsion/tank[4]/levelling-flow-to-3</output>
 		</switch>
@@ -91,7 +103,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[4]/contents-lbs gt 1
 				propulsion/tank[4]/contents-lbs gt propulsion/tank[5]/contents-lbs
-				propulsion/tank[5]/contents-lbs lt 597
+				propulsion/tank[5]/contents-lbs lt 419
 			</test>
 			<output>propulsion/tank[4]/levelling-flow-to-5</output>
 		</switch>
@@ -101,7 +113,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[5]/contents-lbs gt 1
 				propulsion/tank[5]/contents-lbs gt propulsion/tank[4]/contents-lbs
-				propulsion/tank[4]/contents-lbs lt 510
+				propulsion/tank[4]/contents-lbs lt 419
 			</test>
 			<output>propulsion/tank[5]/levelling-flow-to-4</output>
 		</switch>
@@ -112,65 +124,65 @@
 			<default value="0"/>
 			<test logic="AND" value="-15">
 				propulsion/tank[1]/contents-lbs gt 1
-				propulsion/tank[2]/contents-lbs lt 237
+				propulsion/tank[2]/contents-lbs lt 463
 			</test>
 			<output>propulsion/tank[1]/pumping-flow-to-2</output>
 		</switch>
 		
-		<!-- ventral [10] flowing into 1. ventral should be first emptied -->
+		<!-- ventral [11] flowing into 1. ventral should be first emptied -->
 		
 		<switch name="trash/fuelrefuel7">
 			<default value="0"/>
 			<test logic="AND" value="-15">
-				propulsion/tank[10]/contents-lbs gt 1
-				propulsion/tank[1]/contents-lbs lt 817
+				propulsion/tank[11]/contents-lbs gt 1
+				propulsion/tank[1]/contents-lbs lt 1264
 			</test>
-			<output>propulsion/tank[10]/pumping-flow-to-1</output>
+			<output>propulsion/tank[11]/pumping-flow-to-1</output>
 		</switch>
 		
-		<!-- wing drop tanks [11][12] into left/right wing tanks. should occur after ventral. -->
+		<!-- wing drop tanks [12][13] into left/right wing tanks. should occur after ventral. -->
 		
 		<switch name="trash/fuelrefuel8">
 			<default value="0"/>
 			<test logic="AND" value="-15">
-				propulsion/tank[10]/contents-lbs lt 1
-				propulsion/tank[11]/contents-lbs gt 1
-				propulsion/tank[1]/contents-lbs lt 817
+				propulsion/tank[11]/contents-lbs lt 1
+				propulsion/tank[12]/contents-lbs gt 1
+				propulsion/tank[1]/contents-lbs lt 1264
 			</test>
-			<output>propulsion/tank[11]/pumping-flow-to-1</output>
+			<output>propulsion/tank[12]/pumping-flow-to-1</output>
 		</switch>
 		
 		<switch name="trash/fuelrefuel9">
 			<default value="0"/>
 			<test logic="AND" value="-15">
-				propulsion/tank[10]/contents-lbs lt 1
-				propulsion/tank[12]/contents-lbs gt 1
-				propulsion/tank[1]/contents-lbs lt 817
+				propulsion/tank[11]/contents-lbs lt 1
+				propulsion/tank[13]/contents-lbs gt 1
+				propulsion/tank[1]/contents-lbs lt 1264
 			</test>
-			<output>propulsion/tank[12]/pumping-flow-to-1</output>
+			<output>propulsion/tank[13]/pumping-flow-to-1</output>
 		</switch>
 		
-		<!-- wing left [6][7] and wing right [8][9] pump into 1. occurs after wing tanks. -->
+		<!-- wing left [7][8] and wing right [9][10] pump into 1. occurs after wing tanks. -->
 		
 		<!-- left side -->
 		<switch name="trash/fuelrefuel10">
 			<default value="0"/>
 			<test logic="AND" value="-15">
-				propulsion/tank[11]/contents-lbs lt 2
-				propulsion/tank[6]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 817
+				propulsion/tank[12]/contents-lbs lt 2
+				propulsion/tank[7]/contents-lbs gt 2
+				propulsion/tank[1]/contents-lbs lt 1264
 			</test>
-			<output>propulsion/tank[6]/pumping-flow-to-1</output>
+			<output>propulsion/tank[7]/pumping-flow-to-1</output>
 		</switch>
 		
 		<switch name="trash/fuelrefuel11">
 			<default value="0"/>
 			<test logic="AND" value="-15">
-				propulsion/tank[11]/contents-lbs lt 2
-				propulsion/tank[7]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 817
+				propulsion/tank[12]/contents-lbs lt 2
+				propulsion/tank[8]/contents-lbs gt 2
+				propulsion/tank[1]/contents-lbs lt 1264
 			</test>
-			<output>propulsion/tank[7]/pumping-flow-to-1</output>
+			<output>propulsion/tank[8]/pumping-flow-to-1</output>
 		</switch>
 		
 		<!-- right side -->
@@ -178,21 +190,21 @@
 		<switch name="trash/fuelrefuel12">
 			<default value="0"/>
 			<test logic="AND" value="-15">
-				propulsion/tank[12]/contents-lbs lt 2
-				propulsion/tank[8]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 817
+				propulsion/tank[13]/contents-lbs lt 2
+				propulsion/tank[9]/contents-lbs gt 2
+				propulsion/tank[1]/contents-lbs lt 1264
 			</test>
-			<output>propulsion/tank[8]/pumping-flow-to-1</output>
+			<output>propulsion/tank[9]/pumping-flow-to-1</output>
 		</switch>
 		
 		<switch name="trash/fuelrefuel13">
 			<default value="0"/>
 			<test logic="AND" value="-15">
-				propulsion/tank[12]/contents-lbs lt 2
-				propulsion/tank[9]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 817
+				propulsion/tank[13]/contents-lbs lt 2
+				propulsion/tank[10]/contents-lbs gt 2
+				propulsion/tank[1]/contents-lbs lt 1264
 			</test>
-			<output>propulsion/tank[9]/pumping-flow-to-1</output>
+			<output>propulsion/tank[10]/pumping-flow-to-1</output>
 		</switch>
 		
 		<!-- 3 and 4 flow into 0 -->
@@ -200,12 +212,12 @@
 		<switch name="trash/fuelrefuel14">
 			<default value="0"/>
 			<test logic="AND" value="-15">
-				propulsion/tank[6]/contents-lbs lt 2
 				propulsion/tank[7]/contents-lbs lt 2
 				propulsion/tank[8]/contents-lbs lt 2
 				propulsion/tank[9]/contents-lbs lt 2
+				propulsion/tank[10]/contents-lbs lt 2
 				propulsion/tank[3]/contents-lbs gt 2
-				propulsion/tank[0]/contents-lbs lt 300
+				propulsion/tank[0]/contents-lbs lt 410
 			</test>
 			<output>propulsion/tank[3]/pumping-flow-to-0</output>
 		</switch>
@@ -213,12 +225,12 @@
 		<switch name="trash/fuelrefuel15">
 			<default value="0"/>
 			<test logic="AND" value="-15">
-				propulsion/tank[6]/contents-lbs lt 2
 				propulsion/tank[7]/contents-lbs lt 2
 				propulsion/tank[8]/contents-lbs lt 2
 				propulsion/tank[9]/contents-lbs lt 2
+				propulsion/tank[10]/contents-lbs lt 2
 				propulsion/tank[4]/contents-lbs gt 2
-				propulsion/tank[0]/contents-lbs lt 300
+				propulsion/tank[0]/contents-lbs lt 410
 			</test>
 			<output>propulsion/tank[4]/pumping-flow-to-0</output>
 		</switch>
@@ -242,13 +254,14 @@
 			<input>propulsion/tank[1]/levelling-flow-to-0</input>
 			<input>propulsion/tank[1]/pumping-flow-to-2</input>
 			<input>-propulsion/tank[0]/levelling-flow-to-1</input>
-			<input>-propulsion/tank[10]/pumping-flow-to-1</input>
 			<input>-propulsion/tank[11]/pumping-flow-to-1</input>
 			<input>-propulsion/tank[12]/pumping-flow-to-1</input>
-			<input>-propulsion/tank[6]/pumping-flow-to-1</input>
+			<input>-propulsion/tank[13]/pumping-flow-to-1</input>
+			<input>-propulsion/tank[6]/levelling-flow-to-1</input>
 			<input>-propulsion/tank[7]/pumping-flow-to-1</input>
 			<input>-propulsion/tank[8]/pumping-flow-to-1</input>
 			<input>-propulsion/tank[9]/pumping-flow-to-1</input>
+			<input>-propulsion/tank[10]/pumping-flow-to-1</input>
 			<output>propulsion/tank[1]/external-flow-rate-pps</output>
 		</summer>
 		
@@ -284,45 +297,51 @@
 		</summer>
 		
 		<!-- tank 6 -->
-		<summer name="trash/fuelrefuel22">
-			<input>propulsion/tank[6]/pumping-flow-to-1</input>
+		<summer name="trash/fuelrefuel22qq">
+			<input>propulsion/tank[6]/levelling-flow-to-1</input>
 			<output>propulsion/tank[6]/external-flow-rate-pps</output>
 		</summer>
 		
 		<!-- tank 7 -->
-		<summer name="trash/fuelrefuel23">
+		<summer name="trash/fuelrefuel22">
 			<input>propulsion/tank[7]/pumping-flow-to-1</input>
 			<output>propulsion/tank[7]/external-flow-rate-pps</output>
 		</summer>
 		
 		<!-- tank 8 -->
-		<summer name="trash/fuelrefuel24">
+		<summer name="trash/fuelrefuel23">
 			<input>propulsion/tank[8]/pumping-flow-to-1</input>
 			<output>propulsion/tank[8]/external-flow-rate-pps</output>
 		</summer>
 		
 		<!-- tank 9 -->
-		<summer name="trash/fuelrefuel25">
+		<summer name="trash/fuelrefuel24">
 			<input>propulsion/tank[9]/pumping-flow-to-1</input>
 			<output>propulsion/tank[9]/external-flow-rate-pps</output>
 		</summer>
 		
 		<!-- tank 10 -->
-		<summer name="trash/fuelrefuel26">
+		<summer name="trash/fuelrefuel25">
 			<input>propulsion/tank[10]/pumping-flow-to-1</input>
 			<output>propulsion/tank[10]/external-flow-rate-pps</output>
 		</summer>
 		
 		<!-- tank 11 -->
-		<summer name="trash/fuelrefuel27">
+		<summer name="trash/fuelrefuel26">
 			<input>propulsion/tank[11]/pumping-flow-to-1</input>
 			<output>propulsion/tank[11]/external-flow-rate-pps</output>
 		</summer>
 		
 		<!-- tank 12 -->
-		<summer name="trash/fuelrefuel28">
+		<summer name="trash/fuelrefuel27">
 			<input>propulsion/tank[12]/pumping-flow-to-1</input>
 			<output>propulsion/tank[12]/external-flow-rate-pps</output>
+		</summer>
+		
+		<!-- tank 13 -->
+		<summer name="trash/fuelrefuel28">
+			<input>propulsion/tank[13]/pumping-flow-to-1</input>
+			<output>propulsion/tank[13]/external-flow-rate-pps</output>
 		</summer>
 
 	</channel>
