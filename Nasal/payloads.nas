@@ -427,8 +427,12 @@ setlistener("/controls/smokepod/trigger", func() {
 			paint_the_rainbow(4.0);
 			return;
 		}
+		elsif (color == "red white black"){
+			red_white_black(2.0);
+			return;
+		}
 		else { 
-			var cn = 8 
+			var cn = 8;
 		}
 		setprop("/sim/multiplay/generic/int[19]",cn);
 	} else {
