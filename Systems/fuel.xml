@@ -246,7 +246,7 @@
 			<test logic="OR" value="0">
 				propulsion/tank[2]/accumulator-valve EQ 0 
 				propulsion/tank[2]/contents-lbs LE 1
-				propulsion/tank[14]contents-lbs GE 54
+				propulsion/tank[14]/contents-lbs GE 54
 				accelerations/Nz LE -0.5
 			</test>
 			<output>propulsion/tank[2]/flow-to-accumulator</output>
