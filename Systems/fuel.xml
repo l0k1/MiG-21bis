@@ -18,6 +18,7 @@
 	11 - ventral drop tank
 	12 - left drop tank
 	13 - right drop tank
+	14 - accumulator
 	-->
 	
 	  <!--all the time:
@@ -25,7 +26,8 @@
   fuel flows from 7 to 2
   level the fuel between 4, 5, and 6
   fuel in 2 pumps into 3
-  fuel in 3 goes straight to engine
+  fuel in 3 goes straight to engine, via accumulator
+  accumulator feeds the engine in inverted flight
   
   ventral drop tank flows into 2
   wing drop tanks flow into 2
@@ -33,6 +35,8 @@
   #4,5 flow into #1
   #1,2 emptied
   #3 emptied-->
+
+	<property value="1">propulsion/tank[2]/accumulator-valve</property>
 	
 	<channel name="Fuel System">
 	
@@ -93,7 +97,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[4]/contents-lbs gt 1
 				propulsion/tank[4]/contents-lbs gt propulsion/tank[3]/contents-lbs
-				propulsion/tank[3]/contents-lbs lt 349
+				propulsion/tank[3]/contents-lbs lt 319
 			</test>
 			<output>propulsion/tank[4]/levelling-flow-to-3</output>
 		</switch>
@@ -124,7 +128,7 @@
 			<default value="0"/>
 			<test logic="AND" value="-15">
 				propulsion/tank[1]/contents-lbs gt 1
-				propulsion/tank[2]/contents-lbs lt 463
+				propulsion/tank[2]/contents-lbs lt 407
 			</test>
 			<output>propulsion/tank[1]/pumping-flow-to-2</output>
 		</switch>
@@ -235,6 +239,18 @@
 			<output>propulsion/tank[4]/pumping-flow-to-0</output>
 		</switch>
 
+		<!-- accumulator fed from 3 when G<-0.5 -->
+
+		<switch name="trash/fuelaccumulator">
+			<default value="-15"/>
+			<test logic="OR" value="0">
+				propulsion/tank[2]/accumulator-valve EQ 0 
+				propulsion/tank[2]/contents-lbs LE 1
+				propulsion/tank[14]contents-lbs GE 54
+				accelerations/Nz LE -0.5
+			</test>
+			<output>propulsion/tank[2]/flow-to-accumulator</output>
+		</switch>
 		
 		<!-- inputs/outputs -->
 		
@@ -268,6 +284,7 @@
 		<!-- tank 2 -->
 		<summer name="trash/fuelrefuel18">
 			<input>-propulsion/tank[1]/pumping-flow-to-2</input>
+			<input>propulsion/tank[2]/flow-to-accumulator</input>
 			<output>propulsion/tank[2]/external-flow-rate-pps</output>
 		</summer>
 		
@@ -342,6 +359,12 @@
 		<summer name="trash/fuelrefuel28">
 			<input>propulsion/tank[13]/pumping-flow-to-1</input>
 			<output>propulsion/tank[13]/external-flow-rate-pps</output>
+		</summer>
+
+		<!-- tank 14 accumulator -->
+		<summer name="trash/fuelaccumulator2">
+			<input>-propulsion/tank[2]/flow-to-accumulator</input>
+			<output>propulsion/tank[14]/external-flow-rate-pps</output>
 		</summer>
 
 	</channel>
