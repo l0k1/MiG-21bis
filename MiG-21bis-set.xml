@@ -224,6 +224,7 @@
 			<tank n="11"><name>Ventral Drop Tank</name></tank>
 			<tank n="12"><name>Left Drop Tank</name></tank>
 			<tank n="13"><name>Right Drop Tank</name></tank>
+			<tank n="14"><name>Accumulator</name></tank>
 		</fuel>
 	</consumables>
 
