@@ -203,7 +203,7 @@
       <y>   0.00 </y>
       <z>   0.00 </z>
     </location>
-    <feed>2</feed>
+    <feed>14</feed>
     <thruster file="direct">
      <location unit="IN">
        <x> 263.40 </x>
@@ -256,7 +256,7 @@
   	<!-- Tanks:
 	0 - internal
 	1 - internal
-	2 - internal
+	2 - internal (Main)
 	3 - internal
 	4 - internal
 	5 - internal
@@ -268,6 +268,7 @@
 	11 - ventral drop tank
 	12 - left drop tank
 	13 - right drop tank
+	14 - accumulator (inside Main tank)
 	
 	***** FUEL AMOUNTS PER TANK ARE FICTIONAL ******* but the total fuel matches
 	***** LOCATIONS ARE ESTIMATES ***** i didn't have a map of tank 1 is here, tank 2 is there. just a cutaway.
@@ -308,8 +309,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 466.4 </capacity>
-     <contents unit="LBS"> 440 </contents>
+     <capacity unit="LBS"> 410.4 </capacity>
+     <contents unit="LBS"> 384 </contents>
      <standpipe unit="LBS"> 100 </standpipe> 
   </tank>
   
@@ -453,6 +454,22 @@
      <capacity unit="LBS"> 850 </capacity>
      <contents unit="LBS"> 0 </contents>
   </tank>
+
+<!-- accumulator - inside tank 3 -->
+
+  <tank type="FUEL" number="14">
+     <location unit="M">
+       <x>  -0.50 </x>
+       <y>   0.00 </y>
+       <z>   0.50 </z>
+     </location>
+     <priority>1</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 56 </capacity>
+     <contents unit="LBS"> 56 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+  
 
   <dump-rate unit="LBS/MIN"> 1500 </dump-rate>
  </propulsion>
