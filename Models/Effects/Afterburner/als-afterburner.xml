@@ -21,6 +21,7 @@
 	<animation>
 		<type>scale</type>
 		<object-name>bounding_box</object-name>
+		<property>engines/engine[0]/nozzle-pos-norm</property>
 		<nopreview/>
 		<x-offset>1.0</x-offset>
 		<y-offset>0.68</y-offset>
