@@ -15,9 +15,7 @@
         <condition>
 		<and>
 			<property>sim/multiplay/generic/float[8]</property>	
-			<not>
-				<property>sim/multiplay/generic/float[10]</property>
-			</not>
+			<property>sim/multiplay/generic/float[10]</property>
 		</and>
         </condition>
     </animation>
@@ -28,7 +26,7 @@
 		<object-name>bounding_box</object-name>
 		<property>sim/multiplay/generic/float[9]</property>
 		<nopreview/>
-		<x-factor>1.0</x-factor>
+		<x-factor>2.0</x-factor>
 		<y-factor>0.68</y-factor>
 		<z-factor>0.68</z-factor>
 	</animation>
