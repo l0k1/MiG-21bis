@@ -69,10 +69,10 @@ var contact = nil;
 var AIM = {
 	#done
 	new : func (p, type = "AIM-9", sign = "Sidewinder") {
-		print("setting up a new missile, type: " ~ type);
+		#print("setting up a new missile, type: " ~ type);
 		if(AIM.active[p] != nil) {
 			#do not make new missile logic if one exist for this pylon.
-			print("returned -1");
+			#print("returned -1");
 			return -1;
 		}
 		var m = { parents : [AIM]};
