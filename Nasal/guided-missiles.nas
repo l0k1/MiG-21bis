@@ -69,8 +69,10 @@ var contact = nil;
 var AIM = {
 	#done
 	new : func (p, type = "AIM-9", sign = "Sidewinder") {
+		print("setting up a new missile, type: " ~ type);
 		if(AIM.active[p] != nil) {
 			#do not make new missile logic if one exist for this pylon.
+			print("returned -1");
 			return -1;
 		}
 		var m = { parents : [AIM]};
@@ -783,7 +785,7 @@ var AIM = {
 #
 # Uncomment the following lines to check stats while flying:
 #
-printf("Mach %02.1f , time %03.1f s , thrust %03.1f lbf , G-force %02.2f", me.speed_m, me.life_time, thrust_lbf, me.g);
+#printf("Mach %02.1f , time %03.1f s , thrust %03.1f lbf , G-force %02.2f", me.speed_m, me.life_time, thrust_lbf, me.g);
 #printf("Alt %05.1f ft", alt_ft);
 
 			var exploded = me.poximity_detection();
