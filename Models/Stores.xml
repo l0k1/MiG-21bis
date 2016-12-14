@@ -135,7 +135,7 @@
 
 	<model>
 		<name>R-60 Missile Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-0.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
 		<offsets>
 			<x-m> 1.13</x-m>
 			<y-m>-2.73 </y-m>
@@ -143,10 +143,21 @@
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
+	
+	<animation>
+		<object-name>R-60 Missile Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[11]</property>
+                  <value>R-60</value>
+            </equals>
+		</condition>
+	</animation>
 
 	<model>
 		<name>R-60 Missile Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-1.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
 		<offsets>
 			<x-m> 0.20</x-m>
 			<y-m>-2.11 </y-m>
@@ -154,10 +165,21 @@
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
+	
+	<animation>
+		<object-name>R-60 Missile Left Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[12]</property>
+                  <value>R-60</value>
+            </equals>
+		</condition>
+	</animation>
 
 	<model>
 		<name>R-60 Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-3.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
 		<offsets>
 			<x-m> 1.13</x-m>
 			<y-m> 2.73 </y-m>
@@ -166,9 +188,20 @@
 		</offsets>
 	</model>
 	
+	<animation>
+		<object-name>R-60 Missile Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[15]</property>
+                  <value>R-60</value>
+            </equals>
+		</condition>
+	</animation>
+	
 	<model>
 		<name>R-60 Missile Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60-4.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
 		<offsets>
 			<x-m> 0.20</x-m>
 			<y-m> 2.11 </y-m>
@@ -177,9 +210,20 @@
 		</offsets>
 	</model>
 	
+	<animation>
+		<object-name>R-60 Missile Right Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[14]</property>
+                  <value>R-60</value>
+            </equals>
+		</condition>
+	</animation>
+	
 	<model>
 		<name>R-27R1 Missile Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1-0.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
 		<offsets>
 			<x-m> 0.70</x-m>
 			<y-m>-2.73 </y-m>
@@ -187,10 +231,21 @@
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
+	
+	<animation>
+		<object-name>R-27R1 Missile Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[11]</property>
+                  <value>R-27R1</value>
+            </equals>
+		</condition>
+	</animation>
 
 	<model>
 		<name>R-27R1 Missile Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1-1.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
 		<offsets>
 			<x-m> -0.15</x-m>
 			<y-m>-2.11 </y-m>
@@ -198,10 +253,21 @@
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
+	
+	<animation>
+		<object-name>R-27R1 Missile Left Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[12]</property>
+                  <value>R-27R1</value>
+            </equals>
+		</condition>
+	</animation>
 
 	<model>
 		<name>R-27R1 Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1-3.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
 		<offsets>
 			<x-m> 0.70</x-m>
 			<y-m>2.73 </y-m>
@@ -210,9 +276,20 @@
 		</offsets>
 	</model>
 	
+	<animation>
+		<object-name>R-27R1 Missile Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[15]</property>
+                  <value>R-27R1</value>
+            </equals>
+		</condition>
+	</animation>
+	
 	<model>
 		<name>R-27R1 Missile Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1-4.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
 		<offsets>
 			<x-m> -0.15</x-m>
 			<y-m> 2.11 </y-m>
@@ -221,9 +298,20 @@
 		</offsets>
 	</model>
 	
+	<animation>
+		<object-name>R-27R1 Missile Right Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[14]</property>
+                  <value>R-27R1</value>
+            </equals>
+		</condition>
+	</animation>
+	
 		<model>
 		<name>R-27T1 Missile Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1-0.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
 		<offsets>
 			<x-m> 0.70</x-m>
 			<y-m>-2.73 </y-m>
@@ -231,10 +319,21 @@
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
+	
+	<animation>
+		<object-name>R-27T1 Missile Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[11]</property>
+                  <value>R-27T1</value>
+            </equals>
+		</condition>
+	</animation>
 
 	<model>
 		<name>R-27T1 Missile Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1-1.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
 		<offsets>
 			<x-m> -0.15</x-m>
 			<y-m>-2.11 </y-m>
@@ -242,10 +341,21 @@
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
+	
+	<animation>
+		<object-name>R-27T1 Missile Left Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[12]</property>
+                  <value>R-27T1</value>
+            </equals>
+		</condition>
+	</animation>
 
 	<model>
 		<name>R-27T1 Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1-3.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
 		<offsets>
 			<x-m> 0.70</x-m>
 			<y-m>2.73 </y-m>
@@ -254,9 +364,20 @@
 		</offsets>
 	</model>
 	
+	<animation>
+		<object-name>R-27T1 Missile Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[15]</property>
+                  <value>R-27T1</value>
+            </equals>
+		</condition>
+	</animation>
+	
 	<model>
 		<name>R-27T1 Missile Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1-4.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
 		<offsets>
 			<x-m> -0.15</x-m>
 			<y-m> 2.11 </y-m>
@@ -264,5 +385,16 @@
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
+	
+	<animation>
+		<object-name>R-27T1 Missile Right Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[14]</property>
+                  <value>R-27T1</value>
+            </equals>
+		</condition>
+	</animation>
 
 </PropertyList>
