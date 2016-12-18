@@ -322,7 +322,7 @@ var impact_listener = func {
         var lon = ballistic.getNode("impact/longitude-deg").getValue();
         var impactPos = geo.Coord.new().set_latlon(lat, lon);
 
-        var selectionPos = radar_logicradar_logic.selection.get_Coord();
+        var selectionPos = radar_logic.selection.get_Coord();
 
         var distance = impactPos.distance_to(selectionPos);
         if (distance < 125) {
