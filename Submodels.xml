@@ -88,13 +88,15 @@
         <submodel-path>Aircraft/MiG-21bis/Models/Stores/Bullet-Submodel.xml</submodel-path>
     </submodel>
     
-    <!--submodel>
-        <name>Bomb L</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/BombL.xml</model>
-        <trigger>fdm/jsbsim/systems/armament/station2/released</trigger>
+    <submodel>
+        <name>FAB-500</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-500/FAB-500-sub.xml</model>
+        <trigger>payload/released/FAB-500[1]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
-        <count>1</count>
+        <repeat>false</repeat>
+        <delay>2</delay>
+        <count>-1</count>
         <x-offset>-2.5</x-offset>
         <y-offset>-12.33</y-offset>
         <z-offset>-1.0</z-offset>
@@ -112,12 +114,14 @@
     </submodel>
 
     <submodel>
-        <name>Bomb R</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/BombR.xml</model>
-        <trigger>fdm/jsbsim/systems/armament/station4/released</trigger>
+        <name>FAB-500</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-500/FAB-500-sub.xml</model>
+        <trigger>payload/released/FAB-500[3]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
-        <count>1</count>
+        <repeat>false</repeat>
+        <delay>2</delay>
+        <count>-1</count>
         <x-offset>-2.5</x-offset>
         <y-offset>12.33</y-offset>
         <z-offset>-1.0</z-offset>
@@ -131,7 +135,7 @@
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
-    </submodel-->
+    </submodel>
 
     <submodel>
         <name>Braking Parachute</name>

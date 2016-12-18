@@ -1,0 +1,30 @@
+<PropertyList>
+
+    <path>FAB-500.ac</path>
+    
+    <animation>
+        <enable-hot type="bool">false</enable-hot>
+    </animation>
+    
+    <animation>
+        <type>select</type>
+        <object-name>fab500</object-name>
+        <condition>
+            <!--not>
+                <property>fdm/jsbsim/systems/armament/station2/released</property>
+            </not-->
+            <equals>
+                  <property>sim/multiplay/generic/string[12]</property>
+                  <value>FAB-500</value>
+            </equals>
+
+        </condition>
+    </animation>
+
+    <animation>
+        <type>range</type>
+        <min-m>0</min-m>
+        <max-m>12000</max-m>
+    </animation>
+
+</PropertyList>

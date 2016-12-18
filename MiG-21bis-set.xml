@@ -479,6 +479,11 @@
 					<lbs>550</lbs>
 					<weight-lb>550</weight-lb>
 				</opt>
+				<opt>
+					<name>FAB-500</name>
+					<lbs>1102</lbs>
+					<weight-lb>1102</weight-lb>
+				</opt>
 				<!--<opt>
 					<name>FAB-250</name>
 					<lbs>520</lbs>
@@ -544,6 +549,11 @@
 					<name>R-27T1</name>
 					<lbs>550</lbs>
 					<weight-lb>550</weight-lb>
+				</opt>
+				<opt>
+					<name>FAB-500</name>
+					<lbs>1102</lbs>
+					<weight-lb>1102</weight-lb>
 				</opt>
 				<!--<opt>
 						<name>FAB-250</name>

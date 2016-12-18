@@ -68,23 +68,23 @@
 	</model>
     
 	<model>
-		<name>Bomb Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Bomb/BombL.xml</path>
+		<name>FAB-500 Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/FAB-500/FAB-500-1.xml</path>
 		<offsets>
-			<x-m> 0.28</x-m>
+			<x-m> 0.35</x-m>
 			<y-m>-2.11 </y-m>
-			<z-m>-0.19</z-m>
+			<z-m>-0.32</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
 
 	<model>
-		<name>Bomb Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Bomb/BombR.xml</path>
+		<name>FAB-500 Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/FAB-500/FAB-500-3.xml</path>
 		<offsets>
-			<x-m> 0.28</x-m>
+			<x-m> 0.35</x-m>
 			<y-m> 2.11 </y-m>
-			<z-m>-0.19</z-m>
+			<z-m>-0.32</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
