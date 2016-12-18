@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<view n="0">
+		<internal archive="y">true</internal>
+		<config>
+			<pitch-offset-deg>-10.0</pitch-offset-deg>
+			<x-offset-m archive="y"> 0.00</x-offset-m>
+			<y-offset-m archive="y"> 1.28</y-offset-m>
+			<z-offset-m archive="y">-3.30</z-offset-m>
+			<default-field-of-view-deg type="double">75</default-field-of-view-deg>
+		</config>
+	</view>
+	
+	<view n="101">
+		<internal archive="y">true</internal>
+		<name>Radar</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-20.0</pitch-offset-deg>
+			<heading-offset-deg>356</heading-offset-deg>
+			<x-offset-m archive="y"> 0.0765</x-offset-m>
+			<y-offset-m archive="y"> 0.9245</y-offset-m>
+			<z-offset-m archive="y">-3.5500</z-offset-m>
+			<default-field-of-view-deg type="double">55</default-field-of-view-deg>
+		</config>
+	</view>
+
+
+</PropertyList>
+
