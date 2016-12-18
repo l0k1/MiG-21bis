@@ -1,0 +1,66 @@
+<PropertyList>
+	<key>
+		<name>s</name>
+		<desc>Toggle starter valves</desc>
+	</key>
+	<key>
+		<name>Shift-q</name>
+		<desc>Fuel cut off</desc>
+	</key>
+	<key>
+		<name>Ctrl-b</name>
+		<desc>Toggle air brakes</desc>
+	</key>
+	<key>
+		<name>d</name>
+		<desc>Deploy drag parachute</desc>
+	</key>
+	<key>
+		<name>j</name>
+		<desc>Jettison drag parachute</desc>
+	</key>
+	<key>
+		<name>m</name>
+		<desc>Nose wheel steering</desc>
+	</key>
+	<key>
+		<name>c</name>
+		<desc>Toggle canopy</desc>
+	</key>
+	<key>
+		<name>e</name>
+		<desc>Eject</desc>
+	</key>
+	<key>
+		<name>f</name>
+		<desc>Gun trigger</desc>
+	</key>
+	<key>
+		<name>q</name>
+		<desc>Fire selected weapon</desc>
+	</key>
+	<key>
+		<name>1</name>
+		<desc>Select left R-60 missile</desc>
+	</key>
+	<key>
+		<name>2</name>
+		<desc>Select right R-60 missile</desc>
+	</key>
+	<key>
+		<name>Shift-1</name>
+		<desc>Select FAB-250 bombs</desc>
+	</key>
+	<key>
+		<name>Shift-3</name>
+		<desc>Select external fuel tank</desc>
+	</key>
+	<key>
+		<name>Ctrl-d</name>
+		<desc>Deselect all stations</desc>
+	</key>
+	<key>
+		<name>Ctrl-f</name>
+		<desc>Engage CSR Afterburner (below 15000ft)</desc>
+	</key>
+</PropertyList>
