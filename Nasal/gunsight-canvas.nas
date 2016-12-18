@@ -383,8 +383,8 @@ var gun_sight = {
 	
 	pipper_move: func() {
 		#get current center coords
-		#var pip_cen_x = me.pipper_center[0] + getprop("aax"); #use aax and aay for manual testing
-		#var pip_cen_y = me.pipper_center[1] + getprop("aay");
+		var pip_cen_x = me.pipper_center[0] ; #+ getprop("aax"); #use aax and aay for manual testing
+		var pip_cen_y = me.pipper_center[1] ; #+ getprop("aay");
 		
 		var pipper_adjust_x = 0;
 		var pipper_adjust_y = 0;
