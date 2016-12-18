@@ -62,6 +62,8 @@ var payloads = {
 	"Smokepod":		pos_arm.new("smokepod",157,"tank")
 };
 
+var loop_time = 0;
+
 var update_loop = func {
 
 	if(input.replay.getValue() == TRUE) {
@@ -173,7 +175,11 @@ var update_loop = func {
 				setprop("payload/armament/GSh-30/trigger",0);
 				print("GSh-30 has jammed!");
 			}
-			cur_ammo = math.clamp(cur_ammo - 4,0,200);
+			var scnd = getprop("/sim/time/elapsed-sec")  - loop_time;
+			var spent= int(58.3 * scnd);
+			#print("scnd: " ~ scnd);
+			#print("spent: " ~ spent);
+			cur_ammo = math.clamp(cur_ammo - spent,0,200);
 			setprop("payload/armament/GSh-30/trigger",1);
 			setprop("payload/armament/GSh-30/ammo",cur_ammo);
 		} else {
@@ -183,6 +189,8 @@ var update_loop = func {
 	} else {
 		setprop("payload/armament/GSh-30/trigger",0);
 	}
+	
+	loop_time = getprop("/sim/time/elapsed-sec");
 	
 	settimer(update_loop, UPDATE_PERIOD);
 }
@@ -307,37 +315,72 @@ var missile_release = func(pylon) {
 }
 ############ Cannon impact messages #####################
 
-var last_impact = 0;
-
 var hit_count = 0;
+var hit_callsign = "";
+var hit_timer = 0;
+var closest_distance = 200;
 
 var impact_listener = func {
-  if (radar_logic.selection != nil and (input.elapsed.getValue()-last_impact) > 1) {
     var ballistic_name = input.impact.getValue();
     var ballistic = props.globals.getNode(ballistic_name, 0);
+	var closest_distance = 10000;
+	var inside_callsign = "";
+	#print("inside listener");
     if (ballistic != nil) {
-      var typeNode = ballistic.getNode("impact/type");
-      if (typeNode != nil and typeNode.getValue() != "terrain") {
-        var lat = ballistic.getNode("impact/latitude-deg").getValue();
-        var lon = ballistic.getNode("impact/longitude-deg").getValue();
-        var impactPos = geo.Coord.new().set_latlon(lat, lon);
+		#print("ballistic isn't nil");
+		var typeNode = ballistic.getNode("impact/type");
+		var typeOrd = ballistic.getNode("name").getValue();
+		print("typeOrd: " ~ typeOrd);
+		if (typeNode != nil and typeNode.getValue() != "terrain") {
+			#print("typenode isnt nil");
+			var lat = ballistic.getNode("impact/latitude-deg").getValue();
+			var lon = ballistic.getNode("impact/longitude-deg").getValue();
+			var impactPos = geo.Coord.new().set_latlon(lat, lon);
+			if (typeOrd = "GSh-23") {
+				closest_distance = 35;
+				foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
+					#print("Gau impact - hit: " ~ typeNode.getValue());
+					var mlat = mp.getNode("position/latitude-deg").getValue();
+					var mlon = mp.getNode("position/longitude-deg").getValue();
+					var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
+					var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
+					var distance = impactPos.distance_to(selectionPos);
+					print("distance = " ~ distance);
+					if (distance < closest_distance) {
+						closest_distance = distance;
+						inside_callsign = mp.getNode("callsign").getValue();
+					}
+				}
 
-        var selectionPos = radar_logic.selection.get_Coord();
+				if ( inside_callsign != "" ) {
+					#we have a successful hit
+					#print("successful hit");
+					if ( inside_callsign == hit_callsign ) {
+						hit_count = hit_count + 1;
+						#print("hit_count: " ~ hit_count);
+					} else {
+						#print("new callsign");
+						hit_callsign = inside_callsign;
+						hit_count = 1;
+					}
+					if ( hit_timer == 0 ) {
+						hit_timer = 1;
+						#print("should be going into the timer...");
+						settimer(func{hitmessage(typeOrd);},1);
+					}
+				}
+			}
+		}
+	}
+}
 
-        var distance = impactPos.distance_to(selectionPos);
-        if (distance < 125) {
-          last_impact = input.elapsed.getValue();
-          var phrase =  ballistic.getNode("name").getValue() ~ " hit: " ~ radar_logic.selection.get_Callsign();
-          if (getprop("payload/armament/msg")) {
-            defeatSpamFilter(phrase);
-			      #hit_count = hit_count + 1;
-          } else {
-            setprop("/sim/messages/atc", phrase);
-          }
-        }
-      }
-    }
-  }
+var hitmessage = func(typeOrd) {
+	#print("inside hitmessage");
+	message = typeOrd ~ " hit: " ~ hit_callsign ~ ": " ~ hit_count ~ " hits";
+	defeatSpamFilter(message);
+	hit_callsign = "";
+	hit_timer = 0;
+	hit_count = 0;
 }
 
 ############ Smokepod Cannon Trigger Controller##############

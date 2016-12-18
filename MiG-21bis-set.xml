@@ -596,7 +596,7 @@
                 <msg type="bool">true</msg>
                 <damage type="bool">true</damage>
 				<GSh-30>
-					<ammo type="int">200</ammo>
+					<ammo type="double">200</ammo>
 					<trigger type="bool">false</trigger>
 					<jammed type="bool">false</jammed>
 				</GSh-30>

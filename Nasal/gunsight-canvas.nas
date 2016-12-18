@@ -507,7 +507,7 @@ var gun_sight = {
 			var l_angle = 0;    #launch angle adjustment
 			if ( getprop(pipperangularcorrection) == 0 ) { 
 				#guns default until the knobbin gets installed
-				b_speed = (2840 * FT2M) + airspeed; 
+				b_speed = (2350 * FT2M) + airspeed; 
 				l_angle = -1;
 			}
 			#adjust launch angle to account for aircraft roll

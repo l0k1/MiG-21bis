@@ -1,10 +1,10 @@
 <PropertyList>
 
     <submodel>
-        <name>Left Barrel</name>
+        <name>GSh-23</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Tracer.xml</model>
         <trigger>payload/armament/GSh-30/trigger</trigger>
-        <speed>2840.0</speed>
+        <speed>2350.0</speed>
         <repeat>true</repeat>
         <delay>0.15</delay>
         <count>-1</count>
@@ -13,7 +13,7 @@
         <z-offset>-2.0</z-offset>
         <yaw-offset>0.0</yaw-offset>
         <pitch-offset>-1</pitch-offset>
-        <life>2.0</life>
+        <life>3.0</life>
         <wind>false</wind>
         <weight>0.1069</weight>
         <cd>0.193</cd>
@@ -21,12 +21,12 @@
     </submodel>
 
     <submodel>
-        <name>GSh-30</name>
+        <name>GSh-23</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Null.ac</model>
         <trigger>payload/armament/GSh-30/trigger</trigger>
-        <speed>2840.0</speed>
+        <speed>2350.0</speed>
         <repeat>true</repeat>
-        <delay>0</delay>
+        <delay>0.034</delay>
         <count>-1</count>
         <x-offset> 20.0</x-offset>
         <y-offset> -1.0</y-offset>
@@ -45,10 +45,10 @@
     </submodel>
 
     <submodel>
-        <name>Right Barrel</name>
+        <name>GSh-23</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Tracer.xml</model>
         <trigger>payload/armament/GSh-30/trigger</trigger>
-        <speed>2840.0</speed>
+        <speed>2350.0</speed>
         <repeat>true</repeat>
         <delay>0.15</delay>
         <count>-1</count>
@@ -57,7 +57,7 @@
         <z-offset>-2.0</z-offset>
         <yaw-offset>0.0</yaw-offset>
         <pitch-offset>-1</pitch-offset>
-        <life>2.0</life>
+        <life>3.0</life>
         <wind>false</wind>
         <weight>0.1069</weight>
         <cd>0.193</cd>
@@ -65,12 +65,12 @@
     </submodel>
 
     <submodel>
-        <name>GSh-30</name>
+        <name>GSh-23</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Null.ac</model>
         <trigger>payload/armament/GSh-30/trigger</trigger>
-        <speed>2840.0</speed>
+        <speed>2350.0</speed>
         <repeat>true</repeat>
-        <delay>0</delay>
+        <delay>0.034</delay>
         <count>-1</count>
         <x-offset> 20.0</x-offset>
         <y-offset>  1.0</y-offset>
