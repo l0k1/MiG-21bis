@@ -50,7 +50,7 @@ var payloads = {
 	"R-27R1":					pos_arm.new("R-27R1",560,"radar"),
 	# bombs
 	"FAB-250":							pos_arm.new("FAB-250",520,"bomb"),
-	"FAB-500":							pos_arm.new("FAB-500",1102,"bomb"),
+	"FAB-500":							pos_arm.new("FAB-500",1146,"bomb"),
 	# anti-radiation
 	"Kh-25":				pos_arm.new("Kh-25",695,"antirad"),
 	# beam

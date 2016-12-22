@@ -483,7 +483,6 @@
  <system file="Alpha-Buffet"/>
  <system file="Chute"/>
  <system file="Dump"/>
- <!--<system file="Armament"/>-->
  <system file="Canopy"/>
  <system file="Particles"/>
  <system file="fuel"/>
