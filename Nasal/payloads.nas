@@ -41,16 +41,21 @@ var payloads = {
 	#payload format is:
 	#name: pos_arm.new(brevity code, weight, type/guidance, ammo count (optional)
 	#bomb names can NOT have spaces in them.
-	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad
+	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy
 	"none":					pos_arm.new("none",0,"none"),
 	# ir missiles
 	"R-60":					pos_arm.new("R-60",96,"ir"),
-	"R-27T1":					pos_arm.new("R-27T1",550,"ir"),
+	"R-27T1":				pos_arm.new("R-27T1",550,"ir"),
 	# radar missiles
-	"R-27R1":					pos_arm.new("R-27R1",560,"radar"),
+	"R-27R1":				pos_arm.new("R-27R1",560,"radar"),
 	# bombs
-	"FAB-250":							pos_arm.new("FAB-250",520,"bomb"),
-	"FAB-500":							pos_arm.new("FAB-500",1146,"bomb"),
+	"FAB-250":				pos_arm.new("FAB-250",520,"bomb"),
+	"FAB-500":				pos_arm.new("FAB-500",1146,"bomb"),
+	# heavy
+	"RN-14T":				pos_arm.new("RN-14T",856,"heavy"),
+	"RN-18T":				pos_arm.new("RN-18T",1150,"heavy"),
+	"RN-24":				pos_arm.new("RN-24",860,"heavy"),
+	"RN-28":				pos_arm.new("RN-28",1200,"heavy"),
 	# anti-radiation
 	"Kh-25":				pos_arm.new("Kh-25",695,"antirad"),
 	# beam
@@ -60,9 +65,9 @@ var payloads = {
 	"UB-32":				pos_arm.new("UB-32",582,"rocket",32),
 	"S-21":					pos_arm.new("S-21",341,"rocket"), #no real info found (yet)
 	"S-24":					pos_arm.new("S-24",518,"rocket"),
-	"PTB-490 Droptank":			pos_arm.new("PTB-490 Droptank",180,"tank"),
-	"PTB-800 Droptank":			pos_arm.new("PTB-800 Droptank",230,"tank"),
-	"Smokepod":		pos_arm.new("smokepod",157,"tank")
+	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank",180,"tank"),
+	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank",230,"tank"),
+	"Smokepod":				pos_arm.new("smokepod",157,"tank")
 };
 
 var loop_time = 0;
@@ -270,6 +275,13 @@ var missile_release_listener = func {
 		}
 	}
 }
+
+var heavy_release_listener = func {
+	var selected = getprop("payload/weight[2]/selected");
+	if ( payloads[selected].type = "heavy" ) {
+		bomb_release(2);
+	}
+}
   
   #pylon knob
   #0: 1/2 bomb | 16 rkt
@@ -347,7 +359,7 @@ var hit_timer = 0;
 var closest_distance = 200;
 
 var impact_listener = func {
-	print(payloads["FAB-500"].type);
+	#print(payloads["FAB-500"].type);
     var ballistic_name = input.impact.getValue();
     var ballistic = props.globals.getNode(ballistic_name, 0);
 	var closest_distance = 10000;
@@ -399,6 +411,24 @@ var impact_listener = func {
 			}elsif (payloads[typeOrd] != nil and payloads[typeOrd].type == "bomb")  {
 				#print("bomb impact!");
 				closest_distance = 250;
+				foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
+					var mlat = mp.getNode("position/latitude-deg").getValue();
+					var mlon = mp.getNode("position/longitude-deg").getValue();
+					var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
+					var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
+					var distance = impactPos.distance_to(selectionPos);
+					#print("distance = " ~ distance);
+					if (distance < closest_distance) {
+						closest_distance = distance;
+						inside_callsign = mp.getNode("callsign").getValue();
+					}
+				}
+				if (inside_callsign != "" ) {
+					defeatSpamFilter(sprintf( typeOrd~" exploded: %01.1f", distance) ~ " meters from: " ~ inside_callsign);
+				}
+			}elsif (payloads[typeOrd] != nil and payloads[typeOrd].type == "heavy")  {
+				#print("bomb impact!");
+				closest_distance = 1000;
 				foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
 					var mlat = mp.getNode("position/latitude-deg").getValue();
 					var mlon = mp.getNode("position/longitude-deg").getValue();
@@ -554,6 +584,7 @@ var main_init = func {
 
   screen.log.write("Welcome to MiG-21bis!", 1.0, 0.2, 0.2);
   setlistener("/fdm/jsbsim/systems/armament/release", missile_release_listener);
+  setlistener("fdm/jsbsim/systems/armament/heavy-release", heavy_release_listener);
 
   # setup impact listener
   setlistener("/ai/models/model-impact", impact_listener, 0, 0);

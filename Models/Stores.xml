@@ -397,4 +397,15 @@
 		</condition>
 	</animation>
 
+	<model>
+		<name>RN-28</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/RN-28/RN-28.xml</path>
+        <offsets>
+                <x-m> 0.13</x-m>
+                <y-m>0.00</y-m>
+                <z-m>-0.83</z-m>
+                <pitch-deg>0.00</pitch-deg>
+        </offsets>
+	</model>
+
 </PropertyList>

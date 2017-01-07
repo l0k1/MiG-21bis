@@ -64,8 +64,8 @@
 		</binding>
 	</key>
 
-	<key n="81">
-		<name>Shift-Q</name>
+	<key n="87">
+		<name>Shift-W</name>
 		<desc>Fuel cut off</desc>
 		<binding>
 			<condition>
@@ -165,6 +165,23 @@
 			<binding>
 				<command>property-assign</command>
 				<property>fdm/jsbsim/systems/armament/release</property>
+				<value>0</value>
+			</binding>
+		</mod-up>
+	</key>
+
+	<key n="81">
+		<name>Shift-Q</name>
+		<desc>Center Pylon Drop</desc>
+		<binding>
+			<command>property-assign</command>
+			<property>fdm/jsbsim/systems/armament/heavy-release</property>
+			<value>1</value>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>fdm/jsbsim/systems/armament/heavy-release</property>
 				<value>0</value>
 			</binding>
 		</mod-up>

@@ -525,6 +525,11 @@
 					<lbs>157</lbs>
 					<weight-lb>157</weight-lb>
 				</opt>
+				<opt>
+					<name>RN-28</name>
+					<lbs>1200</lbs>
+					<weight-lb>1200</weight-lb>
+				</opt>
 			</weight>
 			<weight n="3">
 				<name>Right wing inboard pylon (#4)</name>
