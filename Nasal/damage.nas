@@ -13,16 +13,16 @@ var FALSE = 0;
 
 
 var cannon_types = {
-    " M70 rocket hit":        0.30,
-    " M55 cannon shell hit":  0.20,
-    " KCA cannon shell hit":  0.20,
-    " Gun Splash On ":        0.30,
-    " M61A1 shell hit":       0.20,
-    " GAU-8/A hit":           0.30,
-    " BK27 cannon hit":       0.20,
-    " GSh-30 hit":            0.20,
-    " 7.62 hit":              2.50, #UH-1
-    " 50 BMG hit":            3.00, #p-47
+    " M70 rocket hit":        0.25, #135mm
+    " M55 cannon shell hit":  0.10, # 30mm
+    " KCA cannon shell hit":  0.10, # 30mm
+    " Gun Splash On ":        0.10, # 30mm
+    " M61A1 shell hit":       0.05, # 20mm
+    " GAU-8/A hit":           0.10, # 30mm
+    " BK27 cannon hit":       0.07, # 27mm
+    " GSh-30 hit":            0.10, # 30mm
+    " 7.62 hit":              0.30, #UH-1
+    " 50 BMG hit":            0.20, #p-47
 };
     
     
@@ -30,6 +30,7 @@ var cannon_types = {
 var warhead_lbs = {
     "aim-120":              44.00,
     "AIM120":               44.00,
+    "AIM-120":              44.00,
     "RB-99":                44.00,
     "aim-7":                88.00,
     "RB-71":                88.00,
