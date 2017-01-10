@@ -21,6 +21,8 @@ var cannon_types = {
     " GAU-8/A hit":           0.30,
     " BK27 cannon hit":       0.20,
     " GSh-30 hit":            0.20,
+    " 7.62 hit":              2.50, #UH-1
+    " 50 BMG hit":            3.00, #p-47
 };
     
     
@@ -65,6 +67,8 @@ var warhead_lbs = {
     "R-60":                  6.60,
     "R-27R1":               85.98,
     "R-27T1":               85.98,
+    "FAB-500":             564.00,
+    "M71R":                200.00,
 };
 
 var incoming_listener = func {
