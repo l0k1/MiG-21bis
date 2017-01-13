@@ -639,6 +639,49 @@
 		<path>Aircraft/MiG-21bis/Models/Effects.xml</path>
 	</model>
 
+	<effect>
+		<inherits-from>Aircraft/MiG-21bis/Models/Effects/normal_map</inherits-from>
+		<object-name>spoiler</object-name>
+		<object-name>cone</object-name>
+		<object-name>hull</object-name>
+		<object-name>canopy</object-name>
+		<object-name>front-canopy</object-name>
+		<object-name>bcanopy</object-name>
+		<object-name>bfront-canopy</object-name>
+		<object-name>left_ventral_air_brake</object-name>
+		<object-name>right_ventral_air_brake</object-name>
+		<object-name>central_air_brake</object-name>
+		<object-name>left_gill</object-name>
+		<object-name>left_back_gill</object-name>
+		<object-name>right_gill</object-name>
+		<object-name>right_back_gill</object-name>
+		<object-name>rudder</object-name>
+		<object-name>hstab</object-name>
+		<object-name>right_elevator</object-name>
+		<object-name>left_elevator</object-name>
+		<object-name>right_door</object-name>
+		<object-name>left_door</object-name>
+		<object-name>right_inner_door</object-name>
+		<object-name>left_inner_door</object-name>
+		<object-name>right_outer_door</object-name>
+		<object-name>left_outer_door</object-name>
+		<object-name>right_outer_door_up</object-name>
+		<object-name>right_outer_door_down</object-name>
+		<object-name>left_outer_door_up</object-name>
+		<object-name>left_outer_door_down</object-name>
+		<object-name>back_right_door</object-name>
+		<object-name>back_left_door</object-name>
+		<object-name>wings</object-name>
+		<object-name>right_flap</object-name>
+		<object-name>left_flap</object-name>
+		<object-name>right_aileron</object-name>
+		<object-name>left_aileron</object-name>
+		<object-name>pylons</object-name>
+		<object-name>nose_wheel</object-name>
+		<object-name>left_wheel</object-name>
+		<object-name>right_wheel</object-name>
+	</effect>
+
 	<animation>
 		<type>material</type>
 		<object-name>spoiler</object-name>
