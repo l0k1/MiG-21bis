@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name>Aircraft/MiG-21bis/Models/Effects/normal_map</name>
+  <inherits-from>Effects/model-combined-deferred</inherits-from>
+  <parameters>
+  
+     <normalmap-enabled type="int">1</normalmap-enabled>
+     <normalmap-dds type="int">0</normalmap-dds>
+     <texture n="2">
+         <image>Aircraft/MiG-21bis/Models/Effects/normal_map.png</image>
+         <filter>linear-mipmap-linear</filter>
+         <wrap-s>clamp</wrap-s>
+         <wrap-t>clamp</wrap-t>
+         <internal-format>normalized</internal-format>
+     </texture>   
+  </parameters>
+  
+  
+  <!-- ####################
+    ### NORMALMAP INCLUDE ###
+    ######################### -->
+    <generate>
+        <tangent type="int">6</tangent>
+        <binormal type="int">7</binormal>
+    </generate>
+    
+    <technique n="4">
+        <pass>
+            <program>
+                <attribute>
+                    <name>tangent</name>
+                    <index>6</index>
+                </attribute>
+                <attribute>
+                    <name>binormal</name>
+                    <index>7</index>
+                </attribute>
+            </program>
+        </pass>
+    </technique>
+    
+    <technique n="7">
+        <pass>
+            <program>
+                <attribute>
+                    <name>tangent</name>
+                    <index>6</index>
+                </attribute>
+                <attribute>
+                    <name>binormal</name>
+                    <index>7</index>
+                </attribute>
+            </program>
+        </pass>
+    </technique>
+    
+    <technique n="9">
+        <pass>
+            <program>
+                <attribute>
+                    <name>tangent</name>
+                    <index>6</index>
+                </attribute>
+                <attribute>
+                    <name>binormal</name>
+                    <index>7</index>
+                </attribute>
+            </program>
+        </pass>
+    </technique>
+    <!-- ########################
+    ### END NORMALMAP INCLUDE ###
+    ############################# -->
+</PropertyList>
