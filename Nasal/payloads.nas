@@ -419,12 +419,8 @@ var impact_listener = func {
 					var distance = impactPos.distance_to(selectionPos);
 					#print("distance = " ~ distance);
 					if (distance < closest_distance) {
-						closest_distance = distance;
-						inside_callsign = mp.getNode("callsign").getValue();
+						defeatSpamFilter(sprintf( typeOrd~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
 					}
-				}
-				if (inside_callsign != "" ) {
-					defeatSpamFilter(sprintf( typeOrd~" exploded: %01.1f", distance) ~ " meters from: " ~ inside_callsign);
 				}
 			}elsif (payloads[typeOrd] != nil and payloads[typeOrd].type == "heavy")  {
 				#print("bomb impact!");
@@ -437,12 +433,8 @@ var impact_listener = func {
 					var distance = impactPos.distance_to(selectionPos);
 					#print("distance = " ~ distance);
 					if (distance < closest_distance) {
-						closest_distance = distance;
-						inside_callsign = mp.getNode("callsign").getValue();
+						defeatSpamFilter(sprintf( typeOrd~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
 					}
-				}
-				if (inside_callsign != "" ) {
-					defeatSpamFilter(sprintf( typeOrd~" exploded: %01.1f", distance) ~ " meters from: " ~ inside_callsign);
 				}
 			}
 		}

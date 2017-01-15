@@ -1,10 +1,10 @@
 <PropertyList>
-
+  
 <particlesystem>
-   <name>explosion</name>
-   <texture>smoke.png</texture>
+   <name>explosion-smoke</name>
+   <texture>smoke2.png</texture>
 
-   <emissive type="bool">true</emissive>
+   <emissive type="bool">false</emissive>
    <lighting type="bool">false</lighting>
 
    <attach>world</attach>
@@ -19,8 +19,8 @@
      <phi-min-deg>-180</phi-min-deg>
      <phi-max-deg>180</phi-max-deg>
      <speed-mps>
-       <value>2600</value>
-       <spread>230</spread>
+       <value>2800</value>
+       <spread>260</spread>
      </speed-mps>
      <rotation-speed>
        <x-min-deg-sec>0</x-min-deg-sec>
@@ -34,8 +34,8 @@
 
    <counter>
      <particles-per-sec>
-       <value>70</value>
-       <spread>15</spread>
+       <value>2000</value>
+       <spread>20</spread>
      </particles-per-sec>
    </counter>
       
@@ -44,30 +44,30 @@
    <particle>
      <start>
        <color>
-         <red><value>   1.0 </value></red>
-         <green><value> 1.0 </value></green>
-         <blue><value>  0.4 </value></blue>
-         <alpha><value> 1 </value></alpha>
+         <red><value>   0.3 </value></red>
+         <green><value> 0.3 </value></green>
+         <blue><value>  0.25 </value></blue>
+         <alpha><value> 0.7 </value></alpha>
        </color>
        <size>
-         <value>2</value>
+         <value>10</value>
        </size>
      </start>
 
      <end>
        <color>
-         <red><value>   0.8 </value></red>
-         <green><value> 0.5 </value></green>
-         <blue><value>  0.2 </value></blue>
-         <alpha><value> 0.1 </value></alpha>
+         <red><value>   0.4 </value></red>
+         <green><value> 0.4 </value></green>
+         <blue><value>  0.4 </value></blue>
+         <alpha><value> 0.04 </value></alpha>
        </color>
        <size>
-         <value>180</value>
+         <value>85</value>
        </size>
      </end>
 
      <life-sec>
-       <value>4.0</value>
+       <value>50</value>
      </life-sec>
         
      <mass-kg>  5 </mass-kg>
