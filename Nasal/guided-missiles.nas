@@ -1849,12 +1849,17 @@ var defeatSpamFilter = func (str) {
   for (var i = 1; i <= spams; i+=1) {
     str = str~".";
   }
+  var myCallsign = getprop("sim/multiplay/callsign");
+  if (myCallsign != nil and find(myCallsign, str) != -1) {
+      str = myCallsign~": "~str;
+  }
   var newList = [str];
   for (var i = 0; i < size(spamList); i += 1) {
     append(newList, spamList[i]);
   }
   spamList = newList;  
 }
+
 
 var spamLoop = func {
   var spam = pop(spamList);
