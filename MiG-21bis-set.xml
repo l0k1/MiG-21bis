@@ -799,6 +799,10 @@
 		<!--<headmove>
 			<file>Aircraft/MiG-21bis/Nasal/headmove.nas</file>
 		</headmove>-->
+		<!-- For Wingmen AI Scenarios -->
+                <formation>
+                        <file>Aircraft/Generic/formation.nas</file>
+                </formation>
 	</nasal>
 
 </PropertyList>

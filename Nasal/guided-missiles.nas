@@ -1355,9 +1355,9 @@ var AIM = {
 		# Create impact coords from this previous relative position applied to target current coord.
 		#me.t_coord.apply_course_distance(t_bearing_deg, t_dist_m);
 		#me.t_coord.set_alt(new_t_alt_m);		
-		#var wh_mass = me.weight_whead_lbs / slugs_to_lbs;
+		var wh_mass = me.weight_whead_lbs / slugs_to_lbs;
 		#print("FOX2: me.direct_dist_m = ",  me.direct_dist_m, " time ",getprop("sim/time/elapsed-sec"));
-		#impact_report(me.t_coord, wh_mass, "missile"); # pos, alt, mass_slug,(speed_mps)
+		impact_report(me.coord, wh_mass, "missile"); # pos, alt, mass_slug,(speed_mps)
 
 		var phrase = sprintf( me.type~" exploded: %01.1f", min_distance) ~ " meters from: " ~ me.callsign;
 		print(phrase~"  Reason: "~reason~sprintf(" time %.1f", me.life_time));
