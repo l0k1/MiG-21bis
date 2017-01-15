@@ -98,8 +98,8 @@
         altitudes : {
         wheelsOnGroundAGL_m : 1 , #altitude correction to add to your aircraft or ship that is needed to put wheels on ground (or, for a ship, make it float in the water at the correct level).  For most objects this is 0 but some models need a small correction to place them exactly at ground level
 
-        minimumAGL_m : 50, #minimum altitude above ground level this object is allowed to fly
-        maximumAGL_m : 19000, #maximum altitude AGL this object is allowed to fly, ie, operational ceiling
+        minimumAGL_m : 300, #minimum altitude above ground level this object is allowed to fly
+        maximumAGL_m : 15000, #maximum altitude AGL this object is allowed to fly, ie, operational ceiling
         crashedAGL_m : -0.01, #altitude AGL when crashed.  Ships will sink to this level, aircraft or vehicles will sink into the ground as landing gear collapses or tires deflate. Should be negative, even just -0.001.
         },
         #
@@ -215,7 +215,7 @@
         {
         name : "GSh-23", # name presented to users, ie in on-screen messages
         maxDamage_percent : 10, # maximum percentage damage one hit from the aircraft's main weapon/machine guns will do to an opponent
-        maxDamageDistance_m : 700, # maximum distance at which the aircrafts main weapon/maching guns will be able to damage an opponent
+        maxDamageDistance_m : 1500, # maximum distance at which the aircrafts main weapon/maching guns will be able to damage an opponent
         weaponAngle_deg  :  { heading: 0, elevation: 0 }, # direction the aircraft's main weapon is aimed.
         # 0,0 = straight ahead, 90,0=directly right, 0,90=directly up, 0,180=directly back, etc.
         weaponOffset_m : {x:2.5, y:0, z:0}, # Offset of the weapon from the main aircraft center
@@ -246,7 +246,7 @@
         # VULNERABILITIES DEFINITIONS
         #
         vulnerabilities : {
-        damageVulnerability : 8, #Vulnerability to damage from armament, 1=normal M1 tank; higher to make objects easier to kill and lower to make them more difficult.  This is a multiplier, so 5 means 5X easier to kill than an M1, 1/5 means 5X harder to kill.
+        damageVulnerability : 15, #Vulnerability to damage from armament, 1=normal M1 tank; higher to make objects easier to kill and lower to make them more difficult.  This is a multiplier, so 5 means 5X easier to kill than an M1, 1/5 means 5X harder to kill.
 
         engineDamageVulnerability_percent : 8, #Chance that a small-caliber machine-gun round will damage the engine.
 
