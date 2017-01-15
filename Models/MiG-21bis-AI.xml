@@ -185,9 +185,9 @@
         # The attack system makes the AI aircraft turn and fly towards
         # other aircraft
         attacks : {
-        maxDistance_m : 20000, #max distance to turn and attack main aircraft
-        minDistance_m : 1000, #min distance to turn and attack main aircraft, ie, fly away this far before turning to attack again
-        continueAttackAngle_deg : 50, #when within minDistance_m, the aircraft will continue to turn towards the main aircraft and attack *if* if the angle is less than this amount from dead ahead
+        maxDistance_m : 40000, #max distance to turn and attack main aircraft
+        minDistance_m : 3000, #min distance to turn and attack main aircraft, ie, fly away this far before turning to attack again
+        continueAttackAngle_deg : 80, #when within minDistance_m, the aircraft will continue to turn towards the main aircraft and attack *if* if the angle is less than this amount from dead ahead
         altitudeHigherCutoff_m : 13000, # will attack the main aircraft unless this amount higher than it or more
         altitudeLowerCutoff_m : 5000, # will attack the main aircraft unless this amount lower than it or more
         climbPower : 6000, # How powerful the aircraft is when climbing during an attack; 4000 would be typical for, say a Zero--scale accordingly for others; higher is stronger
