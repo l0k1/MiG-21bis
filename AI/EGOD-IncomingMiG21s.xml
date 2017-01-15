@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+  <name>FGUK (EGOD) Incoming MiG-21s</name>
+
+  <scenario>
+    <description>
+            This scenario put 4X MiG-21bis 60 degs 8000ft Inbound for EGOD
+            They are at 500kts so scramble quick or reloading the parking position will reset them.
+    </description>
+
+    <entry>
+      <type>aircraft</type>
+      <callsign>Red-Leader</callsign>
+      <name>Red-Leader</name>
+      <model type="string">Aircraft/MiG-21bis/Models/MiG-21bis-AI.xml</model>
+      <latitude type="double">53.104643</latitude>
+      <longitude type="double">-3.208808</longitude>
+      <altitude type="double">8000</altitude>
+      <speed>500</speed>
+      <heading type="double">241</heading>
+      <bank type="double">20</bank>
+    </entry>
+
+    <entry>
+      <type>aircraft</type>
+      <callsign>Red-1</callsign>
+      <name>Red-1</name>
+      <model type="string">Aircraft/MiG-21bis/Models/MiG-21bis-AI.xml</model>
+      <latitude type="double">53.104443</latitude>
+      <longitude type="double">-3.208408</longitude>
+      <altitude type="double">8015</altitude>
+      <speed>500</speed>
+      <heading type="double">241</heading>
+      <bank type="double">20</bank>
+    </entry>
+
+    <entry>
+      <type>aircraft</type>
+      <callsign>Red-2</callsign>
+      <name>Red-2</name>
+      <model type="string">Aircraft/MiG-21bis/Models/MiG-21bis-AI.xml</model>
+      <latitude type="double">53.104243</latitude>
+      <longitude type="double">-3.208008</longitude>
+      <altitude type="double">8030</altitude>
+      <speed>500</speed>
+      <heading type="double">241</heading>
+      <bank type="double">20</bank>
+    </entry>
+
+    <entry>
+      <type>aircraft</type>
+      <callsign>Red-3</callsign>
+      <name>Red-3</name>
+      <model type="string">Aircraft/MiG-21bis/Models/MiG-21bis-AI.xml</model>
+      <latitude type="double">53.104043</latitude>
+      <longitude type="double">-3.207608</longitude>
+      <altitude type="double">8045</altitude>
+      <speed>500</speed>
+      <heading type="double">241</heading>
+      <bank type="double">20</bank>
+    </entry>
+
+
+
+	</scenario>
+</PropertyList>

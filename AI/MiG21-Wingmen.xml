@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<name>MiG-21bis Wingmen</name>
+
+
+	<scenario>
+
+		<description>
+
+			Diamond 4 - Non-tactical formation
+
+			This scenario formates 2 MiG-21 to the
+			parent ac at the position designated by
+			the x,y,z ofsets.
+
+			Use in conjunction with MiG-21bis wingman scenario to give a Diamond 4
+
+			Note:
+
+			1.	Setting life = -1 indicates that this
+			ballistic object will not die
+			2.	The default value for aero-stabilzed
+			is false, so this must be explictly set.
+			3.	Yaw offset should not be used for now
+
+			Originally from the Buccaneer by Vivian Meazza
+		</description>
+
+		<entry>
+			<name>Red-Leader</name>
+			<callsign>Red-Leader</callsign>
+			<type>wingman</type>
+			<model>Aircraft/MiG-21bis/Models/MiG-21bis-Wingman.xml</model>
+			<x-offset>-75</x-offset>
+			<y-offset>75</y-offset>
+			<z-offset>0</z-offset>
+			<formate>true</formate>
+			<max-speed-kts>500</max-speed-kts>
+			<submodels>
+				<path type="string">Aircraft/MiG-21bis/Submodels.xml</path>
+				<serviceable type="bool">true</serviceable>
+			</submodels>
+			<coefficients>
+				<heading>5.0</heading>
+				<pitch>4.0</pitch>
+				<bank>4.0</bank>
+				<speed>2.5</speed>
+			</coefficients>
+		</entry>
+
+		<entry>
+			<name>Red-2</name>
+			<callsign>Red-2</callsign>
+			<type>wingman</type>
+			<model>Aircraft/MiG-21bis/Models/MiG-21bis-Wingman.xml</model>
+			<x-offset>-75</x-offset>
+			<y-offset>75</y-offset>
+			<z-offset>0</z-offset>
+			<ground-offset>1.5</ground-offset>
+			<formate>true</formate>
+			<max-speed-kts>500</max-speed-kts>
+			<submodels>
+				<path type="string">Aircraft/MiG-21bis/Submodels.xml</path>
+				<serviceable type="bool">true</serviceable>
+			</submodels>
+			<coefficients>
+				<heading>5.0</heading>
+				<pitch>4.0</pitch>
+				<bank>4.0</bank>
+				<speed>2.5</speed>
+			</coefficients>
+			<parent>Red-Leader</parent>
+		</entry>
+
+	</scenario>
+
+</PropertyList>
