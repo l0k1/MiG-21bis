@@ -38,13 +38,52 @@
       <load>
         var livery_update = aircraft.livery_update.new("Aircraft/MiG-21bis/Models/Liveries");
 
-        print("Loading MiG-21bis bombable", cmdarg().getPath());
+  	var root = cmdarg();
+
+	var variant_node = root.getNode("sim/model/variant", 1);
+	var name_node = root.getNode("callsign", 1);
+	print("value of name: ", name_node.getValue());
+	var variant = nil;
+	var loopid = 0;
+	var loop = func(id) {
+
+	id == loopid or return;
+
+	if(name_node.getValue()== "Red-Leader"){
+	variant_node.setValue("CCCP");
+	}elsif(name_node.getValue()== "Red-1"){
+	variant_node.setValue("Soviet");
+	}elsif(name_node.getValue()== "Red-2"){
+	variant_node.setValue("USSR");
+	}elsif(name_node.getValue()== "Red-3"){
+	variant_node.setValue("MiG-21-93");
+	}
+
+	var v = variant_node.getValue();
+
+	if (v != nil ) {
+	variant = v;
+	v = "Aircraft/MiG-21bis/Models/Liveries/" ~ variant ~ ".xml";
+	fgcommand("loadxml", props.Node.new({ filename: v, targetnode: root.getPath() }));
+	}
+	}
+
+	loop(loopid);
+
+	#BOMBABLE support
+
+	#check if bombable is installed to prevent errors
+	if(props.globals.getNode("/bombable")==nil) {
+        	print("MiG-21bis: Bombable not installed, ignoring Bombable code...");
+        return;
+	}
+
+        print("Loading MiG-21bis bombable ", cmdarg().getPath());
 
         var nodeName = cmdarg().getPath();
 
         ##checks whether it has been initialized already; if so, just return
         if ( bombable.check_overall_initialized (nodeName) ) return;
-
 
 
 
@@ -321,7 +360,6 @@
 
 ###################
 
-  var root = cmdarg();
   var rootindex = root.getIndex();
   var mpPath = "/ai/models/multiplayer["~ rootindex ~"]/";
 
@@ -534,36 +572,6 @@
 
   ### the rest of your model load embedded Nasal code ###
 
-	var variant_node = root.getNode("sim/model/variant", 1);
-	var name_node = root.getNode("callsign", 1);
-	print("value of name: ", name_node.getValue());
-	var variant = nil;
-	var loopid = 0;
-	var loop = func(id) {
-
-	id == loopid or return;
-
-	if(name_node.getValue()== "Red-Leader"){
-	variant_node.setValue("CCCP");
-	}elsif(name_node.getValue()== "Red-1"){
-	variant_node.setValue("Soviet");
-	}elsif(name_node.getValue()== "Red-2"){
-	variant_node.setValue("USSR");
-	}elsif(name_node.getValue()== "Red-3"){
-	variant_node.setValue("MiG-21-93");
-	}
-
-	var v = variant_node.getValue();
-
-	if (v != nil ) {
-	variant = v;
-	v = "Aircraft/MiG-21bis/Models/Liveries/" ~ variant ~ ".xml";
-	fgcommand("loadxml", props.Node.new({ filename: v, targetnode: root.getPath() }));
-	}
-	}
-
-	loop(loopid);
-
       </load>
       <unload>
 	livery_update.stop();
@@ -605,16 +613,24 @@
 #        fadeWhite.del();
 
         ### the rest of your model unload embedded Nasal code ###
-	print("Unloading MiG-21bis Bombable", cmdarg().getPath());
-      var nodeName= cmdarg().getPath();
-      bombable.de_overall_initialize( nodeName );
-      bombable.initialize_del( nodeName );
-      bombable.ground_del( nodeName );
-      bombable.location_del (nodeName);
-      bombable.bombable_del( nodeName );
-      bombable.attack_del( nodeName );
-      bombable.weapons_del (nodeName);
+
 	loopid += 1;
+
+	#check if bombable is installed to prevent errors
+	if(props.globals.getNode("/bombable")==nil) {
+        	print("MiG-21bis: Bombable not installed, ignoring Bombable unload code...");
+        	return;
+	}
+
+	print("Unloading MiG-21bis Bombable", cmdarg().getPath());
+	var nodeName= cmdarg().getPath();
+	bombable.de_overall_initialize( nodeName );
+	bombable.initialize_del( nodeName );
+	bombable.ground_del( nodeName );
+	bombable.location_del (nodeName);
+	bombable.bombable_del( nodeName );
+	bombable.attack_del( nodeName );
+	bombable.weapons_del (nodeName);
 
       </unload>
     </nasal>
