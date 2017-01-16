@@ -667,10 +667,10 @@
 
 	<!-- Effects -->
 
-	<model>
+	<!--model>
 		<name>Effects</name>
 		<path>Aircraft/MiG-21bis/Models/Effects.xml</path>
-	</model>
+	</model-->
 
 	<animation>
 		<type>material</type>
@@ -730,7 +730,7 @@
 
 	<!-- Animations -->
 
-	 <animation>
+	 <!--animation>
 		 <type>translate</type>
 		 <object-name>Pilot</object-name>
 		 <object-name>Seat</object-name>
@@ -746,7 +746,7 @@
 			 <y>0</y>
 			 <z>1</z>
 		 </axis>
-	 </animation>
+	 </animation-->
 
          <animation>
                  <type>select</type>
@@ -808,7 +808,7 @@
 		</condition>
 	</animation>
 
-	<animation>
+	<!--animation>
 		<type>rotate</type>
 		<object-name>canopy_glass</object-name>
 		<object-name>canopy</object-name>
@@ -826,7 +826,7 @@
 			<y2-m>  0.39</y2-m>
 			<z2-m>  0.84</z2-m>
 		</axis>
-	</animation>
+	</animation-->
 
 	<animation>
 		<type>rotate</type>
