@@ -38,13 +38,52 @@
       <load>
         var livery_update = aircraft.livery_update.new("Aircraft/MiG-21bis/Models/Liveries");
 
-        print("Loading MiG-21bis bombable", cmdarg().getPath());
+  	var root = cmdarg();
+
+	var variant_node = root.getNode("sim/model/variant", 1);
+	var name_node = root.getNode("callsign", 1);
+	print("value of name: ", name_node.getValue());
+	var variant = nil;
+	var loopid = 0;
+	var loop = func(id) {
+
+	id == loopid or return;
+
+	if(name_node.getValue()== "Red-Leader"){
+	variant_node.setValue("CCCP");
+	}elsif(name_node.getValue()== "Red-1"){
+	variant_node.setValue("Soviet");
+	}elsif(name_node.getValue()== "Red-2"){
+	variant_node.setValue("USSR");
+	}elsif(name_node.getValue()== "Red-3"){
+	variant_node.setValue("MiG-21-93");
+	}
+
+	var v = variant_node.getValue();
+
+	if (v != nil ) {
+	variant = v;
+	v = "Aircraft/MiG-21bis/Models/Liveries/" ~ variant ~ ".xml";
+	fgcommand("loadxml", props.Node.new({ filename: v, targetnode: root.getPath() }));
+	}
+	}
+
+	loop(loopid);
+
+	#BOMBABLE support
+
+	#check if bombable is installed to prevent errors
+	if(props.globals.getNode("/bombable")==nil) {
+        	print("MiG-21bis: Bombable not installed, ignoring Bombable code...");
+        return;
+	}
+
+        print("Loading MiG-21bis bombable ", cmdarg().getPath());
 
         var nodeName = cmdarg().getPath();
 
         ##checks whether it has been initialized already; if so, just return
         if ( bombable.check_overall_initialized (nodeName) ) return;
-
 
 
 
@@ -98,8 +137,8 @@
         altitudes : {
         wheelsOnGroundAGL_m : 1 , #altitude correction to add to your aircraft or ship that is needed to put wheels on ground (or, for a ship, make it float in the water at the correct level).  For most objects this is 0 but some models need a small correction to place them exactly at ground level
 
-        minimumAGL_m : 50, #minimum altitude above ground level this object is allowed to fly
-        maximumAGL_m : 19000, #maximum altitude AGL this object is allowed to fly, ie, operational ceiling
+        minimumAGL_m : 300, #minimum altitude above ground level this object is allowed to fly
+        maximumAGL_m : 15000, #maximum altitude AGL this object is allowed to fly, ie, operational ceiling
         crashedAGL_m : -0.01, #altitude AGL when crashed.  Ships will sink to this level, aircraft or vehicles will sink into the ground as landing gear collapses or tires deflate. Should be negative, even just -0.001.
         },
         #
@@ -185,9 +224,9 @@
         # The attack system makes the AI aircraft turn and fly towards
         # other aircraft
         attacks : {
-        maxDistance_m : 20000, #max distance to turn and attack main aircraft
-        minDistance_m : 1000, #min distance to turn and attack main aircraft, ie, fly away this far before turning to attack again
-        continueAttackAngle_deg : 50, #when within minDistance_m, the aircraft will continue to turn towards the main aircraft and attack *if* if the angle is less than this amount from dead ahead
+        maxDistance_m : 40000, #max distance to turn and attack main aircraft
+        minDistance_m : 3000, #min distance to turn and attack main aircraft, ie, fly away this far before turning to attack again
+        continueAttackAngle_deg : 80, #when within minDistance_m, the aircraft will continue to turn towards the main aircraft and attack *if* if the angle is less than this amount from dead ahead
         altitudeHigherCutoff_m : 13000, # will attack the main aircraft unless this amount higher than it or more
         altitudeLowerCutoff_m : 5000, # will attack the main aircraft unless this amount lower than it or more
         climbPower : 6000, # How powerful the aircraft is when climbing during an attack; 4000 would be typical for, say a Zero--scale accordingly for others; higher is stronger
@@ -215,7 +254,7 @@
         {
         name : "GSh-23", # name presented to users, ie in on-screen messages
         maxDamage_percent : 10, # maximum percentage damage one hit from the aircraft's main weapon/machine guns will do to an opponent
-        maxDamageDistance_m : 700, # maximum distance at which the aircrafts main weapon/maching guns will be able to damage an opponent
+        maxDamageDistance_m : 1500, # maximum distance at which the aircrafts main weapon/maching guns will be able to damage an opponent
         weaponAngle_deg  :  { heading: 0, elevation: 0 }, # direction the aircraft's main weapon is aimed.
         # 0,0 = straight ahead, 90,0=directly right, 0,90=directly up, 0,180=directly back, etc.
         weaponOffset_m : {x:2.5, y:0, z:0}, # Offset of the weapon from the main aircraft center
@@ -246,7 +285,7 @@
         # VULNERABILITIES DEFINITIONS
         #
         vulnerabilities : {
-        damageVulnerability : 8, #Vulnerability to damage from armament, 1=normal M1 tank; higher to make objects easier to kill and lower to make them more difficult.  This is a multiplier, so 5 means 5X easier to kill than an M1, 1/5 means 5X harder to kill.
+        damageVulnerability : 15, #Vulnerability to damage from armament, 1=normal M1 tank; higher to make objects easier to kill and lower to make them more difficult.  This is a multiplier, so 5 means 5X easier to kill than an M1, 1/5 means 5X harder to kill.
 
         engineDamageVulnerability_percent : 8, #Chance that a small-caliber machine-gun round will damage the engine.
 
@@ -306,7 +345,8 @@
         # trail for the object.
         # Smoke types available: flare, jetcontrail, pistonexhaust, smoketrail,
         # damagedengine
-        # bombable.startSmoke("jetcontrail", thisNodeName );
+	# uncomment this for a thin contrail (makes them easier to see)
+        #bombable.startSmoke("flare", thisNodeName );
         #
         # END INITIALIZE BOMBABLE
         ########################################################################
@@ -320,7 +360,6 @@
 
 ###################
 
-  var root = cmdarg();
   var rootindex = root.getIndex();
   var mpPath = "/ai/models/multiplayer["~ rootindex ~"]/";
 
@@ -533,36 +572,6 @@
 
   ### the rest of your model load embedded Nasal code ###
 
-	var variant_node = root.getNode("sim/model/variant", 1);
-	var name_node = root.getNode("callsign", 1);
-	print("value of name: ", name_node.getValue());
-	var variant = nil;
-	var loopid = 0;
-	var loop = func(id) {
-
-	id == loopid or return;
-
-	if(name_node.getValue()== "Red-Leader"){
-	variant_node.setValue("CCCP");
-	}elsif(name_node.getValue()== "Red-1"){
-	variant_node.setValue("Soviet");
-	}elsif(name_node.getValue()== "Red-2"){
-	variant_node.setValue("USSR");
-	}elsif(name_node.getValue()== "Red-3"){
-	variant_node.setValue("MiG-21-93");
-	}
-
-	var v = variant_node.getValue();
-
-	if (v != nil ) {
-	variant = v;
-	v = "Aircraft/MiG-21bis/Models/Liveries/" ~ variant ~ ".xml";
-	fgcommand("loadxml", props.Node.new({ filename: v, targetnode: root.getPath() }));
-	}
-	}
-
-	loop(loopid);
-
       </load>
       <unload>
 	livery_update.stop();
@@ -604,16 +613,24 @@
 #        fadeWhite.del();
 
         ### the rest of your model unload embedded Nasal code ###
-	print("Unloading MiG-21bis Bombable", cmdarg().getPath());
-      var nodeName= cmdarg().getPath();
-      bombable.de_overall_initialize( nodeName );
-      bombable.initialize_del( nodeName );
-      bombable.ground_del( nodeName );
-      bombable.location_del (nodeName);
-      bombable.bombable_del( nodeName );
-      bombable.attack_del( nodeName );
-      bombable.weapons_del (nodeName);
+
 	loopid += 1;
+
+	#check if bombable is installed to prevent errors
+	if(props.globals.getNode("/bombable")==nil) {
+        	print("MiG-21bis: Bombable not installed, ignoring Bombable unload code...");
+        	return;
+	}
+
+	print("Unloading MiG-21bis Bombable", cmdarg().getPath());
+	var nodeName= cmdarg().getPath();
+	bombable.de_overall_initialize( nodeName );
+	bombable.initialize_del( nodeName );
+	bombable.ground_del( nodeName );
+	bombable.location_del (nodeName);
+	bombable.bombable_del( nodeName );
+	bombable.attack_del( nodeName );
+	bombable.weapons_del (nodeName);
 
       </unload>
     </nasal>
@@ -666,10 +683,10 @@
 
 	<!-- Effects -->
 
-	<model>
+	<!--model>
 		<name>Effects</name>
 		<path>Aircraft/MiG-21bis/Models/Effects.xml</path>
-	</model>
+	</model-->
 
 	<animation>
 		<type>material</type>
@@ -729,7 +746,7 @@
 
 	<!-- Animations -->
 
-	 <animation>
+	 <!--animation>
 		 <type>translate</type>
 		 <object-name>Pilot</object-name>
 		 <object-name>Seat</object-name>
@@ -745,7 +762,7 @@
 			 <y>0</y>
 			 <z>1</z>
 		 </axis>
-	 </animation>
+	 </animation-->
 
          <animation>
                  <type>select</type>
@@ -807,7 +824,7 @@
 		</condition>
 	</animation>
 
-	<animation>
+	<!--animation>
 		<type>rotate</type>
 		<object-name>canopy_glass</object-name>
 		<object-name>canopy</object-name>
@@ -825,7 +842,7 @@
 			<y2-m>  0.39</y2-m>
 			<z2-m>  0.84</z2-m>
 		</axis>
-	</animation>
+	</animation-->
 
 	<animation>
 		<type>rotate</type>
