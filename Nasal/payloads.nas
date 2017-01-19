@@ -27,7 +27,7 @@ input = {
 };
 
 var pos_arm = {
-	new: func(brevity, weight, type, ammo_count = 0, hit_max_distance = 65) {
+	new: func(brevity, weight, type, hit_max_distance = 65, ammo_count = 0) {
 		var m = {parents:[pos_arm]};
 		m.brevity = brevity;
 		m.weight = weight;
@@ -63,8 +63,8 @@ var payloads = {
 	# beam
 	"Kh-66":				pos_arm.new("Kh-66",632,"beam"),
 	# rockets
-	"UB-16":				pos_arm.new("UB-32",475,"rocket",16),
-	"UB-32":				pos_arm.new("UB-32",582,"rocket",32),
+	"UB-16":				pos_arm.new("UB-32",475,"rocket",,16),
+	"UB-32":				pos_arm.new("UB-32",582,"rocket",,32),
 	"S-21":					pos_arm.new("S-21",341,"rocket"), #no real info found (yet)
 	"S-24":					pos_arm.new("S-24",518,"rocket"),
 	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank",180,"tank"),
