@@ -27,21 +27,23 @@ input = {
 };
 
 var pos_arm = {
-	new: func(brevity, weight, type, ammo_count = 0) {
+	new: func(brevity, weight, type, ammo_count = 0, hit_max_distance = 65) {
 		var m = {parents:[pos_arm]};
 		m.brevity = brevity;
 		m.weight = weight;
 		m.type = type;
 		m.ammo_count = ammo_count;
+		m.hit_max_distance = hit_max_distance;
 		return m;
 	}
 };
 
 var payloads = {
 	#payload format is:
-	#name: pos_arm.new(brevity code, weight, type/guidance, ammo count (optional)
+	#name: pos_arm.new(brevity code, weight, type/guidance, hit message max distance (not used for guided missiles), ammo count (optional)
 	#bomb names can NOT have spaces in them.
 	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy
+	#regarding hit distance, the GSh-23 is coded as 35m seperately in this file
 	"none":					pos_arm.new("none",0,"none"),
 	# ir missiles
 	"R-60":					pos_arm.new("R-60",96,"ir"),
@@ -49,13 +51,13 @@ var payloads = {
 	# radar missiles
 	"R-27R1":				pos_arm.new("R-27R1",560,"radar"),
 	# bombs
-	"FAB-250":				pos_arm.new("FAB-250",520,"bomb"),
-	"FAB-500":				pos_arm.new("FAB-500",1146,"bomb"),
+	"FAB-250":				pos_arm.new("FAB-250",520,"bomb",250),
+	"FAB-500":				pos_arm.new("FAB-500",1146,"bomb",250),
 	# heavy
-	"RN-14T":				pos_arm.new("RN-14T",856,"heavy"),
-	"RN-18T":				pos_arm.new("RN-18T",1150,"heavy"),
-	"RN-24":				pos_arm.new("RN-24",860,"heavy"),
-	"RN-28":				pos_arm.new("RN-28",1200,"heavy"),
+	"RN-14T":				pos_arm.new("RN-14T",856,"heavy",500),
+	"RN-18T":				pos_arm.new("RN-18T",1150,"heavy",500),
+	"RN-24":				pos_arm.new("RN-24",860,"heavy",1000),
+	"RN-28":				pos_arm.new("RN-28",1200,"heavy",1000),
 	# anti-radiation
 	"Kh-25":				pos_arm.new("Kh-25",695,"antirad"),
 	# beam
@@ -359,82 +361,57 @@ var hit_timer = 0;
 var closest_distance = 200;
 
 var impact_listener = func {
-	#print(payloads["FAB-500"].type);
     var ballistic_name = input.impact.getValue();
     var ballistic = props.globals.getNode(ballistic_name, 0);
 	var closest_distance = 10000;
 	var inside_callsign = "";
 	#print("inside listener");
-    if (ballistic != nil) {
-		#print("ballistic isn't nil");
+    if (ballistic != nil and ballistic.getNode("name").getValue() != nil and ballistic.getNode("impact/type") != nil) {
 		var typeNode = ballistic.getNode("impact/type");
 		var typeOrd = ballistic.getNode("name").getValue();
-		#print("typeOrd: " ~ typeOrd);
-		if (typeNode != nil) {
-			#print("typenode isnt nil");
-			var lat = ballistic.getNode("impact/latitude-deg").getValue();
-			var lon = ballistic.getNode("impact/longitude-deg").getValue();
-			var impactPos = geo.Coord.new().set_latlon(lat, lon);
-			if (typeOrd == "GSh-23" and typeNode.getValue() != "terrain") {
-				closest_distance = 35;
-				foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
-					#print("Gau impact - hit: " ~ typeNode.getValue());
-					var mlat = mp.getNode("position/latitude-deg").getValue();
-					var mlon = mp.getNode("position/longitude-deg").getValue();
-					var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
-					var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
-					var distance = impactPos.distance_to(selectionPos);
-					#print("distance = " ~ distance);
-					if (distance < closest_distance) {
-						closest_distance = distance;
-						inside_callsign = mp.getNode("callsign").getValue();
-					}
+		var lat = ballistic.getNode("impact/latitude-deg").getValue();
+		var lon = ballistic.getNode("impact/longitude-deg").getValue();
+		var impactPos = geo.Coord.new().set_latlon(lat, lon);
+		if (typeOrd == "GSh-23" and typeNode.getValue() != "terrain") {
+			closest_distance = 35;
+			foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
+				#print("Gau impact - hit: " ~ typeNode.getValue());
+				var mlat = mp.getNode("position/latitude-deg").getValue();
+				var mlon = mp.getNode("position/longitude-deg").getValue();
+				var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
+				var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
+				var distance = impactPos.distance_to(selectionPos);
+				#print("distance = " ~ distance);
+				if (distance < closest_distance) {
+					closest_distance = distance;
+					inside_callsign = mp.getNode("callsign").getValue();
 				}
+			}
 
-				if ( inside_callsign != "" ) {
-					#we have a successful hit
-					#print("successful hit");
-					if ( inside_callsign == hit_callsign ) {
-						hit_count = hit_count + 1;
-						#print("hit_count: " ~ hit_count);
-					} else {
-						#print("new callsign");
-						hit_callsign = inside_callsign;
-						hit_count = 1;
-					}
-					if ( hit_timer == 0 ) {
-						hit_timer = 1;
-						#print("should be going into the timer...");
-						settimer(func{hitmessage(typeOrd);},1);
-					}
+			if ( inside_callsign != "" ) {
+				#we have a successful hit
+				if ( inside_callsign == hit_callsign ) {
+					hit_count = hit_count + 1;
+					#print("hit_count: " ~ hit_count);
+				} else {
+					hit_callsign = inside_callsign;
+					hit_count = 1;
 				}
-			}elsif (payloads[typeOrd] != nil and payloads[typeOrd].type == "bomb")  {
-				#print("bomb impact!");
-				closest_distance = 250;
-				foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
-					var mlat = mp.getNode("position/latitude-deg").getValue();
-					var mlon = mp.getNode("position/longitude-deg").getValue();
-					var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
-					var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
-					var distance = impactPos.distance_to(selectionPos);
-					#print("distance = " ~ distance);
-					if (distance < closest_distance) {
-						defeatSpamFilter(sprintf( typeOrd~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
-					}
+				if ( hit_timer == 0 ) {
+					hit_timer = 1;
+					settimer(func{hitmessage(typeOrd);},1);
 				}
-			}elsif (payloads[typeOrd] != nil and payloads[typeOrd].type == "heavy")  {
-				#print("bomb impact!");
-				closest_distance = 1000;
-				foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
-					var mlat = mp.getNode("position/latitude-deg").getValue();
-					var mlon = mp.getNode("position/longitude-deg").getValue();
-					var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
-					var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
-					var distance = impactPos.distance_to(selectionPos);
-					#print("distance = " ~ distance);
-					if (distance < closest_distance) {
-						defeatSpamFilter(sprintf( typeOrd~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
-					}
+			}
+		}elsif (payloads[typeOrd] != nil and ( payloads[typeOrd].type == "bomb" or payloads[typeOrd].type == "heavy" ))  {
+			foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
+				var mlat = mp.getNode("position/latitude-deg").getValue();
+				var mlon = mp.getNode("position/longitude-deg").getValue();
+				var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
+				var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
+				var distance = impactPos.distance_to(selectionPos);
+				#print("distance = " ~ distance);
+				if (distance < payloads[typeOrd].hit_max_distance) {
+					defeatSpamFilter(sprintf( typeOrd~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
 				}
 			}
 		}
