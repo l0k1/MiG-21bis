@@ -86,7 +86,10 @@ var update_loop = func {
 		var selected = getprop("payload/weight["~ (i) ~"]/selected");
 		if(selected != "none" and getprop("payload/weight["~ (i) ~"]/weight-lb") == 0) {
 			setprop("controls/armament/station["~(i)~"]/released", FALSE);
-			if (payloads[selected].type == "ir" or payloads[selected].type == "radar" or payloads[selected].type == "antirad") {
+			if (payloads[selected].type == "ir" or 
+					payloads[selected].type == "radar" or 
+					payloads[selected].type == "antirad" or
+					payloads[selected].type == "beam") {
 				if(armament.AIM.active[i] != nil and armament.AIM.active[i].type != selected) {
 					#print("deleting "~i~" due to type != selected");
 					armament.AIM.active[i].del();
@@ -115,7 +118,11 @@ var update_loop = func {
 	for ( i = 0; i <= 4; i += 1 ) {
 		#print("in arming logic");
 		var payloadName = getprop("/payload/weight[" ~ i ~ "]/selected");
-		if (payloads[payloadName].type == "ir" or payloads[payloadName].type == "radar" or payloads[payloadName].type == "antirad") {
+		if (payloads[payloadName].type == "ir" or 
+				payloads[payloadName].type == "radar" or 
+				payloads[payloadName].type == "antirad" or
+				payloads[payloadName].type == "beam" or
+				payloads[payloadName].type == "none") {
 			if ( armament.AIM.active[i] != nil ) {
 				if ( armSelect[0] != i and armSelect[1] != i and armament.AIM.active[i].status != MISSILE_FLYING ) {
 					#print("setting pylon " ~ i ~ " to standby");
