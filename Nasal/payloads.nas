@@ -373,7 +373,7 @@ var impact_listener = func {
 	var closest_distance = 10000;
 	var inside_callsign = "";
 	#print("inside listener");
-    if (ballistic != nil and ballistic.getNode("name").getValue() != nil and ballistic.getNode("impact/type") != nil) {
+    if (ballistic != nil and ballistic.getNode("name") != nil and ballistic.getNode("impact/type") != nil) {
 		var typeNode = ballistic.getNode("impact/type");
 		var typeOrd = ballistic.getNode("name").getValue();
 		var lat = ballistic.getNode("impact/latitude-deg").getValue();
