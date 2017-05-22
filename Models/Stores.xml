@@ -398,6 +398,50 @@
 	</animation>
 
 	<model>
+		<name>S-24 Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-0.xml</path>
+		<offsets>
+			<x-m> -0.15</x-m>
+			<y-m>-2.11 </y-m>
+			<z-m>-0.23</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>S-24 Left Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-1.xml</path>
+		<offsets>
+			<x-m> 0.70</x-m>
+			<y-m>-2.73 </y-m>
+			<z-m>-0.26</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>S-24 Right Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-3.xml</path>
+		<offsets>
+			<x-m> -0.15</x-m>
+			<y-m> 2.11 </y-m>
+			<z-m>-0.23</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
+		<name>S-24 Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-4.xml</path>
+		<offsets>
+			<x-m> 0.70</x-m>
+			<y-m>2.73 </y-m>
+			<z-m>-0.26</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<model>
 		<name>RN-28</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/RN-28/RN-28.xml</path>
         <offsets>

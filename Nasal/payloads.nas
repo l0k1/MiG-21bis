@@ -265,11 +265,11 @@ var missile_release_listener = func {
 
 		} elsif (armSelect[2] <= 2) {
 			#bombs and/or multi-rockets
-			if (selected0.type == "bomb" and getprop(ag_panel_switch) == 2 ) {
+			if ((selected0.type == "bomb" or selected0.type == "rocket") and getprop(ag_panel_switch) == 2 ) {
 				bomb_release(armSelect[0]);
 			}
 			if ( armSelect[1] != -1 and getprop("payload/weight["~(armSelect[1])~"]/selected") != "none") {
-				if (selected1.type == "bomb" and getprop(ag_panel_switch) == 2 ) {
+				if ((selected0.type == "bomb" or selected0.type == "rocket") and getprop(ag_panel_switch) == 2 ) {
 					settimer(func { 
 						bomb_release(armSelect[1]); 
 					}, 0.75);
@@ -342,6 +342,7 @@ var bomb_release = func(pylon) {
 	var selected = getprop("payload/weight[" ~ ( pylon ) ~ "]/selected");
 	if ( selected != "none" ) {
 		print("dropping bomb: " ~ payloads[selected].brevity ~ ": pylon " ~ pylon);
+		print("selected: " ~ selected ~ "| pylon: " ~ pylon);
 		setprop("payload/weight[" ~ ( pylon ) ~ "]/selected", "none" );
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 		setprop("payload/released/"~selected~"["~pylon~"]",1);
