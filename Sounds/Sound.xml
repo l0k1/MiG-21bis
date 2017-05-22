@@ -447,6 +447,10 @@
 			 <property>/fdm/jsbsim/aero/alpha-rad[0]</property>
 			 <value>0.17</value>
 			</greater-than>
+			<greater-than>
+			 <property>/velocities/airspeed-kt</property>
+			 <value>45</value>
+			</greater-than>
 			</condition>
 			<path>Sounds/rumble.wav</path>
 			<volume>
@@ -495,10 +499,9 @@
 				<property>orientation/alpha-deg</property>
 				<value>22.5</value>
 			</greater-than>
-			<greater-than>
-				<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
-				<value>10</value>
-			</greater-than>
+			<not>
+				<property>/gear/gear[0]/wow</property>
+			</not>
 			<property>/sim/current-view/internal</property>
 			<not>
 			<property>fdm/jsbsim/systems/crash-detect/crashed</property>
