@@ -65,8 +65,8 @@ var payloads = {
 	# rockets
 	"UB-16":				pos_arm.new("UB-32",475,"rocket",,16),
 	"UB-32":				pos_arm.new("UB-32",582,"rocket",,32),
-	"S-21":					pos_arm.new("S-21",341,"rocket"), #no real info found (yet)
-	"S-24":					pos_arm.new("S-24",518,"rocket"),
+	"S-21":					pos_arm.new("S-21",341,"heavyrocket"), #no real info found (yet)
+	"S-24":					pos_arm.new("S-24",518,"heavyrocket"),
 	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank",180,"tank"),
 	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank",230,"tank"),
 	"Smokepod":				pos_arm.new("smokepod",157,"tank")
@@ -275,6 +275,17 @@ var missile_release_listener = func {
 					}, 0.75);
 				}
 			}
+		} elsif (armSelect[2] == 3 or armSelect[2] == 4) {
+			if (selected0.type == "heavyrocket" and getprop(ag_panel_switch) == 2 ) {
+				bomb_release(armSelect[0]);
+			}
+			if ( armSelect[1] != -1 and getprop("payload/weight["~(armSelect[1])~"]/selected") != "none") {
+				if (selected0.type == "heavyrocket" and getprop(ag_panel_switch) == 2 ) {
+					settimer(func  {
+						bomb_release(armSelect[1]);
+					},0.75);
+				}
+			}
 		}
 	}
 }
@@ -341,20 +352,24 @@ var missile_release = func(pylon) {
 var bomb_release = func(pylon) {
 	var selected = getprop("payload/weight[" ~ ( pylon ) ~ "]/selected");
 	if ( selected != "none" ) {
-		print("dropping bomb: " ~ payloads[selected].brevity ~ ": pylon " ~ pylon);
-		print("selected: " ~ selected ~ "| pylon: " ~ pylon);
+		#print("dropping bomb: " ~ payloads[selected].brevity ~ ": pylon " ~ pylon);
+		#print("selected: " ~ selected ~ "| pylon: " ~ pylon);
+		setprop("payload/released/"~selected~"["~pylon~"]",1);
 		setprop("payload/weight[" ~ ( pylon ) ~ "]/selected", "none" );
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
-		setprop("payload/released/"~selected~"["~pylon~"]",1);
 		var phrase = payloads[selected].brevity ~ " released.";
 		if (getprop("payload/armament/msg")) {
 			defeatSpamFilter(phrase);
 		} else {
 			setprop("/sim/messages/atc", phrase);
 		}
+		settimer(func{return_trigger(selected,pylon);},19)
 	}
 }
-		
+
+var return_trigger = func(selected, pylon) {
+	setprop("payload/released/"~selected~"["~pylon~"]",0);
+}
 ############ Impact messages #####################
 
 var hit_count = 0;

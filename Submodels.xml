@@ -120,7 +120,7 @@
         <trigger-once>false</trigger-once>
         <speed>0.0</speed>
         <repeat>false</repeat>
-        <delay>2</delay>
+        <delay>20</delay>
         <count>-1</count>
         <x-offset>-1.14829</x-offset>
         <y-offset>6.922572</y-offset>
@@ -141,10 +141,10 @@
         <name>S-24</name>
         <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
         <trigger>payload/released/S-24[0]</trigger>
-        <trigger-once>false</trigger-once>
+        <trigger-once>true</trigger-once>
         <speed>2350.0</speed>
-        <repeat>false</repeat>
-        <delay>2</delay>
+        <repeat>true</repeat>
+        <delay>20</delay>
         <count>-1</count>
         <x-offset>-1.14829</x-offset>
         <y-offset>-6.922572</y-offset>
@@ -165,10 +165,10 @@
         <name>S-24</name>
         <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
         <trigger>payload/released/S-24[1]</trigger>
-        <trigger-once>false</trigger-once>
+        <trigger-once>true</trigger-once>
         <speed>2350.0</speed>
-        <repeat>false</repeat>
-        <delay>2</delay>
+        <repeat>true</repeat>
+        <delay>20</delay>
         <count>-1</count>
         <x-offset>-1.14829</x-offset>
         <y-offset>-6.922572</y-offset>
@@ -189,10 +189,10 @@
         <name>S-24</name>
         <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
         <trigger>payload/released/S-24[3]</trigger>
-        <trigger-once>false</trigger-once>
+        <trigger-once>true</trigger-once>
         <speed>2350.0</speed>
-        <repeat>false</repeat>
-        <delay>2</delay>
+        <repeat>true</repeat>
+        <delay>20</delay>
         <count>-1</count>
         <x-offset>-1.14829</x-offset>
         <y-offset>6.922572</y-offset>
@@ -213,10 +213,10 @@
         <name>S-24</name>
         <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
         <trigger>payload/released/S-24[4]</trigger>
-        <trigger-once>false</trigger-once>
+        <trigger-once>true</trigger-once>
         <speed>2350.0</speed>
-        <repeat>false</repeat>
-        <delay>2</delay>
+        <repeat>true</repeat>
+        <delay>20</delay>
         <count>-1</count>
         <x-offset>-1.14829</x-offset>
         <y-offset>6.922572</y-offset>
