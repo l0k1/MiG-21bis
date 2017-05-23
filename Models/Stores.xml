@@ -398,10 +398,10 @@
 	</animation>
 
 	<model>
-		<name>S-24 Left</name>
+		<name>S-24 Left Inner</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-0.xml</path>
 		<offsets>
-			<x-m> -0.15</x-m>
+			<x-m> 0.15</x-m>
 			<y-m>-2.11 </y-m>
 			<z-m>-0.23</z-m>
 			<pitch-deg>0.0</pitch-deg>
@@ -409,10 +409,10 @@
 	</model>
 
 	<model>
-		<name>S-24 Left Inner</name>
+		<name>S-24 Left </name>
 		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-1.xml</path>
 		<offsets>
-			<x-m> 0.70</x-m>
+			<x-m> 1.00</x-m>
 			<y-m>-2.73 </y-m>
 			<z-m>-0.26</z-m>
 			<pitch-deg>0.0</pitch-deg>
@@ -423,7 +423,7 @@
 		<name>S-24 Right Inner</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-3.xml</path>
 		<offsets>
-			<x-m> -0.15</x-m>
+			<x-m> 0.15</x-m>
 			<y-m> 2.11 </y-m>
 			<z-m>-0.23</z-m>
 			<pitch-deg>0.0</pitch-deg>
@@ -434,7 +434,7 @@
 		<name>S-24 Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-4.xml</path>
 		<offsets>
-			<x-m> 0.70</x-m>
+			<x-m> 1.00</x-m>
 			<y-m>2.73 </y-m>
 			<z-m>-0.26</z-m>
 			<pitch-deg>0.0</pitch-deg>

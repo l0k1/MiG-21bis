@@ -142,18 +142,20 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
         <trigger>payload/released/S-24[0]</trigger>
         <trigger-once>true</trigger-once>
-        <speed>2350.0</speed>
+        <speed>1200.0</speed>
         <repeat>true</repeat>
         <delay>20</delay>
         <count>-1</count>
-        <x-offset>-1.14829</x-offset>
-        <y-offset>-6.922572</y-offset>
-        <z-offset>-1.1</z-offset>
+        <offsets>
+            <x-m>-0.15</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.73</z-m>
+        </offsets>
         <yaw-offset>0.0</yaw-offset>
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.3</cd>
+        <cd>0.47</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -166,18 +168,20 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
         <trigger>payload/released/S-24[1]</trigger>
         <trigger-once>true</trigger-once>
-        <speed>2350.0</speed>
+        <speed>1200.0</speed>
         <repeat>true</repeat>
         <delay>20</delay>
         <count>-1</count>
-        <x-offset>-1.14829</x-offset>
-        <y-offset>-6.922572</y-offset>
-        <z-offset>-1.1</z-offset>
+        <offsets>
+            <x-m> 0.70</x-m>
+            <y-m>-2.73 </y-m>
+            <z-m>-0.76</z-m>
+        </offsets>
         <yaw-offset>0.0</yaw-offset>
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.3</cd>
+        <cd>0.47</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -190,18 +194,20 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
         <trigger>payload/released/S-24[3]</trigger>
         <trigger-once>true</trigger-once>
-        <speed>2350.0</speed>
+        <speed>1200.0</speed>
         <repeat>true</repeat>
         <delay>20</delay>
         <count>-1</count>
-        <x-offset>-1.14829</x-offset>
-        <y-offset>6.922572</y-offset>
-        <z-offset>-1.1</z-offset>
+        <offsets>
+            <x-m> -0.15</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.73</z-m>
+        </offsets>
         <yaw-offset>0.0</yaw-offset>
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.3</cd>
+        <cd>0.47</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -214,18 +220,20 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
         <trigger>payload/released/S-24[4]</trigger>
         <trigger-once>true</trigger-once>
-        <speed>2350.0</speed>
+        <speed>1200.0</speed>
         <repeat>true</repeat>
         <delay>20</delay>
         <count>-1</count>
-        <x-offset>-1.14829</x-offset>
-        <y-offset>6.922572</y-offset>
-        <z-offset>-1.1</z-offset>
+        <offsets>
+            <x-m> 0.70</x-m>
+            <y-m>2.73 </y-m>
+            <z-m>-0.76</z-m>
+        </offsets>
         <yaw-offset>0.0</yaw-offset>
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.3</cd>
+        <cd>0.47</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
