@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+
+<property value="0">electric/external-connected</property>
+<property value="26">electric/battery-volts</property>
+<property value="0">electric/volts-required</property>
+
+<system name="electric">
+    <channel name="sources">
+        
+        <switch name="electric/sources/external-volt-ac">
+			<default value="0"/>
+			<test logic="AND" value="115">
+				electric/external-connected == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/sources/alternator-volt-dc">
+			<default value="0"/>
+			<test logic="AND" value="29">
+				<!--engine rpms-->
+			</test>
+		</switch>
+		
+        <pure_gain name="electric/sources/battery-alternator-charge-volt-dc">
+            <input>electric/sources/alternator-volt-dc</input>
+            <gain>0.0001</gain>
+            <clipto>
+                <min>0.000</min>
+                <max>0.003</max>
+            </clipto>
+        </pure_gain>
+		
+		<switch name="electric/sources/battery-drain-volt-dc">
+			<default value="0"/>
+			<test logic="AND" value="electric/volts-required">
+				electric/sources/battery-volt-dc gt 0
+			</test>
+		</switch>
+		
+		<summer name="trash/battery-volt-dc">
+			<input>electric/sources/battery-alternator-charge-volt-dc</input>
+			<input>-electric/sources/battery-drain-volt-dc</input>
+			<output>electric/sources/battery-volt-dc</output>
+		</summer>
+        
+    </channel>
+    
+    <channel name="inverters">
+        <!-- DC - AC 115 -->
+        <!-- DC - AC 365 -->
+        
+        <switch name="electric/inverters/115v-volts-ac">
+            <default value="0"/>
+            <test logic="AND" value="115">
+                electric/sources/battery-volt-dc gt 0
+                electric/inverters/115v-switch == 1
+            </test>
+        </switch>
+        
+        <pure_gain name="electric/inverters/115v-volts-used">
+            <input>electric/inverters/115v-volts-ac</input>
+            <gain>0.000001</gain>
+            <clipto>
+                <min>0.000000</min>
+                <max>0.000115</max>
+            </clipto>
+        </pure_gain>
+        
+        <switch name="electric/inverters/365v-volts-ac">
+            <default value="0"/>
+            <test logic="AND" value="365">
+                electric/sources/battery-volt-dc gt 0
+                electric/inverters/365v-switch == 1
+            </test>
+        </switch>
+        
+        <pure_gain name="electric/inverters/365v-volts-used">
+            <input>electric/inverters/365v-volts-ac</input>
+            <gain>0.0000005</gain>
+            <clipto>
+                <min>0.000000</min>
+                <max>0.000115</max>
+            </clipto>
+        </pure_gain>
+        
+    </channel>
+    
+    <channel name="busses">
+        <!-- 3 busses -->
+        
+        <fcs_function name="trash/voltage-per-buss">
+    		<function>
+    		    <product>
+        			<product>
+        			    <sum>
+        			        <property>electric/busses/buss-1-switch</property>
+        			        <property>electric/busses/buss-2-switch</property>
+        			        <property>electric/busses/buss-3-switch</property>
+        			    </sum>
+        			    <value>0.3333</value>
+        			</product>
+        			<property>electric/sources/battery-volt-dc</property>
+        		</product>
+    		</function>
+    		<output>electric/busses/volts-per-buss</output>
+	    </fcs_function>
+        
+        
+        <switch name="electric/busses/buss-1">
+            <default value="0"/>
+            <test logic="AND" value="electric/busses/volts-per-buss">
+                electric/sources/battery-volt-dc gt 0
+                electric/busses/buss-1-switch == 1
+            </test>
+        </switch>
+        
+        <switch name="electric/busses/buss-2">
+            <default value="0"/>
+            <test logic="AND" value="electric/busses/volts-per-buss">
+                electric/sources/battery-volt-dc gt 0
+                electric/busses/buss-2-switch == 1
+            </test>
+        </switch>
+        
+        <switch name="electric/busses/buss-3">
+            <default value="0"/>
+            <test logic="AND" value="electric/busses/volts-per-buss">
+                electric/sources/battery-volt-dc gt 0
+                electric/busses/buss-3-switch == 1
+            </test>
+        </switch>
+    </channel>
+</system>
