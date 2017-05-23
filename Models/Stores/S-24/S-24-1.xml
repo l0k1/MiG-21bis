@@ -1,0 +1,24 @@
+<PropertyList>
+
+    <path>S-24.ac</path>
+    
+    <animation>
+        <enable-hot type="bool">false</enable-hot>
+    </animation>
+    
+    <animation>
+        <type>select</type>
+        <object-name>s24</object-name>
+        <condition>
+            <!--not>
+                <property>fdm/jsbsim/systems/armament/station2/released</property>
+            </not-->
+            <equals>
+                  <property>sim/multiplay/generic/string[11]</property>
+                  <value>S-24</value>
+            </equals>
+
+        </condition>
+    </animation>
+
+</PropertyList>
