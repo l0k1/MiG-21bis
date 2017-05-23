@@ -643,6 +643,134 @@
 			
 		</flyby>
 
+<!-- Crash and stress -->
+
+        <aircraft-explode>
+            <name>aircraft-explode</name>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/aircraft-explode.wav</path>
+            <mode>once</mode>
+            <condition>
+                <equals>
+                    <property>damage/sounds/explode-on</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <position>
+                <x>0.01</x>
+                <y>0.01</y>
+                <z>0.01</z>
+            </position>
+            <volume>
+                <factor>3</factor>
+                <max>3</max>
+            </volume>
+        </aircraft-explode>
+
+        <aircraft-detach>
+            <name>aircraft-detach</name>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/aircraft-wings-detach.wav</path>
+            <mode>once</mode>
+            <condition>
+                <equals>
+                    <property>damage/sounds/detach-on</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <position>
+                <x>0.01</x>
+                <y>0.01</y>
+                <z>0.01</z>
+            </position>
+            <volume>
+                <factor>1</factor>
+            </volume>
+        </aircraft-detach>
+
+        <aircraft-crash>
+            <name>aircraft-impact</name>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/aircraft-crash.wav</path>
+            <mode>once</mode>
+            <condition>
+                <equals>
+                    <property>damage/sounds/crash-on</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <position>
+                <x>0.01</x>
+                <y>0.01</y>
+                <z>0.01</z>
+            </position>
+            <volume>
+                <factor>1</factor>
+            </volume>
+        </aircraft-crash>
+
+        <aircraft-water-crash>
+            <name>aircraft-water-crash</name>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/aircraft-water-crash.wav</path>
+            <mode>once</mode>
+            <condition>
+                <equals>
+                    <property>damage/sounds/water-crash-on</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <position>
+                <x>0.01</x>
+                <y>0.01</y>
+                <z>0.01</z>
+            </position>
+            <volume>
+                <factor>1</factor>
+            </volume>
+        </aircraft-water-crash>
+
+        <aircraft-crack>
+            <name>aircraft-crack</name>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/aircraft-crack.wav</path>
+            <mode>once</mode>
+            <condition>
+                <property>sim/current-view/internal</property>
+                <equals>
+                    <property>damage/sounds/crack-on</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <position>
+                <x>0.01</x>
+                <y>0.01</y>
+                <z>0.01</z>
+            </position>
+            <volume>
+                <property>damage/sounds/crack-volume</property>
+                <factor>1</factor>
+            </volume>
+        </aircraft-crack>
+
+        <aircraft-creaking>
+            <name>aircraft-creaking</name>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/aircraft-creaking.wav</path>
+            <mode>looped</mode>
+            <condition>
+                <property>sim/current-view/internal</property>
+                <equals>
+                    <property>damage/sounds/creaking-on</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <position>
+                <x>0.01</x>
+                <y>0.01</y>
+                <z>0.01</z>
+            </position>
+            <volume>
+                <property>damage/sounds/creaking-volume</property>
+                <factor>1</factor>
+            </volume>
+        </aircraft-creaking>
+
+
 	</fx>
  
 </PropertyList>

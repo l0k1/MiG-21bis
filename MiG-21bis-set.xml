@@ -816,6 +816,9 @@
 		<damage>
 			<file>Aircraft/MiG-21bis/Nasal/damage.nas</file>
 		</damage>
+    <crashandstress>
+			<file>Aircraft/MiG-21bis/Nasal/crash-and-stress.nas</file>    
+    </crashandstress>
 		<!--<headmove>
 			<file>Aircraft/MiG-21bis/Nasal/headmove.nas</file>
 		</headmove>-->
