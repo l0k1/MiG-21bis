@@ -64,8 +64,8 @@
 		</binding>
 	</key>
 
-	<key n="87">
-		<name>Shift-W</name>
+	<key n="81">
+		<name>Shift-Q</name>
 		<desc>Fuel cut off</desc>
 		<binding>
 			<condition>
@@ -165,23 +165,6 @@
 			<binding>
 				<command>property-assign</command>
 				<property>fdm/jsbsim/systems/armament/release</property>
-				<value>0</value>
-			</binding>
-		</mod-up>
-	</key>
-
-	<key n="81">
-		<name>Shift-Q</name>
-		<desc>Center Pylon Drop</desc>
-		<binding>
-			<command>property-assign</command>
-			<property>fdm/jsbsim/systems/armament/heavy-release</property>
-			<value>1</value>
-		</binding>
-		<mod-up>
-			<binding>
-				<command>property-assign</command>
-				<property>fdm/jsbsim/systems/armament/heavy-release</property>
 				<value>0</value>
 			</binding>
 		</mod-up>
@@ -325,4 +308,33 @@
 			<property>/controls/smokepod/trigger</property>
 		</binding>
 	</key>
+
+	<key n="114">
+		<name>r</name>
+		<desc>Pylon Select Next</desc>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>property-adjust</command>
+			<property>/controls/armament/panel/pylon-knob</property>
+			<step>1</step>
+			<min>0</min>
+			<max>11</max>
+			<wrap>true</wrap>
+		</binding>
+	</key>
+
+	<key n="82">
+		<name>R</name>
+		<desc>Pylon Select Previous</desc>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>property-adjust</command>
+			<property>/controls/armament/panel/pylon-knob</property>
+			<step>-1</step>
+			<min>0</min>
+			<max>11</max>
+			<wrap>true</wrap>
+		</binding>
+	</key>
+
 </PropertyList>
