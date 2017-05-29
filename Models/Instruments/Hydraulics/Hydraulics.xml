@@ -2,7 +2,7 @@
 
 <PropertyList>
 
-    <path>Load.ac</path>
+    <path>hydraulic.ac</path>
 
     <animation>
         <type>material</type>
@@ -16,30 +16,29 @@
         </emission> 
     </animation>
     
-    <animation>
-        <type>rotate</type>
-        <object-name>needle</object-name>
-        <property>fdm/jsbsim/accelerations/Nz</property>
-        <factor>22.5</factor>
-        <offset-deg>-22.5</offset-deg>
+	<animation>
+		<type>rotate</type>
+		<object-name>needle</object-name>
+		<property>/engines/engine/fuel-flow_pph</property>
+		<factor>0.0457</factor>
         <center>
-            <x-m> 0.0000</x-m>
-            <y-m>-0.0020</y-m>
-            <z-m> 0.0021</z-m>
+            <x-m>-0.0029</x-m>
+            <y-m> 0.0002</y-m>
+            <z-m>-0.0166</z-m>
         </center>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-    
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
 <!-- Label text -->
 
 <text>
 	<name>LabelText</name>
 	<type type="string">literal</type>
-		<text type="string">Load Indicator</text>
+		<text type="string">Doubled Main Hydraulic Manometer</text>
 	<draw-text type="bool">true</draw-text>
 	<font>Helvetica.txf</font>
 		<character-size type="double">0.012</character-size>

@@ -5,13 +5,6 @@
 	<path>ASI.ac</path>
 
 	<animation>
-  		<type>scale</type>
-  		<x-offset>1.4</x-offset>
-  		<y-offset>1.4</y-offset>
-  		<z-offset>1.4</z-offset>
- 	</animation>
-
-	<animation>
 		<type>material</type>
 		<object-name>needle</object-name>
 		<object-name>face</object-name>
