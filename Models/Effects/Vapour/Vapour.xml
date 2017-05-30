@@ -97,7 +97,6 @@
 	<attach>world</attach>
 
 	<placer>
-	<type>segments</type> 
 	<segments>
 	<vertex>
 	<x-m>-3.70573</x-m>
@@ -131,7 +130,6 @@
 	<y-m>2.86034</y-m>
 	<z-m>-0.329977</z-m>
 	</vertex>
-	</segments>
 	</placer>
 
 
