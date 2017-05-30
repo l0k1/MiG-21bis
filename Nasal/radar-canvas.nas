@@ -465,7 +465,7 @@ var radar_screen = {
 					# Node with valid position data (and "distance!=nil").
 					var p = mp.get_polar();
 					var distance = p[0];
-					var xa_rad = p[1];
+					var xa_rad = p[3];
 					var ya_ang = p[2] * R2D;
 
 					#make blip

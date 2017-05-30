@@ -342,7 +342,7 @@ var trackCalc = func (aircraftPos, range, carrier, mp, type, node) {
       var hud_pos_y = 0;#canvas_HUD.centerOffset + canvas_HUD.pixelPerDegreeY * -ya_rad * rad2deg;
 
       var contact = Contact.new(node, type);
-      contact.setPolar(distanceRadar, xa_rad, ya_rad);
+      contact.setPolar(distanceRadar, xa_rad, ya_rad, xg_rad);
       contact.setCartesian(hud_pos_x, hud_pos_y);
       return contact;
 
@@ -825,8 +825,8 @@ var Contact = {
       return me.node.getNode("sim/multiplay/generic/string[10]");
     },
 
-    setPolar: func(dist, angle, angle2 = 0) {
-      me.polar = [dist,angle,angle2];
+    setPolar: func(dist, angle, angle2 = 0, angle_normalized = 0) {
+      me.polar = [dist,angle,angle2,angle_normalized];
     },
 
     setCartesian: func(x, y) {
