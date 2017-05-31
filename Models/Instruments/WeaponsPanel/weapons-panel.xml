@@ -5,7 +5,7 @@
 
 	<!--lights-->
 	
-	<effect>
+	<!--<effect>
 	<inherits-from>Effects/model-transparent</inherits-from>
 	<condition>
 		<greater-than>
@@ -48,7 +48,7 @@
 				 <blue>0.3</blue>
 				<factor-prop>controls/lighting/instruments-norm</factor-prop>
 			</emission> 
-	</animation>
+	</animation> -->
 	
 	<animation>
         <type>material</type>
@@ -122,9 +122,9 @@
 		<property>controls/armament/panel/reload[0]</property>
 		<factor>0.004</factor>
 		<axis>
-			<x>-0.00412</x>
-			<y>-0.00073</y>
-			<z> 0.00000</z>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
 		</axis>
 	</animation>
 	
@@ -156,9 +156,9 @@
 		<property>controls/armament/panel/reload[1]</property>
 		<factor>0.004</factor>
 		<axis>
-			<x>-0.00412</x>
-			<y>-0.00073</y>
-			<z> 0.00000</z>
+			<x>-1</x>
+			<y> 0</y>
+			<z> 0</z>
 		</axis>
 	</animation>
 	
@@ -190,9 +190,9 @@
 		<property>controls/armament/panel/reload[2]</property>
 		<factor>0.004</factor>
 		<axis>
-			<x>-0.00412</x>
-			<y>-0.00073</y>
-			<z> 0.00000</z>
+			<x>-1</x>
+			<y> 0</y>
+			<z> 0</z>
 		</axis>
 	</animation>
 	
@@ -234,9 +234,9 @@
 		<factor>35</factor>
 		<offset-deg>-35</offset-deg>
 		<center>
-			<x-m>-3.87843</x-m>
-			<y-m>-0.33518</y-m>
-			<z-m> 0.83899</z-m>
+			<x-m>-0.00580</x-m>
+			<y-m>-0.04886</y-m>
+			<z-m>-0.00577</z-m>
 		</center>
 		<axis>
 			<x>0</x>
@@ -282,9 +282,9 @@
 		<factor>35</factor>
 		<offset-deg>-35</offset-deg>
 		<center>
-			<x-m>-3.88583</x-m>
-			<y-m>-0.30205</y-m>
-			<z-m> 0.83899</z-m>
+			<x-m>-0.00580</x-m>
+			<y-m>-0.04886</y-m>
+			<z-m>-0.00577</z-m>
 		</center>
 		<axis>
 			<x>0</x>
@@ -375,13 +375,13 @@
 			</entry>
 		</interpolation>
 		<center>
-			<x-m>-3.89615</x-m>
-			<y-m>-0.25594</y-m>
-			<z-m> 0.88658</z-m>
+			<x-m>-0.00355</x-m>
+			<y-m> 0.03225</y-m>
+			<z-m> 0.03300</z-m>
 		</center>
 		<axis>
-			<x>-10</x>
-			<y>-1</y>
+			<x>-1</x>
+			<y>0</y>
 			<z>0</z>
 		</axis>
 	</animation>	
