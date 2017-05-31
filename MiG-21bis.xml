@@ -648,17 +648,17 @@
   <dump-rate unit="LBS/MIN"> 1500 </dump-rate>
  </propulsion>
 
- <system file="Gear"/> 
- <system file="Flaps"/> 
- <system file="Speedbrakes"/>
+ <system file="gear"/> 
+ <system file="flaps"/> 
+ <system file="speedbrakes"/>
  <system file="FCS-Pitch"/>
  <system file="FCS-Roll"/>
  <system file="FCS-Yaw"/>
- <system file="Alpha-Buffet"/>
- <system file="Chute"/>
- <system file="Dump"/>
- <system file="Canopy"/>
- <system file="Particles"/>
+ <system file="alpha-buffet"/>
+ <system file="chute"/>
+ <system file="dump"/>
+ <system file="canopy"/>
+ <system file="particles"/>
  <system file="fuel"/>
  <system file="throttle"/>
 
