@@ -45,7 +45,7 @@
    <ixy unit="SLUG*FT2">         0 </ixy>
    <ixz unit="SLUG*FT2">         0 </ixz>
    <iyz unit="SLUG*FT2">         0 </iyz>
-   <emptywt unit="LBS" >     12996 </emptywt> <!-- source: http://www.mig-21.de/english/technicaldata.htm -->
+   <emptywt unit="LBS" >     12545 </emptywt> <!-- source: http://www.mig-21.de/english/technicaldata.htm -->
    
    <location name="CG" unit="IN">
      <x>  15.64 </x>
@@ -371,7 +371,7 @@
  </ground_reactions>
 
  <propulsion>
-   <engine file="Tumansky-R25-300">
+   <engine file="Tumansky-R13-300">
     <location unit="IN">
       <x> 263.40 </x>
       <y>   0.00 </y>
