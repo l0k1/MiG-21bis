@@ -67,8 +67,7 @@ var isInRadarRange = func (contact, myRadarDistance_nm, myRadarStrength_rcs) {
     if (contact != nil) {
         var value = targetRCSSignal(contact.get_Coord(), contact.get_model(), contact.get_heading(), contact.get_Pitch(), contact.get_Roll(), geo.aircraft_position(), myRadarDistance_nm*NM2M, myRadarStrength_rcs);
         prevVisible[contact.get_Callsign()] = value;
-        
-        print("RCS: " ~ value);
+        #print("RCS: " ~ value);
         return value;
     }
     return 0;
