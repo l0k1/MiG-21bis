@@ -45,7 +45,7 @@
    <ixy unit="SLUG*FT2">         0 </ixy>
    <ixz unit="SLUG*FT2">         0 </ixz>
    <iyz unit="SLUG*FT2">         0 </iyz>
-   <emptywt unit="LBS" >     12882 </emptywt>
+   <emptywt unit="LBS" >     12996 </emptywt> <!-- source: http://www.mig-21.de/english/technicaldata.htm -->
    
    <location name="CG" unit="IN">
      <x>  15.64 </x>
