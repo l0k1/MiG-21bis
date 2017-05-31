@@ -627,6 +627,15 @@
 				</opt>
 			</weight>
 			<armament>
+                <modelsUseCase type="bool">true</modelsUseCase>
+                <modelsUpperCase type="bool">true</modelsUpperCase>
+                <MP-lat type="string">rotors/main/blade[0]/flap-deg</MP-lat>
+                <MP-lon type="string">rotors/main/blade[1]/flap-deg</MP-lon>
+                <MP-alt type="string">rotors/main/blade[2]/flap-deg</MP-alt>
+                <hit-interpolation type="bool">true</hit-interpolation>
+                <pylon-offset type="int">0</pylon-offset>
+                <pylon-stations>controls/armament</pylon-stations>
+                <station-name type="string">station</station-name>
                 <models type="string">Aircraft/MiG-21bis/Models/Stores/</models>
                 <msg type="bool">true</msg>
                 <damage type="bool">true</damage>
@@ -669,10 +678,14 @@
                     <max-report-distance type="double">65</max-report-distance>
                     <class type="string">A</class>
                     <fire-msg>Aphid</fire-msg>
-					<flags>
-					<smoke-id-0 type="bool">false</smoke-id-0>
-					</flags>
+                    <lock-on-sun-deg type="double">5</lock-on-sun-deg>
+                    <!--<weight-fuel-lbm type="double">42.02</weight-fuel-lbm>-->
+                    <navigation type="string">APN</navigation>
+					<sound-on-off type="bool">false</sound-on-off>
+                    <sound-fire-on-off type="bool">false</sound-fire-on-off>
+                    <sound-volume type="double">0.0</sound-volume>
                 </r-60>
+
 				 <r-27r1>
                     <sound-on-off type="bool">false</sound-on-off>
                     <sound-volume type="double">0.0</sound-volume>
@@ -707,9 +720,9 @@
                     <max-report-distance type="double">65</max-report-distance>
                     <class type="string">A</class>
                     <fire-msg>Alamo</fire-msg>
-					<flags>
-					<smoke-id-0 type="bool">false</smoke-id-0>
-					</flags>
+					<sound-on-off type="bool">false</sound-on-off>
+                    <sound-fire-on-off type="bool">false</sound-fire-on-off>
+                    <sound-volume type="double">0.0</sound-volume>
                 </r-27r1>
 				 <r-27t1>
                     <sound-on-off type="bool">false</sound-on-off>
@@ -745,9 +758,9 @@
                     <max-report-distance type="double">65</max-report-distance>
                     <class type="string">A</class>
                     <fire-msg>Alamo</fire-msg>
-					<flags>
-					<smoke-id-0 type="bool">false</smoke-id-0>
-					</flags>
+					<sound-on-off type="bool">false</sound-on-off>
+                    <sound-fire-on-off type="bool">false</sound-fire-on-off>
+                    <sound-volume type="double">0.0</sound-volume>
                 </r-27t1>
             </armament>
 	</payload>
@@ -816,16 +829,22 @@
 		<damage>
 			<file>Aircraft/MiG-21bis/Nasal/damage.nas</file>
 		</damage>
-    <crashandstress>
+		<crashandstress>
 			<file>Aircraft/MiG-21bis/Nasal/crash-and-stress.nas</file>    
-    </crashandstress>
+		</crashandstress>
+		<rcs>
+			<file>Aircraft/MiG-21bis/Nasal/rcs.nas</file>
+		</rcs>
+    	<vector>
+    		<file>Aircraft/MiG-21bis/Nasal/vector.nas</file>
+    	</vector>
 		<!--<headmove>
 			<file>Aircraft/MiG-21bis/Nasal/headmove.nas</file>
 		</headmove>-->
 		<!-- For Wingmen AI Scenarios -->
-                <formation>
-                        <file>Aircraft/Generic/formation.nas</file>
-                </formation>
+        <formation>
+                <file>Aircraft/Generic/formation.nas</file>
+        </formation>
 	</nasal>
 
 </PropertyList>

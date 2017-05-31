@@ -13,6 +13,9 @@ var lock_bars_pos = "/controls/radar/lock-bars-pos";
 var radar_mode = "/controls/radar/mode";
 var show_callsigns = "/controls/radar/panel/iff";
 
+var radarRange = 60000;
+var radarRange10k = radarRange / 1000;
+
 var RADAR_BOTTOM_LIMIT = -30;
 var RADAR_TOP_LIMIT = 30;
 var RADAR_LEFT_LIMIT = -30;
@@ -45,7 +48,7 @@ var radar_screen = {
 	
 		#radar settings
 		
-		m.radar_range = 60000; #radar range in meters - should be set by properties at some point
+		m.radar_range = radarRange; #radar range in meters - should be set by properties at some point
 		m.no_blip=20; # max number of blips
 		
 		#radar canvas
@@ -83,7 +86,7 @@ var radar_screen = {
 			.setFont("LiberationFonts/LiberationMono-Regular.ttf")
 			.setFontSize(fS)
 			.setColor(dR,dG,dB)
-			.setText("60");
+			.setText(int(radarRange10k));
 			
 		m.m20_left = m.radar_group.createChild("text", "20 distance marker left")
 			.setTranslation(96,377)
@@ -91,7 +94,7 @@ var radar_screen = {
 			.setFont("LiberationFonts/LiberationMono-Regular.ttf")
 			.setFontSize(fS)
 			.setColor(dR,dG,dB)
-			.setText("40");
+			.setText(int((radarRange10k/3)*2));
 
 		m.m20_right = m.radar_group.createChild("text", "20 distance marker right")
 			.setTranslation(918,377)
@@ -99,7 +102,7 @@ var radar_screen = {
 			.setFont("LiberationFonts/LiberationMono-Regular.ttf")
 			.setFontSize(fS)
 			.setColor(dR,dG,dB)
-			.setText("40");
+			.setText(int((radarRange10k/3)*2));
 			
 		m.m10_left = m.radar_group.createChild("text", "10 distance marker left")
 			.setTranslation(96,663)
@@ -107,7 +110,7 @@ var radar_screen = {
 			.setFont("LiberationFonts/LiberationMono-Regular.ttf")
 			.setFontSize(fS)
 			.setColor(dR,dG,dB)
-			.setText(20);
+			.setText(int(radarRange10k/3));
 			
 		m.m10_right = m.radar_group.createChild("text", "10 distance marker right")
 			.setTranslation(918,663)
@@ -115,7 +118,7 @@ var radar_screen = {
 			.setFont("LiberationFonts/LiberationMono-Regular.ttf")
 			.setFontSize(fS)
 			.setColor(dR,dG,dB)
-			.setText(20);
+			.setText(int(radarRange10k/3));
 			
 		m.m0 = m.radar_group.createChild("text", "0 distance marker")
 			.setTranslation(506,950)

@@ -9,7 +9,27 @@ var rad2deg = 180.0/math.pi;
 var kts2kmh = 1.852;
 var feet2meter = 0.3048;
  
-var radarRange = 60000; # getprop("sim/description") == "Saab JA-37 Viggen"?180000:120000;#meter, is estimate. The AJ-37 has 120KM and JA37 is almost 10 years newer, so is reasonable I think.       #################### update me
+var radarRange = 60000;
+var radarPowerRange = 30000;
+var radarPowerRCS = 4;
+
+var containsVector = func (vec, item) {
+  foreach(test; vec) {
+    if (test == item) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+var getClock = func (bearing) {
+    var clock = int(((geo.normdeg(bearing)-15)/30)+1);
+    if (clock == 0) {
+      return 12;
+    } else {
+      return clock;
+    }
+}
 
 var self = nil;
 var myAlt = nil;
@@ -22,6 +42,10 @@ var selection_updated = FALSE;
 var tracks_index = 0;
 var tracks = [];
 var callsign_struct = {};
+var rwr = [];
+
+var lockLog  = events.LogBuffer.new(echo: 0);#compatible with older FG?
+var lockLast = nil;
 
 var AIR = 0;
 var MARINE = 1;
@@ -44,7 +68,7 @@ input = {
         lookThrough:      "/instrumentation/radar/look-through-terrain",
         dopplerOn:        "/instrumentation/radar/doppler-enabled",
         dopplerSpeed:     "/instrumentation/radar/min-doppler-speed-kt",
-		radarMode:        "/controls/radar/mode"
+		    radarMode:        "/controls/radar/mode"
 };
 
 foreach(var name; keys(input)) {
@@ -344,7 +368,9 @@ var trackCalc = func (aircraftPos, range, carrier, mp, type, node) {
       var contact = Contact.new(node, type);
       contact.setPolar(distanceRadar, xa_rad, ya_rad, xg_rad);
       contact.setCartesian(hud_pos_x, hud_pos_y);
-      return contact;
+      if ((rand() < 0.05?rcs.isInRadarRange(contact, radarPowerRange * M2NM, radarPowerRCS) == TRUE:rcs.wasInRadarRange(contact, radarPowerRange * M2NM, radarPowerRCS))) {# 40 / 3.2
+          return contact;
+      }
 
     } elsif (carrier == TRUE) {
       # need to return carrier even if out of radar cone, due to carrierNear calc
@@ -361,76 +387,102 @@ var trackCalc = func (aircraftPos, range, carrier, mp, type, node) {
 # The following 6 methods is from Mirage 2000-5
 #
 var isNotBehindTerrain = func(SelectCoord) {
-    var isVisible = 0;
-    var MyCoord = geo.aircraft_position();
-    
-    # Because there is no terrain on earth that can be between these 2
-    if(MyCoord.alt() < 8900 and SelectCoord.alt() < 8900 and input.lookThrough.getValue() == FALSE)
-    {
-        # Temporary variable
-        # A (our plane) coord in meters
-        var a = MyCoord.x();
-        var b = MyCoord.y();
-        var c = MyCoord.z();
-        # B (target) coord in meters
-        var d = SelectCoord.x();
-        var e = SelectCoord.y();
-        var f = SelectCoord.z();
-        var difa = d - a;
-        var difb = e - b;
-        var difc = f - c;
-		
-		#print("a,b,c | " ~ a ~ "," ~ b ~ "," ~ c);
-		#print("d,e,f | " ~ d ~ "," ~ e ~ "," ~ f);
-		
-        # direct Distance in meters
-        var myDistance = math.sqrt( math.pow((d-a),2) + math.pow((e-b),2) + math.pow((f-c),2)); #calculating distance ourselves to avoid another call to geo.nas (read: speed, probably).
-        #print("myDistance: " ~ myDistance);
-		    var Aprime = geo.Coord.new();
-        
-        # Here is to limit FPS drop on very long distance
-        var L = 500;
-        if(myDistance > 50000)
-        {
-            L = myDistance / 15;
+    if (getprop("mig21/advanced-radar") == TRUE) {
+      var myPos = geo.aircraft_position();
+
+      var xyz = {"x":myPos.x(),                  "y":myPos.y(),                 "z":myPos.z()};
+      var dir = {"x":SelectCoord.x()-myPos.x(),  "y":SelectCoord.y()-myPos.y(), "z":SelectCoord.z()-myPos.z()};
+
+      # Check for terrain between own aircraft and other:
+      v = get_cart_ground_intersection(xyz, dir);
+      if (v == nil) {
+        return 1;
+        #printf("No terrain, planes has clear view of each other");
+      } else {
+        var terrain = geo.Coord.new();
+        terrain.set_latlon(v.lat, v.lon, v.elevation);
+        var maxDist = myPos.direct_distance_to(SelectCoord);
+        var terrainDist = myPos.direct_distance_to(terrain);
+        if (terrainDist < maxDist) {
+          #print("terrain found between the planes");
+          return 0;
+        } else {
+          return 1;
+          #print("The planes has clear view of each other");
         }
-        var maxLoops = int(myDistance / L);
-        
-        isVisible = 1;
-        # This loop will make travel a point between us and the target and check if there is terrain
-        for(var i = 1 ; i <= maxLoops ; i += 1)
-        {
-          #calculate intermediate step
-          #basically dividing the line into maxLoops number of steps, and checking at each step
-          #to ascii-art explain it:
-          #  |us|----------|step 1|-----------|step 2|--------|step 3|----------|them|
-          #there will be as many steps as there is i
-          #every step will be equidistant
-
-          #also, if i == 0 then the first step will be our plane
-
-          var x = ((difa/(maxLoops+1))*i)+a;
-          var y = ((difb/(maxLoops+1))*i)+b;
-          var z = ((difc/(maxLoops+1))*i)+c;
-          #print("i:" ~ i ~ "|x,y,z | " ~ x ~ "," ~ y ~ "," ~ z);
-          Aprime.set_xyz(x,y,z);
-          var AprimeTerrainAlt = geo.elevation(Aprime.lat(), Aprime.lon());
-          if(AprimeTerrainAlt == nil)
+      }
+    } else {
+      var isVisible = 0;
+      var MyCoord = geo.aircraft_position();
+      
+      # Because there is no terrain on earth that can be between these 2
+      if(MyCoord.alt() < 8900 and SelectCoord.alt() < 8900 and input.lookThrough.getValue() == FALSE)
+      {
+          # Temporary variable
+          # A (our plane) coord in meters
+          var a = MyCoord.x();
+          var b = MyCoord.y();
+          var c = MyCoord.z();
+          # B (target) coord in meters
+          var d = SelectCoord.x();
+          var e = SelectCoord.y();
+          var f = SelectCoord.z();
+          var difa = d - a;
+          var difb = e - b;
+          var difc = f - c;
+  		
+  		#print("a,b,c | " ~ a ~ "," ~ b ~ "," ~ c);
+  		#print("d,e,f | " ~ d ~ "," ~ e ~ "," ~ f);
+  		
+          # direct Distance in meters
+          var myDistance = math.sqrt( math.pow((d-a),2) + math.pow((e-b),2) + math.pow((f-c),2)); #calculating distance ourselves to avoid another call to geo.nas (read: speed, probably).
+          #print("myDistance: " ~ myDistance);
+  		    var Aprime = geo.Coord.new();
+          
+          # Here is to limit FPS drop on very long distance
+          var L = 500;
+          if(myDistance > 50000)
           {
-            AprimeTerrainAlt = 0;
+              L = myDistance / 15;
           }
-
-          if(AprimeTerrainAlt > Aprime.alt())
+          var maxLoops = int(myDistance / L);
+          
+          isVisible = 1;
+          # This loop will make travel a point between us and the target and check if there is terrain
+          for(var i = 1 ; i <= maxLoops ; i += 1)
           {
-            return 0;
+            #calculate intermediate step
+            #basically dividing the line into maxLoops number of steps, and checking at each step
+            #to ascii-art explain it:
+            #  |us|----------|step 1|-----------|step 2|--------|step 3|----------|them|
+            #there will be as many steps as there is i
+            #every step will be equidistant
+
+            #also, if i == 0 then the first step will be our plane
+
+            var x = ((difa/(maxLoops+1))*i)+a;
+            var y = ((difb/(maxLoops+1))*i)+b;
+            var z = ((difc/(maxLoops+1))*i)+c;
+            #print("i:" ~ i ~ "|x,y,z | " ~ x ~ "," ~ y ~ "," ~ z);
+            Aprime.set_xyz(x,y,z);
+            var AprimeTerrainAlt = geo.elevation(Aprime.lat(), Aprime.lon());
+            if(AprimeTerrainAlt == nil)
+            {
+              AprimeTerrainAlt = 0;
+            }
+
+            if(AprimeTerrainAlt > Aprime.alt())
+            {
+              return 0;
+            }
           }
-        }
+      }
+      else
+      {
+          isVisible = 1;
+      }
+      return isVisible;
     }
-    else
-    {
-        isVisible = 1;
-    }
-    return isVisible;
 }
 
 # will return true if absolute closure speed of target is greater than 50kt
@@ -576,11 +628,11 @@ var lockTarget = func() {
 			var dist_rad = track.get_polar();
 			#print("distance: " ~ dist_rad[0]);
 			#print("x_ang: " ~ (dist_rad[1] * R2D));
-			#print("y_ang: " ~ (dist_rad[2] * R2D));
+			#print("y_ang: " ~ (dist_rad[3] * R2D));
 			#print("lowerBar: " ~ lowerBar);
 			#print("upperBar: " ~ upperBar);
 			#print("centerBar: " ~ centerBar);
-			if ( dist_rad[0] != 900000 and dist_rad[0] > lowerBar and dist_rad[0] < upperBar and math.abs(dist_rad[1] * R2D) < 5 and math.abs(dist_rad[2] * R2D) < 5) { # if the target is between lowerbar and upperbar on the radar, and is no more than 5* off centerline in all directions (left, up, right, down)
+			if ( dist_rad[0] != 900000 and dist_rad[0] > lowerBar and dist_rad[0] < upperBar and math.abs(dist_rad[1] * R2D) < 5 and math.abs(dist_rad[3] * R2D) < 5) { # if the target is between lowerbar and upperbar on the radar, and is no more than 5* off centerline in all directions (left, up, right, down)
 				if ( math.abs(dist_rad[0] - centerBar) < c_dist ) {
 					c_dist = dist_rad[0];
 					c_most = track;
@@ -733,6 +785,7 @@ var Contact = {
 #});
 #debug.benchmark("radar process4", func {
         obj.pitch           = obj.oriProp.getNode("pitch-deg");
+        obj.roll            = obj.oriProp.getNode("roll-deg");
         obj.speed           = obj.velProp.getNode("true-airspeed-kt");
         obj.vSpeed          = obj.velProp.getNode("vertical-speed-fps");
         obj.callsign        = c.getNode("callsign", 1);
@@ -822,7 +875,11 @@ var Contact = {
     },
 
     getFlareNode: func () {
-      return me.node.getNode("sim/multiplay/generic/string[10]");
+      return me.node.getNode("rotors/main/blade[3]/flap-deg");
+    },
+
+    getChaffNode: func () {
+      return me.node.getNode("rotors/main/blade[3]/position-deg");
     },
 
     setPolar: func(dist, angle, angle2 = 0, angle_normalized = 0) {
@@ -915,6 +972,11 @@ var Contact = {
 
     get_Pitch: func(){
         var n = me.pitch.getValue();
+        return n;
+    },
+
+    get_Roll: func(){
+        var n = me.roll.getValue();
         return n;
     },
 

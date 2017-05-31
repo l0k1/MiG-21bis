@@ -49,4 +49,21 @@ var vor_intercept_angle = func () {
 	}
 }
 
+setprop("/mig21/advanced-radar",0);
+
+var test_support = func {
+ 
+  var versionString = getprop("sim/version/flightgear");
+  var version = split(".", versionString);
+  var major = num(version[0]);
+  var minor = num(version[1]);
+  var detail = num(version[2]);
+  if ( major == 2017 ) {
+  	if ( minor >= 2 ) {
+  		setprop("/mig21/advanced-radar",1);
+  	}
+  }
+}
+
+test_support();
 main_loop();
