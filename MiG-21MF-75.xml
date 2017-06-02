@@ -648,22 +648,22 @@
   <dump-rate unit="LBS/MIN"> 1500 </dump-rate>
  </propulsion>
 
- <system file="Gear"/> 
- <system file="Flaps"/> 
- <system file="Speedbrakes"/>
+ <system file="gear"/> 
+ <system file="flaps"/> 
+ <system file="speedbrakes"/>
  <system file="FCS-Pitch"/>
  <system file="FCS-Roll"/>
  <system file="FCS-Yaw"/>
- <system file="Alpha-Buffet"/>
- <system file="Chute"/>
- <system file="Dump"/>
- <system file="Canopy"/>
- <system file="Particles"/>
+ <!--<system file="alpha-Buffet"/>-->
+ <system file="chute"/>
+ <!--<system file="dump"/>-->
+ <system file="canopy"/>
+ <!--<system file="particles"/>-->
  <system file="fuel"/>
  <system file="throttle"/>
 
  <flight_control name="none"/>
 
- <aerodynamics file="/mig-21-aero.xml"/>
+ <aerodynamics file="mig-21-aero-aeromatic-v0_96.xml"/>
 
 </fdm_config>

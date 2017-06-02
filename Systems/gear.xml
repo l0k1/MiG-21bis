@@ -1,5 +1,25 @@
 <?xml version="1.0"?>
 
+<!-- aeromatic v 0.96 http://jsbsim.sourceforge.net/aeromatic2.html generated 2 June 2017 by pinto -->
+<!-- GPLv2+ -->
+
 <system name="gear">
 
+  <channel name="Landing Gear">
+   <kinematic name="Gear Control">
+     <input>gear/gear-cmd-norm</input>
+     <traverse>
+       <setting>
+          <position> 0 </position>
+          <time>     0 </time>
+       </setting>
+       <setting>
+          <position> 1 </position>
+          <time>     5 </time>
+       </setting>
+     </traverse>
+     <output>gear/gear-pos-norm</output>
+   </kinematic>
+
+  </channel>
 </system>

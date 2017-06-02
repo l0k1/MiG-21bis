@@ -6,10 +6,10 @@
         <type>select</type>
         <object-name>chute</object-name>
         <condition>
-            <equals>
-                <property>sim/multiplay/generic/int[6]</property>
+            <greater-than>
+                <property>sim/multiplay/generic/float[6]</property>
                 <value>1</value>
-            </equals>
+            </greater-than>
         </condition>
     </animation>
 

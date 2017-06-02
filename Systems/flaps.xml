@@ -1,5 +1,43 @@
 <?xml version="1.0"?>
 
+<!-- aeromatic v 0.96 http://jsbsim.sourceforge.net/aeromatic2.html generated 2 June 2017 by pinto -->
+<!-- GPLv2+ -->
+
 <system name="flaps">
+
+  <channel name="Flaps">
+   <kinematic name="Flaps Control">
+     <input>fcs/flap-cmd-norm</input>
+     <traverse>
+       <setting>
+          <position>  0 </position>
+          <time>      0 </time>
+       </setting>
+       <setting>
+          <position> 25 </position>
+          <time>      4 </time>
+       </setting>
+       <setting>
+          <position> 45 </position>
+          <time>      3 </time>
+       </setting>
+     </traverse>
+     <output>fcs/flap-pos-deg</output>
+   </kinematic>
+
+   <aerosurface_scale name="flap normalization">
+      <input>fcs/flap-pos-deg</input>
+      <domain>
+        <min>  0 </min>
+        <max> 45 </max>
+      </domain>
+      <range>
+        <min> 0 </min>
+        <max> 1 </max>
+      </range>
+      <output>fcs/flap-pos-norm</output>
+   </aerosurface_scale>
+
+  </channel>
 
 </system>

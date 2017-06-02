@@ -1,5 +1,62 @@
 <?xml version="1.0"?>
 
+<!--re-written by pinto 2 June 2017 (GPLv2+) -->
+
+<!-- 
+    on chute deploy:
+        fdm/jsbsim/systems/chute/deploy == 1
+    
+    on chute jettison:
+        fdm/jsbsim/systems/chute/deploy == 0
+        controls/flight/chute_jettisoned == 1
+    
+    for animation:
+        /sim/multiplay/generic/float[6]
+        
+    for drag:
+        systems/chute/unfurl-norm
+-->
+
+
 <system name="chute">
+
+    <channel name="Braking Chute">
+    
+        <!-- if deploy == 1 and ve-kts > 450, auto jettison chute. -->
+        <!-- no idea what actual upper limit for chute is. -->
+        <switch name="systems/chute/speed-limiter">
+            <default value="/controls/flight/chute_jettisoned"/>
+            <test value="1">
+                systems/chute/deploy == 1
+                velocities/ve-kts gt 450.0
+            </test>
+            <output>/controls/flight/chute_jettisoned</output>
+        </switch>
+        
+        <switch name="systems/chute/status">
+            <default value="systems/chute/deploy"/>
+            <test value="0">
+                /controls/flight/chute_jettisoned == 1
+            </test>
+            <output>/sim/multiplay/generic/float[6]</output> <!-- for animation -->
+        </switch>
+        
+        <!-- kinematic to set chute unfurl level -->
+        <kinematic name="Brake Chute Deploy">
+            <input>systems/chute/status</input>
+            <traverse>
+                <setting>
+                    <position> 0 </position>
+                    <time> 0 </time>
+                </setting>
+                <setting>
+                    <position> 1 </position>
+                    <time> 0.5 </time>
+                </setting>
+            </traverse>
+            <output>systems/chute/unfurl-norm</output> <!-- this is value for drag -->
+        </kinematic>
+    
+    </channel>
 
 </system>
