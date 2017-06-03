@@ -450,14 +450,19 @@
 					<weight-lb>550</weight-lb>
 				</opt>
 				<opt>
-					<name>PTB-490 Droptank</name>
-					<lbs>180</lbs>
-					<weight-lb>180</weight-lb>
+					<name>FAB-100</name>
+					<lbs>220</lbs>
+					<weight-lb>220</weight-lb>
 				</opt>
 				<opt>
 					<name>S-24</name>
 					<lbs>518</lbs>
 					<weight-lb>518</weight-lb>
+				</opt>
+				<opt>
+					<name>PTB-490 Droptank</name>
+					<lbs>180</lbs>
+					<weight-lb>180</weight-lb>
 				</opt>
 			</weight>
 			<weight n="1">
@@ -483,6 +488,11 @@
 					<name>R-27T1</name>
 					<lbs>550</lbs>
 					<weight-lb>550</weight-lb>
+				</opt>
+				<opt>
+					<name>FAB-100</name>
+					<lbs>220</lbs>
+					<weight-lb>220</weight-lb>
 				</opt>
 				<opt>
 					<name>FAB-500</name>
@@ -566,6 +576,11 @@
 					<weight-lb>550</weight-lb>
 				</opt>
 				<opt>
+					<name>FAB-100</name>
+					<lbs>220</lbs>
+					<weight-lb>220</weight-lb>
+				</opt>
+				<opt>
 					<name>FAB-500</name>
 					<lbs>1146</lbs>
 					<weight-lb>1146</weight-lb>
@@ -616,14 +631,19 @@
 					<weight-lb>550</weight-lb>
 				</opt>
 				<opt>
-					<name>PTB-490 Droptank</name>
-					<lbs>180</lbs>
-					<weight-lb>180</weight-lb>
+					<name>FAB-100</name>
+					<lbs>220</lbs>
+					<weight-lb>220</weight-lb>
 				</opt>
 				<opt>
 					<name>S-24</name>
 					<lbs>518</lbs>
 					<weight-lb>518</weight-lb>
+				</opt>
+				<opt>
+					<name>PTB-490 Droptank</name>
+					<lbs>180</lbs>
+					<weight-lb>180</weight-lb>
 				</opt>
 			</weight>
 			<armament>
