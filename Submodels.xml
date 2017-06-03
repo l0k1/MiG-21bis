@@ -136,6 +136,102 @@
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
     </submodel>
+	
+	<submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <trigger>payload/released/FAB-100[0]</trigger>
+        <trigger-once>false</trigger-once>
+        <speed>0.0</speed>
+        <repeat>false</repeat>
+        <delay>20</delay>
+        <count>-1</count>
+       <offsets>
+			<x-m> 1.13</x-m>
+			<y-m>-2.73 </y-m>
+			<z-m>-0.28</z-m>
+		</offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+    </submodel>
+	
+	<submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <trigger>payload/released/FAB-100[1]</trigger>
+        <trigger-once>false</trigger-once>
+        <speed>0.0</speed>
+        <repeat>false</repeat>
+        <delay>20</delay>
+        <count>-1</count>
+        <offsets>
+			<x-m> 0.20</x-m>
+			<y-m>-2.11 </y-m>
+			<z-m>-0.25</z-m>
+		</offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+    </submodel>
+
+	<submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <trigger>payload/released/FAB-100[3]</trigger>
+        <trigger-once>false</trigger-once>
+        <speed>0.0</speed>
+        <repeat>false</repeat>
+        <delay>20</delay>
+        <count>-1</count>
+       <offsets>
+			<x-m> 0.20</x-m>
+			<y-m> 2.11 </y-m>
+			<z-m>-0.25</z-m>
+		</offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+    </submodel>
+
+	<submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <trigger>payload/released/FAB-100[4]</trigger>
+        <trigger-once>false</trigger-once>
+        <speed>0.0</speed>
+        <repeat>false</repeat>
+        <delay>20</delay>
+        <offsets>
+			<x-m> 1.13</x-m>
+			<y-m> 2.73 </y-m>
+			<z-m>-0.28</z-m>
+		</offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+    </submodel>
+
 
     <submodel>
         <name>S-24</name>

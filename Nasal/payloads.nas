@@ -51,6 +51,7 @@ var payloads = {
 	# radar missiles
 	"R-27R1":				pos_arm.new("R-27R1",560,"radar"),
 	# bombs
+	"FAB-100":				pos_arm.new("FAB-100",220,"bomb",250),
 	"FAB-250":				pos_arm.new("FAB-250",520,"bomb",250),
 	"FAB-500":				pos_arm.new("FAB-500",1146,"bomb",250),
 	# heavy
@@ -239,14 +240,14 @@ var missile_release_listener = func {
 	if ( armSelect[1] != -1 ) {	
 		selected1 = payloads[getprop("payload/weight["~(armSelect[1])~"]/selected") ];
 	}
-	print("in listener");
-	print("armselect0: " ~ armSelect[0]);
-	print("armselect1: " ~ armSelect[1]);
-	print("armselect2: " ~ armSelect[2]);
-	print("release prop: " ~ getprop("/fdm/jsbsim/systems/armament/release"));
+	#print("in listener");
+	#print("armselect0: " ~ armSelect[0]);
+	#print("armselect1: " ~ armSelect[1]);
+	#print("armselect2: " ~ armSelect[2]);
+	#print("release prop: " ~ getprop("/fdm/jsbsim/systems/armament/release"));
 	if (getprop("/fdm/jsbsim/systems/armament/release") == 1 )  {
-		print("selected0.type: " ~ selected0.type);
-		print("iar_sar_switch: " ~ getprop(ir_sar_switch));
+		#print("selected0.type: " ~ selected0.type);
+		#print("iar_sar_switch: " ~ getprop(ir_sar_switch));
 		
 		
 		if (armSelect[2] >= 5 ) {
@@ -328,7 +329,6 @@ var heavy_release_listener = func {
 #  }
 var missile_release = func(pylon) {
 	if(getprop("payload/weight["~(pylon)~"]/selected") != "none") { 
-		#print("releasing...");
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on. The gear check is prevent missiles from firing when changing airport location.
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
 			#missile locked, fire it.
@@ -347,7 +347,6 @@ var missile_release = func(pylon) {
 			}
 			
 		}
-		#print("if no fire, it failed.");
 	}
 }
 
