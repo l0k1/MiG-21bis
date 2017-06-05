@@ -91,6 +91,13 @@
 							<script>mig21.smokepod_dialog.open()</script>
 						</binding>
 					</item>
+					<item>
+						<label>FDM TUNE</label>
+						<binding>
+							<command>nasal</command>
+							<script>mig21.tuner_dialog.open()</script>
+						</binding>
+					</item>
 				</menu>
 			</default>
 		</menubar>
@@ -423,6 +430,13 @@
 				<pitch-gearing-enable>1</pitch-gearing-enable>
 				<roll-damping-enable>1</roll-damping-enable>
 			</fcs>
+			<tune>
+				<one type="double">0</one>
+				<two type="double">0</two>
+				<three type="double">0</three>
+				<four type="double">0</four>
+				<five type="double">0</five>
+			</tune>
 		</jsbsim>
 	</fdm>
         <!-- Payload -->

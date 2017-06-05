@@ -5,6 +5,7 @@ UPDATE_TIME = 0.15;
 
 var radio_dialog = gui.Dialog.new("vor_ils_radio/dialog","Aircraft/MiG-21bis/Dialogs/vor_ils_radio.xml");
 var smokepod_dialog = gui.Dialog.new("smokepod/dialog","Aircraft/MiG-21bis/Dialogs/smokepod_dialog.xml");
+var tuner_dialog = gui.Dialog.new("fdm_tuning/dialog","Aircraft/MiG-21bis/Dialogs/fdm_tune.xml");
 
 var main_loop = func (){
 	performance();
