@@ -20,7 +20,7 @@
 
 <system name="chute">
 
-    <channel name="Braking Chute">
+    <channel name="BrakingChute">
     
         <!-- if deploy == 1 and ve-kts > 450, auto jettison chute. -->
         <!-- no idea what actual upper limit for chute is. -->
@@ -42,7 +42,7 @@
         </switch>
         
         <!-- kinematic to set chute unfurl level -->
-        <kinematic name="Brake Chute Deploy">
+        <kinematic name="BrakeChuteDeploy">
             <input>systems/chute/status</input>
             <traverse>
                 <setting>

@@ -5,7 +5,7 @@
 <system name="canopy">
     <channel>		
     
-        <kinematic name="Canopy Open/Close">		
+        <kinematic name="CanopyOpenClose">		
             <input>systems/canopy/command</input>		
             <traverse>		
                 <setting>		
