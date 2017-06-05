@@ -11,19 +11,22 @@
           <table>
             <independentVar lookup="row">aero/alpha-rad</independentVar>
             <tableData>
-              -1.57  0.0000
-              -1.22 -0.6409
-              -1.05 -0.8634
-              -0.88 -0.9970
-              -1.04 -0.5947
-              -2.15 -1.4868
-               0.00  0.3869
-               1.71  1.8736
-               0.60  0.9816
-               0.88  1.0030
-               1.05  0.8686
-               1.22  0.6447
-               1.57  0.0000
+              <!-- 0 degrees to 20 degrees: source: http://www.uotechnology.edu.iq/tec_magaz/volume272009/No.7,2009/researches/Text_11.pdf page 12 -->
+              -0.20 -0.620
+              0.000 -0.0
+              0.087 0.40
+              0.175 0.502
+              0.262 0.70
+              0.349  0.80
+              0.436 0.89
+              0.524 0.91
+              0.611 0.95
+              0.698 0.97
+              0.785 0.89
+              0.873 0.85
+              0.960 0.79
+              1.050 0.70
+              1.396 0.20
             </tableData>
           </table>
       </product>
@@ -97,9 +100,9 @@
             <independentVar lookup="row">aero/alpha-rad</independentVar>
             <tableData>
              -1.57    1.4102
-             -1.71    0.1971
+             -0.71    0.1971
               0.00    0.0000
-              1.71    0.1971
+              0.71    0.1971
               1.57    1.4102
             </tableData>
           </table>
@@ -256,7 +259,8 @@
            <property>metrics/Sw-sqft</property>
            <property>metrics/cbarw-ft</property>
            <property>aero/alpha-rad</property>
-           <value> -0.2164 </value>
+           <value> -0.2062 </value>
+           <!--<property>tune/one</property>-->
        </product>
     </function>
 
@@ -267,13 +271,16 @@
           <property>metrics/Sw-sqft</property>
           <property>metrics/cbarw-ft</property>
           <property>fcs/elevator-pos-rad</property>
-          <table>
-            <independentVar lookup="row">velocities/mach</independentVar>
-            <tableData>
-              0.0    -1.9187
-              2.0    -0.4797
-            </tableData>
-          </table>
+          <product>
+            <table>
+              <independentVar lookup="row">velocities/mach</independentVar>
+              <tableData>
+                0.0    -0.5797
+                2.0    -0.1449
+              </tableData>
+            </table>
+            <!--<property>tune/two</property>-->
+          </product>
        </product>
     </function>
 
@@ -285,7 +292,8 @@
            <property>metrics/cbarw-ft</property>
            <property>aero/ci2vel</property>
            <property>velocities/q-aero-rad_sec</property>
-           <value> -11.6699 </value>
+           <value> -9.4484 </value>
+           <!--<property>tune/three</property>-->
        </product>
     </function>
 
@@ -297,7 +305,8 @@
            <property>metrics/cbarw-ft</property>
            <property>aero/ci2vel</property>
            <property>aero/alphadot-rad_sec</property>
-           <value> -11.0615 </value>
+           <value> -3.4053 </value>
+           <!--<property>tune/four</property>-->
        </product>
     </function>
 
@@ -317,10 +326,11 @@
              <independentVar lookup="column">aero/Re</independentVar>
              <tableData>
                          15043185 16547504 22564778 30305826
-                 -0.0349  -3.9501  -0.3751  -0.1965  -0.1377
-                  0.3491  -9.2601  -0.7278  -0.2987  -0.2433
+                 -0.0349  -1.3501  -0.1251  -0.0665  -0.0477
+                  0.3491  -3.0601  -0.2478  -0.0987  -0.0833
              </tableData>
            </table>
+           <!--<property>tune/one</property>-->
        </product>
     </function>
 
@@ -332,7 +342,8 @@
            <property>metrics/bw-ft</property>
            <property>aero/bi2vel</property>
            <property>velocities/p-aero-rad_sec</property>
-           <value> 0.2601 </value>
+           <!--<property>tune/two</property>-->
+           <value> -0.07 </value>
        </product>
     </function>
 
@@ -353,6 +364,7 @@
                   0.3491   4.6306   0.3391   0.1210   0.1192
              </tableData>
            </table>
+           <!--<property>tune/three</property>-->
        </product>
     </function>
 
@@ -366,10 +378,11 @@
            <table>
             <independentVar lookup="row">velocities/mach</independentVar>
             <tableData>
-              0.0    0.1100
-              2.0    0.0275
+              0.0    0.0462
+              2.0    0.00675
             </tableData>
           </table>
+          <!--<property>tune/four</property>-->
        </product>
     </function>
 
@@ -380,7 +393,7 @@
            <property>metrics/Sw-sqft</property>
            <property>metrics/bw-ft</property>
            <property>fcs/rudder-pos-rad</property>
-           <value> 0.0100 </value>
+           <value> 0.0070 </value>
        </product>
     </function>
 
@@ -396,7 +409,7 @@
            <property>metrics/Sw-sqft</property>
            <property>metrics/bw-ft</property>
            <property>aero/alpha-rad</property>
-           <property>fcs/gear-no-wow</property>
+           <!--<property>fcs/gear-no-wow</property>-->
            <table>
              <independentVar lookup="row">aero/beta-rad</independentVar>
              <independentVar lookup="column">aero/Re</independentVar>
