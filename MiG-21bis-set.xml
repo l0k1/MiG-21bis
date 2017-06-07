@@ -81,18 +81,18 @@
 						<label>VOR/ILS Radio</label>
 						<binding>
 							<command>nasal</command>
-							<script>mig21.radio_dialog.open()</script>
+							<script>dialog.radio_dialog.open()</script>
 						</binding>
 					</item>
 					<item>
 						<label>Smokepod Color</label>
 						<binding>
 							<command>nasal</command>
-							<script>mig21.smokepod_dialog.open()</script>
+							<script>dialog.smokepod_dialog.open()</script>
 						</binding>
 					</item>
 				</menu>
-				<menu n="100">
+				<menu n="101">
 					<label>FDM Tuning</label>
 					<item>
 						<label>Tune Drag</label>
@@ -942,8 +942,8 @@
                 <file>Aircraft/Generic/formation.nas</file>
         </formation>
         <dialog>
-        	<file>Aircraft/MiG-21bis/Nasal/dialog.nas</file>
-        <dialog>
+        	<file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>
+        </dialog>
 	</nasal>
 
 </PropertyList>

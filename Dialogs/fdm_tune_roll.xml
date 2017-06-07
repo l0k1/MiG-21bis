@@ -4,26 +4,26 @@
    <modal>false</modal>
    <layout>vbox</layout>
    <width>450</width>
-   <height>300</height>
+   <height>315</height>
    
    <group>
       <text>
          <label>Tune dat roll</label>
          <x>10</x>
-         <y>275</y>
+         <y>290</y>
       </text>
       
       <!-- slider 1 -->
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>270</y>
          <label>Roll_beta</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>270</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/roll/beta</property>
@@ -31,7 +31,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>270</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Roll_beta</property>
@@ -40,9 +40,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>245</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/roll/beta</property>
          <min>-2</min>
@@ -56,13 +56,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>220</y>
          <label>Roll_damp</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>220</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/roll/damp</property>
@@ -70,7 +70,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>220</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Roll_damp</property>
@@ -79,9 +79,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>195</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/roll/damp</property>
          <min>-2</min>
@@ -95,13 +95,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>170</y>
          <label>Roll_yaw</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>170</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/roll/yaw</property>
@@ -109,7 +109,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>170</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Roll_yaw</property>
@@ -118,9 +118,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>145</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/roll/yaw</property>
          <min>-2</min>
@@ -134,13 +134,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>120</y>
          <label>Roll_aileron</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>120</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/roll/aileron</property>
@@ -148,7 +148,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>120</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Roll_aileron</property>
@@ -157,9 +157,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>95</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/roll/aileron</property>
          <min>-2</min>
@@ -169,17 +169,17 @@
          </binding>
       </slider>
       
-      <!-- slider 4 -->
+      <!-- slider 5 -->
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>70</y>
          <label>Roll_rudder</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>70</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/roll/rudder</property>
@@ -187,7 +187,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>70</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Roll_rudder</property>
@@ -196,9 +196,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>45</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/roll/rudder</property>
          <min>-2</min>
@@ -222,9 +222,9 @@
       <button>
          <legend>Close</legend>
          <y>10</y>
-         <x>167</x>
+         <x>400</x>
          <binding>
-         <command>dialog-apply</command>
+            <command>dialog-apply</command>
          </binding>
          <binding>
             <command>dialog-close</command>

@@ -1,29 +1,29 @@
 <PropertyList>
 
-   <name>fdm_tuner</name>
+   <name>fdm_tune_side</name>
    <modal>false</modal>
    <layout>vbox</layout>
    <width>450</width>
-   <height>300</height>
+   <height>265</height>
    
    <group>
       <text>
          <label>Tune dat side</label>
          <x>10</x>
-         <y>275</y>
+         <y>240</y>
       </text>
       
       <!-- slider 1 -->
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>220</y>
          <label>Side_beta</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>220</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/side/beta</property>
@@ -31,7 +31,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>220</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Side_beta</property>
@@ -40,9 +40,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>195</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/side/beta</property>
          <min>-2</min>
@@ -56,13 +56,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>170</y>
          <label>Side_roll_rate</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>170</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/side/roll_rate</property>
@@ -70,7 +70,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>170</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Side_roll_rate</property>
@@ -79,9 +79,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>145</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/side/roll_rate</property>
          <min>-2</min>
@@ -95,13 +95,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>120</y>
          <label>Side_yaw_rate</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>120</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/side/yaw_rate</property>
@@ -109,7 +109,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>120</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Side_yaw_rate</property>
@@ -118,9 +118,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>95</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/side/yaw_rate</property>
          <min>-2</min>
@@ -134,13 +134,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>70</y>
          <label>Side_rudder</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>70</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/side/rudder</property>
@@ -148,7 +148,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>70</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Side_rudder</property>
@@ -157,9 +157,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>45</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/side/rudder</property>
          <min>-2</min>
@@ -183,7 +183,7 @@
       <button>
          <legend>Close</legend>
          <y>10</y>
-         <x>167</x>
+         <x>400</x>
          <binding>
             <command>dialog-apply</command>
          </binding>

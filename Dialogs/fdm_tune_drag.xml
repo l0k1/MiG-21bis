@@ -1,30 +1,30 @@
 <PropertyList>
    
-   <name>fdm_tuner</name>
+   <name>fdm_tune_drag</name>
    <modal>false</modal>
    <layout>vbox</layout>
    <width>450</width>
-   <height>300</height>
+   <height>515</height>
    
    <group>
    
       <text>
          <label>Tune dat drag</label>
          <x>10</x>
-         <y>275</y>
+         <y>490</y>
       </text>
       
       <!-- slider 1 -->
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>470</y>
          <label>Drag_minimum</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>470</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/drag/minimum</property>
@@ -32,7 +32,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>470</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/force/Drag_minimum</property>
@@ -41,9 +41,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>445</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/drag/minimum</property>
          <min>-2</min>
@@ -57,13 +57,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>420</y>
          <label>Drag_alpha</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>420</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/drag/alpha</property>
@@ -71,7 +71,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>420</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/force/Drag_alpha</property>
@@ -80,9 +80,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>395</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/drag/alpha</property>
          <min>-2</min>
@@ -96,13 +96,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>370</y>
          <label>Drag_induced</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>370</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/drag/induced</property>
@@ -110,7 +110,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>370</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/force/Drag_induced</property>
@@ -119,9 +119,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>345</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/drag/induced</property>
          <min>-2</min>
@@ -135,13 +135,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>320</y>
          <label>Drag_mach</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>320</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/drag/mach</property>
@@ -149,7 +149,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>320</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/force/Drag_mach</property>
@@ -158,9 +158,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>295</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/drag/mach</property>
          <min>-2</min>
@@ -174,13 +174,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>270</y>
          <label>Drag_beta</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>270</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/drag/beta</property>
@@ -188,7 +188,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>270</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/force/Drag_beta</property>
@@ -197,9 +197,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>245</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/drag/beta</property>
          <min>-2</min>
@@ -213,13 +213,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>220</y>
          <label>Drag_elevator</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>220</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/drag/elevator</property>
@@ -227,7 +227,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>220</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/force/Drag_elevator</property>
@@ -236,9 +236,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>195</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/drag/elevator</property>
          <min>-2</min>
@@ -252,13 +252,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>170</y>
          <label>Drag_gear</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>170</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/drag/gear</property>
@@ -266,7 +266,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>170</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/force/Drag_gear</property>
@@ -275,9 +275,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>145</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/drag/gear</property>
          <min>-2</min>
@@ -291,13 +291,13 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>120</y>
          <label>Drag_flap</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>120</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/drag/flap</property>
@@ -305,7 +305,7 @@
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>120</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/force/Drag_flap</property>
@@ -314,9 +314,9 @@
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>95</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
          <property>/fdm/jsbsim/tune/drag/flap</property>
          <min>-2</min>
@@ -330,34 +330,34 @@
       
       <text>
          <x>10</x>
-         <y></y>
+         <y>70</y>
          <label>Drag_speedbrake</label>
       </text>
       
       <text>
          <x>245</x>
-         <y></y>
+         <y>70</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
-         <property>/fdm/jsbsim/tune/drag/speedbrake<</property>
+         <property>/fdm/jsbsim/tune/drag/speedbrake</property>
       </text>
       
       <text>
          <x>400</x>
-         <y></y>
+         <y>70</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
-         <property>/fdm/jsbsim/aero/force/Drag_speedbrake<</property>
+         <property>/fdm/jsbsim/aero/force/Drag_speedbrake</property>
       </text>
       
       <slider>
          <vertical>false</vertical>
          <x>10</x>
-         <y>210</y>
+         <y>45</y>
          <width>425</width>
-         <height>30</height>
+         <height>25</height>
          <fraction>0</fraction>
-         <property>/fdm/jsbsim/tune/drag/speedbrake<</property>
+         <property>/fdm/jsbsim/tune/drag/speedbrake</property>
          <min>-2</min>
          <max>2</max>
          <binding>
@@ -379,7 +379,7 @@
       <button>
          <legend>Close</legend>
          <y>10</y>
-         <x>167</x>
+         <x>400</x>
          <binding>
             <command>dialog-apply</command>
          </binding>
