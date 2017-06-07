@@ -27,6 +27,7 @@
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/roll/beta</property>
+         <live>true</live>
       </text>
       
       <text>
@@ -35,6 +36,7 @@
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Roll_beta</property>
+         <live>true</live>
       </text>
       
       <slider>
@@ -66,6 +68,7 @@
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/roll/damp</property>
+         <live>true</live>
       </text>
       
       <text>
@@ -74,6 +77,7 @@
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Roll_damp</property>
+         <live>true</live>
       </text>
       
       <slider>
@@ -105,6 +109,7 @@
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/roll/yaw</property>
+         <live>true</live>
       </text>
       
       <text>
@@ -113,6 +118,7 @@
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Roll_yaw</property>
+         <live>true</live>
       </text>
       
       <slider>
@@ -144,6 +150,7 @@
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/roll/aileron</property>
+         <live>true</live>
       </text>
       
       <text>
@@ -152,6 +159,7 @@
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Roll_aileron</property>
+         <live>true</live>
       </text>
       
       <slider>
@@ -183,6 +191,7 @@
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/tune/roll/rudder</property>
+         <live>true</live>
       </text>
       
       <text>
@@ -191,6 +200,7 @@
          <label>-9.9999</label>
          <format>%-0.4f</format>
          <property>/fdm/jsbsim/aero/moment/Roll_rudder</property>
+         <live>true</live>
       </text>
       
       <slider>
