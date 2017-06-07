@@ -1,6 +1,6 @@
 <PropertyList>
 
-   <name>fdm_tuner</name>
+   <name>fdm_tune_roll</name>
    <modal>false</modal>
    <layout>vbox</layout>
    <width>450</width>
