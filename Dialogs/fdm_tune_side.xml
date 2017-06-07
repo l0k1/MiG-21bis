@@ -34,7 +34,7 @@
          <y>220</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
-         <property>/fdm/jsbsim/aero/moment/Side_beta</property>
+         <property>/fdm/jsbsim/aero/force/Side_beta</property>
       </text>
       
       <slider>
@@ -73,7 +73,7 @@
          <y>170</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
-         <property>/fdm/jsbsim/aero/moment/Side_roll_rate</property>
+         <property>/fdm/jsbsim/aero/force/Side_roll_rate</property>
       </text>
       
       <slider>
@@ -112,7 +112,7 @@
          <y>120</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
-         <property>/fdm/jsbsim/aero/moment/Side_yaw_rate</property>
+         <property>/fdm/jsbsim/aero/force/Side_yaw_rate</property>
       </text>
       
       <slider>
@@ -151,7 +151,7 @@
          <y>70</y>
          <label>-9.9999</label>
          <format>%-0.4f</format>
-         <property>/fdm/jsbsim/aero/moment/Side_rudder</property>
+         <property>/fdm/jsbsim/aero/force/Side_rudder</property>
       </text>
       
       <slider>
