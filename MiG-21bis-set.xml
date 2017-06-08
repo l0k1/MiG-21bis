@@ -81,14 +81,59 @@
 						<label>VOR/ILS Radio</label>
 						<binding>
 							<command>nasal</command>
-							<script>mig21.radio_dialog.open()</script>
+							<script>dialog.radio_dialog.open()</script>
 						</binding>
 					</item>
 					<item>
 						<label>Smokepod Color</label>
 						<binding>
 							<command>nasal</command>
-							<script>mig21.smokepod_dialog.open()</script>
+							<script>dialog.smokepod_dialog.open()</script>
+						</binding>
+					</item>
+				</menu>
+				<menu n="101">
+					<label>FDM Tuning</label>
+					<item>
+						<label>Tune Drag</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_drag_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Tune Lift</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_lift_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Tune Pitch</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_pitch_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Tune Roll</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_roll_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Tune Side</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_side_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Tune Yaw</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_yaw_dialog.open()</script>
 						</binding>
 					</item>
 				</menu>
@@ -385,6 +430,9 @@
 				<sim-time-sec>0</sim-time-sec>
 			</simulation>
 			<systems>
+				<chute>
+					<deploy type="double">0</deploy>
+				</chute>
 				<dump>
 					<armed type="double">0</armed>
 				</dump>
@@ -420,6 +468,54 @@
 				<pitch-gearing-enable>1</pitch-gearing-enable>
 				<roll-damping-enable>1</roll-damping-enable>
 			</fcs>
+			<!-- for in-flight FDM tuning -->
+			<tune>
+				<lift>
+					<alpha type="double">1</alpha>
+					<pitch_rate type="double">1</pitch_rate>
+					<alpha_rate type="double">1</alpha_rate>
+					<elevator type="double">1</elevator>
+					<flap type="double">1</flap>
+				</lift>
+				<drag>
+					<minimum type="double">1</minimum>
+					<alpha type="double">1</alpha>
+					<induced type="double">1</induced>
+					<mach type="double">1</mach>
+					<beta type="double">1</beta>
+					<elevator type="double">1</elevator>
+					<gear type="double">1</gear>
+					<flap type="double">1</flap>
+					<speedbrake type="double">1</speedbrake>
+				</drag>
+				<side>
+					<beta type="double">1</beta>
+					<roll_rate type="double">1</roll_rate>
+					<yaw_rate type="double">1</yaw_rate>
+					<rudder type="double">1</rudder>
+				</side>
+				<pitch>
+					<alpha type="double">1</alpha>
+					<elevator type="double">1</elevator>
+					<damp type="double">1</damp>
+					<alphadot type="double">1</alphadot>
+				</pitch>
+				<roll>
+					<beta type="double">1</beta>
+					<damp type="double">1</damp>
+					<yaw type="double">1</yaw>
+					<aileron type="double">1</aileron>
+					<rudder type="double">1</rudder>
+				</roll>
+				<yaw>
+					<alpha type="double">1</alpha>
+					<beta type="double">1</beta>
+					<roll_rate type="double">1</roll_rate>
+					<damp type="double">1</damp>
+					<rudder type="double">1</rudder>
+					<aileron type="double">1</aileron>
+				</yaw>
+			</tune>
 		</jsbsim>
 	</fdm>
         <!-- Payload -->
@@ -865,6 +961,9 @@
         <formation>
                 <file>Aircraft/Generic/formation.nas</file>
         </formation>
+        <dialog>
+        	<file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>
+        </dialog>
 	</nasal>
 
 </PropertyList>

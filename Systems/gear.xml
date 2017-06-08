@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 
+<!-- aeromatic v 0.96 http://jsbsim.sourceforge.net/aeromatic2.html generated 2 June 2017 by pinto -->
+<!-- GPLv2+ -->
+
 <system name="gear">
 
   <channel name="Landing Gear">
@@ -19,5 +22,4 @@
    </kinematic>
 
   </channel>
-
 </system>

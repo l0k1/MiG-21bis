@@ -381,6 +381,9 @@
 
 	<fdm>
 		<jsbsim>
+			<chute>
+				<deploy type="double">0</deploy>
+			</chute>
 			<simulation>
 				<sim-time-sec>0</sim-time-sec>
 			</simulation>

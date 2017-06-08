@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 
+<!-- aeromatic v 0.96 http://jsbsim.sourceforge.net/aeromatic2.html generated 2 June 2017 by pinto -->
+<!-- GPLv2+ -->
+
 <system name="speedbrakes">
 
   <channel name="Speedbrake">
-
    <kinematic name="Speedbrake Control">
      <input>fcs/speedbrake-cmd-norm</input>
      <traverse>
