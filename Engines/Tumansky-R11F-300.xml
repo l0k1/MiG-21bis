@@ -4,16 +4,15 @@
       [1] - JSBSim uses the bypassratio as a measure of spool up time only.
       The MiG-21's engines were jet turbine engines, and therefore had an actual bypass ratio of 0.
       According to HAVE DOUGHNUT, page 1-8 section F, the R-11F-300 engine required 14 seconds
-      to spool up from idle to milthrust. Assuming the R-13 is moderately improved, a spool up
-      time of 11.5 seconds seems reasonable.
+      to spool up from idle to milthrust.
 -->
 
-<turbine_engine name="Tumansky R-13-300">
-  <milthrust>       8970 </milthrust>   <!-- source: http://www.mig-21.de/english/technicaldataengines.htm -->
-  <maxthrust>      14320 </maxthrust>   <!-- source: http://www.mig-21.de/english/technicaldataengines.htm -->
-  <bypassratio>     11.5 </bypassratio> <!-- see note [1] above -->
-  <tsfc>            0.93 </tsfc>        <!-- source: wikipedia :( -->
-  <atsfc>           2.09 </atsfc>       <!-- source: wikipedia :( -->
+<turbine_engine name="Tumansky R-11F-300">
+  <milthrust>       8590 </milthrust>   <!-- source: http://www.mig-21.de/english/technicaldataengines.htm -->
+  <maxthrust>      12005 </maxthrust>   <!-- source: http://www.mig-21.de/english/technicaldataengines.htm -->
+  <bypassratio>     14.0 </bypassratio> <!-- see note [1] above -->
+  <tsfc>            0.95 </tsfc>        <!-- source: wikipedia :( -->
+  <atsfc>           2.37 </atsfc>       <!-- source: wikipedia :( -->
   <bleed>           0.03 </bleed>
   <idlen1>         30.0  </idlen1>      <!-- using same value as R25-300 -->
   <idlen2>         65.0  </idlen2>      <!-- using same value as R25-300 -->
