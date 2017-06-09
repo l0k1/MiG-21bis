@@ -43,18 +43,18 @@ ignition, a delay of up to 9 seconds was experienced.
 		</fcs_function>
 		
 		<kinematic name="throttle-redist-aug">
-                <input>fcs/throttle-redist-aug-predelay</input>
-                <traverse>
-                    <setting>
-                        <position>0.0000</position>
-                        <time>0.0000</time>
-                    </setting>
-                    <setting>
-                        <position>1.0000</position>
-                        <time>1.0000</time>
-                    </setting>
-                </traverse>
-            </kinematic>
+            <input>fcs/throttle-redist-aug-predelay</input>
+            <traverse>
+                <setting>
+                    <position>0.0000</position>
+                    <time>0.0000</time>
+                </setting>
+                <setting>
+                    <position>1.0000</position>
+                    <time>0.2500</time>
+                </setting>
+            </traverse>
+        </kinematic>
 
 
 		<switch name="aug-delay-switch">
@@ -96,23 +96,11 @@ ignition, a delay of up to 9 seconds was experienced.
 			<output>fcs/throttle-aug-compare</output>
 		</fcs_function>
 		
-		<switch name="aug-ignition">
-			<default value="0"/>
-			<test logic="AND" value="1">
-				<test logic="OR">
-					fcs/aug-ignition == 1
-					fcs/aug-delay ge fcs/throttle-aug-compare
-				</test>
-				fcs/throttle-redist-aug ge 0.001
-			</test>
-		</switch>
-
-		
 		<switch name="aug-active">
 			<default value="0"/>
 			<test logic="AND" value="1">
 				propulsion/engine[0]/n1 ge 102
-				fcs/aug-delay == 1
+				fcs/aug-delay ge fcs/throttle-aug-compare
 			</test>
 		</switch>
 		
