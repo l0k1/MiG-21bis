@@ -432,8 +432,8 @@
                <independentVar lookup="column">aero/Re</independentVar>
                <tableData>
                            15043185 16547504 22564778 30305826
-                   -0.0349   0.0356   0.0356   0.0356   0.0356
-                    0.3491   4.6306   0.3391   0.1210   0.1192
+                   -0.0349   0.0304   0.0304   0.0304   0.0304
+                    0.3491   3.6306   0.2391   0.0810   0.0892
                </tableData>
              </table>
              <property>tune/roll/yaw</property>
@@ -494,8 +494,8 @@
                <independentVar lookup="column">aero/Re</independentVar>
                <tableData>
                            15043185 16547504
-                   -0.3491  -1.0000   0.0000
-                    0.3491   1.0000   0.0000
+                   -0.3491  -0.6500   0.0000
+                    0.3491   0.6500   0.0000
                </tableData>
              </table>
              <property>tune/yaw/alpha</property>
@@ -511,7 +511,7 @@
            <property>metrics/bw-ft</property>
            <property>aero/beta-rad</property>
            <product>
-             <value> 0.3014 </value>
+             <value> 0.1836 </value>
              <property>tune/yaw/beta</property>
            </product>
        </product>
@@ -549,7 +549,7 @@
            <property>aero/bi2vel</property>
            <property>velocities/r-aero-rad_sec</property>
            <product>
-             <value> -0.5175 </value>
+             <value> -0.6275 </value>
              <property>tune/yaw/damp</property>
            </product>
        </product>
@@ -563,7 +563,7 @@
            <property>metrics/bw-ft</property>
            <property>fcs/rudder-pos-rad</property>
            <product>
-             <value> -0.1950 </value>
+             <value> -0.1487 </value>
              <property>tune/yaw/rudder</property>
            </product>
        </product>
