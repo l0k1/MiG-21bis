@@ -5,7 +5,7 @@
 
 		<!-- Info -->
 
-		<description>Mikoyan-Gurevich MiG-21bis JSBSim</description>
+		<description>Mikoyan-Gurevich MiG-21MF-75</description>
 		<author>Petar Jedvaj, David Culp, Raptor, Stuart Cassie, Gary Brown, Brendan Black, bugman and Tomaskom</author>
 		<status>1.4.4 beta 3</status>
 
@@ -381,6 +381,9 @@
 
 	<fdm>
 		<jsbsim>
+			<chute>
+				<deploy type="double">0</deploy>
+			</chute>
 			<simulation>
 				<sim-time-sec>0</sim-time-sec>
 			</simulation>
@@ -420,6 +423,53 @@
 				<pitch-gearing-enable>1</pitch-gearing-enable>
 				<roll-damping-enable>1</roll-damping-enable>
 			</fcs>
+			<tune>
+				<lift>
+					<alpha type="double">1</alpha>
+					<pitch_rate type="double">1</pitch_rate>
+					<alpha_rate type="double">1</alpha_rate>
+					<elevator type="double">1</elevator>
+					<flap type="double">1</flap>
+				</lift>
+				<drag>
+					<minimum type="double">1</minimum>
+					<alpha type="double">1</alpha>
+					<induced type="double">1</induced>
+					<mach type="double">1</mach>
+					<beta type="double">1</beta>
+					<elevator type="double">1</elevator>
+					<gear type="double">1</gear>
+					<flap type="double">1</flap>
+					<speedbrake type="double">1</speedbrake>
+				</drag>
+				<side>
+					<beta type="double">1</beta>
+					<roll_rate type="double">1</roll_rate>
+					<yaw_rate type="double">1</yaw_rate>
+					<rudder type="double">1</rudder>
+				</side>
+				<pitch>
+					<alpha type="double">1</alpha>
+					<elevator type="double">1</elevator>
+					<damp type="double">1</damp>
+					<alphadot type="double">1</alphadot>
+				</pitch>
+				<roll>
+					<beta type="double">1</beta>
+					<damp type="double">1</damp>
+					<yaw type="double">1</yaw>
+					<aileron type="double">1</aileron>
+					<rudder type="double">1</rudder>
+				</roll>
+				<yaw>
+					<alpha type="double">1</alpha>
+					<beta type="double">1</beta>
+					<roll_rate type="double">1</roll_rate>
+					<damp type="double">1</damp>
+					<rudder type="double">1</rudder>
+					<aileron type="double">1</aileron>
+				</yaw>
+			</tune>
 		</jsbsim>
 	</fdm>
         <!-- Payload -->
@@ -450,14 +500,24 @@
 					<weight-lb>550</weight-lb>
 				</opt>
 				<opt>
-					<name>PTB-490 Droptank</name>
-					<lbs>180</lbs>
-					<weight-lb>180</weight-lb>
+					<name>FAB-100</name>
+					<lbs>220</lbs>
+					<weight-lb>220</weight-lb>
+				</opt>
+				<opt>
+					<name>FAB-250</name>
+					<lbs>551</lbs>
+					<weight-lb>551</weight-lb>
 				</opt>
 				<opt>
 					<name>S-24</name>
 					<lbs>518</lbs>
 					<weight-lb>518</weight-lb>
+				</opt>
+				<opt>
+					<name>PTB-490 Droptank</name>
+					<lbs>180</lbs>
+					<weight-lb>180</weight-lb>
 				</opt>
 			</weight>
 			<weight n="1">
@@ -483,6 +543,16 @@
 					<name>R-27T1</name>
 					<lbs>550</lbs>
 					<weight-lb>550</weight-lb>
+				</opt>
+				<opt>
+					<name>FAB-100</name>
+					<lbs>220</lbs>
+					<weight-lb>220</weight-lb>
+				</opt>
+				<opt>
+					<name>FAB-250</name>
+					<lbs>551</lbs>
+					<weight-lb>551</weight-lb>
 				</opt>
 				<opt>
 					<name>FAB-500</name>
@@ -566,6 +636,16 @@
 					<weight-lb>550</weight-lb>
 				</opt>
 				<opt>
+					<name>FAB-100</name>
+					<lbs>220</lbs>
+					<weight-lb>220</weight-lb>
+				</opt>
+				<opt>
+					<name>FAB-250</name>
+					<lbs>551</lbs>
+					<weight-lb>551</weight-lb>
+				</opt>
+				<opt>
 					<name>FAB-500</name>
 					<lbs>1146</lbs>
 					<weight-lb>1146</weight-lb>
@@ -616,14 +696,24 @@
 					<weight-lb>550</weight-lb>
 				</opt>
 				<opt>
-					<name>PTB-490 Droptank</name>
-					<lbs>180</lbs>
-					<weight-lb>180</weight-lb>
+					<name>FAB-100</name>
+					<lbs>220</lbs>
+					<weight-lb>220</weight-lb>
+				</opt>
+				<opt>
+					<name>FAB-250</name>
+					<lbs>551</lbs>
+					<weight-lb>551</weight-lb>
 				</opt>
 				<opt>
 					<name>S-24</name>
 					<lbs>518</lbs>
 					<weight-lb>518</weight-lb>
+				</opt>
+				<opt>
+					<name>PTB-490 Droptank</name>
+					<lbs>180</lbs>
+					<weight-lb>180</weight-lb>
 				</opt>
 			</weight>
 			<armament>
