@@ -14,12 +14,20 @@
 			</test>
 		</switch>
 		
-		<switch name="electric/sources/alternator-volt-dc">
-			<default value="0"/>
-			<test logic="AND" value="29">
-				<!--engine rpms-->
-			</test>
-		</switch>
+		<fcs_function name="trash/electric/sources/alternator-volt-dc">
+			<function>
+				<table>
+					<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
+					<tableData>
+						0.00	0.00
+						6.00	20.0
+						30.0	28.1
+						97.0    29.7
+					</tableData>
+				</table>
+			</function>
+			<output>electric/sources/alternator-volt-dc</output>
+		</fcs_function>
 		
         <pure_gain name="electric/sources/battery-alternator-charge-volt-dc">
             <input>electric/sources/alternator-volt-dc</input>
@@ -90,17 +98,14 @@
         
         <fcs_function name="trash/voltage-per-buss">
     		<function>
-    		    <product>
-        			<product>
-        			    <sum>
-        			        <property>electric/busses/buss-1-switch</property>
-        			        <property>electric/busses/buss-2-switch</property>
-        			        <property>electric/busses/buss-3-switch</property>
-        			    </sum>
-        			    <value>0.3333</value>
-        			</product>
+    		    <quotient>
+    			    <sum>
+    			        <property>electric/busses/buss-1-switch</property>
+    			        <property>electric/busses/buss-2-switch</property>
+    			        <property>electric/busses/buss-3-switch</property>
+    			    </sum>
         			<property>electric/sources/battery-volt-dc</property>
-        		</product>
+        		</quotient>
     		</function>
     		<output>electric/busses/volts-per-buss</output>
 	    </fcs_function>

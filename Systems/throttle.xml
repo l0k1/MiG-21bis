@@ -1,5 +1,13 @@
 <?xml version="1.0"?>
 
+<!-- from HAVE DONUT pp 2-29
+Afterburner ignition required 2 to 3 seconds from
+initiation to full CRT. [...] The afterburner
+did not ignite until 100 percent RPM was attained. If the
+throttle was not placed in the full afterburner detent for
+ignition, a delay of up to 9 seconds was experienced. 
+-->
+
 <system name="throttle">
 
 	<channel name="Throttle">
@@ -13,13 +21,105 @@
 					<tableData>
 						0.00	0.00
 						0.80	1.00
-						1.00	2.00
+						1.00	1.00
 					</tableData>
 				</table>
 			</function>
+			<output>fcs/throttle-redist-mil</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/asdeeefsd">
+			<function>
+				<table>
+					<independentVar lookup="row">fcs/throttle-cmd-norm</independentVar>
+					<tableData>
+						0.00	0.00
+						0.80	0.00
+						1.00	1.00
+					</tableData>
+				</table>
+			</function>
+			<output>fcs/throttle-redist-aug-predelay</output>
+		</fcs_function>
+		
+		<kinematic name="throttle-redist-aug">
+            <input>fcs/throttle-redist-aug-predelay</input>
+            <traverse>
+                <setting>
+                    <position>0.0000</position>
+                    <time>0.0000</time>
+                </setting>
+                <setting>
+                    <position>1.0000</position>
+                    <time>0.2500</time>
+                </setting>
+            </traverse>
+        </kinematic>
+
+
+		<switch name="aug-delay-switch">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				propulsion/engine[0]/n1 ge 102
+			</test>
+		</switch>
+		
+		<kinematic name="aug-delay">
+			<input>fcs/aug-delay-switch</input>
+			<noscale/>
+			<traverse>
+				<setting>
+					<position>0.0000</position>
+					<time>0.0000</time>
+				</setting>
+				<setting>
+					<position>1.0000</position>
+					<time>9.0000</time>
+				</setting>
+			</traverse>
+		</kinematic>
+		
+		<fcs_function name="trash/asdfp3df32">
+			<function>
+				<table>
+					<independentVar>fcs/throttle-redist-aug</independentVar>
+					<tableData>
+						0.001  1.000
+						1.000  0.333
+					</tableData>
+				</table>
+			</function>
+			<clipto>
+				<min>0.0</min>
+				<max>1.0</max>
+			</clipto>
+			<output>fcs/throttle-aug-compare</output>
+		</fcs_function>
+		
+		<switch name="aug-active">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				propulsion/engine[0]/n1 ge 102
+				fcs/aug-delay ge fcs/throttle-aug-compare
+			</test>
+		</switch>
+		
+		<fcs_function name="trash/asdfp32">
+			<function>
+				<sum>
+					<property>fcs/throttle-redist-mil</property>
+					<product>
+						<property>fcs/throttle-redist-aug</property>
+						<property>fcs/aug-active</property>
+					</product>
+				</sum>
+			</function>
+			<clipto>
+				<min>0.0</min>
+				<max>2.0</max>
+			</clipto>
 			<output>fcs/throttle-pos-norm</output>
 		</fcs_function>
-
 
 	</channel>
 
