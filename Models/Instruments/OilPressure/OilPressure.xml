@@ -6,38 +6,13 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-        <object-name>needle</object-name>
+        <object-name>oilPressureFace</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
             <blue>0.3</blue>
             <factor-prop>controls/lighting/instruments-norm</factor-prop>
         </emission> 
-    </animation>
-    
-    <animation>
-        <type>rotate</type>
-        <object-name>needle</object-name>
-        <property>/engines/engine[0]/oilp-norm</property>
-        <interpolation>
-            <entry><ind> 0.0 </ind><dep>   0 </dep></entry>
-            <entry><ind> 0.2 </ind><dep>  58 </dep></entry>
-            <entry><ind> 0.4 </ind><dep> 118 </dep></entry>
-            <entry><ind> 0.6 </ind><dep> 181 </dep></entry>
-            <entry><ind> 0.8 </ind><dep> 245 </dep></entry>
-            <entry><ind> 1.0 </ind><dep> 314 </dep></entry>
-        </interpolation>
-        <center>
-            <x-m>-0.0010</x-m>
-            <y-m> 0.0000</y-m>
-            <z-m> 0.0000</z-m>
-        </center>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
     </animation>
     
 <!-- Label text -->

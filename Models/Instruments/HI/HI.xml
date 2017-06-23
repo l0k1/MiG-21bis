@@ -6,17 +6,15 @@
 
     <animation>
         <type>material</type>
-        <object-name>adfBack</object-name>
-		<object-name>adfFwd</object-name>
-		<object-name>azimuth</object-name>
-		<object-name>azimuthNeedle</object-name>
-		<object-name>compass</object-name>
-		<object-name>courseBack</object-name>
-		<object-name>courseFwd</object-name>
-		<object-name>fromFlag</object-name>
-		<object-name>glideslopeNeedle</object-name>
-		<object-name>innerPlate</object-name>
-		<object-name>toFlag</object-name>
+        <object-name>HIadfBack</object-name>
+		<object-name>HIadfFwd</object-name>
+		<object-name>HIazimuth</object-name>
+		<object-name>HIazimuthNeedle</object-name>
+		<object-name>HIcompass</object-name>
+		<object-name>HIfromFlag</object-name>
+		<object-name>HIglideslopeNeedle</object-name>
+		<object-name>HIinnerbevel</object-name>
+		<object-name>HItoFlag</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -28,8 +26,8 @@
     <animation>
         <type>rotate</type>
         <object-name>compass</object-name>
-		<object-name>courseFwd</object-name>
-		<object-name>courseBack</object-name>
+		<!--<object-name>courseFwd</object-name>
+		<object-name>courseBack</object-name>-->
         <property>/orientation/heading-deg</property>
         <factor>1</factor>
         <axis>
@@ -39,7 +37,7 @@
         </axis>
     </animation>
 
-	<animation>
+	<!--<animation>
         <type>rotate</type>
         <object-name>courseFwd</object-name>
 		<object-name>courseBack</object-name>
@@ -50,11 +48,11 @@
             <y>0</y>
             <z>0</z>
         </axis>
-    </animation>
+    </animation>-->
 	
 	<animation>
         <type>translate</type>
-        <object-name>azimuthNeedle</object-name>
+        <object-name>HIazimuthNeedle</object-name>
         <property>/instrumentation/nav[0]/heading-needle-deflection-norm</property>
         <factor>.03</factor>
         <axis>
@@ -66,7 +64,7 @@
 	
 	<animation>
         <type>translate</type>
-        <object-name>azimuthNeedle</object-name>
+        <object-name>HIazimuthNeedle</object-name>
         <property>/instrumentation/nav[1]/gs-needle-deflection-norm</property>
         <factor>.03</factor>
         <axis>
@@ -78,7 +76,7 @@
 	
 	<animation>
 		<type>textranslate</type>
-		<object-name>toFlag</object-name>
+		<object-name>HItoFlag</object-name>
 		<property>/instrumentation/nav[0]/to-flag</property>
 		<bias>0.0001</bias>
 		<factor>0.029296875</factor>
@@ -91,7 +89,7 @@
 	
 	<animation>
 		<type>textranslate</type>
-		<object-name>fromFlag</object-name>
+		<object-name>HIfromFlag</object-name>
 		<property>/instrumentation/nav[0]/from-flag</property>
 		<bias>0.0001</bias>
 		<factor>0.029296875</factor>
@@ -137,7 +135,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>knob</object-name>
+		<object-name>HIknob</object-name>
 		<action>
 			<button>0</button>
 			<repeatable>true</repeatable>

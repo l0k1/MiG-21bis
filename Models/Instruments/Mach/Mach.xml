@@ -5,8 +5,8 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-        <object-name>needle</object-name>
+        <object-name>machFace</object-name>
+        <object-name>machNeedle</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -17,7 +17,7 @@
     
 	<animation>
 		<type>rotate</type>
-		<object-name>needle</object-name>
+		<object-name>machNeedle</object-name>
 		<property>/instrumentation/airspeed-indicator/indicated-mach</property>
 		<interpolation>
 			<entry>
