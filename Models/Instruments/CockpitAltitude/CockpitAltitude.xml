@@ -6,32 +6,13 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-        <object-name>needle</object-name>
+        <object-name>cockpitAltFace</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
             <blue>0.3</blue>
             <factor-prop>controls/lighting/instruments-norm</factor-prop>
         </emission> 
-    </animation>
-    
-    <animation>
-        <type>rotate</type>
-        <object-name>needle</object-name>
-        <property>engines/engine[0]/mp-osi</property>
-        <offset-deg>158.82</offset-deg>
-        <factor>-5.294117647</factor>
-        <center>
-            <x-m> 0.0060</x-m>
-            <y-m>-0.0003</y-m>
-            <z-m>-0.0047</z-m>
-        </center>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
     </animation>
     
 <!-- Label text -->

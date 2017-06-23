@@ -6,10 +6,10 @@
 
     <animation>
         <type>material</type>
-        <object-name>100-needle</object-name>
-        <object-name>1000-needle</object-name>
-        <object-name>10000-needle</object-name>
-        <object-name>face</object-name>
+        <object-name>altimeterNeedle100</object-name>
+        <object-name>altimeterNeedle1k</object-name>
+        <object-name>altimeterNeedle10k</object-name>
+        <object-name>altimeterFace</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -20,7 +20,7 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>100-needle</object-name>
+        <object-name>altimeterNeedle100</object-name>
         <property>instrumentation/altimeter/indicated-altitude-ft</property>
         <factor>-0.1097279</factor>
         <axis>
@@ -35,7 +35,7 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>1000-needle</object-name>
+        <object-name>altimeterNeedle1k</object-name>
         <property>instrumentation/altimeter/indicated-altitude-ft</property>
         <factor>-0.01097279</factor>
         <axis>
@@ -50,7 +50,7 @@
 
     <animation> <!--using for singles, not 10000 (which is pretty much useless for meters -->
         <type>rotate</type>
-        <object-name>10000-needle</object-name>
+        <object-name>altimeterNeedle10k</object-name>
         <property>instrumentation/altimeter/indicated-altitude-ft</property>
         <factor>-1.097279</factor>
         <axis>

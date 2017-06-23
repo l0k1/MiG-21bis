@@ -6,8 +6,8 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-        <object-name>needle</object-name>
+        <object-name>ARUface</object-name>
+        <object-name>ARUneedle</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>

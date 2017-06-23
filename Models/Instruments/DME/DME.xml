@@ -6,10 +6,6 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-        <object-name>vor.001</object-name>
-        <object-name>vor.002</object-name>
-        <object-name>vor.003</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>

@@ -6,11 +6,11 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-		<object-name>pitchTape</object-name>
-		<object-name>azimuthLittleNeedle</object-name>
-		<object-name>gsLittleNeedle</object-name>
-		<object-name>sideslipCage</object-name>
+        <object-name>AIface</object-name>
+		<object-name>AIpitchTape</object-name>
+		<object-name>AIazimuthLittleNeedle</object-name>
+		<object-name>AIgsLittleNeedle</object-name>
+		<object-name>AIsideslipCage</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -21,10 +21,10 @@
 	
 	    <animation>
         <type>material</type>
-		<object-name>aircraftMarker</object-name>
-		<object-name>azimuthNeedle</object-name>
-		<object-name>gsNeedle</object-name>
-		<object-name>rollNeedles</object-name>
+		<object-name>AIaircraftMarker</object-name>
+		<object-name>AIazimuthNeedle</object-name>
+		<object-name>AIgsNeedle</object-name>
+		<object-name>AIrollNeedles</object-name>
         <emission>
             <red>0.7</red>
             <green>0.3</green>
@@ -35,7 +35,7 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>rollNeedles</object-name>
+        <object-name>AIrollNeedles</object-name>
         <property>orientation/roll-deg</property>
         <factor>1</factor>
         <center>
@@ -52,7 +52,7 @@
 
 	<animation>
         <type>rotate</type>
-        <object-name>azimuthNeedle</object-name>
+        <object-name>AIazimuthNeedle</object-name>
         <property>/instrumentation/nav[0]/intercept-norm</property>
         <factor>4</factor>
         <center>
@@ -69,7 +69,7 @@
 
     <animation>
         <type>textranslate</type>
-        <object-name>pitchTape</object-name>
+        <object-name>AIpitchTape</object-name>
         <property>orientation/pitch-deg</property>
 		<bias>0.0001</bias>
 		<factor>0.0051</factor>
@@ -82,7 +82,7 @@
 	
 	<animation>
 		<type>translate</type>
-		<object-name>sideslipBall</object-name>
+		<object-name>AIsideslipBall</object-name>
 		<property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
 		<interpolation>
             <entry><ind>3.0</ind><dep>0.02</dep></entry>

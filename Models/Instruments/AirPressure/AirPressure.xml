@@ -6,10 +6,7 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-        <object-name>vor.001</object-name>
-        <object-name>vor.002</object-name>
-        <object-name>vor.003</object-name>
+        <object-name>airPressureFace</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -23,7 +20,7 @@
 <text>
 	<name>LabelText</name>
 	<type type="string">literal</type>
-		<text type="string">PPD1M Range Finder NOT WORKING</text>
+		<text type="string">Air Pressure</text>
 	<draw-text type="bool">true</draw-text>
 	<font>Helvetica.txf</font>
 		<character-size type="double">0.012</character-size>
