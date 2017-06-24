@@ -5,7 +5,7 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
+        <object-name>vspeedFace</object-name>
         <object-name>vspeedneedle</object-name>
 		<object-name>turnneedle</object-name>
         <emission>
