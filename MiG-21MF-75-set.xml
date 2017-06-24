@@ -381,13 +381,13 @@
 
 	<fdm>
 		<jsbsim>
+			<chute>
+				<deploy type="double">0</deploy>
+			</chute>
 			<simulation>
 				<sim-time-sec>0</sim-time-sec>
 			</simulation>
 			<systems>
-				<chute>
-					<deploy type="double">0</deploy>
-				</chute>
 				<dump>
 					<armed type="double">0</armed>
 				</dump>
@@ -505,6 +505,11 @@
 					<weight-lb>220</weight-lb>
 				</opt>
 				<opt>
+					<name>FAB-250</name>
+					<lbs>551</lbs>
+					<weight-lb>551</weight-lb>
+				</opt>
+				<opt>
 					<name>S-24</name>
 					<lbs>518</lbs>
 					<weight-lb>518</weight-lb>
@@ -543,6 +548,11 @@
 					<name>FAB-100</name>
 					<lbs>220</lbs>
 					<weight-lb>220</weight-lb>
+				</opt>
+				<opt>
+					<name>FAB-250</name>
+					<lbs>551</lbs>
+					<weight-lb>551</weight-lb>
 				</opt>
 				<opt>
 					<name>FAB-500</name>
@@ -631,6 +641,11 @@
 					<weight-lb>220</weight-lb>
 				</opt>
 				<opt>
+					<name>FAB-250</name>
+					<lbs>551</lbs>
+					<weight-lb>551</weight-lb>
+				</opt>
+				<opt>
 					<name>FAB-500</name>
 					<lbs>1146</lbs>
 					<weight-lb>1146</weight-lb>
@@ -684,6 +699,11 @@
 					<name>FAB-100</name>
 					<lbs>220</lbs>
 					<weight-lb>220</weight-lb>
+				</opt>
+				<opt>
+					<name>FAB-250</name>
+					<lbs>551</lbs>
+					<weight-lb>551</weight-lb>
 				</opt>
 				<opt>
 					<name>S-24</name>
