@@ -38,8 +38,9 @@
             </greater-than>
             <property>/sim/rendering/rembrandt/enabled</property>
 		</condition>
+		<object-name>gunsight_glass_guage</object-name>
 		<object-name>sight</object-name>
-		<object-name>gunsight-glass</object-name>
+		<object-name>gunsight_glass</object-name>
     </effect>
 	
 	<animation>
@@ -54,43 +55,18 @@
 	
 	<!-- Shaders -->
 	
-  <animation>
-			<type>material</type>
-				<object-name>labelAngle</object-name>
-				<object-name>labelAuto</object-name>
-				<object-name>labelBomb</object-name>
-				<object-name>labelBreak</object-name>
-				<object-name>labelContback</object-name>
-				<object-name>labelFixedNetReticle</object-name>
-				<object-name>labelGun</object-name>
-				<object-name>labelGyro</object-name>
-				<object-name>labelLnc</object-name>
-				<object-name>labelMan</object-name>
-				<object-name>labelMissle</object-name>
-				<object-name>labelReticle</object-name>
-				<object-name>labelShoot</object-name>
-				<object-name>labelSize</object-name>
-				<object-name>labelVLnch</object-name>	
-			<emission>
-				 <red>0.6</red>
-				 <green>0.3</green>
-				 <blue>0.3</blue>
-				<factor-prop>controls/lighting/instruments-norm</factor-prop>
-			</emission> 
-	</animation>
-
 	<animation>
 		<type>shader</type>
 		<shader>chrome</shader>
 		<texture>Aircraft/Generic/Effects/glass_shader.png</texture>
 		<object-name>sight</object-name>
-		<object-name>gunsight-glass</object-name>
+		<object-name>gunsight_glass</object-name>
 	</animation>
 	
 	<animation>
 		<type>noshadow</type>
 		<object-name>sight</object-name>
-		<object-name>gunsight-glass</object-name>
+		<object-name>gunsight_glass</object-name>
 	</animation>
 	
 	<!-- Animations -->
@@ -99,7 +75,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>switchGunMissile</object-name>
+		<object-name>gunsight_gun_launch_switch</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -112,15 +88,15 @@
 	</animation>
 	
 	<animation>
-		<object-name>switchGunMissile</object-name>
+		<object-name>gunsight_gun_launch_switch</object-name>
 		<type>rotate</type>
 		<property>controls/armament/gunsight/gun-missile-switch</property>
 		<factor>50</factor>
 		<offset-deg>-25</offset-deg>
 		<center>
-			<x-m>-3.93359</x-m>
-			<y-m>-0.12332</y-m>
-			<z-m> 0.96043</z-m>
+			<x-m>-3.98946</x-m>
+			<y-m>-0.13801</y-m>
+			<z-m> 0.97956</z-m>
 		</center>
 		<axis>
 			<x>0</x>
@@ -131,7 +107,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>switchPipperMode</object-name>
+		<object-name>gunsight_shoot_bomb_switch</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -144,15 +120,15 @@
 	</animation>
 	
 	<animation>
-		<object-name>switchPipperMode</object-name>
+		<object-name>gunsight_shoot_bomb_switch</object-name>
 		<type>rotate</type>
 		<property>controls/armament/gunsight/pip-mode-select-switch</property>
 		<factor>50</factor>
 		<offset-deg>-25</offset-deg>
 		<center>
-			<x-m>-3.93359</x-m>
-			<y-m>-0.12332</y-m>
-			<z-m> 0.93381</z-m>
+			<x-m>-3.98946</x-m>
+			<y-m>-0.13805</y-m>
+			<z-m> 0.94807</z-m>
 		</center>
 		<axis>
 			<x>0</x>
@@ -163,7 +139,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>switchAutoMan</object-name>
+		<object-name>gunsight_auto_manual_switch</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -176,15 +152,15 @@
 	</animation>
 	
 	<animation>
-		<object-name>switchAutoMan</object-name>
+		<object-name>gunsight_auto_manual_switch</object-name>
 		<type>rotate</type>
 		<property>controls/armament/gunsight/auto-man-switch</property>
 		<factor>50</factor>
 		<offset-deg>-25</offset-deg>
 		<center>
-			<x-m>-3.93359</x-m>
-			<y-m>-0.12332</y-m>
-			<z-m> 0.90836</z-m>
+			<x-m>-3.98946</x-m>
+			<y-m>-0.13191</y-m>
+			<z-m> 0.90668</z-m>
 		</center>
 		<axis>
 			<x>0</x>
@@ -195,7 +171,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>switchPipperAccuracy</object-name>
+		<object-name>gunsight_gyro_knob</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -208,15 +184,15 @@
 	</animation>
 	
 	<animation>
-		<object-name>switchPipperAccuracy</object-name>
+		<object-name>gunsight_gyro_knob</object-name>
 		<type>rotate</type>
 		<property>controls/armament/gunsight/pipper-accuracy-switch</property>
 		<factor>70</factor>
 		<offset-deg>0</offset-deg>
 		<center>
-			<x-m>-3.93578</x-m>
-			<y-m>-0.07046</y-m>
-			<z-m> 0.91165</z-m>
+			<x-m>-3.98895</x-m>
+			<y-m>-0.09091</y-m>
+			<z-m> 0.87915</z-m>
 		</center>
 		<axis>
 			<x>1</x>
@@ -229,7 +205,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>switchFixedNetPower</object-name>
+		<object-name>gunsight_fixed_net_switch</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -242,15 +218,15 @@
 	</animation>
 	
 	<animation>
-		<object-name>switchFixedNetPower</object-name>
+		<object-name>gunsight_fixed_net_switch</object-name>
 		<type>rotate</type>
 		<property>controls/armament/gunsight/fixed-net-power-switch</property>
 		<factor>50</factor>
 		<offset-deg>-25</offset-deg>
 		<center>
-			<x-m>-3.90404</x-m>
-			<y-m> 0.02677</y-m>
-			<z-m> 0.86791</z-m>
+			<x-m>-3.94470</x-m>
+			<y-m> 0.05806</y-m>
+			<z-m> 0.80344</z-m>
 		</center>
 		<axis>
 			<x>1</x>
@@ -261,7 +237,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>switchPipperPower</object-name>
+		<object-name>gunsight_pipper_switch</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -274,15 +250,15 @@
 	</animation>
 	
 	<animation>
-		<object-name>switchPipperPower</object-name>
+		<object-name>gunsight_pipper_switch</object-name>
 		<type>rotate</type>
 		<property>controls/armament/gunsight/pipper-power-switch</property>
 		<factor>50</factor>
 		<offset-deg>-25</offset-deg>
 		<center>
-			<x-m>-3.90346</x-m>
-			<y-m> 0.05298</y-m>
-			<z-m> 0.88300</z-m>
+			<x-m>-3.96103</x-m>
+			<y-m> 0.07166</y-m>
+			<z-m> 0.83470</z-m>
 		</center>
 		<axis>
 			<x>1</x>
@@ -300,7 +276,7 @@
 				
 	<animation>
 		<type>pick</type>
-		<object-name>knobTargetSize</object-name>
+		<object-name>gunsight_pipper_diameter_knob</object-name>
 		<action>
 			<button>0</button>
 			<repeatable>true</repeatable>
@@ -329,7 +305,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>knobPipperAngularCorrection</object-name>
+		<object-name>gunsight_pipper_angular_correction_knob</object-name>
 		<action>
 			<button>0</button>
 			<repeatable>true</repeatable>
@@ -358,7 +334,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>knobPipperBrightness</object-name>
+		<object-name>gunsight_pipper_illum_knob</object-name>
 		<action>
 			<button>0</button>
 			<repeatable>true</repeatable>
@@ -387,7 +363,7 @@
 
 	<animation>
 		<type>pick</type>
-		<object-name>knobFixedNetBrightness</object-name>
+		<object-name>gunsight_fixed_net_illum_knob</object-name>
 		<action>
 			<button>0</button>
 			<repeatable>true</repeatable>
