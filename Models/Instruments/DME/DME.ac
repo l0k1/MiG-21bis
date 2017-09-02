@@ -11,7 +11,7 @@ name "bevel"
 data 9
 Plane.040
 crease 85.0
-texture "bevel.png"
+texture "../bevel.png"
 texrep 1 1
 numvert 102
 0.00032 -0.03311 -0.00732

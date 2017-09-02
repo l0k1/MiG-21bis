@@ -12,7 +12,7 @@ data 14
 panel.mesh.004
 loc 0.0011277 0.0046268 -0.0045441
 crease 45.0
-texture "bevel.png"
+texture "../bevel.png"
 texrep 1 1
 numvert 133
 -0.00052 -0.03192 0.02089
@@ -1021,7 +1021,7 @@ data 12
 Cylinder.055
 loc 0.0043300 -0.0282490 0.0277844
 crease 35.0
-texture "accessories.png"
+texture "../accessories.png"
 texrep 1 1
 numvert 32
 0.00875 0.00000 -0.00509
