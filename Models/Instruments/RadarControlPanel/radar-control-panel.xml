@@ -15,27 +15,8 @@
 	<reset type="bool">0</reset>-->
 	
 	<animation>
-			<type>material</type>
-				<object-name>labelCont</object-name>
-				<object-name>labelIff</object-name>
-				<object-name>labelInter</object-name>
-				<object-name>labelLst</object-name>
-				<object-name>labelPas</object-name>
-				<object-name>labelReset</object-name>
-				<object-name>labelSelfTest</object-name>
-				<object-name>labelWeat</object-name>
-			<emission>
-				 <red>0.6</red>
-				 <green>0.3</green>
-				 <blue>0.3</blue>
-				<factor-prop>controls/lighting/instruments-norm</factor-prop>
-			</emission> 
-	</animation>
-	
-	
-	<animation>
         <type>material</type>
-        <object-name>ledCont</object-name>
+        <object-name>radarContLight</object-name>
 		<ambient>
 			<red>0.2</red>
 			<green>0.0</green>
@@ -51,7 +32,7 @@
 	
 	<animation>
         <type>material</type>
-        <object-name>ledInter</object-name>
+        <object-name>radarInterLight</object-name>
 		<ambient>
 			<red>0.2</red>
 			<green>0.0</green>
@@ -67,7 +48,7 @@
 	
 	<animation>
         <type>material</type>
-        <object-name>ledPas</object-name>
+        <object-name>radarPasLight</object-name>
 		<ambient>
 			<red>0.2</red>
 			<green>0.0</green>
@@ -83,7 +64,7 @@
 	
 	<animation>
         <type>material</type>
-        <object-name>ledWeat</object-name>
+        <object-name>radarWeatButtonLight</object-name>
 		<ambient>
 			<red>0.2</red>
 			<green>0.0</green>
@@ -99,7 +80,7 @@
 	
 	<animation>
         <type>material</type>
-        <object-name>ledIff</object-name>
+        <object-name>radarIffButtonLight</object-name>
 		<ambient>
 			<red>0.2</red>
 			<green>0.0</green>
@@ -115,7 +96,7 @@
 	
 	<animation>
         <type>material</type>
-        <object-name>ledLst</object-name>
+        <object-name>radarLSTLight</object-name>
 		<ambient>
 			<red>0.2</red>
 			<green>0.0</green>
@@ -131,7 +112,7 @@
 	
 	<animation>
         <type>material</type>
-        <object-name>ledSelfTest</object-name>
+        <object-name>radarSelfTestButtonLight</object-name>
 		<ambient>
 			<red>0.2</red>
 			<green>0.0</green>
@@ -147,7 +128,7 @@
 	
 	<animation>
         <type>material</type>
-        <object-name>ledReset</object-name>
+        <object-name>radarResetButtonLight</object-name>
 		<ambient>
 			<red>0.2</red>
 			<green>0.0</green>
@@ -166,8 +147,8 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>buttonCont</object-name>
-		<object-name>ledCont</object-name>
+		<object-name>radarContButton</object-name>
+		<object-name>radarContLight</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -181,8 +162,8 @@
 	
 	<animation>
 		<type>translate</type>
-		<object-name>buttonCont</object-name>
-		<object-name>ledCont</object-name>
+		<object-name>radarContButton</object-name>
+		<object-name>radarContLight</object-name>
 		<property>controls/radar/panel/continuous-jam</property>
 		<factor>0.004</factor>
 		<axis>
@@ -194,8 +175,8 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>buttonInter</object-name>
-		<object-name>ledInter</object-name>
+		<object-name>radarInterButton</object-name>
+		<object-name>radarInterLight</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -209,8 +190,8 @@
 	
 	<animation>
 		<type>translate</type>
-		<object-name>buttonInter</object-name>
-		<object-name>ledInter</object-name>
+		<object-name>radarInterButton</object-name>
+		<object-name>radarInterLight</object-name>
 		<property>controls/radar/panel/intermittent-jam</property>
 		<factor>0.004</factor>
 		<axis>
@@ -222,8 +203,8 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>buttonPas</object-name>
-		<object-name>ledPas</object-name>
+		<object-name>radarPasButton</object-name>
+		<object-name>radarPasLight</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -237,8 +218,8 @@
 	
 	<animation>
 		<type>translate</type>
-		<object-name>buttonPas</object-name>
-		<object-name>ledPas</object-name>
+		<object-name>radarPasButton</object-name>
+		<object-name>radarPasLight</object-name>
 		<property>controls/radar/panel/passive-jam</property>
 		<factor>0.004</factor>
 		<axis>
@@ -250,8 +231,8 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>buttonWeat</object-name>
-		<object-name>ledWeat</object-name>
+		<object-name>radarWeatButton</object-name>
+		<object-name>radarWeatButtonLight</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -265,8 +246,8 @@
 	
 	<animation>
 		<type>translate</type>
-		<object-name>buttonWeat</object-name>
-		<object-name>ledWeat</object-name>
+		<object-name>radarWeatButton</object-name>
+		<object-name>radarWeatButtonLight</object-name>
 		<property>controls/radar/panel/weather-filter</property>
 		<factor>0.004</factor>
 		<axis>
@@ -278,8 +259,8 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>buttonIff</object-name>
-		<object-name>ledIff</object-name>
+		<object-name>radarIffButton</object-name>
+		<object-name>radarIffButtonLight</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -293,8 +274,8 @@
 	
 	<animation>
 		<type>translate</type>
-		<object-name>buttonIff</object-name>
-		<object-name>ledIff</object-name>
+		<object-name>radarIffButton</object-name>
+		<object-name>radarIffButtonLight</object-name>
 		<property>controls/radar/panel/iff</property>
 		<factor>0.004</factor>
 		<axis>
@@ -306,8 +287,8 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>buttonLst</object-name>
-		<object-name>ledLst</object-name>
+		<object-name>radarLSTButton</object-name>
+		<object-name>radarLSTLight</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -327,8 +308,8 @@
 	
 	<animation>
 		<type>translate</type>
-		<object-name>buttonLst</object-name>
-		<object-name>ledLst</object-name>
+		<object-name>radarLSTButton</object-name>
+		<object-name>radarLSTLight</object-name>
 		<property>controls/radar/panel/lst-mode</property>
 		<factor>0.004</factor>
 		<axis>
@@ -340,8 +321,8 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>buttonSelfTest</object-name>
-		<object-name>ledSelfTest</object-name>
+		<object-name>radarSelfTestButton</object-name>
+		<object-name>radarSelfTestButtonLight</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -355,8 +336,8 @@
 	
 	<animation>
 		<type>translate</type>
-		<object-name>buttonSelfTest</object-name>
-		<object-name>ledSelfTest</object-name>
+		<object-name>radarSelfTestButton</object-name>
+		<object-name>radarSelfTestButtonLight</object-name>
 		<property>controls/radar/panel/selftest</property>
 		<factor>0.004</factor>
 		<axis>
@@ -368,8 +349,8 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>buttonReset</object-name>
-		<object-name>ledReset</object-name>
+		<object-name>radarResetButton</object-name>
+		<object-name>radarResetButtonLight</object-name>
 		<action>
 			<button>0</button>
 			<button>1</button>
@@ -383,8 +364,8 @@
 	
 	<animation>
 		<type>translate</type>
-		<object-name>buttonReset</object-name>
-		<object-name>ledReset</object-name>
+		<object-name>radarResetButton</object-name>
+		<object-name>radarResetButtonLight</object-name>
 		<property>controls/radar/panel/reset</property>
 		<factor>0.004</factor>
 		<axis>

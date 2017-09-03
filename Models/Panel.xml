@@ -319,7 +319,7 @@
 	
 	<model>
 		<name>Radar Control Panel</name>
-		<path>Aircraft/MiG-21bis/Models/Instruments/Cockpit/radar-control-panel.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Instruments/RadarControlPanel/radar-control-panel.xml</path>
 		<offsets>
             <x-m>-3.94986</x-m>
             <y-m> 0.13719</y-m>
