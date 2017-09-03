@@ -23,61 +23,41 @@
     <interpolation>
       <entry>
         <ind>32</ind>
-        <dep>0</dep>
-      </entry>
-      <entry>
-        <ind>212</ind>
-        <dep>17</dep>
-      </entry>
-      <entry>
-        <ind>392</ind>
-        <dep>34</dep>
+        <dep>-225</dep>
       </entry>
       <entry>
         <ind>572</ind>
-        <dep>51</dep>
+        <dep>-225</dep>
       </entry>
       <entry>
         <ind>752</ind>
-        <dep>68</dep>
+        <dep>-200</dep>
       </entry>
       <entry>
         <ind>932</ind>
-        <dep>85</dep>
+        <dep>-165</dep>
       </entry>
       <entry>
         <ind>1112</ind>
-        <dep>102</dep>
-      </entry>
-      <entry>
-        <ind>1202</ind>
-        <dep>133</dep>
+        <dep>-130</dep>
       </entry>
       <entry>
         <ind>1292</ind>
-        <dep>164</dep>
-      </entry>
-      <entry>
-        <ind>1382</ind>
-        <dep>195</dep>
+        <dep>-75</dep>
       </entry>
       <entry>
         <ind>1472</ind>
-        <dep>226</dep>
+        <dep>-20</dep>
       </entry>
       <entry>
         <ind>1652</ind>
-        <dep>243</dep>
-      </entry>
-      <entry>
-        <ind>1832</ind>
-        <dep>260</dep>
+        <dep>10</dep>
       </entry>
     </interpolation>
         <center>
-            <x-m>-0.0032</x-m>
-            <y-m> 0.0001</y-m>
-            <z-m>-0.0056</z-m>
+            <x-m>-0.00170</x-m>
+            <y-m> 0.00006</y-m>
+            <z-m>-0.00006</z-m>
         </center>
     <axis>
       <x>-1</x>
