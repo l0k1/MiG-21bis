@@ -91,6 +91,14 @@
 							<script>dialog.smokepod_dialog.open()</script>
 						</binding>
 					</item>
+					<item>
+						<label>Repack Chute</label>
+						<binding>
+							<command>property-assign</command>
+							<property>/controls/flight/chute_jettisoned</property>
+							<value>0</value>
+						</binding>
+					</item>
 				</menu>
 				<menu n="101">
 					<label>FDM Tuning</label>

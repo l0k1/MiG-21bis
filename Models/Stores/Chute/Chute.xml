@@ -6,10 +6,16 @@
         <type>select</type>
         <object-name>chute</object-name>
         <condition>
-            <equals>
-                <property>sim/multiplay/generic/float[6]</property>
-                <value>1</value>
-            </equals>
+            <and>
+                <equals>
+                    <property>sim/multiplay/generic/float[6]</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                    <property>controls/flight/chute_jettisoned</property>
+                    <value>0</value>
+                </equals>
+            </and>
         </condition>
     </animation>
 
