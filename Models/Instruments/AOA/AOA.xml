@@ -6,9 +6,8 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-        <object-name>needle</object-name>
-        <object-name>off-flag</object-name>
+        <object-name>alphaFace</object-name>
+        <object-name>alphaNeedle</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -19,20 +18,16 @@
     
 	<animation>
 		<type>rotate</type>
-		<object-name>needle</object-name>
+		<object-name>alphaNeedle</object-name>
 		<property>orientation/alpha-deg</property>
 		<interpolation>
-			<entry><ind>-10  </ind>	<dep> 360 </dep></entry>
-			<entry><ind>  0  </ind>	<dep> 270 </dep></entry>
-			<entry><ind> 10  </ind>	<dep> 180 </dep></entry>
-			<entry><ind> 20  </ind>	<dep> 90  </dep></entry>
-			<entry><ind> 30  </ind>	<dep> 0   </dep></entry>
+			<entry><ind>-10  </ind>	<dep> -210 </dep></entry>
+			<entry><ind>  0  </ind>	<dep> -155 </dep></entry>
+			<entry><ind> 10  </ind>	<dep> -100 </dep></entry>
+			<entry><ind> 20  </ind>	<dep> -45  </dep></entry>
+			<entry><ind> 30  </ind>	<dep> 10   </dep></entry>
+			<entry><ind> 35  </ind>	<dep> 37.75</dep></entry>
 		</interpolation>
-        <center>
-            <x-m>-0.0051</x-m>
-            <y-m> 0.0000</y-m>
-            <z-m>-0.0030</z-m>
-        </center>
 		<axis>
 			<x>-1</x>
 			<y>0</y>

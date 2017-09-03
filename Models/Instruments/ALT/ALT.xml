@@ -6,10 +6,10 @@
 
     <animation>
         <type>material</type>
-        <object-name>100-needle</object-name>
-        <object-name>1000-needle</object-name>
-        <object-name>10000-needle</object-name>
-        <object-name>face</object-name>
+        <object-name>altimeterNeedle100</object-name>
+        <object-name>altimeterNeedle1k</object-name>
+        <object-name>altimeterFace</object-name>
+        <object-name>pressureGuage</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -20,47 +20,145 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>100-needle</object-name>
+        <object-name>altimeterNeedle100</object-name>
         <property>instrumentation/altimeter/indicated-altitude-ft</property>
         <factor>-0.1097279</factor>
+        <center>
+            <x-m>-0.00136</x-m>
+            <y-m> 0.00581</y-m>
+            <z-m> 0.00591</z-m>
+        </center>
         <axis>
-            <x1-m>-0.0254</x1-m>
-            <y1-m> 0.0000</y1-m>
-            <z1-m>-0.0038</z1-m>
-            <x2-m>-0.0057</x2-m>
-            <y2-m> 0.0000</y2-m>
-            <z2-m>-0.0038</z2-m>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
         </axis>
     </animation>  
 
     <animation>
         <type>rotate</type>
-        <object-name>1000-needle</object-name>
+        <object-name>altimeterNeedle1k</object-name>
         <property>instrumentation/altimeter/indicated-altitude-ft</property>
-        <factor>-0.01097279</factor>
+        <factor>-0.00350199</factor>
+        <center>
+            <x-m>-0.00136</x-m>
+            <y-m> 0.00581</y-m>
+            <z-m> 0.00591</z-m>
+        </center>
         <axis>
-            <x1-m>-0.0254</x1-m>
-            <y1-m> 0.0000</y1-m>
-            <z1-m>-0.0038</z1-m>
-            <x2-m>-0.0057</x2-m>
-            <y2-m> 0.0000</y2-m>
-            <z2-m>-0.0038</z2-m>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
         </axis>
-    </animation>  
+    </animation>
 
-    <animation> <!--using for singles, not 10000 (which is pretty much useless for meters -->
+    <animation>
         <type>rotate</type>
-        <object-name>10000-needle</object-name>
-        <property>instrumentation/altimeter/indicated-altitude-ft</property>
-        <factor>-1.097279</factor>
+        <object-name>pressureGuage</object-name>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <interpolation>
+            <entry>
+                <ind> 940.0</ind>
+                <dep>   0.0</dep>
+            </entry>
+            <entry>
+                <ind>1050.0</ind>
+                <dep>-330.0</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m>-0.00136</x-m>
+            <y-m> 0.00581</y-m>
+            <z-m> 0.00591</z-m>
+        </center>
         <axis>
-            <x1-m>-0.0254</x1-m>
-            <y1-m> 0.0000</y1-m>
-            <z1-m>-0.0038</z1-m>
-            <x2-m>-0.0057</x2-m>
-            <y2-m> 0.0000</y2-m>
-            <z2-m>-0.0038</z2-m>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
         </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>altimeterKnob</object-name>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <interpolation>
+            <entry>
+                <ind> 940.0</ind>
+                <dep>   0.0</dep>
+            </entry>
+            <entry>
+                <ind>1050.0</ind>
+                <dep>-330.0</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m> 0.00433</x-m>
+            <y-m>-0.02778</y-m>
+            <z-m>-0.02825</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>altimeterKnob</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.05</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/altimeter/setting-hpa</property>
+                <step>0.25</step>
+                <min>940</min>
+                <max>1051</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.05</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/altimeter/setting-hpa</property>
+                <step>-0.25</step>
+                <min>940</min>
+                <max>1051</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/altimeter/setting-hpa</property>
+                <step>1.0</step>
+                <min>940</min>
+                <max>1051</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/altimeter/setting-hpa</property>
+                <step>-1.0</step>
+                <min>940</min>
+                <max>1051</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
     </animation>
     
 <!-- Label text -->

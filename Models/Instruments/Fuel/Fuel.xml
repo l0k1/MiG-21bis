@@ -6,8 +6,8 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-        <object-name>needle</object-name>
+        <object-name>fuelFace</object-name>
+        <object-name>fuelNeedle</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -18,14 +18,14 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>needle</object-name>
+        <object-name>fuelNeedle</object-name>
         <property>instrumentation/fuel/knob-level</property>
         <factor>0.029403976</factor> <!--ish-->
 		<offset-deg>-66</offset-deg>
         <center>
-            <x-m>0.02</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
+            <x-m>-0.00227</x-m>
+            <y-m>-0.00032</y-m>
+            <z-m> 0.01135</z-m>
         </center>
         <axis>
             <x>-1</x>
@@ -36,13 +36,13 @@
 	
 	<animation>
         <type>rotate</type>
-        <object-name>needle</object-name>
+        <object-name>fuelNeedle</object-name>
         <property>fdm/jsbsim/propulsion/engine/fuel-used-lbs</property>
         <factor>-0.029403976</factor> <!--ish-->
         <center>
-            <x-m>0.02</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
+            <x-m>-0.00227</x-m>
+            <y-m>-0.00032</y-m>
+            <z-m> 0.01135</z-m>
         </center>
         <axis>
             <x>-1</x>
@@ -53,7 +53,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>knob</object-name>
+		<object-name>fuelKnob</object-name>
 		<action>
 			<button>0</button>
 			<button>3</button>

@@ -6,8 +6,8 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-        <object-name>needle</object-name>
+        <object-name>gforceFace</object-name>
+        <object-name>gforceNeedle</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -18,14 +18,14 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>needle</object-name>
+        <object-name>gforceNeedle</object-name>
         <property>fdm/jsbsim/accelerations/Nz</property>
         <factor>22.5</factor>
-        <offset-deg>-22.5</offset-deg>
+        <offset-deg>90</offset-deg>
         <center>
-            <x-m>0.0011</x-m>
-            <y-m>0</y-m>
-            <z-m>0.0014</z-m>
+            <x-m>-0.00159</x-m>
+            <y-m>-0.00633</y-m>
+            <z-m> 0.00640</z-m>
         </center>
         <axis>
             <x>-1</x>

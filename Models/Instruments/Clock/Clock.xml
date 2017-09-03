@@ -5,10 +5,10 @@
 
     <animation>
         <type>material</type>
-        <object-name>face</object-name>
-        <object-name>sec</object-name>
-        <object-name>min</object-name>
-        <object-name>hour</object-name>
+        <object-name>clockFace</object-name>
+        <object-name>clockSec</object-name>
+        <object-name>clockMin</object-name>
+        <object-name>clockHour</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -19,9 +19,14 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>sec</object-name>
+        <object-name>clockSec</object-name>
         <property>/instrumentation/clock/indicated-sec</property>
         <factor>6</factor>
+        <center>
+            <x-m>-0.00082</x-m>
+            <y-m> 0.00065</y-m>
+            <z-m> 0.00345</z-m>
+        </center>
         <axis>
             <x>-1.0</x>
             <y>0</y>
@@ -31,9 +36,14 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>min</object-name>
+        <object-name>clockMin</object-name>
         <property>/instrumentation/clock/indicated-sec</property>
         <factor>0.1</factor>
+        <center>
+            <x-m>-0.00082</x-m>
+            <y-m> 0.00065</y-m>
+            <z-m> 0.00345</z-m>
+        </center>
         <axis>
             <x>-1.0</x>
             <y>0</y>
@@ -43,9 +53,14 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>hour</object-name>
+        <object-name>clockHour</object-name>
         <property>/instrumentation/clock/indicated-sec</property>
         <factor>0.008333</factor>
+        <center>
+            <x-m>-0.00082</x-m>
+            <y-m> 0.00065</y-m>
+            <z-m> 0.00345</z-m>
+        </center>
         <axis>
             <x>-1.0</x>
             <y>0</y>
