@@ -159,9 +159,10 @@
 				<!-- Crashed -->
 				<int n="7" alias="/sim/crashed" />
 
-				<int n="10" alias="controls/armament/trigger" />
+				<int n="10" alias="/controls/armament/trigger" />
 				<!-- Smokepod -->
 				<int n="19" type="int">0</int>
+				<float n="6" alias="/fdm/jsbsim/systems/chute/deploy" /> <!-- braking chute. -->
 				<float n="8" alias="/engines/engine[0]/augmentation" /> <!-- Reheat  -->
 				<float n="9" alias="/engines/engine[0]/nozzle-pos-norm" /> <!-- Reheat  -->
 				<float n="10" alias="/fdm/jsbsim/propulsion/clr" /> <!-- Reheat  -->
@@ -202,7 +203,7 @@
 		<flight>
 			<flaps>0</flaps>
 			<elevator-trim>0.00</elevator-trim>
-			<chute_jettisoned type="int">0</chute_jettisoned>z
+			<chute_jettisoned type="int">0</chute_jettisoned>
 		</flight>
 		<gear>
 			<brake-parking type="double">1</brake-parking>
@@ -487,6 +488,7 @@
 					<gear type="double">1</gear>
 					<flap type="double">1</flap>
 					<speedbrake type="double">1</speedbrake>
+					<chute type="double">1</chute>
 				</drag>
 				<side>
 					<beta type="double">1</beta>

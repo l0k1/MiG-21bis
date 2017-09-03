@@ -6,10 +6,10 @@
         <type>select</type>
         <object-name>chute</object-name>
         <condition>
-            <greater-than>
+            <equals>
                 <property>sim/multiplay/generic/float[6]</property>
                 <value>1</value>
-            </greater-than>
+            </equals>
         </condition>
     </animation>
 
@@ -29,7 +29,7 @@
         <type>rotate</type>
         <object-name>chute</object-name>
         <property>orientation/pitch-deg</property>
-        <factor>-0.17</factor>
+        <factor>-0.10</factor>
             <center>
             <x-m>0</x-m>
             <y-m>0</y-m>

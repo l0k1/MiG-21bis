@@ -4,16 +4,57 @@
    <modal>false</modal>
    <layout>vbox</layout>
    <width>450</width>
-   <height>515</height>
+   <height>565</height>
    
    <group>
    
       <text>
          <label>Tune dat drag</label>
          <x>10</x>
-         <y>490</y>
+         <y>540</y>
       </text>
       
+      <!-- slider 0 -->
+      
+      <text>
+         <x>10</x>
+         <y>520</y>
+         <label>Drag_chute</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>520</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/drag/chute</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>520</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/force/Drag_chute</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>495</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/drag/chute</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+
       <!-- slider 1 -->
       
       <text>

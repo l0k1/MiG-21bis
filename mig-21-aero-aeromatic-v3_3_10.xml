@@ -243,6 +243,19 @@
          </product>
     </function>
 
+    <function name="aero/force/Drag_chute">
+       <description>Drag due to chute</description>
+         <product>
+           <property>aero/qbar-psf</property>
+           <property>metrics/Sw-sqft</property>
+           <property>systems/chute/unfurl-norm</property>
+           <product>
+            <value> 0.2700 </value>
+            <property>tune/drag/chute</property>
+           </product>
+         </product>
+    </function>
+
   </axis>
 
   <axis name="SIDE">
