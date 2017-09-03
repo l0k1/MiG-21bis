@@ -22,6 +22,11 @@
         <object-name>clockSec</object-name>
         <property>/instrumentation/clock/indicated-sec</property>
         <factor>6</factor>
+        <center>
+            <x-m>-0.00082</x-m>
+            <y-m> 0.00065</y-m>
+            <z-m> 0.00345</z-m>
+        </center>
         <axis>
             <x>-1.0</x>
             <y>0</y>
@@ -34,6 +39,11 @@
         <object-name>clockMin</object-name>
         <property>/instrumentation/clock/indicated-sec</property>
         <factor>0.1</factor>
+        <center>
+            <x-m>-0.00082</x-m>
+            <y-m> 0.00065</y-m>
+            <z-m> 0.00345</z-m>
+        </center>
         <axis>
             <x>-1.0</x>
             <y>0</y>
@@ -46,6 +56,11 @@
         <object-name>clockHour</object-name>
         <property>/instrumentation/clock/indicated-sec</property>
         <factor>0.008333</factor>
+        <center>
+            <x-m>-0.00082</x-m>
+            <y-m> 0.00065</y-m>
+            <z-m> 0.00345</z-m>
+        </center>
         <axis>
             <x>-1.0</x>
             <y>0</y>
