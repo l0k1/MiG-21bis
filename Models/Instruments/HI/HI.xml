@@ -25,16 +25,21 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>compass</object-name>
+        <object-name>HIcompass</object-name>
 		<!--<object-name>courseFwd</object-name>
 		<object-name>courseBack</object-name>-->
-        <property>/orientation/heading-deg</property>
+        <property>/orientation/heading-magnetic-deg</property>
         <factor>1</factor>
         <axis>
             <x>1</x>
             <y>0</y>
             <z>0</z>
         </axis>
+        <center>
+        	<x-m>-0.00303</x-m>
+        	<y-m>-0.00296</y-m>
+        	<z-m> 0.00437</z-m>
+        </center>
     </animation>
 
 	<!--<animation>
