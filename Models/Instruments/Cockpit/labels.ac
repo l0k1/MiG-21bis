@@ -3,7 +3,7 @@ MATERIAL "DefaultWhite" rgb 1.0000 1.0000 1.0000  amb 0.2000 0.2000 0.2000  emis
 MATERIAL "labelTestMat" rgb 1.0000 1.0000 1.0000  amb 0.4054 0.4054 0.4054  emis 0.0000 0.0000 0.0000  spec 0.2514 0.2514 0.2514  shi 10 trans 0.0000
 OBJECT world
 name "Blender_exporter_v2.11__labels.ac"
-kids 105
+kids 103
 OBJECT poly
 name "label1"
 data 8
@@ -323,7 +323,7 @@ OBJECT poly
 name "labelAngle"
 data 8
 Cube.073
-loc 0.0587642 0.0970115 -0.0967384
+loc 0.0613378 0.0970115 -0.0967384
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -433,7 +433,7 @@ OBJECT poly
 name "labelCage"
 data 8
 Cube.080
-loc 0.0041227 -0.2491128 -0.2532157
+loc 0.0066339 -0.2491128 -0.2532157
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1720,118 +1720,10 @@ refs 4
 0 0.907489 0.094507
 kids 0
 OBJECT poly
-name "labelIRback.018"
-data 8
-Cube.071
-loc 0.0574236 0.0966531 0.0200760
-crease 35.0
-texture "labels.png"
-texrep 1 1
-numvert 8
-0.00327 -0.00599 0.00960
--0.00015 0.00682 0.00960
-0.00327 -0.00599 -0.00959
--0.00015 0.00682 -0.00959
--0.00136 -0.00722 0.00959
--0.00478 0.00558 0.00959
--0.00136 -0.00722 -0.00960
--0.00478 0.00558 -0.00960
-numsurf 5
-SURF 0X0
-mat 1
-refs 4
-3 0.947558 0.082780
-1 0.909763 0.079857
-0 0.907489 0.094507
-2 0.945284 0.097431
-SURF 0X0
-mat 1
-refs 4
-3 0.947558 0.082780
-7 0.968506 0.065039
-5 0.883012 0.065039
-1 0.909763 0.079857
-SURF 0X0
-mat 1
-refs 4
-2 0.945284 0.097431
-6 0.972035 0.112249
-7 0.968506 0.065039
-3 0.947558 0.082780
-SURF 0X0
-mat 1
-refs 4
-0 0.907489 0.094507
-4 0.886541 0.112249
-6 0.972035 0.112249
-2 0.945284 0.097431
-SURF 0X0
-mat 1
-refs 4
-1 0.909763 0.079857
-5 0.883012 0.065039
-4 0.886541 0.112249
-0 0.907489 0.094507
-kids 0
-OBJECT poly
-name "labelIRback.019"
-data 8
-Cube.072
-loc 0.0574236 0.0966531 -0.0967273
-crease 35.0
-texture "labels.png"
-texrep 1 1
-numvert 8
-0.00327 -0.00599 0.00960
--0.00015 0.00682 0.00960
-0.00327 -0.00599 -0.00959
--0.00015 0.00682 -0.00959
--0.00136 -0.00722 0.00959
--0.00478 0.00558 0.00959
--0.00136 -0.00722 -0.00960
--0.00478 0.00558 -0.00960
-numsurf 5
-SURF 0X0
-mat 1
-refs 4
-3 0.947558 0.082780
-1 0.909763 0.079857
-0 0.907489 0.094507
-2 0.945284 0.097431
-SURF 0X0
-mat 1
-refs 4
-3 0.947558 0.082780
-7 0.968506 0.065039
-5 0.883012 0.065039
-1 0.909763 0.079857
-SURF 0X0
-mat 1
-refs 4
-2 0.945284 0.097431
-6 0.972035 0.112249
-7 0.968506 0.065039
-3 0.947558 0.082780
-SURF 0X0
-mat 1
-refs 4
-0 0.907489 0.094507
-4 0.886541 0.112249
-6 0.972035 0.112249
-2 0.945284 0.097431
-SURF 0X0
-mat 1
-refs 4
-1 0.909763 0.079857
-5 0.883012 0.065039
-4 0.886541 0.112249
-0 0.907489 0.094507
-kids 0
-OBJECT poly
 name "labelIRback.020"
 data 8
 Cube.079
-loc -0.0104961 -0.1239597 -0.2848679
+loc -0.0075268 -0.1239597 -0.2848679
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1885,7 +1777,7 @@ OBJECT poly
 name "labelIRback.021"
 data 8
 Cube.081
-loc -0.0129330 -0.2494115 -0.2569312
+loc -0.0104218 -0.2494115 -0.2569312
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3175,7 +3067,7 @@ OBJECT poly
 name "labelOil"
 data 8
 Cube.078
-loc 0.0064690 -0.1253015 -0.2809727
+loc 0.0094383 -0.1253015 -0.2809727
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3761,8 +3653,8 @@ refs 4
 kids 0
 OBJECT poly
 name "labelSelector"
-data 6
-Circle
+data 10
+Circle.012
 loc 0.0059109 0.0555778 0.2252758
 crease 35.0
 texture "labels.png"
@@ -3933,7 +3825,7 @@ kids 0
 OBJECT poly
 name "labelSelectorBack"
 data 10
-Circle.002
+Circle.013
 loc 0.0056438 0.0555778 0.2252711
 crease 35.0
 texture "labels.png"
@@ -4733,7 +4625,7 @@ OBJECT poly
 name "labelTargetSize"
 data 8
 Cube.070
-loc 0.0587642 0.0970115 0.0200649
+loc 0.0613378 0.0970115 0.0200649
 crease 35.0
 texture "labels.png"
 texrep 1 1
