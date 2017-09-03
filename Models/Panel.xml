@@ -488,7 +488,7 @@
 
     <model>
         <name>Radar Degauss and Contrast Buttons</name>
-        <path>Aircraft/MiG-21bis/Models/Instruments/radar/radarDeguass.xml</path>
+        <path>Aircraft/MiG-21bis/Models/Instruments/Radar/radarDegauss.xml</path>
         <offsets>
             <heading-deg></heading-deg>
             <x-m>-3.96097</x-m>
