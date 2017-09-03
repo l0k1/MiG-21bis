@@ -820,12 +820,9 @@
 
 	<animation>
 		<type>rotate</type>
-		<object-name>canopy_glass</object-name>
+		<object-name>canopyGlass</object-name>
 		<object-name>canopy</object-name>
-		<object-name>bcanopy_glass</object-name>
-		<object-name>bcanopy</object-name>
-		<object-name>arch</object-name>
-		<object-name>barch</object-name>
+        <object-name>canopyInside</object-name>
 		<property>canopy/position-norm</property>
 		<factor>80.00</factor>
 		<axis>
