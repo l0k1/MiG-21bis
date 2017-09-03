@@ -16,7 +16,7 @@
         </emission> 
     </animation>
     
-	<animation>
+	<!--<animation>
 		<type>rotate</type>
 		<object-name>hydraulicNeedle</object-name>
 		<property>/engines/engine/fuel-flow_pph</property>
@@ -31,7 +31,7 @@
 			<y>0</y>
 			<z>0</z>
 		</axis>
-	</animation>
+	</animation>-->
 	
 <!-- Label text -->
 
