@@ -17,7 +17,7 @@
 <turbine_engine name="Tumansky R-25-300">
   <milthrust>    9050.0 </milthrust> <!-- max milthrust, 4100 kgf per page 5, line (a) [2] -->
   <maxthrust>   15100.0 </maxthrust> <!-- max thrust without second reheat, 6850 kgf per page 5, line (a) [2] -->
-  <bypassratio>     9.0 </bypassratio> <!-- see note [1] above -->
+  <bypassratio>     6.0 </bypassratio> <!-- see note [1] above -->
   <tsfc>            0.96</tsfc> <!-- source - wikipedia :( -->
   <atsfc>           2.25</atsfc> <!-- source - wikipedia :( this is without second reheat -->
   <bleed>           0.03</bleed>

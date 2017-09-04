@@ -11,7 +11,7 @@
 <turbine_engine name="Tumansky R-13-300">
   <milthrust>       8970 </milthrust>   <!-- source: http://www.mig-21.de/english/technicaldataengines.htm -->
   <maxthrust>      14320 </maxthrust>   <!-- source: http://www.mig-21.de/english/technicaldataengines.htm -->
-  <bypassratio>     11.5 </bypassratio> <!-- see note [1] above -->
+  <bypassratio>     8.0 </bypassratio> <!-- see note [1] above -->
   <tsfc>            0.93 </tsfc>        <!-- source: wikipedia :( -->
   <atsfc>           2.09 </atsfc>       <!-- source: wikipedia :( -->
   <bleed>           0.03 </bleed>
