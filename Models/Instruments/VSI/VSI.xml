@@ -62,7 +62,7 @@
 	
 	<animation>
 		<type>translate</type>
-		<object-name>ball</object-name>
+		<object-name>vspeedBall</object-name>
 		<property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
 		<interpolation>
             <entry><ind>3.0</ind><dep>0.0115</dep></entry>

@@ -592,18 +592,14 @@
 		<type>shader</type>
 		<shader>chrome</shader>
 		<texture>Aircraft/Generic/Effects/glass_shader.png</texture>
-		<object-name>glass</object-name>
-		<object-name>canopy_glass</object-name>
-		<object-name>bglass</object-name>
-		<object-name>bcanopy_glass</object-name>
+		<object-name>canopyFrontGlass</object-name>
+        <object-name>canopyGlass</object-name>
 	</animation>
 
 	<animation>
 		<type>noshadow</type>
-		<object-name>glass</object-name>
-		<object-name>canopy_glass</object-name>
-		<object-name>bglass</object-name>
-		<object-name>bcanopy_glass</object-name>
+		<object-name>canopyFrontGlass</object-name>
+        <object-name>canopyGlass</object-name>
 	</animation>
 
     <!-- Parts invisible from internally -->
@@ -758,55 +754,6 @@
 		 </axis>
 	 </animation>
 
-         <animation>
-                 <type>select</type>
-                 <object-name>canopy_glass</object-name>
-                 <object-name>canopy</object-name>
-                 <object-name>arch</object-name>
-                 <object-name>glass</object-name>
-                 <object-name>front-canopy</object-name>
-                 <object-name>front-arch</object-name>
-                 <condition>
-			<not>
-                             <equals>
-                                 <property>sim/model/livery/name</property>
-                                 <value>MiG-21-93</value>
-                             </equals>
-			</not>
-                 </condition>
-         </animation>
-
-         <animation>
-                 <type>select</type>
-                 <object-name>bcanopy_glass</object-name>
-                 <object-name>bcanopy</object-name>
-                 <object-name>barch</object-name>
-                 <object-name>bglass</object-name>
-                 <object-name>bfront-canopy</object-name>
-                 <object-name>bfront-arch</object-name>
-                 <condition>
-                             <equals>
-                                 <property>sim/model/livery/name</property>
-                                 <value>MiG-21-93</value>
-                             </equals>
-                 </condition>
-         </animation>
-
-	 <animation>
-		 <type>select</type>
-		 <object-name>canopy_glass</object-name>
-		 <object-name>canopy</object-name>
-		 <object-name>bcanopy_glass</object-name>
-		 <object-name>bcanopy</object-name>
-		 <object-name>arch</object-name>
-		 <object-name>barch</object-name>
-		 <condition>
-			 <not>
-				 <property>controls/eject</property>
-			 </not>
-		 </condition>
-	 </animation>
-
 	<animation>
 		<type>select</type>
 		<object-name>heat</object-name>
@@ -820,12 +767,9 @@
 
 	<animation>
 		<type>rotate</type>
-		<object-name>canopy_glass</object-name>
-		<object-name>canopy</object-name>
-		<object-name>bcanopy_glass</object-name>
-		<object-name>bcanopy</object-name>
-		<object-name>arch</object-name>
-		<object-name>barch</object-name>
+		<object-name>canopyGlass</object-name>
+        <object-name>canopy</object-name>
+        <object-name>canopyInside</object-name>
 		<property>canopy/position-norm</property>
 		<factor>80.00</factor>
 		<axis>
