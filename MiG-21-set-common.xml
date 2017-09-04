@@ -1,0 +1,590 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<sim>
+
+		<submodels>
+			<serviceable type="bool">true</serviceable>
+			<path>Aircraft/MiG-21bis/Submodels.xml</path>
+		</submodels>
+
+		<!-- System Settings -->
+
+		<systems>
+			<autopilot>
+				<path>Aircraft/MiG-21bis/Systems/Autopilot.xml</path>
+			</autopilot>
+		</systems>
+
+		<sound>
+			<path>Aircraft/MiG-21bis/Sounds/Sound.xml</path>
+		</sound>
+
+		<virtual-cockpit archive="y">true</virtual-cockpit>
+		<allow-toggle-cockpit archive="y">false</allow-toggle-cockpit>
+
+		<panel>
+			<visibility archive="y">false</visibility>
+		</panel>
+
+		<flaps>
+			<setting>0.000</setting>
+			<setting>0.500</setting>
+			<setting>1.000</setting>
+		</flaps>
+
+		<!-- View Settings -->
+
+		<chase-distance-m>-20</chase-distance-m>
+
+		<!-- Menu -->
+
+		<menubar>
+			<default>
+				<menu n="100">
+					<label>MiG-21bis</label>
+					<enabled type="bool">true</enabled>
+					<item>
+						<label>Select Livery</label>
+						<binding>
+							<command>nasal</command>
+							<script>aircraft.livery.dialog.toggle()</script>
+						</binding>
+					</item>
+					<item>
+						<label>VOR/ILS Radio</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.radio_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Smokepod Color</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.smokepod_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Repack Chute</label>
+						<binding>
+							<command>property-assign</command>
+							<property>/controls/flight/chute_jettisoned</property>
+							<value>0</value>
+						</binding>
+					</item>
+				</menu>
+				<menu n="101">
+					<label>FDM Tuning</label>
+					<item>
+						<label>Tune Drag</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_drag_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Tune Lift</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_lift_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Tune Pitch</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_pitch_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Tune Roll</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_roll_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Tune Side</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_side_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Tune Yaw</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.tuner_yaw_dialog.open()</script>
+						</binding>
+					</item>
+				</menu>
+			</default>
+		</menubar>
+
+		<!-- Help -->
+
+		<help include="Systems/help.xml" />
+
+		<!-- Multiplayer -->
+
+		<multiplay>
+			<generic>
+				<!-- Nav lights on -->
+				<int n="0" alias="/controls/lighting/nav-lights-switch" />
+				<!-- Beacon on -->
+				<int n="1" alias="/controls/lighting/beacon-switch" />
+				<!-- Landing lights on -->
+				<int n="2" alias="/controls/lighting/landing-lights-switch" />
+				<!-- Taxi light on -->
+				<int n="3" alias="/controls/lighting/taxi-light-switch" />
+				<!-- Crashed -->
+				<int n="7" alias="/sim/crashed" />
+
+				<int n="10" alias="/controls/armament/trigger" />
+				<!-- Smokepod -->
+				<int n="19" type="int">0</int>
+				<float n="6" alias="/fdm/jsbsim/systems/chute/deploy" /> <!-- braking chute. -->
+				<float n="8" alias="/engines/engine[0]/augmentation" /> <!-- Reheat  -->
+				<float n="9" alias="/engines/engine[0]/nozzle-pos-norm" /> <!-- Reheat  -->
+				<float n="10" alias="/fdm/jsbsim/propulsion/clr" /> <!-- Reheat  -->
+				<string n="9" type="string"/>
+		    <string n="11" alias="/payload/weight[0]/selected"/>
+        <string n="12" alias="/payload/weight[1]/selected"/>
+        <string n="13" alias="/payload/weight[2]/selected"/>
+        <string n="14" alias="/payload/weight[3]/selected"/>
+        <string n="15" alias="/payload/weight[4]/selected"/>
+			</generic>
+		</multiplay>
+
+	</sim>
+	
+	<consumables>
+		<fuel>
+			<tank n="0"><name>Dorsal</name></tank>
+			<tank n="1"><name>Front</name></tank>
+			<tank n="2"><name>Main</name></tank>
+			<tank n="3"><name>Aft 1</name></tank>
+			<tank n="4"><name>Aft 2</name></tank>
+			<tank n="5"><name>Aft 3</name></tank>
+			<tank n="6"><name>Saddle</name></tank>
+			<tank n="7"><name>Left Wing Front</name></tank>
+			<tank n="8"><name>Left Wing Rear</name></tank>
+			<tank n="9"><name>Right Wing Front</name></tank>
+			<tank n="10"><name>Right Wing Rear</name></tank>
+			<tank n="11"><name>Ventral Drop Tank</name></tank>
+			<tank n="12"><name>Left Drop Tank</name></tank>
+			<tank n="13"><name>Right Drop Tank</name></tank>
+			<tank n="14"><name>Accumulator</name></tank>
+		</fuel>
+	</consumables>
+
+	<!-- Misc Settings -->
+	
+	<controls>
+		<flight>
+			<flaps>0</flaps>
+			<elevator-trim>0.00</elevator-trim>
+			<chute_jettisoned type="int">0</chute_jettisoned>
+		</flight>
+		<gear>
+			<brake-parking type="double">1</brake-parking>
+		</gear>
+		<lighting>
+			<instruments-norm>0.3</instruments-norm>
+		</lighting>
+		<armament>
+			<panel>
+				<!--switches, knobbins and buttons-->
+				<reload n="0" type="bool">false</reload>
+				<reload n="1" type="bool">false</reload>
+				<reload n="2" type="bool">false</reload>
+				<air-gnd-switch type="int">1</air-gnd-switch>
+				<ir-sar-switch type="int">1</ir-sar-switch>
+				<pylon-knob type="int">0</pylon-knob>
+				<!-- lights -->
+				<gun-ready type="bool">1</gun-ready>
+			</panel>
+			<gunsight>
+				<!--fixed net options-->
+				<ghosting-x type="double">7000</ghosting-x>
+				<ghosting-y type="double">7000</ghosting-y>
+				<scaling type="double">0</scaling>
+				<elevation type="int">-158</elevation>
+				<windage type="int">0</windage>
+				<!--fixed net fade value is set under gunsights below-->
+				<!--fixed net/pipper options-->
+				<red type="int">239</red>
+				<green type="int">197</green>
+				<blue type="int">31</blue>
+				<thickness type="int">6</thickness>
+				<font-size type="int">60</font-size>
+				<!--gunsight switches and knobbins-->
+				<gun-missile-switch type="int">0</gun-missile-switch>
+				<pipper-mode-select-switch type="int">0</pipper-mode-select-switch>
+				<auto-man-switch type="int">0</auto-man-switch>
+				<pipper-accuracy-switch type="int">0</pipper-accuracy-switch>
+				<pipper-power-switch type="int">0</pipper-power-switch>
+				<target-size-knob type="float">0</target-size-knob>
+				<pipper-angular-correction-knob type="int">0</pipper-angular-correction-knob> <!-- 0 for gun -->
+				<pipper-brightness-knob type="float">1</pipper-brightness-knob>
+				<pipper-scale type="float">5</pipper-scale>
+				<fixed-net-brightness-knob type="float">1</fixed-net-brightness-knob>
+			</gunsight>
+			<missile-release type="int" alias="/fdm/jsbsim/systems/armament/release">0</missile-release>
+			           <trigger type="bool">false</trigger>
+            <station n="0"> <!-- left outer wing -->
+                <offsets>
+                    <x-m type="double">  1.33</x-m>
+                    <y-m type="double"> -2.73</y-m>
+                    <z-m type="double"> -0.51</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+            </station>
+            <station n="1"> <!-- left inner wing -->
+                <offsets>
+                    <x-m type="double"> -0.35</x-m>
+                    <y-m type="double"> -2.11</y-m>
+                    <z-m type="double"> -0.20</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+            </station>
+            <station n="2"><!--center-->
+                <offsets>
+                    <x-m type="double">  -0.3</x-m>
+                    <y-m type="double">  0.00</y-m>
+                    <z-m type="double"> -0.83</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+                <trigger-m70 type="bool">false</trigger-m70>
+            </station>
+            <station n="3"> <!-- right inner wing -->
+                <offsets>
+                    <x-m type="double"> -0.35</x-m>
+                    <y-m type="double">  2.11</y-m>
+                    <z-m type="double"> -0.20</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+                <trigger-m70 type="bool">false</trigger-m70>
+            </station>
+            <station n="4"><!-- right outer wing -->
+                <offsets>
+                    <x-m type="double">  1.33</x-m>
+                    <y-m type="double"> 2.73</y-m>
+                    <z-m type="double"> -0.51</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+            </station>
+		</armament>
+		<radar>
+			<panel>
+				<continuous-jam type="bool">0</continuous-jam>
+				<intermittent-jam type="bool">0</intermittent-jam>
+				<passive-jam type="bool">0</passive-jam>
+				<weather-filter type="bool">0</weather-filter>
+				<iff type="bool">0</iff>
+				<lst-mode type="bool">0</lst-mode>
+				<selftest type="bool">0</selftest>
+				<reset type="bool">0</reset>
+			</panel>
+			<power-panel>
+				<run>0</run>
+				<low-alt>0</low-alt>
+				<fixed-beam>0</fixed-beam>
+			</power-panel>
+			<lock-bars-scale type="int">100</lock-bars-scale>
+			<lock-bars-pos type="int">0</lock-bars-pos>
+			<mode type="string">normal</mode>
+		</radar>
+		<smokepod>
+			<color type="string">white</color>
+			<trigger type="bool">0</trigger>
+		</smokepod>
+	</controls>
+
+	<engines>
+		<engine n="0">
+			<running>true</running>
+		</engine>
+	</engines>
+
+	<instrumentation>
+		<nav n="0">
+			<radials>
+				<selected-deg>0</selected-deg>
+			</radials>
+		</nav>
+		<marker-beacon>
+			<volume type="double" archive="y">0.0</volume>
+		</marker-beacon>
+		<radar>
+			<range type="int" archive="y">20</range>
+			<range-factor type="double" archive="n">0.001888</range-factor>
+			<minimized type="bool" archive="y">false</minimized>
+			<selected type="int">3</selected>
+			<enabled type="bool">true</enabled>
+			<az-field type="double">120</az-field>
+			<range type="double">150</range>
+			<range-selected type="double">50</range-selected>
+			<radar2-range type="double">150</radar2-range>
+			<display-rdr type="bool">true</display-rdr>
+			<radar-standby type="int">3</radar-standby>
+			<mode>
+				<rws type="bool">true</rws>
+				<tws-auto type="bool">false</tws-auto>
+			</mode>
+			<serviceable type="bool">true</serviceable>
+			<look-through-terrain type="bool">false</look-through-terrain>
+			<doppler-enabled type="bool">true</doppler-enabled>
+			<min-doppler-speed-kt type="int">80</min-doppler-speed-kt>
+		</radar>
+		<rdmi-mode type="int">0</rdmi-mode> <!-- 0=TAC, 1=VOR, 2=ADF -->
+		<radar2>
+			<sweep-width-m type="double">0.0844</sweep-width-m>
+			<range-width-m type="double">0.0846</range-width-m>
+			<radius-ppi-display-m type="double">0.0846</radius-ppi-display-m>
+			<hud-eye-dist-m type="double">0.766</hud-eye-dist-m>
+			<hud-radius-m type="double">0.071</hud-radius-m>
+			<hud-vertical-offset-m type="double">-0.025</hud-vertical-offset-m>
+		</radar2>
+		<rwr>
+			<display-lighting-intens type="double">0.4</display-lighting-intens>
+			<symbology-lighting-intens type="double">1</symbology-lighting-intens>
+		</rwr>
+		<gunsight>
+			<min-launch-range type="float">0</min-launch-range>
+			<max-launch-range type="float">0</max-launch-range>
+			<range-to-target type="float">0</range-to-target>
+		</gunsight>
+		<fuel>
+			<knob-level type="float">0</knob-level>
+		</fuel>
+		<vor-radio>
+			<selection type="int" archive="y">0</selection>
+			<preset type="double" n="0" archive="y">101.00</preset>
+			<preset type="double" n="1" archive="y">101.00</preset>
+			<preset type="double" n="2" archive="y">101.00</preset>
+			<preset type="double" n="3" archive="y">101.00</preset>
+			<preset type="double" n="4" archive="y">101.00</preset>
+			<preset type="double" n="5" archive="y">101.00</preset>
+			<preset type="double" n="6" archive="y">101.00</preset>
+			<preset type="double" n="7" archive="y">101.00</preset>
+			<preset type="double" n="8" archive="y">101.00</preset>
+			<preset type="double" n="9" archive="y">101.00</preset>
+			<preset type="double" n="10" archive="y">101.00</preset>
+			<preset type="double" n="11" archive="y">101.00</preset>
+			<preset type="double" n="12" archive="y">101.00</preset>
+			<preset type="double" n="13" archive="y">101.00</preset>
+			<preset type="double" n="14" archive="y">101.00</preset>
+			<preset type="double" n="15" archive="y">101.00</preset>
+			<preset type="double" n="16" archive="y">101.00</preset>
+			<preset type="double" n="17" archive="y">101.00</preset>
+			<preset type="double" n="18" archive="y">101.00</preset>
+			<preset type="double" n="19" archive="y">101.00</preset>
+		</vor-radio>
+		<ils-radio>
+			<selection type="int" archive="y">0</selection>
+			<preset type="double" n="0" archive="y">101.00</preset>
+			<preset type="double" n="1" archive="y">101.00</preset>
+			<preset type="double" n="2" archive="y">101.00</preset>
+			<preset type="double" n="3" archive="y">101.00</preset>
+			<preset type="double" n="4" archive="y">101.00</preset>
+			<preset type="double" n="5" archive="y">101.00</preset>
+			<preset type="double" n="6" archive="y">101.00</preset>
+			<preset type="double" n="7" archive="y">101.00</preset>
+			<preset type="double" n="8" archive="y">101.00</preset>
+			<preset type="double" n="9" archive="y">101.00</preset>
+			<preset type="double" n="10" archive="y">101.00</preset>
+			<preset type="double" n="11" archive="y">101.00</preset>
+			<preset type="double" n="12" archive="y">101.00</preset>
+			<preset type="double" n="13" archive="y">101.00</preset>
+			<preset type="double" n="14" archive="y">101.00</preset>
+			<preset type="double" n="15" archive="y">101.00</preset>
+			<preset type="double" n="16" archive="y">101.00</preset>
+			<preset type="double" n="17" archive="y">101.00</preset>
+			<preset type="double" n="18" archive="y">101.00</preset>
+			<preset type="double" n="19" archive="y">101.00</preset>
+		</ils-radio>
+	</instrumentation>
+
+	<fdm>
+		<jsbsim>
+			<simulation>
+				<sim-time-sec>0</sim-time-sec>
+			</simulation>
+			<systems>
+				<chute>
+					<deploy type="double">0</deploy>
+				</chute>
+				<dump>
+					<armed type="double">0</armed>
+				</dump>
+				<NWS>
+					<engaged type="double">0</engaged>
+				</NWS>
+				<canopy>
+					<command type="double">0</command>
+					<position type="double">0</position>
+				</canopy>
+				<armament>
+					<station1>
+						<selected type="double">0</selected>
+					</station1>
+					<station2>
+						<selected type="double">0</selected>
+					</station2>
+					<station3>
+						<selected type="double">0</selected>
+					</station3>
+					<station4>
+						<selected type="double">0</selected>
+					</station4>
+					<station5>
+						<selected type="double">0</selected>
+					</station5>
+				</armament>
+			</systems>
+			<propulsion>
+				<clr type="int">0</clr>
+			</propulsion>
+			<fcs>
+				<pitch-gearing-enable>1</pitch-gearing-enable>
+				<roll-damping-enable>1</roll-damping-enable>
+			</fcs>
+			<!-- for in-flight FDM tuning -->
+			<tune>
+				<lift>
+					<alpha type="double">1</alpha>
+					<pitch_rate type="double">1</pitch_rate>
+					<alpha_rate type="double">1</alpha_rate>
+					<elevator type="double">1</elevator>
+					<flap type="double">1</flap>
+				</lift>
+				<drag>
+					<minimum type="double">1</minimum>
+					<alpha type="double">1</alpha>
+					<induced type="double">1</induced>
+					<mach type="double">1</mach>
+					<beta type="double">1</beta>
+					<elevator type="double">1</elevator>
+					<gear type="double">1</gear>
+					<flap type="double">1</flap>
+					<speedbrake type="double">1</speedbrake>
+					<chute type="double">1</chute>
+				</drag>
+				<side>
+					<beta type="double">1</beta>
+					<roll_rate type="double">1</roll_rate>
+					<yaw_rate type="double">1</yaw_rate>
+					<rudder type="double">1</rudder>
+				</side>
+				<pitch>
+					<alpha type="double">1</alpha>
+					<elevator type="double">1</elevator>
+					<damp type="double">1</damp>
+					<alphadot type="double">1</alphadot>
+				</pitch>
+				<roll>
+					<beta type="double">1</beta>
+					<damp type="double">1</damp>
+					<yaw type="double">1</yaw>
+					<aileron type="double">1</aileron>
+					<rudder type="double">1</rudder>
+				</roll>
+				<yaw>
+					<alpha type="double">1</alpha>
+					<beta type="double">1</beta>
+					<roll_rate type="double">1</roll_rate>
+					<damp type="double">1</damp>
+					<rudder type="double">1</rudder>
+					<aileron type="double">1</aileron>
+				</yaw>
+			</tune>
+		</jsbsim>
+	</fdm>
+
+	<!-- Keyboard Shortcuts -->
+	<input>
+		<keyboard include="Systems/keyboard.xml" />
+	</input>
+
+	<!-- Effects -->
+	<gear>
+		<gear n="0">
+			<tyre-smoke type="int">0</tyre-smoke>
+			<sprayspeed-ms type="double">0</sprayspeed-ms>
+			<spray-density type="double">0</spray-density>
+			<caster-angle-deg-damped type="double">0</caster-angle-deg-damped>
+		</gear>
+		<gear n="1">
+			<tyre-smoke type="int">0</tyre-smoke>
+			<sprayspeed-ms type="double">0</sprayspeed-ms>
+			<spray-density type="double">0</spray-density>
+		</gear>
+		<gear n="2">
+			<tyre-smoke type="int">0</tyre-smoke>
+			<sprayspeed-ms type="double">0</sprayspeed-ms>
+			<spray-density type="double">0</spray-density>
+		</gear>
+	</gear>
+
+	<!-- Nasal Scripts -->
+	<nasal>
+		<mig21>
+			<file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>
+		</mig21>
+		<MiG-21bis>
+			<file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>
+		</MiG-21bis>
+		<lights>
+	    		<file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>
+	   	</lights>
+		<Eject>
+			<file>Aircraft/MiG-21bis/Nasal/eject.nas</file>
+		</Eject>
+		<tyresmoke>
+			<file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>
+		</tyresmoke>
+		<payloads>
+			<file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>
+		</payloads>
+		<radar_logic>
+			<file>Aircraft/MiG-21bis/Nasal/radar-logic.nas</file>
+		</radar_logic>
+		<radar_canvas>
+			<file>Aircraft/MiG-21bis/Nasal/radar-canvas.nas</file>
+		</radar_canvas>
+		<gunsight_canvas>
+			<file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>
+		</gunsight_canvas>
+		<blackout>
+			<file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>
+		</blackout>
+		<armament>
+			<file>Aircraft/MiG-21bis/Nasal/guided-missiles.nas</file>
+		</armament>
+		<damage>
+			<file>Aircraft/MiG-21bis/Nasal/damage.nas</file>
+		</damage>
+		<crashandstress>
+			<file>Aircraft/MiG-21bis/Nasal/crash-and-stress.nas</file>    
+		</crashandstress>
+		<rcs>
+			<file>Aircraft/MiG-21bis/Nasal/rcs.nas</file>
+		</rcs>
+    	<vector>
+    		<file>Aircraft/MiG-21bis/Nasal/vector.nas</file>
+    	</vector>
+		<!--<headmove>
+			<file>Aircraft/MiG-21bis/Nasal/headmove.nas</file>
+		</headmove>-->
+		<!-- For Wingmen AI Scenarios -->
+        <formation>
+                <file>Aircraft/Generic/formation.nas</file>
+        </formation>
+        <dialog>
+        	<file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>
+        </dialog>
+	</nasal>
+
+</PropertyList>
