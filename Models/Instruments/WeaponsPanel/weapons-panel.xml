@@ -52,45 +52,19 @@
 	
 	<animation>
         <type>material</type>
-        <object-name>light</object-name>
+        <object-name>gunReadyLight</object-name>
 		<ambient>
 			<red>1.0</red>
 			<green>0.2</green>
 			<blue>0.0</blue>
 		</ambient>
         <emission>
-            <red>1</red>
-            <green>0</green>
-            <blue>0</blue>
+            <red>0</red>
+            <green>1</green>
+            <blue>.2</blue>
             <factor-prop>controls/armament/panel/gun-ready</factor-prop>
         </emission> 
     </animation>
-	
-	<animation>
-        <type>textranslate</type>
-        <object-name>light</object-name>
-        <property>controls/armament/panel/gun-ready</property>
-		<bias>0.0001</bias>
-		<factor>0.01757</factor>
-		  <step>1</step>
-		  <axis>
-		   <x>0</x>
-		   <y>1</y>
-		  </axis>
-
-    </animation>
-	
-    <!--<animation>
-        <type>material</type>
-        <object-name>labelAir</object-name>
-        <object-name>labelReloading</object-name>
-        <emission>
-            <red>0.9</red>
-            <green>0.1</green>
-            <blue>0.1</blue>
-            <factor-prop>controls/lighting/instruments-norm</factor-prop>
-        </emission> 
-    </animation>-->
 	
 	<!-- RELOAD BUTTONS -->
 	
