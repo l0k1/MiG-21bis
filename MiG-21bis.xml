@@ -39,7 +39,7 @@
  </metrics>
 
  <mass_balance>
-   <ixx unit="SLUG*FT2">      8500 </ixx>
+   <ixx unit="SLUG*FT2">      9200 </ixx>
    <iyy unit="SLUG*FT2">     42000 </iyy>
    <izz unit="SLUG*FT2">     35000 </izz>
    <ixy unit="SLUG*FT2">         0 </ixy>
@@ -55,46 +55,46 @@
    
    <pointmass name="station1"><!-- left wing outboard pylon pointmass 0 -->
       <weight unit="LBS"> 0 </weight>
-      <location name="POINTMASS" unit="IN">
-          <x>   11 </x>
-          <y> -120 </y>
-          <z>  -10 </z>
+      <location name="POINTMASS" unit="M">
+          <x>  1.20 </x>
+          <y> -2.73 </y>
+          <z> -0.15 </z>
       </location>
    </pointmass>
    
    <pointmass name="station2"><!-- left wing inboard pylon pointmass 1 -->
       <weight unit="LBS"> 0 </weight>
-      <location name="POINTMASS" unit="IN">
-          <x>    3 </x>
-          <y> -100 </y>
-          <z>  -10 </z>
+      <location name="POINTMASS" unit="M">
+          <x>  0.31 </x>
+          <y> -2.10 </y>
+          <z> -0.13 </z>
       </location>
    </pointmass>
    
    <pointmass name="station3"><!-- empty centerline fuel tank pointmass 2 -->
       <weight unit="LBS"> 0 </weight>
-      <location name="POINTMASS" unit="IN">
-          <x>   -7 </x>
-          <y>    0 </y>
-          <z>  -30 </z>
+      <location name="POINTMASS" unit="M">
+          <x>  0.05 </x>
+          <y>  0.00 </y>
+          <z> -0.60 </z>
       </location>
    </pointmass>
    
    <pointmass name="station4"><!-- right wing inboard pylon pointmass 3 -->
       <weight unit="LBS"> 0 </weight>
-      <location name="POINTMASS" unit="IN">
-          <x>    3 </x>
-          <y>  100 </y>
-          <z>  -10 </z>
+      <location name="POINTMASS" unit="M">
+          <x>  0.31 </x>
+          <y>  2.10 </y>
+          <z> -0.13 </z>
       </location>
    </pointmass>
    
    <pointmass name="station5"><!-- right wing outboard pylon pointmass 4 -->
       <weight unit="LBS"> 0 </weight>
-      <location name="POINTMASS" unit="IN">
-          <x>   11 </x>
-          <y>  120 </y>
-          <z>  -10 </z>
+      <location name="POINTMASS" unit="M">
+          <x>  1.20 </x>
+          <y>  2.73 </y>
+          <z> -0.15 </z>
       </location>
    </pointmass>
  </mass_balance>
