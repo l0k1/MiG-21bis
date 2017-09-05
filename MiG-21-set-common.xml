@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 
 <PropertyList>
+	<aax type="int">0</aax>
+	<aay type="int">0</aay>
 	<sim>
 
 		<submodels>
@@ -207,11 +209,11 @@
 			</panel>
 			<gunsight>
 				<!--fixed net options-->
-				<ghosting-x type="double">7000</ghosting-x>
-				<ghosting-y type="double">7000</ghosting-y>
+				<ghosting-x type="double">5480</ghosting-x>
+				<ghosting-y type="double">5480</ghosting-y>
 				<scaling type="double">0</scaling>
 				<elevation type="int">-158</elevation>
-				<windage type="int">0</windage>
+				<windage type="int">-12</windage>
 				<!--fixed net fade value is set under gunsights below-->
 				<!--fixed net/pipper options-->
 				<red type="int">239</red>

@@ -339,7 +339,7 @@ var trackCalc = func (aircraftPos, range, carrier, mp, type, node) {
 	#print("ready to see if in cone");
     if(ya_rad > RADAR_BOTTOM_LIMIT * D2R and ya_rad < RADAR_TOP_LIMIT * D2R and xa_rad > RADAR_LEFT_LIMIT * D2R and xa_rad < RADAR_RIGHT_LIMIT * D2R) {
 	  #print("xa_rad_corr: " ~ xa_rad_corr);
-	  #print("xa_rad_corr_deg: " ~ xa_rad_corr * R2D);
+	  #print("xa_rad_corr_deg: " ~ xa_rad * R2D);
 	  #print("ya_rad_deg: " ~ ya_rad * R2D);
       #is within the radar cone
       # AJ37 manual: 61.5 deg sideways.
