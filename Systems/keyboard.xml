@@ -1,68 +1,4 @@
 <PropertyList>
-	<key n="4">
-		<name>Ctrl-d</name>
-		<desc>Deselect All Stations</desc>
-		<binding>
-			<command>property-assign</command>
-			<property>fdm/jsbsim/systems/armament/station1/selected</property>
-			<value type="int">0</value>
-		</binding>
-		<binding>
-			<command>property-assign</command>
-			<property>fdm/jsbsim/systems/armament/station2/selected</property>
-			<value type="int">0</value>
-		</binding>
-		<binding>
-			<command>property-assign</command>
-			<property>fdm/jsbsim/systems/armament/station3/selected</property>
-			<value type="int">0</value>
-		</binding>
-	</key>
-
-	<key n="33">
-		<name>Shift 1</name>
-		<desc>Add Station 2</desc>
-		<binding>
-			<command>property-assign</command>
-			<property>fdm/jsbsim/systems/armament/station2/selected</property>
-			<value type="int">1</value>
-		</binding>
-		<binding>
-			<command>property-assign</command>
-			<property>fdm/jsbsim/systems/armament/station4/selected</property>
-			<value type="int">1</value>
-		</binding>
-	</key>
-
-	<key n="35">
-		<name>Shift 3</name>
-		<desc>Add Station 3</desc>
-		<binding>
-			<command>property-assign</command>
-			<property>fdm/jsbsim/systems/armament/station3/selected</property>
-			<value type="int">1</value>
-		</binding>
-	</key>
-
-	<key n="49">
-		<name>1</name>
-		<desc>Add Station 1</desc>
-		<binding>
-			<command>property-assign</command>
-			<property>fdm/jsbsim/systems/armament/station1/selected</property>
-			<value type="int">1</value>
-		</binding>
-	</key>
-
-	<key n="50">
-		<name>2</name>
-		<desc>Add Station 5</desc>
-		<binding>
-			<command>property-assign</command>
-			<property>fdm/jsbsim/systems/armament/station5/selected</property>
-			<value type="int">1</value>
-		</binding>
-	</key>
 
 	<key n="81">
 		<name>Shift-Q</name>
@@ -85,8 +21,8 @@
 		</binding>
 	</key>
 
-	<key n="100">
-		<name>d</name>
+	<key n="4">
+		<name>Ctrl-d</name>
 		<desc>Deploy braking parachute</desc>
 		<binding>
 			<command>property-assign</command>
@@ -94,15 +30,6 @@
 			<value type="int">1</value>
 		</binding>
 	</key>
-
-	<!-- needs to be rebound <key n="101">
-		<name>e</name>
-		<desc>Eject</desc>
-		<binding>
-			<command>nasal</command>
-			<script>Eject.eject();</script>
-		</binding>
-	</key> -->
 
 	<key n="102">
 		<name>f</name>
@@ -121,8 +48,8 @@
 		</mod-up>
 	</key>
 
-	<key n="106">
-		<name>j</name>
+	<key n="10">
+		<name>Ctrl-j</name>
 		<desc>jettison braking parachute</desc>
 		<binding>
 			<command>property-assign</command>
@@ -186,7 +113,7 @@
 
 	<key n="6">
 		<name>Ctrl-f</name>
-		<desc>Toggle CSR Mode (modelled as 3 minutes water injection)</desc>
+		<desc>Toggle Afterburner Reheat (CLR)</desc>
 		<binding>
 			<command>property-toggle</command>
 			<property>fdm/jsbsim/propulsion/clr</property>

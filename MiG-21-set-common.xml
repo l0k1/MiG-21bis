@@ -44,7 +44,7 @@
 		<menubar>
 			<default>
 				<menu n="100">
-					<label>MiG-21bis</label>
+					<label>MiG-21</label>
 					<enabled type="bool">true</enabled>
 					<item>
 						<label>Select Livery</label>
