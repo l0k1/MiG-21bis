@@ -1,12 +1,13 @@
 AC3Db
-MATERIAL "DefaultWhite.004" rgb 0.800 0.800 0.800  amb 0.200 0.200 0.200  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 10 trans 0.000
+MATERIAL "DefaultWhite.005" rgb 0.800 0.800 0.800  amb 0.750 0.750 0.750  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 10 trans 0.000
+MATERIAL "light" rgb 0.800 0.800 0.800  amb 0.100 0.100 0.100  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 10 trans 0.000
 OBJECT world
 name "Blender_exporter_v2.19__rwr.ac"
 kids 11
 OBJECT poly
 name "rwrHousing"
 data 12
-Cylinder.067
+Cylinder.152
 crease 85.0
 texture "rwr.png"
 texrep 1 1
@@ -2380,7 +2381,7 @@ numvert 16
 0.01534 -0.01754 0.00821
 numsurf 1
 SURF 0X10
-mat 0
+mat 1
 refs 16
 0 0.101492 0.070641
 1 0.094653 0.054383
@@ -2402,7 +2403,7 @@ kids 0
 OBJECT poly
 name "rwrRedLR"
 data 12
-Cylinder.070
+Cylinder.153
 crease 85.0
 texture "rwr.png"
 texrep 1 1
@@ -2425,7 +2426,7 @@ numvert 16
 0.01855 0.00246 -0.02852
 numsurf 1
 SURF 0X10
-mat 0
+mat 1
 refs 16
 2 0.094237 0.036739
 3 0.100999 0.020294
@@ -2447,7 +2448,7 @@ kids 0
 OBJECT poly
 name "rwrRedUL"
 data 12
-Cylinder.071
+Cylinder.154
 crease 85.0
 texture "rwr.png"
 texrep 1 1
@@ -2470,7 +2471,7 @@ numvert 16
 0.01484 0.00361 0.01385
 numsurf 1
 SURF 0X10
-mat 0
+mat 1
 refs 16
 1 0.114154 0.082669
 0 0.101754 0.070364
@@ -2492,7 +2493,7 @@ kids 0
 OBJECT poly
 name "rwrRedUR"
 data 12
-Cylinder.072
+Cylinder.155
 crease 85.0
 texture "rwr.png"
 texrep 1 1
@@ -2515,7 +2516,7 @@ numvert 16
 0.01763 0.02283 -0.018
 numsurf 1
 SURF 0X10
-mat 0
+mat 1
 refs 16
 6 0.182778 0.036836
 0 0.182834 0.05427
@@ -2537,7 +2538,7 @@ kids 0
 OBJECT poly
 name "rwrTestButton"
 data 12
-Cylinder.073
+Cylinder.156
 crease 85.0
 texture "rwr.png"
 texrep 1 1
@@ -2710,7 +2711,7 @@ kids 0
 OBJECT poly
 name "rwrVolume"
 data 12
-Cylinder.074
+Cylinder.157
 crease 85.0
 texture "rwr.png"
 texrep 1 1
@@ -3011,7 +3012,7 @@ kids 0
 OBJECT poly
 name "rwrYellowLL"
 data 12
-Cylinder.075
+Cylinder.158
 crease 85.0
 texture "rwr.png"
 texrep 1 1
@@ -3036,7 +3037,7 @@ numvert 18
 0.01492 -0.00423 0.01292
 numsurf 1
 SURF 0X10
-mat 0
+mat 1
 refs 18
 2 0.037719 0.002734
 3 0.055277 0.002726
@@ -3060,7 +3061,7 @@ kids 0
 OBJECT poly
 name "rwrYellowLR"
 data 12
-Cylinder.076
+Cylinder.159
 crease 85.0
 texture "rwr.png"
 texrep 1 1
@@ -3083,7 +3084,7 @@ numvert 16
 0.01828 -0.00951 -0.02543
 numsurf 1
 SURF 0X10
-mat 0
+mat 1
 refs 16
 0 0.002621 0.038551
 1 0.00921 0.022373
@@ -3105,7 +3106,7 @@ kids 0
 OBJECT poly
 name "rwrYellowUL"
 data 12
-Cylinder.077
+Cylinder.160
 crease 85.0
 texture "rwr.png"
 texrep 1 1
@@ -3128,7 +3129,7 @@ numvert 16
 0.01506 0.01091 0.01135
 numsurf 1
 SURF 0X10
-mat 0
+mat 1
 refs 16
 0 0.037514 0.09206
 13 0.021029 0.085235
@@ -3150,7 +3151,7 @@ kids 0
 OBJECT poly
 name "rwrYellowUR"
 data 12
-Cylinder.078
+Cylinder.161
 crease 85.0
 texture "rwr.png"
 texrep 1 1
@@ -3175,7 +3176,7 @@ numvert 18
 0.01807 0.01529 -0.02306
 numsurf 1
 SURF 0X10
-mat 0
+mat 1
 refs 18
 2 0.001886 0.055758
 3 0.001886 0.038021

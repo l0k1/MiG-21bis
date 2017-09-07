@@ -1,13 +1,13 @@
 AC3Db
-MATERIAL "glass" rgb 0.651 0.651 0.651  amb 0.100 0.100 0.100  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 103 trans 0.000
-MATERIAL "metal" rgb 0.651 0.651 0.651  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 80 trans 0.000
+MATERIAL "glass.001" rgb 0.651 0.651 0.651  amb 0.100 0.100 0.100  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 103 trans 0.000
+MATERIAL "metal" rgb 0.651 0.651 0.651  amb 0.750 0.750 0.750  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 80 trans 0.000
 OBJECT world
 name "Blender_exporter_v2.19__lights.ac"
 kids 21
 OBJECT poly
 name "arcIBNLight"
 data 10
-Sphere.000
+Sphere.004
 crease 35.0
 texture "lights.png"
 texrep 1 1
@@ -995,7 +995,7 @@ kids 0
 OBJECT poly
 name "bombArmedHousing"
 data 12
-Cylinder.000
+Cylinder.053
 crease 75.0
 texture "lights.png"
 texrep 1 1
@@ -1696,7 +1696,7 @@ kids 0
 OBJECT poly
 name "bombArmedLight"
 data 10
-Sphere.003
+Sphere.005
 crease 35.0
 texture "lights.png"
 texrep 1 1
@@ -1983,7 +1983,7 @@ kids 0
 OBJECT poly
 name "cagedLight"
 data 10
-Sphere.005
+Sphere.006
 crease 35.0
 texture "lights.png"
 texrep 1 1
@@ -2576,7 +2576,7 @@ kids 0
 OBJECT poly
 name "dangerAltLight"
 data 10
-Sphere.001
+Sphere.007
 crease 35.0
 texture "lights.png"
 texrep 1 1
@@ -2863,7 +2863,7 @@ kids 0
 OBJECT poly
 name "dangerAltLightHousing"
 data 12
-Cylinder.001
+Cylinder.055
 crease 75.0
 texture "lights.png"
 texrep 1 1
@@ -3564,7 +3564,7 @@ kids 0
 OBJECT poly
 name "leftMissileLightHouse"
 data 12
-Cylinder.002
+Cylinder.058
 crease 75.0
 texture "lights.png"
 texrep 1 1
@@ -4265,7 +4265,7 @@ kids 0
 OBJECT poly
 name "leftMissileLockLight"
 data 10
-Sphere.002
+Sphere.008
 crease 35.0
 texture "lights.png"
 texrep 1 1
@@ -4552,7 +4552,7 @@ kids 0
 OBJECT poly
 name "oilLight"
 data 10
-Sphere.004
+Sphere.009
 crease 35.0
 texture "lights.png"
 texrep 1 1
@@ -5125,7 +5125,7 @@ kids 0
 OBJECT poly
 name "radarLockLight"
 data 10
-Sphere.006
+Sphere.010
 crease 35.0
 texture "lights.png"
 texrep 1 1
@@ -5412,7 +5412,7 @@ kids 0
 OBJECT poly
 name "radarLockLightHouse"
 data 12
-Cylinder.003
+Cylinder.059
 crease 75.0
 texture "lights.png"
 texrep 1 1
@@ -6113,7 +6113,7 @@ kids 0
 OBJECT poly
 name "rightMissileLightHouse"
 data 12
-Cylinder.004
+Cylinder.060
 crease 75.0
 texture "lights.png"
 texrep 1 1
@@ -6814,7 +6814,7 @@ kids 0
 OBJECT poly
 name "rightMissileLockLight"
 data 10
-Sphere.007
+Sphere.011
 crease 35.0
 texture "lights.png"
 texrep 1 1
@@ -7101,7 +7101,7 @@ kids 0
 OBJECT poly
 name "transponderResponseLight"
 data 10
-Sphere.008
+Sphere.012
 crease 35.0
 texture "lights.png"
 texrep 1 1
@@ -7561,7 +7561,7 @@ kids 0
 OBJECT poly
 name "unknownLight"
 data 10
-Sphere.009
+Sphere.013
 crease 35.0
 texture "lights.png"
 texrep 1 1
@@ -7848,7 +7848,7 @@ kids 0
 OBJECT poly
 name "unknownLightHousing"
 data 12
-Cylinder.005
+Cylinder.061
 crease 75.0
 texture "lights.png"
 texrep 1 1
