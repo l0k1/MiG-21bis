@@ -16,6 +16,9 @@
 			<model type="int">2</model>
 		</rating>
 
+		<flight-model>jsb</flight-model>
+		<aero>MiG-21bis</aero>
+
 		<gui>
             <style>
                 <colors>
