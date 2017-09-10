@@ -3,6 +3,15 @@
 
     <path>dashLightBank.ac</path>
 
-	<!--lights-->
+	<!--<animation>
+        <type>material</type>
+        <object-name>markerBeaconLight</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.0</green>
+            <blue>0.0</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission> 
+    </animation>-->
 	
 </PropertyList>
