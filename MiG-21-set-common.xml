@@ -10,6 +10,8 @@
 			<path>Aircraft/MiG-21bis/Submodels.xml</path>
 		</submodels>
 
+		<minimum-fg-version>1.9.1</minimum-fg-version>
+
 		<!-- System Settings -->
 
 		<systems>

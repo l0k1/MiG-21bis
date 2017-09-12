@@ -1,12 +1,12 @@
 AC3Db
-MATERIAL "labelTestMat" rgb 1.000 1.000 1.000  amb 0.963 0.963 0.963  emis 0.000 0.000 0.000  spec 0.251 0.251 0.251  shi 10 trans 0.000
+MATERIAL "labelTestMat.001" rgb 1.000 1.000 1.000  amb 0.963 0.963 0.963  emis 0.000 0.000 0.000  spec 0.251 0.251 0.251  shi 10 trans 0.000
 OBJECT world
 name "Blender_exporter_v2.19__labels.ac"
 kids 103
 OBJECT poly
 name "label1"
 data 8
-Cube.006
+Cube.009
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -27,7 +27,7 @@ kids 0
 OBJECT poly
 name "label1back"
 data 8
-Cube.019
+Cube.025
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -80,7 +80,7 @@ kids 0
 OBJECT poly
 name "label2"
 data 8
-Cube.007
+Cube.026
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -101,7 +101,7 @@ kids 0
 OBJECT poly
 name "label2back"
 data 8
-Cube.020
+Cube.035
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -154,7 +154,7 @@ kids 0
 OBJECT poly
 name "label3"
 data 8
-Cube.008
+Cube.036
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -175,7 +175,7 @@ kids 0
 OBJECT poly
 name "label3back"
 data 8
-Cube.021
+Cube.037
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -228,7 +228,7 @@ kids 0
 OBJECT poly
 name "labelAir"
 data 8
-Cube.001
+Cube.038
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -260,7 +260,7 @@ kids 0
 OBJECT poly
 name "labelAirback"
 data 8
-Cube.012
+Cube.113
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -313,7 +313,7 @@ kids 0
 OBJECT poly
 name "labelAngle"
 data 8
-Cube.073
+Cube.114
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -334,7 +334,7 @@ kids 0
 OBJECT poly
 name "labelATCResp"
 data 8
-Cube.085
+Cube.115
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -355,7 +355,7 @@ kids 0
 OBJECT poly
 name "labelAuto"
 data 8
-Cube.065
+Cube.116
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -376,7 +376,7 @@ kids 0
 OBJECT poly
 name "labelBlank"
 data 8
-Cube.082
+Cube.117
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -397,7 +397,7 @@ kids 0
 OBJECT poly
 name "labelBomb"
 data 8
-Cube.062
+Cube.118
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -418,15 +418,15 @@ kids 0
 OBJECT poly
 name "labelCage"
 data 8
-Cube.080
+Cube.119
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.00556 -0.25196 -0.23855
-0.00556 -0.24396 -0.23919
-0.00856 -0.25427 -0.26728
-0.00856 -0.24626 -0.26792
+0.03476 -0.24916 -0.23855
+0.03379 -0.24122 -0.23919
+0.03802 -0.25109 -0.26728
+0.03704 -0.24314 -0.26792
 numsurf 1
 SURF 0X0
 mat 0
@@ -439,15 +439,15 @@ kids 0
 OBJECT poly
 name "labelCont"
 data 8
-Cube.039
+Cube.120
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.01343 -0.03698 -0.12211
-0.01343 -0.03088 -0.12211
-0.01337 -0.03698 -0.1413
-0.01337 -0.03088 -0.1413
+0.01637 -0.03483 -0.12211
+0.01563 -0.02877 -0.12211
+0.01631 -0.03483 -0.1413
+0.01557 -0.02878 -0.1413
 numsurf 1
 SURF 0X0
 mat 0
@@ -460,15 +460,15 @@ kids 0
 OBJECT poly
 name "labelDangerAlt"
 data 8
-Cube.091
+Cube.121
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.00643 -0.03312 0.27032
-0.00802 -0.03312 0.29
-0.00643 -0.0153 0.27032
-0.00802 -0.0153 0.29
+0.00896 -0.03185 0.27032
+0.01053 -0.03165 0.29
+0.00678 -0.01416 0.27032
+0.00836 -0.01397 0.29
 numsurf 1
 SURF 0X0
 mat 0
@@ -481,15 +481,15 @@ kids 0
 OBJECT poly
 name "labelExtStoreJett"
 data 8
-Cube.105
+Cube.122
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
--0.00119 -0.32774 -0.12171
--0.00119 -0.3221 -0.12171
--0.0011 -0.32774 -0.17447
--0.0011 -0.3221 -0.17447
+0.0373 -0.3252 -0.12171
+0.03661 -0.3196 -0.12171
+0.03739 -0.32519 -0.17447
+0.0367 -0.31959 -0.17447
 numsurf 1
 SURF 0X0
 mat 0
@@ -502,15 +502,15 @@ kids 0
 OBJECT poly
 name "labelFDS"
 data 8
-Cube.089
+Cube.123
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
--0.00082 -0.05751 0.03136
--0.00082 -0.05141 0.03136
--0.00088 -0.05751 0.01217
--0.00088 -0.05141 0.01217
+0.00473 -0.05694 0.03136
+0.00399 -0.05089 0.03136
+0.00467 -0.05695 0.01217
+0.00393 -0.05089 0.01217
 numsurf 1
 SURF 0X0
 mat 0
@@ -523,7 +523,7 @@ kids 0
 OBJECT poly
 name "labelGnd"
 data 8
-Cube.002
+Cube.124
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -544,7 +544,7 @@ kids 0
 OBJECT poly
 name "labelGNDback"
 data 8
-Cube.015
+Cube.125
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -597,7 +597,7 @@ kids 0
 OBJECT poly
 name "labelGun"
 data 8
-Cube.057
+Cube.126
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -618,7 +618,7 @@ kids 0
 OBJECT poly
 name "labelGyro"
 data 8
-Cube.111
+Cube.127
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -639,15 +639,15 @@ kids 0
 OBJECT poly
 name "labelIFF"
 data 8
-Cube.043
+Cube.128
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.01343 -0.06481 -0.16909
-0.01343 -0.05871 -0.16909
-0.01337 -0.06481 -0.18828
-0.01337 -0.05871 -0.18828
+0.01976 -0.06244 -0.12221
+0.01902 -0.05639 -0.12221
+0.0197 -0.06245 -0.1414
+0.01896 -0.0564 -0.1414
 numsurf 1
 SURF 0X0
 mat 0
@@ -660,15 +660,15 @@ kids 0
 OBJECT poly
 name "labelInbd"
 data 8
-Cube.109
+Cube.129
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
--0.00082 -0.33507 -0.14564
--0.00082 -0.32897 -0.14564
--0.00088 -0.33507 -0.16483
--0.00088 -0.32897 -0.16483
+0.03856 -0.33243 -0.14564
+0.03781 -0.32638 -0.14564
+0.0385 -0.33244 -0.16483
+0.03775 -0.32638 -0.16483
 numsurf 1
 SURF 0X0
 mat 0
@@ -681,15 +681,15 @@ kids 0
 OBJECT poly
 name "labelInter"
 data 8
-Cube.044
+Cube.130
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.01343 -0.03698 -0.16899
-0.01343 -0.03088 -0.16899
-0.01337 -0.03698 -0.18818
-0.01337 -0.03088 -0.18818
+0.01637 -0.03483 -0.16899
+0.01563 -0.02877 -0.16899
+0.01631 -0.03483 -0.18818
+0.01557 -0.02878 -0.18818
 numsurf 1
 SURF 0X0
 mat 0
@@ -702,7 +702,7 @@ kids 0
 OBJECT poly
 name "labelIr"
 data 8
-Cube.004
+Cube.131
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -723,7 +723,7 @@ kids 0
 OBJECT poly
 name "labelIRback"
 data 8
-Cube.013
+Cube.132
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -776,7 +776,7 @@ kids 0
 OBJECT poly
 name "labelIRback.001"
 data 8
-Cube.027
+Cube.133
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -829,7 +829,7 @@ kids 0
 OBJECT poly
 name "labelIRback.002"
 data 8
-Cube.030
+Cube.134
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -882,7 +882,7 @@ kids 0
 OBJECT poly
 name "labelIRback.003"
 data 8
-Cube.031
+Cube.135
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -935,19 +935,19 @@ kids 0
 OBJECT poly
 name "labelIRback.004"
 data 8
-Cube.024
+Cube.136
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.01324 -0.03698 -0.1221
-0.01324 -0.03088 -0.1221
-0.01318 -0.03698 -0.14129
-0.01318 -0.03088 -0.14129
-0.00845 -0.03698 -0.12209
-0.00845 -0.03088 -0.12209
-0.00839 -0.03698 -0.14128
-0.00839 -0.03088 -0.14128
+0.01618 -0.03485 -0.1221
+0.01544 -0.0288 -0.1221
+0.01613 -0.03486 -0.14129
+0.01538 -0.0288 -0.14129
+0.01143 -0.03543 -0.12209
+0.01069 -0.02938 -0.12209
+0.01137 -0.03544 -0.14128
+0.01063 -0.02939 -0.14128
 numsurf 5
 SURF 0X0
 mat 0
@@ -988,19 +988,19 @@ kids 0
 OBJECT poly
 name "labelIRback.005"
 data 8
-Cube.041
+Cube.137
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.01324 -0.06481 -0.12221
-0.01324 -0.05871 -0.12221
-0.01318 -0.06481 -0.1414
-0.01318 -0.05871 -0.1414
-0.00845 -0.06481 -0.1222
-0.00845 -0.05871 -0.1222
-0.00839 -0.06481 -0.14139
-0.00839 -0.05871 -0.14139
+0.01958 -0.06247 -0.12221
+0.01883 -0.05642 -0.12221
+0.01952 -0.06248 -0.1414
+0.01877 -0.05643 -0.1414
+0.01482 -0.06306 -0.1222
+0.01408 -0.057 -0.1222
+0.01476 -0.06306 -0.14139
+0.01402 -0.05701 -0.14139
 numsurf 5
 SURF 0X0
 mat 0
@@ -1041,19 +1041,19 @@ kids 0
 OBJECT poly
 name "labelIRback.006"
 data 8
-Cube.042
+Cube.138
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.01324 -0.06481 -0.16909
-0.01324 -0.05871 -0.16909
-0.01318 -0.06481 -0.18828
-0.01318 -0.05871 -0.18828
-0.00845 -0.06481 -0.16908
-0.00845 -0.05871 -0.16908
-0.00839 -0.06481 -0.18827
-0.00839 -0.05871 -0.18827
+0.01958 -0.06247 -0.16909
+0.01883 -0.05642 -0.16909
+0.01952 -0.06248 -0.18828
+0.01877 -0.05643 -0.18828
+0.01482 -0.06306 -0.16908
+0.01408 -0.057 -0.16908
+0.01476 -0.06306 -0.18827
+0.01402 -0.05701 -0.18827
 numsurf 5
 SURF 0X0
 mat 0
@@ -1094,19 +1094,19 @@ kids 0
 OBJECT poly
 name "labelIRback.007"
 data 8
-Cube.045
+Cube.139
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.01324 -0.03698 -0.16898
-0.01324 -0.03088 -0.16898
-0.01318 -0.03698 -0.18817
-0.01318 -0.03088 -0.18817
-0.00845 -0.03698 -0.16897
-0.00845 -0.03088 -0.16897
-0.00839 -0.03698 -0.18816
-0.00839 -0.03088 -0.18816
+0.01618 -0.03485 -0.16898
+0.01544 -0.0288 -0.16898
+0.01613 -0.03486 -0.18817
+0.01538 -0.0288 -0.18817
+0.01143 -0.03543 -0.16897
+0.01069 -0.02938 -0.16897
+0.01137 -0.03544 -0.18816
+0.01063 -0.02939 -0.18816
 numsurf 5
 SURF 0X0
 mat 0
@@ -1147,19 +1147,19 @@ kids 0
 OBJECT poly
 name "labelIRback.008"
 data 8
-Cube.046
+Cube.140
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.01324 -0.03698 -0.2168
-0.01324 -0.03088 -0.2168
-0.01318 -0.03698 -0.23599
-0.01318 -0.03088 -0.23599
-0.00845 -0.03698 -0.21679
-0.00845 -0.03088 -0.21679
-0.00839 -0.03698 -0.23598
-0.00839 -0.03088 -0.23598
+0.01618 -0.03485 -0.2168
+0.01544 -0.0288 -0.2168
+0.01613 -0.03486 -0.23599
+0.01538 -0.0288 -0.23599
+0.01143 -0.03543 -0.21679
+0.01069 -0.02938 -0.21679
+0.01137 -0.03544 -0.23598
+0.01063 -0.02939 -0.23598
 numsurf 5
 SURF 0X0
 mat 0
@@ -1200,19 +1200,19 @@ kids 0
 OBJECT poly
 name "labelIRback.009"
 data 8
-Cube.049
+Cube.141
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.01324 -0.06481 -0.2169
-0.01324 -0.05871 -0.2169
-0.01318 -0.06481 -0.23609
-0.01318 -0.05871 -0.23609
-0.00845 -0.06481 -0.21689
-0.00845 -0.05871 -0.21689
-0.00839 -0.06481 -0.23608
-0.00839 -0.05871 -0.23608
+0.01958 -0.06247 -0.2169
+0.01883 -0.05642 -0.2169
+0.01952 -0.06248 -0.23609
+0.01877 -0.05643 -0.23609
+0.01482 -0.06306 -0.21689
+0.01408 -0.057 -0.21689
+0.01476 -0.06306 -0.23608
+0.01402 -0.05701 -0.23608
 numsurf 5
 SURF 0X0
 mat 0
@@ -1253,19 +1253,19 @@ kids 0
 OBJECT poly
 name "labelIRback.010"
 data 8
-Cube.054
+Cube.142
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.00933 -0.03988 -0.29788
-0.00933 -0.03378 -0.29788
-0.0106 -0.03988 -0.31703
-0.0106 -0.03378 -0.31703
-0.00455 -0.03988 -0.2982
-0.00455 -0.03378 -0.2982
-0.00582 -0.03988 -0.31735
-0.00582 -0.03378 -0.31735
+0.01266 -0.0382 -0.29788
+0.01191 -0.03215 -0.29788
+0.01392 -0.03805 -0.31703
+0.01317 -0.032 -0.31703
+0.00791 -0.03879 -0.2982
+0.00717 -0.03273 -0.2982
+0.00917 -0.03863 -0.31735
+0.00843 -0.03258 -0.31735
 numsurf 5
 SURF 0X0
 mat 0
@@ -1306,7 +1306,7 @@ kids 0
 OBJECT poly
 name "labelIRback.011"
 data 8
-Cube.056
+Cube.143
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1359,7 +1359,7 @@ kids 0
 OBJECT poly
 name "labelIRback.012"
 data 8
-Cube.059
+Cube.144
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1412,7 +1412,7 @@ kids 0
 OBJECT poly
 name "labelIRback.013"
 data 8
-Cube.060
+Cube.145
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1465,7 +1465,7 @@ kids 0
 OBJECT poly
 name "labelIRback.014"
 data 8
-Cube.063
+Cube.146
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1518,7 +1518,7 @@ kids 0
 OBJECT poly
 name "labelIRback.015"
 data 8
-Cube.064
+Cube.147
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1571,7 +1571,7 @@ kids 0
 OBJECT poly
 name "labelIRback.016"
 data 8
-Cube.067
+Cube.148
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1624,7 +1624,7 @@ kids 0
 OBJECT poly
 name "labelIRback.017"
 data 8
-Cube.068
+Cube.149
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1677,19 +1677,19 @@ kids 0
 OBJECT poly
 name "labelIRback.020"
 data 8
-Cube.079
+Cube.150
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.00903 -0.13131 -0.27289
-0.00903 -0.12555 -0.2709
-0.0103 -0.12508 -0.291
-0.0103 -0.11931 -0.28901
-0.00425 -0.13121 -0.27319
-0.00425 -0.12544 -0.2712
-0.00552 -0.12497 -0.2913
-0.00552 -0.1192 -0.28931
+0.0235 -0.12899 -0.27289
+0.0228 -0.12327 -0.2709
+0.024 -0.12265 -0.291
+0.0233 -0.11692 -0.28901
+0.01875 -0.12947 -0.27319
+0.01804 -0.12375 -0.2712
+0.01925 -0.12312 -0.2913
+0.01854 -0.1174 -0.28931
 numsurf 5
 SURF 0X0
 mat 0
@@ -1730,19 +1730,19 @@ kids 0
 OBJECT poly
 name "labelIRback.021"
 data 8
-Cube.081
+Cube.151
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.00537 -0.25196 -0.23852
-0.00537 -0.24395 -0.23917
-0.00837 -0.25427 -0.26725
-0.00837 -0.24626 -0.26789
-0.00049 -0.25194 -0.23831
-0.00049 -0.24394 -0.23896
-0.00348 -0.25425 -0.26704
-0.00348 -0.24625 -0.26768
+0.03457 -0.24919 -0.23852
+0.0336 -0.24124 -0.23917
+0.03783 -0.25111 -0.26725
+0.03686 -0.24316 -0.26789
+0.02973 -0.24976 -0.23831
+0.02875 -0.24182 -0.23896
+0.03298 -0.25169 -0.26704
+0.032 -0.24375 -0.26768
 numsurf 5
 SURF 0X0
 mat 0
@@ -1783,19 +1783,19 @@ kids 0
 OBJECT poly
 name "labelIRback.022"
 data 8
-Cube.088
+Cube.152
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
--0.00101 -0.05751 0.03137
--0.00101 -0.05141 0.03137
--0.00107 -0.05751 0.01218
--0.00107 -0.05141 0.01218
--0.0058 -0.05751 0.03138
--0.0058 -0.05141 0.03138
--0.00586 -0.05751 0.01219
--0.00586 -0.05141 0.01219
+0.00454 -0.05696 0.03137
+0.0038 -0.05091 0.03137
+0.00448 -0.05697 0.01218
+0.00374 -0.05092 0.01218
+-0.00021 -0.05755 0.03138
+-0.00095 -0.05149 0.03138
+-0.00027 -0.05755 0.01219
+-0.00101 -0.0515 0.01219
 numsurf 5
 SURF 0X0
 mat 0
@@ -1836,7 +1836,7 @@ kids 0
 OBJECT poly
 name "labelIRback.023"
 data 8
-Cube.094
+Cube.153
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1889,7 +1889,7 @@ kids 0
 OBJECT poly
 name "labelIRback.024"
 data 8
-Cube.097
+Cube.154
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1942,7 +1942,7 @@ kids 0
 OBJECT poly
 name "labelIRback.025"
 data 8
-Cube.099
+Cube.155
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -1995,7 +1995,7 @@ kids 0
 OBJECT poly
 name "labelIRback.026"
 data 8
-Cube.100
+Cube.156
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2048,7 +2048,7 @@ kids 0
 OBJECT poly
 name "labelIRback.027"
 data 8
-Cube.103
+Cube.157
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2101,19 +2101,19 @@ kids 0
 OBJECT poly
 name "labelIRback.028"
 data 8
-Cube.107
+Cube.158
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
--0.00101 -0.33318 -0.10182
--0.00101 -0.32708 -0.10182
--0.00107 -0.33318 -0.12101
--0.00107 -0.32708 -0.12101
--0.0058 -0.33318 -0.10181
--0.0058 -0.32708 -0.10181
--0.00586 -0.33318 -0.121
--0.00586 -0.32708 -0.121
+0.03814 -0.33058 -0.10182
+0.0374 -0.32452 -0.10182
+0.03808 -0.33059 -0.12101
+0.03734 -0.32453 -0.12101
+0.03338 -0.33116 -0.10181
+0.03264 -0.32511 -0.10181
+0.03332 -0.33117 -0.121
+0.03258 -0.32512 -0.121
 numsurf 5
 SURF 0X0
 mat 0
@@ -2154,19 +2154,19 @@ kids 0
 OBJECT poly
 name "labelIRback.029"
 data 8
-Cube.108
+Cube.159
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
--0.00101 -0.33507 -0.14563
--0.00101 -0.32897 -0.14563
--0.00107 -0.33507 -0.16482
--0.00107 -0.32897 -0.16482
--0.0058 -0.33507 -0.14562
--0.0058 -0.32897 -0.14562
--0.00586 -0.33507 -0.16481
--0.00586 -0.32897 -0.16481
+0.03837 -0.33245 -0.14563
+0.03763 -0.3264 -0.14563
+0.03831 -0.33246 -0.16482
+0.03757 -0.32641 -0.16482
+0.03361 -0.33304 -0.14562
+0.03287 -0.32698 -0.14562
+0.03356 -0.33305 -0.16481
+0.03281 -0.32699 -0.16481
 numsurf 5
 SURF 0X0
 mat 0
@@ -2207,7 +2207,7 @@ kids 0
 OBJECT poly
 name "labelIRback.030"
 data 8
-Cube.112
+Cube.160
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2260,15 +2260,15 @@ kids 0
 OBJECT poly
 name "labelJettWingTanks"
 data 8
-Cube.086
+Cube.161
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
--0.00019 -0.03312 0.01376
-0.00013 -0.03312 0.0335
--0.00019 -0.0153 0.01376
-0.00013 -0.0153 0.0335
+0.00238 -0.03266 0.01376
+0.0027 -0.03262 0.0335
+0.00021 -0.01497 0.01376
+0.00053 -0.01493 0.0335
 numsurf 1
 SURF 0X0
 mat 0
@@ -2281,7 +2281,7 @@ kids 0
 OBJECT poly
 name "labelLNC"
 data 8
-Cube.058
+Cube.162
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2302,7 +2302,7 @@ kids 0
 OBJECT poly
 name "labelLndg"
 data 8
-Cube.032
+Cube.163
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2323,7 +2323,7 @@ kids 0
 OBJECT poly
 name "labelLock"
 data 8
-Cube.034
+Cube.164
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2344,15 +2344,15 @@ kids 0
 OBJECT poly
 name "labelLST"
 data 8
-Cube.048
+Cube.165
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.01343 -0.06481 -0.21691
-0.01343 -0.05871 -0.21691
-0.01337 -0.06481 -0.2361
-0.01337 -0.05871 -0.2361
+0.01977 -0.06245 -0.21691
+0.01902 -0.05639 -0.21691
+0.01971 -0.06246 -0.2361
+0.01896 -0.0564 -0.2361
 numsurf 1
 SURF 0X0
 mat 0
@@ -2365,7 +2365,7 @@ kids 0
 OBJECT poly
 name "labelMain"
 data 8
-Cube.102
+Cube.166
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2386,7 +2386,7 @@ kids 0
 OBJECT poly
 name "labelMan"
 data 8
-Cube.066
+Cube.167
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2407,7 +2407,7 @@ kids 0
 OBJECT poly
 name "labelMaster"
 data 8
-Cube.010
+Cube.168
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2428,7 +2428,7 @@ kids 0
 OBJECT poly
 name "labelMasterback"
 data 8
-Cube.023
+Cube.169
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2481,7 +2481,7 @@ kids 0
 OBJECT poly
 name "labelMissile"
 data 8
-Cube.069
+Cube.170
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2502,7 +2502,7 @@ kids 0
 OBJECT poly
 name "labelNavig"
 data 8
-Cube.029
+Cube.171
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2523,7 +2523,7 @@ kids 0
 OBJECT poly
 name "labelNeut"
 data 8
-Cube.011
+Cube.172
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2544,7 +2544,7 @@ kids 0
 OBJECT poly
 name "labelNeutback"
 data 8
-Cube.022
+Cube.173
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2597,7 +2597,7 @@ kids 0
 OBJECT poly
 name "labelNeutback.001"
 data 8
-Cube.033
+Cube.174
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2650,19 +2650,19 @@ kids 0
 OBJECT poly
 name "labelNeutback.002"
 data 8
-Cube.050
+Cube.175
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.00811 -0.04318 -0.26717
-0.00821 -0.04318 -0.26107
-0.00811 -0.024 -0.26717
-0.00821 -0.024 -0.26107
-0.00294 -0.04318 -0.26709
-0.00304 -0.04318 -0.26098
-0.00294 -0.024 -0.26709
-0.00304 -0.024 -0.26098
+0.01185 -0.04163 -0.26717
+0.01195 -0.04162 -0.26107
+0.00951 -0.02259 -0.26717
+0.00961 -0.02258 -0.26107
+0.00672 -0.04226 -0.26709
+0.00682 -0.04225 -0.26098
+0.00438 -0.02322 -0.26709
+0.00448 -0.02321 -0.26098
 numsurf 5
 SURF 0X0
 mat 0
@@ -2703,19 +2703,19 @@ kids 0
 OBJECT poly
 name "labelNeutback.003"
 data 8
-Cube.053
+Cube.176
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.00811 -0.07154 -0.26717
-0.00821 -0.07155 -0.26107
-0.00811 -0.05237 -0.26717
-0.00821 -0.05237 -0.26107
-0.00294 -0.07154 -0.26709
-0.00304 -0.07155 -0.26098
-0.00294 -0.05237 -0.26709
-0.00304 -0.05237 -0.26098
+0.0153 -0.06978 -0.26717
+0.01541 -0.06978 -0.26107
+0.01297 -0.05075 -0.26717
+0.01307 -0.05074 -0.26107
+0.01017 -0.07041 -0.26709
+0.01027 -0.07041 -0.26098
+0.00784 -0.05138 -0.26709
+0.00794 -0.05137 -0.26098
 numsurf 5
 SURF 0X0
 mat 0
@@ -2756,7 +2756,7 @@ kids 0
 OBJECT poly
 name "labelNeutback.004"
 data 8
-Cube.083
+Cube.177
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2809,7 +2809,7 @@ kids 0
 OBJECT poly
 name "labelNeutback.005"
 data 8
-Cube.084
+Cube.178
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2862,19 +2862,19 @@ kids 0
 OBJECT poly
 name "labelNeutback.006"
 data 8
-Cube.087
+Cube.179
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
--0.00154 -0.03312 0.01355
--0.00121 -0.03312 0.03329
--0.00154 -0.0153 0.01355
--0.00121 -0.0153 0.03329
--0.01826 -0.03312 0.01384
--0.01793 -0.03312 0.03357
--0.01826 -0.0153 0.01384
--0.01793 -0.0153 0.03357
+0.00104 -0.03282 0.01355
+0.00137 -0.03278 0.03329
+-0.00113 -0.01513 0.01355
+-0.0008 -0.01509 0.03329
+-0.01555 -0.03486 0.01384
+-0.01522 -0.03482 0.03357
+-0.01772 -0.01717 0.01384
+-0.01739 -0.01713 0.03357
 numsurf 5
 SURF 0X0
 mat 0
@@ -2915,19 +2915,19 @@ kids 0
 OBJECT poly
 name "labelNeutback.007"
 data 8
-Cube.090
+Cube.180
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
-0.00507 -0.03312 0.2702
-0.00666 -0.03312 0.28988
-0.00507 -0.0153 0.2702
-0.00666 -0.0153 0.28988
--0.0116 -0.03312 0.27156
--0.01001 -0.03312 0.29124
--0.0116 -0.0153 0.27156
--0.01001 -0.0153 0.29124
+0.00761 -0.03201 0.2702
+0.00918 -0.03182 0.28988
+0.00543 -0.01433 0.2702
+0.00701 -0.01413 0.28988
+-0.00894 -0.03405 0.27156
+-0.00736 -0.03385 0.29124
+-0.01111 -0.01636 0.27156
+-0.00953 -0.01617 0.29124
 numsurf 5
 SURF 0X0
 mat 0
@@ -2968,7 +2968,7 @@ kids 0
 OBJECT poly
 name "labelNWheelBrake"
 data 8
-Cube.075
+Cube.181
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -2989,15 +2989,15 @@ kids 0
 OBJECT poly
 name "labelOil"
 data 8
-Cube.078
+Cube.182
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.00922 -0.13131 -0.27288
-0.00922 -0.12554 -0.27089
-0.01049 -0.12508 -0.29099
-0.01049 -0.11931 -0.289
+0.02369 -0.12897 -0.27288
+0.02299 -0.12324 -0.27089
+0.02419 -0.12263 -0.29099
+0.02349 -0.1169 -0.289
 numsurf 1
 SURF 0X0
 mat 0
@@ -3010,15 +3010,15 @@ kids 0
 OBJECT poly
 name "labelOutbd"
 data 8
-Cube.106
+Cube.183
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
--0.00082 -0.33318 -0.10183
--0.00082 -0.32708 -0.10183
--0.00088 -0.33318 -0.12102
--0.00088 -0.32708 -0.12102
+0.03833 -0.33056 -0.10183
+0.03758 -0.3245 -0.10183
+0.03827 -0.33056 -0.12102
+0.03752 -0.32451 -0.12102
 numsurf 1
 SURF 0X0
 mat 0
@@ -3031,15 +3031,15 @@ kids 0
 OBJECT poly
 name "labelOuterInner"
 data 8
-Cube.076
+Cube.184
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
--0.00184 -0.01962 0.17785
--0.00184 -0.01398 0.17785
--0.00175 -0.01962 0.12509
--0.00175 -0.01398 0.12509
+-0.0009 -0.01946 0.17785
+-0.00159 -0.01386 0.17785
+-0.00081 -0.01945 0.12509
+-0.0015 -0.01385 0.12509
 numsurf 1
 SURF 0X0
 mat 0
@@ -3052,15 +3052,15 @@ kids 0
 OBJECT poly
 name "labelPas"
 data 8
-Cube.047
+Cube.185
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.01343 -0.03698 -0.2168
-0.01343 -0.03088 -0.2168
-0.01337 -0.03698 -0.23599
-0.01337 -0.03088 -0.23599
+0.01637 -0.03483 -0.2168
+0.01563 -0.02877 -0.2168
+0.01631 -0.03483 -0.23599
+0.01557 -0.02878 -0.23599
 numsurf 1
 SURF 0X0
 mat 0
@@ -3073,7 +3073,7 @@ kids 0
 OBJECT poly
 name "labelPitot"
 data 8
-Cube.098
+Cube.186
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3094,7 +3094,7 @@ kids 0
 OBJECT poly
 name "labelProceed"
 data 8
-Cube.028
+Cube.187
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3115,7 +3115,7 @@ kids 0
 OBJECT poly
 name "labelReady"
 data 8
-Cube.005
+Cube.188
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3136,7 +3136,7 @@ kids 0
 OBJECT poly
 name "labelReadyback"
 data 8
-Cube.016
+Cube.189
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3189,7 +3189,7 @@ kids 0
 OBJECT poly
 name "labelReloading"
 data 8
-Cube.003
+Cube.190
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3210,7 +3210,7 @@ kids 0
 OBJECT poly
 name "labelReloadingback"
 data 8
-Cube.018
+Cube.191
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3263,7 +3263,7 @@ kids 0
 OBJECT poly
 name "labelReloadingback.001"
 data 8
-Cube.074
+Cube.192
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3316,19 +3316,19 @@ kids 0
 OBJECT poly
 name "labelReloadingback.002"
 data 8
-Cube.077
+Cube.193
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
--0.00194 -0.01962 0.17783
--0.00194 -0.01398 0.17783
--0.00185 -0.01962 0.12507
--0.00185 -0.01398 0.12507
--0.00694 -0.01962 0.17718
--0.00694 -0.01398 0.17718
--0.00685 -0.01398 0.12442
--0.00685 -0.01962 0.12442
+-0.001 -0.01947 0.17783
+-0.00168 -0.01387 0.17783
+-0.00091 -0.01946 0.12507
+-0.0016 -0.01386 0.12507
+-0.00596 -0.02008 0.17718
+-0.00665 -0.01448 0.17718
+-0.00656 -0.01447 0.12442
+-0.00587 -0.02007 0.12442
 numsurf 5
 SURF 0X0
 mat 0
@@ -3369,19 +3369,19 @@ kids 0
 OBJECT poly
 name "labelReloadingback.003"
 data 8
-Cube.104
+Cube.194
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 8
--0.00129 -0.32774 -0.12174
--0.00129 -0.3221 -0.12174
--0.0012 -0.32774 -0.1745
--0.0012 -0.3221 -0.1745
--0.00629 -0.32774 -0.12239
--0.00629 -0.3221 -0.12239
--0.0062 -0.3221 -0.17515
--0.0062 -0.32774 -0.17515
+0.0372 -0.32521 -0.12174
+0.03651 -0.31962 -0.12174
+0.03729 -0.3252 -0.1745
+0.0366 -0.3196 -0.1745
+0.03224 -0.32582 -0.12239
+0.03155 -0.32022 -0.12239
+0.03164 -0.32021 -0.17515
+0.03232 -0.32581 -0.17515
 numsurf 5
 SURF 0X0
 mat 0
@@ -3422,15 +3422,15 @@ kids 0
 OBJECT poly
 name "labelReset"
 data 8
-Cube.040
+Cube.195
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.01343 -0.06481 -0.12222
-0.01343 -0.05871 -0.12222
-0.01337 -0.06481 -0.14141
-0.01337 -0.05871 -0.14141
+0.01977 -0.06245 -0.16909
+0.01902 -0.05639 -0.16909
+0.01971 -0.06246 -0.18827
+0.01896 -0.0564 -0.18827
 numsurf 1
 SURF 0X0
 mat 0
@@ -3443,7 +3443,7 @@ kids 0
 OBJECT poly
 name "labelReticle"
 data 8
-Cube.110
+Cube.196
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3464,15 +3464,15 @@ kids 0
 OBJECT poly
 name "labelRwrVol"
 data 8
-Cube.055
+Cube.197
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.00952 -0.03988 -0.29787
-0.00952 -0.03378 -0.29787
-0.01079 -0.03988 -0.31702
-0.01079 -0.03378 -0.31702
+0.01285 -0.03818 -0.29787
+0.0121 -0.03213 -0.29787
+0.01411 -0.03803 -0.31702
+0.01336 -0.03197 -0.31702
 numsurf 1
 SURF 0X0
 mat 0
@@ -3485,7 +3485,7 @@ kids 0
 OBJECT poly
 name "labelSar"
 data 8
-Cube.014
+Cube.198
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3506,7 +3506,7 @@ kids 0
 OBJECT poly
 name "labelSARback"
 data 8
-Cube.017
+Cube.199
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3559,7 +3559,7 @@ kids 0
 OBJECT poly
 name "labelSelector"
 data 10
-Circle.012
+Circle.000
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -3729,7 +3729,7 @@ kids 0
 OBJECT poly
 name "labelSelectorBack"
 data 10
-Circle.013
+Circle.001
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -4483,7 +4483,7 @@ kids 0
 OBJECT poly
 name "labelShoot"
 data 8
-Cube.061
+Cube.200
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -4504,7 +4504,7 @@ kids 0
 OBJECT poly
 name "labelStby"
 data 8
-Cube.101
+Cube.201
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -4525,7 +4525,7 @@ kids 0
 OBJECT poly
 name "labelTargetSize"
 data 8
-Cube.070
+Cube.202
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -4546,7 +4546,7 @@ kids 0
 OBJECT poly
 name "labelTaxi"
 data 8
-Cube.096
+Cube.203
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -4567,15 +4567,15 @@ kids 0
 OBJECT poly
 name "labelTest"
 data 8
-Cube.052
+Cube.204
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.00854 -0.07154 -0.2671
-0.00864 -0.07155 -0.261
-0.00854 -0.05237 -0.2671
-0.00864 -0.05237 -0.261
+0.01573 -0.06973 -0.2671
+0.01583 -0.06972 -0.261
+0.0134 -0.0507 -0.2671
+0.01349 -0.05069 -0.261
 numsurf 1
 SURF 0X0
 mat 0
@@ -4588,7 +4588,7 @@ kids 0
 OBJECT poly
 name "labelToff"
 data 8
-Cube.095
+Cube.205
 crease 35.0
 texture "labels.png"
 texrep 1 1
@@ -4609,15 +4609,15 @@ kids 0
 OBJECT poly
 name "labelWeat"
 data 8
-Cube.051
+Cube.206
 crease 35.0
 texture "labels.png"
 texrep 1 1
 numvert 4
-0.00854 -0.04318 -0.2671
-0.00864 -0.04318 -0.261
-0.00854 -0.024 -0.2671
-0.00864 -0.024 -0.261
+0.01228 -0.04158 -0.2671
+0.01237 -0.04156 -0.261
+0.00994 -0.02254 -0.2671
+0.01004 -0.02253 -0.261
 numsurf 1
 SURF 0X0
 mat 0

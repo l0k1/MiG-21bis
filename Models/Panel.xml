@@ -53,10 +53,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/Radar/Radar.xml</path>
         <offsets>
 			<heading-deg></heading-deg>
-            <pitch-deg></pitch-deg>
-            <x-m>-4.01335</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.98830</x-m>
             <y-m> 0.10467</y-m>
-            <z-m> 0.59006</z-m>
+            <z-m> 0.58641</z-m>
         </offsets>
     </model>
     
@@ -85,9 +85,10 @@
         <name>Attitude Indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/AI/AI.xml</path>
         <offsets>
-            <x-m>-3.97310</x-m>
-            <y-m>-0.14113</y-m>
-            <z-m> 0.66844</z-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.95784</x-m>
+            <y-m>-0.14120</y-m>
+            <z-m> 0.66935</z-m>
         </offsets>
     </model>
     
@@ -95,9 +96,10 @@
         <name>Heading Indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/HI/HI.xml</path>
         <offsets>
-            <x-m>-3.97823</x-m>
-            <y-m>-0.13970</y-m>
-            <z-m> 0.53521</z-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.94719</x-m>
+            <y-m>-0.14009</y-m>
+            <z-m> 0.53679</z-m>
         </offsets>
     </model>
     
@@ -105,9 +107,10 @@
         <name>Machometer</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Mach/Mach.xml</path>
         <offsets>
-            <x-m>-3.97408</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.94531</x-m>
             <y-m>-0.02813</y-m>
-            <z-m> 0.55713</z-m>
+            <z-m> 0.55852</z-m>
         </offsets>
     </model>
     
@@ -115,9 +118,10 @@
         <name>Clock</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Clock/Clock.xml</path>
         <offsets>
-            <x-m>-3.97346</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.93413</x-m>
             <y-m>-0.03131</y-m>
-            <z-m> 0.47046</z-m>
+            <z-m> 0.47257</z-m>
         </offsets>
     </model>
     
@@ -125,9 +129,10 @@
         <name>DA-200 Combo VSI and TC Indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/VSI/VSI.xml</path>
         <offsets>
-            <x-m>-3.97793</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.96086</x-m>
             <y-m>-0.02923</y-m>
-            <z-m> 0.65341</z-m>
+            <z-m> 0.65361</z-m>
         </offsets>
     </model>
     
@@ -135,9 +140,10 @@
         <name>Voltmeter and Ampmeter</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Volt/Volt.xml</path>
         <offsets>
-            <x-m>-3.97324</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.93202</x-m>
             <y-m> 0.03458</y-m>
-            <z-m> 0.45491</z-m>
+            <z-m> 0.45716</z-m>
         </offsets>
     </model>
     
@@ -147,9 +153,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/ASI2/ASI.xml</path>
         <offsets>
             <heading-deg>5</heading-deg>
-            <x-m>-3.96820</x-m>
-            <y-m>-0.28365</y-m>
-            <z-m> 0.68549</z-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.95465</x-m>
+            <y-m>-0.28361</y-m>
+            <z-m> 0.68672</z-m>
         </offsets>
     </model>
     
@@ -158,9 +165,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/ALT/ALT.xml</path>
         <offsets>
             <heading-deg>5</heading-deg>
-            <x-m>-3.96692</x-m>
-            <y-m>-0.28944</y-m>
-            <z-m> 0.58509</z-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.94207</x-m>
+            <y-m>-0.28958</y-m>
+            <z-m> 0.58687</z-m>
         </offsets>
     </model>
     
@@ -169,9 +177,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/RadarAltimeter/RadarAltimeter.xml</path>
         <offsets>
             <heading-deg>5</heading-deg>
-            <x-m>-3.96724</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.93117</x-m>
             <y-m>-0.28282</y-m>
-            <z-m> 0.49678</z-m>
+            <z-m> 0.49945</z-m>
         </offsets>
     </model>
     
@@ -179,9 +188,10 @@
         <name>Oil Pressure indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/OilPressure/OilPressure.xml</path>
         <offsets>
-            <x-m>-3.97861</x-m>
+            <pitch-deg>-25</pitch-deg>
+            <x-m>-3.89874</x-m>
             <y-m>-0.05035</y-m>
-            <z-m> 0.34661</z-m>
+            <z-m> 0.35638</z-m>
         </offsets>
     </model>
 
@@ -189,10 +199,10 @@
         <name>Cabin Pressure Indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/CockpitAltitude/CockpitAltitude.xml</path>
         <offsets>
-            <!--<pitch-deg>-10</pitch-deg>-->
-            <x-m>-3.96941</x-m>
+            <pitch-deg>-25</pitch-deg>
+            <x-m>-3.81000</x-m>
             <y-m>-0.04261</y-m>
-            <z-m> 0.15637</z-m>
+            <z-m> 0.18785</z-m>
         </offsets>
     </model>
     
@@ -201,9 +211,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/Tachometer/Tachometer.xml</path>
         <offsets>
             <heading-deg>-5</heading-deg>
-            <x-m>-3.96464</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.95055</x-m>
             <y-m> 0.31421</y-m>
-            <z-m> 0.67705</z-m>
+            <z-m> 0.67870</z-m>
         </offsets>
     </model>
     
@@ -212,9 +223,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/JPT/JPT.xml</path>
         <offsets>
             <heading-deg>-5</heading-deg>
-            <x-m>-3.96370</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.93833</x-m>
             <y-m> 0.31478</y-m>
-            <z-m> 0.58446</z-m>
+            <z-m> 0.58691</z-m>
         </offsets>
     </model>
     
@@ -223,9 +235,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/Fuel/Fuel.xml</path>
         <offsets>
             <heading-deg>-5</heading-deg>
-            <x-m>-3.95813</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.92067</x-m>
             <y-m> 0.31724</y-m>
-            <z-m> 0.48478</z-m>
+            <z-m> 0.48865</z-m>
         </offsets>
     </model>
     
@@ -245,9 +258,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/Hydraulics/Hydraulics.xml</path>
         <offsets>
             <heading-deg>-5</heading-deg>
-            <x-m>-3.96802</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.92974</x-m>
             <y-m> 0.23161</y-m>
-            <z-m> 0.47875</z-m>
+            <z-m> 0.48146</z-m>
         </offsets>
     </model>
     
@@ -289,20 +303,22 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/MagneticDeclination/MagneticDeclination.xml</path>
         <offsets>
             <heading-deg>0</heading-deg>
-            <x-m>-3.98199</x-m>
+            <pitch-deg>-25</pitch-deg>
+            <x-m>-3.83831</x-m>
             <y-m> 0.05305</y-m>
-            <z-m> 0.19636</z-m>
+            <z-m> 0.21878</z-m>
         </offsets>
     </model>
 
     <model>
-        <name>Magnetic Declination Indicator</name>
+        <name>Air Pressure Indicatior</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/AirPressure/AirPressure.xml</path>
         <offsets>
             <heading-deg>0</heading-deg>
-            <x-m>-3.98189</x-m>
+            <pitch-deg>-25</pitch-deg>
+            <x-m>-3.80213</x-m>
             <y-m> 0.04972</y-m>
-            <z-m> 0.11097</z-m>
+            <z-m> 0.14143</z-m>
         </offsets>
     </model>
 
@@ -321,9 +337,10 @@
 		<name>Radar Control Panel</name>
 		<path>Aircraft/MiG-21bis/Models/Instruments/RadarControlPanel/radar-control-panel.xml</path>
 		<offsets>
-            <x-m>-3.94986</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.94626</x-m>
             <y-m> 0.13719</y-m>
-            <z-m> 0.75696</z-m>
+            <z-m> 0.75973</z-m>
         </offsets>
 	</model>
 	
@@ -403,9 +420,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/RWR/rwr.xml</path>
         <offsets>
             <heading-deg>-5</heading-deg>
-            <x-m>-3.94942</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.94524</x-m>
             <y-m> 0.30571</y-m>
-            <z-m> 0.75739</z-m>
+            <z-m> 0.76029</z-m>
         </offsets>
     </model>
 
@@ -447,9 +465,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/LightPanels/lowerLightBank.xml</path>
         <offsets>
             <heading-deg></heading-deg>
-            <x-m>-3.97014</x-m>
+            <pitch-deg>-25</pitch-deg>
+            <x-m>-3.87060</x-m>
             <y-m> 0.04398</y-m>
-            <z-m> 0.29819</z-m>
+            <z-m> 0.31607</z-m>
         </offsets>
     </model>
 
@@ -458,9 +477,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/LightPanels/dashLightBank.xml</path>
         <offsets>
             <heading-deg></heading-deg>
-            <x-m>-3.95787</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.93039</x-m>
             <y-m> 0.24960</y-m>
-            <z-m> 0.56677</z-m>
+            <z-m> 0.57006</z-m>v
         </offsets>
     </model>
 
@@ -480,9 +500,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/RadarAltimeter/radarAltimeterKnob.xml</path>
         <offsets>
             <heading-deg></heading-deg>
-            <x-m>-3.96610</x-m>
+            <pitch-deg>-25</pitch-deg>
+            <x-m>-3.84960</x-m>
             <y-m>-0.05173</y-m>
-            <z-m> 0.25715</z-m>
+            <z-m> 0.28058</z-m>
         </offsets>
     </model>
 
@@ -491,9 +512,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/Radar/radarDegauss.xml</path>
         <offsets>
             <heading-deg></heading-deg>
-            <x-m>-3.96097</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.92067</x-m>
             <y-m>-0.11292</y-m>
-            <z-m> 0.46172</z-m>
+            <z-m> 0.46542</z-m>
         </offsets>
     </model>
 
