@@ -641,7 +641,7 @@
 		<object-name>cone</object-name>
 		<object-name>hull</object-name>
 		<object-name>canopy</object-name>
-		<object-name>front-canopy</object-name>
+		<object-name>canopyFront</object-name>
 		<object-name>bcanopy</object-name>
 		<object-name>bfront-canopy</object-name>
 		<object-name>left_ventral_air_brake</object-name>
