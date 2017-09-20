@@ -61,16 +61,6 @@
     </model>
     
     <model>
-        <name>Landing Gear</name>
-        <path>Aircraft/MiG-21bis/Models/Instruments/Gear/Gear.xml</path>
-        <offsets>
-            <x-m>0</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
-        </offsets>
-    </model>
-    
-    <model>
         <name>GMeter</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/GMeter/GMeter.xml</path>
         <offsets>
@@ -527,6 +517,17 @@
             <x-m>-3.96832</x-m>
             <y-m>-0.04216</y-m>
             <z-m> 0.80486</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>Labels</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/Autopilot/autopilot_panel.xml</path>
+        <offsets>
+            <heading-deg>58</heading-deg>
+            <x-m>-3.87433</x-m>
+            <y-m>-0.37710</y-m>
+            <z-m> 0.45108</z-m>
         </offsets>
     </model>
 
