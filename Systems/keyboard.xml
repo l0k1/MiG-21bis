@@ -48,8 +48,8 @@
 		</mod-up>
 	</key>
 
-	<key n="10">
-		<name>Ctrl-j</name>
+	<key n="7">
+		<name>Ctrl-g</name>
 		<desc>jettison braking parachute</desc>
 		<binding>
 			<command>property-assign</command>
