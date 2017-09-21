@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+ 
+<PropertyList>
+
+	<!-- danger altitude lighting -->
+
+	<logic>
+		<input>
+			<greater-than>
+				<property>/instrumentation/altimeter/altitude-limit-select-ft</property>
+        		<property>/position/altitude-agl-ft</property>
+        	</greater-than>
+        </input>
+        <output>/instrumentation/altimeter/danger-alt-light</output>
+    </logic>
+
+</PropertyList>

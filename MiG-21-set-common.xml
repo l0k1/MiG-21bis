@@ -18,6 +18,10 @@
 			<autopilot>
 				<path>Aircraft/MiG-21bis/Systems/Autopilot.xml</path>
 			</autopilot>
+			<property-rule n="101">
+              <name>radar-altimeter</name>
+              <path>Aircraft/MiG-21bis/Systems/radar-altimeter.xml</path>
+            </property-rule>
 		</systems>
 
 		<sound>
@@ -534,61 +538,25 @@
 
 	<!-- Nasal Scripts -->
 	<nasal>
-		<mig21>
-			<file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>
-		</mig21>
-		<MiG-21bis>
-			<file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>
-		</MiG-21bis>
-		<lights>
-	    		<file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>
-	   	</lights>
-		<Eject>
-			<file>Aircraft/MiG-21bis/Nasal/eject.nas</file>
-		</Eject>
-		<tyresmoke>
-			<file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>
-		</tyresmoke>
-		<payloads>
-			<file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>
-		</payloads>
-		<radar_logic>
-			<file>Aircraft/MiG-21bis/Nasal/radar-logic.nas</file>
-		</radar_logic>
-		<radar_canvas>
-			<file>Aircraft/MiG-21bis/Nasal/radar-canvas.nas</file>
-		</radar_canvas>
-		<gunsight_canvas>
-			<file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>
-		</gunsight_canvas>
-		<blackout>
-			<file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>
-		</blackout>
-		<armament>
-			<file>Aircraft/MiG-21bis/Nasal/guided-missiles.nas</file>
-		</armament>
-		<damage>
-			<file>Aircraft/MiG-21bis/Nasal/damage.nas</file>
-		</damage>
-		<crashandstress>
-			<file>Aircraft/MiG-21bis/Nasal/crash-and-stress.nas</file>    
-		</crashandstress>
-		<rcs>
-			<file>Aircraft/MiG-21bis/Nasal/rcs.nas</file>
-		</rcs>
-    	<vector>
-    		<file>Aircraft/MiG-21bis/Nasal/vector.nas</file>
-    	</vector>
-		<!--<headmove>
-			<file>Aircraft/MiG-21bis/Nasal/headmove.nas</file>
-		</headmove>-->
-		<!-- For Wingmen AI Scenarios -->
-        <formation>
-                <file>Aircraft/Generic/formation.nas</file>
-        </formation>
-        <dialog>
-        	<file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>
-        </dialog>
+		<mig21>           <file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>         </mig21>
+		<MiG-21bis>       <file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>         </MiG-21bis>
+		<lights>          <file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>           </lights>
+		<Eject>           <file>Aircraft/MiG-21bis/Nasal/eject.nas</file>            </Eject>
+		<tyresmoke>       <file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>        </tyresmoke>
+		<payloads>        <file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>         </payloads>
+		<radar_logic>     <file>Aircraft/MiG-21bis/Nasal/radar-logic.nas</file>      </radar_logic>
+		<radar_canvas>    <file>Aircraft/MiG-21bis/Nasal/radar-canvas.nas</file>     </radar_canvas>
+		<gunsight_canvas> <file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>  </gunsight_canvas>
+		<blackout>        <file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>         </blackout>
+		<armament>        <file>Aircraft/MiG-21bis/Nasal/guided-missiles.nas</file>  </armament>
+		<damage>          <file>Aircraft/MiG-21bis/Nasal/damage.nas</file>           </damage>
+		<crashandstress>  <file>Aircraft/MiG-21bis/Nasal/crash-and-stress.nas</file> </crashandstress>
+		<rcs>             <file>Aircraft/MiG-21bis/Nasal/rcs.nas</file>              </rcs>
+    	<vector>          <file>Aircraft/MiG-21bis/Nasal/vector.nas</file>           </vector>
+        <formation>       <file>Aircraft/Generic/formation.nas</file>                </formation>
+        <dialog>          <file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>          </dialog>
+        <radar-altimeter> <file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>  </radar-altimeter>
+
 	</nasal>
 
 </PropertyList>

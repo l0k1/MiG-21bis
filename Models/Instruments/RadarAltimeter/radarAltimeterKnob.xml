@@ -3,7 +3,7 @@
 
     <path>radarAltimeterKnob.ac</path>
 
-        <animation>
+    <animation>
         <type>material</type>
         <object-name>radarAltLimitSelectorFace</object-name>
         <object-name>radarAltLimitSelectorKnob</object-name>
@@ -11,9 +11,87 @@
             <red>0.6</red>
             <green>0.3</green>
             <blue>0.3</blue>
-            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+            <factor-prop>/controls/lighting/instruments-norm</factor-prop>
         </emission> 
+    </animation>
+
+	<animation>
+	    <type>rotate</type>
+	    <object-name>radarAltLimitSelectorKnob</object-name>
+	    <property>/instrumentation/altimeter/altitude-limit-select</property>
+        <interpolation>
+            <entry><ind> 0</ind><dep>  120</dep></entry>
+            <entry><ind> 1</ind><dep>   90</dep></entry>
+            <entry><ind> 2</ind><dep>   60</dep></entry>
+            <entry><ind> 3</ind><dep>   30</dep></entry>
+            <entry><ind> 4</ind><dep>    0</dep></entry>
+            <entry><ind> 5</ind><dep>  -45</dep></entry>
+            <entry><ind> 6</ind><dep>  -90</dep></entry>
+            <entry><ind> 7</ind><dep> -105</dep></entry>
+            <entry><ind> 8</ind><dep> -120</dep></entry>
+        </interpolation>
+        <axis>
+            <x>1</x>
+        </axis>
     </animation> 
+    
+    <animation>
+        <type>pick</type>
+        <object-name>radarAltLimitSelectorFace</object-name>
+        <object-name>radarAltLimitSelectorKnob</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/altimeter/altitude-limit-select</property>
+                <step>1</step>
+                <min>0</min>
+                <max>9</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.05</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/altimeter/altitude-limit-select</property>
+                <step>-1</step>
+                <min>0</min>
+                <max>9</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/altimeter/altitude-limit-select</property>
+                <step>1</step>
+                <min>0</min>
+                <max>9</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/altimeter/altitude-limit-select</property>
+                <step>-1</step>
+                <min>0</min>
+                <max>9</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+    </animation>
 
 	<!--lights-->
 
