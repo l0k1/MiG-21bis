@@ -33,7 +33,7 @@ var ir_sar_switch = "/controls/armament/panel/ir-sar-switch";
 var gun_missile_switch = "/controls/armament/gunsight/gun-missile-switch";
 
 var pipper_scale_degree_per_pixel = 0.018229508; # amount of degrees per pixel of pipperscale
-var pipper_translation_degree_per_pixel = 0.009989712; # degrees to translate the pipper with
+var pipper_translation_degree_per_pixel = 0.01383; # degrees to translate the pipper with
 
 var startViewX = getprop(viewX);
 var startViewY = getprop(viewY);
@@ -313,7 +313,7 @@ var gun_sight = {
 			.setTranslation(441,583)
 			.setRotation(315 * D2R,0));
 			
-		m.pipper_center = [500,196];
+		m.pipper_center = [500,509];
 			
 		setlistener(pipperpowerswitch, func { m.pipper_power(); } );
 		setlistener(pipperscale, func { m.pipper_move(); } );
@@ -327,6 +327,7 @@ var gun_sight = {
 		setlistener(redpath,func { m.updateColor() });
 		setlistener(bluepath,func { m.updateColor() });
 		setlistener(greenpath,func { m.updateColor() });
+		setlistener(pipperbrightness,func { m.updateColor() });
 		setlistener(fixed_net_alphapath,func { m.updateColor() });
 		
 		setlistener(linewidthpath,func { m.updateWidth() });
@@ -401,6 +402,7 @@ var gun_sight = {
 		
 		#calculate range and pipper location
 		
+		################## FIXED BEAM ##################
 		if ( getprop(ir_sar_switch) != 0 and getprop("controls/radar/power-panel/fixed-beam") == 1 and getprop(air_gnd_switch) == 0) {
 			#find range here. radar locked to -1.5*. it's going to be code intensive-ish. =\
 			#orientation/heading-deg
@@ -463,8 +465,8 @@ var gun_sight = {
 			}
 			#print("range: " ~ range ~ " | iters: " ~ i ~ " | alt: " ~ alt_to_check);
 			
-		# calculate pipper position if IR seeking is active
-			
+		################## IR SEEKING ##################
+
 		} elsif ( getprop(ir_sar_switch) == 0 ) {
 			# IR won't calculate range, so putting it seperate from the auto-range functions.
 			# in theory, the pipper could "surround" the heat source, so letting the range thing slide for now.
@@ -477,11 +479,16 @@ var gun_sight = {
 				if ( getprop(gun_missile_switch) == 1 ) {
 					pipper_adjust_x = (dist_rad[1] * R2D);
 					pipper_adjust_y = (dist_rad[2] * R2D);
+					#pipper_adjust_x = getprop("/aax");
+					#pipper_adjust_y = getprop("/aay");
 				}
 				#print("x deg: " ~ (dist_rad[1] * R2D) ~ " |y deg: " ~ (dist_rad[2] * R2D) ~ " |adjust x: " ~ math.cos(getprop("orientation/roll-deg") * D2R) ~ " |adjust y: " ~ ( -1 * math.sin(getprop("orientation/roll-deg") * D2R)) ~ " |finalx: " ~ pipper_adjust_x ~ " |finaly: " ~ pipper_adjust_y);
 			}
 		}
 		
+		################## PIPPER SCALING ##################
+
+
 		if ( getprop(pipperautomanual) == 0 ) {
 			#calculate pipper scale based on range value (i.e. automatically)
 			#currently assuming a width of 15m, need to fix when the correct instrument is implemented.
@@ -499,16 +506,18 @@ var gun_sight = {
 			#print("range " ~ range);
 		}
 		
+		################## PIPPER GUN POSITION ##################
+
 		if ( getprop(gun_missile_switch) == 0 ) {
 			#gun pipper movement logic. need to do it after range has been calculated.
 			#2840 ft/sec if we are calculating for gun.
 			var airspeed = getprop("/velocities/airspeed-kt") * KT2MPS;
 			var b_speed = 3000 + airspeed; #projectile speed
-			var l_angle = 0;    #launch angle adjustment
+			var l_angle = 1;    #launch angle adjustment
 			if ( getprop(pipperangularcorrection) == 0 ) { 
 				#guns default until the knobbin gets installed
 				b_speed = (2350 * FT2M) + airspeed; 
-				l_angle = -1;
+				l_angle = 1;
 			}
 			#adjust launch angle to account for aircraft roll
 			#assuming heading variation is 0, otherwise we will need to account for that.
@@ -521,6 +530,7 @@ var gun_sight = {
 		}
 			
 	
+		################## PIPPER FINAL LOCATION CALCULATION ##################
 	
 		#translate center to proper position
 		# ^ if that works, we can easily do a clamp to set the max amount of movement based on the gyro/miss switch
@@ -554,9 +564,12 @@ var gun_sight = {
 		var dB = me.getColor(bluepath);
 		var dG = me.getColor(greenpath);
 		var dA = getprop(fixed_net_alphapath);
-		for (var i = 0; i < size(me.gschild); i += 1 ) {
-			me.gschild[i].setColor(dR,dG,dB,dA);
-		}
+		var dAp = getprop(pipperbrightness);
+		#for (var i = 0; i < size(me.gschild); i += 1 ) {
+		#	me.gschild[i].setColor(dR,dG,dB,dA);
+		#}
+		me.gsight.setColor(dR,dG,dB,dA);
+		me.pipper.setColor(dR,dG,dB,dAp);
 	},
 	updateWidth: func() {
 		var lW = getprop(linewidthpath);

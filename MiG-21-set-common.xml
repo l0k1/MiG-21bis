@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-	<aax type="int">0</aax>
-	<aay type="int">0</aay>
+	<!--<aax type="float">0</aax>
+	<aay type="float">0</aay>-->
 	<sim>
 
 		<submodels>

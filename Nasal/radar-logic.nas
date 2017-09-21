@@ -663,11 +663,11 @@ var ir_seekTarget= func() {
 			#print("distance: " ~ dist_rad[0]);
 			#print("x_ang: " ~ (dist_rad[1] * R2D));
 			#print("y_ang: " ~ (dist_rad[2] * R2D));
-			if ( dist_rad[0] != 900000 and dist_rad[0] < ir_seek_limit and math.abs(dist_rad[1] * R2D) < 5 and dist_rad[2] * R2D < 3 and dist_rad[2] > -7 * R2D) { # target distance < seek range, no more than 5* left/right, 3* up and 7* down
-				if ( dist_rad[0] < c_dist ) {
+      # IR Seeker cone, normalized at 1* pitch up and straight ahead.
+      # maximum distance of 5.5 degrees in any direction.
+			if ( dist_rad[0] != 900000 and dist_rad[0] < ir_seek_limit and math.abs(dist_rad[1] * R2D) < 5 and dist_rad[2] * R2D < 6 and dist_rad[2] > -4 * R2D) { # target distance < seek range, no more than 5* left/right, 3* up and 7* down
 					c_dist = dist_rad[0];
 					c_most = track;
-				}
 			}
 		}
 		if ( c_most != nil and c_most != selection ) {
@@ -687,7 +687,7 @@ var ir_seekTarget= func() {
 
 var unlockTarget = func() {
 	if ( selection != nil ) {
-		#print("unlocking target");
+		print("unlocking target");
 		paint(selection.getNode(), FALSE);
 		selection = nil;
 		armament.contact = nil;
