@@ -14,4 +14,20 @@
         <output>/instrumentation/altimeter/danger-alt-light</output>
     </logic>
 
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+	    		<div>
+	    			<property>/position/altitude-agl-ft</property>
+	    			<cos>
+	    				<property>/instrumentation/altimeter/radar-altimeter-angle-rad</property>
+	    			</cos>
+	    		</div>
+    		</expression>
+    	</input>
+    	<output>/instrumentation/altimeter/radar-altimeter-ft</output>
+    </filter>
+
 </PropertyList>

@@ -555,7 +555,7 @@
     	<vector>          <file>Aircraft/MiG-21bis/Nasal/vector.nas</file>           </vector>
         <formation>       <file>Aircraft/Generic/formation.nas</file>                </formation>
         <dialog>          <file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>          </dialog>
-        <radar-altimeter> <file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>  </radar-altimeter>
+        <radar_altimeter> <file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>  </radar_altimeter>
 
 	</nasal>
 
