@@ -10,7 +10,7 @@ setlistener( "/instrumentation/altimeter/altitude-limit-select", func{
 
 var calc_safe_altitude = func(){
 	var low_limit = getprop("/instrumentation/altimeter/altitude-limit-select-ft");
-	setprop("/autopilot/settings/safe-alt",getprop("/position/altitude-ft") - getprop("/position/altitude-agl-ft") + (low_limit + (M2FT * (150 + (20-150) * ((low_limit * FT2M) - 20) / (600-20)))));
+	setprop("/autopilot/settings/safe-alt",getprop("/instrumentation/altimeter/indicated-altitude-ft") - getprop("/instrumentation/altimeter/radar-altimeter-ft") + (low_limit + (M2FT * (150 + (20-150) * ((low_limit * FT2M) - 20) / (600-20)))));
 }
 
 var calc_down_angle = func(){

@@ -40,6 +40,14 @@ check for Low Altitude Mode
     alt limit is hit, continuously compute new alt until above the alt limit
 -->
 
+<!-- modes:
+    0 is off
+    1 is low-alt
+    2 is leveler
+    3 is stabilizer
+    4 is ils
+-->
+
     <state-machine>
 
         <branch>/autopilot/low-level-state-machine</branch>
@@ -47,7 +55,13 @@ check for Low Altitude Mode
         <state>
             <name>monitor</name>
             <enter></enter>
-            <exit></exit>
+            <exit>
+                <binding>
+                    <command>property-assign</command>
+                    <property>/autopilot/locks/mode</property>
+                    <value>1</value>
+                </binding>
+            </exit>
             <update></update>
         </state>
 
@@ -67,15 +81,13 @@ check for Low Altitude Mode
             <target>climb</target>
             <exclude-target type="bool">true</exclude-target>
             <condition>
-                <!--<property>/autopilot/locks/low-alt-mode</property>-->
+                <property>/autopilot/locks/low-alt-mode-enabled</property>>
                 <greater-than>
                     <property>/instrumentation/altimeter/altitude-limit-select-ft</property>
                     <property>/position/altitude-agl-ft</property>
                 </greater-than>
             </condition>
             <binding>
-                <command>nasal</command>
-                <script>print('triggered2');</script>
             </binding>
         </transition>
 
@@ -86,7 +98,8 @@ check for Low Altitude Mode
             <exclude-target type="bool">false</exclude-target>
             <condition>
                 <not>
-                    <property>/autopilot/locks/low-alt-mode</property>
+                    <property>/autopilot/locks/mode</property>
+                    <value>lowaltitude</value>
                 </not>
                 <less-than>
                     <property>/instrumentation/altimeter/altitude-limit-select-ft</property>
@@ -94,12 +107,125 @@ check for Low Altitude Mode
                 </less-than>
             </condition>
             <binding>
-                <command>nasal</command>
-                <script>print('triggered2');</script>
             </binding>
         </transition>
 
-
     </state-machine>
+
+<!-- the actual low-alt pids -->
+    
+    <pid-controller>
+        <name>Low Altitude Hold Stage 1</name>
+        <debug>false</debug>
+        <enable>
+            <prop>/autopilot/locks/mode</prop>
+            <value>1</value>
+        </enable>
+        <input>
+            <prop>/instrumentation/altimeter/indicated-altitude-ft</prop>
+        </input>
+        <reference>
+            <prop>/autopilot/settings/safe-alt</prop>
+        </reference>
+        <output>
+            <prop>/autopilot/internal/low-alt-target-climb</prop>
+        </output>
+            <config>
+            <Kp>-0.0018</Kp> 
+            <beta>0.0</beta>
+            <alpha>0.0</alpha>
+            <gamma>0.0</gamma>
+            <Ti>5.5</Ti>
+            <Td>0.00003</Td>
+            <u_min></u_min>
+            <u_max></u_max>
+        </config>
+    </pid-controller>
+    
+    <pid-controller>
+        <name>Low Altitude Hold Stage 2</name>
+        <debug>false</debug>
+        <enable>
+            <prop>/autopilot/locks/mode</prop>
+            <value>1</value>
+        </enable>
+        <input>
+            <prop>/velocities/vertical-speed-fps</prop>
+        </input>
+        <reference>
+            <prop>/autopilot/internal/low-alt-target-climb</prop>
+        </reference>
+        <output>
+            <prop>/controls/flight/elevator</prop>
+        </output>
+        <config>
+            <Kp>-0.0018v</Kp>
+            <beta>0.9</beta>
+            <alpha>0.1</alpha>
+            <gamma>0.0</gamma>
+            <Ti>5.5</Ti>
+            <Td>0.00003</Td>
+            <u_min>-1.0</u_min>
+            <u_max>1.0</u_max>
+        </config>
+    </pid-controller>
+    
+<!-- auto-leveler -->
+
+    <pid-controller>
+        <name>Auto-Leveler Pitch</name>
+        <debug>false</debug>
+        <enable>
+            <prop>/autopilot/locks/mode</prop>
+            <value>2</value>
+        </enable>
+        <input>
+            <prop>/orientation/pitch-deg</prop>
+        </input>
+        <reference>
+            <prop>/orientation/alpha-deg</prop>
+        </reference>
+        <output>
+            <prop>/controls/flight/elevator</prop>
+        </output>
+            <config>
+            <Kp>-0.0018</Kp> 
+            <beta>0.0</beta>
+            <alpha>0.0</alpha>
+            <gamma>0.0</gamma>
+            <Ti>5.5</Ti>
+            <Td>0.00003</Td>
+            <u_min></u_min>
+            <u_max></u_max>
+        </config>
+    </pid-controller>
+    
+    <pid-controller>
+        <name>Auto-Leveler Roll</name>
+        <debug>false</debug>
+        <enable>
+            <prop>/autopilot/locks/mode</prop>
+            <value>2</value>
+        </enable>
+        <input>
+            <prop>/orientation/roll-deg</prop>
+        </input>
+        <reference>
+            <value>0</value>
+        </reference>
+        <output>
+            <prop>/controls/flight/aileron</prop>
+        </output>
+        <config>
+            <Kp>-0.0018</Kp>
+            <beta>0.9</beta>
+            <alpha>0.1</alpha>
+            <gamma>0.0</gamma>
+            <Ti>5.5</Ti>
+            <Td>0.00003</Td>
+            <u_min>-1.0</u_min>
+            <u_max>1.0</u_max>
+        </config>
+    </pid-controller>
 
 </PropertyList>

@@ -458,6 +458,9 @@
 			<fcs>
 				<pitch-gearing-enable>1</pitch-gearing-enable>
 				<roll-damping-enable>1</roll-damping-enable>
+				<elevator-ap-cmd-norm type="double">0</elevator-ap-cmd-norm>
+				<aileron-ap-cmd-norm type="double">0</aileron-ap-cmd-norm>
+				<rudder-ap-cmd-norm type="double">0</rudder-ap-cmd-norm>
 			</fcs>
 			<!-- for in-flight FDM tuning -->
 			<tune>

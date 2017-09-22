@@ -2,16 +2,52 @@
 
 <system name="FCS-yaw">
 
-  <channel name="Yaw">
+    <property>/autopilot/locks/mode</property>
 
-   <summer name="Rudder Command Sum">
+  <channel name="Yaw">
+  
+  	<switch name="rudder-ap-override">
+		<default value="0"/>
+		<test logic="AND" value="1">
+			/autopilot/locks/mode gt 0
+			fcs/rudder-manual-override == 0
+		</test>
+	</switch>
+  
+	<fcs_function name="trash/aadf3423">
+		<function>
+			<sum>
+				<product>
+					<property>fcs/rudder-cmd-norm</property>
+					<sum>
+						<product>
+							<property>fcs/rudder-ap-override</property>
+							<value>-1</value>
+						</product>
+						<value>1</value>
+					</sum>
+				<product>
+					<property>fcs/rudder-ap-cmd-norm</property>
+					<property>fcs/rudder-ap-override</property>
+				</product>
+				<property>fcs/yaw-trim-cmd-norm</property>
+			</sum>
+		</function>
+		<clipto>
+			<min> -1 </min>
+			<max>  1 </max>
+		</clipto>
+		<output>fcs/yaw-trim-sum</output>
+	</fcs_function>
+  
+   <!--<summer name="Rudder Command Sum">
       <input>fcs/rudder-cmd-norm</input>
       <input>fcs/yaw-trim-cmd-norm</input>
       <limit>
         <min> -1.0 </min>
         <max>  1.0 </max>
       </limit>
-   </summer>
+   </summer>-->
 
    <scheduled_gain name="Yaw Damper Rate">
       <input>velocities/r-aero-rad_sec</input>
