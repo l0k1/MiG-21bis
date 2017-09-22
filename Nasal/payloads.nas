@@ -259,24 +259,34 @@ var missile_release_listener = func {
 				if ((selected1.type = "ir" and getprop(ir_sar_switch) == 0 ) or ( selected1.type = "radar" and getprop(ir_sar_switch) == 2 )) { #if is IR/Radar missile, and weapon selector is in missile range
 				settimer(func { 
 					missile_release(armSelect[1]); 
-					}, 0.75);
+					}, 0.2);
 				}
 			}
-			
+		}	
 
-		} elsif (armSelect[2] <= 2) {
+		if (armSelect[2] < 2) {
 			#bombs and/or multi-rockets
 			if ((selected0.type == "bomb" or selected0.type == "rocket") and getprop(ag_panel_switch) == 2 ) {
 				bomb_release(armSelect[0]);
 			}
 			if ( armSelect[1] != -1 and getprop("payload/weight["~(armSelect[1])~"]/selected") != "none") {
-				if ((selected0.type == "bomb" or selected0.type == "rocket") and getprop(ag_panel_switch) == 2 ) {
-					settimer(func { 
-						bomb_release(armSelect[1]); 
-					}, 0.75);
+				if ((selected0.type == "bomb" or selected0.type == "rocket")) {
+					bomb_release(armSelect[1]);
 				}
 			}
-		} elsif (armSelect[2] == 3 or armSelect[2] == 4) {
+		}
+
+		if (armSelect[2] == 2 and getprop(ag_panel_switch) == 2 ) {
+			#bombs and/or multi-rockets
+			for ( i = 0; i <= 4; i = i + 1 ) {
+				if ( i != 2 and payloads[getprop("payload/weight["~i~"]/selected")].type == "bomb" ) {
+					bomb_release(i);
+				}
+			}
+		}
+
+
+		if (armSelect[2] == 3 or armSelect[2] == 4) {
 			if (selected0.type == "heavyrocket" and getprop(ag_panel_switch) == 2 ) {
 				bomb_release(armSelect[0]);
 			}
@@ -284,7 +294,7 @@ var missile_release_listener = func {
 				if (selected0.type == "heavyrocket" and getprop(ag_panel_switch) == 2 ) {
 					settimer(func  {
 						bomb_release(armSelect[1]);
-					},0.75);
+					},0.1);
 				}
 			}
 		}
