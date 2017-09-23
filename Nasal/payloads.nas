@@ -264,9 +264,9 @@ var missile_release_listener = func {
 			}
 		}	
 
-		if (armSelect[2] < 2) {
+		if (armSelect[2] < 2  and getprop(ag_panel_switch) == 2 ) {
 			#bombs and/or multi-rockets
-			if ((selected0.type == "bomb" or selected0.type == "rocket") and getprop(ag_panel_switch) == 2 ) {
+			if ((selected0.type == "bomb" or selected0.type == "rocket") ) {
 				bomb_release(armSelect[0]);
 			}
 			if ( armSelect[1] != -1 and getprop("payload/weight["~(armSelect[1])~"]/selected") != "none") {

@@ -109,7 +109,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-500/fab-500-sub.xml</submodel-path>
   
     </submodel>
 
@@ -134,7 +134,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-500/fab-500-sub.xml</submodel-path>
     </submodel>
 	
 	<submodel>
