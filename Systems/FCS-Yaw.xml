@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 
 <system name="FCS-yaw">
+    <property>fcs/rudder-ap-override</property>
+    <property>fcs/rudder-manual-override</property>
 
-    <property>/autopilot/locks/mode</property>
 
   <channel name="Yaw">
   
@@ -14,7 +15,7 @@
 		</test>
 	</switch>
   
-	<fcs_function name="trash/aadf3423">
+	<fcs_function name="trash/aadf3a423">
 		<function>
 			<sum>
 				<product>
@@ -26,6 +27,7 @@
 						</product>
 						<value>1</value>
 					</sum>
+                </product>
 				<product>
 					<property>fcs/rudder-ap-cmd-norm</property>
 					<property>fcs/rudder-ap-override</property>
@@ -61,7 +63,7 @@
    </scheduled_gain>
 
    <summer name="Rudder Sum">
-      <input>fcs/rudder-command-sum</input>
+      <input>fcs/yaw-trim-sum</input>
       <input>fcs/yaw-damper-rate</input>
       <limit>
         <min> -1 </min>

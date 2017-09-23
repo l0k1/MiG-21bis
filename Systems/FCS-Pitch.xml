@@ -4,6 +4,8 @@
 
 	<property>/instrumentation/altimeter/indicated-altitude-ft</property>
 	<property>/autopilot/locks/mode</property>
+	<property>fcs/elevator-ap-override</property>
+	<property>fcs/elevator-manual-override</property>
 
   <channel name="Pitch">
   
@@ -27,6 +29,7 @@
 						</product>
 						<value>1</value>
 					</sum>
+				</product>
 				<product>
 					<property>fcs/elevator-ap-cmd-norm</property>
 					<property>fcs/elevator-ap-override</property>

@@ -2,7 +2,9 @@
 
 <system name="FCS-roll">
 
-    <property>/autopilot/locks/mode</property>
+	<property>fcs/aileron-ap-override</property>
+	<property>fcs/aileron-manual-override</property>
+
 
   <channel name="Roll">
   
@@ -14,7 +16,7 @@
 		</test>
 	</switch>
   
-	<fcs_function name="trash/aadf3423">
+	<fcs_function name="trash/aadf3d423">
 		<function>
 			<sum>
 				<product>
@@ -26,6 +28,7 @@
 						</product>
 						<value>1</value>
 					</sum>
+				</product>
 				<product>
 					<property>fcs/aileron-ap-cmd-norm</property>
 					<property>fcs/aileron-ap-override</property>
