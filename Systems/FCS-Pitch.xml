@@ -2,6 +2,15 @@
 
 <system name="FCS-pitch">
 
+	<!-- 
+    the FCS defines two properties for autopilot:
+    [channel]-ap-override - to be used by the autopilot to override the joystick inputs
+    [channel]-manual-override - to be used by the autopilot to override it's override.
+                                use manual override when you want to temporarily disable
+                                a specific channel for temporary joystick input without
+                                fully disabling the autopilot.
+    -->
+
 	<property>/instrumentation/altimeter/indicated-altitude-ft</property>
 	<property>/autopilot/locks/mode</property>
 	<property>fcs/elevator-ap-override</property>

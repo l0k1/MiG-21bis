@@ -317,6 +317,15 @@
 	</engines>
 
 	<instrumentation>
+		<autopilot>
+			<lights>
+				<off type="int">0</off>
+				<cmd type="int">0</cmd>
+				<auto type="int">0</auto>
+				<stab type="int">0</stab>
+				<level type="int">0</level>
+			</lights>
+		</autopilot>
 		<nav n="0">
 			<radials>
 				<selected-deg>0</selected-deg>
@@ -559,6 +568,7 @@
         <formation>       <file>Aircraft/Generic/formation.nas</file>                </formation>
         <dialog>          <file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>          </dialog>
         <radar_altimeter> <file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>  </radar_altimeter>
+        <autopilot>       <file>Aircraft/MiG-21bis/Nasal/autopilot.nas</file>        </autopilot>
 
 	</nasal>
 

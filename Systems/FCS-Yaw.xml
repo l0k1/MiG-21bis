@@ -1,6 +1,16 @@
 <?xml version="1.0"?>
 
 <system name="FCS-yaw">
+
+    <!-- 
+    the FCS defines two properties for autopilot:
+    [channel]-ap-override - to be used by the autopilot to override the joystick inputs
+    [channel]-manual-override - to be used by the autopilot to override it's override.
+                                use manual override when you want to temporarily disable
+                                a specific channel for temporary joystick input without
+                                fully disabling the autopilot.
+    -->
+
     <property>fcs/rudder-ap-override</property>
     <property>fcs/rudder-manual-override</property>
 
