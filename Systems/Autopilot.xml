@@ -185,17 +185,14 @@ check for Low Altitude Mode
             <prop>/orientation/alpha-deg</prop>
         </reference>
         <output>
-            <prop>/controls/flight/elevator</prop>
+            <prop>/fdm/jsbsim/fcs/elevator-ap-cmd-norm</prop>
         </output>
-            <config>
-            <Kp>-0.0018</Kp> 
-            <beta>0.0</beta>
-            <alpha>0.0</alpha>
-            <gamma>0.0</gamma>
-            <Ti>5.5</Ti>
-            <Td>0.00003</Td>
-            <u_min></u_min>
-            <u_max></u_max>
+        <config>
+            <Kp>-0.03</Kp>
+            <Ti>2.0</Ti><!--5.5-->
+            <Td>0.00000</Td>
+            <u_min>-1.0</u_min>
+            <u_max>1.0</u_max>
         </config>
     </pid-controller>
     
@@ -213,15 +210,12 @@ check for Low Altitude Mode
             <value>0</value>
         </reference>
         <output>
-            <prop>/controls/flight/aileron</prop>
+            <prop>/fdm/jsbsim/fcs/aileron-ap-cmd-norm</prop>
         </output>
         <config>
-            <Kp>-0.0018</Kp>
-            <beta>0.9</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>5.5</Ti>
-            <Td>0.00003</Td>
+            <Kp>0.02</Kp>
+            <Ti>100</Ti>
+            <Td>0.00000</Td>
             <u_min>-1.0</u_min>
             <u_max>1.0</u_max>
         </config>
