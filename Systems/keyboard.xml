@@ -274,13 +274,28 @@
 		</binding>
 	</key>
 
-	<key n="27">
-		<name>Ctrl+a</name>
+	<key n="87">
+		<name>W</name>
 		<desc>autopilot off</desc>
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
 			<script>autopilot.panel_button("off");</script>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/fdm/jsbsim/fcs/elevator-ap-cmd-norm</property>
+			<value>0</value>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/fdm/jsbsim/fcs/aileron-ap-cmd-norm</property>
+			<value>0</value>
+		</binding>
+		<binding>
+			<command>property-assign</command>
+			<property>/fdm/jsbsim/fcs/rudder-ap-cmd-norm</property>
+			<value>0</value>
 		</binding>
 	</key>
 
@@ -297,6 +312,7 @@
     </script>
    </binding>
   </mod-shift>
+
  </key>
 
 </PropertyList>
