@@ -53,6 +53,12 @@ check for Low Altitude Mode
         <type>gain</type>
         <gain>1</gain>
         <input>
+            <condition>
+                <equals>
+                    <property>/autopilot/internal/safe-altitude-switch</property>
+                    <value>1</value>
+                </equals>
+            </condition>
             <expression>
                 <sum>
                     <dif>
@@ -82,7 +88,7 @@ check for Low Altitude Mode
                 </sum>
             </expression>
         </input>
-        <output>/autopilot/settings/safe-alt</output>
+        <output>/autopilot/internal/safe-alt-calc</output>
     </filter>
 
     <state-machine>
@@ -91,7 +97,13 @@ check for Low Altitude Mode
 
         <state>
             <name>monitor</name>
-            <enter></enter>
+            <enter>
+                <command>nasal</command>
+                <script>
+                    setprop("/autopilot/internal/safe-alt",getprop("/autopilot/internal/safe-alt-calc"));
+                    setprop("/autopilot/internal/safe-altitude-switch",0);
+                </script>
+            </enter>
             <exit>
                 <binding>
                     <command>nasal</command>
@@ -104,10 +116,15 @@ check for Low Altitude Mode
         <state>
             <name>climb</name>
             <enter></enter>
-            <exit></exit>
+            <exit>
+                <command>property-assign</command>
+                <property>/autopilot/internal/safe-altitude-switch</property>
+                <value>0</value>
+            </exit>
             <update>
-                <command>nasal</command>
-                <script>radar_altimeter.calc_safe_altitude();</script>
+                <command>property-assign</command>
+                <property>/autopilot/internal/safe-altitude-switch</property>
+                <value>1</value>
             </update>
         </state>
 
@@ -150,61 +167,7 @@ check for Low Altitude Mode
 
 <!-- the actual low-alt pids -->
     
-    <pid-controller>
-        <name>Low Altitude Hold Stage 1</name>
-        <debug>false</debug>
-        <enable>
-            <prop>/autopilot/locks/mode</prop>
-            <value>1</value>
-        </enable>
-        <input>
-            <prop>/instrumentation/altimeter/indicated-altitude-ft</prop>
-        </input>
-        <reference>
-            <prop>/autopilot/settings/safe-alt</prop>
-        </reference>
-        <output>
-            <prop>/autopilot/internal/low-alt-target-climb</prop>
-        </output>
-            <config>
-            <Kp>-0.0018</Kp> 
-            <beta>0.0</beta>
-            <alpha>0.0</alpha>
-            <gamma>0.0</gamma>
-            <Ti>5.5</Ti>
-            <Td>0.00003</Td>
-            <u_min></u_min>
-            <u_max></u_max>
-        </config>
-    </pid-controller>
-    
-    <pid-controller>
-        <name>Low Altitude Hold Stage 2</name>
-        <debug>false</debug>
-        <enable>
-            <prop>/autopilot/locks/mode</prop>
-            <value>1</value>
-        </enable>
-        <input>
-            <prop>/velocities/vertical-speed-fps</prop>
-        </input>
-        <reference>
-            <prop>/autopilot/internal/low-alt-target-climb</prop>
-        </reference>
-        <output>
-            <prop>/controls/flight/elevator</prop>
-        </output>
-        <config>
-            <Kp>-0.0018v</Kp>
-            <beta>0.9</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>5.5</Ti>
-            <Td>0.00003</Td>
-            <u_min>-1.0</u_min>
-            <u_max>1.0</u_max>
-        </config>
-    </pid-controller>
+
     
 <!-- auto-leveler -->
 
@@ -212,9 +175,9 @@ check for Low Altitude Mode
 Then increase Ki to get rid of steady state error, if its too high, it will oscillate. Then 
 increase Kd which will help to stop overshoot and damped the output a bit -->
 
-<!--
+
     
-        <filter>
+    <filter>
         <name>PITCH KP (P Gain)</name>
         <type>gain</type>
         <gain>1</gain>
@@ -222,15 +185,14 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
             <expression>
                 <table>
                     <property>/velocities/mach</property>
-                    <entry><ind>0.2</ind><dep>-0.20</dep></entry>
-                    <entry><ind>0.9</ind><dep>-0.13</dep></entry>
+                    <entry><ind>0.3</ind><dep>-0.7</dep></entry>
+                    <entry><ind>1.7</ind><dep>-0.1</dep></entry>
                 </table>
             </expression>
         </input>
         <output>/autopilot/internal/pitch-rate-kp</output>
     </filter>
 
--->
 
     <pid-controller>
         <name>Auto-Leveler Pitch Stage 1</name>
@@ -246,19 +208,19 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
             <value>0</value>
         </reference>
         <output>
-            <property>/autopilot/settings/target-pitch-rate-degps</property>
+            <property>/autopilot/internal/target-pitch-rate-degps</property>
         </output>
         <config>
-            <Kp>0.01</Kp>
-            <Ti>1000000000000</Ti><!--5.5-->
-            <Td>0.00000</Td>
-            <u_min>-15.0</u_min>
-            <u_max>15.0</u_max>
+            <Kp>0.05</Kp>
+            <Ti>7</Ti>
+            <Td>0.0003</Td>
+            <u_min>-10.0</u_min>
+            <u_max>10.0</u_max>
         </config>
     </pid-controller>
 
     <pid-controller>
-        <name>Auto-Leveler Pitch Stage 1</name>
+        <name>Auto-Leveler Pitch Stage 2</name>
         <debug>false</debug>
         <enable>
             <property>/autopilot/locks/mode</property>
@@ -268,22 +230,22 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
             <property>/orientation/pitch-rate-degps</property>
         </input>
         <reference>
-            <property>/autopilot/settings/target-pitch-rate-degps</property>
+            <property>/autopilot/internal/target-pitch-rate-degps</property>
         </reference>
         <output>
             <property>/fdm/jsbsim/fcs/elevator-ap-cmd-norm</property>
         </output>
         <config>
-            <Kp>-0.0001</Kp>
-            <Ti>1000000000000</Ti><!--5.5-->
-            <Td>0.00000</Td>
+            <Kp><property>/autopilot/internal/pitch-rate-kp</property></Kp>
+            <Ti>0.5</Ti>
+            <Td>0.0002</Td>
             <u_min>-1.0</u_min>
             <u_max>1.0</u_max>
         </config>
     </pid-controller>
     
     <pid-controller>
-        <name>Auto-Leveler Roll</name>
+        <name>Auto-Leveler Roll Stage 1</name>
         <debug>false</debug>
         <enable>
             <prop>/autopilot/locks/mode</prop>
@@ -296,12 +258,37 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
             <value>0</value>
         </reference>
         <output>
+            <prop>/autopilot/internal/target-roll-rate-degps</prop>
+        </output>
+        <config>
+            <Kp>3.6</Kp>
+            <Ti>0.5</Ti>
+            <Td>0.00000</Td>
+            <u_min>-15.0</u_min>
+            <u_max>15.0</u_max>
+        </config>
+    </pid-controller>
+
+    <pid-controller>
+        <name>Auto-Leveler Roll Stage 2</name>
+        <debug>false</debug>
+        <enable>
+            <prop>/autopilot/locks/mode</prop>
+            <value>2</value>
+        </enable>
+        <input>
+            <prop>/orientation/roll-rate-degps</prop>
+        </input>
+        <reference>
+            <property>/autopilot/internal/target-roll-rate-degps</property>
+        </reference>
+        <output>
             <prop>/fdm/jsbsim/fcs/aileron-ap-cmd-norm</prop>
         </output>
         <config>
-            <Kp>0.0018</Kp>
-            <Ti>5.5</Ti>
-            <Td>0.00000</Td>
+            <Kp>0.025</Kp>
+            <Ti>0.5</Ti>
+            <Td>0.0002</Td>
             <u_min>-1.0</u_min>
             <u_max>1.0</u_max>
         </config>
