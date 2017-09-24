@@ -167,7 +167,30 @@ check for Low Altitude Mode
 
 <!-- the actual low-alt pids -->
     
-
+    <pid-controller>
+        <name>Low Altitude Recovery</name>
+        <debug>false</debug>
+        <enable>
+            <property>/autopilot/locks/mode</property>
+            <value>1</value>
+        </enable>
+        <input>
+            <property>/instrumentation/altimeter/indicated-altitude-ft</property>
+        </input>
+        <reference>
+            <property>/autopilot/internal/safe-alt</property>
+        </reference>
+        <output>
+            <property>/autopilot/internal/target-pitch-rate-degps</property>
+        </output>
+        <config>
+            <Kp>0.05</Kp>
+            <Ti>100000000000</Ti>
+            <Td>0.0000</Td>
+            <u_min>-10.0</u_min>
+            <u_max>10.0</u_max>
+        </config>
+    </pid-controller>
     
 <!-- auto-leveler -->
 
@@ -195,7 +218,7 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
 
 
     <pid-controller>
-        <name>Auto-Leveler Pitch Stage 1</name>
+        <name>Auto-Leveler Pitch</name>
         <debug>false</debug>
         <enable>
             <property>/autopilot/locks/mode</property>
@@ -219,6 +242,57 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
         </config>
     </pid-controller>
 
+    <filter>
+        <name>Autoleveller and Low altitude roll level setting</name>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <condition>
+                <or>
+                    <equals>
+                        <condition>/autopilot/locks/mode</condition>
+                        <value>1</value>
+                    </equals>
+                    <equals>
+                        <condition>/autopilot/locks/mode</condition>
+                        <value>2</value>
+                    </equals>
+                </or>
+            </condition>
+            <expression>
+                <value>0</value>
+            </expression>
+        </input>
+        <output>/orientation/roll-deg</output>
+    </filter>
+
+    <pid-controller>
+        <name>Roll-deg controller</name>
+        <debug>false</debug>
+        <enable>
+            <prop>/autopilot/locks/mode</prop>
+            <value>2</value>
+        </enable>
+        <input>
+            <prop>/orientation/roll-deg</prop>
+        </input>
+        <reference>
+            <property>/autopilot/internal/target-roll</property>
+        </reference>
+        <output>
+            <prop>/autopilot/internal/target-roll-rate-degps</prop>
+        </output>
+        <config>
+            <Kp>3.6</Kp>
+            <Ti>0.5</Ti>
+            <Td>0.00000</Td>
+            <u_min>-15.0</u_min>
+            <u_max>15.0</u_max>
+        </config>
+    </pid-controller>
+
+    <!-- pitch/roll final controllers -->
+
     <pid-controller>
         <name>Auto-Leveler Pitch Stage 2</name>
         <debug>false</debug>
@@ -241,31 +315,6 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
             <Td>0.0002</Td>
             <u_min>-1.0</u_min>
             <u_max>1.0</u_max>
-        </config>
-    </pid-controller>
-    
-    <pid-controller>
-        <name>Auto-Leveler Roll Stage 1</name>
-        <debug>false</debug>
-        <enable>
-            <prop>/autopilot/locks/mode</prop>
-            <value>2</value>
-        </enable>
-        <input>
-            <prop>/orientation/roll-deg</prop>
-        </input>
-        <reference>
-            <value>0</value>
-        </reference>
-        <output>
-            <prop>/autopilot/internal/target-roll-rate-degps</prop>
-        </output>
-        <config>
-            <Kp>3.6</Kp>
-            <Ti>0.5</Ti>
-            <Td>0.00000</Td>
-            <u_min>-15.0</u_min>
-            <u_max>15.0</u_max>
         </config>
     </pid-controller>
 
