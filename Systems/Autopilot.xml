@@ -92,30 +92,55 @@ check for Low Altitude Mode
     </filter>
 
     <state-machine>
+        <!-- 
+            properties used:
+            ./internal/safe-alt-calc            calculate the safe altitude to climb to
+            ./internal/safe-alt                 actual safe altitude to climb to
+            ./internal/safe-altitude-switch     run the safe altitude calculation algorithm
+            ./locks/low-alt-mode-armed          the low-alt mode is armed and primed to run
+        -->
 
-        <branch>/autopilot/low-level-state-machine</branch>
+        <branch>/autopilot/state-machines/low-alt</branch>
 
         <state>
-            <name>monitor</name>
+            <name>off</name>
             <enter>
-                <command>nasal</command>
-                <script>
-                    setprop("/autopilot/internal/safe-alt",getprop("/autopilot/internal/safe-alt-calc"));
-                    setprop("/autopilot/internal/safe-altitude-switch",0);
-                </script>
+                <command>property-assign</command>
+                <property>/autopilot/locks/mode</property>
+                <value>0</value>
             </enter>
-            <exit>
-                <binding>
-                    <command>nasal</command>
-                    <script>autopilot.panel_button("low-alt");</script>
-                </binding>
-            </exit>
-            <update></update>
+            <enter>
+                <command>property-assign</command>
+                <property>/autopilot/internal/safe-altitude-switch</property>
+                <value>0</value>
+            </enter>
         </state>
 
         <state>
-            <name>climb</name>
-            <enter></enter>
+            <name>off-no-ap-set</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/autopilot/internal/safe-altitude-switch</property>
+                <value>0</value>
+            </enter>
+        </state>
+
+        <state>
+            <name>armed</name>
+        </state>
+
+        <state>
+            <name>danger-alt</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/autopilot/internal/safe-altitude-switch</property>
+                <value>1</value>
+            </enter>
+            <enter>
+                <command>property-assign</command>
+                <property>/autopilot/locks/mode</property>
+                <value>1</value>
+            </enter>
             <exit>
                 <command>property-assign</command>
                 <property>/autopilot/internal/safe-altitude-switch</property>
@@ -123,41 +148,130 @@ check for Low Altitude Mode
             </exit>
             <update>
                 <command>property-assign</command>
-                <property>/autopilot/internal/safe-altitude-switch</property>
-                <value>1</value>
+                <property>/autopilot/internal/safe-alt</property>
+                <property>/autopilot/internal/safe-alt-calc</property>
             </update>
         </state>
 
+        <state>
+            <name>altitude-hold</name>
+        </state>
+
         <transition>
-            <name>ready</name>
-            <source>monitor</source>
-            <target>climb</target>
+            <name>off-to-armed</name>
+            <source>off</source>
+            <source>off-no-ap-set</source>
+            <target>armed</target>
             <exclude-target type="bool">true</exclude-target>
             <condition>
-                <property>/autopilot/locks/low-alt-mode-enabled</property>>
-                <greater-than>
-                    <property>/instrumentation/altimeter/altitude-limit-select-ft</property>
-                    <property>/position/altitude-agl-ft</property>
-                </greater-than>
+                <equals>
+                    <property>/autopilot/locks/low-alt-mode-armed</property>
+                    <value>1</value>
+                </equals>
             </condition>
             <binding>
             </binding>
         </transition>
 
         <transition>
-            <name>ready</name>
-            <source>climb</source>
-            <target>monitor</target>
-            <exclude-target type="bool">false</exclude-target>
+            <name>armed-to-danger-alt</name>
+            <sourcee>armed</sourcee>
+            <target>danger-alt</target>
+            <exclude-target type="bool">true</exclude-target>
             <condition>
-                <not>
+                <and>
+                    <equals>
+                        <property>/autopilot/locks/low-alt-mode-armed</property>
+                        <value>1</value>
+                    </equals>
+                    <greater-than>
+                        <property>/instrumentation/altimeter/altitude-limit-select-ft</property>
+                        <property>/position/altitude-agl-ft</property>
+                    </greater-than>
+                </and>
+            </condition>
+            <binding>
+            </binding>
+        </transition>
+
+        <transition>
+            <name>danger-alt-to-altitude-hold</name>
+            <source>danger-alt</source>
+            <target>altitude-hold</target>
+            <exclude-target type="bool">true</exclude-target>
+            <condition>
+                <and>
+                    <equals>
+                        <property>/autopilot/locks/low-alt-mode-armed</property>
+                        <value>1</value>
+                    </equals>
+                    <less-than>
+                        <property>/instrumentation/altimeter/altitude-limit-select-ft</property>
+                        <property>/position/altitude-agl-ft</property>
+                    </less-than>
+                </and>
+            </condition>
+            <binding>
+            </binding>
+        </transition>
+
+        <transition>
+            <name>disable-ap</name>
+            <source>danger-alt</source>
+            <source>altitude-hold</source>
+            <target>off</target>
+            <exclude-target type="bool">true</exclude-target>
+            <condition>
+                <or>
+                    <equals>
+                        <property>/autopilot/locks/low-alt-mode-armed</property>
+                        <value>0</value>
+                    </equals>
+                    <equals>
+                        <property>/autopilot/locks/mode</property>
+                        <value>0</value>
+                    </equals>
+                    <greater-than>
+                        <property>/fdm/jsbsim/fcs/aileron-cmd-norm</property>
+                        <value>0.3</value>
+                    </greater-than>
+                    <less-than>
+                        <property>/fdm/jsbsim/fcs/aileron-cmd-norm</property>
+                        <value>-0.3</value>
+                    </less-than>
+                    <greater-than>
+                        <property>/fdm/jsbsim/fcs/elevator-cmd-norm</property>
+                        <value>0.3</value>
+                    </greater-than>
+                    <less-than>
+                        <property>/fdm/jsbsim/fcs/elevator-cmd-norm</property>
+                        <value>-0.3</value>
+                    </less-than>
+                    <greater-than>
+                        <property>/fdm/jsbsim/fcs/rudder-cmd-norm</property>
+                        <value>0.3</value>
+                    </greater-than>
+                    <less-than>
+                        <property>/fdm/jsbsim/fcs/rudder-cmd-norm</property>
+                        <value>-0.3</value>
+                    </less-than>
+                </or>
+            </condition>
+            <binding>
+            </binding>
+        </transition>
+
+        <transition>
+            <name>disable-ap-2</name>
+            <source>danger-alt</source>
+            <source>altitude-hold</source>
+            <target>off-no-ap-set</target>
+            <exclude-target type="bool">true</exclude-target>
+            <condition>
+                <greater-than>
                     <property>/autopilot/locks/mode</property>
                     <value>1</value>
-                </not>
-                <less-than>
-                    <property>/instrumentation/altimeter/altitude-limit-select-ft</property>
-                    <property>/position/altitude-agl-ft</property>
-                </less-than>
+                </greater-than>
             </condition>
             <binding>
             </binding>
@@ -165,10 +279,11 @@ check for Low Altitude Mode
 
     </state-machine>
 
+
 <!-- the actual low-alt pids -->
-    
+
     <pid-controller>
-        <name>Low Altitude Recovery</name>
+        <name>Low Altitude Recovery Stage 1</name>
         <debug>false</debug>
         <enable>
             <property>/autopilot/locks/mode</property>
@@ -181,24 +296,43 @@ check for Low Altitude Mode
             <property>/autopilot/internal/safe-alt</property>
         </reference>
         <output>
+            <property>/autopilot/internal/target-vs</property>
+        </output>
+        <config>
+            <Kp>0.21</Kp>
+            <Ti>11</Ti>
+            <Td>0.001</Td>
+            <u_min>-300.0</u_min>
+            <u_max>300.0</u_max>
+        </config>
+    </pid-controller>
+    
+    <pid-controller>
+        <name>Low Altitude Recovery Stage 2</name>
+        <debug>false</debug>
+        <enable>
+            <property>/autopilot/locks/mode</property>
+            <value>1</value>
+        </enable>
+        <input>
+            <property>/velocities/vertical-speed-fps</property>
+        </input>
+        <reference>
+            <property>/autopilot/internal/target-vs</property>
+        </reference>
+        <output>
             <property>/autopilot/internal/target-pitch-rate-degps</property>
         </output>
         <config>
             <Kp>0.05</Kp>
-            <Ti>100000000000</Ti>
-            <Td>0.0000</Td>
+            <Ti>7</Ti>
+            <Td>0.0003</Td>
             <u_min>-10.0</u_min>
             <u_max>10.0</u_max>
         </config>
     </pid-controller>
     
 <!-- auto-leveler -->
-
-<!-- Start with 0 for Ki and Kd, and tune Kp until it moves big enough, but not oscilating. 
-Then increase Ki to get rid of steady state error, if its too high, it will oscillate. Then 
-increase Kd which will help to stop overshoot and damped the output a bit -->
-
-
     
     <filter>
         <name>PITCH KP (P Gain)</name>
@@ -250,11 +384,11 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
             <condition>
                 <or>
                     <equals>
-                        <condition>/autopilot/locks/mode</condition>
+                        <property>/autopilot/locks/mode</property>
                         <value>1</value>
                     </equals>
                     <equals>
-                        <condition>/autopilot/locks/mode</condition>
+                        <property>/autopilot/locks/mode</property>
                         <value>2</value>
                     </equals>
                 </or>
@@ -263,15 +397,25 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
                 <value>0</value>
             </expression>
         </input>
-        <output>/orientation/roll-deg</output>
+        <output>/autopilot/internal/target-roll</output>
     </filter>
 
     <pid-controller>
         <name>Roll-deg controller</name>
         <debug>false</debug>
         <enable>
-            <prop>/autopilot/locks/mode</prop>
-            <value>2</value>
+            <condition>
+                <or>
+                    <equals>
+                        <property>/autopilot/locks/mode</property>
+                        <value>1</value>
+                    </equals>
+                    <equals>
+                        <property>/autopilot/locks/mode</property>
+                        <value>2</value>
+                    </equals>
+                </or>
+            </condition>
         </enable>
         <input>
             <prop>/orientation/roll-deg</prop>
@@ -294,11 +438,19 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
     <!-- pitch/roll final controllers -->
 
     <pid-controller>
-        <name>Auto-Leveler Pitch Stage 2</name>
+        <name>Pitch Final</name>
         <debug>false</debug>
         <enable>
-            <property>/autopilot/locks/mode</property>
-            <value>2</value>
+            <condition>
+                <greater-than>
+                    <property>/autopilot/locks/mode</property>
+                    <value>0</value>
+                </greater-than>
+                <less-than>
+                    <property>/fdm/jsbsim/fcs/elevator-manual-override</property>
+                    <value>0.5</value>
+                </less-than>
+            </condition>
         </enable>
         <input>
             <property>/orientation/pitch-rate-degps</property>
@@ -319,20 +471,28 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
     </pid-controller>
 
     <pid-controller>
-        <name>Auto-Leveler Roll Stage 2</name>
+        <name>Roll Final</name>
         <debug>false</debug>
         <enable>
-            <prop>/autopilot/locks/mode</prop>
-            <value>2</value>
+            <condition>
+                <greater-than>
+                    <property>/autopilot/locks/mode</property>
+                    <value>0</value>
+                </greater-than>
+                <less-than>
+                    <property>/fdm/jsbsim/fcs/aileron-manual-override</property>
+                    <value>0.5</value>
+                </less-than>
+            </condition>
         </enable>
         <input>
-            <prop>/orientation/roll-rate-degps</prop>
+            <property>/orientation/roll-rate-degps</property>
         </input>
         <reference>
             <property>/autopilot/internal/target-roll-rate-degps</property>
         </reference>
         <output>
-            <prop>/fdm/jsbsim/fcs/aileron-ap-cmd-norm</prop>
+            <property>/fdm/jsbsim/fcs/aileron-ap-cmd-norm</property>
         </output>
         <config>
             <Kp>0.025</Kp>
@@ -345,19 +505,7 @@ increase Kd which will help to stop overshoot and damped the output a bit -->
 
     <!-- stabilizer state machines (one per channel) -->
 
-    <state-machine>
-        <branch>/autopilot/stabilizer-roll-state-machine</branch>
 
-        <state>
-        </state>
-    </state-machine>
-
-    <state-machine>
-        <branch>/autopilot/stabilizer-pitch-state-machine</branch>
-
-        <state>
-        </state>
-    </state-machine>
 
     <!-- stabilizer pids -->
 

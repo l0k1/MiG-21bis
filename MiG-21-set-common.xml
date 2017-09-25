@@ -3,6 +3,9 @@
 <PropertyList>
 	<!--<aax type="float">0</aax>
 	<aay type="float">0</aay>-->
+	<a type="float">0.5</a>
+	<b type="float">1000000</b>
+	<c type="float">0</c>
 	<sim>
 
 		<submodels>

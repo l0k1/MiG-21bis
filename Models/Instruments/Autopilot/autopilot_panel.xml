@@ -204,7 +204,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>/autopilot/locks/low-alt-mode-enabled</property>
+				<property>/autopilot/locks/low-alt-mode-armed</property>
 			</binding>
 		</action>
 	</animation>
@@ -212,7 +212,7 @@
 	<animation>
 		<object-name>limitAltSwitch</object-name>
 		<type>rotate</type>
-		<property>/autopilot/locks/low-alt-mode-enabled</property>
+		<property>/autopilot/locks/low-alt-mode-armed</property>
 		<factor>-35</factor>
 		<offset-deg>15</offset-deg>
 		<axis>
