@@ -333,6 +333,93 @@ check for Low Altitude Mode
     </pid-controller>
     
 <!-- auto-leveler -->
+
+    <state-machine>
+
+        <branch>/autopilot/state-machines/autoleveller</branch>
+
+        <state>
+            <name>off</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/autopilot/locks/mode</property>
+                <value>0</value>
+            </enter>
+        </state>
+
+        <state>
+            <name>off-no-ap-set</name>
+        </state>
+
+        <state>
+            <name>active</name>
+        </state>
+
+        <transition>
+            <name>off-to-active</name>
+            <source>off</source>
+            <source>off-no-ap-set</source>
+            <target>active</target>
+            <condition>
+                <equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>2</value>
+                </equals>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>active-to-off</name>
+            <source>active</source>
+            <target>off</target>
+            <condition>
+                <or>
+                    <equals>
+                        <property>/autopilot/locks/mode</property>
+                        <value>0</value>
+                    </equals>
+                    <greater-than>
+                        <property>/fdm/jsbsim/fcs/aileron-cmd-norm</property>
+                        <value>0.3</value>
+                    </greater-than>
+                    <less-than>
+                        <property>/fdm/jsbsim/fcs/aileron-cmd-norm</property>
+                        <value>-0.3</value>
+                    </less-than>
+                    <greater-than>
+                        <property>/fdm/jsbsim/fcs/elevator-cmd-norm</property>
+                        <value>0.3</value>
+                    </greater-than>
+                    <less-than>
+                        <property>/fdm/jsbsim/fcs/elevator-cmd-norm</property>
+                        <value>-0.3</value>
+                    </less-than>
+                    <greater-than>
+                        <property>/fdm/jsbsim/fcs/rudder-cmd-norm</property>
+                        <value>0.3</value>
+                    </greater-than>
+                    <less-than>
+                        <property>/fdm/jsbsim/fcs/rudder-cmd-norm</property>
+                        <value>-0.3</value>
+                    </less-than>
+                </or>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>active-to-off-no-ap-set</name>
+            <source>active</source>
+            <target>off-no-ap-set</target>
+            <condition>
+                <not-equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>2</value>
+                </not-equals>
+            </condition>
+        </transition>
+
+    </state-machine>
+
     
     <filter>
         <name>PITCH KP (P Gain)</name>
@@ -342,8 +429,8 @@ check for Low Altitude Mode
             <expression>
                 <table>
                     <property>/velocities/mach</property>
-                    <entry><ind>0.3</ind><dep>-0.7</dep></entry>
-                    <entry><ind>1.7</ind><dep>-0.1</dep></entry>
+                    <entry><ind>0.3</ind><dep>-0.8</dep></entry>
+                    <entry><ind>1.7</ind><dep>-0.2</dep></entry>
                 </table>
             </expression>
         </input>
