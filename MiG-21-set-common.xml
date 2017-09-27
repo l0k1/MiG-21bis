@@ -473,6 +473,9 @@
 				<elevator-ap-cmd-norm type="double">0</elevator-ap-cmd-norm>
 				<aileron-ap-cmd-norm type="double">0</aileron-ap-cmd-norm>
 				<rudder-ap-cmd-norm type="double">0</rudder-ap-cmd-norm>
+				<aileron-manual-override type="bool">false</aileron-manual-override>
+				<elevator-manual-override type="bool">false</elevator-manual-override>
+				<rudder-manual-override type="bool">false</rudder-manual-override>
 			</fcs>
 			<!-- for in-flight FDM tuning -->
 			<tune>

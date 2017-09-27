@@ -12,7 +12,6 @@
     -->
 
     <property>fcs/rudder-ap-override</property>
-    <property>fcs/rudder-manual-override</property>
 
 
   <channel name="Yaw">

@@ -48,17 +48,28 @@ check for Low Altitude Mode
     4 is ils
 -->
 
+<!--
+    ########################################
+    LOW ALTITUDE
+    -safe altitude algorithm
+    -state machine
+    -pid stages 1 & 2
+    ########################################
+-->
+
     <filter>
         <name>Calculate Safe Altitude</name>
         <type>gain</type>
         <gain>1</gain>
-        <input>
+        <enable>
             <condition>
                 <equals>
                     <property>/autopilot/internal/safe-altitude-switch</property>
                     <value>1</value>
                 </equals>
             </condition>
+        </enable>
+        <input>
             <expression>
                 <sum>
                     <dif>
@@ -332,7 +343,13 @@ check for Low Altitude Mode
         </config>
     </pid-controller>
     
-<!-- auto-leveler -->
+<!--
+    ########################################
+    AUTOLEVEL
+    -state machine
+    -autolevel pitch (v/s based)
+    ########################################
+-->
 
     <state-machine>
 
@@ -420,23 +437,6 @@ check for Low Altitude Mode
 
     </state-machine>
 
-    
-    <filter>
-        <name>PITCH KP (P Gain)</name>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
-                <table>
-                    <property>/velocities/mach</property>
-                    <entry><ind>0.3</ind><dep>-0.8</dep></entry>
-                    <entry><ind>1.7</ind><dep>-0.2</dep></entry>
-                </table>
-            </expression>
-        </input>
-        <output>/autopilot/internal/pitch-rate-kp</output>
-    </filter>
-
 
     <pid-controller>
         <name>Auto-Leveler Pitch</name>
@@ -463,33 +463,358 @@ check for Low Altitude Mode
         </config>
     </pid-controller>
 
+
+<!--
+    ########################################
+    STABILIZER
+    -state machine
+    -pitch degree pid
+    -heading seek pid
+    ########################################
+-->
+
+    <state-machine>
+        <branch>/autopilot/state-machines/stabilizer-roll</branch>
+
+        <state>
+            <name>off</name>
+        </state>
+
+        <state>
+            <name>active-bank</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/autopilot/internal/target-roll</property>
+                <property>/orientation/roll-deg</property>
+            </enter>
+            <enter>
+                <command>property-assign</command>
+                <property>/autopilot/locks/stab-mode</property>
+                <value>0</value>
+            </enter>
+        </state>
+
+        <state>
+            <name>active-heading</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/autopilot/internal/target-heading</property>
+                <property>/orientation/heading-magnetic-deg</property>
+            </enter>
+            <enter>
+                <command>property-assign</command>
+                <property>/autopilot/locks/stab-mode</property>
+                <value>1</value>
+            </enter>
+        </state>
+
+        <state>
+            <name>suspended</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/fdm/jsbsim/fcs/aileron-manual-override</property>
+                <value>1</value>
+            </enter>
+            <exit>
+                <command>property-assign</command>
+                <property>/fdm/jsbsim/fcs/aileron-manual-override</property>
+                <value>0</value>
+            </exit>
+        </state>
+
+        <transition>
+            <name>off-to-active-heading</name>
+            <source>off</source>
+            <target>active-heading</target>
+            <condition>
+                <equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>3</value>
+                </equals>
+                <less-than>
+                    <property>/orientation/roll-deg</property>
+                    <value>6</value>
+                </less-than>
+                <greater-than>
+                    <property>/orientation/roll-deg</property>
+                    <value>-6</value>
+                </greater-than>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>off-to-active-bank</name>
+            <source>off</source>
+            <target>active-bank</target>
+            <condition>
+                <equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>3</value>
+                </equals>
+                <or>
+                    <less-than>
+                        <property>/orientation/roll-deg</property>
+                        <value>-6</value>
+                    </less-than>
+                    <greater-than>
+                        <property>/orientation/roll-deg</property>
+                        <value>6</value>
+                    </greater-than>
+                </or>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>active-to-suspended</name>
+            <source>active-bank</source>
+            <source>active-heading</source>
+            <target>suspended</target>
+            <condition>
+                <or>
+                    <greater-than>
+                        <property>/fdm/jsbsim/fcs/aileron-cmd-norm</property>
+                        <value>0.05</value>
+                    </greater-than>
+                    <less-than>
+                        <property>/fdm/jsbsim/fcs/aileron-cmd-norm</property>
+                        <value>-0.05</value>
+                    </less-than>
+                </or>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>suspended-to-active-bank</name>
+            <source>suspended</source>
+            <target>active-bank</target>
+            <condition>
+                <or>
+                    <less-than>
+                        <property>/orientation/roll-deg</property>
+                        <value>-6</value>
+                    </less-than>
+                    <greater-than>
+                        <property>/orientation/roll-deg</property>
+                        <value>6</value>
+                    </greater-than>
+                </or>
+                <greater-than>
+                    <property>/fdm/jsbsim/fcs/aileron-cmd-norm</property>
+                    <value>-0.05</value>
+                </greater-than>
+                <less-than>
+                    <property>/fdm/jsbsim/fcs/aileron-cmd-norm</property>
+                    <value>0.05</value>
+                </less-than>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>suspended-to-active-heading</name>
+            <source>suspended</source>
+            <target>active-heading</target>
+            <condition>
+                <less-than>
+                    <property>/orientation/roll-deg</property>
+                    <value>6</value>
+                </less-than>
+                <greater-than>
+                    <property>/orientation/roll-deg</property>
+                    <value>-6</value>
+                </greater-than>
+                <greater-than>
+                    <property>/fdm/jsbsim/fcs/aileron-cmd-norm</property>
+                    <value>-0.05</value>
+                </greater-than>
+                <less-than>
+                    <property>/fdm/jsbsim/fcs/aileron-cmd-norm</property>
+                    <value>0.05</value>
+                </less-than>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>set-off</name>
+            <source>active-bank</source>
+            <source>active-heading</source>
+            <source>suspended</source>
+            <target>off</target>
+            <condition>
+                <not-equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>3</value>
+                </not-equals>
+            </condition>
+        </transition>
+
+    </state-machine>
+
+    <state-machine>
+        <branch>/autopilot/state-machines/stabilizer-pitch</branch>
+
+        <state>
+            <name>off</name>
+        </state>
+
+        <state>
+            <name>active</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/autopilot/internal/target-pitch</property>
+                <property>/orientation/pitch-deg</property>
+            </enter>
+        </state>
+
+        <state>
+            <name>suspended</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/fdm/jsbsim/fcs/elevator-manual-override</property>
+                <value>1</value>
+            </enter>
+            <exit>
+                <command>property-assign</command>
+                <property>/fdm/jsbsim/fcs/elevator-manual-override</property>
+                <value>0</value>
+            </exit>
+        </state>
+
+        <transition>
+            <name>off-to-active</name>
+            <source>off</source>
+            <target>active</target>
+            <condition>
+                <equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>3</value>
+                </equals>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>active-to-suspended</name>
+            <source>active</source>
+            <target>suspended</target>
+            <condition>
+                <or>
+                    <greater-than>
+                        <property>/fdm/jsbsim/fcs/elevator-cmd-norm</property>
+                        <value>0.05</value>
+                    </greater-than>
+                    <less-than>
+                        <property>/fdm/jsbsim/fcs/elevator-cmd-norm</property>
+                        <value>-0.05</value>
+                    </less-than>
+                </or>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>suspended-to-active</name>
+            <source>suspended</source>
+            <target>active</target>
+            <condition>
+                <greater-than>
+                    <property>/fdm/jsbsim/fcs/elevator-cmd-norm</property>
+                    <value>-0.05</value>
+                </greater-than>
+                <less-than>
+                    <property>/fdm/jsbsim/fcs/elevator-cmd-norm</property>
+                    <value>0.05</value>
+                </less-than>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>set-off</name>
+            <source>active</source>
+            <source>suspended</source>
+            <target>off</target>
+            <condition>
+                <not-equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>3</value>
+                </not-equals>
+            </condition>
+        </transition>
+
+    </state-machine>
+
+    <pid-controller>
+        <name>Pitch-deg controller</name>
+        <debug>false</debug>
+        <enable>
+            <property>/autopilot/locks/mode</property>
+            <value>3</value>
+        </enable>
+        <input>
+            <property>/orientation/pitch-deg</property>
+        </input>
+        <reference>
+            <property>/autopilot/internal/target-pitch</property>
+        </reference>
+        <output>
+            <property>/autopilot/internal/target-pitch-rate-degps</property>
+        </output>
+        <config>
+            <Kp>6.5</Kp>
+            <Ti>0.7</Ti>
+            <Td>0.003</Td>
+            <u_min>-10</u_min>
+            <u_max>10</u_max>
+        </config>
+    </pid-controller>
+
+    <pid-controller>
+        <name>Heading seek stage 1</name>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>3</value>
+                </equals>
+                <equals>
+                    <property>/autopilot/locks/stab-mode</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </enable>
+        <input>
+            <property>/orientation/heading-magnetic-deg</property>
+        </input>
+        <reference>
+            <property>/autopilot/internal/target-heading</property>
+        </reference>
+        <output>
+            <property>/autopilot/internal/target-roll</property>
+        </output>
+        <config>
+            <Kp>19</Kp>
+            <Ti>5</Ti>
+            <Td>0.01</Td>
+            <u_min>-3</u_min>
+            <u_max>3</u_max>
+        </config>
+    </pid-controller>
+
+<!--
+    ########################################
+    MULTI-USE
+    -autoleveler and low alt target roll setting
+    -target roll to target roll rate pid
+    -pitch kp algorithm
+    -pitch final
+    -roll final
+    ########################################
+-->
+
+    <!-- set target roll to 0 for autolevel and low-alt climb -->
+
     <filter>
         <name>Autoleveller and Low altitude roll level setting</name>
         <type>gain</type>
         <gain>1</gain>
-        <input>
-            <condition>
-                <or>
-                    <equals>
-                        <property>/autopilot/locks/mode</property>
-                        <value>1</value>
-                    </equals>
-                    <equals>
-                        <property>/autopilot/locks/mode</property>
-                        <value>2</value>
-                    </equals>
-                </or>
-            </condition>
-            <expression>
-                <value>0</value>
-            </expression>
-        </input>
-        <output>/autopilot/internal/target-roll</output>
-    </filter>
-
-    <pid-controller>
-        <name>Roll-deg controller</name>
-        <debug>false</debug>
         <enable>
             <condition>
                 <or>
@@ -505,6 +830,61 @@ check for Low Altitude Mode
             </condition>
         </enable>
         <input>
+            <reference>
+                <value>0</value>
+            </reference>
+        </input>
+        <output>/autopilot/internal/target-roll</output>
+    </filter>
+
+
+    <!-- target roll to target roll rate -->
+    <filter>
+        <name>Roll-deg Kp</name>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <table>
+                    <property>/velocities/mach</property>
+                    <entry><ind>0.4</ind><dep>0.5</dep></entry>
+                    <entry><ind>0.95</ind><dep>1.7</dep></entry>
+                    <entry><ind>1.6</ind><dep>1.1</dep></entry>
+                </table>
+            </expression>
+        </input>
+        <output>/autopilot/internal/roll-rate-kp</output>
+    </filter>
+
+    <filter>
+        <name>Roll-deg Ti</name>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <table>
+                    <property>/velocities/mach</property>
+                    <entry><ind>0.4</ind><dep>25</dep></entry>
+                    <entry><ind>0.95</ind><dep>3</dep></entry>
+                    <entry><ind>1.6</ind><dep>25</dep></entry>
+                </table>
+            </expression>
+        </input>
+        <output>/autopilot/internal/roll-rate-ti</output>
+    </filter>
+
+    <pid-controller>
+        <name>Roll-deg controller</name>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <greater-than>
+                    <property>/autopilot/locks/mode</property>
+                    <value>0</value>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>
             <prop>/orientation/roll-deg</prop>
         </input>
         <reference>
@@ -514,15 +894,32 @@ check for Low Altitude Mode
             <prop>/autopilot/internal/target-roll-rate-degps</prop>
         </output>
         <config>
-            <Kp>3.6</Kp>
-            <Ti>0.5</Ti>
-            <Td>0.00000</Td>
+            <Kp><property>/autopilot/internal/roll-rate-kp</property></Kp>
+            <Ti><property>/autopilot/internal/roll-rate-ti</property></Ti>
+            <Td>0.005</Td>
             <u_min>-15.0</u_min>
             <u_max>15.0</u_max>
         </config>
     </pid-controller>
 
     <!-- pitch/roll final controllers -->
+
+    <filter>
+        <name>PITCH KP (P Gain)</name>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <table>
+                    <property>/velocities/mach</property>
+                    <entry><ind>0.35</ind><dep>-0.30</dep></entry>
+                    <entry><ind>0.95</ind><dep>-0.20</dep></entry>
+                    <entry><ind>1.50</ind><dep>-0.15</dep></entry>
+                </table>
+            </expression>
+        </input>
+        <output>/autopilot/internal/pitch-rate-kp</output>
+    </filter>
 
     <pid-controller>
         <name>Pitch Final</name>
@@ -533,10 +930,10 @@ check for Low Altitude Mode
                     <property>/autopilot/locks/mode</property>
                     <value>0</value>
                 </greater-than>
-                <less-than>
+                <equals>
                     <property>/fdm/jsbsim/fcs/elevator-manual-override</property>
-                    <value>0.5</value>
-                </less-than>
+                    <value>0</value>
+                </equals>
             </condition>
         </enable>
         <input>
@@ -551,7 +948,7 @@ check for Low Altitude Mode
         <config>
             <Kp><property>/autopilot/internal/pitch-rate-kp</property></Kp>
             <Ti>0.5</Ti>
-            <Td>0.0002</Td>
+            <Td>0.005</Td>
             <u_min>-1.0</u_min>
             <u_max>1.0</u_max>
         </config>
@@ -566,10 +963,10 @@ check for Low Altitude Mode
                     <property>/autopilot/locks/mode</property>
                     <value>0</value>
                 </greater-than>
-                <less-than>
-                    <property>/fdm/jsbsim/fcs/aileron-manual-override</property>
-                    <value>0.5</value>
-                </less-than>
+                <equals>
+                    <property>/fdm/jsbsim/fcs/elevator-manual-override</property>
+                    <value>0</value>
+                </equals>
             </condition>
         </enable>
         <input>
@@ -589,12 +986,6 @@ check for Low Altitude Mode
             <u_max>1.0</u_max>
         </config>
     </pid-controller>
-
-    <!-- stabilizer state machines (one per channel) -->
-
-
-
-    <!-- stabilizer pids -->
 
     <!-- ILS pids -->
 
