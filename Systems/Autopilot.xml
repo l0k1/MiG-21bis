@@ -766,7 +766,7 @@ check for Low Altitude Mode
     </pid-controller>
 
     <pid-controller>
-        <name>Heading seek stage 1</name>
+        <name>Heading seek stabilizer</name>
         <debug>false</debug>
         <enable>
             <condition>
@@ -795,6 +795,233 @@ check for Low Altitude Mode
             <Td>0.01</Td>
             <u_min>-3</u_min>
             <u_max>3</u_max>
+        </config>
+    </pid-controller>
+
+<!--
+    ########################################
+    ILS
+    -LOC state machine
+    -LOC heading seek pid
+    -GS state machine
+    -GS feet per second hold
+    ########################################
+-->
+
+    <state-machine>
+        <branch>/autopilot/state-machines/localizer</branch>
+
+        <state>
+            <name>off</name>
+        </state>
+
+        <state>
+            <name>suspended</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/fdm/jsbsim/fcs/aileron-manual-override</property>
+                <value>1</value>
+            </enter>
+            <exit>
+                <command>property-assign</command>
+                <property>/fdm/jsbsim/fcs/aileron-manual-override</property>
+                <value>0</value>
+            </exit>
+        </state>
+
+        <state>
+            <name>active</name>
+        </state>
+
+        <transition>
+            <name>set-off</name>
+            <source>active</source>
+            <source>suspended</source>
+            <target>off</target>
+            <condition>
+                <not-equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>4</value>
+                </not-equals>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>set-suspended</name>
+            <source>off</source>
+            <source>active</source>
+            <target>suspended</target>
+            <condition>
+                <equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>4</value>
+                </equals>
+                <equals>
+                    <property>/instrumentation/nav[0]/frequencies/is-localizer-frequency</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>set-active</name>
+            <source>off</source>
+            <source>suspended</source>
+            <target>active</target>
+            <condition>
+                <equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>4</value>
+                </equals>
+                <equals>
+                    <property>/instrumentation/nav[0]/frequencies/is-localizer-frequency</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </transition>
+
+    </state-machine>
+
+    <pid-controller>
+        <name>LOC Heading seek</name>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>4</value>
+                </equals>
+            </condition>
+        </enable>
+        <input>
+            <property>/autopilot/internal/nav1-heading-error-deg</property>
+        </input>
+        <reference>
+            <value>0.0</value>
+        </reference>
+        <output>
+            <property>/autopilot/internal/target-roll</property>
+        </output>
+        <config>
+            <Kp>-19</Kp>
+            <Ti>5</Ti>
+            <Td>0.01</Td>
+            <u_min>-30</u_min>
+            <u_max>30</u_max>
+        </config>
+    </pid-controller>
+
+    <state-machine>
+        <branch>/autopilot/state-machines/glideslope</branch>
+
+        <state>
+            <name>off</name>
+        </state>
+
+        <state>
+            <name>suspended</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/fdm/jsbsim/fcs/elevator-manual-override</property>
+                <value>1</value>
+            </enter>
+            <exit>
+                <command>property-assign</command>
+                <property>/fdm/jsbsim/fcs/elevator-manual-override</property>
+                <value>0</value>
+            </exit>
+        </state>
+
+        <state>
+            <name>active</name>
+        </state>
+
+        <transition>
+            <name>set-off</name>
+            <source>active</source>
+            <source>suspended</source>
+            <target>off</target>
+            <condition>
+                <not-equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>4</value>
+                </not-equals>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>set-suspended</name>
+            <source>off</source>
+            <source>active</source>
+            <target>suspended</target>
+            <condition>
+                <equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>4</value>
+                </equals>
+                <equals>
+                    <property>/instrumentation/nav[0]/has-gs</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+        </transition>
+
+        <transition>
+            <name>set-active</name>
+            <source>off</source>
+            <source>suspended</source>
+            <target>active</target>
+            <condition>
+                <equals>
+                    <property>/autopilot/locks/mode</property>
+                    <value>4</value>
+                </equals>
+                <equals>
+                    <property>/instrumentation/nav[0]/has-gs</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </transition>
+
+    </state-machine>
+
+    <!-- NAV1 G/S FPM Calc taken from it0uchpod's work on Necolatis' viggen -->
+
+    <filter>
+        <name>NAV1 G/S FPM Calc</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <property>/instrumentation/nav[0]/gs-rate-of-climb</property>
+        </input>
+        <output>/autopilot/internal/nav1-rate-of-climb</output>
+        <gain>1.0</gain>
+        <min>-2500</min>
+        <max>0</max>
+    </filter>
+
+    <pid-controller>
+        <name>Glideslope FPS</name>
+        <debug>false</debug>
+        <enable>
+            <property>/autopilot/locks/mode</property>
+            <value>4</value>
+        </enable>
+        <input>
+            <property>/velocities/vertical-speed-fps</property>
+        </input>
+        <reference>
+            <property>/autopilot/internal/nav1-rate-of-climb</property>
+        </reference>
+        <output>
+            <property>/autopilot/internal/target-pitch-rate-degps</property>
+        </output>
+        <config>
+            <Kp>0.05</Kp>
+            <Ti>7</Ti>
+            <Td>0.0003</Td>
+            <u_min>-3.0</u_min>
+            <u_max>3.0</u_max>
         </config>
     </pid-controller>
 
