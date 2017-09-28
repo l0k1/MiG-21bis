@@ -1,16 +1,21 @@
 
-### VOR RADIO HANDLING/CHANNEL SELECTION
-### VOR radio outputs to nav[0], ILS radio outputs to nav[1]
-### I was using listeners for this, it wasn't working perfectly, so just updating in the main loop.
+### VOR/ILS radio frequency handling using preset channels and a letdown/navig/landing switch
+	
+# /instrumentation/nav[0]/nav-mode-swith:
+#    0 = letdown mode - VOR
+#    1 = navig mode   - VOR
+#    2 = landing mode - ILS
 
-var update_vor_freq = func () {
-	var channel = getprop("/instrumentation/vor-radio/selection");
-	setprop("instrumentation/nav[0]/frequencies/selected-mhz",getprop("/instrumentation/vor-radio/preset[" ~ channel ~ "]"));
+# this function is as "var"-less as possible, which is why it's sort of ugly.
+# basically, check where the switch is, and assign nav[0] selected frequency 
+# to the frequency represented by the preset channel on the radio panel. 
+var update_radio = func() {
+	if ( getprop("/instrumentation/nav[0]/nav-mode-switch") == 2 ) {
+		setprop("/instrumentation/nav[0]/frequencies/selected-mhz",getprop("/instrumentation/ils-radio/preset[" ~ getprop("/instrumentation/ils-radio/selection") ~ "]"));
+	} else {
+		setprop("/instrumentation/nav[0]/frequencies/selected-mhz",getprop("/instrumentation/vor-radio/preset[" ~ getprop("/instrumentation/vor-radio/selection") ~ "]"));
+	}
 }
-
-### ILS RADIO HANDLING/CHANNEL SELECTION
-
-var update_ils_freq = func () {
-	var channel = getprop("/instrumentation/ils-radio/selection");
-	setprop("instrumentation/nav[1]/frequencies/selected-mhz",getprop("/instrumentation/ils-radio/preset[" ~ channel ~ "]"));
-}
+	
+update_radio();
+setlistener("/instrumentation/nav[0]/nav-mode-switch",func(){update_radio();});
