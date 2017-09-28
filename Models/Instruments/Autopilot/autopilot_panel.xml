@@ -4,6 +4,36 @@
 
     <path>autopilot_panel.ac</path>
 
+    <!-- CMD BUTTON -->
+
+    <animation>
+		<type>pick</type>
+		<object-name>cmdCtrlLight</object-name>
+		<object-name>cmdHousing</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>autopilot.panel_button("cmd");</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>cmdCtrlLight</object-name>
+		<object-name>cmdHousing</object-name>
+		<property>/instrumentation/autopilot/lights/cmd</property>
+		<factor>0.001</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
 	<animation>
         <type>material</type>
         <object-name>cmdCtrlLight</object-name>
@@ -12,15 +42,45 @@
 			<green>0.1</green>
 			<blue>0.0</blue>
 		</ambient>
-        <emission>
+    	<emission>
             <red>0</red>
             <green>1.0</green>
             <blue>0.2</blue>
-            <factor-prop>controls/armament/panel/gun-ready</factor-prop>
+            <factor-prop>/instrumentation/autopilot/lights/cmd</factor-prop>
         </emission> 
     </animation>
 
+	<!-- AUTO BUTTON -->
+
     <animation>
+		<type>pick</type>
+		<object-name>autoCtrlLight</object-name>
+		<object-name>autoHousing</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>autopilot.panel_button("auto");</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>autoCtrlLight</object-name>
+		<object-name>autoHousing</object-name>
+		<property>/instrumentation/autopilot/lights/auto</property>
+		<factor>0.001</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
         <type>material</type>
         <object-name>autoCtrlLight</object-name>
 		<ambient>
@@ -28,27 +88,57 @@
 			<green>0.1</green>
 			<blue>0.0</blue>
 		</ambient>
-        <emission>
+    	<emission>
             <red>0</red>
             <green>1.0</green>
             <blue>0.2</blue>
-            <factor-prop>controls/armament/panel/gun-ready</factor-prop>
+            <factor-prop>/instrumentation/autopilot/lights/auto</factor-prop>
         </emission> 
     </animation>
 
+	<!-- STAB BUTTON -->
+
     <animation>
+		<type>pick</type>
+		<object-name>stabilizeLight</object-name>
+		<object-name>stabilizeHousing</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>autopilot.panel_button("stab");</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>stabilizeLight</object-name>
+		<object-name>stabilizeHousing</object-name>
+		<property>/instrumentation/autopilot/lights/stab</property>
+		<factor>0.001</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
         <type>material</type>
-        <object-name>stabilizeLight</object-name>
+		<object-name>stabilizeLight</object-name>
 		<ambient>
 			<red>0.0</red>
 			<green>0.1</green>
 			<blue>0.0</blue>
 		</ambient>
-        <emission>
+    	<emission>
             <red>0</red>
             <green>1.0</green>
             <blue>0.2</blue>
-            <factor-prop>controls/armament/panel/gun-ready</factor-prop>
+            <factor-prop>/instrumentation/autopilot/lights/stab</factor-prop>
         </emission> 
     </animation>
 
@@ -64,12 +154,73 @@
             <red>1.0</red>
             <green>0.0</green>
             <blue>0.2</blue>
-            <factor-prop>controls/armament/panel/gun-ready</factor-prop>
+            <factor-prop>/instrumentation/autopilot/lights/level</factor-prop>
         </emission>
     </animation>
 	
+    <!-- OFF BUTTON -->
 
-    
+    <animation>
+		<type>pick</type>
+		<object-name>offButton</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>autopilot.panel_button("off");</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-assign</command>
+					<property>/instrumentation/autopilot/lights/off</property>
+					<value>0</value>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>offButton</object-name>
+		<property>/instrumentation/autopilot/lights/off</property>
+		<factor>0.001</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- LOW ALT SWITCH -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>limitAltSwitch</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/autopilot/locks/low-alt-mode-armed</property>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>limitAltSwitch</object-name>
+		<type>rotate</type>
+		<property>/autopilot/locks/low-alt-mode-armed</property>
+		<factor>-35</factor>
+		<offset-deg>15</offset-deg>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
     
 <!-- Label text -->
 

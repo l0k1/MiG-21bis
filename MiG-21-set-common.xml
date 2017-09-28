@@ -3,6 +3,9 @@
 <PropertyList>
 	<!--<aax type="float">0</aax>
 	<aay type="float">0</aay>-->
+	<a type="float">0.5</a>
+	<b type="float">1000000</b>
+	<c type="float">0</c>
 	<sim>
 
 		<submodels>
@@ -317,6 +320,15 @@
 	</engines>
 
 	<instrumentation>
+		<autopilot>
+			<lights>
+				<off type="int">0</off>
+				<cmd type="int">0</cmd>
+				<auto type="int">0</auto>
+				<stab type="int">0</stab>
+				<level type="int">0</level>
+			</lights>
+		</autopilot>
 		<nav n="0">
 			<radials>
 				<selected-deg>0</selected-deg>
@@ -458,6 +470,12 @@
 			<fcs>
 				<pitch-gearing-enable>1</pitch-gearing-enable>
 				<roll-damping-enable>1</roll-damping-enable>
+				<elevator-ap-cmd-norm type="double">0</elevator-ap-cmd-norm>
+				<aileron-ap-cmd-norm type="double">0</aileron-ap-cmd-norm>
+				<rudder-ap-cmd-norm type="double">0</rudder-ap-cmd-norm>
+				<aileron-manual-override type="bool">false</aileron-manual-override>
+				<elevator-manual-override type="bool">false</elevator-manual-override>
+				<rudder-manual-override type="bool">false</rudder-manual-override>
 			</fcs>
 			<!-- for in-flight FDM tuning -->
 			<tune>
@@ -556,6 +574,7 @@
         <formation>       <file>Aircraft/Generic/formation.nas</file>                </formation>
         <dialog>          <file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>          </dialog>
         <radar_altimeter> <file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>  </radar_altimeter>
+        <autopilot>       <file>Aircraft/MiG-21bis/Nasal/autopilot.nas</file>        </autopilot>
 
 	</nasal>
 

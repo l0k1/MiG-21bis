@@ -2,18 +2,65 @@
 
 <system name="FCS-pitch">
 
+	<!-- 
+    the FCS defines two properties for autopilot:
+    [channel]-ap-override - to be used by the autopilot to override the joystick inputs
+    [channel]-manual-override - to be used by the autopilot to override it's override.
+                                use manual override when you want to temporarily disable
+                                a specific channel for temporary joystick input without
+                                fully disabling the autopilot.
+    -->
+
 	<property>/instrumentation/altimeter/indicated-altitude-ft</property>
+	<property>/autopilot/locks/mode</property>
+	<property>fcs/elevator-ap-override</property>
 
   <channel name="Pitch">
+  
+	<switch name="elevator-ap-override">
+		<default value="0"/>
+		<test logic="AND" value="1">
+			/autopilot/locks/mode gt 0
+			fcs/elevator-manual-override == 0
+		</test>
+	</switch>
+  
+	<fcs_function name="trash/aadf3423">
+		<function>
+			<sum>
+				<product>
+					<property>fcs/elevator-cmd-norm</property>
+					<sum>
+						<product>
+							<property>fcs/elevator-ap-override</property>
+							<value>-1</value>
+						</product>
+						<value>1</value>
+					</sum>
+				</product>
+				<product>
+					<property>fcs/elevator-ap-cmd-norm</property>
+					<property>fcs/elevator-ap-override</property>
+				</product>
+				<property>fcs/pitch-trim-cmd-norm</property>
+			</sum>
+		</function>
+		<clipto>
+			<min> -1 </min>
+			<max>  1 </max>
+		</clipto>
+		<output>fcs/pitch-trim-sum</output>
+	</fcs_function>
 
-   <summer name="Pitch Trim Sum">
+   <!--<summer name="Pitch Trim Sum">
       <input>fcs/elevator-cmd-norm</input>
+      <input>fcs/elevator-ap-cmd-norm</input>
       <input>fcs/pitch-trim-cmd-norm</input>
       <clipto>
         <min> -1 </min>
         <max>  1 </max>
       </clipto>
-   </summer>
+   </summer>-->
    
       <fcs_function name="pitch-gearing">
 	  <!--There is a q-feel system called ARU, that changes the pitch control gearing ratio proportionally with speed and altitude. 
