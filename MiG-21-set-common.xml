@@ -167,6 +167,52 @@
         <string n="15" alias="/payload/weight[4]/selected"/>
 			</generic>
 		</multiplay>
+		
+		<!-- persistent properties -->
+		
+		<aircraft-data>
+		
+			<path>/instrumentation/vor-radio[0]</path>
+			<path>/instrumentation/vor-radio[1]</path>
+			<path>/instrumentation/vor-radio[2]</path>
+			<path>/instrumentation/vor-radio[3]</path>
+			<path>/instrumentation/vor-radio[4]</path>
+			<path>/instrumentation/vor-radio[5]</path>
+			<path>/instrumentation/vor-radio[6]</path>
+			<path>/instrumentation/vor-radio[7]</path>
+			<path>/instrumentation/vor-radio[8]</path>
+			<path>/instrumentation/vor-radio[9]</path>
+			<path>/instrumentation/vor-radio[10]</path>
+			<path>/instrumentation/vor-radio[11]</path>
+			<path>/instrumentation/vor-radio[12]</path>
+			<path>/instrumentation/vor-radio[13]</path>
+			<path>/instrumentation/vor-radio[14]</path>
+			<path>/instrumentation/vor-radio[15]</path>
+			<path>/instrumentation/vor-radio[16]</path>
+			<path>/instrumentation/vor-radio[17]</path>
+			<path>/instrumentation/vor-radio[18]</path>
+			<path>/instrumentation/vor-radio[19]</path>
+			
+			<path>/instrumentation/ils-radio[0]</path>
+			<path>/instrumentation/ils-radio[1]</path>
+			<path>/instrumentation/ils-radio[2]</path>
+			<path>/instrumentation/ils-radio[3]</path>
+			<path>/instrumentation/ils-radio[4]</path>
+			<path>/instrumentation/ils-radio[5]</path>
+			<path>/instrumentation/ils-radio[6]</path>
+			<path>/instrumentation/ils-radio[7]</path>
+			<path>/instrumentation/ils-radio[8]</path>
+			<path>/instrumentation/ils-radio[9]</path>
+			<path>/instrumentation/ils-radio[10]</path>
+			<path>/instrumentation/ils-radio[11]</path>
+			<path>/instrumentation/ils-radio[12]</path>
+			<path>/instrumentation/ils-radio[13]</path>
+			<path>/instrumentation/ils-radio[14]</path>
+			<path>/instrumentation/ils-radio[15]</path>
+			<path>/instrumentation/ils-radio[16]</path>
+			<path>/instrumentation/ils-radio[17]</path>
+			<path>/instrumentation/ils-radio[18]</path>
+			<path>/instrumentation/ils-radio[19]</path>
 
 	</sim>
 	
@@ -380,50 +426,50 @@
 			<knob-level type="float">0</knob-level>
 		</fuel>
 		<vor-radio>
-			<selection type="int" archive="y">0</selection>
-			<preset type="double" n="0" archive="y">101.00</preset>
-			<preset type="double" n="1" archive="y">101.00</preset>
-			<preset type="double" n="2" archive="y">101.00</preset>
-			<preset type="double" n="3" archive="y">101.00</preset>
-			<preset type="double" n="4" archive="y">101.00</preset>
-			<preset type="double" n="5" archive="y">101.00</preset>
-			<preset type="double" n="6" archive="y">101.00</preset>
-			<preset type="double" n="7" archive="y">101.00</preset>
-			<preset type="double" n="8" archive="y">101.00</preset>
-			<preset type="double" n="9" archive="y">101.00</preset>
-			<preset type="double" n="10" archive="y">101.00</preset>
-			<preset type="double" n="11" archive="y">101.00</preset>
-			<preset type="double" n="12" archive="y">101.00</preset>
-			<preset type="double" n="13" archive="y">101.00</preset>
-			<preset type="double" n="14" archive="y">101.00</preset>
-			<preset type="double" n="15" archive="y">101.00</preset>
-			<preset type="double" n="16" archive="y">101.00</preset>
-			<preset type="double" n="17" archive="y">101.00</preset>
-			<preset type="double" n="18" archive="y">101.00</preset>
-			<preset type="double" n="19" archive="y">101.00</preset>
+			<selection type="int" userarchive="y">0</selection>
+			<preset type="double" n="0" userarchive="y">101.00</preset>
+			<preset type="double" n="1" userarchive="y">101.00</preset>
+			<preset type="double" n="2" userarchive="y">101.00</preset>
+			<preset type="double" n="3" userarchive="y">101.00</preset>
+			<preset type="double" n="4" userarchive="y">101.00</preset>
+			<preset type="double" n="5" userarchive="y">101.00</preset>
+			<preset type="double" n="6" userarchive="y">101.00</preset>
+			<preset type="double" n="7" userarchive="y">101.00</preset>
+			<preset type="double" n="8" userarchive="y">101.00</preset>
+			<preset type="double" n="9" userarchive="y">101.00</preset>
+			<preset type="double" n="10" userarchive="y">101.00</preset>
+			<preset type="double" n="11" userarchive="y">101.00</preset>
+			<preset type="double" n="12" userarchive="y">101.00</preset>
+			<preset type="double" n="13" userarchive="y">101.00</preset>
+			<preset type="double" n="14" userarchive="y">101.00</preset>
+			<preset type="double" n="15" userarchive="y">101.00</preset>
+			<preset type="double" n="16" userarchive="y">101.00</preset>
+			<preset type="double" n="17" userarchive="y">101.00</preset>
+			<preset type="double" n="18" userarchive="y">101.00</preset>
+			<preset type="double" n="19" userarchive="y">101.00</preset>
 		</vor-radio>
 		<ils-radio>
-			<selection type="int" archive="y">0</selection>
-			<preset type="double" n="0" archive="y">101.00</preset>
-			<preset type="double" n="1" archive="y">101.00</preset>
-			<preset type="double" n="2" archive="y">101.00</preset>
-			<preset type="double" n="3" archive="y">101.00</preset>
-			<preset type="double" n="4" archive="y">101.00</preset>
-			<preset type="double" n="5" archive="y">101.00</preset>
-			<preset type="double" n="6" archive="y">101.00</preset>
-			<preset type="double" n="7" archive="y">101.00</preset>
-			<preset type="double" n="8" archive="y">101.00</preset>
-			<preset type="double" n="9" archive="y">101.00</preset>
-			<preset type="double" n="10" archive="y">101.00</preset>
-			<preset type="double" n="11" archive="y">101.00</preset>
-			<preset type="double" n="12" archive="y">101.00</preset>
-			<preset type="double" n="13" archive="y">101.00</preset>
-			<preset type="double" n="14" archive="y">101.00</preset>
-			<preset type="double" n="15" archive="y">101.00</preset>
-			<preset type="double" n="16" archive="y">101.00</preset>
-			<preset type="double" n="17" archive="y">101.00</preset>
-			<preset type="double" n="18" archive="y">101.00</preset>
-			<preset type="double" n="19" archive="y">101.00</preset>
+			<selection type="int" userarchive="y">0</selection>
+			<preset type="double" n="0" userarchive="y">101.00</preset>
+			<preset type="double" n="1" userarchive="y">101.00</preset>
+			<preset type="double" n="2" userarchive="y">101.00</preset>
+			<preset type="double" n="3" userarchive="y">101.00</preset>
+			<preset type="double" n="4" userarchive="y">101.00</preset>
+			<preset type="double" n="5" userarchive="y">101.00</preset>
+			<preset type="double" n="6" userarchive="y">101.00</preset>
+			<preset type="double" n="7" userarchive="y">101.00</preset>
+			<preset type="double" n="8" userarchive="y">101.00</preset>
+			<preset type="double" n="9" userarchive="y">101.00</preset>
+			<preset type="double" n="10" userarchive="y">101.00</preset>
+			<preset type="double" n="11" userarchive="y">101.00</preset>
+			<preset type="double" n="12" userarchive="y">101.00</preset>
+			<preset type="double" n="13" userarchive="y">101.00</preset>
+			<preset type="double" n="14" userarchive="y">101.00</preset>
+			<preset type="double" n="15" userarchive="y">101.00</preset>
+			<preset type="double" n="16" userarchive="y">101.00</preset>
+			<preset type="double" n="17" userarchive="y">101.00</preset>
+			<preset type="double" n="18" userarchive="y">101.00</preset>
+			<preset type="double" n="19" userarchive="y">101.00</preset>
 		</ils-radio>
 	</instrumentation>
 
