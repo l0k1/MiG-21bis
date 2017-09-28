@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+ 
+<PropertyList>
+
+	<!-- gyro compass drift calculations -->
+	<!-- what is accounted for:
+		- earth rotation rate wander
+		- latitude compass setting wander
+		- transport wander
+		- random wander
+	-->
+	
+	<!-- convert delta-sec to delta-hour for easy use -->
+	<!-- delta-sec / 60 / 60 -->
+	<filter>
+		<type>gain</type>
+		<gain>1</gain>
+		<input>
+			<expression>
+				<div>
+					<div>
+						<property>/sim/time/delta-sec</property>
+						<value>60</value>
+					</div>
+					<value>60</value>
+				</div>
+			</expression>
+		</input>
+		<output>/sim/time/delta-hour</property>
+	</filter>
+
+	<!-- earth rate -->
+	<!-- 15 * sin(latitude) = drift per hour -->
+
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+    			<product>
+		    		<product>
+		    			<value>15</value>
+		    			<sin>
+		    				<property>/position/latitude-deg</property> <!-- may need to convert to radians -->
+		    			</sin>
+		    		</product>
+		    		<property>/sim/time/delta-hour</property>
+		    	</product>
+    		</expression>
+    	</input>
+    	<output>/instrumentation/gyro-compass/earth-rate-drift</output>
+    </filter>
+    
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+    			<sum>
+    				<property>/instrumentation/gyro-compass/earth-rate-drift</property>
+    				<property>/instrumentation/gyro-compass/earth-rate-drift-accumulated</property>
+    			</sum>
+    		</expression>
+    	</input>
+    	<output>/instrumentation/gyro-compass/earth-rate-drift-accumulated</output>
+    </filter>
+    
+    <!-- latitude setting drift -->
+    <!-- -15 * sin(lattitude-setting) = drift per hour -->
+    
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+    			<product>
+		    		<product>
+		    			<value>-15</value>
+		    			<sin>
+		    				<property>/instrumentation/gyro-compass/latitude-setting</property> <!-- may need to convert to radians -->
+		    			</sin>
+		    		</product>
+		    		<property>/sim/time/delta-hour</property>
+		    	</product>
+    		</expression>
+    	</input>
+    	<output>/instrumentation/gyro-compass/lattitude-setting-drift</output>
+    </filter>
+    
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+    			<sum>
+    				<property>/instrumentation/gyro-compass/lattitude-setting-drift</property>
+    				<property>/instrumentation/gyro-compass/lattitude-setting-drift-accumulated</property>
+    			</sum>
+    		</expression>
+    	</input>
+    	<output>/instrumentation/gyro-compass/lattitude-setting-drift-accumulated</output>
+    </filter>
+    
+    <!-- transport wander -->
+    <!-- (-1 * east-groundspeed-kts / 60) * tan(latitude) = drift per hour -->
+    
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+    		
+    		<product>
+	    		<product>
+		    		<div>
+		    			<product>
+		    				<product>
+				    			<property>/velocities/speed-east-fps</velocities> <!-- make sure this is groundspeed -->
+				    			<value>-1</value>
+				    		</product>
+			    			<value>0.592484</value> <!-- feet per second to knots -->
+			    		</product>
+		    			<value>60</value>
+		    		</div>
+		    		<tan>
+		    			<property>/position/latitude-deg</property>
+		    		</tan>
+		    	</product>
+		    	<property>/sim/time/delta-hour</property>
+		    </product>
+    		
+    		</expression>
+    	</input>
+    	<output>/instrumentation/gyro-compass/transport-wander</output>
+    </filter>
+    
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+    			<sum>
+    				<property>/instrumentation/gyro-compass/transport-wander</property>
+    				<property>/instrumentation/gyro-compass/transport-wander-accumulated</property>
+    			</sum>
+    		</expression>
+    	</input>
+    	<output>/instrumentation/gyro-compass/transport-wander-accumulated</output>
+    </filter>
+    
+    <!-- real drift -->
+    <!-- gyro-specific "random" wandering due to friction, etc. -->
+	<!-- 3.47 * sin(latitude) = drift per hour -->
+	
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+    			<product>
+		    		<product>
+		    			<value>3.47</value>
+		    			<sin>
+		    				<property>/position/latitude-deg</property> <!-- may need to convert to radians -->
+		    			</sin>
+		    		</product>
+		    		<property>/sim/time/delta-hour</property>
+		    	</product>
+    		</expression>
+    	</input>
+    	<output>/instrumentation/gyro-compass/real-drift</output>
+    </filter>
+    
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+    			<sum>
+    				<property>/instrumentation/gyro-compass/real-drift</property>
+    				<property>/instrumentation/gyro-compass/real-drift-accumulated</property>
+    			</sum>
+    		</expression>
+    	</input>
+    	<output>/instrumentation/gyro-compass/real-drift-accumulated</output>
+    </filter>
+    
+    <!-- sum of drift -->
+    
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+    			<sum>
+    				<property>/instrumentation/gyro-compass/earth-rate-drift-accumulated</property>
+    				<property>/instrumentation/gyro-compass/lattitude-setting-drift-accumulated</property>
+    				<property>/instrumentation/gyro-compass/transport-wander-accumulated</property>
+    				<property>/instrumentation/gyro-compass/real-drift-accumulated</property>
+    			</sum>
+    		</expression>
+    	</input>
+    	<output>/instrumentation/gyro-compass/total-drift</output>
+    </filter>
+    
+    <!-- fds slave setting -->
+    
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<enable>
+    		<condition>
+    			<equals>
+	    			<property>/instrumentation/gyro-compass/fds-button</property>
+	    			<value>1</value>
+	    		</equals>
+	    	</condition>
+	    </enable>
+	    <input>
+	    	<expression>
+		    	<difference>
+		    		<property>/instrumentation/compass/heading-deg</property>
+		    		<property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+		    	</difference>
+	    	</expression>
+	    </input>
+	    <output>/instrumentation/gyro-compass/mag-offset-change-rate</output>
+	    <min>-0.1</min>
+	    <max> 0.1</max>
+	</filter>
+
+	<filter>
+		<type>gain</type>
+		<gain>1</gain>
+		<enable>
+			<condition>
+    			<equals>
+	    			<property>/instrumentation/gyro-compass/fds-button</property>
+	    			<value>1</value>
+	    		</equals>
+	    	</condition>
+	    </enable>
+	    <input>
+	    	<expression>
+	    		<sum>
+	    			<property>/instrumentation/gyro-compass/mag-offset</property>
+	    			<property>/instrumentation/gyro-compass/mag-offset-change-rate</property>
+	    		</sum>
+	    	</expression>
+	    </input>
+	    <output>/instrumentation/gyro-compass/mag-offset</property>
+	</filter>
+	
+	<!-- final gyro compass calculation -->
+    		
+    	
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+    			<sum>
+    				<property>/instrumentation/gyro-compass/total-drift</property>
+    				<property>/instrumentation/gyro-compass/mag-offset</property>
+    			</sum>
+    		</expression>
+    	</input>
+    	<output>/instrumentation/gyro-compass/gyro-heading-deg</output>
+    </filter>
+
+</PropertyList>
