@@ -213,6 +213,8 @@
 			<path>/instrumentation/ils-radio[17]</path>
 			<path>/instrumentation/ils-radio[18]</path>
 			<path>/instrumentation/ils-radio[19]</path>
+			
+		</aircraft-data>
 
 	</sim>
 	
