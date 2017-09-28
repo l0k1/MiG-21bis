@@ -3,9 +3,6 @@ UPDATE_TIME = 0.15;
 
 var main_loop = func (){
 	performance();
-	update_vor_freq();
-	update_ils_freq();
-	vor_intercept_angle();
 	settimer(func{main_loop();},UPDATE_TIME);
 }
 
