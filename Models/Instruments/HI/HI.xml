@@ -44,10 +44,43 @@
         </center>
     </animation>
 
-	<!--<animation>
+    <animation>
         <type>rotate</type>
-        <object-name>courseFwd</object-name>
-		<object-name>courseBack</object-name>
+        <object-name>bearingNeedle</object-name>
+        <property>/instrumentation/nav[0]/heading-deg</property>
+        <factor>-1</factor>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+        <center>
+        	<x-m>-0.00303</x-m>
+        	<y-m>-0.00296</y-m>
+        	<z-m> 0.00437</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>bearingNeedle</object-name>
+        <property>/orientation/heading-magnetic-deg</property>
+        <factor>1</factor>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+        <center>
+        	<x-m>-0.00303</x-m>
+        	<y-m>-0.00296</y-m>
+        	<z-m> 0.00437</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>radialNeedle</object-name>
         <property>/instrumentation/nav[0]/radials/selected-deg</property>
         <factor>-1</factor>
         <axis>
@@ -55,7 +88,29 @@
             <y>0</y>
             <z>0</z>
         </axis>
-    </animation>-->
+        <center>
+        	<x-m>-0.00303</x-m>
+        	<y-m>-0.00296</y-m>
+        	<z-m> 0.00437</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>radialNeedle</object-name>
+        <property>/orientation/heading-magnetic-deg</property>
+        <factor>1</factor>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+        <center>
+        	<x-m>-0.00303</x-m>
+        	<y-m>-0.00296</y-m>
+        	<z-m> 0.00437</z-m>
+        </center>
+    </animation>
 	
 	<animation>
         <type>translate</type>
@@ -72,7 +127,7 @@
 	<animation>
         <type>translate</type>
         <object-name>HIazimuthNeedle</object-name>
-        <property>/instrumentation/nav[1]/gs-needle-deflection-norm</property>
+        <property>/instrumentation/nav[0]/gs-needle-deflection-norm</property>
         <factor>.03</factor>
         <axis>
             <x>0</x>
@@ -84,62 +139,46 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>HItoFlag</object-name>
-		<property>/instrumentation/nav[0]/to-flag</property>
+		<property>/instrumentation/nav[0]/frequencies/is-localizer-frequency</property>
 		<bias>0.0001</bias>
 		<factor>0.029296875</factor>
 		<step>1</step>
 		<axis>
-			<x>1</x>
-			<y>0</y>
+			<x>0</x>
+			<y>-1</y>
 		</axis>
 	</animation>
 	
 	<animation>
 		<type>textranslate</type>
 		<object-name>HIfromFlag</object-name>
-		<property>/instrumentation/nav[0]/from-flag</property>
+		<property>/instrumentation/nav[0]/gs-in-range</property>
 		<bias>0.0001</bias>
 		<factor>0.029296875</factor>
 		<step>1</step>
 		<axis>
-			<x>1</x>
-			<y>0</y>
+			<x>0</x>
+			<y>-1</y>
 		</axis>
 	</animation>
 	
- <!--   <animation>
+	<animation>
         <type>rotate</type>
-        <object-name>hdgbug</object-name>
-        <property>/instrumentation/heading-indicator/indicated-heading-deg</property>
-        <factor>-1</factor>
+        <object-name>HIknob</object-name>
+        <property>/instrumentation/nav[0]/radials/selected-deg</property>
+        <factor>-4</factor>
         <center>
-        <x>-0.0057</x>
-        <y>-0.0015</y>
-        <z> 0.001</z>
+	        <x-m> 0.01391</x-m>
+	        <y-m> 0.03775</y-m>
+	        <z-m>-0.05188</z-m>
         </center>
-        <axis>
-        <x>-1</x>
-        <y>0</y>
-        <z>0</z>
+	    <axis>
+	        <x>-1</x>
+	        <y>0</y>
+	        <z>0</z>
         </axis>
     </animation>
 
-    <animation>
-        <type>rotate</type>
-        <object-name>hdgbug</object-name>
-        <property>/autopilot/settings/heading-bug-deg</property>
-        <center>
-        <x>-0.0057</x>
-        <y>-0.0015</y>
-        <z> 0.001</z>
-        </center>
-        <axis>
-        <x>-1</x>
-        <y>0</y>
-        <z>0</z>
-        </axis>
-    </animation>-->
-	
 	<animation>
 		<type>pick</type>
 		<object-name>HIknob</object-name>

@@ -377,6 +377,10 @@
     <binding>
      <command>dialog-apply</command>
     </binding>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/nav[0]/radio-tune-update</property>
+    </binding>
    </button>
   
   <button>
@@ -386,55 +390,15 @@
     <binding>
      <command>dialog-apply</command>
     </binding>
-	<binding>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/nav[0]/radio-tune-update</property>
+    </binding>
+	 <binding>
      <command>dialog-close</command>
     </binding>
    </button>
   
   </group>
-
-
-  <!--<text>
-    <label>Weapon Management</label>
-  </text>
-	  
-	  var tlat = getprop("ai/guided/bay"~ b ~"/bomb["~ n ~"]/target-latitude-deg");
-var tlong = getprop("ai/guided/bay"~ b ~"/bomb["~ n ~"]/target-longitude-deg");
-	  
- <hrule/>
- 
-  <nasal>
-    <open>
-	#nasal
-    </open>
-  </nasal>
-
-
-    <text>
-    <label>Load Weapons</label>
-   </text>
-    <text>
-    <label></label>
-   </text>
-  <group>
-   <layout>vbox</layout>
-    
-    <text>
-    <label>Load bays with 8 guidable GBU-31 2000lb bombs</label>
-    <halign>left</halign>
-   </text>
-   
-  <button>
-	<legend>Load Guided Ordonance - FWD</legend>
-	<default>true</default>
-	<pref-width>230</pref-width>
-	  <binding>
-		<command>nasal</command>
-		<script>weapons.wpn_load(0)</script>
-	  </binding>
-          <binding>
-            <command>dialog-apply</command>
-          </binding>
-  </button>-->
 
 </PropertyList>

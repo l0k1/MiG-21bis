@@ -3,6 +3,51 @@
 
     <path>switches.ac</path>
 
-	<!--lights-->
+	<animation>
+		<type>pick</type>
+		<object-name>navmodeSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/nav[0]/nav-mode-switch</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>2</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/nav[0]/nav-mode-switch</property>
+				<step>1</step>
+				<min>0</min>
+				<max>2</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>navmodeSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/nav[0]/nav-mode-switch</property>
+		<factor>35</factor>
+		<offset-deg>-35</offset-deg>
+		<center>
+			<x-m>-0.02045</x-m>
+			<y-m>-0.09739</y-m>
+			<z-m> 0.30206</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
 	
 </PropertyList>

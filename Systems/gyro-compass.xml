@@ -26,7 +26,7 @@
 				</div>
 			</expression>
 		</input>
-		<output>/sim/time/delta-hour</property>
+		<output>/sim/time/delta-hour</output>
 	</filter>
 
 	<!-- earth rate -->
@@ -115,7 +115,7 @@
 		    		<div>
 		    			<product>
 		    				<product>
-				    			<property>/velocities/speed-east-fps</velocities> <!-- make sure this is groundspeed -->
+				    			<property>/velocities/speed-east-fps</property> <!-- make sure this is groundspeed -->
 				    			<value>-1</value>
 				    		</product>
 			    			<value>0.592484</value> <!-- feet per second to knots -->
@@ -248,7 +248,7 @@
 	    		</sum>
 	    	</expression>
 	    </input>
-	    <output>/instrumentation/gyro-compass/mag-offset</property>
+	    <output>/instrumentation/gyro-compass/mag-offset</output>
 	</filter>
 	
 	<!-- final gyro compass calculation -->
@@ -266,6 +266,22 @@
     		</expression>
     	</input>
     	<output>/instrumentation/gyro-compass/gyro-heading-deg</output>
+    </filter>
+
+    <!-- other HI related filters -->
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <property>/instrumentation/nav[0]/heading-deg</property>
+                    <property>/orientation/heading-deg</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/instrumentation/nav[0]/bearing-to-beacon-deg</output>
     </filter>
 
 </PropertyList>

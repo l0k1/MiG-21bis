@@ -25,6 +25,10 @@
               <name>radar-altimeter</name>
               <path>Aircraft/MiG-21bis/Systems/radar-altimeter.xml</path>
             </property-rule>
+            <property-rule n="102">
+              <name>gyro-compass</name>
+              <path>Aircraft/MiG-21bis/Systems/gyro-compass.xml</path>
+            </property-rule>
 		</systems>
 
 		<sound>
@@ -381,6 +385,7 @@
 			<radials>
 				<selected-deg>0</selected-deg>
 			</radials>
+			<radio-tune-update type="bool">false</radio-tune-update>
 		</nav>
 		<marker-beacon>
 			<volume type="double" archive="y">0.0</volume>
@@ -604,6 +609,7 @@
 
 	<!-- Nasal Scripts -->
 	<nasal>
+
 		<mig21>           <file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>         </mig21>
 		<MiG-21bis>       <file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>         </MiG-21bis>
 		<lights>          <file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>           </lights>
@@ -623,6 +629,7 @@
         <dialog>          <file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>          </dialog>
         <radar_altimeter> <file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>  </radar_altimeter>
         <autopilot>       <file>Aircraft/MiG-21bis/Nasal/autopilot.nas</file>        </autopilot>
+        <radio>           <file>Aircraft/MiG-21bis/Nasal/radios.nas</file>           </radio>
 
 	</nasal>
 

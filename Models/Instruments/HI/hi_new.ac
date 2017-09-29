@@ -1,14 +1,14 @@
 AC3Db
-MATERIAL "generic.003" rgb 1.000 1.000 1.000  amb 0.750 0.750 0.750  emis 0.000 0.000 0.000  spec 0.761 0.761 0.761  shi 60 trans 0.000
-MATERIAL "bevel.016" rgb 0.528 0.467 0.467  amb 0.750 0.750 0.750  emis 0.000 0.000 0.000  spec 0.657 0.686 0.664  shi 101 trans 0.000
-MATERIAL "knobbly.008" rgb 0.800 0.800 0.800  amb 0.750 0.750 0.750  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 12 trans 0.000
+MATERIAL "generic.000" rgb 1.000 1.000 1.000  amb 0.750 0.750 0.750  emis 0.000 0.000 0.000  spec 0.761 0.761 0.761  shi 60 trans 0.000
+MATERIAL "bevel.000" rgb 0.528 0.467 0.467  amb 0.750 0.750 0.750  emis 0.000 0.000 0.000  spec 0.657 0.686 0.664  shi 101 trans 0.000
+MATERIAL "knobbly.000" rgb 0.800 0.800 0.800  amb 0.750 0.750 0.750  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 12 trans 0.000
 OBJECT world
 name "Blender_exporter_v2.19__hi_new.ac"
 kids 13
 OBJECT poly
 name "bearingNeedle"
 data 9
-Plane.001
+Plane.016
 crease 40.0
 texture "hi_new.png"
 texrep 1 1
@@ -162,7 +162,7 @@ kids 0
 OBJECT poly
 name "HIazimuth"
 data 14
-bezel.mesh.002
+bezel.mesh.000
 crease 45.0
 texture "hi_new.png"
 texrep 1 1
@@ -542,7 +542,7 @@ kids 0
 OBJECT poly
 name "HIazimuthNeedle"
 data 9
-Plane.020
+Plane.017
 crease 35.0
 texture "hi_new.png"
 texrep 1 1
@@ -563,7 +563,7 @@ kids 0
 OBJECT poly
 name "HIbevel"
 data 14
-panel.mesh.006
+panel.mesh.000
 crease 45.0
 texture "../bevel.png"
 texrep 1 1
@@ -1390,7 +1390,7 @@ kids 0
 OBJECT poly
 name "HIcompass"
 data 14
-bezel.mesh.003
+bezel.mesh.001
 crease 45.0
 texture "hi_new.png"
 texrep 1 1
@@ -1538,7 +1538,7 @@ kids 0
 OBJECT poly
 name "HIface"
 data 14
-bezel.mesh.004
+bezel.mesh.006
 crease 45.0
 texture "hi_new.png"
 texrep 1 1
@@ -1615,7 +1615,7 @@ kids 0
 OBJECT poly
 name "HIfromFlag"
 data 9
-Plane.021
+Plane.018
 crease 35.0
 texture "hi_new.png"
 texrep 1 1
@@ -1636,7 +1636,7 @@ kids 0
 OBJECT poly
 name "HIglideslopeNeedle"
 data 9
-Plane.025
+Plane.028
 crease 35.0
 texture "hi_new.png"
 texrep 1 1
@@ -1657,7 +1657,7 @@ kids 0
 OBJECT poly
 name "HIinnerbevel"
 data 14
-bezel.mesh.005
+bezel.mesh.007
 crease 45.0
 texture "hi_new.png"
 texrep 1 1
@@ -2317,7 +2317,7 @@ kids 0
 OBJECT poly
 name "HIknob"
 data 12
-Cylinder.047
+Cylinder.006
 crease 85.0
 texture "../accessories.png"
 texrep 1 1
@@ -2546,7 +2546,7 @@ kids 0
 OBJECT poly
 name "HImidbevel"
 data 14
-bezel.mesh.008
+bezel.mesh.009
 crease 45.0
 texture "hi_new.png"
 texrep 1 1
@@ -3206,7 +3206,7 @@ kids 0
 OBJECT poly
 name "HItoFlag"
 data 9
-Plane.026
+Plane.029
 crease 35.0
 texture "hi_new.png"
 texrep 1 1
@@ -3226,8 +3226,8 @@ refs 4
 kids 0
 OBJECT poly
 name "radialNeedle"
-data 5
-Plane
+data 9
+Plane.030
 crease 40.0
 texture "hi_new.png"
 texrep 1 1

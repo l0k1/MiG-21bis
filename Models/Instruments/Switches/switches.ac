@@ -809,7 +809,7 @@ kids 0
 OBJECT poly
 name "jettAACover"
 data 9
-Plane.020
+Plane.002
 crease 180.0
 texture "switches.png"
 texrep 1 1
@@ -1019,7 +1019,7 @@ kids 0
 OBJECT poly
 name "jettInnerStoresBase"
 data 9
-Plane.021
+Plane.003
 crease 85.0
 texture "switches.png"
 texrep 1 1
@@ -2005,7 +2005,7 @@ kids 0
 OBJECT poly
 name "jettWingTanksBase"
 data 9
-Plane.025
+Plane.004
 crease 85.0
 texture "switches.png"
 texrep 1 1
@@ -2288,7 +2288,7 @@ kids 0
 OBJECT poly
 name "jettWingTanksCover"
 data 9
-Plane.026
+Plane.005
 crease 180.0
 texture "switches.png"
 texrep 1 1
