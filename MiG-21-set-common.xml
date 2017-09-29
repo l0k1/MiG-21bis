@@ -172,47 +172,47 @@
 		
 		<aircraft-data>
 		
-			<path>/instrumentation/vor-radio[0]</path>
-			<path>/instrumentation/vor-radio[1]</path>
-			<path>/instrumentation/vor-radio[2]</path>
-			<path>/instrumentation/vor-radio[3]</path>
-			<path>/instrumentation/vor-radio[4]</path>
-			<path>/instrumentation/vor-radio[5]</path>
-			<path>/instrumentation/vor-radio[6]</path>
-			<path>/instrumentation/vor-radio[7]</path>
-			<path>/instrumentation/vor-radio[8]</path>
-			<path>/instrumentation/vor-radio[9]</path>
-			<path>/instrumentation/vor-radio[10]</path>
-			<path>/instrumentation/vor-radio[11]</path>
-			<path>/instrumentation/vor-radio[12]</path>
-			<path>/instrumentation/vor-radio[13]</path>
-			<path>/instrumentation/vor-radio[14]</path>
-			<path>/instrumentation/vor-radio[15]</path>
-			<path>/instrumentation/vor-radio[16]</path>
-			<path>/instrumentation/vor-radio[17]</path>
-			<path>/instrumentation/vor-radio[18]</path>
-			<path>/instrumentation/vor-radio[19]</path>
+			<path>/instrumentation/vor-radio/preset[0]</path>
+			<path>/instrumentation/vor-radio/preset[1]</path>
+			<path>/instrumentation/vor-radio/preset[2]</path>
+			<path>/instrumentation/vor-radio/preset[3]</path>
+			<path>/instrumentation/vor-radio/preset[4]</path>
+			<path>/instrumentation/vor-radio/preset[5]</path>
+			<path>/instrumentation/vor-radio/preset[6]</path>
+			<path>/instrumentation/vor-radio/preset[7]</path>
+			<path>/instrumentation/vor-radio/preset/preset[8]</path>
+			<path>/instrumentation/vor-radio/preset[9]</path>
+			<path>/instrumentation/vor-radio/preset[10]</path>
+			<path>/instrumentation/vor-radio/preset[11]</path>
+			<path>/instrumentation/vor-radio/preset[12]</path>
+			<path>/instrumentation/vor-radio/preset[13]</path>
+			<path>/instrumentation/vor-radio/preset[14]</path>
+			<path>/instrumentation/vor-radio/preset[15]</path>
+			<path>/instrumentation/vor-radio/preset[16]</path>
+			<path>/instrumentation/vor-radio/preset[17]</path>
+			<path>/instrumentation/vor-radio/preset[18]</path>
+			<path>/instrumentation/vor-radio/preset[19]</path>
 			
-			<path>/instrumentation/ils-radio[0]</path>
-			<path>/instrumentation/ils-radio[1]</path>
-			<path>/instrumentation/ils-radio[2]</path>
-			<path>/instrumentation/ils-radio[3]</path>
-			<path>/instrumentation/ils-radio[4]</path>
-			<path>/instrumentation/ils-radio[5]</path>
-			<path>/instrumentation/ils-radio[6]</path>
-			<path>/instrumentation/ils-radio[7]</path>
-			<path>/instrumentation/ils-radio[8]</path>
-			<path>/instrumentation/ils-radio[9]</path>
-			<path>/instrumentation/ils-radio[10]</path>
-			<path>/instrumentation/ils-radio[11]</path>
-			<path>/instrumentation/ils-radio[12]</path>
-			<path>/instrumentation/ils-radio[13]</path>
-			<path>/instrumentation/ils-radio[14]</path>
-			<path>/instrumentation/ils-radio[15]</path>
-			<path>/instrumentation/ils-radio[16]</path>
-			<path>/instrumentation/ils-radio[17]</path>
-			<path>/instrumentation/ils-radio[18]</path>
-			<path>/instrumentation/ils-radio[19]</path>
+			<path>/instrumentation/ils-radio/preset[0]</path>
+			<path>/instrumentation/ils-radio/preset[1]</path>
+			<path>/instrumentation/ils-radio/preset[2]</path>
+			<path>/instrumentation/ils-radio/preset[3]</path>
+			<path>/instrumentation/ils-radio/preset[4]</path>
+			<path>/instrumentation/ils-radio/preset[5]</path>
+			<path>/instrumentation/ils-radio/preset[6]</path>
+			<path>/instrumentation/ils-radio/preset[7]</path>
+			<path>/instrumentation/ils-radio/preset[8]</path>
+			<path>/instrumentation/ils-radio/preset[9]</path>
+			<path>/instrumentation/ils-radio/preset[10]</path>
+			<path>/instrumentation/ils-radio/preset[11]</path>
+			<path>/instrumentation/ils-radio/preset[12]</path>
+			<path>/instrumentation/ils-radio/preset[13]</path>
+			<path>/instrumentation/ils-radio/preset[14]</path>
+			<path>/instrumentation/ils-radio/preset[15]</path>
+			<path>/instrumentation/ils-radio/preset[16]</path>
+			<path>/instrumentation/ils-radio/preset[17]</path>
+			<path>/instrumentation/ils-radio/preset[18]</path>
+			<path>/instrumentation/ils-radio/preset[19]</path>
 			
 		</aircraft-data>
 
