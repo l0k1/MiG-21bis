@@ -365,6 +365,17 @@
     </model>
 
     <model>
+        <name>Namako</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/PanelNamako/screws.xml</path>
+        <offsets>
+            <x-m>-3.93123</x-m>
+            <y-m> 0.00810</y-m>
+            <z-m> 0.60048</z-m>
+        </offsets>
+    </model>
+
+
+    <model>
         <name>De-Ice Lever</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/KnobsandLevers/deice.xml</path>
         <offsets>
