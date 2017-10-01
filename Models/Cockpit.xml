@@ -27,4 +27,9 @@
 		<path>Aircraft/MiG-21bis/Models/Panel.xml</path>
 	</model>
 
+	<effect>
+		<inherits-from>Aircraft/MiG-21bis/Models/Effects/cockpit/mig21-cockpit</inherits-from>
+		<object-name>panelMain</object-name>
+	</effect>
+
 </PropertyList>
