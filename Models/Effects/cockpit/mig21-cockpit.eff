@@ -55,7 +55,7 @@
           </texture>-->
 
           <texture n="6">
-            <image>Aircraft/MiG-21bis/Models/ao_test.png</image>
+            <image>Aircraft/MiG-21bis/Models/Effects/cockpit/ambient-occlusion.png</image>
             <filter>linear</filter>
             <wrap-s>clamp</wrap-s>
             <wrap-t>clamp</wrap-t>

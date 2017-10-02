@@ -30,6 +30,14 @@
 	<effect>
 		<inherits-from>Aircraft/MiG-21bis/Models/Effects/cockpit/mig21-cockpit</inherits-from>
 		<object-name>panelMain</object-name>
+		<object-name>panelTopRightMid</object-name>
+		<object-name>panelLeft</object-name>
+		<object-name>panelTopLeftMid</object-name>
+		<object-name>panelTopRight</object-name>
+		<object-name>panelTopLeft</object-name>
+		<object-name>panelBottom</object-name>
+		<object-name>panelRadarGuard</object-name>
+		<object-name>panelRight</object-name>
 	</effect>
 
 </PropertyList>
