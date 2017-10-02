@@ -12,7 +12,7 @@
           <ambient-correction type="float">0.00</ambient-correction>
           <normalmap-enabled type="int">1</normalmap-enabled>
 
-          <lightmap-enabled type="int">1</lightmap-enabled>
+          <lightmap-enabled type="int">0</lightmap-enabled>
           <lightmap-multi type="int">1</lightmap-multi>
           <lightmap-factor type="float" n="0"><use>sim/multiplay/generic/float[3]</use></lightmap-factor>
           <lightmap-color type="vec3d" n="0"> 1.0 0.0 0.0 </lightmap-color>
@@ -52,17 +52,17 @@
             <wrap-s>clamp</wrap-s>
             <wrap-t>clamp</wrap-t>
             <internal-format>normalized</internal-format>
-          </texture>
+          </texture>-->
 
           <texture n="6">
-            <image>Aircraft/MiG-21bis/Models/Effects/fuselage/ambient-occlusion.png</image>
+            <image>Aircraft/MiG-21bis/Models/Effects/fuselage/ambient_occlusion.png</image>
             <filter>linear</filter>
             <wrap-s>clamp</wrap-s>
             <wrap-t>clamp</wrap-t>
             <internal-format>normalized</internal-format>
           </texture>
 
-          <grain-texture-enabled type="int"><use>MiG-21bis/effect/rust-outside</use></grain-texture-enabled>
+          <!--<grain-texture-enabled type="int"><use>MiG-21bis/effect/rust-outside</use></grain-texture-enabled>
             <grain-magnification type="float">0.1</grain-magnification>
             <texture n="7">
                 <image>Aircraft/MiG-21bis/Models/Effects/rust1.png</image>

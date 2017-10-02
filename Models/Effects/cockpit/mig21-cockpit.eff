@@ -8,9 +8,9 @@
           <metallic type="float">0.75</metallic>
           <ambient-factor type="float">1.00</ambient-factor>
 
-          <rain-enabled type="int">2</rain-enabled>
+          <rain-enabled type="int">0</rain-enabled>
           <ambient-correction type="float">0.00</ambient-correction>
-          <normalmap-enabled type="int">1</normalmap-enabled>
+          <normalmap-enabled type="int">0</normalmap-enabled>
 
           <lightmap-enabled type="int">1</lightmap-enabled>
           <lightmap-multi type="int">1</lightmap-multi>
