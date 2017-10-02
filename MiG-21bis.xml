@@ -101,11 +101,11 @@
 
  <ground_reactions>
 
-  <contact type="BOGEY" name="NOSE">
+<contact type="BOGEY" name="NOSE">
    <location unit="M">
-     <x> -4.09877 </x>
-     <y>  -0.00407 </y>
-     <z> -1.40477 </z>
+     <x> -4.21 </x>
+     <y>  -0.000 </y>
+     <z> -1.27543 </z>
    </location>
    <static_friction>  0.80 </static_friction>
    <dynamic_friction> 0.50 </dynamic_friction>
@@ -121,7 +121,7 @@
    <location unit="M">
      <x>   0.61490 </x>
      <y>  -1.47895 </y>
-     <z>  -1.68586 </z>
+     <z>  -1.53586 </z>
    </location>
    <static_friction>  0.80 </static_friction>
    <dynamic_friction> 0.50 </dynamic_friction>
@@ -136,7 +136,7 @@
    <location unit="M">
      <x>  0.61490 </x>
      <y> 1.47895 </y>
-     <z> -1.68585 </z>
+     <z> -1.53586 </z>
    </location>
    <static_friction>  0.80 </static_friction>
    <dynamic_friction> 0.50 </dynamic_friction>

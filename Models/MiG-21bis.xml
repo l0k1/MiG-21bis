@@ -1228,7 +1228,7 @@
 		<object-name>front_strut</object-name>
 		<object-name>frontd_strut</object-name>
 		<property>surface-positions/rudder-pos-norm</property>
-		<factor>25</factor>
+		<factor>-25</factor>
 		<center>
 			<x-m>-4.43</x-m>
 			<y-m> 0.00</y-m>
@@ -1661,33 +1661,33 @@
 		</axis>
 	</animation>
 
-	<animation>
-		<type>translate</type>
-		<object-name>rightd_strut</object-name>
-		<object-name>right_scissor</object-name>
-		<object-name>right_wheel</object-name>
-		<property>gear/gear[2]/compression-norm[0]</property>
-		<factor>0.3</factor>
-		<axis>
-			<x>0</x>
-			<y>0</y>
-			<z>1</z>
-		</axis>
-	</animation>
+    <animation>
+        <type>translate</type>
+        <object-name>rightd_strut</object-name>
+        <object-name>right_scissor</object-name>
+        <object-name>right_wheel</object-name>
+        <property>gear/gear[2]/compression-norm</property>
+        <factor>0.3048</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
 
-	<animation>
-		<type>translate</type>
-		<object-name>leftd_strut</object-name>
-		<object-name>left_scissor</object-name>
-		<object-name>left_wheel</object-name>
-		<property>gear/gear[1]/compression-norm[0]</property>
-		<factor>0.3</factor>
-		<axis>
-			<x>0</x>
-			<y>0</y>
-			<z>1</z>
-		</axis>
-	</animation>
+    <animation>
+        <type>translate</type>
+        <object-name>leftd_strut</object-name>
+        <object-name>left_scissor</object-name>
+        <object-name>left_wheel</object-name>
+        <property>gear/gear[1]/compression-norm</property>
+        <factor>0.3048</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
 
         <!-- Wheel Spinning-->
 
