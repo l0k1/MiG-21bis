@@ -310,9 +310,9 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-vs</property>
         </output>
         <config>
-            <Kp>0.21</Kp>
-            <Ti>11</Ti>
-            <Td>0.001</Td>
+            <Kp><property>/a</property></Kp>
+            <Ti><property>/b</property></Ti>
+            <Td><property>/c</property></Td>
             <u_min>-300.0</u_min>
             <u_max>300.0</u_max>
         </config>
@@ -332,14 +332,14 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-vs</property>
         </reference>
         <output>
-            <property>/autopilot/internal/target-pitch-rate-degps</property>
+            <property>/autopilot/internal/target-pitch</property>
         </output>
         <config>
-            <Kp>0.05</Kp>
-            <Ti>7</Ti>
-            <Td>0.0003</Td>
-            <u_min>-10.0</u_min>
-            <u_max>10.0</u_max>
+            <Kp>0.01</Kp>
+            <Ti>2.5</Ti>
+            <Td>0.0001</Td>
+            <u_min>-30</u_min>
+            <u_max>45</u_max>
         </config>
     </pid-controller>
     
@@ -437,7 +437,6 @@ check for Low Altitude Mode
 
     </state-machine>
 
-
     <pid-controller>
         <name>Auto-Leveler Pitch</name>
         <debug>false</debug>
@@ -452,23 +451,22 @@ check for Low Altitude Mode
             <value>0</value>
         </reference>
         <output>
-            <property>/autopilot/internal/target-pitch-rate-degps</property>
+            <property>/autopilot/internal/target-pitch</property>
         </output>
         <config>
-            <Kp>0.05</Kp>
-            <Ti>7</Ti>
-            <Td>0.0003</Td>
-            <u_min>-10.0</u_min>
-            <u_max>10.0</u_max>
+            <Kp>0.01</Kp>
+            <Ti>1.5</Ti>
+            <Td>0.0001</Td>
+            <u_min>-20</u_min>
+            <u_max>45</u_max>
         </config>
     </pid-controller>
-
 
 <!--
     ########################################
     STABILIZER
     -state machine
-    -pitch degree pid
+	-heading error
     -heading seek pid
     ########################################
 -->
@@ -482,21 +480,16 @@ check for Low Altitude Mode
 
         <state>
             <name>active-bank</name>
-            <!--<enter>
+            <enter>
                 <command>property-assign</command>
                 <property>/autopilot/internal/target-roll</property>
                 <property>/orientation/roll-deg</property>
-            </enter>-->
+            </enter>
             <enter>
                 <command>property-assign</command>
                 <property>/autopilot/locks/stab-mode</property>
                 <value>0</value>
             </enter>
-            <update>
-                <command>property-assign</command>
-                <property>/autopilot/internal/target-roll</property>
-                <property>/orientation/roll-deg</property>
-            </update>
         </state>
 
         <state>
@@ -744,53 +737,27 @@ check for Low Altitude Mode
         </transition>
 
     </state-machine>
-
-    <!--<pid-controller>
-        <name>Pitch-deg controller</name>
-        <debug>false</debug>
-        <enable>
-            <property>/autopilot/locks/mode</property>
-            <value>3</value>
-        </enable>
-        <input>
-            <property>/orientation/pitch-deg</property>
-        </input>
-        <reference>
-            <property>/autopilot/internal/target-pitch</property>
-        </reference>
-        <output>
-            <property>/autopilot/internal/target-pitch-rate-degps</property>
-        </output>
-        <config>
-            <Kp>6.5</Kp>
-            <Ti>0.7</Ti>
-            <Td>0.003</Td>
-            <u_min>-10</u_min>
-            <u_max>10</u_max>
-        </config>
-    </pid-controller>-->
-
+	
     <filter>
-        <name>Pitch-deg controller</name>
+        <name>HDG ERROR DEG</name>
         <debug>false</debug>
         <type>gain</type>
-        <gain>-3.25</gain>
-        <enable>
-            <property>/autopilot/locks/mode</property>
-            <value>3</value>
-        </enable>
         <input>
-            <property>/orientation/pitch-deg</property>
+            <property>/autopilot/internal/target-heading</property>
+            <offset>
+                <property>/orientation/heading-magnetic-deg</property>
+                <scale>-1.0</scale>
+            </offset>
         </input>
-        <reference>
-            <property>/autopilot/internal/target-pitch</property>
-        </reference>
-        <output>
-            <property>/autopilot/internal/target-pitch-rate-degps</property>
-        </output>
+        <output>/autopilot/internal/hdg-error-deg</output>
+        <period>
+            <min>-180</min>
+            <max>180</max>
+        </period>
+        <gain>1.0</gain>
     </filter>
 
-    <pid-controller>
+    <pi-simple-controller>
         <name>Heading seek stabilizer</name>
         <debug>false</debug>
         <enable>
@@ -806,22 +773,21 @@ check for Low Altitude Mode
             </condition>
         </enable>
         <input>
-            <property>/orientation/heading-magnetic-deg</property>
+            <property>/autopilot/internal/hdg-error-deg</property>
         </input>
         <reference>
-            <property>/autopilot/internal/target-heading</property>
+            <value>0</value>
         </reference>
         <output>
             <property>/autopilot/internal/target-roll</property>
         </output>
         <config>
-            <Kp>17</Kp>
-            <Ti>6</Ti>
-            <Td>0.01</Td>
-            <u_min>-3</u_min>
-            <u_max>3</u_max>
+            <Kp>-1.1</Kp>
+			<Ki>-0.00001</Ki>
+            <min>-5</min>
+            <max>5</max>
         </config>
-    </pid-controller>
+    </pi-simple-controller>
 
 <!--
     ########################################
@@ -907,7 +873,7 @@ check for Low Altitude Mode
 
     </state-machine>
 
-    <pid-controller>
+    <pi-simple-controller>
         <name>LOC Heading seek</name>
         <debug>false</debug>
         <enable>
@@ -928,13 +894,12 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-roll</property>
         </output>
         <config>
-            <Kp>-19</Kp>
-            <Ti>5</Ti>
-            <Td>0.01</Td>
-            <u_min>-30</u_min>
-            <u_max>30</u_max>
+            <Kp>-1.1</Kp>
+			<Ki>-0.00001</Ki>
+            <min>-5</min>
+            <max>5</max>
         </config>
-    </pid-controller>
+    </pi-simple-controller>
 
     <state-machine>
         <branch>/autopilot/state-machines/glideslope</branch>
@@ -1039,14 +1004,14 @@ check for Low Altitude Mode
             <property>/autopilot/internal/nav1-rate-of-climb</property>
         </reference>
         <output>
-            <property>/autopilot/internal/target-pitch-rate-degps</property>
+            <property>/autopilot/internal/target-pitch</property>
         </output>
         <config>
-            <Kp>0.05</Kp>
-            <Ti>7</Ti>
-            <Td>0.0003</Td>
-            <u_min>-3.0</u_min>
-            <u_max>3.0</u_max>
+            <Kp>0.01</Kp>
+            <Ti>2.5</Ti>
+            <Td>0.0001</Td>
+            <u_min>-30</u_min>
+            <u_max>45</u_max>
         </config>
     </pid-controller>
 
@@ -1054,10 +1019,11 @@ check for Low Altitude Mode
     ########################################
     MULTI-USE
     -autoleveler and low alt target roll setting
-    -target roll to target roll rate pid
+    -target roll to target roll rate
+    -target pitch to target pitch rate
+    -roll final
     -pitch kp algorithm
     -pitch final
-    -roll final
     ########################################
 -->
 
@@ -1088,52 +1054,24 @@ check for Low Altitude Mode
         </input>
         <output>/autopilot/internal/target-roll</output>
     </filter>
+	
+	<!-- Roll Degree Calculate -->
 
-
-    <!-- target roll to target roll rate -->
     <filter>
-        <name>Roll-deg Kp</name>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
-                <table>
-                    <property>/velocities/mach</property>
-                    <entry><ind>0.4</ind><dep>-0.5</dep></entry>
-                    <entry><ind>0.95</ind><dep>-1.7</dep></entry>
-                    <entry><ind>1.6</ind><dep>-1.1</dep></entry>
-                </table>
-            </expression>
-        </input>
-        <output>/autopilot/internal/roll-rate-kp</output>
-    </filter>
-
-    <!--<filter>
-        <name>Roll-deg Ti</name>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
-                <table>
-                    <property>/velocities/mach</property>
-                    <entry><ind>0.4</ind><dep>25</dep></entry>
-                    <entry><ind>0.95</ind><dep>3</dep></entry>
-                    <entry><ind>1.6</ind><dep>25</dep></entry>
-                </table>
-            </expression>
-        </input>
-        <output>/autopilot/internal/roll-rate-ti</output>
-    </filter>
-
-    <pid-controller>
         <name>Roll-deg controller</name>
         <debug>false</debug>
+		<type>gain</type>
+		<gain>-1</gain>
         <enable>
             <condition>
                 <greater-than>
                     <property>/autopilot/locks/mode</property>
                     <value>0</value>
                 </greater-than>
+                <equals>
+                    <property>/fdm/jsbsim/fcs/aileron-manual-override</property>
+                    <value>0</value>
+                </equals>
             </condition>
         </enable>
         <input>
@@ -1145,78 +1083,76 @@ check for Low Altitude Mode
         <output>
             <prop>/autopilot/internal/target-roll-rate-degps</prop>
         </output>
-        <config>
-            <Kp><property>/autopilot/internal/roll-rate-kp</property></Kp>
-            <Ti><property>/autopilot/internal/roll-rate-ti</property></Ti>
-            <Td>0.005</Td>
-            <u_min>-15.0</u_min>
-            <u_max>15.0</u_max>
-        </config>
-    </pid-controller>-->
-
+		<min>-15</min>
+		<max>15</max>
+    </filter>
+	
+	<!-- Pitch Degree Calculate -->
+	
     <filter>
-        <name>Roll-deg controller</name>
+        <name>Pitch-deg controller</name>
         <debug>false</debug>
-        <type>gain</type>
-        <gain>-0.1</gain>
+		<type>gain</type>
+		<gain>-1.5</gain>
         <enable>
             <condition>
                 <greater-than>
                     <property>/autopilot/locks/mode</property>
                     <value>0</value>
                 </greater-than>
+                <equals>
+                    <property>/fdm/jsbsim/fcs/elevator-manual-override</property>
+                    <value>0</value>
+                </equals>
             </condition>
         </enable>
         <input>
-            <property>/orientation/roll-deg</property>
+            <property>/orientation/pitch-deg</property>
         </input>
         <reference>
-            <property>/autopilot/internal/target-roll</property>
+            <property>/autopilot/internal/target-pitch</property>
         </reference>
         <output>
-            <property>/autopilot/internal/target-roll-rate-degps</property>
+            <property>/autopilot/internal/target-pitch-rate-degps</property>
         </output>
+		<min>-10</min>
+		<max>10</max>
     </filter>
 
-    <!-- pitch/roll final controllers -->
-
-    <filter>
-        <name>Aileron Normalizer</name>
-        <type>gain</type>
-        <gain>1</gain>
+    <!-- Roll/Pitch Final Controllers -->
+	
+    <pid-controller>
+        <name>Roll Final</name>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <greater-than>
+                    <property>/autopilot/locks/mode</property>
+                    <value>0</value>
+                </greater-than>
+                <equals>
+                    <property>/fdm/jsbsim/fcs/aileron-manual-override</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+        </enable>
         <input>
-            <expression>
-                <table>
-                    <property>/controls/flight/aileron</property>
-                    <entry><ind>-1.000</ind><dep>-1.0</dep></entry>
-                    <entry><ind>-0.005</ind><dep> 0.0</dep></entry>
-                    <entry><ind> 0.000</ind><dep> 0.0</dep></entry>
-                    <entry><ind> 0.005</ind><dep> 0.0</dep></entry>
-                    <entry><ind> 1.000</ind><dep> 1.0</dep></entry>
-                </table>
-            </expression>
+            <property>/orientation/roll-rate-degps</property>
         </input>
-        <output>/controls/flight/aileron-norm</output>
-    </filter>
-    
-    <filter>
-        <name>Elevator Normalizer</name>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
-                <table>
-                    <property>/controls/flight/elevator</property>
-                    <entry><ind>-1.000</ind><dep>-1.0</dep></entry>
-                    <entry><ind>-0.005</ind><dep> 0.0</dep></entry>
-                    <entry><ind> 0.000</ind><dep> 0.0</dep></entry>
-                    <entry><ind> 0.005</ind><dep> 0.0</dep></entry>
-                    <entry><ind> 1.000</ind><dep> 1.0</dep></entry>
-                </table>
-            </expression>
-        </input>
-        <output>/controls/flight/elevator-norm</output>
-    </filter>
+        <reference>
+            <property>/autopilot/internal/target-roll-rate-degps</property>
+        </reference>
+        <output>
+            <property>/fdm/jsbsim/fcs/aileron-ap-cmd-norm</property>
+        </output>
+        <config>
+            <Kp>0.025</Kp>
+            <Ti>0.45</Ti>
+            <Td>0.001</Td>
+            <u_min>-1.0</u_min>
+            <u_max>1.0</u_max>
+        </config>
+    </pid-controller>
 
     <filter>
         <name>PITCH KP (P Gain)</name>
@@ -1226,9 +1162,9 @@ check for Low Altitude Mode
             <expression>
                 <table>
                     <property>/velocities/mach</property>
-                    <entry><ind>0.35</ind><dep>-0.30</dep></entry>
-                    <entry><ind>0.95</ind><dep>-0.20</dep></entry>
-                    <entry><ind>1.50</ind><dep>-0.15</dep></entry>
+                    <entry><ind>0.35</ind><dep>-0.22</dep></entry>
+                    <entry><ind>0.95</ind><dep>-0.15</dep></entry>
+                    <entry><ind>1.50</ind><dep>-0.11</dep></entry>
                 </table>
             </expression>
         </input>
@@ -1248,10 +1184,6 @@ check for Low Altitude Mode
                     <property>/fdm/jsbsim/fcs/elevator-manual-override</property>
                     <value>0</value>
                 </equals>
-                <equals>
-                    <property>/controls/flight/elevator-norm</property>
-                    <value>0</value>
-                </equals>
             </condition>
         </enable>
         <input>
@@ -1265,50 +1197,11 @@ check for Low Altitude Mode
         </output>
         <config>
             <Kp><property>/autopilot/internal/pitch-rate-kp</property></Kp>
-            <Ti>0.5</Ti>
-            <Td>0.005</Td>
+            <Ti>0.35</Ti>
+            <Td>0.01</Td>
             <u_min>-1.0</u_min>
             <u_max>1.0</u_max>
         </config>
     </pid-controller>
-
-    <pid-controller>
-        <name>Roll Final</name>
-        <debug>false</debug>
-        <enable>
-            <condition>
-                <greater-than>
-                    <property>/autopilot/locks/mode</property>
-                    <value>0</value>
-                </greater-than>
-                <equals>
-                    <property>/fdm/jsbsim/fcs/elevator-manual-override</property>
-                    <value>0</value>
-                </equals>
-                <equals>
-                    <property>/controls/flight/aileron-norm</property>
-                    <value>0</value>
-                </equals>
-            </condition>
-        </enable>
-        <input>
-            <property>/orientation/roll-rate-degps</property>
-        </input>
-        <reference>
-            <property>/autopilot/internal/target-roll-rate-degps</property>
-        </reference>
-        <output>
-            <property>/fdm/jsbsim/fcs/aileron-ap-cmd-norm</property>
-        </output>
-        <config>
-            <Kp>0.025</Kp>
-            <Ti>0.5</Ti>
-            <Td>0.0002</Td>
-            <u_min>-1.0</u_min>
-            <u_max>1.0</u_max>
-        </config>
-    </pid-controller>
-
-    <!-- ILS pids -->
 
 </PropertyList>
