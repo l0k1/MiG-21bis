@@ -420,11 +420,11 @@
         <name>RWR</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/RWR/rwr.xml</path>
         <offsets>
-            <heading-deg>-5</heading-deg>
+            <heading-deg>0</heading-deg>
             <pitch-deg>-7</pitch-deg>
             <x-m>-3.94524</x-m>
-            <y-m> 0.30571</y-m>
-            <z-m> 0.76029</z-m>
+            <y-m> 0.301</y-m>
+            <z-m> 0.75779</z-m>
         </offsets>
     </model>
 
@@ -433,9 +433,10 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/KnobsandLevers/fdsButton.xml</path>
         <offsets>
             <heading-deg></heading-deg>
-            <x-m>-3.96625</x-m>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.95930</x-m>
             <y-m>-0.06331</y-m>
-            <z-m> 0.73565</z-m>
+            <z-m> 0.73666</z-m>
         </offsets>
     </model>
 
