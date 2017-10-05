@@ -76,6 +76,12 @@
 		<desc>Select previous pylon</desc>
 	</key>
 	<text><![CDATA[
+	STARTUP
+	---------
+	Startup is automatic (for now), but you need to do a couple things:
+	1) Set the fuel guage - the fuel gauge does not automatically set to the level in the tank, you need to set the initial level.
+	2) Slave the gyrocompass - hold down the FDS button until the HI compass settles. The compass will drift over time, press the FDS button every now and again to reslave.
+	2b) Set the magnetic declination instrument to your current latitude to help minimize gyro error.
 	INFO
 	---------
 	- Check the installation directory for a how-to guide on weapons employment.
