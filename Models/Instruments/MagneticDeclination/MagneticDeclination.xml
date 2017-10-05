@@ -65,7 +65,7 @@
 		<action>
 			<button>0</button>
 			<button>3</button>
-			<repeatable>false</repeatable>
+			<repeatable>true</repeatable>
 			<interval-sec>0.2</interval-sec>
 			<binding>
 				<command>property-adjust</command>
@@ -79,7 +79,7 @@
 		<action>
 			<button>1</button>
 			<button>4</button>
-			<repeatable>false</repeatable>
+			<repeatable>true</repeatable>
 			<interval-sec>0.2</interval-sec>
 			<binding>
 				<command>property-adjust</command>

@@ -310,9 +310,9 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-vs</property>
         </output>
         <config>
-            <Kp><property>/a</property></Kp>
-            <Ti><property>/b</property></Ti>
-            <Td><property>/c</property></Td>
+            <Kp>0.21</Kp>
+            <Ti>11</Ti>
+            <Td>0.001</Td>
             <u_min>-300.0</u_min>
             <u_max>300.0</u_max>
         </config>
@@ -335,9 +335,9 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-pitch</property>
         </output>
         <config>
-            <Kp>0.01</Kp>
-            <Ti>2.5</Ti>
-            <Td>0.0001</Td>
+            <Kp>0.05</Kp>
+            <Ti>7</Ti>
+            <Td>0.0003</Td>
             <u_min>-30</u_min>
             <u_max>45</u_max>
         </config>
@@ -497,7 +497,7 @@ check for Low Altitude Mode
             <enter>
                 <command>property-assign</command>
                 <property>/autopilot/internal/target-heading</property>
-                <property>/orientation/heading-magnetic-deg</property>
+                <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
             </enter>
             <enter>
                 <command>property-assign</command>
@@ -745,7 +745,7 @@ check for Low Altitude Mode
         <input>
             <property>/autopilot/internal/target-heading</property>
             <offset>
-                <property>/orientation/heading-magnetic-deg</property>
+                <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
                 <scale>-1.0</scale>
             </offset>
         </input>

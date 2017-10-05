@@ -2,10 +2,10 @@
 
 <PropertyList>
 	<!--<aax type="float">0</aax>
-	<aay type="float">0</aay>-->
+	<aay type="float">0</aay>
 	<a type="float">0.5</a>
 	<b type="float">1000000</b>
-	<c type="float">0</c>
+	<c type="float">0</c>-->
 	<sim>
 
 		<submodels>
@@ -217,6 +217,8 @@
 			<path>/instrumentation/ils-radio/preset[17]</path>
 			<path>/instrumentation/ils-radio/preset[18]</path>
 			<path>/instrumentation/ils-radio/preset[19]</path>
+
+			<path>/instrumentation/gyro-compass/gyro-heading-deg</path>
 			
 		</aircraft-data>
 
@@ -390,6 +392,9 @@
 		<marker-beacon>
 			<volume type="double" archive="y">0.0</volume>
 		</marker-beacon>
+		<gyro-compass>
+			<gyro-heading-deg type="double" userarchive="y">0.0</gyro-heading-deg>
+		</gyro-compass>
 		<radar>
 			<range type="int" archive="y">20</range>
 			<range-factor type="double" archive="n">0.001888</range-factor>

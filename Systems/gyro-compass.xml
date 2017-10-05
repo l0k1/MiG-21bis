@@ -225,14 +225,14 @@
 	    <input>
 	    	<expression>
 		    	<difference>
-		    		<property>/instrumentation/compass/heading-deg</property>
+		    		<property>/instrumentation/magnetic-compass/indicated-heading-deg</property>
 		    		<property>/instrumentation/gyro-compass/gyro-heading-deg</property>
 		    	</difference>
 	    	</expression>
 	    </input>
 	    <output>/instrumentation/gyro-compass/mag-offset-change-rate</output>
-	    <min>-0.1</min>
-	    <max> 0.1</max>
+	    <min>-0.2</min>
+	    <max> 0.2</max>
 	</filter>
 
 	<filter>
