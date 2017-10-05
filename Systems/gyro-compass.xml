@@ -256,6 +256,47 @@
 	    </input>
 	    <output>/instrumentation/gyro-compass/mag-offset</output>
 	</filter>
+
+    <!-- heading rate change -->
+
+    <!-- subtract current heading from last heading -->
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <property>/orientation/heading-deg</property>
+                    <property>/instrumentation/gyro-compass/heading-deg-prev</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/instrumentation/gyro-compass/heading-deg-change</output>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <property>/orientation/heading-deg</property>
+        </input>
+        <output>/instrumentation/gyro-compass/heading-deg-prev</output>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <sum>
+                    <property>/instrumentation/gyro-compass/heading-deg-change</property>
+                    <property>/instrumentation/gyro-compass/heading-deg-change-accumulated</property>
+                </sum>
+            </expression>
+        </input>
+        <output>/instrumentation/gyro-compass/heading-deg-change-accumulated</output>
+    </filter>
 	
 	<!-- final gyro compass calculation -->
     		
@@ -268,6 +309,7 @@
     			<sum>
     				<property>/instrumentation/gyro-compass/total-drift</property>
     				<property>/instrumentation/gyro-compass/mag-offset</property>
+                    <property>/instrumentation/gyro-compass/heading-deg-change-accumulated</property>
     			</sum>
     		</expression>
     	</input>

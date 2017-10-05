@@ -21,13 +21,10 @@
 		<object-name>airspeedNeedle</object-name>
 		<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
 		<interpolation>
-			<entry><ind>  0</ind><dep>     0</dep></entry>
-			<entry><ind> 54</ind><dep>   10</dep></entry>
-			<entry><ind> 162</ind><dep>  90</dep></entry>
-			<entry><ind> 270</ind><dep>  180</dep></entry>
-			<entry><ind> 378</ind><dep>  240</dep></entry>
-			<entry><ind> 486</ind><dep>  292</dep></entry>
-			<entry><ind> 594</ind><dep>  352</dep></entry>
+			<entry><ind>    0</ind><dep>     0</dep></entry>
+            <entry><ind>  540</ind><dep>   360</dep></entry>
+            <entry><ind> 1080</ind><dep>   720</dep></entry>
+            <entry><ind> 1620</ind><dep>  1080</dep></entry>
 		</interpolation>
 		<axis>
 			<x>-1.0</x>
