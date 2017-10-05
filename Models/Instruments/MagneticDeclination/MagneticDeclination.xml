@@ -6,14 +6,111 @@
 
     <animation>
         <type>material</type>
-        <object-name>magneticDeclinationFace</object-name>
+        <object-name>lat1</object-name>
+        <object-name>lat10</object-name>
+        <object-name>latSign</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
             <blue>0.3</blue>
-            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+            <factor-prop>/controls/lighting/instruments-norm</factor-prop>
         </emission> 
     </animation>
+
+    <animation>
+		<type>textranslate</type>
+		<object-name>lat1</object-name>
+		<property>/instrumentation/gyro-compass/display_num</property>
+		<bias>0.000001</bias>
+		<factor>-0.10001</factor>
+		<step>1</step>
+		<!-- property * factor * texture width/height -->
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>lat10</object-name>
+		<property>/instrumentation/gyro-compass/display_num</property>
+		<bias>0.000001</bias>
+		<factor>-0.010001</factor>
+		<step>10</step>
+		<!-- property * factor * texture width/height -->
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>latSign</object-name>
+		<property>/instrumentation/gyro-compass/display_sign</property>
+		<bias>0.000001</bias>
+		<factor>-0.2</factor>
+		<step>1</step>
+		<!-- property * factor * texture width/height -->
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>knob</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable>false</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/gyro-compass/latitude-setting</property>
+				<step>1</step>
+				<min>-90</min>
+				<max>91</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/gyro-compass/latitude-setting</property>
+				<step>-1</step>
+				<min>-90</min>
+				<max>91</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>knob</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/gyro-compass/latitude-setting</property>
+		<factor>20</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m> 0.00441</x-m>
+			<y-m> 0.01695</y-m>
+			<z-m>-0.01165</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+    <!--  /instrumentation/gyro-compass/latitude-setting -->
     
 <!-- Label text -->
 
