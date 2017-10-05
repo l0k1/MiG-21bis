@@ -41,7 +41,9 @@
 		    		<product>
 		    			<value>15</value>
 		    			<sin>
-		    				<property>/position/latitude-deg</property> <!-- may need to convert to radians -->
+                            <deg2rad>
+                                <property>/position/latitude-deg</property>
+                            </deg2rad>
 		    			</sin>
 		    		</product>
 		    		<property>/sim/time/delta-hour</property>
@@ -77,7 +79,9 @@
 		    		<product>
 		    			<value>-15</value>
 		    			<sin>
-		    				<property>/instrumentation/gyro-compass/latitude-setting</property> <!-- may need to convert to radians -->
+                            <deg2rad>
+		    				  <property>/instrumentation/gyro-compass/latitude-setting</property>
+                            </deg2rad>
 		    			</sin>
 		    		</product>
 		    		<property>/sim/time/delta-hour</property>
@@ -161,7 +165,9 @@
 		    		<product>
 		    			<value>3.47</value>
 		    			<sin>
-		    				<property>/position/latitude-deg</property> <!-- may need to convert to radians -->
+                            <deg2rad>
+                                <property>/position/latitude-deg</property>
+                            </deg2rad>
 		    			</sin>
 		    		</product>
 		    		<property>/sim/time/delta-hour</property>
