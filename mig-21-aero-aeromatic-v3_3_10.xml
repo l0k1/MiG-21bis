@@ -109,7 +109,7 @@
           <property>aero/qbar-psf</property>
           <property>metrics/Sw-sqft</property>
           <product>
-            <value> 0.01568 </value>
+            <value> 0.014112 </value>
             <property>tune/drag/minimum</property>
           </product>
        </product>
@@ -125,9 +125,9 @@
                 <independentVar lookup="row">aero/alpha-rad</independentVar>
                 <tableData>
                  -1.57    1.4102
-                 -0.71    0.2271
+                 -0.71    0.1567
                   0.00    0.0000
-                  0.71    0.2271
+                  0.71    0.1567
                   1.57    1.4102
                 </tableData>
               </table>
@@ -143,7 +143,7 @@
            <property>metrics/Sw-sqft</property>
            <property>aero/cl-squared</property>
            <product>
-             <value> 0.1714 </value>
+             <value> 0.2057 </value>
              <property>tune/drag/induced</property>
            </product>
          </product>
@@ -158,10 +158,10 @@
               <table>
                 <independentVar lookup="row">velocities/mach</independentVar>
                 <tableData>
-                    0.00    0.0000
-                    0.81    0.0000
-                    1.10    0.0138 
-                    1.80    0.0055
+                    0.00    0.00000
+                    0.81    0.00000
+                    1.10    0.02484 
+                    1.80    0.00550
                 </tableData>
               </table>
               <property>tune/drag/mach</property>
@@ -407,8 +407,8 @@
                <independentVar lookup="column">aero/Re</independentVar>
                <tableData>
                            15043185 16547504 22564778 30305826
-                   -0.0349  -1.1501  -0.0851  -0.0565  -0.0417
-                    0.3491  -2.6601  -0.2078  -0.0787  -0.0633
+                   -0.0349  -0.3916  -0.0851  -0.0565  -0.0417
+                    0.3491  -0.9058  -0.2078  -0.0787  -0.0633
                </tableData>
              </table>
              <property>tune/roll/beta</property>
