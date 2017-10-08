@@ -1,6 +1,5 @@
-# RADAR ALTIMETER
-# set a radar altimeter limit based on the position of the knob.
-
+# RWR
+# seek to accurately emulate the RWR and allow it to be flexible/expandable.
 
 
 var rcs_loop = func() {
