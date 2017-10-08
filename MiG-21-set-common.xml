@@ -636,6 +636,7 @@
         <autopilot>       <file>Aircraft/MiG-21bis/Nasal/autopilot.nas</file>        </autopilot>        <!-- ap button listeners -->
         <radio>           <file>Aircraft/MiG-21bis/Nasal/radios.nas</file>           </radio>            <!-- radio freq remapping -->
         <gyro_compass>    <file>Aircraft/MiG-21bis/Nasal/gyro-compass.nas</file>     </gyro_compass>     <!-- listener for gyrocompass display -->
+        <rwr>             <file>Aircraft/MiG-21bis/Nasal/rwr.nas</file>              </rwr>              <!-- rwr -->
 
 	</nasal>
 
