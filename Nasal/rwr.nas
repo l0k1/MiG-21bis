@@ -6,12 +6,12 @@ var rcs_loop = func() {
 	var myCoord = geo.aircraft_position();
 	foreach (var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")) {
 		var loc = geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(),mp.getNode("position/longitude-deg").getValue(),mp.getNode("position/altitude-ft").getValue() * FT2M);
-		calc_down_angle(myCoord,loc,mp.getNode("orientation/true-heading-deg").getValue(),mp.getNode("orientation/pitch-deg").getValue(),mp.getNode("orientation/roll-deg").getValue());
+		rwr_detect(myCoord,loc,mp.getNode("orientation/true-heading-deg").getValue(),mp.getNode("orientation/pitch-deg").getValue(),mp.getNode("orientation/roll-deg").getValue());
 	}
 	settimer(func(){rcs_loop();},0.1);
 }
 
-var calc_down_angle = func(myCoord,echoCoord,echoHeading,echoPitch,echoRoll){
+var rwr_detect = func(myCoord,echoCoord,echoHeading,echoPitch,echoRoll){
 
     var vectorToEcho   = vector.Math.eulerToCartesian2(myCoord.course_to(echoCoord), vector.Math.getPitch(myCoord,echoCoord));
 
