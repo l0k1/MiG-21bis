@@ -426,8 +426,22 @@
 			<hud-vertical-offset-m type="double">-0.025</hud-vertical-offset-m>
 		</radar2>
 		<rwr>
-			<display-lighting-intens type="double">0.4</display-lighting-intens>
-			<symbology-lighting-intens type="double">1</symbology-lighting-intens>
+			<forward-left>
+				<light-enable type="bool">false</light-enable>
+				<signal-strength type="int">0</signal-strength>
+			</forward-left>
+			<forward-right>
+				<light-enable type="bool">false</light-enable>
+				<signal-strength type="int">0</signal-strength>
+			</forward-right>
+			<rear-left>
+				<light-enable type="bool">false</light-enable>
+				<signal-strength type="int">0</signal-strength>
+			</rear-left>
+			<rear-right>
+				<light-enable type="bool">false</light-enable>
+				<signal-strength type="int">0</signal-strength>
+			</rear-right>
 		</rwr>
 		<gunsight>
 			<min-launch-range type="float">0</min-launch-range>
