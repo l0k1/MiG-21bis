@@ -13,9 +13,14 @@ var my_roll = props.globals.getNode("/orientation/roll-deg");
 var rcs_loop = func() {
 	foreach (var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")) {
 		var cs = mp.getNode("callsign").getValue();
-		if ( contains(cs,radiation_sources) != nil ) {
-			radiation_sources[cs].update();
-		} else {
+		var match = 0;
+		foreach ( var source; keys(radiation_sources)) {
+			if ( source == cs ) {
+				radiation_sources[cs].update();
+				match = 1
+			} 
+		}
+		if ( match == 0 ) {
 			radiation_sources[cs] = radiation_source.new(mp);
 			radiation_sources[cs].update();
 		}
@@ -38,39 +43,54 @@ var rwr_sensor = {
 		m.light_enable = 0;
 		m.blink_rate = 0;
 		m.blink_rate_low = 1.5;
-		m.blink_rate_high = 0.25;
+		m.blink_rate_high = 0.1;
 		m.serviceable = 1;
-		m.update_rate = 0.3;
+		m.update_rate = 0.6;
 		m.lbound = lbound;
 		m.hbound = hbound;
+		m.missile_override = 0;
 		m.sources = {};
 		return m;
 	},
 	update: func() {
 		var temp_str = 0;
+		#print("in update func for " ~ me.light_enable_prop);
 		if ( size(radiation_sources) > 0 ) {
 			foreach(var source; keys(radiation_sources)) {
 				forindex(var i; me.lbound){
 					if ( radiation_sources[source].bearing > me.lbound[i] and radiation_sources[source].bearing < me.hbound[i] ) {
-						if ( radiation_sources[source].msl_lnch == 1 and systime() - radiation_sources[source].msl_time < 10 ) {
-							temp_str = 3;
-							break;
-						} elsif ( radiation_sources[source].msl_lnch == 1 and systime() - radiation_sources[source].msl_time >= 10 ) {
-							radiation_sources[source].missile_launch_complete();
-						}
-						if ( radiation_sources[source].sig_str > temp_str ) {
+						#print("source found");
+						#print("launch state: " ~ radiation_sources[source].msl_lnch);
+						#print("launch time:  " ~ radiation_sources[source].msl_time);
+						if ( radiation_sources[source].msl_lnch == 1 ) {
+								#print("time since launch: " ~ systime() - radiation_sources[source].msl_time);
+								if ( systime() - radiation_sources[source].msl_time < 10 ) {
+									#print("setting override");
+									temp_str = 3;
+									me.missile_override = 1;
+								} else {
+									#print("missile launch is over");
+									radiation_sources[source].missile_launch_complete();
+									me.missile_override = 0;
+								}
+						} elsif ( radiation_sources[source].sig_str > temp_str ) {
+							#print("setting strength normally");
+							me.missile_override = 0;
 							temp_str = radiation_sources[source].sig_str;
 						}
-						break;
 					}
 				}
 			}
 		}
+		#print("strength: " ~ temp_str);
 		me.set_strength(temp_str);
 		settimer(func(){me.update();},me.update_rate);
 	},
 
 	set_strength: func(strength) {
+		if ( me.missile_override == 1 ) {
+			strength = 3;
+		}
 		if ( strength != me.signal_strength) {
 			me.signal_strength = strength;
 
@@ -87,27 +107,13 @@ var rwr_sensor = {
 				me.blink_rate = me.blink_rate_high;
 				me._blink();
 			}
-		}
-	},
-	missile_detected: func() {
-		if ( me.missile_override == 0 ) {
-			me.missile_override == 1;
-			me.set_strength(3);
-			me.missile_detect_time = systime();
-			me._missile_detect_off();
-		}
-	},
-	_missile_detect_off: func() {
-		if ( me.missile_override == 1 and systime() - me.missile_detect_time > 10 ) {
-			me.missile_override = 0;
-		} elsif ( me.missile_override == 1 ) {
-			settimer(func(){me._missile_detect_off();},3);
+			me._update_props();
 		}
 	},
 	_blink: func() {
 		if ( me.blink_rate != 0 ) {
 			me.light_enable = me.light_enable * -1 + 1; #flip the light_enable
-			settimer(func(){me.blink();},me.blink_rate);
+			settimer(func(){me._blink();},me.blink_rate);
 		}
 		me._update_props();
 	},
@@ -144,10 +150,13 @@ var incoming_listener = func {
 					if (m2000 == 1 or last_vector[2] == " "~callsign) {
 						# its being fired at me
 						#print("Incoming!");
-						var enemy = damage.getCallsign(author);
-						if ( enemy != nil and contains(enemy,radiation_sources) != nil ) {
-							#print("enemy identified");
-							radiation_sources[enemy].missile_launc();
+						#print("author: |" ~ author ~ "|");
+						if ( author != nil ) {
+							foreach ( var source; keys(radiation_sources)) {
+								if ( source == author ) {
+									radiation_sources[author].missile_launch();
+								} 
+							}
 						}
 					}
 				}
@@ -216,6 +225,7 @@ var radiation_source = {
 	# source is props.globals.getNode pointing to the base mp prop
 	new: func(source) {
 		var m = {parents:[radiation_source]};
+		print("creating new source");
 		m.source =      source;
 		m.callsign =    source.getNode("callsign");
         m.valid =       source.getNode("valid");
@@ -257,17 +267,23 @@ var radiation_source = {
 
 			me.check_distance(myCoord);
 			if ( me.sig_str != 0 ) {
+			#	print("passed distance");
 				me.check_terrain();
 			}
 			if ( me.sig_str != 0 ) {
-				me.check_rel_pitch();
+			#	print("passed terrain");
+				me.check_rel_pitch(myCoord);
 			}
 			if ( me.sig_str != 0 ) {
+			#	print("passed pitch");
 				me.check_emit();
 			}
-			#if ( me.sig_str != 0 ) {
-			#	me.sensor_detect_logic();
-			#}
+			if ( me.sig_str != 0 ) {
+				#print("passed emit");
+				me.get_bearing(myCoord);
+			}
+			
+			#print("sig_str for " ~ me.callsign.getValue() ~ " is " ~ me.sig_str);
 		}
 	},
 	
@@ -291,14 +307,18 @@ var radiation_source = {
 	},
 	
 	check_rel_pitch: func() {
-		#var vectorSide = vector.Math.eulerToCartesian3Y(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue());
-	    #var vectorTop = vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue());
-	    #var view2Dpitch = vector.Math.projVectorOnPlane(vectorTop,me.vectorSide);
-	    #var relative_pitch = math.abs(vector.Math.angleBetweenVectors(me.vectorToEcho,view2Dpitch)-90);
+		# thank you Leto :)
+	    #var vectorToBall = vector.Math.eulerToCartesian2(myCoord.course_to(me.geo), vector.Math.getPitch(myCoord,me.geo));
+		#var vectorMyTop  = vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue());
+		#var view2D         = vector.Math.projVectorOnPlane(vectorMyTop,vectorToBall);
+		#me.rel_pitch = vector.Math.angleBetweenVectors(vectorToBall, view2D);
 	    
 	    # the following line is a condensed version of the above commented out code
-	    me.rel_pitch = math.abs(vector.Math.angleBetweenVectors(me.vectorToEcho,vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),me.vectorSide))-90);
+
+	    me.rel_pitch = vector.Math.angleBetweenVectors(me.vectorToEcho, vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),me.vectorToEcho));
 	    
+	    #print("rel_pitch = " ~ me.rel_pitch);
+
 	    if ( me.rel_pitch > MAX_PITCH ) {
 	    	me.sig_str = 0;
 	    }
@@ -312,7 +332,8 @@ var radiation_source = {
 		
 		#the following line is a condensed version of the above commented out code
 		var angle = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vector.Math.eulerToCartesian3X(me.heading.getValue(), me.pitch.getValue(), me.roll.getValue()), vector.Math.projVectorOnPlane(me.vectorEchoTop,me.vectorToEcho))+180));
-	
+		#print("bearing from target: " ~ angle);
+
 		if ( angle > me.rad_data.bearing ) { # bearing
 	    	me.sig_str = 0;
 	    	return;
@@ -320,6 +341,8 @@ var radiation_source = {
 	
 	    angle = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(me.vectorEchoTop, me.vectorToEcho))-90); #pitch
 	
+	    #print("pitch from target: " ~ angle);
+
 	    if ( angle > me.rad_data.pitch ) {
 	    	me.sig_str = 0;
 	    }
@@ -327,13 +350,22 @@ var radiation_source = {
 	
 	get_bearing: func() {
 		#roll adjusted bearing
-		#var vectorNose = vector.Math.eulerToCartesian3X(getprop("/orientation/heading-deg"), getprop("/orientation/pitch-deg"), getprop("/orientation/roll-deg"));
-		#var view2Droll = vector.Math.projVectorOnPlane(vectorNose,me.vectorSide);
-	    #var relative_bearing = vector.Math.angleBetweenVectors(me.vectorToEcho,view2Droll)-90;
-	    
+		
+		var view2D = vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),me.vectorToEcho);
+		me.bearing = vector.Math.angleBetweenVectors(vector.Math.eulerToCartesian3X(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()), view2D);
+
+		#find left/right
+		var leftright = vector.Math.angleBetweenVectors(me.vectorSide, view2D);
+
+		if (leftright > 90 ){
+			me.bearing = me.bearing * -1;
+		}
+
 	    #condensed from the above commented out code
-	    me.bearing = vector.Math.angleBetweenVectors(me.vectorToEcho,vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3X(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),me.vectorSide))-90;
+	    #me.bearing = vector.Math.angleBetweenVectors(me.vectorToEcho,vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3X(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),me.vectorSide))-90;
+	    #print("final bearing: " ~ me.bearing);
 	},
+
 	missile_launch: func() {
 		me.msl_lnch = 1;
 		me.msl_time = systime();
