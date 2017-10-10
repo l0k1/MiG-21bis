@@ -4,114 +4,25 @@
 # settings
 var MAX_PITCH = 20;
 
-var sensor_info = {};
-var sensor_save = {};
+var radiation_sources = {};
 
+var my_heading = props.globals.getNode("/orientation/heading-deg");
+var my_pitch = props.globals.getNode("/orientation/pitch-deg");
+var my_roll = props.globals.getNode("/orientation/roll-deg");
+ 
 var rcs_loop = func() {
-	var myCoord = geo.aircraft_position();
-	sensor_save = [0,0,0,0];
 	foreach (var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")) {
-		var model = mp.getNode("model-shorter");
-		if ( model != nil ) {
-			#print('boom');
-			model = model.getValue();
-			var loc = geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(),mp.getNode("position/longitude-deg").getValue(),mp.getNode("position/altitude-ft").getValue() * FT2M);
-			sensor_info = rwr_detect(myCoord, loc, mp.getNode("orientation/true-heading-deg").getValue(), mp.getNode("orientation/pitch-deg").getValue(), mp.getNode("orientation/roll-deg").getValue(), model);
-			if ( sensor_info != nil ) {
-				if ( sensor_save[sensor_info[0]] < sensor_info[1] ) {
-					sensor_save[sensor_info[0]] = sensor_info[1];
-				}
-			}
+		var cs = mp.getNode("callsign").getValue();
+		if ( contains(cs,radiation_sources) != nil ) {
+			radiation_sources[cs].update();
+		} else {
+			radiation_sources[cs] = radiation_source.new(mp);
+			radiation_sources[cs].update();
 		}
 	}
-	for ( var i = 0; i < 4; i = i + 1 ) {
-		sensor_array[i].set_strength(sensor_save[i]);
-	}
-	settimer(func(){rcs_loop();},0.4);
+	settimer(func(){rcs_loop();},0.3);
 }
 
-var rwr_detect = func(myCoord,echoCoord,echoHeading,echoPitch,echoRoll,echoModel){
-
-	# get the datum
-
-	if (contains(rwr_database, echoModel)) {
-		var radiation_datum = rwr_database[echoModel];
-	} else {
-		var radiation_datum = rwr_database["default"];
-	}
-
-    # is it close enough
-
-    var distance_to_source = myCoord.direct_distance_to(echoCoord); # in meters
-    if (distance_to_source > radiation_datum.distance) {
-    	return nil;
-    } else {
-    	if ( distance_to_source < radiation_datum.distance / 4 ) {
-    		var sig_strength = 2;
-    	} else {
-    		var sig_strength = 1;
-    	}
-    }
-
-
-    # is it behind terrain
-
-	if ( radar_logic.isNotBehindTerrain(echoCoord) == 0 ) {
-		return nil;
-	}
-
-    var vectorToEcho   = vector.Math.eulerToCartesian2(myCoord.course_to(echoCoord), vector.Math.getPitch(myCoord,echoCoord));
-
-    # first calculate relative pitch angle to see if the rwr can see the radiation source
-
-    var vectorSide = vector.Math.eulerToCartesian3Y(getprop("/orientation/heading-deg"), getprop("/orientation/pitch-deg"), getprop("/orientation/roll-deg"));
-    var vectorTop = vector.Math.eulerToCartesian3Z(getprop("/orientation/heading-deg"), getprop("/orientation/pitch-deg"), getprop("/orientation/roll-deg"));
-    var view2Dpitch = vector.Math.projVectorOnPlane(vectorTop,vectorSide);
-    var relative_pitch = math.abs(vector.Math.angleBetweenVectors(vectorToEcho,view2Dpitch)-90);
-
-    if ( relative_pitch > MAX_PITCH ) {
-    	return nil;
-    }
-    
-    # check if we are in the radar scope of the radiation source
-
-	var vectorEchoNose = vector.Math.eulerToCartesian3X(echoHeading, echoPitch, echoRoll);
-	var vectorEchoTop  = vector.Math.eulerToCartesian3Z(echoHeading, echoPitch, echoRoll);
-	var view2D         = vector.Math.projVectorOnPlane(vectorEchoTop,vectorToEcho);
-	var angleToNose    = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vectorEchoNose, view2D)+180)); #bearing
-
-	if ( angleToNose > radiation_datum.bearing ) {
-    	return nil;
-    }
-
-    var angleToBelly   = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vectorEchoTop, vectorToEcho))-90); #pitch
-
-    if ( angleToBelly > radiation_datum.pitch ) {
-    	return nil;
-    }
-
-    # it passed, so calculate angle to radiation source
-
-    var vectorNose = vector.Math.eulerToCartesian3X(getprop("/orientation/heading-deg"), getprop("/orientation/pitch-deg"), getprop("/orientation/roll-deg"));
-	var view2Droll = vector.Math.projVectorOnPlane(vectorNose,vectorSide);
-    var relative_bearing = vector.Math.angleBetweenVectors(vectorToEcho,view2Droll)-90;
-
-    #print("relative_bearing: " ~ relative_bearing);
-
-    if ( relative_bearing > -112.5 and relative_bearing < 22.5 ) { 
-   		#front left sensor - 0
-   		return [0,sig_strength];
-    } elsif ( relative_bearing < 112.5 and relative_bearing > -22.5 ) {
-    	#front right sensor - 1
-    	return [1,sig_strength];
-    } elsif ( relative_bearing > 112.5 or relative_bearing < 157.5 ) {
-    	#rear right sensor - 3
-    	return [3,sig_strength];
-    } else {
-    	#rear left sensor - 2
-    	return [2,sig_strength];
-    }
-}
 
 # rwr strengths:
 # 0 - off - light is off
@@ -119,34 +30,48 @@ var rwr_detect = func(myCoord,echoCoord,echoHeading,echoPitch,echoRoll,echoModel
 # 2 - close/aiming - solid on
 # 3 - missile fired - blink quickly
 var rwr_sensor = {
-	new: func(	light_enable_prop, 
-				signal_strength_prop, 
-				signal_strength = 0, 
-				light_enable = 0, 
-				blink_rate = 0, 
-				blink_rate_low=1.5, 
-				blink_rate_high = 0.25, 
-				serviceable = 1, 
-				missile_override = 0,
-				missile_detect_time = 0) {
+	new: func( light_enable_prop, signal_strength_prop, lbound, hbound ) {
 		var m = {parents:[rwr_sensor]};
 		m.light_enable_prop = light_enable_prop;
 		m.signal_strength_prop = signal_strength_prop;
-		m.signal_strength = signal_strength;
-		m.light_enable = light_enable;
-		m.blink_rate = blink_rate;
-		m.blink_rate_low = blink_rate_low;
-		m.blink_rate_high = blink_rate_high;
-		m.serviceable = serviceable;
-		m.missile_override = missile_override;
-		m.missile_detect_time = missile_detect_time;
+		m.signal_strength = 0;
+		m.light_enable = 0;
+		m.blink_rate = 0;
+		m.blink_rate_low = 1.5;
+		m.blink_rate_high = 0.25;
+		m.serviceable = 1;
+		m.update_rate = 0.3;
+		m.lbound = lbound;
+		m.hbound = hbound;
+		m.sources = {};
 		return m;
 	},
+	update: func() {
+		var temp_str = 0;
+		if ( size(radiation_sources) > 0 ) {
+			foreach(var source; keys(radiation_sources)) {
+				forindex(var i; me.lbound){
+					if ( radiation_sources[source].bearing > me.lbound[i] and radiation_sources[source].bearing < me.hbound[i] ) {
+						if ( radiation_sources[source].msl_lnch == 1 and systime() - radiation_sources[source].msl_time < 10 ) {
+							temp_str = 3;
+							break;
+						} elsif ( radiation_sources[source].msl_lnch == 1 and systime() - radiation_sources[source].msl_time >= 10 ) {
+							radiation_sources[source].missile_launch_complete();
+						}
+						if ( radiation_sources[source].sig_str > temp_str ) {
+							temp_str = radiation_sources[source].sig_str;
+						}
+						break;
+					}
+				}
+			}
+		}
+		me.set_strength(temp_str);
+		settimer(func(){me.update();},me.update_rate);
+	},
+
 	set_strength: func(strength) {
-		if ( me.missile_override == 1 and me.signal_strength != 3 ) {
-			me.blink_rate = me.blink_rate_high;
-			me._blink();
-		} elsif ( strength != me.signal_strength) {
+		if ( strength != me.signal_strength) {
 			me.signal_strength = strength;
 
 			if ( me.signal_strength == 0 ) {
@@ -220,38 +145,9 @@ var incoming_listener = func {
 						# its being fired at me
 						#print("Incoming!");
 						var enemy = damage.getCallsign(author);
-						if (enemy != nil) {
+						if ( enemy != nil and contains(enemy,radiation_sources) != nil ) {
 							#print("enemy identified");
-							foreach (var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")) {
-								if ( mp.getNode("callsign").getValue == enemy and mp.getNode("valid").getValue == 1 ) {
-
-									var myCoord = geo.aircraft_pos();
-									var echoCoord = geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(),mp.getNode("position/longitude-deg").getValue(),mp.getNode("position/altitude-ft").getValue() * FT2M);
-
-									#var vectorToEcho   = vector.Math.eulerToCartesian2(myCoord.course_to(echoCoord), vector.Math.getPitch(myCoord,echoCoord));
-								    #var vectorSide = vector.Math.eulerToCartesian3Y(getprop("/orientation/heading-deg"), getprop("/orientation/pitch-deg"), getprop("/orientation/roll-deg"));
-									#var vectorNose = vector.Math.eulerToCartesian3X(getprop("/orientation/heading-deg"), getprop("/orientation/pitch-deg"), getprop("/orientation/roll-deg"));
-									#var view2Droll = vector.Math.projVectorOnPlane(vectorNose,vectorSide);
-									#var relative_bearing = vector.Math.angleBetweenVectors(vectorToEcho,view2Droll)-90;
-
-									#the following line is a condensation of the above commented out code
-
-									var relative_bearing = vector.Math.angleBetweenVectors(vector.Math.eulerToCartesian2(myCoord.course_to(echoCoord), vector.Math.getPitch(myCoord,echoCoord)),vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3X(getprop("/orientation/heading-deg"), getprop("/orientation/pitch-deg"), getprop("/orientation/roll-deg")),vector.Math.eulerToCartesian3Y(getprop("/orientation/heading-deg"), getprop("/orientation/pitch-deg"), getprop("/orientation/roll-deg"))))-90;
-									if ( relative_bearing > -112.5 and relative_bearing < 22.5 ) { 
-										#front left sensor - 0
-										sensor_array[0].missile_detected();
-									} elsif ( relative_bearing < 112.5 and relative_bearing > -22.5 ) {
-										#front right sensor - 1
-										sensor_array[1].missile_detected();
-									} elsif ( relative_bearing > 112.5 or relative_bearing < 157.5 ) {
-										#rear right sensor - 3
-										sensor_array[3].missile_detected();
-									} else {
-										#rear left sensor - 2
-										sensor_array[2].missile_detected();
-									}
-								}
-							}
+							radiation_sources[enemy].missile_launc();
 						}
 					}
 				}
@@ -316,14 +212,158 @@ var rwr_database = {
     "tower":                    rwr_datum.new(0,0,0),
 };
 
+var radiation_source = {
+	# source is props.globals.getNode pointing to the base mp prop
+	new: func(source) {
+		var m = {parents:[radiation_source]};
+		m.source =      source;
+		m.callsign =    source.getNode("callsign");
+        m.valid =       source.getNode("valid");
+        m.lat =         source.getNode("position/latitude-deg");
+        m.lon =         source.getNode("position/longitude-deg");
+        m.alt =         source.getNode("position/altitude-ft");
+		m.heading =     source.getNode("orientation/true-heading-deg");
+		m.pitch =       source.getNode("orientation/pitch-deg");
+		m.roll =        source.getNode("orientation/roll-deg");
+		m.sig_str =     0;
+		m.bearing =     0;
+		m.distance =    0;
+		m.msl_lnch =    0;
+		m.msl_time =    0;
+		m.geo =         geo.Coord.new().set_latlon(m.lat.getValue(),m.lon.getValue(),m.alt.getValue() * FT2M);
+		m.model =       remove_suffix(remove_suffix(split(".", split("/", source.getNode("sim/model/path").getValue())[-1])[0], "-model"), "-anim");
+		
+		if (contains(rwr_database, m.model)) {
+			m.rad_data = rwr_database[m.model];
+		} else {
+			m.rad_data = rwr_database["default"];
+		}
+		
+		m.vectorToEcho =  {};
+		m.vectorSide =    {};
+		m.vectorEchoTop = {};
+		
+		return m;
+	},
+	update: func() {
+		if ( me.valid.getValue() == 1 ) {
+			var myCoord = geo.aircraft_position();
+			me.geo.set_latlon(me.lat.getValue(),me.lon.getValue(),me.alt.getValue() * FT2M);
+			
+			# only precalc vectors that are used more than once
+			me.vectorToEcho   = vector.Math.eulerToCartesian2(myCoord.course_to(me.geo), vector.Math.getPitch(myCoord,me.geo));
+			me.vectorSide = vector.Math.eulerToCartesian3Y(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue());
+			me.vectorEchoTop = vector.Math.eulerToCartesian3Z(me.heading.getValue(), me.pitch.getValue(), me.roll.getValue());
+
+			me.check_distance(myCoord);
+			if ( me.sig_str != 0 ) {
+				me.check_terrain();
+			}
+			if ( me.sig_str != 0 ) {
+				me.check_rel_pitch();
+			}
+			if ( me.sig_str != 0 ) {
+				me.check_emit();
+			}
+			#if ( me.sig_str != 0 ) {
+			#	me.sensor_detect_logic();
+			#}
+		}
+	},
+	
+	check_distance: func(myCoord) {
+		me.distance = myCoord.direct_distance_to(me.geo);
+		if ( me.distance > me.rad_data.distance ) {
+			me.sig_str = 0;
+		} else {
+			if ( me.distance < me.rad_data.distance / 4 ) {
+				me.sig_str = 2;
+			} else {
+				me.sig_str = 1;
+			}
+		}
+	},
+	
+	check_terrain: func() {
+		if ( radar_logic.isNotBehindTerrain(me.geo) == 0 ) {
+			return nil;
+		}
+	},
+	
+	check_rel_pitch: func() {
+		#var vectorSide = vector.Math.eulerToCartesian3Y(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue());
+	    #var vectorTop = vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue());
+	    #var view2Dpitch = vector.Math.projVectorOnPlane(vectorTop,me.vectorSide);
+	    #var relative_pitch = math.abs(vector.Math.angleBetweenVectors(me.vectorToEcho,view2Dpitch)-90);
+	    
+	    # the following line is a condensed version of the above commented out code
+	    me.rel_pitch = math.abs(vector.Math.angleBetweenVectors(me.vectorToEcho,vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),me.vectorSide))-90);
+	    
+	    if ( me.rel_pitch > MAX_PITCH ) {
+	    	me.sig_str = 0;
+	    }
+	},
+	
+	check_emit: func() {
+		#var vectorEchoNose = vector.Math.eulerToCartesian3X(echoHeading, echoPitch, echoRoll);
+		#var vectorEchoTop  = vector.Math.eulerToCartesian3Z(echoHeading, echoPitch, echoRoll);
+		#var view2D         = vector.Math.projVectorOnPlane(me.vectorEchoTop,me.vectorToEcho);
+		#var angleToNose    = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vectorEchoNose, view2D)+180));
+		
+		#the following line is a condensed version of the above commented out code
+		var angle = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vector.Math.eulerToCartesian3X(me.heading.getValue(), me.pitch.getValue(), me.roll.getValue()), vector.Math.projVectorOnPlane(me.vectorEchoTop,me.vectorToEcho))+180));
+	
+		if ( angle > me.rad_data.bearing ) { # bearing
+	    	me.sig_str = 0;
+	    	return;
+	    }
+	
+	    angle = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(me.vectorEchoTop, me.vectorToEcho))-90); #pitch
+	
+	    if ( angle > me.rad_data.pitch ) {
+	    	me.sig_str = 0;
+	    }
+	},
+	
+	get_bearing: func() {
+		#roll adjusted bearing
+		#var vectorNose = vector.Math.eulerToCartesian3X(getprop("/orientation/heading-deg"), getprop("/orientation/pitch-deg"), getprop("/orientation/roll-deg"));
+		#var view2Droll = vector.Math.projVectorOnPlane(vectorNose,me.vectorSide);
+	    #var relative_bearing = vector.Math.angleBetweenVectors(me.vectorToEcho,view2Droll)-90;
+	    
+	    #condensed from the above commented out code
+	    me.bearing = vector.Math.angleBetweenVectors(me.vectorToEcho,vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3X(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),me.vectorSide))-90;
+	},
+	missile_launch: func() {
+		me.msl_lnch = 1;
+		me.msl_time = systime();
+	},
+	missile_launch_complete: func() {
+		me.msl_lnch = 0;
+	},
+};
+	
+		
+
+var remove_suffix = func(s, x) {
+    var len = size(x);
+    if (substr(s, -len) == x)
+        return substr(s, 0, size(s) - len);
+    return s;
+}
+
 # set up sensors
 
 var sensor_array = {};
 
-sensor_array[0]  = rwr_sensor.new("/instrumentation/rwr/forward-left/light-enable","/instrumentation/rwr/forward-left/signal-strength");
-sensor_array[1] = rwr_sensor.new("/instrumentation/rwr/forward-right/light-enable","/instrumentation/rwr/forward-right/signal-strength");
-sensor_array[2]  = rwr_sensor.new("/instrumentation/rwr/rear-left/light-enable","/instrumentation/rwr/rear-left/signal-strength");
-sensor_array[3]  = rwr_sensor.new("/instrumentation/rwr/rear-right/light-enable","/instrumentation/rwr/rear-right/signal-strength");
+sensor_array[0] = rwr_sensor.new("/instrumentation/rwr/forward-left/light-enable","/instrumentation/rwr/forward-left/signal-strength",[-112.5],[22.5]);
+sensor_array[0].update();
+sensor_array[1] = rwr_sensor.new("/instrumentation/rwr/forward-right/light-enable","/instrumentation/rwr/forward-right/signal-strength",[-22.5],[112.5]);
+sensor_array[1].update();
+sensor_array[2] = rwr_sensor.new("/instrumentation/rwr/rear-left/light-enable","/instrumentation/rwr/rear-left/signal-strength",[-180,157.5],[-67.5,180]);
+sensor_array[2].update();
+sensor_array[3] = rwr_sensor.new("/instrumentation/rwr/rear-right/light-enable","/instrumentation/rwr/rear-right/signal-strength",[67.5,-180],[180,-157.5]);
+sensor_array[3].update();
 
 
 setlistener("/sim/multiplay/chat-history", incoming_listener, 0, 0);
