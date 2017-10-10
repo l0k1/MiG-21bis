@@ -225,7 +225,7 @@ var radiation_source = {
 	# source is props.globals.getNode pointing to the base mp prop
 	new: func(source) {
 		var m = {parents:[radiation_source]};
-		print("creating new source");
+		#print("creating new source");
 		m.source =      source;
 		m.callsign =    source.getNode("callsign");
         m.valid =       source.getNode("valid");
