@@ -47,7 +47,7 @@
     <animation>
         <type>rotate</type>
         <object-name>bearingNeedle</object-name>
-        <property>/instrumentation/nav[0]/heading-deg</property>
+        <property>/instrumentation/dead-reckoner/azimuth</property>
         <factor>-1</factor>
         <axis>
             <x>1</x>
@@ -116,24 +116,29 @@
         <type>translate</type>
         <object-name>HIazimuthNeedle</object-name>
         <property>/instrumentation/nav[0]/heading-needle-deflection-norm</property>
-        <factor>.03</factor>
+        <factor>.024</factor>
         <axis>
             <x>0</x>
             <y>1</y>
             <z>0</z>
         </axis>
+
+        <min>-8</min>
+        <max>8</max>
     </animation>
 	
 	<animation>
         <type>translate</type>
         <object-name>HIazimuthNeedle</object-name>
         <property>/instrumentation/nav[0]/gs-needle-deflection-norm</property>
-        <factor>.03</factor>
+        <factor>.024</factor>
         <axis>
             <x>0</x>
             <y>0</y>
             <z>1</z>
         </axis>
+        <min>-8</min>
+        <max>8</max>
     </animation>
 	
 	<animation>

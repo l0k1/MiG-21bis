@@ -180,7 +180,7 @@
     	</period>
     	<output>/instrumentation/dead-reckoner/internal/azimuth</output>
     </filter>
-    
+
     <!-- calculate new distance to target point -->
     
     <filter>

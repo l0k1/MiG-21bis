@@ -10,7 +10,6 @@
 # basically, check where the switch is, and assign nav[0] selected frequency 
 # to the frequency represented by the preset channel on the radio panel. 
 var update_radio = func() {
-	print("updating");
 	if ( getprop("/instrumentation/nav[0]/nav-mode-switch") == 2 ) {
 		setprop("/instrumentation/nav[0]/frequencies/selected-mhz",getprop("/instrumentation/ils-radio/preset[" ~ getprop("/instrumentation/ils-radio/selection") ~ "]"));
 	} else {
