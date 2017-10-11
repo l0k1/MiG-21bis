@@ -61,7 +61,10 @@
     			<product>
     				<difference>
 	    				<property>/instrumentation/gyro-compass/gyro-heading-deg</property>
-	    				<property>/instrumentation/dead-reckoner/internal/azimuth</property>
+	    				<sum>
+	    				    <property>/instrumentation/dead-reckoner/internal/azimuth</property>
+	    				    <property>/instrumentation/dead-reckoner/azimuth-adjust</property>
+	    				</sum>
 	    			</difference>
 	    			<value>-1</value>
     			</product>
@@ -114,95 +117,133 @@
     	<output>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</output>
     </filter>
     
-    <!-- calculate length of adjacent based on distance and bearing -->
+    <!--
+    find new distances and such.
+    the filters for angles can be condensed at a later date if desired.
+    -->
     
-	<filter>
-    	<type>gain</type>
-    	<gain>1</gain>
-    	<input>
-    		<expression>
-    			<difference>
-	    			<product>
-	    				<cos>
-	    					<deg2rad><property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property></deg2rad>
-	    				</cos>
-	    				<property>/instrumentation/dead-reckoner/internal/distance</property>
-	    			</product>
-	    			<property>/velocities/nm-per-frame</property>
-	    		</difference>
-    		</expression>
-    	</input>
-    	<output>/instrumentation/dead-reckoner/internal/azimuth-adjacent-length</output>
-    </filter>
-    
-    <!-- calculate length of opposite based on distance and bearing -->
-    
-    <filter>
-    	<type>gain</type>
-    	<gain>1</gain>
-    	<input>
-    		<expression>
-    			<product>
-    				<sin>
-    					<deg2rad><property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property></deg2rad>
-    				</sin>
-    				<property>/instrumentation/dead-reckoner/internal/distance</property>
-    			</product>
-    		</expression>
-    	</input>
-    	<output>/instrumentation/dead-reckoner/internal/azimuth-opposite-length</output>
-    </filter>
-    
-    <!-- calculate new distance (hypotenuse) based on opposite and adjacent -->
-    
-    <filter>
-    	<type>gain</type>
-    	<gain>1</gain>
-    	<input>
-    		<expression>
-                <sum>
-        			<sum>
-    	    			<rad2deg>
-    		    			<atan2>
-    		    				<property>/instrumentation/dead-reckoner/internal/azimuth-opposite-length</property>
-    		    				<property>/instrumentation/dead-reckoner/internal/azimuth-adjacent-length</property>
-    		    			</atan2>
-    			    	</rad2deg>
-    			    	<property>/instrumentation/gyro-compass/gyro-heading-deg</property>
-    		    	</sum>
-                    <property>/instrumentation/dead-reckoner/azimuth-adjust</property>
-                </sum>
-    		</expression>
-    	</input>
-    	<period>
-    		<min>0</min>
-    		<max>360</max>
-    	</period>
-    	<output>/instrumentation/dead-reckoner/internal/azimuth</output>
-    </filter>
+    <!-- calculate new distance using law of cosines -->
+    <!-- new distance = sqrt(nm_per_frame^2 + distance^2 - 2 * nm_per_frame * distance * cos(bearing_to_azimuth) -->
 
-    <!-- calculate new distance to target point -->
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <sqrt>
+                        <difference>
+                            <sum>
+                                <pow>
+                                    <property>/velocities/nm-per-frame</property>
+                                    <value>2</value>
+                                </pow>
+                                <pow>
+                                    <sum>
+                                        <property>/instrumentation/dead-reckoner/internal/distance</property>
+                                        <property>/instrumentation/dead-reckoner/distance-adjust</property>
+                                    </sum>
+                                    <value>2</value>
+                                <pow>
+                            </sum>
+                            <product>
+                                <value>2</value>
+                                <proeprty>/velocities/nm-per-frame</property>
+                                <sum>
+                                    <property>/instrumentation/dead-reckoner/internal/distance</property>
+                                    <property>/instrumentation/dead-reckoner/distance-adjust</property>
+                                </sum>
+                                <cos><deg2rad><property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property></deg2rad></cos>
+                            </product>
+                        </difference>
+                    </sqrt>
+                    <property>/instrumentation/dead-reckoner/distance-adjust</property>
+                </difference>
+            </exression>
+        <input>
+        <output>/instrumentation/dead-reckoner/internal/distance</output>
+    </filter>
+    
+    <!-- find the small angle first, assumed to be the angle at the imaginary point -->
+    <!-- small_angle = asin( ( sin(bearing_to_azimuth) * nm_per_frame) / internal_distance -->
     
     <filter>
         <type>gain</type>
         <gain>1</gain>
         <input>
             <expression>
-                <sum>
+                <asin>
                     <div>
-                        <property>/instrumentation/dead-reckoner/internal/azimuth-opposite-length</property>
-                        <sin>
-                            <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
-                        </sin>
+                        <product>
+                            <sin><deg2rad><property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property></deg2rad></sin>
+                            <property>/velocities/nm-per-frame</property>
+                        </product>
+                        <property>/instrumentation/dead-reckoner/internal/distance</property>
                     </div>
-                    <property>/instrumentation/dead-reckoner/distance-adjust</property>
-                </sum>
+                </asin>
             </expression>
         </input>
-        <output>/instrumentation/dead-reckoner/internal/distance</output>
+        <output>/instrumentation/dead-reckoner/internal/small-angle</output>
+    </filter>
+    
+    <!-- find the remaining angle -->
+    <!-- remaining_angle = 180 - bearing_to_azimuth - small_angle -->
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <difference>
+                        <value>180</value>
+                        <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                    </difference>
+                    <property>/instrumentation/dead-reckoner/internal/small-angle</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/remaining-angle</output>
+    </filter>
+    
+    <!-- find new bearing -->
+    <!-- new_bearing = 180 - remaining_angle -->
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <value>180</value>
+                    <property>/instrumentation/dead-reckoner/internal/remaining-angle</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</output>
+    </filter>
+    
+    <!-- translate from bearing to azimuth back to an absolute azimuth value -->
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <sum>
+                        <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+                        <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                    <sum>
+                    <property>/instrumentation/dead-reckoner/azimuth-adjust</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/azimuth</output>
     </filter>
 
     <!-- overwrite the calculated entries if nav/dme is valid -->
+    <!-- also set distance-adjust and azimuth-adjust to 0 if valid or if reset is pressed -->
 
     <filter>
         <type>gain</type>
@@ -318,7 +359,12 @@
         <type>gain</type>
         <gain>1</gain>
         <input>
-            <property>/instrumentation/dead-reckoner/internal/azimuth</property>
+            <expression>
+                <sum>
+                    <property>/instrumentation/dead-reckoner/internal/azimuth</property>
+                    <property>/instrumentation/dead-reckoner/azimuth-adjust</property>
+                </sum>
+            </expression>
         </input>
         <output>/instrumentation/dead-reckoner/azimuth</output>
     </filter>
@@ -327,7 +373,10 @@
         <type>gain</type>
         <gain>1</gain>
         <input>
-            <property>/instrumentation/dead-reckoner/internal/distance</property>
+            <sum>
+                <property>/instrumentation/dead-reckoner/internal/distance</property>
+                <property>/instrumentation/dead-reckoner/distance-adjust</property>
+            </sum>
         </input>
         <output>/instrumentation/dead-reckoner/distance</output>
     </filter>
