@@ -17,17 +17,23 @@
 
 		<!-- System Settings -->
 
+		<!-- electrical, hydraulic, pneumatic, and fuel systems will be done in jsbsim -->
+
 		<systems>
 			<autopilot>
 				<path>Aircraft/MiG-21bis/Systems/Autopilot.xml</path>
 			</autopilot>
 			<property-rule n="101">
-              <name>radar-altimeter</name>
-              <path>Aircraft/MiG-21bis/Systems/radar-altimeter.xml</path>
+				<name>radar-altimeter</name>
+				<path>Aircraft/MiG-21bis/Systems/radar-altimeter.xml</path>
             </property-rule>
             <property-rule n="102">
-              <name>gyro-compass</name>
-              <path>Aircraft/MiG-21bis/Systems/gyro-compass.xml</path>
+				<name>gyro-compass</name>
+				<path>Aircraft/MiG-21bis/Systems/gyro-compass.xml</path>
+            </property-rule>
+            <property-rule n="103">
+            	<name>dead-reckoner</name>
+            	<path>Aircraft/MiG-21bis/Systems/dead-reckoner.xml</path>
             </property-rule>
 		</systems>
 
