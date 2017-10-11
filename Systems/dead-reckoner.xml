@@ -33,6 +33,24 @@
     	<output>/velocities/tas-kt</output>
     </filter>
     
+    <!-- horizontal-only true airspeed -->
+    
+    <filter>
+    	<type>gain</type>
+    	<gain>1</gain>
+    	<input>
+    		<expression>
+    			<product>
+    			    <property>/velocities/tas-kt</property>
+    			    <cos>
+    			        <deg2rad><property>/orientation/pitch-deg</property></deg2rad>
+    			    </cos>
+    			</product>
+    		</expression>
+    	</input>
+    	<output>/velocities/horizontal-tas-kt</output>
+    </filter>
+    
     <!-- distance travelled in one frame -->
     <filter>
     	<type>gain</type>
@@ -40,12 +58,12 @@
     	<input>
     		<expression>
     			<product>
-    				<property>/velocities/tas-kt</property>
+    				<property>/velocities/horizontal-tas-kt</property>
     				<property>/sim/time/delta-hour</property> <!-- calculated in gyro-compass.xml -->
     			</product>
     		</expression>
     	</input>
-    	<output>/velocities/nm-per-frame</output>
+    	<output>/velocities/tas-nm-per-frame</output>
     </filter>
     
     <!-- update distance and azimuth to fictional point based on distance travelled 
@@ -135,7 +153,7 @@
                         <difference>
                             <sum>
                                 <pow>
-                                    <property>/velocities/nm-per-frame</property>
+                                    <property>/velocities/tas-nm-per-frame</property>
                                     <value>2</value>
                                 </pow>
                                 <pow>
@@ -148,7 +166,7 @@
                             </sum>
                             <product>
                                 <value>2</value>
-                                <proeprty>/velocities/nm-per-frame</property>
+                                <proeprty>/velocities/tas-nm-per-frame</property>
                                 <sum>
                                     <property>/instrumentation/dead-reckoner/internal/distance</property>
                                     <property>/instrumentation/dead-reckoner/distance-adjust</property>
@@ -176,7 +194,7 @@
                     <div>
                         <product>
                             <sin><deg2rad><property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property></deg2rad></sin>
-                            <property>/velocities/nm-per-frame</property>
+                            <property>/velocities/tas-nm-per-frame</property>
                         </product>
                         <property>/instrumentation/dead-reckoner/internal/distance</property>
                     </div>
