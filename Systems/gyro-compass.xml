@@ -314,6 +314,10 @@
     		</expression>
     	</input>
     	<output>/instrumentation/gyro-compass/gyro-heading-deg</output>
+        <period>
+            <min>0</min>
+            <max>360</max>
+        </period>
     </filter>
 
     <!-- other HI related filters -->
