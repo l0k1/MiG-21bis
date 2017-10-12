@@ -398,6 +398,16 @@
 		<marker-beacon>
 			<volume type="double" archive="y">0.0</volume>
 		</marker-beacon>
+		<dead-reckoner>
+			<azimuth type="double">0.0001</azimuth>
+			<distance type="double">0.0001</distance>
+			<distance-adjust type="double">0.0</distance-adjust>
+			<azimuth-adjust type="double">0.0</azimuth-adjust>
+			<internal>
+				<azimuth type="double">0.0001</azimuth>
+				<distance type="double">0.0001</distance>
+			</internal>
+		</dead-reckoner>
 		<gyro-compass>
 			<gyro-heading-deg type="double" userarchive="y">0.0</gyro-heading-deg>
 		</gyro-compass>

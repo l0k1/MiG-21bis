@@ -391,10 +391,12 @@
         <type>gain</type>
         <gain>1</gain>
         <input>
-            <sum>
-                <property>/instrumentation/dead-reckoner/internal/distance</property>
-                <property>/instrumentation/dead-reckoner/distance-adjust</property>
-            </sum>
+            <expression>
+                <sum>
+                    <property>/instrumentation/dead-reckoner/internal/distance</property>
+                    <property>/instrumentation/dead-reckoner/distance-adjust</property>
+                </sum>
+            </expression>
         </input>
         <output>/instrumentation/dead-reckoner/distance</output>
     </filter>
