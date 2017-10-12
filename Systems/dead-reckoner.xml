@@ -65,6 +65,45 @@
     	</input>
     	<output>/velocities/tas-nm-per-frame</output>
     </filter>
+
+    <!-- check if azimuth input has changed -->
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <property>/instrumentation/dead-reckoner/azimuth-adjust</property>
+                    <property>/instrumentation/dead-reckoner/internal/azimuth-adjust-last</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/azimuth-change</output>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <sum>
+                    <property>/instrumentation/dead-reckoner/internal/azimuth-change</property>
+                    <property>/instrumentation/dead-reckoner/internal/azimuth</property>
+                </sum>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/azimuth</output>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <value>0</value>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/azimuth-change</output>
+    </filter>
     
     <!-- update distance and azimuth to fictional point based on distance travelled 
     (derived via KTAS above) and heading -->
@@ -79,10 +118,7 @@
     			<product>
     				<difference>
 	    				<property>/instrumentation/gyro-compass/gyro-heading-deg</property>
-	    				<sum>
-	    				    <property>/instrumentation/dead-reckoner/internal/azimuth</property>
-	    				    <property>/instrumentation/dead-reckoner/azimuth-adjust</property>
-	    				</sum>
+	    				<property>/instrumentation/dead-reckoner/internal/azimuth</property>
 	    			</difference>
 	    			<value>-1</value>
     			</product>
@@ -215,7 +251,9 @@
                 <difference>
                     <difference>
                         <value>180</value>
-                        <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                        <abs>
+                            <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                        </abs>
                     </difference>
                     <property>/instrumentation/dead-reckoner/internal/small-angle</property>
                 </difference>
@@ -248,13 +286,10 @@
         <gain>1</gain>
         <input>
             <expression>
-                <difference>
-                    <sum>
-                        <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
-                        <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
-                    </sum>
-                    <property>/instrumentation/dead-reckoner/azimuth-adjust</property>
-                </difference>
+                <sum>
+                    <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+                    <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                </sum>
             </expression>
         </input>
         <output>/instrumentation/dead-reckoner/internal/azimuth</output>
@@ -376,14 +411,14 @@
     <filter>
         <type>gain</type>
         <gain>1</gain>
-        <input>
-            <expression>
+        <input>/instrumentation/dead-reckoner/internal/azimuth</input>
+            <!--<expression>
                 <sum>
                     <property>/instrumentation/dead-reckoner/internal/azimuth</property>
                     <property>/instrumentation/dead-reckoner/azimuth-adjust</property>
                 </sum>
             </expression>
-        </input>
+        </input>-->
         <output>/instrumentation/dead-reckoner/azimuth</output>
     </filter>
 

@@ -227,7 +227,7 @@
 		<action>
 			<button>0</button>
 			<repeatable>true</repeatable>
-			<interval-sec>0.2</interval-sec>
+			<interval-sec>0.05</interval-sec>
 			<binding>
 				<command>property-assign</command>
 				<property>/instrumentation/dead-reckoner/switch-dist-pos</property>
@@ -236,7 +236,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/instrumentation/dead-reckoner/distance-adjust</property>
-				<step>1</step>
+				<step>0.25</step>
 			</binding>
 			<mod-up>
 				<binding>
@@ -249,7 +249,7 @@
 		<action>
 			<button>1</button>
 			<repeatable>true</repeatable>
-			<interval-sec>0.2</interval-sec>
+			<interval-sec>0.05</interval-sec>
 			<binding>
 				<command>property-assign</command>
 				<property>/instrumentation/dead-reckoner/switch-dist-pos</property>
@@ -258,7 +258,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/instrumentation/dead-reckoner/distance-adjust</property>
-				<step>-1</step>
+				<step>-0.25</step>
 			</binding>
 			<mod-up>
 				<binding>
@@ -288,13 +288,13 @@
 		</axis>
 	</animation>
 
-		<animation>
+	<animation>
 		<type>pick</type>
 		<object-name>switchBrng</object-name>
 		<action>
 			<button>0</button>
 			<repeatable>true</repeatable>
-			<interval-sec>0.2</interval-sec>
+			<interval-sec>0.05</interval-sec>
 			<binding>
 				<command>property-assign</command>
 				<property>/instrumentation/dead-reckoner/switch-azm-pos</property>
@@ -316,7 +316,7 @@
 		<action>
 			<button>1</button>
 			<repeatable>true</repeatable>
-			<interval-sec>0.2</interval-sec>
+			<interval-sec>0.05</interval-sec>
 			<binding>
 				<command>property-assign</command>
 				<property>/instrumentation/dead-reckoner/switch-azm-pos</property>
