@@ -162,11 +162,11 @@
                                         <property>/instrumentation/dead-reckoner/distance-adjust</property>
                                     </sum>
                                     <value>2</value>
-                                <pow>
+                                </pow>
                             </sum>
                             <product>
                                 <value>2</value>
-                                <proeprty>/velocities/tas-nm-per-frame</property>
+                                <property>/velocities/tas-nm-per-frame</property>
                                 <sum>
                                     <property>/instrumentation/dead-reckoner/internal/distance</property>
                                     <property>/instrumentation/dead-reckoner/distance-adjust</property>
@@ -177,8 +177,8 @@
                     </sqrt>
                     <property>/instrumentation/dead-reckoner/distance-adjust</property>
                 </difference>
-            </exression>
-        <input>
+            </expression>
+        </input>
         <output>/instrumentation/dead-reckoner/internal/distance</output>
     </filter>
     
@@ -252,7 +252,7 @@
                     <sum>
                         <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
                         <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
-                    <sum>
+                    </sum>
                     <property>/instrumentation/dead-reckoner/azimuth-adjust</property>
                 </difference>
             </expression>
