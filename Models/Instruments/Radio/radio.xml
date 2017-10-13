@@ -236,7 +236,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/instrumentation/dead-reckoner/distance-adjust</property>
-				<step>0.25</step>
+				<step>0.45</step>
 			</binding>
 			<mod-up>
 				<binding>
@@ -258,7 +258,7 @@
 			<binding>
 				<command>property-adjust</command>
 				<property>/instrumentation/dead-reckoner/distance-adjust</property>
-				<step>-0.25</step>
+				<step>-0.45</step>
 			</binding>
 			<mod-up>
 				<binding>
