@@ -302,7 +302,7 @@ var radiation_source = {
 	
 	check_terrain: func() {
 		if ( radar_logic.isNotBehindTerrain(me.geo) == 0 ) {
-			return nil;
+			me.sig_str = 0;
 		}
 	},
 	
