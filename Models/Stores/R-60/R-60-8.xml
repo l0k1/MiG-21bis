@@ -1,0 +1,43 @@
+<PropertyList>
+
+    <path>R-60.ac</path>
+    
+    <animation>
+        <type>select</type>
+        <object-name>r-60</object-name>
+        <condition>
+            <!--not>
+                <property>fdm/jsbsim/systems/armament/station5/released</property>
+            </not-->
+            <equals>
+                  <property>payload/virtual/weight[8]/selected</property>
+                  <value>R-60</value>
+            </equals>
+        </condition>
+    </animation>
+
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/motor-smoke-8.xml</path>
+		<offsets>
+			<x-m>1.44</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<name>explosion</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/explosion-8.xml</path>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<animation>
+  		<object-name>r-60</object-name>
+  		<enable-hot type="bool">false</enable-hot>
+ 	</animation>
+
+</PropertyList>

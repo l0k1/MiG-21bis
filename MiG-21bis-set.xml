@@ -59,7 +59,7 @@
 		</model>
 	</sim>
 
-		<payload>
+	<payload>
 		<weight n="0">
 			<name>Left wing outboard pylon (#1)</name>
 			<selected>none</selected>

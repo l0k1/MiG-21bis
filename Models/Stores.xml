@@ -258,8 +258,36 @@
 		<object-name>R-60 Missile Left Inner</object-name>
 		<type>select</type>
 		<condition>
+			<or>
+				<equals>
+	                  <property>sim/multiplay/generic/string[12]</property>
+	                  <value>R-60</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/string[12]</property>
+	                  <value>R-60x2</value>
+	            </equals>
+	        </or>
+		</condition>
+	</animation>
+
+	<model>
+		<name>R-60 Missile Left Inner 2</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
+		<offsets>
+			<x-m> 0.20</x-m>
+			<y-m>-2.24 </y-m>
+			<z-m>-0.07</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+		<object-name>R-60 Missile Left Inner 2</object-name>
+		<type>select</type>
+		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[12]</property>
+                  <property>payload/virtual/weight[7]/selected</property>
                   <value>R-60</value>
             </equals>
 		</condition>
@@ -302,8 +330,36 @@
 		<object-name>R-60 Missile Right Inner</object-name>
 		<type>select</type>
 		<condition>
+			<or>
+				<equals>
+	                  <property>sim/multiplay/generic/string[14]</property>
+	                  <value>R-60</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/string[14]</property>
+	                  <value>R-60x2</value>
+	            </equals>
+	        </or>
+		</condition>
+	</animation>
+
+	<model>
+		<name>R-60 Missile Right Inner 2</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
+		<offsets>
+			<x-m> 0.20</x-m>
+			<y-m> 2.24 </y-m>
+			<z-m>-0.07</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+		<object-name>R-60 Missile Right Inner 2</object-name>
+		<type>select</type>
+		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[14]</property>
+                  <property>payload/virtual/weight[8]/selected</property>
                   <value>R-60</value>
             </equals>
 		</condition>
