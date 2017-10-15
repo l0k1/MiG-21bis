@@ -120,6 +120,11 @@
 				<weight-lb>96</weight-lb>
 			</opt>
 			<opt>
+				<name>R-60x2</name>
+				<lbs>192</lbs>
+				<weight-lb>192</weight-lb>
+			</opt>
+			<opt>
 				<name>R-27R1</name>
 				<lbs>560</lbs>
 				<weight-lb>560</weight-lb>
@@ -209,6 +214,11 @@
 				<name>R-60</name>
 				<lbs>96</lbs>
 				<weight-lb>96</weight-lb>
+			</opt>
+			<opt>
+				<name>R-60x2</name>
+				<lbs>192</lbs>
+				<weight-lb>192</weight-lb>
 			</opt>
 			<opt>
 				<name>R-27R1</name>

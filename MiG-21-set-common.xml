@@ -346,6 +346,38 @@
                 </offsets>
                 <trigger type="bool">false</trigger>
             </station>
+            <station n="5"><!-- rear left jato/cm -->
+                <offsets>
+                    <x-m type="double">  1.33</x-m>
+                    <y-m type="double"> 2.73</y-m>
+                    <z-m type="double"> -0.51</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+            </station>
+            <station n="6"><!-- rear right jato/cm -->
+                <offsets>
+                    <x-m type="double">  1.33</x-m>
+                    <y-m type="double"> 2.73</y-m>
+                    <z-m type="double"> -0.51</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+            </station>
+            <station n="7"><!-- left r-60 #2 -->
+                <offsets>
+                    <x-m type="double">  1.33</x-m>
+                    <y-m type="double"> 2.73</y-m>
+                    <z-m type="double"> -0.51</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+            </station>
+            <station n="8"><!-- right r-60 #2 -->
+                <offsets>
+                    <x-m type="double">  1.33</x-m>
+                    <y-m type="double"> 2.73</y-m>
+                    <z-m type="double"> -0.51</z-m>
+                </offsets>
+                <trigger type="bool">false</trigger>
+            </station>
 		</armament>
 		<radar>
 			<panel>
