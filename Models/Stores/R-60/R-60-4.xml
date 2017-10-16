@@ -9,10 +9,16 @@
             <!--not>
                 <property>fdm/jsbsim/systems/armament/station5/released</property>
             </not-->
-            <equals>
-                  <property>sim/multiplay/generic/string[14]</property>
-                  <value>R-60</value>
-            </equals>
+            <or>
+	            <equals>
+	                  <property>sim/multiplay/generic/string[14]</property>
+	                  <value>R-60</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/string[14]</property>
+	                  <value>R-60x2</value>
+	            </equals>
+	        </or>
         </condition>
     </animation>
 

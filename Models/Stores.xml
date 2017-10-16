@@ -236,8 +236,36 @@
 		<object-name>R-60 Missile Left</object-name>
 		<type>select</type>
 		<condition>
+			<or>
+				<equals>
+	                  <property>sim/multiplay/generic/string[11]</property>
+	                  <value>R-60</value>
+	            </equals>
+	            <equals>
+	                <property>sim/multiplay/generic/string[11]</property>
+	                <value>R-60x2</value>
+	            </equals>
+	        </or>
+		</condition>
+	</animation>
+
+	<model>
+		<name>R-60 Missile Left 2</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
+		<offsets>
+			<x-m> 1.13</x-m>
+			<y-m>-2.88 </y-m>
+			<z-m>-0.10</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+		<object-name>R-60 Missile Left 2</object-name>
+		<type>select</type>
+		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[11]</property>
+                  <property>payload/virtual/weight[7]/selected</property>
                   <value>R-60</value>
             </equals>
 		</condition>
@@ -258,37 +286,9 @@
 		<object-name>R-60 Missile Left Inner</object-name>
 		<type>select</type>
 		<condition>
-			<or>
-				<equals>
-	                  <property>sim/multiplay/generic/string[12]</property>
-	                  <value>R-60</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/string[12]</property>
-	                  <value>R-60x2</value>
-	            </equals>
-	        </or>
-		</condition>
-	</animation>
-
-	<model>
-		<name>R-60 Missile Left Inner 2</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
-		<offsets>
-			<x-m> 0.20</x-m>
-			<y-m>-2.24 </y-m>
-			<z-m>-0.07</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-60 Missile Left Inner 2</object-name>
-		<type>select</type>
-		<condition>
 			<equals>
-                  <property>payload/virtual/weight[7]/selected</property>
-                  <value>R-60</value>
+                <property>sim/multiplay/generic/string[12]</property>
+                <value>R-60</value>
             </equals>
 		</condition>
 	</animation>
@@ -308,8 +308,36 @@
 		<object-name>R-60 Missile Right</object-name>
 		<type>select</type>
 		<condition>
+			<or>
+				<equals>
+	                <property>sim/multiplay/generic/string[15]</property>
+	                <value>R-60</value>
+	            </equals>
+	            <equals>
+	                <property>sim/multiplay/generic/string[15]</property>
+	                <value>R-60x2</value>
+	            </equals>
+	        </or>
+		</condition>
+	</animation>
+
+	<model>
+		<name>R-60 Missile Right 2</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
+		<offsets>
+			<x-m> 1.13</x-m>
+			<y-m> 2.88 </y-m>
+			<z-m>-0.10</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+		<object-name>R-60 Missile Right 2</object-name>
+		<type>select</type>
+		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[15]</property>
+                  <property>payload/virtual/weight[8]/selected</property>
                   <value>R-60</value>
             </equals>
 		</condition>
@@ -330,36 +358,8 @@
 		<object-name>R-60 Missile Right Inner</object-name>
 		<type>select</type>
 		<condition>
-			<or>
-				<equals>
-	                  <property>sim/multiplay/generic/string[14]</property>
-	                  <value>R-60</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/string[14]</property>
-	                  <value>R-60x2</value>
-	            </equals>
-	        </or>
-		</condition>
-	</animation>
-
-	<model>
-		<name>R-60 Missile Right Inner 2</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
-		<offsets>
-			<x-m> 0.20</x-m>
-			<y-m> 2.24 </y-m>
-			<z-m>-0.07</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-60 Missile Right Inner 2</object-name>
-		<type>select</type>
-		<condition>
 			<equals>
-                  <property>payload/virtual/weight[8]/selected</property>
+                  <property>sim/multiplay/generic/string[14]</property>
                   <value>R-60</value>
             </equals>
 		</condition>

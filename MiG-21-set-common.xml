@@ -365,16 +365,16 @@
             <station n="7"><!-- left r-60 #2 -->
                 <offsets>
                     <x-m type="double">  1.33</x-m>
-                    <y-m type="double"> 2.73</y-m>
-                    <z-m type="double"> -0.51</z-m>
+                    <y-m type="double"> -2.88</y-m>
+                    <z-m type="double"> -0.50</z-m>
                 </offsets>
                 <trigger type="bool">false</trigger>
             </station>
             <station n="8"><!-- right r-60 #2 -->
                 <offsets>
                     <x-m type="double">  1.33</x-m>
-                    <y-m type="double"> 2.73</y-m>
-                    <z-m type="double"> -0.51</z-m>
+                    <y-m type="double">  2.88</y-m>
+                    <z-m type="double"> -0.50</z-m>
                 </offsets>
                 <trigger type="bool">false</trigger>
             </station>

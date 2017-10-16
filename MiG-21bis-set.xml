@@ -75,6 +75,11 @@
 				<weight-lb>96</weight-lb>
 			</opt>
 			<opt>
+				<name>R-60x2</name>
+				<lbs>192</lbs>
+				<weight-lb>192</weight-lb>
+			</opt>
+			<opt>
 				<name>R-27R1</name>
 				<lbs>560</lbs>
 				<weight-lb>560</weight-lb>
@@ -118,11 +123,6 @@
 				<name>R-60</name>
 				<lbs>96</lbs>
 				<weight-lb>96</weight-lb>
-			</opt>
-			<opt>
-				<name>R-60x2</name>
-				<lbs>192</lbs>
-				<weight-lb>192</weight-lb>
 			</opt>
 			<opt>
 				<name>R-27R1</name>
@@ -216,11 +216,6 @@
 				<weight-lb>96</weight-lb>
 			</opt>
 			<opt>
-				<name>R-60x2</name>
-				<lbs>192</lbs>
-				<weight-lb>192</weight-lb>
-			</opt>
-			<opt>
 				<name>R-27R1</name>
 				<lbs>560</lbs>
 				<weight-lb>560</weight-lb>
@@ -279,6 +274,11 @@
 				<name>R-60</name>
 				<lbs>96</lbs>
 				<weight-lb>96</weight-lb>
+			</opt>
+			<opt>
+				<name>R-60x2</name>
+				<lbs>192</lbs>
+				<weight-lb>192</weight-lb>
 			</opt>
 			<opt>
 				<name>R-27R1</name>
@@ -349,7 +349,7 @@
                 <weight-launch-lbs type="double">96</weight-launch-lbs>
                 <weight-warhead-lbs type="double">6.6</weight-warhead-lbs>
                 <drag-coeff type="double">0.5</drag-coeff>
-                <drag-area type="double">0.12</drag-area>
+                <cross-section-sqft type="double">0.12</cross-section-sqft>
                 <searcher-beam-width type="double">2.0</searcher-beam-width>
                 <arming-time-sec type="double">0.4</arming-time-sec> 
                 <min-speed-for-guiding-mach type="double">0.7</min-speed-for-guiding-mach>
@@ -361,7 +361,7 @@
                 <rail-length-m type="double">2.667</rail-length-m>
                 <rail-point-forward type="bool">true</rail-point-forward>
                 <max-report-distance type="double">65</max-report-distance>
-                <class type="string">A</class>
+                <class type="string">AG</class>
                 <fire-msg>Aphid</fire-msg>
                 <lock-on-sun-deg type="double">5</lock-on-sun-deg>
                 <!--<weight-fuel-lbm type="double">42.02</weight-fuel-lbm>-->
@@ -391,7 +391,7 @@
                 <weight-launch-lbs type="double">560</weight-launch-lbs>
                 <weight-warhead-lbs type="double">85.98</weight-warhead-lbs>
                 <drag-coeff type="double">0.5</drag-coeff>
-                <drag-area type="double">0.143</drag-area>
+                <cross-section-sqft type="double">0.143</cross-section-sqft>
                 <searcher-beam-width type="double">2.5</searcher-beam-width>
                 <arming-time-sec type="double">1.6</arming-time-sec> 
                 <min-speed-for-guiding-mach type="double">0.8</min-speed-for-guiding-mach>
@@ -415,7 +415,7 @@
                 <vol-search type="double">0.00</vol-search>
                 <vol-track type="double">0.00</vol-track>
                 <vol-track-weak type="double">0.00</vol-track-weak>
-                <guidance type="string">heat</guidance>
+                <guidance type="string">level</guidance>
                 <all-aspect type="bool">true</all-aspect>
                 <max-fire-range-nm type="double">39.41</max-fire-range-nm>
                 <FCS-field-deg type="int">35</FCS-field-deg>
@@ -429,19 +429,20 @@
                 <weight-launch-lbs type="double">560</weight-launch-lbs>
                 <weight-warhead-lbs type="double">85.98</weight-warhead-lbs>
                 <drag-coeff type="double">0.5</drag-coeff>
-                <drag-area type="double">0.143</drag-area>
+                <cross-section-sqft type="double">0.143</cross-section-sqft>
                 <searcher-beam-width type="double">2.5</searcher-beam-width>
                 <arming-time-sec type="double">1.6</arming-time-sec> 
                 <min-speed-for-guiding-mach type="double">0.8</min-speed-for-guiding-mach>
                 <self-destruct-time-sec type="double">43</self-destruct-time-sec>
                 <seeker-angular-speed-dps type="double">14.9</seeker-angular-speed-dps>
                 <loft-altitude>34000</loft-altitude>
+                <lock-on-sun-deg>5</lock-on-sun-deg>
                 <min-fire-range-nm type="double">1.0</min-fire-range-nm>
                 <rail type="bool">true</rail>
                 <rail-length-m type="double">2.667</rail-length-m>
                 <rail-point-forward type="bool">true</rail-point-forward>
                 <max-report-distance type="double">65</max-report-distance>
-                <class type="string">A</class>
+                <class type="string">AG</class>
                 <fire-msg>Alamo</fire-msg>
 				<sound-on-off type="bool">false</sound-on-off>
                 <sound-fire-on-off type="bool">false</sound-fire-on-off>
