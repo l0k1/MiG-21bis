@@ -65,7 +65,7 @@ var payloads = {
 	"none":					pos_arm.new("none","none",0,"none"),
 	# ir missiles
 	"R-60":					pos_arm.new("R-60","R-60",96,"ir"),
-	"R-60x2":				pos_arm.new("R-60","R-60",192,"ir",,2),
+	"R-60x2":				pos_arm.new("R-60","R-60",96,"ir",,2),
 	"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir"),
 	# radar missiles
 	"R-27R1":				pos_arm.new("R-27R1","R-27R1",560,"radar"),
@@ -108,30 +108,31 @@ var update_loop = func {
 			#print("selected"~selected);
 			#print("nombre"~payloads[selected].name);
 			if(payloads[selected].name != "none" and getprop("payload/weight["~ (i) ~"]/weight-lb") == 0) {
-				print("updating station " ~ i);
+				#print("updating station " ~ i);
 				setprop("controls/armament/station["~(i)~"]/released", FALSE);
+				#print("type: " ~ payloads[selected].type);
 				if (payloads[selected].type == "ir" or 
 						payloads[selected].type == "radar" or 
 						payloads[selected].type == "antirad" or
 						payloads[selected].type == "beam") {
 					if(armament.AIM.active[i] != nil and armament.AIM.active[i].type != payloads[selected].name) {
-						print("deleting "~i~" due to type != selected");
+						#print("deleting "~i~" due to type != selected");
 						armament.AIM.active[i].del();
 					}
-					print(payloads[selected].name);
+					#print(payloads[selected].name);
 					if(selected == "R-60x2") {
-						print("R-60x2 detected");
-						if(i == 1){
-							print('setting pylon 1');
+						#print("R-60x2 detected");
+						if(i == 0){
+							#print('setting pylon 1');
 							setprop("payload/virtual/weight[7]/selected","R-60");
 							setprop("payload/virtual/weight[7]/weight-lb",0);
-						} elsif(i == 3){
-							print('setting pylon 3');
+						} elsif(i == 4){
+							#print('setting pylon 3');
 							setprop("payload/virtual/weight[8]/selected","R-60");
 							setprop("payload/virtual/weight[8]/weight-lb",0);
 						}
 					}
-					print('setting up pylon ' ~ i ~ ' as ' ~ payloads[selected].name);
+					#print('setting up pylon ' ~ i ~ ' as ' ~ payloads[selected].name);
 					if(armament.AIM.new(i, payloads[selected].name, payloads[selected].brevity) == -1 and armament.AIM.active[i].status == MISSILE_FLYING) {
 						setprop("controls/armament/station["~(i+1)~"]/released", TRUE);
 						setprop("payload/weight["~ (i) ~"]/selected", "none");
@@ -142,8 +143,13 @@ var update_loop = func {
 				}
 			} elsif (payloads[selected].name == "none") {
 				if ( armament.AIM.active[i] != nil ) {
-					print("deleting "~i~" due to pylon being none.");
+					#print("deleting "~i~" due to pylon being none.");
 					armament.AIM.active[i].del();
+					if ( i == 0 ) {
+						setprop("payload/virtual/weight[7]/selected","none");
+					} elsif (i == 4 ) {
+						setprop("payload/virtual/weight[8]/selected","none");
+					}
 				}
 				setprop("payload/released/"~payloads[selected].name~"["~i~"]",0);
 			}
@@ -154,17 +160,17 @@ var update_loop = func {
 		var selected = getprop("payload/virtual/weight["~ (i) ~"]/selected");
 		if ( selected != nil ) {
 			if(payloads[selected].name != "none" and getprop("payload/virtual/weight["~ (i) ~"]/weight-lb") == 0) {
-				print("updating station " ~ i);
+				#print("updating station " ~ i);
 				setprop("controls/armament/station["~(i)~"]/released", FALSE);
 				if (payloads[selected].type == "ir" or 
 						payloads[selected].type == "radar" or 
 						payloads[selected].type == "antirad" or
 						payloads[selected].type == "beam") {
 					if(armament.AIM.active[i] != nil and armament.AIM.active[i].type != payloads[selected].name) {
-						print("deleting "~i~" due to type != selected");
+						#print("deleting "~i~" due to type != selected");
 						armament.AIM.active[i].del();
 					}
-					print('setting up pylon ' ~ i ~ ' as ' ~ payloads[selected].name);
+					#print('setting up pylon ' ~ i ~ ' as ' ~ payloads[selected].name);
 					if(armament.AIM.new(i, payloads[selected].name, payloads[selected].brevity) == -1 and armament.AIM.active[i].status == MISSILE_FLYING) {
 						setprop("controls/armament/station["~(i+1)~"]/released", TRUE);
 						setprop("payload/virtual/weight["~ (i) ~"]/selected", "none");
@@ -172,11 +178,11 @@ var update_loop = func {
 					}
 					if(armament.AIM.active[i] != nil) {
 						if(i == 7 and selected == "R-60") {
-							print("r-60 at station 7");
+							#print("r-60 at station 7");
 							setprop("payload/virtual/weight[7]/weight-lb",payloads["R-60"].weight);
 						}
 						if(i == 8 and selected == "R-60") {
-							print("r-60 at station 8");
+							#print("r-60 at station 8");
 							setprop("payload/virtual/weight[8]/weight-lb",payloads["R-60"].weight);
 						}
 					}
@@ -185,8 +191,11 @@ var update_loop = func {
 					setprop("payload/released/"~payloads[selected].name~"["~i~"]",0);
 				}
 			} elsif (payloads[selected].name == "none") {
+				if ( getprop("payload/virtual/weight["~ (i) ~"]/weight-lb") != 0 ) {
+					setprop("payload/virtual/weight["~ (i) ~"]/weight-lb", 0);
+				}
 				if ( armament.AIM.active[i] != nil ) {
-					print("deleting "~i~" due to pylon being none.");
+					#print("deleting "~i~" due to pylon being none.");
 					armament.AIM.active[i].del();
 					setprop("payload/virtual/weight["~ (i) ~"]/weight-lb", 0);
 				}
@@ -206,28 +215,14 @@ var update_loop = func {
 			var payloadName = getprop("/payload/virtual/weight[" ~ i ~ "]/selected");
 		}
 		if ( armament.AIM.active[i] != nil ) {
-			if ( armSelect[0] == 1 and i == 7 ) {
-				var pylon0 = 7;
-			} elsif (armSelect[0] == 3 and i == 8 ) {
-				var pylon0 = 8;
-			} else {
-				var pylon0 = armSelect[0];
-			}
-			if ( armSelect[1] == 1 and i == 7 ) {
-				var pylon1 = 7;
-			} elsif (armSelect[1] == 3 and i == 8 ) {
-				var pylon1 = 8;
-			} else {
-				var pylon1 = armSelect[1];
-			}
-			if ( pylon0 != i and pylon1 != i and armament.AIM.active[i].status != MISSILE_FLYING ) {
+			if ( armSelect[0] != i and armSelect[1] != i and armament.AIM.active[i].status != MISSILE_FLYING ) {
 				#print("setting pylon " ~ i ~ " to standby");
 				armament.AIM.active[i].status = MISSILE_STANDBY;
 			} elsif ( armament.AIM.active[i].status != MISSILE_STANDBY and armament.AIM.active[i] != MISSILE_FLYING and payloadName == "none" ) {
 				#print("setting pylon " ~ i ~ " to standby");
 				armament.AIM.active[i].status = MISSILE_STANDBY;
-			} elsif ( (pylon0 == i or pylon1 == i ) and armament.AIM.active[i].status == MISSILE_STANDBY ) {
-				print("missile " ~i~ " should be searching.");
+			} elsif ( (armSelect[0] == i or armSelect[1] == i ) and armament.AIM.active[i].status == MISSILE_STANDBY ) {
+				#print("missile " ~i~ " should be searching.");
 				armament.AIM.active[i].status = MISSILE_SEARCH;
 				armament.AIM.active[i].search();
 			}
@@ -245,7 +240,7 @@ var update_loop = func {
 		selected = getprop("payload"~virtual~"weight["~i~"]/selected");
 		
 		if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != nil and getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != payloads[selected].weight) {
-			print("setting weight of " ~ payloads[selected].weight ~ " on pylon " ~ i);
+			#print("setting weight of " ~ payloads[selected].weight ~ " on pylon " ~ i);
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", payloads[selected].weight);
 		}
 
@@ -324,9 +319,9 @@ var update_loop = func {
 var charge_used = [0,0,0];
 
 var unjam = func(button) {
-	print("inside unjam");
-	print("button: " ~ button);
-	print("button value: " ~ charge_used[button]);
+	#print("inside unjam");
+	#print("button: " ~ button);
+	#print("button value: " ~ charge_used[button]);
 	if ( charge_used[button] == 0 ) {
 		charge_used[button] = 1;
 		setprop("payload/armament/GSh-30/jammed",0);
@@ -364,23 +359,26 @@ var missile_release_listener = func {
 	#print("armselect2: " ~ armSelect[2]);
 	#print("release prop: " ~ getprop("/fdm/jsbsim/systems/armament/release"));
 	if (getprop("/fdm/jsbsim/systems/armament/release") == 1 )  {
-		print("selected0.type: " ~ selected0.type);
-		print("iar_sar_switch: " ~ getprop(ir_sar_switch));
+		#print("selected0.name: " ~ selected0.name);
+		#print("selected0.type: " ~ selected0.type);
+		#print("iar_sar_switch: " ~ getprop(ir_sar_switch));
 		
 		
 		if (armSelect[2] >= 5 ) {
 			# missile launch logic
-			if ((selected0.type = "ir" and getprop(ir_sar_switch) == 0 ) or ( selected0.type = "radar" and getprop(ir_sar_switch) == 2 )) {
+			if ((selected0.type == "ir" and getprop(ir_sar_switch) == 0 ) or ( selected0.type == "radar" and getprop(ir_sar_switch) == 2 )) {
 				#print("armSelect[0]");
 				#print(selected0.name);
 				#print(getprop("payload/virtual/weight[7]/selected"));
 				#print(getprop("payload/virtual/weight[7]/selected"));
 				missile_release(armSelect[0]);
+				#print("type2: " ~ selected0.type);
 			}
 			if ( armSelect[1] != -1 and getprop("payload" ~ virtual1 ~ "weight["~(armSelect[1])~"]/selected") != "none") {
-				if ((selected1.type = "ir" and getprop(ir_sar_switch) == 0 ) or ( selected1.type = "radar" and getprop(ir_sar_switch) == 2 )) { #if is IR/Radar missile, and weapon selector is in missile range
+				if ((selected1.type == "ir" and getprop(ir_sar_switch) == 0 ) or ( selected1.type == "radar" and getprop(ir_sar_switch) == 2 )) { #if is IR/Radar missile, and weapon selector is in missile range
 					settimer(func { 
 						missile_release(armSelect[1]);
+						#print("type3: " ~ selected1.type);
 					}, 0.2);
 				}
 			}
@@ -420,6 +418,8 @@ var missile_release_listener = func {
 				}
 			}
 		}
+		#print("type4: " ~ selected0.type);
+		#print("type5: " ~ selected1.type);
 	}
 }
 
@@ -465,11 +465,15 @@ var missile_release = func(pylon) {
 	} else {
 		var virtual = "/virtual/";
 	}
-	print("virtual: " ~ virtual);
-	print("gettie: " ~ getprop("payload"~virtual~"weight["~(pylon)~"]/selected"));
+	#print("virtual: " ~ virtual);
+	#print("gettie: " ~ getprop("payload"~virtual~"weight["~(pylon)~"]/selected"));
 	if(getprop("payload"~virtual~"weight["~(pylon)~"]/selected") != "none") { 
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on. The gear check is prevent missiles from firing when changing airport location.
-		#print("active: " ~ armament.AIM.active[pylon]);
+		#if (armament.AIM.active[pylon] != nil ) {
+		#	print("not nil");
+		#} else {
+		#	print("is nil");
+		#}
 		#print("status: " ~ armament.AIM.active[pylon].status);
 		#if (radar_logic.selection != nil){
 		#	print('selection: not nil');
@@ -479,7 +483,7 @@ var missile_release = func(pylon) {
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
 			#missile locked, fire it.
 
-			print("firing missile: "~pylon);
+			#print("firing missile: "~pylon);
 			var callsign = armament.AIM.active[pylon].callsign;
 			var brevity = armament.AIM.active[pylon].brevity;
 			armament.AIM.active[pylon].release();
@@ -491,7 +495,6 @@ var missile_release = func(pylon) {
 			} else {
 				setprop("/sim/messages/atc", phrase);
 			}
-			
 		}
 	}
 }
@@ -692,37 +695,37 @@ var pylon_select = func() {
 	} elsif ( knobpos == 4 ) {
 		return [1,3,knobpos];
 	} elsif ( knobpos == 5 ) {
+		return [1,3,knobpos];
+	} elsif ( knobpos == 6 ) {
 		if ( getprop("payload/virtual/weight[7]/selected") == "R-60" ) {
 			var ret1 = 7;
 		} else {
-			var ret1 = 1;
+			var ret1 = 0;
 		}
 		if ( getprop("payload/virtual/weight[8]/selected") == "R-60" ) {
 			var ret2 = 8;
 		} else {
-			var ret2 = 3;
+			var ret2 = 4;
 		}
 		return [ret1,ret2,knobpos];
-	} elsif ( knobpos == 6 ) {
-		return [0,4,knobpos];
 	} elsif ( knobpos == 7 ) {
-		return [0,-1,knobpos];
-	} elsif ( knobpos == 8 ) {
-		return [4,-1,knobpos];
-	} elsif ( knobpos == 9 ) {
 		if ( getprop("payload/virtual/weight[7]/selected") == "R-60" ) {
 			var ret1 = 7;
 			return [7,-1,knobpos];
 		} else {
-			return [1,-1,knobpos];
+			return [0,-1,knobpos];
 		}
-	} elsif ( knobpos == 10 ) {
+	} elsif ( knobpos == 8 ) {
 		if ( getprop("payload/virtual/weight[8]/selected") == "R-60" ) {
 			var ret1 = 7;
 			return [8,-1,knobpos];
 		} else {
-			return [3,-1,knobpos];
+			return [4,-1,knobpos];
 		}
+	} elsif ( knobpos == 9 ) {
+		return [1,-1,knobpos];
+	} elsif ( knobpos == 10 ) {
+		return [3,-1,knobpos];
 	}
 }
 	
