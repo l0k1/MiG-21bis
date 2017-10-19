@@ -336,23 +336,46 @@
 	
 	<model>
 		<name>Radar Power Panel</name>
-		<path>Aircraft/MiG-21bis/Models/Instruments/Cockpit/radar-power-panel.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Instruments/RadarPowerPanel/radar-power-panel.xml</path>
 		<offsets>
-            <x-m>0</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
+            <heading-deg>-82</heading-deg>
+            <x-m>-3.82922</x-m>
+            <y-m> 0.42022</y-m>
+            <z-m> 0.47574</z-m>
         </offsets>
 	</model>
 	
 	<model>
-		<name>Radar Power Panel</name>
-		<path>Aircraft/MiG-21bis/Models/Instruments/Radio/radio.xml</path>
-		<offsets>
+        <name>Nav Radio</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/NavRadio/radio.xml</path>
+        <offsets>
             <x-m>0</x-m>
             <y-m>0</y-m>
             <z-m>0</z-m>
         </offsets>
-	</model>
+    </model>
+
+    <model>
+        <name>ADF Radio</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/ADF/adf_radio.xml</path>
+        <offsets>
+            <heading-deg>-82</heading-deg>
+            <x-m>-3.74070</x-m>
+            <y-m> 0.42741</y-m>
+            <z-m> 0.51044</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>Comm Radio</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/CommRadio/comm_radio.xml</path>
+        <offsets>
+            <heading-deg>-82</heading-deg>
+            <x-m>-3.69007</x-m>
+            <y-m> 0.42450</y-m>
+            <z-m> 0.52638</z-m>
+        </offsets>
+    </model>
 
     <model>
         <name>Namako</name>

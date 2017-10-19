@@ -150,13 +150,13 @@
 		<factor>-35</factor>
 		<offset-deg>35</offset-deg>
 		<center>
-			<x-m>-3.79061</x-m>
-			<y-m> 0.36293</y-m>
-			<z-m> 0.46639</z-m>
+			<x-m> 0.00023</x-m>
+			<y-m>-0.03606</y-m>
+			<z-m>-0.00761</z-m>
 		</center>
 		<axis>
-			<x>1</x>
-			<y>0</y>
+			<x>0</x>
+			<y>1</y>
 			<z>0</z>
 		</axis>
 	</animation>
@@ -197,13 +197,13 @@
 		<factor>-35</factor>
 		<offset-deg>35</offset-deg>
 		<center>
-			<x-m>-3.75325</x-m>
-			<y-m> 0.36293</y-m>
-			<z-m> 0.46639</z-m>
+			<x-m> 0.00023</x-m>
+			<y-m> 0.00130</y-m>
+			<z-m>-0.00761</z-m>
 		</center>
 		<axis>
-			<x>1</x>
-			<y>0</y>
+			<x>0</x>
+			<y>1</y>
 			<z>0</z>
 		</axis>
 	</animation>
@@ -229,13 +229,13 @@
 		<factor>-70</factor>
 		<offset-deg>35</offset-deg>
 		<center>
-			<x-m>-3.71814</x-m>
-			<y-m> 0.36293</y-m>
-			<z-m> 0.46639</z-m>
+			<x-m> 0.00023</x-m>
+			<y-m> 0.03641</y-m>
+			<z-m>-0.00761</z-m>
 		</center>
 		<axis>
-			<x>1</x>
-			<y>0</y>
+			<x>0</x>
+			<y>1</y>
 			<z>0</z>
 		</axis>
 	</animation>
