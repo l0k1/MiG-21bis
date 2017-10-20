@@ -42,3 +42,21 @@ var update_adf_radio = func() {
 update_adf_radio();
 setlistener("/instrumentation/adf[0]/radio-tune-update",func(){update_adf_radio();});
 setlistener("/instrumentation/adf-radio/selection",func(){update_adf_radio();});
+
+# comm radio volume propogation
+setlistener("/instrumentation/comm-radio/volume",func(){volume_propogate();});
+setlistener("/instrumentation/comm-radio/rset_comp_switch",func(){volume_propogate();});
+
+var volume_propogate = func{
+	if (getprop("/instrumentation/comm-radio/rset_comp_switch") == 0) {
+		setprop("/instrumentation/comm[0]/volume",getprop("/instrumentation/comm-radio/volume"));
+		setprop("/instrumentation/adf[0]/volume-norm",0);
+	} else {
+		setprop("/instrumentation/adf[0]/volume-norm",getprop("/instrumentation/comm-radio/volume"));
+		setprop("/instrumentation/comm[0]/volume",0);
+	}
+}
+
+setprop("/instrumentation/comm[0]/volume",0);
+setprop("/instrumentation/adf[0]/volume-norm",0);
+setprop("/instrumentation/comm-radio/volume",0);

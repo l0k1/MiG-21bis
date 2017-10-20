@@ -561,6 +561,8 @@
 		</ils-radio>
 		<comm-radio>
 			<selection type="int" userarchive="y">0</selection>
+			<vol type="double">0.0</vol>
+			<rset_comp_switch type="int">0</rset_comp_switch>
 			<preset type="double" n="0" userarchive="y">118.00</preset>
 			<preset type="double" n="1" userarchive="y">118.00</preset>
 			<preset type="double" n="2" userarchive="y">118.00</preset>
