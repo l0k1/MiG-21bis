@@ -76,7 +76,21 @@
 						<label>VOR/ILS Radio</label>
 						<binding>
 							<command>nasal</command>
-							<script>dialog.radio_dialog.open()</script>
+							<script>dialog.nav_radio_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Comm Radio</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.comm_radio_dialog.open()</script>
+						</binding>
+					</item>
+					<item>
+						<label>ADF Radio</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.adf_radio_dialog.open()</script>
 						</binding>
 					</item>
 					<item>
@@ -501,50 +515,85 @@
 		</fuel>
 		<vor-radio>
 			<selection type="int" userarchive="y">0</selection>
-			<preset type="double" n="0" userarchive="y">101.00</preset>
-			<preset type="double" n="1" userarchive="y">101.00</preset>
-			<preset type="double" n="2" userarchive="y">101.00</preset>
-			<preset type="double" n="3" userarchive="y">101.00</preset>
-			<preset type="double" n="4" userarchive="y">101.00</preset>
-			<preset type="double" n="5" userarchive="y">101.00</preset>
-			<preset type="double" n="6" userarchive="y">101.00</preset>
-			<preset type="double" n="7" userarchive="y">101.00</preset>
-			<preset type="double" n="8" userarchive="y">101.00</preset>
-			<preset type="double" n="9" userarchive="y">101.00</preset>
-			<preset type="double" n="10" userarchive="y">101.00</preset>
-			<preset type="double" n="11" userarchive="y">101.00</preset>
-			<preset type="double" n="12" userarchive="y">101.00</preset>
-			<preset type="double" n="13" userarchive="y">101.00</preset>
-			<preset type="double" n="14" userarchive="y">101.00</preset>
-			<preset type="double" n="15" userarchive="y">101.00</preset>
-			<preset type="double" n="16" userarchive="y">101.00</preset>
-			<preset type="double" n="17" userarchive="y">101.00</preset>
-			<preset type="double" n="18" userarchive="y">101.00</preset>
-			<preset type="double" n="19" userarchive="y">101.00</preset>
+			<preset type="double" n="0" userarchive="y">108.00</preset>
+			<preset type="double" n="1" userarchive="y">108.00</preset>
+			<preset type="double" n="2" userarchive="y">108.00</preset>
+			<preset type="double" n="3" userarchive="y">108.00</preset>
+			<preset type="double" n="4" userarchive="y">108.00</preset>
+			<preset type="double" n="5" userarchive="y">108.00</preset>
+			<preset type="double" n="6" userarchive="y">108.00</preset>
+			<preset type="double" n="7" userarchive="y">108.00</preset>
+			<preset type="double" n="8" userarchive="y">108.00</preset>
+			<preset type="double" n="9" userarchive="y">108.00</preset>
+			<preset type="double" n="10" userarchive="y">108.00</preset>
+			<preset type="double" n="11" userarchive="y">108.00</preset>
+			<preset type="double" n="12" userarchive="y">108.00</preset>
+			<preset type="double" n="13" userarchive="y">108.00</preset>
+			<preset type="double" n="14" userarchive="y">108.00</preset>
+			<preset type="double" n="15" userarchive="y">108.00</preset>
+			<preset type="double" n="16" userarchive="y">108.00</preset>
+			<preset type="double" n="17" userarchive="y">108.00</preset>
+			<preset type="double" n="18" userarchive="y">108.00</preset>
+			<preset type="double" n="19" userarchive="y">108.00</preset>
 		</vor-radio>
 		<ils-radio>
 			<selection type="int" userarchive="y">0</selection>
-			<preset type="double" n="0" userarchive="y">101.00</preset>
-			<preset type="double" n="1" userarchive="y">101.00</preset>
-			<preset type="double" n="2" userarchive="y">101.00</preset>
-			<preset type="double" n="3" userarchive="y">101.00</preset>
-			<preset type="double" n="4" userarchive="y">101.00</preset>
-			<preset type="double" n="5" userarchive="y">101.00</preset>
-			<preset type="double" n="6" userarchive="y">101.00</preset>
-			<preset type="double" n="7" userarchive="y">101.00</preset>
-			<preset type="double" n="8" userarchive="y">101.00</preset>
-			<preset type="double" n="9" userarchive="y">101.00</preset>
-			<preset type="double" n="10" userarchive="y">101.00</preset>
-			<preset type="double" n="11" userarchive="y">101.00</preset>
-			<preset type="double" n="12" userarchive="y">101.00</preset>
-			<preset type="double" n="13" userarchive="y">101.00</preset>
-			<preset type="double" n="14" userarchive="y">101.00</preset>
-			<preset type="double" n="15" userarchive="y">101.00</preset>
-			<preset type="double" n="16" userarchive="y">101.00</preset>
-			<preset type="double" n="17" userarchive="y">101.00</preset>
-			<preset type="double" n="18" userarchive="y">101.00</preset>
-			<preset type="double" n="19" userarchive="y">101.00</preset>
+			<preset type="double" n="0" userarchive="y">108.00</preset>
+			<preset type="double" n="1" userarchive="y">108.00</preset>
+			<preset type="double" n="2" userarchive="y">108.00</preset>
+			<preset type="double" n="3" userarchive="y">108.00</preset>
+			<preset type="double" n="4" userarchive="y">108.00</preset>
+			<preset type="double" n="5" userarchive="y">108.00</preset>
+			<preset type="double" n="6" userarchive="y">108.00</preset>
+			<preset type="double" n="7" userarchive="y">108.00</preset>
+			<preset type="double" n="8" userarchive="y">108.00</preset>
+			<preset type="double" n="9" userarchive="y">108.00</preset>
+			<preset type="double" n="10" userarchive="y">108.00</preset>
+			<preset type="double" n="11" userarchive="y">108.00</preset>
+			<preset type="double" n="12" userarchive="y">108.00</preset>
+			<preset type="double" n="13" userarchive="y">108.00</preset>
+			<preset type="double" n="14" userarchive="y">108.00</preset>
+			<preset type="double" n="15" userarchive="y">108.00</preset>
+			<preset type="double" n="16" userarchive="y">108.00</preset>
+			<preset type="double" n="17" userarchive="y">108.00</preset>
+			<preset type="double" n="18" userarchive="y">108.00</preset>
+			<preset type="double" n="19" userarchive="y">108.00</preset>
 		</ils-radio>
+		<comm-radio>
+			<selection type="int" userarchive="y">0</selection>
+			<preset type="double" n="0" userarchive="y">118.00</preset>
+			<preset type="double" n="1" userarchive="y">118.00</preset>
+			<preset type="double" n="2" userarchive="y">118.00</preset>
+			<preset type="double" n="3" userarchive="y">118.00</preset>
+			<preset type="double" n="4" userarchive="y">118.00</preset>
+			<preset type="double" n="5" userarchive="y">118.00</preset>
+			<preset type="double" n="6" userarchive="y">118.00</preset>
+			<preset type="double" n="7" userarchive="y">118.00</preset>
+			<preset type="double" n="8" userarchive="y">118.00</preset>
+			<preset type="double" n="9" userarchive="y">118.00</preset>
+			<preset type="double" n="10" userarchive="y">118.00</preset>
+			<preset type="double" n="11" userarchive="y">118.00</preset>
+			<preset type="double" n="12" userarchive="y">118.00</preset>
+			<preset type="double" n="13" userarchive="y">118.00</preset>
+			<preset type="double" n="14" userarchive="y">118.00</preset>
+			<preset type="double" n="15" userarchive="y">118.00</preset>
+			<preset type="double" n="16" userarchive="y">118.00</preset>
+			<preset type="double" n="17" userarchive="y">118.00</preset>
+			<preset type="double" n="18" userarchive="y">118.00</preset>
+			<preset type="double" n="19" userarchive="y">118.00</preset>
+		</comm-radio>
+		<adf-radio>
+			<selection type="int" userarchive="y">0</selection>
+			<preset type="double" n="0" userarchive="y">350</preset>
+			<preset type="double" n="1" userarchive="y">350</preset>
+			<preset type="double" n="2" userarchive="y">350</preset>
+			<preset type="double" n="3" userarchive="y">350</preset>
+			<preset type="double" n="4" userarchive="y">350</preset>
+			<preset type="double" n="5" userarchive="y">350</preset>
+			<preset type="double" n="6" userarchive="y">350</preset>
+			<preset type="double" n="7" userarchive="y">350</preset>
+			<preset type="double" n="8" userarchive="y">350</preset>
+		</adf-radio>
 	</instrumentation>
 
 	<fdm>

@@ -1,0 +1,133 @@
+<PropertyList>
+
+ <name>adf_radio</name>
+ <modal>false</modal>
+ <layout>vbox</layout>
+ <width>260</width>
+ <height>250</height>
+  <group>
+   <text>
+    <label>ADF Radio Presets</label>
+	<x>60</x>
+	<y>225</y>
+  </text>
+  
+  <!-- ********************************* adf Presets  ************************************ -->
+  
+  <text>
+    <label>ADF Presets</label>
+	<x>75</x>
+   <y>195</y>
+  </text>
+  
+  <input>
+   <x>10</x>
+   <y>170</y>
+   <width>75</width>
+   <height>25</height>
+   <label>01</label>
+   <property>/instrumentation/adf-radio/preset[0]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>170</y>
+   <width>75</width>
+   <height>25</height>
+   <label>02</label>
+   <property>/instrumentation/adf-radio/preset[1]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>140</y>
+   <width>75</width>
+   <height>25</height>
+   <label>03</label>
+   <property>/instrumentation/adf-radio/preset[2]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>140</y>
+   <width>75</width>
+   <height>25</height>
+   <label>04</label>
+   <property>/instrumentation/adf-radio/preset[3]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>110</y>
+   <width>75</width>
+   <height>25</height>
+   <label>05</label>
+   <property>/instrumentation/adf-radio/preset[4]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>110</y>
+   <width>75</width>
+   <height>25</height>
+   <label>06</label>
+   <property>/instrumentation/adf-radio/preset[5]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>80</y>
+   <width>75</width>
+   <height>25</height>
+   <label>07</label>
+   <property>/instrumentation/adf-radio/preset[6]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>80</y>
+   <width>75</width>
+   <height>25</height>
+   <label>08</label>
+   <property>/instrumentation/adf-radio/preset[7]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>50</y>
+   <width>75</width>
+   <height>25</height>
+   <label>09</label>
+   <property>/instrumentation/adf-radio/preset[8]</property>
+  </input>
+  
+  <!-- ********************************* CLOSE BUTTON ************************************* -->
+  
+   <button>
+    <legend>Apply</legend>
+	<y>10</y>
+	<x>30</x>
+    <binding>
+     <command>dialog-apply</command>
+    </binding>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/adf[0]/radio-tune-update</property>
+    </binding>
+   </button>
+  
+  <button>
+    <legend>Close</legend>
+	<y>10</y>
+	<x>150</x>
+    <binding>
+     <command>dialog-apply</command>
+    </binding>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/adf[0]/radio-tune-update</property>
+    </binding>
+	 <binding>
+     <command>dialog-close</command>
+    </binding>
+   </button>
+  
+  </group>
+
+</PropertyList>
