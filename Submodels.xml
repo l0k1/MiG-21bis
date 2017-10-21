@@ -13,8 +13,8 @@
         <z-offset>-1.619</z-offset>
         <yaw-offset>-180.0</yaw-offset>
         <pitch-offset>-50.0</pitch-offset>
-        <life>0.6</life>
-        <buoyancy>32</buoyancy>
+        <life>0.2</life>
+        <buoyancy>30</buoyancy>
         <weight>0.1</weight>
         <eda>0.001</eda>
         <cd>0.0</cd>
