@@ -21,13 +21,14 @@
                   0.349 0.80
                   0.436 0.89
                   0.524 0.91
-                  0.611 0.95
-                  0.698 0.97
-                  0.785 0.89
-                  0.873 0.85
-                  0.960 0.79
-                  1.050 0.70
-                  1.396 0.20
+                  0.576 0.87
+                  0.611 0.35
+                  0.698 0.15
+                  0.785 0.00
+                  0.873 0.00
+                  0.960 0.00
+                  1.050 0.00
+                  1.396 0.00
                 </tableData>
               </table>
               <property>tune/lift/alpha</property>
@@ -162,7 +163,7 @@
                     0.81    0.00000
                     1.10    0.02884 
                     1.25    0.01000
-                    1.80    0.00500
+                    1.80    0.00750
                 </tableData>
               </table>
               <property>tune/drag/mach</property>
@@ -334,7 +335,7 @@
            <property>metrics/cbarw-ft</property>
            <property>aero/alpha-rad</property>
            <product>
-             <value> -0.2062 </value>
+             <value> -0.1462 </value>
              <property>tune/pitch/alpha</property>
            </product>
        </product>
