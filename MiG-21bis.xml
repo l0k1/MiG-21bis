@@ -21,10 +21,10 @@
    <htailarm  unit="FT" >   20.68 </htailarm>
    <vtailarea unit="FT2">   29.70 </vtailarea>
    <vtailarm  unit="FT" >   20.68 </vtailarm>
-   <location name="AERORP" unit="IN">
-     <x> 10.00 </x>
+   <location name="AERORP" unit="M">
+     <x> 0.010 </x>
      <y>   0.00 </y>
-     <z>  -3.00 </z>
+     <z>  0.19160 </z>
    </location>
    <location name="EYEPOINT" unit="M">
      <x>-3.28217 </x>
@@ -47,10 +47,10 @@
    <iyz unit="SLUG*FT2">         0 </iyz>
    <emptywt unit="LBS" >     12996 </emptywt> <!-- source: http://www.mig-21.de/english/technicaldata.htm -->
    
-   <location name="CG" unit="IN">
-     <x>  15.64 </x>
+   <location name="CG" unit="M"> <!-- source: mig21bis weight and balance document -->
+     <x>  -0.03445 </x>
      <y>   0.00 </y>
-     <z>  -4.00 </z>
+     <z>  0.19160 </z>
    </location>
    
    <pointmass name="station1"><!-- left wing outboard pylon pointmass 0 -->
