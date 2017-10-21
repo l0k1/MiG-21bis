@@ -36,7 +36,15 @@ setlistener("/instrumentation/comm-radio/selection",func(){update_comm_radio();}
 ### adf/ndb radio frequency handling
 
 var update_adf_radio = func() {
-	setprop("/instrumentation/adf[0]/frequencies/selected-khz",getprop("/instrumentation/adf-radio/preset[" ~ getprop("/instrumentation/adf-radio/selection") ~ "]"));
+	var selection = getprop("/instrumentation/adf-radio/selection");
+	setprop("/instrumentation/adf[0]/frequencies/selected-khz",getprop("/instrumentation/adf-radio/preset[" ~ selection ~ "]"));
+	for (var i = 0; i < 9; i = i + 1 ) {
+		if ( i != selection ) {
+			setprop("/instrumentation/adf-radio/animation/select["~i~"]",0)
+		} else {
+			setprop("/instrumentation/adf-radio/animation/select["~i~"]",1)
+		}
+	}
 }
 	
 update_adf_radio();

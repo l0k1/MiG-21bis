@@ -595,6 +595,18 @@
 			<preset type="double" n="6" userarchive="y">350</preset>
 			<preset type="double" n="7" userarchive="y">350</preset>
 			<preset type="double" n="8" userarchive="y">350</preset>
+			<animation>
+				<select n="0" type="bool">true</select>
+				<select n="1" type="bool">false</select>
+				<select n="2" type="bool">false</select>
+				<select n="3" type="bool">false</select>
+				<select n="4" type="bool">false</select>
+				<select n="5" type="bool">false</select>
+				<select n="6" type="bool">false</select>
+				<select n="7" type="bool">false</select>
+				<select n="8" type="bool">false</select>
+				<select n="9" type="bool">false</select>
+			</animation>
 		</adf-radio>
 	</instrumentation>
 

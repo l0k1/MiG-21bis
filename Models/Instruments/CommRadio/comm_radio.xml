@@ -3,76 +3,6 @@
 
     <path>commradio.ac</path>
 
-	<!--lights-->
-	
-	<!--<animation>
-			<type>material</type>
-				<object-name>ils1</object-name>
-				<object-name>ils10</object-name>
-				<object-name>vor1</object-name>
-				<object-name>vor10</object-name>
-			<emission>
-				 <red>0.6</red>
-				 <green>0.3</green>
-				 <blue>0.3</blue>
-				<factor-prop>controls/lighting/instruments-norm</factor-prop>
-			</emission> 
-	</animation>
-	
-	
-	<animation>
-        <type>material</type>
-        <object-name>lightAzm</object-name>
-        <condition>
-			<equals>
-				<property>/instrumentation/nav/data-is-valid</property>
-				<value>1</value>
-			</equals>
-			<equals>
-				<property>/instrumentation/nav/in-range</property>
-				<value>1</value>
-			</equals>
-		</condition>
-		<ambient>
-			<red>0.0</red>
-			<green>0.2</green>
-			<blue>0.0</blue>
-		</ambient>
-        <emission>
-            <red>0</red>
-            <green>1</green>
-            <blue>0</blue>
-        </emission> 
-    </animation>
-	
-	<animation>
-        <type>material</type>
-        <object-name>lightDist</object-name>
-        <condition>
-			<equals>
-                <property>/instrumentation/nav/data-is-valid</property>
-                <value>1</value>
-            </equals>
-            <equals>
-                <property>/instrumentation/nav/in-range</property>
-                <value>1</value>
-            </equals>
-            <equals>
-                <property>/instrumentation/nav/dme-in-range</property>
-                <value>1</value>
-            </equals>
-		</condition>
-		<ambient>
-			<red>0.0</red>
-			<green>0.2</green>
-			<blue>0.0</blue>
-		</ambient>
-        <emission>
-            <red>0</red>
-            <green>1</green>
-            <blue>0</blue>
-        </emission> 
-    </animation>	-->
 	
 	<!-- channel select knob -->
 	
@@ -136,6 +66,17 @@
 			<x>0</x>
 			<y>1</y>
 		</axis>
+	</animation>
+
+	<animation>
+			<type>material</type>
+			<object-name>commRadioChannelDisplay</object-name>
+			<emission>
+				 <red>0.6</red>
+				 <green>0.3</green>
+				 <blue>0.3</blue>
+				<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			</emission> 
 	</animation>
 
 
@@ -263,13 +204,7 @@
 			</binding>
 		</action>
 	</animation>
-if 0 = -15
-   1 =  15
-   0 -> 1 = 30
 
-   .2 = -15
-   .4 = 15
-   .2 -> .4 = 30
 	<animation>
 		<object-name>commNSup</object-name>
 		<type>rotate</type>
@@ -288,51 +223,4 @@ if 0 = -15
 		</axis>
 	</animation>
 
-	<!--
-	<animation>
-		<type>pick</type>
-		<object-name>knobVolume</object-name>
-		<action>
-			<button>0</button>
-			<repeatable>true</repeatable>
-			<interval-sec>0.3</interval-sec>
-			<binding>
-				<command>property-adjust</command>
-				<property>/instrumentation/nav[0]/volume</property>
-				<step>0.1</step>
-				<min>0</min>
-				<max>1.1</max>
-				<wrap>false</wrap>
-			</binding>
-			<binding>
-				<command>property-adjust</command>
-				<property>/instrumentation/nav[1]/volume</property>
-				<step>0.1</step>
-				<min>0</min>
-				<max>1.1</max>
-				<wrap>false</wrap>
-			</binding>
-		</action>
-		<action>
-			<button>1</button>
-			<repeatable>true</repeatable>
-			<interval-sec>0.3</interval-sec>
-			<binding>
-				<command>property-adjust</command>
-				<property>/instrumentation/nav[0]/volume</property>
-				<step>-0.1</step>
-				<min>0</min>
-				<max>1.1</max>
-				<wrap>false</wrap>
-			</binding>
-			<binding>
-				<command>property-adjust</command>
-				<property>/instrumentation/nav[1]/volume</property>
-				<step>-0.1</step>
-				<min>0</min>
-				<max>1.1</max>
-				<wrap>false</wrap>
-			</binding>
-		</action>
-	</animation> -->
 </PropertyList>
