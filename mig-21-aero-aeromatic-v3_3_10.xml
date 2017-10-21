@@ -160,8 +160,9 @@
                 <tableData>
                     0.00    0.00000
                     0.81    0.00000
-                    1.10    0.02484 
-                    1.80    0.00550
+                    1.10    0.02884 
+                    1.25    0.01000
+                    1.80    0.00500
                 </tableData>
               </table>
               <property>tune/drag/mach</property>
