@@ -357,7 +357,7 @@
                 <seeker-angular-speed-dps type="double">14.9</seeker-angular-speed-dps>
                 <loft-altitude>0</loft-altitude>
                 <min-fire-range-nm type="double">0.15</min-fire-range-nm>
-                <rail type="bool">true</rail>
+                <rail type="bool">false</rail>
                 <rail-length-m type="double">2.667</rail-length-m>
                 <rail-point-forward type="bool">true</rail-point-forward>
                 <max-report-distance type="double">65</max-report-distance>
@@ -399,7 +399,7 @@
                 <seeker-angular-speed-dps type="double">14.9</seeker-angular-speed-dps>
                 <loft-altitude>36000</loft-altitude>
                 <min-fire-range-nm type="double">1.0</min-fire-range-nm>
-                <rail type="bool">true</rail>
+                <rail type="bool">false</rail>
                 <rail-length-m type="double">2.667</rail-length-m>
                 <rail-point-forward type="bool">true</rail-point-forward>
                 <max-report-distance type="double">65</max-report-distance>
@@ -438,7 +438,7 @@
                 <loft-altitude>34000</loft-altitude>
                 <lock-on-sun-deg>5</lock-on-sun-deg>
                 <min-fire-range-nm type="double">1.0</min-fire-range-nm>
-                <rail type="bool">true</rail>
+                <rail type="bool">false</rail>
                 <rail-length-m type="double">2.667</rail-length-m>
                 <rail-point-forward type="bool">true</rail-point-forward>
                 <max-report-distance type="double">65</max-report-distance>

@@ -705,7 +705,7 @@ var AIM = {
 		me.altN.setDoubleValue(malt);
 		me.hdgN.setDoubleValue(ac_hdg);
 
-		if (me.rail == FALSE) {
+		if (me.rail == FALSE and me.drop_time == 0) {
 			# drop distance in time
 			me.drop_time = math.sqrt(2*7/g_fps);# time to fall 7 ft to clear aircraft
 		}

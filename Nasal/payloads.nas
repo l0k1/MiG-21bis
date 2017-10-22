@@ -504,9 +504,10 @@ var missile_release = func(pylon) {
 	} else {
 		var virtual = "/virtual/";
 	}
+	var selected = getprop("payload"~virtual~"weight["~(pylon)~"]/selected");
 	#print("virtual: " ~ virtual);
 	#print("gettie: " ~ getprop("payload"~virtual~"weight["~(pylon)~"]/selected"));
-	if(getprop("payload"~virtual~"weight["~(pylon)~"]/selected") != "none") { 
+	if(selected != "none") { 
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on. The gear check is prevent missiles from firing when changing airport location.
 		#if (armament.AIM.active[pylon] != nil ) {
 		#	print("not nil");
@@ -523,9 +524,31 @@ var missile_release = func(pylon) {
 			#missile locked, fire it.
 
 			#print("firing missile: "~pylon);
+
 			var callsign = armament.AIM.active[pylon].callsign;
 			var brevity = armament.AIM.active[pylon].brevity;
+
+			#if missile is R-27R1 or R-27T1, recalculate drop time
+
+			if ( selected == "R-27R1" or brevity == "R-27T1" ) {
+				var prs_inhg = getprop("/environment/pressure-inhg");
+				if ( prs_inhg > 25 ) {
+					#print("pressure: " ~ math.clamp(interp(prs_inhg,33,0,25,1.5),0,4));
+					#print("altitude: " ~ math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1));
+					armament.AIM.active[pylon].drop_time = math.clamp(interp(prs_inhg,33,0,25,1.5),0,4) * math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1);
+					#armament.AIM.active[pylon].drop_time = 3;
+				} else {
+					#print("pressure: " ~ math.clamp(interp(prs_inhg,25,1.5,5,4),0,4));
+					#print("altitude: " ~ math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1));
+					armament.AIM.active[pylon].drop_time = math.clamp(interp(prs_inhg,25,1.5,5,4),0,4) * math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1);
+					#armament.AIM.active[pylon].drop_time = 3;
+				}
+				#print("range: " ~ radar_logic.selection.get_range());
+				#print("drop time ~ " ~ math.clamp(interp(prs_inhg,33,0,25,1.5),0,4) * math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1));
+			}
+
 			armament.AIM.active[pylon].release();
+
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 			setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
 			var phrase = brevity ~ " at: " ~ callsign;
@@ -849,6 +872,10 @@ var spamLoop = func {
     setprop("/sim/multiplay/chat", spam);
   }
   settimer(spamLoop, 1.20);
+}
+
+var interp = func(x,x0,y0,x1,y1) {
+	return y0 + ( x - x0 ) * ((y1 - y0) / (x1 - x0))
 }
 
 spamLoop();
