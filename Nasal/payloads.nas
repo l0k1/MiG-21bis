@@ -409,7 +409,6 @@ var missile_release_listener = func {
 				#print("armSelect[0]");
 				#print(selected0.name);
 				#print(getprop("payload/virtual/weight[7]/selected"));
-				#print(getprop("payload/virtual/weight[7]/selected"));
 				missile_release(armSelect[0]);
 				#print("type2: " ~ selected0.type);
 			}
