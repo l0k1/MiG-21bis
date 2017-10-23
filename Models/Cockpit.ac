@@ -1,13 +1,13 @@
 AC3Db
 MATERIAL "ac3dmat14.002" rgb 0.800 0.800 0.800  amb 0.200 0.200 0.200  emis 0.000 0.000 0.000  spec 0.200 0.200 0.200  shi 128 trans 0.000
-MATERIAL "cage" rgb 0.640 0.640 0.640  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.688 0.688 0.688  shi 105 trans 0.000
+MATERIAL "cage.001" rgb 0.640 0.640 0.640  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.688 0.688 0.688  shi 105 trans 0.000
 MATERIAL "ac3dmat3.000" rgb 1.000 0.000 0.000  amb 0.200 0.200 0.200  emis 0.000 0.000 0.000  spec 0.200 0.200 0.200  shi 128 trans 0.000
 MATERIAL "DefaultWhite.006" rgb 1.000 1.000 1.000  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 64 trans 0.000
 MATERIAL "cockpit" rgb 0.800 0.800 0.800  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 64 trans 0.000
 MATERIAL "ac3dmat4.000" rgb 0.612 0.576 0.541  amb 0.200 0.200 0.200  emis 0.000 0.000 0.000  spec 0.200 0.200 0.200  shi 128 trans 0.000
 MATERIAL "DefaultWhite.008" rgb 0.800 0.800 0.800  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 64 trans 0.000
 OBJECT world
-name "Blender_exporter_v2.19__Cockpit.ac"
+name "Blender_exporter_v2.22__Cockpit.ac"
 kids 14
 OBJECT poly
 name "cage"
@@ -1727,7 +1727,7 @@ kids 0
 OBJECT poly
 name "cockpit"
 data 9
-Plane.006
+Plane.063
 crease 15.4
 texture "cage.png"
 texrep 1 1
@@ -2028,8 +2028,8 @@ numvert 358
 -4.02499 0.7355 0.35896
 -4.02499 0.6475 0.35896
 -4.02499 0.6475 0.48569
--3.74729 0.64663 0.46591
--3.74729 0.42816 0.46591
+-3.78986 0.64121 0.43929
+-3.78986 0.42274 0.43929
 -3.93272 0.64999 0.34855
 -3.93272 0.42816 0.34855
 -3.86933 0.88008 0.39423
@@ -5997,7 +5997,7 @@ kids 0
 OBJECT poly
 name "panelBottom"
 data 9
-Plane.001
+Plane.002
 crease 35.0
 texture "Cockpit.png"
 texrep 1 1
@@ -14839,7 +14839,7 @@ kids 0
 OBJECT poly
 name "shroud"
 data 9
-Plane.002
+Plane.003
 crease 75.0
 texture "Canopy.png"
 texrep 1 1

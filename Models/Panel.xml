@@ -559,10 +559,10 @@
         <name>Labels</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Autopilot/autopilot_panel.xml</path>
         <offsets>
-            <heading-deg>58</heading-deg>
-            <x-m>-3.87433</x-m>
-            <y-m>-0.37710</y-m>
-            <z-m> 0.45108</z-m>
+            <heading-deg>57.65</heading-deg>
+            <x-m>-3.87993</x-m>
+            <y-m>-0.36987</y-m>
+            <z-m> 0.45136</z-m>
         </offsets>
     </model>
 
