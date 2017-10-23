@@ -1,33 +1,27 @@
 <PropertyList>
 
-    <path>R-27R1.ac</path>
-    
-    <animation>
-        <type>select</type>
-        <object-name>Cylinder</object-name>
-		 <object-name>Plane</object-name>
-		  <object-name>Plane.001</object-name>
-		  <object-name>Plane.002</object-name>
-		  <object-name>Plane.003</object-name>
-		  <object-name>Plane.004</object-name>
-		  <object-name>Plane.005</object-name>
-		  <object-name>Plane.006</object-name>
-		  <object-name>Plane.007</object-name>
-		  <object-name>Plane.008</object-name>
-		  <object-name>Plane.009</object-name>
-		  <object-name>Plane.010</object-name>
-		  <object-name>Plane.011</object-name>
-        <condition>
-            <!--not>
-                <property>fdm/jsbsim/systems/armament/station1/released</property>
-            </not-->
-            <equals>
-                  <property>sim/multiplay/generic/string[11]</property>
-                  <value>R-27R1</value>
-            </equals>
-        </condition>
-    </animation>
-	
+	<path>R-27R1.ac</path>
+
+	<animation>
+		<type>select</type>
+		<object-name>Cylinder</object-name>
+		<object-name>Plane</object-name>
+		<object-name>Plane.001</object-name>
+		<object-name>Plane.002</object-name>
+		<object-name>Plane.003</object-name>
+		<object-name>Plane.004</object-name>
+		<object-name>Plane.005</object-name>
+		<object-name>Plane.006</object-name>
+		<object-name>Plane.007</object-name>
+		<object-name>Plane.008</object-name>
+		<object-name>Plane.009</object-name>
+		<object-name>Plane.010</object-name>
+		<object-name>Plane.011</object-name>
+		<condition>
+			<property>payload/armament/r-27r1/flags/msl-id-0</property>
+		</condition>
+	</animation>
+
 	<model>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/motor-smoke-0.xml</path>
 		<offsets>
@@ -48,20 +42,20 @@
 	</model>
 
 	<animation>
-  		<object-name>Cylinder</object-name>
-		 <object-name>Plane</object-name>
-		  <object-name>Plane.001</object-name>
-		  <object-name>Plane.002</object-name>
-		  <object-name>Plane.003</object-name>
-		  <object-name>Plane.004</object-name>
-		  <object-name>Plane.005</object-name>
-		  <object-name>Plane.006</object-name>
-		  <object-name>Plane.007</object-name>
-		  <object-name>Plane.008</object-name>
-		  <object-name>Plane.009</object-name>
-		  <object-name>Plane.010</object-name>
-		  <object-name>Plane.011</object-name>
-  		<enable-hot type="bool">false</enable-hot>
- 	</animation>
+		<object-name>Cylinder</object-name>
+		<object-name>Plane</object-name>
+		<object-name>Plane.001</object-name>
+		<object-name>Plane.002</object-name>
+		<object-name>Plane.003</object-name>
+		<object-name>Plane.004</object-name>
+		<object-name>Plane.005</object-name>
+		<object-name>Plane.006</object-name>
+		<object-name>Plane.007</object-name>
+		<object-name>Plane.008</object-name>
+		<object-name>Plane.009</object-name>
+		<object-name>Plane.010</object-name>
+		<object-name>Plane.011</object-name>
+		<enable-hot type="bool">false</enable-hot>
+	</animation>
 
 </PropertyList>

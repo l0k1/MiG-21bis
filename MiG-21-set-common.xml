@@ -536,7 +536,7 @@
 		</fuel>
 		<vor-radio>
 			<selection type="int" userarchive="y">0</selection>
-			<preset type="double" n="0" userarchive="y">108.00</preset>
+			<preset userarchive="y" type="double" n="0">108.00</preset>
 			<preset type="double" n="1" userarchive="y">108.00</preset>
 			<preset type="double" n="2" userarchive="y">108.00</preset>
 			<preset type="double" n="3" userarchive="y">108.00</preset>
