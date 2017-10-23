@@ -349,9 +349,10 @@
         <name>Nav Radio</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/NavRadio/radio.xml</path>
         <offsets>
-            <x-m>0</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
+            <heading-deg>91.80</heading-deg>
+            <x-m>-3.56585</x-m>
+            <y-m>-0.42731</y-m>
+            <z-m> 0.55690</z-m>
         </offsets>
     </model>
 
