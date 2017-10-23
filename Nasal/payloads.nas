@@ -94,8 +94,6 @@ var payloads = {
 	"Smokepod":				pos_arm.new("smokepod","smokepod",157,"tank")
 };
 
-var loop_time = 0;
-
 var update_loop = func {
 
 	if(input.replay.getValue() == TRUE) {
@@ -322,34 +320,6 @@ var update_loop = func {
 		flareCount = -1;
 	}
 	
-	#cannon ammo counter and jamming
-	if ( getprop("controls/armament/trigger") == 1 and  getprop("payload/armament/GSh-30/jammed") == 0 ) {
-		var cur_ammo = getprop("payload/armament/GSh-30/ammo");
-		if (cur_ammo > 0) {
-			var jam_prob = rand();
-			#print("jam_prob: " ~ jam_prob);
-			if (jam_prob < 0.005) {
-				setprop("payload/armament/GSh-30/jammed",1);
-				setprop("payload/armament/GSh-30/trigger",0);
-				print("GSh-30 has jammed!");
-			}
-			var scnd = getprop("/sim/time/elapsed-sec")  - loop_time;
-			var spent= int(58.3 * scnd);
-			#print("scnd: " ~ scnd);
-			#print("spent: " ~ spent);
-			cur_ammo = math.clamp(cur_ammo - spent,0,200);
-			setprop("payload/armament/GSh-30/trigger",1);
-			setprop("payload/armament/GSh-30/ammo",cur_ammo);
-		} else {
-			setprop("payload/armament/GSh-30/trigger",0);
-			setprop("controls/armament/panel/gun-ready",0);
-		}
-	} else {
-		setprop("payload/armament/GSh-30/trigger",0);
-	}
-	
-	loop_time = getprop("/sim/time/elapsed-sec");
-	
 	settimer(update_loop, UPDATE_PERIOD);
 }
 
@@ -363,7 +333,7 @@ var unjam = func(button) {
 	#print("button value: " ~ charge_used[button]);
 	if ( charge_used[button] == 0 ) {
 		charge_used[button] = 1;
-		setprop("payload/armament/GSh-30/jammed",0);
+		setprop("/fdm/jsbsim/systems/payloads/GSh-30-jammed",0);
 	}
 }
 

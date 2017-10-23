@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<!-- this is for all stuff that needs to happen near-instantly, such as trigger handling -->
+
+<system name="payloads">
+
+    <channel name="GSh-23">
+    
+    	<!-- cannon jam probability -->
+    	<fcs_function name="systems/payloads/GSh-23-jam-probability">
+			<function>
+				<abs>
+					<urandom/>
+				</abs>
+			</function>
+		</fcs_function>
+		
+		<!-- check if it has jammed -->
+		<!-- jammed can be set to 0 via payloads.nas unjam() function -->
+		<switch name="systems/payloads/GSh-23-jammed">
+			<default value="0"/>
+			<test logic="OR" value="1">
+				systems/payloads/GSh-23-jammed eq 1
+				systems/payloads/GSh-23-jam-probability lt 0.005
+			</test>
+		</switch>
+    
+        <!-- trigger propogation for the cannon. -->
+        
+        <switch name="systems/payloads/GSh-23-trigger">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                /controls/armament/trigger == 1
+                systems/payloads/GSh-23-jammed ne 1
+            </test>
+        </switch>
+    
+    </channel>
+
+</system>
