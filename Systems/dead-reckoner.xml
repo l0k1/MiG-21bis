@@ -315,10 +315,35 @@
                     <property>/instrumentation/nav/in-range</property>
                     <value>1</value>
                 </equals>
+                <equals>
+                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+                	<value>0</value>
+                </equals>
             </condition>
         </enable>
         <input>
             <property>/instrumentation/nav/heading-deg</property>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/azimuth</output>
+    </filter>
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <equals>
+                    <property>/instrumentation/adf/in-range</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+                	<value>1</value>
+                </equals>
+            </condition>
+        </enable>
+        <input>
+            <property>/instrumentation/adf/indicated-bearing-deg</property>
         </input>
         <output>/instrumentation/dead-reckoner/internal/azimuth</output>
     </filter>
@@ -338,7 +363,21 @@
                             <property>/instrumentation/nav/in-range</property>
                             <value>1</value>
                         </equals>
+                        <equals>
+		                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+		                	<value>0</value>
+		                </equals>
                     </and>
+                    <and>
+	                    <equals>
+		                    <property>/instrumentation/adf/in-range</property>
+		                    <value>1</value>
+		                </equals>
+		                <equals>
+		                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+		                	<value>1</value>
+		                </equals>
+		            </and>
                     <equals>
                         <property>/instrumentation/dead-reckoner/reset</property>
                         <value>1</value>
