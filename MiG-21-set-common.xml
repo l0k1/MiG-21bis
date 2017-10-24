@@ -456,6 +456,9 @@
 				<level type="int">0</level>
 			</lights>
 		</autopilot>
+		<adf n="0">
+			<inbound-outbound-switch type="int">0</inbound-outbound-switch>
+		</adf>
 		<nav n="0">
 			<radials>
 				<selected-deg>0</selected-deg>
