@@ -28,5 +28,18 @@ var test_support = func {
   }
 }
 
+setlistener("/instrumentation/misc-panel-1/hlt-heat-rqst",func() {
+  # if the guard is down, the switch can move up but not down
+  # 
+  if ( getprop("/instrumentation/misc-panel-1/guard") == 0 ) {
+    if ( getprop("/instrumentation/misc-panel-1/hlt-heat-rqst") == 0 ) {
+      setprop("/instrumentation/misc-panel-1/hlt-heat",0);
+    }
+    setprop("/instrumentation/misc-panel-1/hlt-heat-rqst",0);
+  } else {
+    setprop("/instrumentation/misc-panel-1/hlt-heat",getprop("/instrumentation/misc-panel-1/hlt-heat-rqst"));
+  }
+});
+
 test_support();
 main_loop();

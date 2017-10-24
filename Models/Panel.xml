@@ -567,4 +567,15 @@
         </offsets>
     </model>
 
+    <model>
+        <name>Misc Panel 1</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/MiscPanel1/miscpanel1.xml</path>
+        <offsets>
+            <heading-deg>90.952</heading-deg>
+            <x-m>-3.44533</x-m>
+            <y-m>-0.42883</y-m>
+            <z-m> 0.52531</z-m>
+        </offsets>
+    </model>
+
 </PropertyList>

@@ -629,6 +629,15 @@
 				<select n="9" type="bool">false</select>
 			</animation>
 		</adf-radio>
+		<misc-panel-1>
+			<rsbn-arc type="bool">false</rsbn-arc>
+			<cone-auto-man type="bool">false</cone-auto-man>
+			<fast-heat type="bool">false</fast-heat>
+			<auto-off type="bool">false</auto-off>
+			<hlt-heat type="bool">false</hlt-heat>
+			<hlt-heat-rqst type="bool">false</hlt-heat-rqst>
+			<guard type="bool">false</guard>
+		</misc-panel-1>
 	</instrumentation>
 
 	<fdm>
