@@ -333,7 +333,7 @@ var unjam = func(button) {
 	#print("button value: " ~ charge_used[button]);
 	if ( charge_used[button] == 0 ) {
 		charge_used[button] = 1;
-		setprop("/fdm/jsbsim/systems/payloads/GSh-30-jammed",0);
+		setprop("/fdm/jsbsim/systems/armament/GSh-23-jammed",0);
 	}
 }
 

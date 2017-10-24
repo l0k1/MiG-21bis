@@ -48,7 +48,7 @@
     <submodel>
         <name>GSh-23</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Tracer.xml</model>
-        <trigger>/fdm/jsbsim/systems/payloads/GSh-23-trigger</trigger>
+        <trigger>/fdm/jsbsim/systems/armament/GSh-23-trigger</trigger>
         <speed>2350.0</speed>
         <repeat>true</repeat>
         <delay>0.1665</delay>
@@ -68,7 +68,7 @@
     <submodel>
         <name>GSh-23</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Null.ac</model>
-        <trigger>/fdm/jsbsim/systems/payloads/GSh-23-trigger</trigger>
+        <trigger>/fdm/jsbsim/systems/armament/GSh-23-trigger</trigger>
         <speed>2350.0</speed>
         <repeat>true</repeat>
         <delay>0.0333</delay>
@@ -92,7 +92,7 @@
     <submodel>
         <name>GSh-23</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Tracer.xml</model>
-        <trigger>/fdm/jsbsim/systems/payloads/GSh-23-trigger</trigger>
+        <trigger>/fdm/jsbsim/systems/armament/GSh-23-trigger</trigger>
         <speed>2350.0</speed>
         <repeat>true</repeat>
         <delay>0.1665</delay>
@@ -112,7 +112,7 @@
     <submodel>
         <name>GSh-23</name>
         <model>Aircraft/MiG-21bis/Models/Stores/Null.ac</model>
-        <trigger>/fdm/jsbsim/systems/payloads/GSh-23-trigger</trigger>
+        <trigger>/fdm/jsbsim/systems/armament/GSh-23-trigger</trigger>
         <speed>2350.0</speed>
         <repeat>true</repeat>
         <delay>0.0333</delay>

@@ -661,6 +661,7 @@
  <!--<system file="particles"/>-->
  <system file="fuel"/>
  <system file="throttle"/>
+ <system file="payloads"/>
 
  <flight_control name="none"/>
 

@@ -4,10 +4,30 @@
 
 <system name="payloads">
 
+	<property value="0">systems/armament/GSh-23-jammed</property>
+	<property value="0">systems/armament/GSh-23-trigger</property>
+	<property value="125">/ai/submodels/submodel[3]/count</property>
+
     <channel name="GSh-23">
+
+    	<!--
+    		to fire:
+    		the trigger needs to be pulled
+    		there needs to be ammo (handled by submodels)
+    		it can't be jammed
+
+    		for jamming:
+    		the trigger needs to be pulled
+    		there needs to be ammo
+    		probability > 0.005
+
+    		OR
+
+    		it was already jammed
+    	-->
     
     	<!-- cannon jam probability -->
-    	<fcs_function name="systems/payloads/GSh-23-jam-probability">
+    	<fcs_function name="systems/armament/GSh-23-jam-probability">
 			<function>
 				<abs>
 					<urandom/>
@@ -17,22 +37,48 @@
 		
 		<!-- check if it has jammed -->
 		<!-- jammed can be set to 0 via payloads.nas unjam() function -->
-		<switch name="systems/payloads/GSh-23-jammed">
+		<!--<switch name="systems/armament/GSh-23-jammed-stage-1">
 			<default value="0"/>
 			<test logic="OR" value="1">
-				systems/payloads/GSh-23-jammed eq 1
-				systems/payloads/GSh-23-jam-probability lt 0.005
+				systems/armament/GSh-23-jammed == 1
+				
 			</test>
+		</switch>-->
+
+		<switch name="systems/armament/GSh-23-jammed-stage-1">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/fdm/jsbsim/systems/armament/GSh-23-trigger == 1
+				/ai/submodels/submodel[3]/count gt 0
+				/fdm/jsbsim/systems/armament/GSh-23-jam-probability lt 0.0008
+			</test>
+		</switch>
+
+		<switch name="trash/systems/armament/GSh-23-jammed">
+			<default value="0"/>
+			<test logic="OR" value="1">
+				/fdm/jsbsim/systems/armament/GSh-23-jammed == 1
+				/fdm/jsbsim/systems/armament/GSh-23-jammed-stage-1 == 1
+			</test>
+			<output>systems/armament/GSh-23-jammed</output>
 		</switch>
     
         <!-- trigger propogation for the cannon. -->
         
-        <switch name="systems/payloads/GSh-23-trigger">
+        <switch name="systems/armament/GSh-23-trigger">
             <default value="0"/>
             <test logic="AND" value="1">
                 /controls/armament/trigger == 1
-                systems/payloads/GSh-23-jammed ne 1
+                /fdm/jsbsim/systems/armament/GSh-23-jammed == 0
             </test>
+        </switch>
+
+        <!-- gun ready light -->
+        <switch name="systems/armament/GSh-23-ready">
+        	<default value="0"/>
+        	<test logic="AND" value="1">
+        		/ai/submodels/submodel[3]/count gt 0
+        	</test>
         </switch>
     
     </channel>

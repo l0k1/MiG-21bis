@@ -62,7 +62,7 @@
             <red>0</red>
             <green>1</green>
             <blue>.2</blue>
-            <factor-prop>controls/armament/panel/gun-ready</factor-prop>
+            <factor-prop>/fdm/jsbsim/systems/armament/GSh-23-ready</factor-prop>
         </emission> 
     </animation>
 	
