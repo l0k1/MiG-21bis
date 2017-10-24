@@ -1204,7 +1204,7 @@ check for Low Altitude Mode
         </config>
     </pid-controller>
     
-    <!-- ASI pids -->
+    <!-- ai pids -->
     
     <!-- pitch should show:
         switch set to landing: glideslope
@@ -1284,7 +1284,7 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-vs-letdown</property>
         </reference>
         <output>
-            <property>/autopilot/internal/asi-target-pitch</property>
+            <property>/autopilot/internal/ai-target-pitch</property>
         </output>
         <config>
             <Kp>0.05</Kp>
@@ -1308,7 +1308,7 @@ check for Low Altitude Mode
         <input>
             <value>0</value>
         </input>
-        <output>/autopilot/internal/asi-target-pitch</output>
+        <output>/autopilot/internal/ai-target-pitch</output>
     </filter>
     
     <!-- landing mode -->
@@ -1327,7 +1327,7 @@ check for Low Altitude Mode
             <property>/autopilot/internal/nav1-rate-of-climb</property>
         </reference>
         <output>
-            <property>/autopilot/internal/asi-target-pitch</property>
+            <property>/autopilot/internal/ai-target-pitch</property>
         </output>
         <config>
             <Kp>0.01</Kp>
@@ -1338,12 +1338,12 @@ check for Low Altitude Mode
         </config>
     </pid-controller>
     
-    <!-- ASI roll pids -->
+    <!-- ai roll pids -->
     
     <!-- all modes use same properties internally-->
     
-        <pi-simple-controller>
-        <name>ASI Roll</name>
+    <pi-simple-controller>
+        <name>AI Roll</name>
         <debug>false</debug>
         <input>
             <property>/autopilot/internal/nav1-heading-error-deg</property>
@@ -1352,7 +1352,7 @@ check for Low Altitude Mode
             <value>0.0</value>
         </reference>
         <output>
-            <property>/autopilot/internal/asi-target-roll</property>
+            <property>/autopilot/internal/ai-target-roll</property>
         </output>
         <config>
             <Kp>-1.1</Kp>
