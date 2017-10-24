@@ -126,26 +126,3 @@ var adf_inbd_outbnd = func() {
 }
 
 setlistener("/instrumentation/adf/inbound-outbound-switch",func() {adf_inbd_outbnd();});
-
-var navaid = findNavaidByFrequency(11.17);
-print("ID: ", navaid.id); # prints info about the navaid
-print("Name: ", navaid.name);
-print("Latitude: ", navaid.lat);
-print("Longitude: ", navaid.lon);
-print("Elevation (AMSL): ", navaid.elevation, " m");
-print("Type: ", navaid.type);
-print("Frequency: ", sprintf("%.3f", navaid.frequency / 1000), " Mhz");
-print("Range: ", navaid.range_nm, " nm");
-if(navaid.course) print("Course: ", navaid.course);
-
-var pos = airportinfo("KSFO");
-var apts = findAirportsWithinRange(pos, 10);
-foreach(var apt; apts){
-    print(apt.name, " (", apt.id, ")");
-}
-			
-var pos = airportinfo("KSFO");
-var navs = findNavaidsWithinRange(pos, 10);
-foreach(var nav; navs){
-    print(nav.name, " (ID: ", nav.id, ")");
-}
