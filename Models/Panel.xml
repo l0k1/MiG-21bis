@@ -578,4 +578,15 @@
         </offsets>
     </model>
 
+    <model>
+        <name>Outer Inner Switch</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/OuterInnerSwitch/outerInnerSwitch.xml</path>
+        <offsets>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.97246</x-m>
+            <y-m>-0.19248</y-m>
+            <z-m> 0.77290</z-m>
+        </offsets>
+    </model>
+
 </PropertyList>
