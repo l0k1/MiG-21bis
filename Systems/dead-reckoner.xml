@@ -343,7 +343,16 @@
             </condition>
         </enable>
         <input>
-            <property>/instrumentation/adf/indicated-bearing-deg</property>
+            <expression>
+                <sum>
+                    <property>/instrumentation/adf/indicated-bearing-deg</property>
+                    <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+                </sum>
+            </expression>
+            <period>
+                <min>0</min>
+                <max>360</max>
+            </period>
         </input>
         <output>/instrumentation/dead-reckoner/internal/azimuth</output>
     </filter>
