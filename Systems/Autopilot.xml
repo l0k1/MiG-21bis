@@ -1327,7 +1327,7 @@ check for Low Altitude Mode
             <property>/autopilot/internal/nav1-rate-of-climb</property>
         </reference>
         <output>
-            <property>/autopilot/internal/ai-target-pitch</property>
+            <property>/autopilot/internal/ai-target-pitch-pre</property>
         </output>
         <config>
             <Kp>0.01</Kp>
@@ -1352,7 +1352,7 @@ check for Low Altitude Mode
             <value>0.0</value>
         </reference>
         <output>
-            <property>/autopilot/internal/ai-target-roll</property>
+            <property>/autopilot/internal/ai-target-roll-pre</property>
         </output>
         <config>
             <Kp>-1.1</Kp>
@@ -1361,5 +1361,58 @@ check for Low Altitude Mode
             <max>20</max>
         </config>
     </pi-simple-controller>
+
+    <!--finally, combine with pitch/roll to get final values-->
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <property>/autopilot/internal/ai-target-pitch-pre</property>
+                    <property>/orientation/pitch-deg</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/autopilot/internal/ai-target-pitch</output>
+        <min>-20</min>
+        <max>20</max>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <abs>
+                    <property>/autopilot/internal/ai-target-pitch</property>
+                </abs>
+            </expression>
+        </input>
+        <output>/autopilot/internal/ai-target-pitch-abs</output>
+        <min>-20</min>
+        <max>20</max>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <property>/autopilot/internal/target-roll</property>
+                    <product>
+                        <property>/orientation/roll-deg</property>
+                        <value>-1</value>
+                    </product>
+                </difference>
+            </expression>
+        </input>
+        <output>/autopilot/internal/ai-target-roll</output>
+        <min>-20</min>
+        <max>20</max>
+    </filter>
+
 
 </PropertyList>

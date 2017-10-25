@@ -129,7 +129,7 @@
 	
 	<animation>
         <type>translate</type>
-        <object-name>HIazimuthNeedle</object-name>
+        <object-name>HIglideslopeNeedle</object-name>
         <property>/instrumentation/nav[0]/gs-needle-deflection-norm</property>
         <factor>.024</factor>
         <axis>

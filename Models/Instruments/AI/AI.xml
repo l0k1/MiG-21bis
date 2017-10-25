@@ -34,27 +34,34 @@
     </animation> 
 
     <animation>
-        <type>rotate</type>
+        <type>translate</type>
         <object-name>AIrollNeedles</object-name>
-        <property>/autopilot/internal/ai-target-roll</property>
-        <factor>1</factor>
-        <center>
-            <x-m>0.01659</x-m>
-            <y-m>0</y-m>
-            <z-m>-0.00298</z-m>
-        </center>
+        <property>/autopilot/internal/ai-target-pitch</property>
+        <factor>0.00125</factor>
         <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
+            <x>0.00</x>
+            <y>0.00</y>
+            <z>1.00</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>AIrollNeedles</object-name>
+        <property>/autopilot/internal/ai-target-pitch-abs</property>
+        <factor>-0.00012</factor>
+        <axis>
+            <x>1.00</x>
+            <y>0.00</y>
+            <z>0.00</z>
         </axis>
     </animation> 
 
 	<animation>
         <type>rotate</type>
         <object-name>AIazimuthNeedle</object-name>
-        <property>/instrumentation/nav[0]/intercept-norm</property>
-        <factor>4</factor>
+        <property>/autopilot/internal/ai-target-roll</property>
+        <factor>2</factor>
         <center>
             <x-m>0.00061</x-m>
             <y-m>-0.00002</y-m>
