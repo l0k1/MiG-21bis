@@ -596,4 +596,96 @@
         </offsets>
 	</model>
 
+<!-- 11 12 14 15 -->
+
+	<model>
+		<name>UB-16 Missile Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16.xml</path>
+		<offsets>
+			<x-m>0.96994</x-m>
+			<y-m>-2.73219</y-m>
+			<z-m>-0.32132</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>UB-16 Missile Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[11]</property>
+                  <value>UB-16</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>UB-16 Missile Left Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16.xml</path>
+		<offsets>
+			<x-m>0.03727</x-m>
+			<y-m>-2.10724</y-m>
+			<z-m>-0.29515</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>UB-16 Missile Left Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[12]</property>
+                  <value>UB-16</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>UB-16 Missile Right Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16.xml</path>
+		<offsets>
+			<x-m>0.03727</x-m>
+			<y-m>2.10724</y-m>
+			<z-m>-0.29515</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>UB-16 Missile Right Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[14]</property>
+                  <value>UB-16</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>UB-16 Missile Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16.xml</path>
+		<offsets>
+			<x-m>0.96994</x-m>
+			<y-m>2.73219</y-m>
+			<z-m>-0.32132</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>UB-16 Missile Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[15]</property>
+                  <value>UB-16</value>
+            </equals>
+		</condition>
+	</animation>
+
+
 </PropertyList>

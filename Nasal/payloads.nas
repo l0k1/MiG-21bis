@@ -85,7 +85,7 @@ var payloads = {
 	# beam
 	"Kh-66":				pos_arm.new("Kh-66","Kh-66",632,"beam"),
 	# rockets
-	"UB-16":				pos_arm.new("UB-16","UB-16",475,"rocket",,16),
+	"UB-16":				pos_arm.new("UB-16","UB-16",141,"rocket",,16),
 	"UB-32":				pos_arm.new("UB-32","UB-32",582,"rocket",,32),
 	"S-21":					pos_arm.new("S-21","S-21",341,"heavyrocket"), # search for с-21 ракет (cyrillic)
 	"S-24":					pos_arm.new("S-24","S-24",518,"heavyrocket"),
