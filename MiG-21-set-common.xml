@@ -812,6 +812,7 @@
 		<tyresmoke>	   <file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>		</tyresmoke>
 		<payloads>		<file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>		 </payloads>		 <!-- store handling -->
 		<radar_logic>	 <file>Aircraft/MiG-21bis/Nasal/radar-logic.nas</file>	  </radar_logic>	  <!-- radar logic and missile locking -->
+		<arm_locking>   <file>Aircraft/MiG-21bis/Nasal/armament-locking.nas</file> </arm_locking>
 		<radar_canvas>	<file>Aircraft/MiG-21bis/Nasal/radar-canvas.nas</file>	 </radar_canvas>	 <!-- radar canvas -->
 		<gunsight_canvas> <file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>  </gunsight_canvas>  <!-- gunsight canvas -->
 		<blackout>		<file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>		 </blackout>		 <!-- legacy blackout code -->

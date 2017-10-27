@@ -139,7 +139,7 @@
 		<desc>Lock on target</desc>
 		<binding>
 			<command>nasal</command>
-			<script>radar_logic.lockTarget();</script>
+			<script>arm_lock.lockTarget();</script>
 		</binding>
 	</key>
 	
@@ -148,7 +148,7 @@
 		<desc>Unlock Target</desc>
 		<binding>
 			<command>nasal</command>
-			<script>radar_logic.unlockTarget();</script>
+			<script>arm_lock.unlockTarget();</script>
 		</binding>
 	</key>
 
