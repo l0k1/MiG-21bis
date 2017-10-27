@@ -297,5 +297,141 @@
 			</test>
 		</switch>
 	</channel>
+	
+	<channel name="S-5 Rockets">
+		<!--
+		handles rocket firing out of UB-16 and UB-32 pods.
+		trigger should be at /controls/armament/rocket-trigger
+		rocket trigger will need to be reset when main trigger is released.
+		how many rockets to shoot should be at /controls/armament/rocket-setting
+		assumes rockets are submodels 22, 23, 24, and 25, going from left to right on the pylons
+		assumes rocket submodel counts are correct.
+		does not do drugs.
+		-->
+		
+		<!-- switches are using <output> instead of 'name' so multiple switches can write to the same property -->
+		<!-- <switch name="trash/systems/armament/rockets/trigger-state-0">
+			<default value="systems/armament/rockets/trigger-state"/>
+			<test logic="AND" value="2">
+				/controls/armament/rocket-trigger = 1
+				systems/armament/rockets/trigger-state = 1
+			</test>
+			<output>systems/armament/rockets/trigger-state</output>
+		</switch>
+		
+		<switch name="trash/systems/armament/rockets/trigger-state-1">
+			<default value="systems/armament/rockets/trigger-state"/>
+			<test logic="AND" value="1">
+				/controls/armament/rocket-trigger = 1
+				systems/armament/rockets/trigger-state = 0
+			</test>
+			<output>systems/armament/rockets/trigger-state</output>
+		</switch>
+		
+		<switch name="trash/systems/armament/rockets/trigger-state-2">
+			<default value="systems/armament/rockets/trigger-state"/>
+			<test logic="AND" value="0">
+				/controls/armament/rocket-trigger = 0
+			</test>
+			<output>systems/armament/rockets/trigger-state</output>
+		</switch> -->
+		
+		<!-- left side rockets -->
+		
+		<!-- <fcs_function name="/trash/systems/armament/rockets/current-count-left">
+			<function>
+				<difference>
+					<property>systems/armament/rockets/max-count-left</property>
+					<property>/controls/armament/rocket-setting-left</property>
+				</difference>
+			</function>
+			<output>systems/armament/rockets/current-coun-leftt</output>
+		</fcs_function>
+		
+		<fcs_function name="/trash/systems/armament/rockets/total-count-left">
+			<function>
+				<sum>
+					<property>/ai/submodels/submodel[23]/count</property>
+					<property>/ai/submodels/submodel[22]/count</property>
+				</sum>
+			</function>
+			<output>systems/armament/rockets/total-count-left</output>
+		</fcs_function>
+		
+		<switch name="systems/armament/rockets/max-count-left">
+			<default value="systems/armament/rockets/max-count-left"/>
+			<test logic="AND" value="systems/armament/rockets/total-count-left">
+				systems/armament/rockets/trigger-state == 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/rockets/inside-left-trigger">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/armament/rockets/trigger-state gt 0
+				/ai/submodels/submodel[23]/count gt 0
+				systems/armament/rockets/current-count-left lt systems/armament/rockets/total-count-left
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/rockets/outside-left-trigger">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/armament/rockets/trigger-state gt 0
+				/ai/submodels/submodel[23]/count == 0
+				/ai/submodels/submodel[22]/count gt 0
+				systems/armament/rockets/current-count-left lt systems/armament/rockets/total-count-left
+			</test>
+		</switch> -->
+		
+		<!-- right side rockets -->
+		
+		<!-- <fcs_function name="/trash/systems/armament/rockets/current-count-right">
+			<function>
+				<difference>
+					<property>systems/armament/rockets/max-count-right</property>
+					<property>/controls/armament/rocket-setting-right</property>
+				</difference>
+			</function>
+			<output>systems/armament/rockets/current-coun-leftt</output>
+		</fcs_function>
+		
+		<fcs_function name="/trash/systems/armament/rockets/total-count-right">
+			<function>
+				<sum>
+					<property>/ai/submodels/submodel[24]/count</property>
+					<property>/ai/submodels/submodel[25]/count</property>
+				</sum>
+			</function>
+			<output>systems/armament/rockets/total-count-right</output>
+		</fcs_function>
+		
+		<switch name="systems/armament/rockets/max-count-right">
+			<default value="systems/armament/rockets/max-count-right"/>
+			<test logic="AND" value="systems/armament/rockets/total-count-right">
+				systems/armament/rockets/trigger-state == 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/rockets/inside-right-trigger">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/armament/rockets/trigger-state gt 0
+				/ai/submodels/submodel[24]/count gt 0
+				systems/armament/rockets/current-count-right lt systems/armament/rockets/total-count-right
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/rockets/outside-right-trigger">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/armament/rockets/trigger-state gt 0
+				/ai/submodels/submodel[24]/count == 0
+				/ai/submodels/submodel[25]/count gt 0
+				systems/armament/rockets/current-count-right lt systems/armament/rockets/total-count-right
+			</test>
+		</switch>
+		
+	</channel> -->
 
 </system>

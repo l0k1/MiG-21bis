@@ -394,24 +394,28 @@ var missile_release_listener = func {
 
 		if (armSelect[2] < 2  and getprop(ag_panel_switch) == 2 ) {
 			#bombs and/or multi-rockets
-			if ((selected0.type == "bomb" or selected0.type == "rocket") ) {
+			if (selected0.type == "bomb") {
 				bomb_release(armSelect[0]);
 			}
 			if ( armSelect[1] != -1 and getprop("payload" ~ virtual1 ~ "weight["~(armSelect[1])~"]/selected") != "none") {
-				if ((selected0.type == "bomb" or selected0.type == "rocket")) {
+				if (selected0.type == "bomb") {
 					bomb_release(armSelect[1]);
 				}
 			}
 		}
 
 		if (armSelect[2] == 2 and getprop(ag_panel_switch) == 2 ) {
-			#bombs and/or multi-rockets
+			#bombs
 			for ( i = 0; i <= 4; i = i + 1 ) {
 				if ( i != 2 and payloads[getprop("payload/weight["~i~"]/selected")].type == "bomb" ) {
 					bomb_release(i);
 				}
 			}
 		}
+		
+		#if (armSelect[2] <= 2 and selected0.type == "rocket"){
+		#	setprop("/controls/armament/rocket-trigger",1);
+		#}
 
 
 		if (armSelect[2] == 3 or armSelect[2] == 4) {
@@ -429,6 +433,9 @@ var missile_release_listener = func {
 		#print("type4: " ~ selected0.type);
 		#print("type5: " ~ selected1.type);
 	}
+	#} else {
+	#	setprop("/controls/armament/rocket-trigger",0);
+	#}
 }
 
 var heavy_release_listener = func {
