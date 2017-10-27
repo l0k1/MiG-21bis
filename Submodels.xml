@@ -1,15 +1,92 @@
 <PropertyList>
-
+    
+    <!-- 
+    table of contents
+     0 ~ flares left
+     1 ~ flares right
+     2 ~ chaff left
+     3 ~ chaff right
+     4 ~ GSh-23 tracer left
+     5 ~ GSh-23 bullet left
+     6 ~ GSh-23 tracer right
+     7 ~ GSh-23 bullet left
+     8 ~ FAB-500 pylon 1 live
+     9 ~ FAB-500 pylon 3 live
+    10 ~ FAB-250 pylon 0 live
+    11 ~ FAB-250 pylon 1 live
+    12 ~ FAB-250 pylon 3 live
+    13 ~ FAB-250 pylon 4 live
+    14 ~ FAB-100 pylon 0 live
+    15 ~ FAB-100 pylon 1 live
+    16 ~ FAB-100 pylon 3 live
+    17 ~ FAB-100 pylon 4 live
+    18 ~ S-24 pylon 0 live
+    19 ~ S-24 pylon 1 live
+    20 ~ S-24 pylon 3 live
+    21 ~ S-24 pylon 4 live
+    22 ~ S-5 pylon 0
+    23 ~ S-5 pylon 1
+    24 ~ S-5 pylon 3
+    25 ~ S-5 pylon 4
+    26 ~ RN-28
+    27 ~ Braking Chute
+    28 ~ Jettison Fuel Tank
+    -->
+    
     <submodel>
-        <name>chaffR</name>
-        <model>Aircraft/MiG-21bis/Models/Effects/Chaff/chaff.xml</model>
-        <trigger>ai/submodels/submodel[0]/flare-release</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
-        <speed>0.0</speed>        <!-- ft/sec -->
+        <name>flaresL</name>
+        <model>Aircraft/MiG-21bis/Models/Effects/Flare/flare.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/cm/flare-firing-0</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
+        <speed>700.0</speed>        <!-- ft/sec -->
         <repeat>true</repeat>
-        <delay>0.50</delay>
+        <delay>0.25</delay>
+        <count>60</count>        <!-- was 40 -->
+        <x-offset>14.3578</x-offset><!-- in feet -->
+        <y-offset>-2.56</y-offset>
+        <z-offset>-1.619</z-offset>
+        <yaw-offset>-90.0</yaw-offset>
+        <pitch-offset>-10.0</pitch-offset>
+        <life>5</life>
+        <buoyancy>0</buoyancy>
+        <weight>2.5</weight>
+        <eda>1.0</eda>
+        <cd>1.0</cd>
+        <no-roll>true</no-roll>
+        <wind>true</wind>
+    </submodel>
+    
+    <submodel>
+        <name>flaresR</name>
+        <model>Aircraft/MiG-21bis/Models/Effects/Flare/flare.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/cm/flare-firing-1</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
+        <speed>700.0</speed>        <!-- ft/sec -->
+        <repeat>true</repeat>
+        <delay>0.25</delay>
         <count>60</count>        <!-- was 40 -->
         <x-offset>14.3578</x-offset><!-- in feet -->
         <y-offset>2.56</y-offset>
+        <z-offset>-1.619</z-offset>
+        <yaw-offset>90.0</yaw-offset>
+        <pitch-offset>-10.0</pitch-offset>
+        <life>5</life>
+        <buoyancy>0</buoyancy>
+        <weight>2.5</weight>
+        <eda>1.0</eda>
+        <cd>1.0</cd>
+        <no-roll>true</no-roll>
+        <wind>true</wind>
+    </submodel>
+
+    <submodel>
+        <name>chaffL</name>
+        <model>Aircraft/MiG-21bis/Models/Effects/Chaff/chaff.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/cm/chaff-firing-0</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
+        <speed>0.0</speed>        <!-- ft/sec -->
+        <repeat>true</repeat>
+        <delay>0.25</delay>
+        <count>60</count>        <!-- was 40 -->
+        <x-offset>14.3578</x-offset><!-- in feet -->
+        <y-offset>-2.56</y-offset>
         <z-offset>-1.619</z-offset>
         <yaw-offset>-180.0</yaw-offset>
         <pitch-offset>-50.0</pitch-offset>
@@ -24,25 +101,26 @@
     </submodel>
 
     <submodel>
-        <name>flaresL</name>
-        <model>Aircraft/MiG-21bis/Models/Effects/Flare/flare.xml</model>
-        <trigger>ai/submodels/submodel[0]/flare-release</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
-        <speed>700.0</speed>        <!-- ft/sec -->
+        <name>chaffR</name>
+        <model>Aircraft/MiG-21bis/Models/Effects/Chaff/chaff.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/cm/chaff-firing-1</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
+        <speed>0.0</speed>        <!-- ft/sec -->
         <repeat>true</repeat>
-        <delay>0.50</delay>
+        <delay>0.25</delay>
         <count>60</count>        <!-- was 40 -->
         <x-offset>14.3578</x-offset><!-- in feet -->
-        <y-offset>-2.56</y-offset>
+        <y-offset>2.56</y-offset>
         <z-offset>-1.619</z-offset>
-        <yaw-offset>-90.0</yaw-offset>
-        <pitch-offset>-10.0</pitch-offset>
-        <life>5</life>
-        <buoyancy>0</buoyancy>
-        <weight>2.5</weight>
-        <eda>1.0</eda>
-        <cd>1.0</cd>
+        <yaw-offset>-180.0</yaw-offset>
+        <pitch-offset>-50.0</pitch-offset>
+        <life>0.2</life>
+        <buoyancy>30</buoyancy>
+        <weight>0.1</weight>
+        <eda>0.001</eda>
+        <cd>0.0</cd>
         <no-roll>true</no-roll>
         <wind>true</wind>
+        <collision>false</collision>
     </submodel>
 
     <submodel>
@@ -181,8 +259,8 @@
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-500/fab-500-sub.xml</submodel-path>
     </submodel>
-	
-	<submodel>
+    
+    <submodel>
         <name>FAB-250</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250-sub.xml</model>
         <trigger>payload/released/FAB-250[0]</trigger>
@@ -192,10 +270,10 @@
         <delay>20</delay>
         <count>-1</count>
        <offsets>
-			<x-m> 1.13</x-m>
-			<y-m>-2.73 </y-m>
-			<z-m>-0.28</z-m>
-		</offsets>
+            <x-m> 1.13</x-m>
+            <y-m>-2.73 </y-m>
+            <z-m>-0.28</z-m>
+        </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
         <cd>0.3</cd>
@@ -205,8 +283,8 @@
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
     </submodel>
-	
-	<submodel>
+    
+    <submodel>
         <name>FAB-250</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250-sub.xml</model>
         <trigger>payload/released/FAB-250[1]</trigger>
@@ -216,10 +294,10 @@
         <delay>20</delay>
         <count>-1</count>
         <offsets>
-			<x-m> 0.20</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.25</z-m>
-		</offsets>
+            <x-m> 0.20</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.25</z-m>
+        </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
         <cd>0.3</cd>
@@ -230,7 +308,7 @@
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
     </submodel>
 
-	<submodel>
+    <submodel>
         <name>FAB-250</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250-sub.xml</model>
         <trigger>payload/released/FAB-250[3]</trigger>
@@ -240,10 +318,10 @@
         <delay>20</delay>
         <count>-1</count>
        <offsets>
-			<x-m> 0.20</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.25</z-m>
-		</offsets>
+            <x-m> 0.20</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.25</z-m>
+        </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
         <cd>0.3</cd>
@@ -254,7 +332,7 @@
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
     </submodel>
 
-	<submodel>
+    <submodel>
         <name>FAB-250</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250-sub.xml</model>
         <trigger>payload/released/FAB-250[4]</trigger>
@@ -263,10 +341,10 @@
         <repeat>true</repeat>
         <delay>20</delay>
         <offsets>
-			<x-m> 1.13</x-m>
-			<y-m> 2.73 </y-m>
-			<z-m>-0.28</z-m>
-		</offsets>
+            <x-m> 1.13</x-m>
+            <y-m> 2.73 </y-m>
+            <z-m>-0.28</z-m>
+        </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
         <cd>0.3</cd>
@@ -276,8 +354,8 @@
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
     </submodel>
-	
-	<submodel>
+    
+    <submodel>
         <name>FAB-100</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
         <trigger>payload/released/FAB-100[0]</trigger>
@@ -287,10 +365,10 @@
         <delay>20</delay>
         <count>-1</count>
        <offsets>
-			<x-m> 1.13</x-m>
-			<y-m>-2.73 </y-m>
-			<z-m>-0.28</z-m>
-		</offsets>
+            <x-m> 1.13</x-m>
+            <y-m>-2.73 </y-m>
+            <z-m>-0.28</z-m>
+        </offsets>
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
@@ -300,8 +378,8 @@
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
     </submodel>
-	
-	<submodel>
+    
+    <submodel>
         <name>FAB-100</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
         <trigger>payload/released/FAB-100[1]</trigger>
@@ -311,10 +389,10 @@
         <delay>20</delay>
         <count>-1</count>
         <offsets>
-			<x-m> 0.20</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.25</z-m>
-		</offsets>
+            <x-m> 0.20</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.25</z-m>
+        </offsets>
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
@@ -325,7 +403,7 @@
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
     </submodel>
 
-	<submodel>
+    <submodel>
         <name>FAB-100</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
         <trigger>payload/released/FAB-100[3]</trigger>
@@ -335,10 +413,10 @@
         <delay>20</delay>
         <count>-1</count>
        <offsets>
-			<x-m> 0.20</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.25</z-m>
-		</offsets>
+            <x-m> 0.20</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.25</z-m>
+        </offsets>
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
@@ -349,7 +427,7 @@
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
     </submodel>
 
-	<submodel>
+    <submodel>
         <name>FAB-100</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
         <trigger>payload/released/FAB-100[4]</trigger>
@@ -358,10 +436,10 @@
         <repeat>true</repeat>
         <delay>20</delay>
         <offsets>
-			<x-m> 1.13</x-m>
-			<y-m> 2.73 </y-m>
-			<z-m>-0.28</z-m>
-		</offsets>
+            <x-m> 1.13</x-m>
+            <y-m> 2.73 </y-m>
+            <z-m>-0.28</z-m>
+        </offsets>
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>

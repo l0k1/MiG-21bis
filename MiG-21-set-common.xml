@@ -26,15 +26,15 @@
 			<property-rule n="101">
 				<name>radar-altimeter</name>
 				<path>Aircraft/MiG-21bis/Systems/radar-altimeter.xml</path>
-            </property-rule>
-            <property-rule n="102">
+			</property-rule>
+			<property-rule n="102">
 				<name>gyro-compass</name>
 				<path>Aircraft/MiG-21bis/Systems/gyro-compass.xml</path>
-            </property-rule>
-            <property-rule n="103">
-            	<name>dead-reckoner</name>
-            	<path>Aircraft/MiG-21bis/Systems/dead-reckoner.xml</path>
-            </property-rule>
+			</property-rule>
+			<property-rule n="103">
+				<name>dead-reckoner</name>
+				<path>Aircraft/MiG-21bis/Systems/dead-reckoner.xml</path>
+			</property-rule>
 		</systems>
 
 		<sound>
@@ -184,11 +184,11 @@
 				<float n="9" alias="/engines/engine[0]/nozzle-pos-norm" /> <!-- Reheat  -->
 				<float n="10" alias="/fdm/jsbsim/propulsion/clr" /> <!-- Reheat  -->
 				<string n="9" type="string"/>
-		    <string n="11" alias="/payload/weight[0]/selected"/>
-        <string n="12" alias="/payload/weight[1]/selected"/>
-        <string n="13" alias="/payload/weight[2]/selected"/>
-        <string n="14" alias="/payload/weight[3]/selected"/>
-        <string n="15" alias="/payload/weight[4]/selected"/>
+			<string n="11" alias="/payload/weight[0]/selected"/>
+		<string n="12" alias="/payload/weight[1]/selected"/>
+		<string n="13" alias="/payload/weight[2]/selected"/>
+		<string n="14" alias="/payload/weight[3]/selected"/>
+		<string n="15" alias="/payload/weight[4]/selected"/>
 			</generic>
 		</multiplay>
 		
@@ -317,81 +317,83 @@
 				<fixed-net-brightness-knob type="float">1</fixed-net-brightness-knob>
 			</gunsight>
 			<missile-release type="int" alias="/fdm/jsbsim/systems/armament/release">0</missile-release>
-			           <trigger type="bool">false</trigger>
-            <station n="0"> <!-- left outer wing -->
-                <offsets>
-                    <x-m type="double">  1.33</x-m>
-                    <y-m type="double"> -2.73</y-m>
-                    <z-m type="double"> -0.51</z-m>
-                </offsets>
-                <trigger type="bool">false</trigger>
-            </station>
-            <station n="1"> <!-- left inner wing -->
-                <offsets>
-                    <x-m type="double"> -0.35</x-m>
-                    <y-m type="double"> -2.11</y-m>
-                    <z-m type="double"> -0.20</z-m>
-                </offsets>
-                <trigger type="bool">false</trigger>
-            </station>
-            <station n="2"><!--center-->
-                <offsets>
-                    <x-m type="double">  -0.3</x-m>
-                    <y-m type="double">  0.00</y-m>
-                    <z-m type="double"> -0.83</z-m>
-                </offsets>
-                <trigger type="bool">false</trigger>
-                <trigger-m70 type="bool">false</trigger-m70>
-            </station>
-            <station n="3"> <!-- right inner wing -->
-                <offsets>
-                    <x-m type="double"> -0.35</x-m>
-                    <y-m type="double">  2.11</y-m>
-                    <z-m type="double"> -0.20</z-m>
-                </offsets>
-                <trigger type="bool">false</trigger>
-                <trigger-m70 type="bool">false</trigger-m70>
-            </station>
-            <station n="4"><!-- right outer wing -->
-                <offsets>
-                    <x-m type="double">  1.33</x-m>
-                    <y-m type="double"> 2.73</y-m>
-                    <z-m type="double"> -0.51</z-m>
-                </offsets>
-                <trigger type="bool">false</trigger>
-            </station>
-            <station n="5"><!-- rear left jato/cm -->
-                <offsets>
-                    <x-m type="double">  1.33</x-m>
-                    <y-m type="double"> 2.73</y-m>
-                    <z-m type="double"> -0.51</z-m>
-                </offsets>
-                <trigger type="bool">false</trigger>
-            </station>
-            <station n="6"><!-- rear right jato/cm -->
-                <offsets>
-                    <x-m type="double">  1.33</x-m>
-                    <y-m type="double"> 2.73</y-m>
-                    <z-m type="double"> -0.51</z-m>
-                </offsets>
-                <trigger type="bool">false</trigger>
-            </station>
-            <station n="7"><!-- left r-60 #2 -->
-                <offsets>
-                    <x-m type="double">  1.33</x-m>
-                    <y-m type="double"> -2.88</y-m>
-                    <z-m type="double"> -0.50</z-m>
-                </offsets>
-                <trigger type="bool">false</trigger>
-            </station>
-            <station n="8"><!-- right r-60 #2 -->
-                <offsets>
-                    <x-m type="double">  1.33</x-m>
-                    <y-m type="double">  2.88</y-m>
-                    <z-m type="double"> -0.50</z-m>
-                </offsets>
-                <trigger type="bool">false</trigger>
-            </station>
+					   <trigger type="bool">false</trigger>
+			<station n="0"> <!-- left outer wing -->
+				<offsets>
+					<x-m type="double">  1.33</x-m>
+					<y-m type="double"> -2.73</y-m>
+					<z-m type="double"> -0.51</z-m>
+				</offsets>
+				<trigger type="bool">false</trigger>
+			</station>
+			<station n="1"> <!-- left inner wing -->
+				<offsets>
+					<x-m type="double"> -0.35</x-m>
+					<y-m type="double"> -2.11</y-m>
+					<z-m type="double"> -0.20</z-m>
+				</offsets>
+				<trigger type="bool">false</trigger>
+			</station>
+			<station n="2"><!--center-->
+				<offsets>
+					<x-m type="double">  -0.3</x-m>
+					<y-m type="double">  0.00</y-m>
+					<z-m type="double"> -0.83</z-m>
+				</offsets>
+				<trigger type="bool">false</trigger>
+				<trigger-m70 type="bool">false</trigger-m70>
+			</station>
+			<station n="3"> <!-- right inner wing -->
+				<offsets>
+					<x-m type="double"> -0.35</x-m>
+					<y-m type="double">  2.11</y-m>
+					<z-m type="double"> -0.20</z-m>
+				</offsets>
+				<trigger type="bool">false</trigger>
+				<trigger-m70 type="bool">false</trigger-m70>
+			</station>
+			<station n="4"><!-- right outer wing -->
+				<offsets>
+					<x-m type="double">  1.33</x-m>
+					<y-m type="double"> 2.73</y-m>
+					<z-m type="double"> -0.51</z-m>
+				</offsets>
+				<trigger type="bool">false</trigger>
+			</station>
+			<station n="5"><!-- rear left jato/cm -->
+				<offsets>
+					<x-m type="double">  1.33</x-m>
+					<y-m type="double"> 2.73</y-m>
+					<z-m type="double"> -0.51</z-m>
+				</offsets>
+				<trigger type="bool">false</trigger>
+			</station>
+			<station n="6"><!-- rear right jato/cm -->
+				<offsets>
+					<x-m type="double">  1.33</x-m>
+					<y-m type="double"> 2.73</y-m>
+					<z-m type="double"> -0.51</z-m>
+				</offsets>
+				<trigger type="bool">false</trigger>
+			</station>
+			<station n="7"><!-- left r-60 #2 -->
+				<offsets>
+					<x-m type="double">  1.33</x-m>
+					<y-m type="double"> -2.88</y-m>
+					<z-m type="double"> -0.50</z-m>
+				</offsets>
+				<trigger type="bool">false</trigger>
+			</station>
+			<station n="8"><!-- right r-60 #2 -->
+				<offsets>
+					<x-m type="double">  1.33</x-m>
+					<y-m type="double">  2.88</y-m>
+					<z-m type="double"> -0.50</z-m>
+				</offsets>
+				<trigger type="bool">false</trigger>
+			</station>
+			<chaff-trigger type="bool">false</chaff-trigger>
+			<flare-trigger type="bool">false</flare-trigger>
 		</armament>
 		<radar>
 			<panel>
@@ -423,28 +425,29 @@
 		<engine n="0">
 			<running>true</running>
 		</engine>
-		<rotors>
-	        <main>
-	            <rpm alias="/engines/engine/nozzle-pos-norm"/>
-	            <blade n="0">
-	                <flap-deg type="double">0</flap-deg>
-	                <position-deg alias="/gear/gear[0]/rollspeed-ms"/>
-	            </blade>
-	            <blade n="1">
-	                <flap-deg type="double">0</flap-deg>
-	                <position-deg alias="/gear/gear[1]/rollspeed-ms"/>
-	            </blade>
-	            <blade n="2">
-	                <flap-deg type="double">0</flap-deg>
-	                <position-deg alias="/gear/gear[2]/rollspeed-ms"/>
-	            </blade>
-	            <blade n="3">
-	                <flap-deg type="double">0</flap-deg>        <!-- used for releasing flares -->
-	                <position-deg type="double">0</position-deg><!-- used for releasing chaff  -->
-	            </blade>
-	        </main>
-	    </rotors>
 	</engines>
+
+	<rotors>
+		<main>
+			<rpm alias="/engines/engine/nozzle-pos-norm"/>
+			<blade n="0">
+				<flap-deg type="double">0</flap-deg>
+				<position-deg alias="/gear/gear[0]/rollspeed-ms"/>
+			</blade>
+			<blade n="1">
+				<flap-deg type="double">0</flap-deg>
+				<position-deg alias="/gear/gear[1]/rollspeed-ms"/>
+			</blade>
+			<blade n="2">
+				<flap-deg type="double">0</flap-deg>
+				<position-deg alias="/gear/gear[2]/rollspeed-ms"/>
+			</blade>
+			<blade n="3">
+				<flap-deg type="double" alias="/fdm/jsbsim/systems/armament/cm/flares-mp-value"/>		<!-- used for releasing flares -->
+				<position-deg type="double" alias="/fdm/jsbsim/systems/armament/cm/chaff-mp-value"/><!-- used for releasing chaff  -->
+			</blade>
+		</main>
+	</rotors>
 
 	<instrumentation>
 		<autopilot>
@@ -643,6 +646,23 @@
 		</misc-panel-1>
 	</instrumentation>
 
+	<ai>
+		<submodels>
+			<submodel n="0">
+				<count type="int">60</count>
+			</submodel>
+			<submodel n="1">
+				<count type="int">60</count>
+			</submodel>
+			<submodel n="2">
+				<count type="int">60</count>
+			</submodel>
+			<submodel n="3">
+				<count type="int">60</count>
+			</submodel>
+		</submodels>
+	</ai>
+
 	<fdm>
 		<jsbsim>
 			<simulation>
@@ -678,6 +698,18 @@
 					<station5>
 						<selected type="double">0</selected>
 					</station5>
+					<cm>
+						<chaff-trigger-0>0</chaff-trigger-0>
+						<chaff-trigger-1>0</chaff-trigger-1>
+						<flare-trigger-0>0</flare-trigger-0>
+						<flare-trigger-1>0</flare-trigger-1>
+						<chaff-firing-0>0</chaff-firing-0>
+						<chaff-firing-1>0</chaff-firing-1>
+						<flare-firing-0>0</flare-firing-0>
+						<flare-firing-1>0</flare-firing-1>
+						<chaff-final-count-0>0</chaff-final-count-0>
+						<chaff-final-count-1>0</chaff-final-count-1>
+					</cm>
 				</armament>
 			</systems>
 			<propulsion>
@@ -773,28 +805,28 @@
 	<!-- Nasal Scripts -->
 	<nasal>
 
-		<mig21>           <file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>         </mig21>            <!-- odds and sods -->
-		<MiG-21bis>       <file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>         </MiG-21bis>        <!-- liveries -->
-		<lights>          <file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>           </lights>
-		<Eject>           <file>Aircraft/MiG-21bis/Nasal/eject.nas</file>            </Eject>            <!-- depreciated -->
-		<tyresmoke>       <file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>        </tyresmoke>
-		<payloads>        <file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>         </payloads>         <!-- store handling -->
-		<radar_logic>     <file>Aircraft/MiG-21bis/Nasal/radar-logic.nas</file>      </radar_logic>      <!-- radar logic and missile locking -->
-		<radar_canvas>    <file>Aircraft/MiG-21bis/Nasal/radar-canvas.nas</file>     </radar_canvas>     <!-- radar canvas -->
+		<mig21>		   <file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>		 </mig21>			<!-- odds and sods -->
+		<MiG-21bis>	   <file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>		 </MiG-21bis>		<!-- liveries -->
+		<lights>		  <file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>		   </lights>
+		<Eject>		   <file>Aircraft/MiG-21bis/Nasal/eject.nas</file>			</Eject>			<!-- depreciated -->
+		<tyresmoke>	   <file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>		</tyresmoke>
+		<payloads>		<file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>		 </payloads>		 <!-- store handling -->
+		<radar_logic>	 <file>Aircraft/MiG-21bis/Nasal/radar-logic.nas</file>	  </radar_logic>	  <!-- radar logic and missile locking -->
+		<radar_canvas>	<file>Aircraft/MiG-21bis/Nasal/radar-canvas.nas</file>	 </radar_canvas>	 <!-- radar canvas -->
 		<gunsight_canvas> <file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>  </gunsight_canvas>  <!-- gunsight canvas -->
-		<blackout>        <file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>         </blackout>         <!-- legacy blackout code -->
-		<armament>        <file>Aircraft/MiG-21bis/Nasal/guided-missiles.nas</file>  </armament>         <!-- guided missile control, oprf standard -->
-		<damage>          <file>Aircraft/MiG-21bis/Nasal/damage.nas</file>           </damage>           <!-- oprf damage code -->
+		<blackout>		<file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>		 </blackout>		 <!-- legacy blackout code -->
+		<armament>		<file>Aircraft/MiG-21bis/Nasal/guided-missiles.nas</file>  </armament>		 <!-- guided missile control, oprf standard -->
+		<damage>		  <file>Aircraft/MiG-21bis/Nasal/damage.nas</file>		   </damage>		   <!-- oprf damage code -->
 		<crashandstress>  <file>Aircraft/MiG-21bis/Nasal/crash-and-stress.nas</file> </crashandstress>   <!-- plane go boom when crash -->
-		<rcs>             <file>Aircraft/MiG-21bis/Nasal/rcs.nas</file>              </rcs>              <!-- rcs calc, used in radar -->
-    	<vector>          <file>Aircraft/MiG-21bis/Nasal/vector.nas</file>           </vector>           <!-- vector math library -->
-        <formation>       <file>Aircraft/Generic/formation.nas</file>                </formation>        <!-- dont support -->
-        <dialog>          <file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>          </dialog>           <!-- dialogs -->
-        <radar_altimeter> <file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>  </radar_altimeter>  <!-- r-alt pitch offsets -->
-        <autopilot>       <file>Aircraft/MiG-21bis/Nasal/autopilot.nas</file>        </autopilot>        <!-- ap button listeners -->
-        <radio>           <file>Aircraft/MiG-21bis/Nasal/radios.nas</file>           </radio>            <!-- radio freq remapping -->
-        <gyro_compass>    <file>Aircraft/MiG-21bis/Nasal/gyro-compass.nas</file>     </gyro_compass>     <!-- listener for gyrocompass display -->
-        <rwr>             <file>Aircraft/MiG-21bis/Nasal/rwr.nas</file>              </rwr>              <!-- rwr -->
+		<rcs>			 <file>Aircraft/MiG-21bis/Nasal/rcs.nas</file>			  </rcs>			  <!-- rcs calc, used in radar -->
+		<vector>		  <file>Aircraft/MiG-21bis/Nasal/vector.nas</file>		   </vector>		   <!-- vector math library -->
+		<formation>	   <file>Aircraft/Generic/formation.nas</file>				</formation>		<!-- dont support -->
+		<dialog>		  <file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>		  </dialog>		   <!-- dialogs -->
+		<radar_altimeter> <file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>  </radar_altimeter>  <!-- r-alt pitch offsets -->
+		<autopilot>	   <file>Aircraft/MiG-21bis/Nasal/autopilot.nas</file>		</autopilot>		<!-- ap button listeners -->
+		<radio>		   <file>Aircraft/MiG-21bis/Nasal/radios.nas</file>		   </radio>			<!-- radio freq remapping -->
+		<gyro_compass>	<file>Aircraft/MiG-21bis/Nasal/gyro-compass.nas</file>	 </gyro_compass>	 <!-- listener for gyrocompass display -->
+		<rwr>			 <file>Aircraft/MiG-21bis/Nasal/rwr.nas</file>			  </rwr>			  <!-- rwr -->
 
 	</nasal>
 

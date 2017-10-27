@@ -4,17 +4,27 @@
             <name>Q</name>
             <desc>Trigger flare release</desc>
             <binding>
-                <command>property-toggle</command>
-                <property>/ai/submodels/submodel[0]/flare-release-cmd</property>
+                <command>property-assign</command>
+                <property>/controls/armament/chaff-trigger</property>
                 <value type="bool">true</value>
             </binding>
-            <!--<mod-up>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/armament/flare-trigger</property>
+                <value type="bool">true</value>
+            </binding>
+            <mod-up>
                 <binding>
                     <command>property-assign</command>
-                    <property>/ai/submodels/submodel[0]/flare-release</property>
+                    <property>/controls/armament/chaff-trigger</property>
                     <value type="bool">false</value>
                 </binding>
-            </mod-up>-->
+                <binding>
+                    <command>property-assign</command>
+                    <property>/controls/armament/flare-trigger</property>
+                    <value type="bool">false</value>
+                </binding>
+            </mod-up>
         </key>
 	<key n="99">
 		<name>c</name>

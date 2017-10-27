@@ -6,7 +6,7 @@
 
 	<property value="0">systems/armament/GSh-23-jammed</property>
 	<property value="0">systems/armament/GSh-23-trigger</property>
-	<property value="125">/ai/submodels/submodel[3]/count</property>
+	<property value="125">/ai/submodels/submodel[5]/count</property>
 
     <channel name="GSh-23">
 
@@ -82,5 +82,220 @@
         </switch>
     
     </channel>
+    
+    <channel name="Countermeasures">
+	    
+	    <!-- 
+	    	how this is going to work:
+	    	flare trigger is pulled
+	    	figure out which flare pod to fire flares from
+	    	if there are flares, set the mp property
+	    	propogate trigger to that pod
+	    	fire 4 from said pod
+	    	when the 4 have been fired (1.5 seconds-ish), set mp property to 0
+	    	also set trigger to 0
+	    -->
+	    
+	    <!-- flare trigger property = /controls/armament/flare-trigger -->
+	    <!-- chaff trigger property = /controls/armament/chaff-trigger -->
+	
+		<!-- flares first -->
+		
+		<!-- figure out which pod to fire from -->
+		
+		<switch name="systems/armament/cm/flare-trigger-0">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/controls/armament/flare-trigger == 1
+				/ai/submodels/submodel[0]/count gt 0
+				/ai/submodels/submodel[0]/count ge /ai/submodels/submodel[1]/count
+				/fdm/jsbsim/systems/armament/cm/flare-firing-0 ne 1
+				/fdm/jsbsim/systems/armament/cm/flare-firing-1 ne 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/flare-trigger-1">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/controls/armament/flare-trigger == 1
+				/ai/submodels/submodel[1]/count gt 0
+				/ai/submodels/submodel[0]/count lt /ai/submodels/submodel[1]/count
+				/fdm/jsbsim/systems/armament/cm/flare-firing-0 ne 1
+				/fdm/jsbsim/systems/armament/cm/flare-firing-1 ne 1
+			</test>
+		</switch>
+		
+		<!-- get count of flares from that pod at the time the trigger is propogated -->
+		
+		<switch name="systems/armament/cm/flares-count-0">
+			<default value="systems/armament/cm/flares-count-0"/>
+			<test logic="AND" value="/ai/submodels/submodel[0]/count">
+				/fdm/jsbsim/systems/armament/cm/flare-trigger-0 == 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/flares-count-1">
+			<default value="systems/armament/cm/flares-count-1"/>
+			<test logic="AND" value="/ai/submodels/submodel[1]/count">
+				/fdm/jsbsim/systems/armament/cm/flare-trigger-1 == 1
+			</test>
+		</switch>
+		
+		<fcs_function name="trash/armament/cm/flares-final-count-0">
+			<function>
+				<max>
+					<difference>
+						<property>systems/armament/cm/flares-count-0</property>
+						<value>4</value>
+					</difference>
+					<value>0</value>
+				</max>
+			</function>
+			<output>systems/armament/cm/flares-final-count-0</output>
+		</fcs_function>
+		
+		<fcs_function name="/trash/armament/cm/flares-final-count-1">
+			<function>
+				<max>
+					<difference>
+						<property>systems/armament/cm/flares-count-1</property>
+						<value>4</value>
+					</difference>
+					<value>0</value>
+				</max>
+			</function>
+			<output>systems/armament/cm/flares-final-count-1</output>
+		</fcs_function>
+		
+		<!-- make sure the trigger is on if number of flares greater than final count -->
+		
+		<switch name="systems/armament/cm/flare-firing-0">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/ai/submodels/submodel[0]/count gt systems/armament/cm/flares-final-count-0
+				/ai/submodels/submodel[0]/count ne 0
+				/fdm/jsbsim/systems/armament/cm/flares-count-0 ne 0
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/flare-firing-1">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/ai/submodels/submodel[1]/count gt systems/armament/cm/flares-final-count-1
+				/ai/submodels/submodel[1]/count ne 0
+				/fdm/jsbsim/systems/armament/cm/flares-count-1 ne 0
+			</test>
+		</switch>
+		
+		<!-- propogate mp property -->
+		<!-- needs to be aliased in the set file -->
+		
+		<switch name="systems/armament/cm/flares-mp-value">
+			<default value="0"/>
+			<test logic="OR" value="/sim/time/elapsed-sec">
+				systems/armament/cm/flare-firing-0 == 1
+				systems/armament/cm/flare-firing-1 == 1
+			</test>
+		</switch>
+		
+		<!-- now chaff -->
+		
+		<!-- figure out which pod to fire from -->
+		
+		<switch name="systems/armament/cm/chaff-trigger-0">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/controls/armament/chaff-trigger == 1
+				/ai/submodels/submodel[2]/count gt 0
+				/ai/submodels/submodel[2]/count ge /ai/submodels/submodel[3]/count
+				/fdm/jsbsim/systems/armament/cm/chaff-firing-0 ne 1
+				/fdm/jsbsim/systems/armament/cm/chaff-firing-1 ne 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/chaff-trigger-1">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/controls/armament/chaff-trigger == 1
+				/ai/submodels/submodel[3]/count gt 0
+				/ai/submodels/submodel[2]/count lt /ai/submodels/submodel[3]/count
+				/fdm/jsbsim/systems/armament/cm/chaff-firing-0 ne 1
+				/fdm/jsbsim/systems/armament/cm/chaff-firing-1 ne 1
+			</test>
+		</switch>
+		
+		<!-- get count of chaff from that pod at the time the trigger is propogated -->
+		
+		<switch name="systems/armament/cm/chaff-count-0">
+			<default value="systems/armament/cm/chaff-count-0"/>
+			<test logic="AND" value="/ai/submodels/submodel[2]/count">
+				/fdm/jsbsim/systems/armament/cm/chaff-trigger-0 == 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/chaff-count-1">
+			<default value="systems/armament/cm/chaff-count-1"/>
+			<test logic="AND" value="/ai/submodels/submodel[3]/count">
+				/fdm/jsbsim/systems/armament/cm/chaff-trigger-1 == 1
+			</test>
+		</switch>
+		
+		<fcs_function name="/trash/armament/cm/chaff-final-count-0">
+			<function>
+				<max>
+					<difference>
+						<property>systems/armament/cm/chaff-count-0</property>
+						<value>4</value>
+					</difference>
+					<value>0</value>
+				</max>
+			</function>
+			<output>systems/armament/cm/chaff-final-count-0</output>
+		</fcs_function>
+		
+		<fcs_function name="/trash/systems/armament/cm/chaff-final-count-1">
+			<function>
+				<max>
+					<difference>
+						<property>systems/armament/cm/chaff-count-1</property>
+						<value>4</value>
+					</difference>
+					<value>0</value>
+				</max>
+			</function>
+			<output>systems/armament/cm/chaff-final-count-1</output>
+		</fcs_function>
+		
+		<!-- make sure the trigger is on if number of chaff greater than final count -->
+		
+		<switch name="systems/armament/cm/chaff-firing-0">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/ai/submodels/submodel[2]/count gt systems/armament/cm/chaff-final-count-0
+				/ai/submodels/submodel[2]/count ne 0
+				/fdm/jsbsim/systems/armament/cm/chaff-count-0 ne 0
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/chaff-firing-1">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/ai/submodels/submodel[3]/count gt systems/armament/cm/chaff-final-count-1
+				/ai/submodels/submodel[3]/count ne 0
+				/fdm/jsbsim/systems/armament/cm/chaff-count-1 ne 0
+			</test>
+		</switch>
+		
+		<!-- propogate mp property -->
+		<!-- needs to be aliased in the set file -->
+		
+		<switch name="systems/armament/cm/chaff-mp-value">
+			<default value="0"/>
+			<test logic="OR" value="/sim/time/elapsed-sec">
+				systems/armament/cm/chaff-firing-0 == 1
+				systems/armament/cm/chaff-firing-1 == 1
+			</test>
+		</switch>
+	</channel>
 
 </system>
