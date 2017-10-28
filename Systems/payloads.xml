@@ -430,8 +430,8 @@
 				/ai/submodels/submodel[25]/count gt 0
 				systems/armament/rockets/current-count-right lt systems/armament/rockets/total-count-right
 			</test>
-		</switch>
+		</switch>-->
 		
-	</channel> -->
+	</channel> 
 
 </system>

@@ -139,7 +139,7 @@
 		<desc>Lock on target</desc>
 		<binding>
 			<command>nasal</command>
-			<script>arm_lock.lockTarget();</script>
+			<script>arm_locking.lockTarget();</script>
 		</binding>
 	</key>
 	
@@ -148,7 +148,7 @@
 		<desc>Unlock Target</desc>
 		<binding>
 			<command>nasal</command>
-			<script>arm_lock.unlockTarget();</script>
+			<script>arm_locking.unlockTarget();</script>
 		</binding>
 	</key>
 

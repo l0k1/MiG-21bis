@@ -1,23 +1,25 @@
 
 var ir_sar_switch = "/controls/armament/panel/ir-sar-switch";
+var TRUE = 1;
+var FALSE = 0;
 
 var lockTarget = func() {
 	if ( getprop(ir_sar_switch) == 2 ) {
 		var c_dist = 999999;
 		var c_most = nil;
 		var i = -1;
-		var lowerBar = (getprop("/controls/radar/lock-bars-pos")/950) * radarRange;
-		var upperBar = ((getprop("/controls/radar/lock-bars-pos")+getprop("controls/radar/lock-bars-scale")) / 950) * radarRange;
+		var lowerBar = (getprop("/controls/radar/lock-bars-pos")/950) * radar_logic.radarRange;
+		var upperBar = ((getprop("/controls/radar/lock-bars-pos")+getprop("controls/radar/lock-bars-scale")) / 950) * radar_logic.radarRange;
 		var centerBar = (upperBar + lowerBar) / 2;
 		foreach(var track; radar_logic.tracks) {
 			i += 1;
 			var dist_rad = track.get_polar();
-			#print("distance: " ~ dist_rad[0]);
-			#print("x_ang: " ~ (dist_rad[1] * R2D));
-			#print("y_ang: " ~ (dist_rad[3] * R2D));
-			#print("lowerBar: " ~ lowerBar);
-			#print("upperBar: " ~ upperBar);
-			#print("centerBar: " ~ centerBar);
+			print("distance: " ~ dist_rad[0]);
+			print("x_ang: " ~ (dist_rad[1] * R2D));
+			print("y_ang: " ~ (dist_rad[3] * R2D));
+			print("lowerBar: " ~ lowerBar);
+			print("upperBar: " ~ upperBar);
+			print("centerBar: " ~ centerBar);
 			if ( dist_rad[0] != 900000 and dist_rad[0] > lowerBar and dist_rad[0] < upperBar and math.abs(dist_rad[1] * R2D) < 5 and math.abs(dist_rad[3] * R2D) < 5) { # if the target is between lowerbar and upperbar on the radar, and is no more than 5* off centerline in all directions (left, up, right, down)
 				if ( math.abs(dist_rad[0] - centerBar) < c_dist ) {
 					c_dist = dist_rad[0];
@@ -30,7 +32,7 @@ var lockTarget = func() {
 			radar_logic.selection = c_most;
 			radar_logic.paint(c_most.getNode(), TRUE);
 			radar_logic.tracks_index = i;
-			armament.contact = selection;
+			armament.contact = radar_logic.selection;
 			#print(selection.get_callsign());
 		}
 	}
@@ -56,13 +58,13 @@ var ir_seekTarget= func() {
 					c_most = track;
 			}
 		}
-		if ( c_most != nil and c_most != selection ) {
+		if ( c_most != nil and c_most != radar_logic.selection ) {
 			#input.radarMode.setValue("locked-init");
 			radar_logic.selection = c_most;
 			radar_logic.paint(c_most.getNode(), TRUE);
 			radar_logic.tracks_index = i;
-			armament.contact = selection;
-			#print("found target: " ~ selection.get_Callsign());
+			armament.contact = radar_logic.selection;
+			#print("found target: " ~ radar_logic.selection.get_Callsign());
 		} elsif ( c_most == nil ) {
 			#print("unlocking 1");
 			unlockTarget();
@@ -72,9 +74,9 @@ var ir_seekTarget= func() {
 }
 
 var unlockTarget = func() {
-	if ( selection != nil ) {
-		print("unlocking target");
-		radar_logic.paint(selection.getNode(), FALSE);
+	if ( radar_logic.selection != nil ) {
+		#print("unlocking target");
+		radar_logic.paint(radar_logic.selection.getNode(), FALSE);
 		radar_logic.selection = nil;
 		armament.contact = nil;
 		if ( radar_logic.input.radarMode.getValue() == "locked" or radar_logic.input.radarMode.getValue() == "locked-init" ) {

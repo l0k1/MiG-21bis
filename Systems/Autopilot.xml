@@ -894,10 +894,10 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-roll</property>
         </output>
         <config>
-            <Kp>-1.1</Kp>
-			<Ki>-0.00001</Ki>
-            <min>-5</min>
-            <max>5</max>
+            <Kp><property>/a</property></Kp>
+			<Ki><property>/b</property></Ki>
+            <min>-30</min>
+            <max>30</max>
         </config>
     </pi-simple-controller>
 
@@ -1010,7 +1010,7 @@ check for Low Altitude Mode
             <Kp>0.01</Kp>
             <Ti>2.5</Ti>
             <Td>0.0001</Td>
-            <u_min>-30</u_min>
+            <u_min>-15</u_min>
             <u_max>45</u_max>
         </config>
     </pid-controller>
