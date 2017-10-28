@@ -481,7 +481,7 @@ var radar_screen = {
 						#	locked = TRUE;
 						#}
 						# plot the blip on the radar screen
-						var pixelDistance = -distance*((950-90)/me.radar_range); #distance in pixels
+						var pixelDistance = -distance*((950)/me.radar_range); #distance in pixels
 
 						#translate from polar coords to cartesian coords
 						#var pixelX =  pixelDistance * math.cos(xa_rad + math.pi/2) + 1024/2;

@@ -394,6 +394,8 @@
 			</station>
 			<chaff-trigger type="bool">false</chaff-trigger>
 			<flare-trigger type="bool">false</flare-trigger>
+			<rocket-trigger type="int">0</rocket-trigger> <!-- can be 0, 1, or 2 -->
+			<rocket-setting type="int">4</rocket-setting>
 		</armament>
 		<radar>
 			<panel>
@@ -659,6 +661,30 @@
 			</submodel>
 			<submodel n="3">
 				<count type="int">60</count>
+			</submodel>
+			<submodel n="4">
+				<count type="int">25</count>
+			</submodel>
+			<submodel n="5">
+				<count type="int">125</count>
+			</submodel>
+			<submodel n="6">
+				<count type="int">25</count>
+			</submodel>
+			<submodel n="7">
+				<count type="int">125</count>
+			</submodel>
+			<submodel n="22">
+				<count type="int">0</count>
+			</submodel>
+			<submodel n="23">
+				<count type="int">0</count>
+			</submodel>
+			<submodel n="24">
+				<count type="int">0</count>
+			</submodel>
+			<submodel n="25">
+				<count type="int">0</count>
 			</submodel>
 		</submodels>
 	</ai>

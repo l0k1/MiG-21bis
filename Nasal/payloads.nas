@@ -141,6 +141,27 @@ var update_loop = func {
 				if ( payloads[selected].type == "bomb" ) {
 					setprop("payload/released/"~payloads[selected].name~"["~i~"]",0);
 				}
+				if ( payloads[selected].type == "rocket" ) {
+					if ( i == 0 ) {
+						setprop("/ai/submodels/submodel[22]/count",payloads[selected].ammo_count);
+					} elsif ( i == 1 ) {
+						setprop("/ai/submodels/submodel[23]/count",payloads[selected].ammo_count);
+					} elsif ( i == 3 ) {
+						setprop("/ai/submodels/submodel[24]/count",payloads[selected].ammo_count);
+					} elsif ( i == 4 ) {
+						setprop("/ai/submodels/submodel[25]/count",payloads[selected].ammo_count);
+					}
+				} else {
+					if ( i == 0 ) {
+						setprop("/ai/submodels/submodel[22]/count",0);
+					} elsif ( i == 1 ) {
+						setprop("/ai/submodels/submodel[23]/count",0);
+					} elsif ( i == 3 ) {
+						setprop("/ai/submodels/submodel[24]/count",0);
+					} elsif ( i == 4 ) {
+						setprop("/ai/submodels/submodel[25]/count",0);
+					}
+				}
 			} elsif (payloads[selected].name == "none") {
 				if ( armament.AIM.active[i] != nil ) {
 					#print("deleting "~i~" due to pylon being none.");
@@ -150,7 +171,18 @@ var update_loop = func {
 					} elsif (i == 4 ) {
 						setprop("payload/virtual/weight[8]/selected","none");
 					}
+				} 
+
+				if ( i == 0 ) {
+					setprop("/ai/submodels/submodel[22]/count",0);
+				} elsif ( i == 1 ) {
+					setprop("/ai/submodels/submodel[23]/count",0);
+				} elsif ( i == 3 ) {
+					setprop("/ai/submodels/submodel[24]/count",0);
+				} elsif ( i == 4 ) {
+					setprop("/ai/submodels/submodel[25]/count",0);
 				}
+
 				setprop("payload/released/"~payloads[selected].name~"["~i~"]",0);
 			}
 		}
@@ -188,6 +220,34 @@ var update_loop = func {
 					}
 				}
 				if ( payloads[selected].type == "bomb" ) {
+					setprop("payload/released/"~payloads[selected].name~"["~i~"]",0);
+				}
+			} elsif (payloads[selected].name == "R-60") {
+				selected0 = getprop("payload/weight[0]/selected");
+				selected1 = getprop("payload/weight[1]/selected");
+				if ( i == 7 and selected0 != nil and ( selected0 != "R-60x2" ) ) {
+					if ( getprop("payload/virtual/weight["~ (i) ~"]/weight-lb") != 0 ) {
+						setprop("payload/virtual/weight["~ (i) ~"]/weight-lb", 0);
+						setprop("payload/virtual/weight["~ (i) ~"]/selected", "none");
+					}
+					if ( armament.AIM.active[i] != nil ) {
+						#print("deleting "~i~" due to pylon being none.");
+						armament.AIM.active[i].del();
+						setprop("payload/virtual/weight["~ (i) ~"]/weight-lb", 0);
+						setprop("payload/virtual/weight["~ (i) ~"]/selected", "none");
+					}
+					setprop("payload/released/"~payloads[selected].name~"["~i~"]",0);
+				} elsif ( i == 8 and selected0 != nil and ( selected1 != "R-60x2" ) )  {
+					if ( getprop("payload/virtual/weight["~ (i) ~"]/weight-lb") != 0 ) {
+						setprop("payload/virtual/weight["~ (i) ~"]/weight-lb", 0);
+						setprop("payload/virtual/weight["~ (i) ~"]/selected", "none");
+					}
+					if ( armament.AIM.active[i] != nil ) {
+						#print("deleting "~i~" due to pylon being none.");
+						armament.AIM.active[i].del();
+						setprop("payload/virtual/weight["~ (i) ~"]/weight-lb", 0);
+						setprop("payload/virtual/weight["~ (i) ~"]/selected", "none");
+					}
 					setprop("payload/released/"~payloads[selected].name~"["~i~"]",0);
 				}
 			} elsif (payloads[selected].name == "none") {
@@ -281,43 +341,6 @@ var update_loop = func {
 				setprop("/consumables/fuel/tank[13]/selected",1);
 			}
 		}
-	}
-
-	# Flare release
-	if (getprop("ai/submodels/submodel[0]/flare-release-snd") == nil) {
-		setprop("ai/submodels/submodel[0]/flare-release-snd", FALSE);
-		setprop("ai/submodels/submodel[0]/flare-release-out-snd", FALSE);
-	}
-	var flareOn = getprop("ai/submodels/submodel[0]/flare-release-cmd");
-	if (flareOn == TRUE and getprop("ai/submodels/submodel[0]/flare-release") == FALSE
-			and getprop("ai/submodels/submodel[0]/flare-release-out-snd") == FALSE
-			and getprop("ai/submodels/submodel[0]/flare-release-snd") == FALSE) {
-		flareCount = getprop("ai/submodels/submodel[0]/count");
-		flareStart = getprop("sim/time/elapsed-sec");
-		setprop("ai/submodels/submodel[0]/flare-release-cmd", FALSE);
-		if (flareCount > 0) {
-			# release a flare
-			setprop("ai/submodels/submodel[0]/flare-release-snd", TRUE);
-			setprop("ai/submodels/submodel[0]/flare-release", TRUE);
-			setprop("rotors/main/blade[3]/flap-deg", flareStart);
-			setprop("rotors/main/blade[3]/position-deg", flareStart);
-		} else {
-			# play the sound for out of flares
-			setprop("ai/submodels/submodel[0]/flare-release-out-snd", TRUE);
-		}
-	}
-	if (getprop("ai/submodels/submodel[0]/flare-release-snd") == TRUE and (flareStart + 1) < input.elapsed.getValue()) {
-		setprop("ai/submodels/submodel[0]/flare-release-snd", FALSE);
-		setprop("rotors/main/blade[3]/flap-deg", 0);
-		setprop("rotors/main/blade[3]/position-deg", 0);#MP interpolates between numbers, so nil is better than 0.
-	}
-	if (getprop("ai/submodels/submodel[0]/flare-release-out-snd") == TRUE and (flareStart + 1) < input.elapsed.getValue()) {
-		setprop("ai/submodels/submodel[0]/flare-release-out-snd", FALSE);
-	}
-	if (flareCount > getprop("ai/submodels/submodel[0]/count")) {
-		# A flare was released in last loop, we stop releasing flares, so user have to press button again to release new.
-		setprop("ai/submodels/submodel[0]/flare-release", FALSE);
-		flareCount = -1;
 	}
 	
 	settimer(update_loop, UPDATE_PERIOD);
@@ -413,9 +436,10 @@ var missile_release_listener = func {
 			}
 		}
 		
-		#if (armSelect[2] <= 2 and selected0.type == "rocket"){
-		#	setprop("/controls/armament/rocket-trigger",1);
-		#}
+		if (armSelect[2] <= 2 ){
+			print("racket triga");
+			setprop("/controls/armament/rocket-trigger",1);
+		}
 
 
 		if (armSelect[2] == 3 or armSelect[2] == 4) {
@@ -432,10 +456,9 @@ var missile_release_listener = func {
 		}
 		#print("type4: " ~ selected0.type);
 		#print("type5: " ~ selected1.type);
+	} else {
+		setprop("/controls/armament/rocket-trigger",0);
 	}
-	#} else {
-	#	setprop("/controls/armament/rocket-trigger",0);
-	#}
 }
 
 var heavy_release_listener = func {
@@ -723,10 +746,13 @@ var pylon_select = func() {
 	
 	var knobpos = getprop("controls/armament/panel/pylon-knob");
 	if ( knobpos == 0 ) {
+		setprop("/controls/armament/rocket-setting",16);
 		return [0,4,knobpos];
 	} elsif ( knobpos == 1 ) {
+		setprop("/controls/armament/rocket-setting",8);
 		return [1,3,knobpos];
 	} elsif ( knobpos == 2 ) {
+		setprop("/controls/armament/rocket-setting",4);
 		return [0,3,knobpos];
 	} elsif ( knobpos == 3 ) {
 		return [0,4,knobpos];

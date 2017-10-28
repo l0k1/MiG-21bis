@@ -555,6 +555,111 @@
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
     </submodel>
 
+
+    <submodel>
+        <name>S-5</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/rockets/outside-left-trigger</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>1200.0</speed>
+        <repeat>true</repeat>
+        <delay>0.1</delay>
+        <count>0</count>
+        <offsets>
+            <x-m>-0.15</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.73</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.47</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+    </submodel>
+
+    <submodel>
+        <name>S-5</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/rockets/inside-left-trigger</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>1200.0</speed>
+        <repeat>true</repeat>
+        <delay>0.1</delay>
+        <count>0</count>
+        <offsets>
+            <x-m> 0.70</x-m>
+            <y-m>-2.73 </y-m>
+            <z-m>-0.76</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.47</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+    </submodel>
+
+    <submodel>
+        <name>S-5</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/rockets/inside-right-trigger</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>1200.0</speed>
+        <repeat>true</repeat>
+        <delay>0.1</delay>
+        <count>0</count>
+        <offsets>
+            <x-m> -0.15</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.73</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.47</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+    </submodel>
+
+    <submodel>
+        <name>S-5</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/rockets/outside-right-trigger</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>1200.0</speed>
+        <repeat>true</repeat>
+        <delay>0.1</delay>
+        <count>0</count>
+        <offsets>
+            <x-m> 0.70</x-m>
+            <y-m>2.73 </y-m>
+            <z-m>-0.76</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.47</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+    </submodel>
+
     <submodel>
         <name>RN-28</name>
         <model>Aircraft/MiG-21bis/Models/Stores/RN-28/RN-28-sub.xml</model>
