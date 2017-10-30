@@ -596,16 +596,14 @@
         </offsets>
 	</model>
 
-<!-- 11 12 14 15 -->
-
 	<model>
 		<name>UB-16 Missile Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-0.xml</path>
 		<offsets>
-			<x-m>0.96994</x-m>
-			<y-m>-2.73219</y-m>
-			<z-m>-0.32132</z-m>
-			<pitch-deg>0.0</pitch-deg>
+			<x-m>0.91380</x-m>
+			<y-m>-2.73282</y-m>
+			<z-m>-0.34106</z-m>
+			<pitch-deg>0.9</pitch-deg>
 		</offsets>
 	</model>
 
@@ -622,12 +620,12 @@
 
 	<model>
 		<name>UB-16 Missile Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-1.xml</path>
 		<offsets>
-			<x-m>0.03727</x-m>
-			<y-m>-2.10724</y-m>
-			<z-m>-0.29515</z-m>
-			<pitch-deg>0.0</pitch-deg>
+			<x-m>-0.02128</x-m>
+			<y-m>-2.10897</y-m>
+			<z-m>-0.30692</z-m>
+			<pitch-deg>0.9</pitch-deg>
 		</offsets>
 	</model>
 
@@ -644,12 +642,12 @@
 
 	<model>
 		<name>UB-16 Missile Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-3.xml</path>
 		<offsets>
-			<x-m>0.03727</x-m>
-			<y-m>2.10724</y-m>
-			<z-m>-0.29515</z-m>
-			<pitch-deg>0.0</pitch-deg>
+			<x-m>-0.02128</x-m>
+			<y-m>2.10897</y-m>
+			<z-m>-0.30692</z-m>
+			<pitch-deg>0.9</pitch-deg>
 		</offsets>
 	</model>
 
@@ -666,13 +664,12 @@
 
 	<model>
 		<name>UB-16 Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-4.xml</path>
 		<offsets>
-			<x-m>0.96994</x-m>
-			<y-m>2.73219</y-m>
-			<z-m>-0.32132</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<pitch-deg>0.0</pitch-deg>
+			<x-m>0.91380</x-m>
+			<y-m>2.73282</y-m>
+			<z-m>-0.34106</z-m>
+			<pitch-deg>0.9</pitch-deg>
 		</offsets>
 	</model>
 

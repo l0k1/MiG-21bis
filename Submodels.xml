@@ -558,7 +558,7 @@
 
     <submodel>
         <name>S-5</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-sub.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/outside-left-trigger</trigger>
         <trigger-once>true</trigger-once>
         <speed>1200.0</speed>
@@ -578,13 +578,13 @@
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
-        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <impact-report>sim/ai/aircraft/impact/rocket</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-5/s-5-explosion-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
         <name>S-5</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-sub.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/inside-left-trigger</trigger>
         <trigger-once>true</trigger-once>
         <speed>1200.0</speed>
@@ -604,13 +604,13 @@
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
-        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <impact-report>sim/ai/aircraft/impact/rocket</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-5/s-5-explosion-sub.xml</submodel-path>  
     </submodel>
 
     <submodel>
         <name>S-5</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-sub.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/inside-right-trigger</trigger>
         <trigger-once>true</trigger-once>
         <speed>1200.0</speed>
@@ -630,13 +630,13 @@
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
-        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <impact-report>sim/ai/aircraft/impact/rocket</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-5/s-5-explosion-sub.xml</submodel-path>  
     </submodel>
 
     <submodel>
         <name>S-5</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-sub.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/outside-right-trigger</trigger>
         <trigger-once>true</trigger-once>
         <speed>1200.0</speed>
@@ -656,32 +656,104 @@
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
-        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <impact-report>sim/ai/aircraft/impact/rocket</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-5/s-5-explosion-sub.xml</submodel-path>  
     </submodel>
 
     <submodel>
-        <name>RN-28</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/RN-28/RN-28-sub.xml</model>
-        <trigger>payload/released/RN-28[2]</trigger>
-        <trigger-once>false</trigger-once>
-        <speed>0.0</speed>
-        <repeat>false</repeat>
-        <delay>2</delay>
+        <name>S-5 Backblast</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/rockets/outside-left-trigger</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>1200.0</speed>
+        <repeat>true</repeat>
+        <delay>0.1</delay>
+        <life>0.1</life>
         <count>-1</count>
-        <x-offset>0.426509</x-offset>
-        <y-offset>0.0</y-offset>
-        <z-offset>-2.95276</z-offset>
+        <offsets>
+            <x-m> 1.54588</x-m>
+            <y-m>-2.73430</y-m>
+            <z-m>-0.34673</z-m>
+        </offsets>
         <yaw-offset>0.0</yaw-offset>
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.3</cd>
-        <collision>true</collision>
-        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
-        <impact>true</impact>
-        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Nuke/rn-28-sub.xml</submodel-path>  
+        <cd>0.47</cd>
+        <collision>false</collision>
+        <impact>false</impact>
+    </submodel>
+
+    <submodel>
+        <name>S-5 Backblast</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/rockets/inside-left-trigger</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>1200.0</speed>
+        <repeat>true</repeat>
+        <delay>0.1</delay>
+        <life>0.1</life>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.61079</x-m>
+            <y-m>-2.10844</y-m>
+            <z-m>-0.31276</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.47</cd>
+        <collision>false</collision>
+        <impact>false</impact>
+    </submodel>
+
+    <submodel>
+        <name>S-5 Backblast</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/rockets/inside-right-trigger</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>1200.0</speed>
+        <repeat>true</repeat>
+        <delay>0.1</delay>
+        <life>0.1</life>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.61079</x-m>
+            <y-m> 2.10844</y-m>
+            <z-m>-0.31276</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.47</cd>
+        <collision>false</collision>
+        <impact>false</impact>
+    </submodel>
+
+    <submodel>
+        <name>S-5 Backblast</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/rockets/outside-right-trigger</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>1200.0</speed>
+        <repeat>true</repeat>
+        <delay>0.1</delay>
+        <life>0.1</life>
+        <count>-1</count>
+        <offsets>
+            <x-m> 1.54588</x-m>
+            <y-m> 2.73430</y-m>
+            <z-m>-0.34673</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.47</cd>
+        <collision>false</collision>
+        <impact>false</impact>
     </submodel>
 
     <submodel>

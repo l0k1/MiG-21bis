@@ -1,0 +1,192 @@
+<PropertyList>
+
+	<path>ub-16.ac</path>
+
+	<animation>
+		<object-name>s-5-16</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>15</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-16</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>15</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-15</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>14</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-14</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>13</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-13</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>12</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-12</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>11</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-11</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>10</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-10</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>9</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-9</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>8</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-8</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>7</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-7</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>6</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-6</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>5</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-5</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>4</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-4</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>3</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-3</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>2</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-2</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>1</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-1</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[25]/count</property>
+				<value>0</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+</PropertyList>
