@@ -571,7 +571,7 @@
             <z-m>-0.73</z-m>
         </offsets>
         <yaw-offset>0.0</yaw-offset>
-        <pitch-offset>-3.0</pitch-offset>
+        <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.47</cd>
@@ -597,7 +597,7 @@
             <z-m>-0.76</z-m>
         </offsets>
         <yaw-offset>0.0</yaw-offset>
-        <pitch-offset>-3.0</pitch-offset>
+        <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.47</cd>
@@ -623,7 +623,7 @@
             <z-m>-0.73</z-m>
         </offsets>
         <yaw-offset>0.0</yaw-offset>
-        <pitch-offset>-3.0</pitch-offset>
+        <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.47</cd>
@@ -649,7 +649,7 @@
             <z-m>-0.76</z-m>
         </offsets>
         <yaw-offset>0.0</yaw-offset>
-        <pitch-offset>-3.0</pitch-offset>
+        <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.47</cd>
@@ -676,7 +676,7 @@
             <z-m>-0.34673</z-m>
         </offsets>
         <yaw-offset>0.0</yaw-offset>
-        <pitch-offset>-3.0</pitch-offset>
+        <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.47</cd>
@@ -700,7 +700,7 @@
             <z-m>-0.31276</z-m>
         </offsets>
         <yaw-offset>0.0</yaw-offset>
-        <pitch-offset>-3.0</pitch-offset>
+        <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.47</cd>
@@ -724,7 +724,7 @@
             <z-m>-0.31276</z-m>
         </offsets>
         <yaw-offset>0.0</yaw-offset>
-        <pitch-offset>-3.0</pitch-offset>
+        <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.47</cd>
@@ -748,7 +748,7 @@
             <z-m>-0.34673</z-m>
         </offsets>
         <yaw-offset>0.0</yaw-offset>
-        <pitch-offset>-3.0</pitch-offset>
+        <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.47</cd>

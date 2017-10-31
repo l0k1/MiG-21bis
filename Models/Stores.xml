@@ -200,28 +200,6 @@
 	</model>
 
 	<model>
-		<name>UB-32 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32L.xml</path>
-		<offsets>
-			<x-m> -0.3</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.35</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-
-	<model>
-		<name>UB-32 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32R.xml</path>
-		<offsets>
-			<x-m> -0.3</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.35</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-
-	<model>
 		<name>R-60 Missile Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
 		<offsets>
@@ -541,6 +519,14 @@
 		</condition>
 	</animation>
 
+	<!--
+
+
+	S-24
+
+
+	-->
+
 	<model>
 		<name>S-24 Left Inner</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-0.xml</path>
@@ -584,6 +570,13 @@
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
+	<!--
+
+
+	RN-28
+
+
+	-->
 
 	<model>
 		<name>RN-28</name>
@@ -596,6 +589,13 @@
         </offsets>
 	</model>
 
+	<!--
+
+
+	UB-16
+
+
+	-->
 	<model>
 		<name>UB-16 Missile Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-0.xml</path>
@@ -680,6 +680,102 @@
 			<equals>
                   <property>sim/multiplay/generic/string[15]</property>
                   <value>UB-16</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<!--
+
+
+	UB-32
+
+
+	-->
+
+	<model>
+		<name>UB-32 Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-0.xml</path>
+		<offsets>
+			<x-m> 0.97528</x-m>
+			<y-m>-2.73238</y-m>
+			<z-m>-0.41322</z-m>
+			<pitch-deg>0.9</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>UB-32 Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[11]</property>
+                  <value>UB-32</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>UB-32 Left Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-1.xml</path>
+		<offsets>
+			<x-m> 0.04613</x-m>
+			<y-m>-2.10822</y-m>
+			<z-m>-0.37980</z-m>
+			<pitch-deg>0.9</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>UB-32 Left Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[12]</property>
+                  <value>UB-32</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>UB-32 Right Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-3.xml</path>
+		<offsets>
+			<x-m> 0.04613</x-m>
+			<y-m> 2.10822</y-m>
+			<z-m>-0.37980</z-m>
+			<pitch-deg>0.9</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>UB-32 Right Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[14]</property>
+                  <value>UB-32</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>UB-32 Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-4.xml</path>
+		<offsets>
+			<x-m> 0.97528</x-m>
+			<y-m> 2.73238</y-m>
+			<z-m>-0.41322</z-m>
+			<pitch-deg>0.9</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>UB-32 Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[15]</property>
+                  <value>UB-32</value>
             </equals>
 		</condition>
 	</animation>

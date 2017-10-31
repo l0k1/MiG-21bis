@@ -95,6 +95,11 @@
 				<weight-lb>141</weight-lb>
 			</opt>
 			<opt>
+				<name>UB-32</name>
+				<lbs>582</lbs>
+				<weight-lb>582</weight-lb>
+			</opt>
+			<opt>
 				<name>FAB-100</name>
 				<lbs>220</lbs>
 				<weight-lb>220</weight-lb>
@@ -143,6 +148,11 @@
 				<name>UB-16</name>
 				<lbs>141</lbs>
 				<weight-lb>141</weight-lb>
+			</opt>
+			<opt>
+				<name>UB-32</name>
+				<lbs>582</lbs>
+				<weight-lb>582</weight-lb>
 			</opt>
 			<opt>
 				<name>FAB-100</name>
@@ -241,6 +251,11 @@
 				<weight-lb>141</weight-lb>
 			</opt>
 			<opt>
+				<name>UB-32</name>
+				<lbs>582</lbs>
+				<weight-lb>582</weight-lb>
+			</opt>
+			<opt>
 				<name>FAB-100</name>
 				<lbs>220</lbs>
 				<weight-lb>220</weight-lb>
@@ -309,6 +324,11 @@
 				<name>UB-16</name>
 				<lbs>141</lbs>
 				<weight-lb>141</weight-lb>
+			</opt>
+			<opt>
+				<name>UB-32</name>
+				<lbs>582</lbs>
+				<weight-lb>582</weight-lb>
 			</opt>
 			<opt>
 				<name>FAB-100</name>

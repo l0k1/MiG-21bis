@@ -14,17 +14,6 @@
 	</animation>
 
 	<animation>
-		<object-name>s-5-16</object-name>
-		<type>select</type>
-		<condition>
-			<greater-than>
-				<property>/ai/submodels/submodel[25]/count</property>
-				<value>15</value>
-			</greater-than>
-		</condition>
-	</animation>
-
-	<animation>
 		<object-name>s-5-15</object-name>
 		<type>select</type>
 		<condition>

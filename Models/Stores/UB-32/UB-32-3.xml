@@ -1,0 +1,357 @@
+<PropertyList>
+
+	<path>ub-32.ac</path>
+
+	<animation>
+		<object-name>s-5-32</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>31</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-31</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>30</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-30</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>29</value>
+			</greater-than>
+		</condition>
+	</animation>
+	
+	<animation>
+		<object-name>s-5-29</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>28</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-28</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>27</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-27</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>26</value>
+			</greater-than>
+		</condition>
+	</animation>
+	
+	<animation>
+		<object-name>s-5-26</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>25</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-25</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>24</value>
+			</greater-than>
+		</condition>
+	</animation>
+	
+	<animation>
+		<object-name>s-5-24</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>23</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-23</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>22</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-22</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>21</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-21</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>20</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-20</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>19</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-19</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>18</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-18</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>17</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-17</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>16</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-16</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>15</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-15</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>14</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-14</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>13</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-13</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>12</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-12</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>11</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-11</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>10</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-10</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>9</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-9</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>8</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-8</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>7</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-7</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>6</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-6</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>5</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-5</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>4</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-4</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>3</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-3</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>2</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-2</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>1</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<object-name>s-5-1</object-name>
+		<type>select</type>
+		<condition>
+			<greater-than>
+				<property>/ai/submodels/submodel[24]/count</property>
+				<value>0</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+</PropertyList>
