@@ -336,7 +336,6 @@
   var navSwitch = mpPath~"controls/lighting/nav-lights-switch";
   var beaconSwitch = mpPath~"controls/lighting/beacon-switch";
   var strobeSwitch = mpPath~"controls/lighting/strobe-switch";
-  var landingSwitch = mpPath~"controls/lighting/landing-lights-switch";
   var taxiSwitch = mpPath~"controls/lighting/taxi-light-switch";
   var probeSwitch = mpPath~"controls/lighting/probe-light-switch";
   var whiteSwitch = mpPath~"controls/lighting/white-light-switch";
@@ -376,7 +375,6 @@
   	mpVar.new(mpPath~"sim/multiplay/generic/int[0]", navSwitch),
   	mpVar.new(mpPath~"sim/multiplay/generic/int[1]", beaconSwitch),
   	mpVar.new(mpPath~"sim/multiplay/generic/int[1]", strobeSwitch),
-  	mpVar.new(mpPath~"sim/multiplay/generic/int[2]", landingSwitch),
   	mpVar.new(mpPath~"sim/multiplay/generic/int[3]", taxiSwitch),
   	mpVar.new(mpPath~"sim/multiplay/generic/int[3]", probeSwitch),
   	mpVar.new(mpPath~"sim/multiplay/generic/int[0]", whiteSwitch),
@@ -516,7 +514,6 @@
   	},
   };
 
-  fadeLanding = lightFadeInOut.new(landingSwitch, lightsPath~"landing-lights-intensity");
   fadeTaxi = lightFadeInOut.new(taxiSwitch, lightsPath~"taxi-light-intensity");
   fadeProbe = lightFadeInOut.new(probeSwitch, lightsPath~"probe-light-intensity");
   fadeWhite = lightFadeInOut.new(whiteSwitch, lightsPath~"white-light-intensity");

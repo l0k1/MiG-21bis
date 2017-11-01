@@ -169,8 +169,8 @@
 				<int n="0" alias="/controls/lighting/nav-lights-switch" />
 				<!-- Beacon on -->
 				<int n="1" alias="/controls/lighting/beacon-switch" />
-				<!-- Landing lights on -->
-				<int n="2" alias="/controls/lighting/landing-lights-switch" />
+				<!-- radar -->
+				<int n="2" alias="/controls/radar/power-panel/run" />
 				<!-- Taxi light on -->
 				<int n="3" alias="/controls/lighting/taxi-light-switch" />
 				<!-- Crashed -->

@@ -404,66 +404,9 @@ var gun_sight = {
 		
 		################## FIXED BEAM ##################
 		if ( getprop(ir_sar_switch) != 0 and getprop("controls/radar/power-panel/fixed-beam") == 1 and getprop(air_gnd_switch) == 0) {
-			#find range here. radar locked to -1.5*. it's going to be code intensive-ish. =\
-			#orientation/heading-deg
-			#orientation/pitch-deg
-			#position/altitude-ft
-			#var my_coord = geo.aircraft_position();
+			
+			# lock pipper to -1.5, get range from radar info
 			pipper_adjust_y = -1.5; 
-			var test_coord = geo.Coord.new();
-			var altitude = getprop("/position/altitude-ft") * FT2M;
-			#the 1.5 in the below to variables is to account for the fact that the radar is offset 1.5* below aircraft nose.
-			var angle = (getprop("/orientation/pitch-deg") * D2R) - ((1.5 * math.cos(getprop("orientation/roll-deg") * D2R)) * D2R);
-			var heading = (getprop("/orientation/heading-deg") * D2R) - ((1.5 * math.sin(getprop("orientation/roll-deg") * D2R)) * D2R);
-			
-			#print("angle: " ~ (angle * R2D) ~ " | angle_corr: " ~ (1.5 * math.cos(getprop("orientation/roll-deg") * D2R)) ~ " | heading: " ~ (heading * R2D) ~ " | heading_corr: " ~ (1.5 * math.sin(getprop("orientation/roll-deg") * D2R)));
-			
-			var max_loop = 15;
-			var search_tolerance = 0.1;
-			# regarding the tolerance value:
-			# at shallow angles, we need high accuracy to get close to the correct range.
-			# this value is good for 10k meters, if your max range is shorter consider
-			# making this 0.01. if this fails, however, it will return a range of (max_r).
-			# at really low values ( less than 0.01), if you do not decrease the max range
-			# consider increasing iterations considerably.
-			# it might be good to vary the tolerance based on the pitch, but i'll leave that
-			# up to you.
-			
-			var max_range = range;
-			var min_range = 0;
-			
-			var i = 0; #for verification
-			
-			#print("my_lat: " ~ my_coord.lat() ~ " | my_lon: " ~ my_coord.lon());
-			
-			for ( i = 0; i < max_loop; i = i + 1 ) {
-				var mid = min_range + (max_range - min_range) / 2;
-				var alt_to_check = altitude - (mid * math.cos(angle + (90 * D2R)));
-				var distance_for_elev_calc = math.sin(angle + (90 * D2R)) * mid;
-				
-				test_coord = geo.aircraft_position().apply_course_distance(heading, distance_for_elev_calc);
-				#print("test_lat: " ~ test_coord.lat() ~ " | test_lon: " ~ test_coord.lon());
-				var elevation_at_coord = geo.elevation(test_coord.lat(), test_coord.lon());
-				
-				if ( math.abs(alt_to_check - elevation_at_coord) < search_tolerance ) {
-					range = mid;
-					break;
-				} elsif ( angle < 0 ) {
-					if ( alt_to_check < elevation_at_coord ) {
-						max_range = mid + 1;
-					} else {
-						min_range = mid - 1;
-					}
-				}else{
-					if ( alt_to_check < elevation_at_coord ) {
-						min_range = mid - 1
-					} else {
-						max_range = mid + 1;
-					}
-				}
-				#print("iter: " ~ i ~ " | mid: " ~ mid ~ " | min_range: " ~ min_range ~ " | max_range: " ~ max_range ~ " | alt_calc: " ~ alt_to_check ~ " | elev_at: " ~ elevation_at_coord ~ " | dist: " ~ distance_for_elev_calc);
-			}
-			#print("range: " ~ range ~ " | iters: " ~ i ~ " | alt: " ~ alt_to_check);
 			
 		################## IR SEEKING ##################
 

@@ -405,6 +405,8 @@ var radar_screen = {
 	update: func() {
 	
 		var mode = getprop(radar_mode);
+
+		#print("updating radar, mode: " ~ mode);
 		
 		if ( mode == "off" ) {
 		
@@ -567,6 +569,7 @@ var radar_screen = {
 			if ( locked_target != nil ) {
 				var dist_rad = locked_target.get_polar();
 				if ( dist_rad[0] > me.radar_range or math.abs(dist_rad[1] * R2D) > 15 or math.abs(dist_rad[2] * R2D) > 15 or locked_target.isValid() == 0 ) { #if the target is out of lockon range, then exit locked-mode
+					#print("exit1");
 					setprop(radar_mode,"normal-init");
 					arm_locking.unlockTarget();
 				} else {
@@ -617,6 +620,7 @@ var radar_screen = {
 					}
 				}
 			} else {
+				#print("exit2");
 				setprop(radar_mode,"normal-init");
 				arm_locking.unlockTarget();
 			}
@@ -638,6 +642,7 @@ var on_off = func() {
 	if ( getprop("controls/radar/power-panel/run") == 0 ) {
 		setprop(radar_mode, "off");
 	} else {
+		#print("exit3");
 		setprop(radar_mode, "normal-init");
 	}
 }

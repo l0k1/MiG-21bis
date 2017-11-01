@@ -268,7 +268,7 @@ var radiation_source = {
 			me.check_distance(myCoord);
 			if ( me.sig_str != 0 ) {
 			#	print("passed distance");
-				me.check_terrain();
+				me.check_terrain(myCoord);
 			}
 			if ( me.sig_str != 0 ) {
 			#	print("passed terrain");
@@ -300,9 +300,16 @@ var radiation_source = {
 		}
 	},
 	
-	check_terrain: func() {
-		if ( radar_logic.isNotBehindTerrain(me.geo) == 0 ) {
-			me.sig_str = 0;
+	check_terrain: func(myCoord) {
+
+		# Check for terrain between own coord and target
+		var gcgi = get_cart_ground_intersection({"x":myCoord.x(),"y":myCoord.y(),"z":myCoord.z()},{"x":me.geo.x()-myCoord.x(),"y":me.geo.y()-myCoord.y(),"z":me.geo.z()-myCoord.z()});
+		if (gcgi != nil) {
+			if (myCoord.direct_distance_to(geo.Coord.new().set_latlon(gcgi.lat, gcgi.lon, gcgi.elevation)) < myCoord.direct_distance_to(me.geo)) {
+				#print("terrain found between the planes");
+				me.sig_str = 0;
+				return;
+			}
 		}
 	},
 	

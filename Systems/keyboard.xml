@@ -139,7 +139,7 @@
 		<desc>Lock on target</desc>
 		<binding>
 			<command>nasal</command>
-			<script>arm_locking.lockTarget();</script>
+			<script>arm_locking.radar_seekTarget();</script>
 		</binding>
 	</key>
 	
