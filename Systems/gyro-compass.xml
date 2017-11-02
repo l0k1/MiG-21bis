@@ -154,7 +154,7 @@
     
     <!-- real drift -->
     <!-- gyro-specific "random" wandering due to friction, etc. -->
-	<!-- 3.47 * sin(latitude) = drift per hour -->
+	<!-- 0.47 * sin(latitude) = drift per hour -->
 	
     <filter>
     	<type>gain</type>
@@ -163,7 +163,7 @@
     		<expression>
     			<product>
 		    		<product>
-		    			<value>3.47</value>
+		    			<value>0.47</value>
 		    			<sin>
                             <deg2rad>
                                 <property>/position/latitude-deg</property>
