@@ -831,29 +831,29 @@
 	<!-- Nasal Scripts -->
 	<nasal>
 
-		<mig21>		   <file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>		 </mig21>			<!-- odds and sods -->
-		<MiG-21bis>	   <file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>		 </MiG-21bis>		<!-- liveries -->
-		<lights>		  <file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>		   </lights>
-		<Eject>		   <file>Aircraft/MiG-21bis/Nasal/eject.nas</file>			</Eject>			<!-- depreciated -->
-		<tyresmoke>	   <file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>		</tyresmoke>
-		<payloads>		<file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>		 </payloads>		 <!-- store handling -->
-		<radar_logic>	 <file>Aircraft/MiG-21bis/Nasal/radar-logic.nas</file>	  </radar_logic>	  <!-- radar logic and missile locking -->
-		<arm_locking>   <file>Aircraft/MiG-21bis/Nasal/armament-locking.nas</file> </arm_locking>
-		<radar_canvas>	<file>Aircraft/MiG-21bis/Nasal/radar-canvas.nas</file>	 </radar_canvas>	 <!-- radar canvas -->
-		<gunsight_canvas> <file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>  </gunsight_canvas>  <!-- gunsight canvas -->
-		<blackout>		<file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>		 </blackout>		 <!-- legacy blackout code -->
-		<armament>		<file>Aircraft/MiG-21bis/Nasal/guided-missiles.nas</file>  </armament>		 <!-- guided missile control, oprf standard -->
-		<damage>		  <file>Aircraft/MiG-21bis/Nasal/damage.nas</file>		   </damage>		   <!-- oprf damage code -->
-		<crashandstress>  <file>Aircraft/MiG-21bis/Nasal/crash-and-stress.nas</file> </crashandstress>   <!-- plane go boom when crash -->
-		<rcs>			 <file>Aircraft/MiG-21bis/Nasal/rcs.nas</file>			  </rcs>			  <!-- rcs calc, used in radar -->
-		<vector>		  <file>Aircraft/MiG-21bis/Nasal/vector.nas</file>		   </vector>		   <!-- vector math library -->
-		<formation>	   <file>Aircraft/Generic/formation.nas</file>				</formation>		<!-- dont support -->
-		<dialog>		  <file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>		  </dialog>		   <!-- dialogs -->
-		<radar_altimeter> <file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>  </radar_altimeter>  <!-- r-alt pitch offsets -->
-		<autopilot>	   <file>Aircraft/MiG-21bis/Nasal/autopilot.nas</file>		</autopilot>		<!-- ap button listeners -->
-		<radio>		   <file>Aircraft/MiG-21bis/Nasal/radios.nas</file>		   </radio>			<!-- radio freq remapping -->
-		<gyro_compass>	<file>Aircraft/MiG-21bis/Nasal/gyro-compass.nas</file>	 </gyro_compass>	 <!-- listener for gyrocompass display -->
-		<rwr>			 <file>Aircraft/MiG-21bis/Nasal/rwr.nas</file>			  </rwr>			  <!-- rwr -->
+		<mig21>				<file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>			</mig21>			<!-- odds and sods -->
+		<MiG-21bis>			<file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>			</MiG-21bis>		<!-- liveries -->
+		<lights>			<file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>			</lights>
+		<Eject>				<file>Aircraft/MiG-21bis/Nasal/eject.nas</file>				</Eject>			<!-- depreciated -->
+		<tyresmoke>			<file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>			</tyresmoke>
+		<payloads>			<file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>			</payloads>			<!-- store handling -->
+		<radar_logic>		<file>Aircraft/MiG-21bis/Nasal/radar-logic.nas</file>		</radar_logic>		<!-- radar logic and missile locking -->
+		<arm_locking>		<file>Aircraft/MiG-21bis/Nasal/armament-locking.nas</file>	</arm_locking>		<!-- radar locks and missile in-flight logic -->
+		<radar_canvas>		<file>Aircraft/MiG-21bis/Nasal/radar-canvas.nas</file>		</radar_canvas>		<!-- radar canvas -->
+		<gunsight_canvas>	<file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>	</gunsight_canvas>	<!-- gunsight canvas -->
+		<blackout>			<file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>			</blackout>			<!-- legacy blackout code -->
+		<armament>			<file>Aircraft/MiG-21bis/Nasal/guided-missiles.nas</file>	</armament>			<!-- guided missile control, oprf standard -->
+		<damage>			<file>Aircraft/MiG-21bis/Nasal/damage.nas</file>			</damage>			<!-- oprf damage code -->
+		<crashandstress>	<file>Aircraft/MiG-21bis/Nasal/crash-and-stress.nas</file>	</crashandstress>	<!-- plane go boom when crash -->
+		<rcs>				<file>Aircraft/MiG-21bis/Nasal/rcs.nas</file>				</rcs>				<!-- rcs calc, used in radar -->
+		<vector>			<file>Aircraft/MiG-21bis/Nasal/vector.nas</file>			</vector>			<!-- vector math library -->
+		<formation>			<file>Aircraft/Generic/formation.nas</file>					</formation>		<!-- dont support -->
+		<dialog>			<file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>			</dialog>			<!-- dialogs -->
+		<radar_altimeter>	<file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>	</radar_altimeter>	<!-- r-alt pitch offsets -->
+		<autopilot>			<file>Aircraft/MiG-21bis/Nasal/autopilot.nas</file>			</autopilot>		<!-- ap button listeners -->
+		<radio>				<file>Aircraft/MiG-21bis/Nasal/radios.nas</file>			</radio>			<!-- radio freq remapping -->
+		<gyro_compass>		<file>Aircraft/MiG-21bis/Nasal/gyro-compass.nas</file>		</gyro_compass>		<!-- listener for gyrocompass display -->
+		<rwr>				<file>Aircraft/MiG-21bis/Nasal/rwr.nas</file>				</rwr>				<!-- rwr -->
 
 	</nasal>
 
