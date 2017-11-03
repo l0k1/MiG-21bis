@@ -90,6 +90,11 @@
 				<weight-lb>550</weight-lb>
 			</opt>
 			<opt>
+				<name>Kh-66</name>
+				<lbs>633</lbs>
+				<weight-lb>633</weight-lb>
+			</opt>
+			<opt>
 				<name>UB-16</name>
 				<lbs>141</lbs>
 				<weight-lb>141</weight-lb>
@@ -143,6 +148,11 @@
 				<name>R-27T1</name>
 				<lbs>550</lbs>
 				<weight-lb>550</weight-lb>
+			</opt>
+			<opt>
+				<name>Kh-66</name>
+				<lbs>633</lbs>
+				<weight-lb>633</weight-lb>
 			</opt>
 			<opt>
 				<name>UB-16</name>
@@ -246,6 +256,11 @@
 				<weight-lb>550</weight-lb>
 			</opt>
 			<opt>
+				<name>Kh-66</name>
+				<lbs>633</lbs>
+				<weight-lb>633</weight-lb>
+			</opt>
+			<opt>
 				<name>UB-16</name>
 				<lbs>141</lbs>
 				<weight-lb>141</weight-lb>
@@ -319,6 +334,11 @@
 				<name>R-27T1</name>
 				<lbs>550</lbs>
 				<weight-lb>550</weight-lb>
+			</opt>
+			<opt>
+				<name>Kh-66</name>
+				<lbs>633</lbs>
+				<weight-lb>633</weight-lb>
 			</opt>
 			<opt>
 				<name>UB-16</name>

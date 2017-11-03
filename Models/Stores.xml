@@ -780,5 +780,103 @@
 		</condition>
 	</animation>
 
+	<!--
+
+
+	Kh-66
+
+
+	-->
+
+	<model>
+		<name>Kh-66 Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Kh-66/Kh-66.xml</path>
+		<offsets>
+			<x-m> 1.05241</x-m>
+			<y-m>-2.73047</y-m>
+			<z-m>-0.29750</z-m>
+			<pitch-deg>0.9</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>Kh-66 Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[11]</property>
+                  <value>Kh-66</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>Kh-66 Left Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Kh-66/Kh-66.xml</path>
+		<offsets>
+			<x-m> 0.16698</x-m>
+			<y-m>-2.10773</y-m>
+			<z-m>-0.25644</z-m>
+			<pitch-deg>0.9</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>Kh-66 Left Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[12]</property>
+                  <value>Kh-66</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>Kh-66 Right Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Kh-66/Kh-66.xml</path>
+		<offsets>
+			<x-m> 0.16698</x-m>
+			<y-m> 2.10773</y-m>
+			<z-m>-0.25644</z-m>
+			<pitch-deg>0.9</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>Kh-66 Right Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[14]</property>
+                  <value>Kh-66</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>Kh-66 Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Kh-66/Kh-66.xml</path>
+		<offsets>
+			<x-m> 1.05241</x-m>
+			<y-m> 2.73047</y-m>
+			<z-m>-0.29750</z-m>
+			<pitch-deg>0.9</pitch-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>Kh-66 Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[15]</property>
+                  <value>Kh-66</value>
+            </equals>
+		</condition>
+	</animation>
+
+
+
 
 </PropertyList>
