@@ -16,12 +16,6 @@
 # 6			| - 		| cm/jato		| rear rght	| actual
 # 7			| -			| r-60#2		| link2 #1	| virtual
 # 8			| -			| r-60#2		| link2 #3	| virtual
-# 9			| -			| fab100 #1		| link2 #1	| virtual
-# 10		| -			| fab100 #1		| link2 #3	| virtual
-# 11		| -			| fab100 #2		| link2 #1	| virtual
-# 12		| -			| fab100 #1		| link2 #3	| virtual
-# 13		| -			| fab100 #1		| link2 #1	| virtual
-# 14		| -			| fab100 #1		| link2 #3	| virtual
 
 var UPDATE_PERIOD = 0.1;
 
@@ -60,7 +54,7 @@ var pos_arm = {
 
 var payloads = {
 	#payload format is:
-	#name: pos_arm.new(brevity code, weight, type/guidance, hit message max distance (not used for guided missiles), ammo count (optional)
+	#name: pos_arm.new(name, brevity code, weight, type/guidance, hit message max distance (not used for guided missiles), ammo count (optional)
 	#bomb names can NOT have spaces in them.
 	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy
 	#regarding hit distance, the GSh-23 is coded as 35m seperately in this file
@@ -87,8 +81,8 @@ var payloads = {
 	# rockets
 	"UB-16":				pos_arm.new("UB-16","UB-16",141,"rocket",,16),
 	"UB-32":				pos_arm.new("UB-32","UB-32",582,"rocket",,32),
-	"S-21":					pos_arm.new("S-21","S-21",341,"heavyrocket"), # search for с-21 ракет (cyrillic)
-	"S-24":					pos_arm.new("S-24","S-24",518,"heavyrocket"),
+	"S-21":					pos_arm.new("S-21","S-21",341,"heavyrocket",60), # search for с-21 ракет (cyrillic)
+	"S-24":					pos_arm.new("S-24","S-24",518,"heavyrocket",60),
 	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank","PTB-490 Droptank",180,"tank"),
 	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank","PTB-800 Droptank",230,"tank"),
 	"Smokepod":				pos_arm.new("smokepod","smokepod",157,"tank")
@@ -593,57 +587,81 @@ var hit_callsign = "";
 var hit_timer = 0;
 var closest_distance = 200;
 
+var hit_counter = {
+	new: func(name, hit_count, hit_callsign, hit_timer, closest_distance, inc_terrain) {
+		var m = {parents:[hit_counter]};
+		m.name = name;
+		m.hit_count = hit_count;
+		m.hit_callsign = hit_callsign;
+		m.hit_timer = hit_timer;
+		m.closest_distance = closest_distance;
+		m.inc_terrain = inc_terrain;
+		return m;
+	}
+};
+
+var cr_typeord = {
+	"GSh-23"	:	hit_counter.new("GSh-23",0,"",0,200,FALSE),
+	"S-5"		:	hit_counter.new("S-5",0,"",0,200,TRUE),
+};
+
+var inside_callsign = "";
+var distance = 0;
+var typeOrdName = "";
+
 var impact_listener = func {
-    var ballistic_name = input.impact.getValue();
-    var ballistic = props.globals.getNode(ballistic_name, 0);
-	var closest_distance = 10000;
-	var inside_callsign = "";
+    var ballistic = props.globals.getNode(input.impact.getValue(), 0);
+	inside_callsign = "";
 	#print("inside listener");
     if (ballistic != nil and ballistic.getNode("name") != nil and ballistic.getNode("impact/type") != nil) {
-		var typeNode = ballistic.getNode("impact/type");
-		var typeOrd = ballistic.getNode("name").getValue();
-		var lat = ballistic.getNode("impact/latitude-deg").getValue();
-		var lon = ballistic.getNode("impact/longitude-deg").getValue();
-		var impactPos = geo.Coord.new().set_latlon(lat, lon);
-		if (typeOrd == "GSh-23" and typeNode.getValue() != "terrain") {
-			closest_distance = 35;
+		#var typeNode = ballistic.getNode("impact/type");
+		typeOrdName = ballistic.getNode("name").getValue();
+		#var lat = ballistic.getNode("impact/latitude-deg").getValue();
+		#var lon = ballistic.getNode("impact/longitude-deg").getValue();
+		#var impactPos = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue());
+		#if (typeOrd == "GSh-23" and typeNode.getValue() != "terrain") {
+		if ( cr_typeord[typeOrdName] != nil and (cr_typeord[typeOrdName].inc_terrain == TRUE or ballistic.getNode("impact/type").getValue() != "terrain") ) {
+			var typeOrd = cr_typeord[typeOrdName];
+			typeOrd.closest_distance = 35;
 			foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
-				#print("Gau impact - hit: " ~ typeNode.getValue());
-				var mlat = mp.getNode("position/latitude-deg").getValue();
-				var mlon = mp.getNode("position/longitude-deg").getValue();
-				var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
-				var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
-				var distance = impactPos.distance_to(selectionPos);
+				#print("Submodel impact - hit: " ~ typeNode.getValue());
+				#var mlat = mp.getNode("position/latitude-deg").getValue();
+				#var mlon = mp.getNode("position/longitude-deg").getValue();
+				#var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
+				#var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
+				# distance from ballistic impact point to mp point
+				distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
 				#print("distance = " ~ distance);
-				if (distance < closest_distance) {
-					closest_distance = distance;
+				if (distance < typeOrd.closest_distance) {
+					typeOrd.closest_distance = distance;
 					inside_callsign = mp.getNode("callsign").getValue();
 				}
 			}
 
 			if ( inside_callsign != "" ) {
 				#we have a successful hit
-				if ( inside_callsign == hit_callsign ) {
-					hit_count = hit_count + 1;
+				if ( inside_callsign == typeOrd.hit_callsign ) {
+					typeOrd.hit_count = typeOrd.hit_count + 1;
 					#print("hit_count: " ~ hit_count);
 				} else {
-					hit_callsign = inside_callsign;
-					hit_count = 1;
+					typeOrd.hit_callsign = inside_callsign;
+					typeOrd.hit_count = 1;
 				}
-				if ( hit_timer == 0 ) {
-					hit_timer = 1;
+				if ( typeOrd.hit_timer == 0 ) {
+					typeOrd.hit_timer = 1;
 					settimer(func{hitmessage(typeOrd);},1);
 				}
 			}
-		}elsif (payloads[typeOrd] != nil and ( payloads[typeOrd].type == "bomb" or payloads[typeOrd].type == "heavy" ))  {
+		}elsif (payloads[typeOrdName] != nil and ( payloads[typeOrdName].type == "bomb" or payloads[typeOrdName].type == "heavy" or payloads[typeOrdName].type == "heavyrocket" ))  {
 			foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
-				var mlat = mp.getNode("position/latitude-deg").getValue();
-				var mlon = mp.getNode("position/longitude-deg").getValue();
-				var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
-				var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
-				var distance = impactPos.distance_to(selectionPos);
-				if (distance < payloads[typeOrd].hit_max_distance) {
-					defeatSpamFilter(sprintf( typeOrd~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
+				#var mlat = mp.getNode("position/latitude-deg").getValue();
+				#var mlon = mp.getNode("position/longitude-deg").getValue();
+				#var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
+				#var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
+				# distance from ballistic impact point to mp point
+				distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
+				if (distance < payloads[typeOrdName].hit_max_distance) {
+					defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
 				}
 			}
 		}
@@ -652,11 +670,11 @@ var impact_listener = func {
 
 var hitmessage = func(typeOrd) {
 	#print("inside hitmessage");
-	message = typeOrd ~ " hit: " ~ hit_callsign ~ ": " ~ hit_count ~ " hits";
+	message = typeOrd.name ~ " hit: " ~ typeOrd.hit_callsign ~ ": " ~ typeOrd.hit_count ~ " hits";
 	defeatSpamFilter(message);
-	hit_callsign = "";
-	hit_timer = 0;
-	hit_count = 0;
+	typeOrd.hit_callsign = "";
+	typeOrd.hit_timer = 0;
+	typeOrd.hit_count = 0;
 }
 
 ############ Smokepod Cannon Trigger Controller##############
