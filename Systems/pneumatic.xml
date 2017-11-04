@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!-- pressure is in bars -->
+
+<system name="hydraulic">
+
+    <channel name="sources">
+
+		<fcs_function name="trash/hydraulic/source">
+			<function>
+				<table>
+					<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
+					<tableData>
+						0.00	0.00
+						6.00	140.0
+						30.0	181.0
+						90.0    213.0
+						110.0   216.0
+					</tableData>
+				</table>
+			</function>
+			<output>hydraulic/source/bar[0]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/hydraulic/source1">
+			<function>
+				<table>
+					<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
+					<tableData>
+						0.00	0.00
+						6.00	140.0
+						30.0	181.0
+						90.0    213.0
+						110.0   216.0
+					</tableData>
+				</table>
+			</function>
+			<output>hydraulic/source/bar[1]</output>
+		</fcs_function>
+		
+    </channel>
+    
+    <channel name="crossfeed">
+
+	</channel>
+	
+	<channel name="damage">
+	</channel>
+	
+	<channel name="output">
+	</channel>
+    
+</system>
