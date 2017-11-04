@@ -277,14 +277,13 @@ var update_loop = func {
 		if ( armament.AIM.active[i] != nil ) {
 			if ( armSelect[0] != i and armSelect[1] != i and armament.AIM.active[i].status != MISSILE_FLYING ) {
 				#print("setting pylon " ~ i ~ " to standby");
-				armament.AIM.active[i].status = MISSILE_STANDBY;
+				armament.AIM.active[i].stop();
 			} elsif ( armament.AIM.active[i].status != MISSILE_STANDBY and armament.AIM.active[i] != MISSILE_FLYING and payloadName == "none" ) {
 				#print("setting pylon " ~ i ~ " to standby");
-				armament.AIM.active[i].status = MISSILE_STANDBY;
+				armament.AIM.active[i].stop();
 			} elsif ( (armSelect[0] == i or armSelect[1] == i ) and armament.AIM.active[i].status == MISSILE_STANDBY ) {
 				#print("missile " ~i~ " should be searching.");
-				armament.AIM.active[i].status = MISSILE_SEARCH;
-				armament.AIM.active[i].search();
+				armament.AIM.active[i].start();
 			}
 		}
 	}
@@ -508,17 +507,17 @@ var missile_release = func(pylon) {
 	#print("gettie: " ~ getprop("payload"~virtual~"weight["~(pylon)~"]/selected"));
 	if(selected != "none") { 
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on. The gear check is prevent missiles from firing when changing airport location.
-		#if (armament.AIM.active[pylon] != nil ) {
-		#	print("not nil");
-		#} else {
-		#	print("is nil");
-		#}
-		#print("status: " ~ armament.AIM.active[pylon].status);
-		#if (radar_logic.selection != nil){
-		#	print('selection: not nil');
-		#} else {
-		#	print('slection: nil');
-		#}
+		if (armament.AIM.active[pylon] != nil ) {
+			print("not nil");
+		} else {
+			print("is nil");
+		}
+		print("status: " ~ armament.AIM.active[pylon].status);
+		if (radar_logic.selection != nil){
+			print('selection: not nil');
+		} else {
+			print('slection: nil');
+		}
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
 			#missile locked, fire it.
 

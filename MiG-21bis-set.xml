@@ -391,6 +391,68 @@
 			</GSh-30>
 			<r-60>
 				<!-- launch reference: https://www.liveleak.com/view?i=879_1404076874 @ 2:25 -->
+				<!--detection and firing-->
+				<max-fire-range-nm></max-fire-range-nm>
+				<min-fire-range-nm></min-fire-range-nm>
+				<FCS-field-deg></FCS-field-deg>
+				<class></class>
+				<fire-msg></fire-msg>
+				<coolable></coolable>
+				<cool-time></cool-time>
+				<cool-duration></cool-duration>
+				<warm-detect-range-nm></warm-detect-range-nm>
+				<detect-range-nm></detect-range-nm>
+				<seeker-beam-width-deg></seeker-beam-width-deg>
+				<ready-time></ready-time>
+				<!--navigation, guiding and seekerhead-->
+				<seeker-field-deg></seeker-field-deg>
+				<guidance></guidance>
+				<guidanceLaw></guidanceLaw>
+				<proportionality-constant></proportionality-constant>
+				<all-aspect></all-aspect>
+				<seeker-angular-speed-dps></seeker-angular-speed-dps>
+				<lock-on-sun-deg></lock-on-sun-deg>
+				<loft-altitude></loft-altitude>
+				<terrain-follow></terrain-follow>
+				<reaquire></reaquire>
+				<!--engine-->
+				<thrust-lbf-stage-1></thrust-lbf-stage-1>
+				<thrust-lbf-stage-2></thrust-lbf-stage-2>
+				<stage-1-duration-sec></stage-1-duration-sec>
+				<stage-2-duration-sec></stage-2-duration-sec>
+				<weight-fuel-lbm></weight-fuel-lbm>
+				<!--aerodynamic-->
+				<vector-thrust></vector-thrust>
+				<weight-launch-lbs></weight-launch-lbs>
+				<drag-coeff></drag-coeff>
+				<cross-section-sqft></cross-section-sqft>
+				<max-g></max-g>
+				<min-speed-for-guiding-mach></min-speed-for-guiding-mach>
+				<!--detonation-->
+				<weight-warhead-lbs></weight-warhead-lbs>
+				<arming-time-sec></arming-time-sec>
+				<self-destruct-time-sec></self-destruct-time-sec>
+				<self-destruct-at-lock-lost></self-destruct-at-lock-lost>
+				<max-report-distance></max-report-distance>
+				<!--avionics sounds-->
+				<vol-search></vol-search>
+				<vol-track></vol-track>
+				<!--launching conditions-->
+				<rail></rail>
+				<rail-length-m></rail-length-m>
+				<rail-point-forward></rail-point-forward>
+				<rail-pitch-deg></rail-pitch-deg>
+				<drop-time></drop-time>
+				<deploy-time></deploy-time>
+				<!--countermeasures-->
+				<chaff-resistnace></chaff-resistnace>
+				<flare-resistance></flare-resistance>
+				<!--datalink-->
+				<telemetry></telemetry>
+				<DLZ></DLZ>
+				<DLZ-optimal-alt-feet></DLZ-optimal-alt-feet>
+				<DLZ-optimal-closing-mach></DLZ-optimal-closing-mach>
+
 				<sound-on-off type="bool">false</sound-on-off>
 				<sound-volume type="double">0.0</sound-volume>
 				<vol-search type="double">0.00</vol-search>
