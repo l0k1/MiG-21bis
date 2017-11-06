@@ -92,7 +92,7 @@ var RadarLogic = {
 
     loop: func () {
       me.findRadarTracks();
-      #settimer(func{me.loop();}, 0.15);
+      settimer(func{me.loop();}, 0.15);
     },
 
     findRadarTracks: func () {
@@ -302,6 +302,8 @@ var RadarLogic = {
   trackCalc: func (aircraftPos, range, carrier, mp, type, node) {
     me.distance = nil;
     me.distanceDirect = nil;
+
+    print("Checking for: " ~ node.getChild("callsign").getValue());
     
     call(func {me.distance = self.distance_to(aircraftPos); me.distanceDirect = self.direct_distance_to(aircraftPos);}, nil, var err = []);
 
@@ -310,6 +312,7 @@ var RadarLogic = {
       #print("Received invalid position data: dist "~distance);
       #target_circle[track_index+maxTargetsMP].hide();
       #print(i~" invalid pos.");
+      print("returned some sort of invalid pos error");
       return nil;
     }
 
@@ -317,9 +320,14 @@ var RadarLogic = {
       # is multiplayer or 2017.2.1+
       if (me.isNotBehindTerrain(aircraftPos) == FALSE) {
         #hidden behind terrain
+        print("behind terrain: TRUE");
         return nil;
       }
     }
+    print("behind terrain: FALSE");
+
+    print("me.distanceDirect: " ~ me.distanceDirect);
+    print("range: " ~ range);
 
     if (me.distanceDirect < range) {
       # Node with valid position data (and "distance!=nil").
@@ -364,6 +372,9 @@ var RadarLogic = {
         me.ya_rad = me.ya_rad + 2*math.pi;
       }
 
+      print("ya_rad: " ~ me.ya_rad * R2D);
+      print("xa_rad: " ~ me.xa_rad * R2D);
+
       if(me.ya_rad > RADAR_BOTTOM_LIMIT * D2R and me.ya_rad < RADAR_TOP_LIMIT * D2R and me.xa_rad > RADAR_LEFT_LIMIT * D2R and me.xa_rad < RADAR_RIGHT_LIMIT * D2R) {
         #is within the radar cone
         
@@ -383,8 +394,10 @@ var RadarLogic = {
         me.contact = Contact.new(node, type);
 
         if (rcs.inRadarRange(me.contact, radarPowerRange * M2NM, radarPowerRCS) == TRUE) {
+          print("rcs: TRUE");
           return me.contact;
         } else {
+          print("rcs: FALSE");
           return nil;
         }        
 
@@ -1556,7 +1569,7 @@ var deviation_normdeg = func(our_heading, target_bearing) {
 
 var radarLogic = nil;
 radarLogic = RadarLogic.new();
-settimer(func{radarLogic.loop();}, 0.15);
+radarLogic.loop();
 #var starter = func () {
 #  removelistener(lsnr);
 #  if(getprop("ja37/supported/radar") == TRUE) {
