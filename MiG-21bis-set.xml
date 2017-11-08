@@ -89,11 +89,11 @@
 				<lbs>550</lbs>
 				<weight-lb>550</weight-lb>
 			</opt>
-			<opt>
+			<!--<opt>
 				<name>Kh-66</name>
 				<lbs>633</lbs>
 				<weight-lb>633</weight-lb>
-			</opt>
+			</opt>-->
 			<opt>
 				<name>UB-16</name>
 				<lbs>141</lbs>
@@ -149,11 +149,11 @@
 				<lbs>550</lbs>
 				<weight-lb>550</weight-lb>
 			</opt>
-			<opt>
+			<!--<opt>
 				<name>Kh-66</name>
 				<lbs>633</lbs>
 				<weight-lb>633</weight-lb>
-			</opt>
+			</opt>-->
 			<opt>
 				<name>UB-16</name>
 				<lbs>141</lbs>
@@ -255,11 +255,11 @@
 				<lbs>550</lbs>
 				<weight-lb>550</weight-lb>
 			</opt>
-			<opt>
+			<!--<opt>
 				<name>Kh-66</name>
 				<lbs>633</lbs>
 				<weight-lb>633</weight-lb>
-			</opt>
+			</opt>-->
 			<opt>
 				<name>UB-16</name>
 				<lbs>141</lbs>
@@ -335,11 +335,11 @@
 				<lbs>550</lbs>
 				<weight-lb>550</weight-lb>
 			</opt>
-			<opt>
+			<!--<opt>
 				<name>Kh-66</name>
 				<lbs>633</lbs>
 				<weight-lb>633</weight-lb>
-			</opt>
+			</opt>-->
 			<opt>
 				<name>UB-16</name>
 				<lbs>141</lbs>
@@ -391,181 +391,301 @@
 			</GSh-30>
 			<r-60>
 				<!-- launch reference: https://www.liveleak.com/view?i=879_1404076874 @ 2:25 -->
+				<!-- info on Komar seeker head: http://www.ausairpower.net/APA-Legacy-SAM-Upgrades.html -->
 				<!--detection and firing-->
-				<max-fire-range-nm></max-fire-range-nm>
-				<min-fire-range-nm></min-fire-range-nm>
-				<FCS-field-deg></FCS-field-deg>
-				<class></class>
-				<fire-msg></fire-msg>
-				<coolable></coolable>
-				<cool-time></cool-time>
-				<cool-duration></cool-duration>
-				<warm-detect-range-nm></warm-detect-range-nm>
-				<detect-range-nm></detect-range-nm>
-				<seeker-beam-width-deg></seeker-beam-width-deg>
-				<ready-time></ready-time>
+				<max-fire-range-nm type="double">4.32</max-fire-range-nm> <!-- max range that the FCS allows firing -->
+				<min-fire-range-nm type="double">0.15</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
+				<FCS-field-deg type="int">24</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
+				<class type="string">AG</class> <!-- put in letters here that represent the types the missile can fire at. A=air, M=marine, G=ground -->
+				<fire-msg type="string">Fox 2</fire-msg> <!-- what the pilot will call out over the comm when he fires this weapon -->
+				<coolable type="bool">false</coolable> <!-- If the seeker supports being cooled. (AIM-9L or later supports) -->
+				<cool-time type="double">1000</cool-time> <!-- Time to cold the seeker from fully warm. -->
+				<cool-duration type="int">0</cool-duration> <!-- Typically 2.5 hours for cooling fluids. Much higher for electrical. -->
+				<warm-detect-range-nm type="double">4.0</warm-detect-range-nm> <!-- Current guidance mode detect range. (when warm) -->
+				<detect-range-nm type="double">4.0</detect-range-nm> <!-- Current guidance mode default detect range. (when cold) -->
+				<seeker-beam-width-deg type="double">2.0</seeker-beam-width-deg> <!-- Seeker detector field of view diameter -->
+				<ready-time type="double">0.2</ready-time> <!-- time to get ready after standby mode. -->
 				<!--navigation, guiding and seekerhead-->
-				<seeker-field-deg></seeker-field-deg>
-				<guidance></guidance>
-				<guidanceLaw></guidanceLaw>
-				<proportionality-constant></proportionality-constant>
-				<all-aspect></all-aspect>
-				<seeker-angular-speed-dps></seeker-angular-speed-dps>
-				<lock-on-sun-deg></lock-on-sun-deg>
-				<loft-altitude></loft-altitude>
-				<terrain-follow></terrain-follow>
-				<reaquire></reaquire>
+				<seeker-field-deg type="int">24</seeker-field-deg> <!-- missiles own seekers total FOV diameter. -->
+				<guidance type="string">heat</guidance> <!-- heat/radar/semi-radar/laser/gps/vision/unguided/pitch/gyro-pitch/radiation/inertial -->
+				<guidanceLaw type="string">APN</guidanceLaw> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
+				<all-aspect type="bool">false</all-aspect> <!-- bool. set to false if missile only locks on reliably to rear of target aircraft -->
+				<seeker-angular-speed-dps type="double">35</seeker-angular-speed-dps> <!-- only for heat/vision seeking missiles. Max angular speed that the target can move as seen from seeker, before seeker loses lock. -->
+				<lock-on-sun-deg type="double">15.0</lock-on-sun-deg> <!-- only for heat seeking missiles. If it looks at sun within this angle, it will lose lock on target. -->
+				<loft-altitude type="int">0</loft-altitude> <!-- if 0 then no snap up. Below 10000 then cruise altitude above ground. Above 10000 max altitude it will snap up to. -->
+				<terrain-follow type="bool">false</terrain-follow> <!-- bool. used for anti-ship missiles that should be able to terrain follow instead of purely sea skimming. -->
+				<reaquire type="bool">false</reaquire> <!-- bool. If weapon will try to reaquire lock after losing it. [optional] -->
 				<!--engine-->
-				<thrust-lbf-stage-1></thrust-lbf-stage-1>
-				<thrust-lbf-stage-2></thrust-lbf-stage-2>
-				<stage-1-duration-sec></stage-1-duration-sec>
-				<stage-2-duration-sec></stage-2-duration-sec>
-				<weight-fuel-lbm></weight-fuel-lbm>
+				<thrust-lbf-stage-1 type="double">1281.41</thrust-lbf-stage-1> <!-- stage 1 thrust [optional] -->
+				<thrust-lbf-stage-2 type="double">0.0</thrust-lbf-stage-2> <!-- stage 2 thrust [optional] -->
+				<stage-1-duration-sec type="double">4.0</stage-1-duration-sec> <!-- stage 1 duration [optional] -->
+				<stage-2-duration-sec type="double">0.0</stage-2-duration-sec> <!-- stage 2 duration [optional] -->
+				<weight-fuel-lbm type="double">50</weight-fuel-lbm> <!-- fuel weight [optional]. If this property is not present, it won't lose weight as the fuel is used. -->
+				<vector-thrust type="bool">false</vector-thrust> <!-- Boolean. [optional] -->
 				<!--aerodynamic-->
-				<vector-thrust></vector-thrust>
-				<weight-launch-lbs></weight-launch-lbs>
-				<drag-coeff></drag-coeff>
-				<cross-section-sqft></cross-section-sqft>
-				<max-g></max-g>
-				<min-speed-for-guiding-mach></min-speed-for-guiding-mach>
+				<weight-launch-lbs type="double">96</weight-launch-lbs> <!-- total weight of armament, including fuel and warhead. -->
+				<drag-coeff type="double">0.5</drag-coeff> <!-- drag coefficient -->
+				<cross-section-sqft type="double">0.12</cross-section-sqft> <!-- normally is crosssection area of munition (without fins) -->
+				<max-g type="int">30</max-g> <!-- max G-force the missile can pull at sealevel -->
+				<min-speed-for-guiding-mach type="double">0.7</min-speed-for-guiding-mach> <!-- minimum speed before the missile steers, before it reaches this speed it will fly ballistic. -->
 				<!--detonation-->
-				<weight-warhead-lbs></weight-warhead-lbs>
-				<arming-time-sec></arming-time-sec>
-				<self-destruct-time-sec></self-destruct-time-sec>
-				<self-destruct-at-lock-lost></self-destruct-at-lock-lost>
-				<max-report-distance></max-report-distance>
+				<weight-warhead-lbs type="double">6.6</weight-warhead-lbs> <!-- warhead weight -->
+				<arming-time-sec type="double">0.4</arming-time-sec> <!-- time for weapon to arm -->
+				<self-destruct-time-sec type="double">43</self-destruct-time-sec> <!-- time before selfdestruct -->
+				<self-destruct-at-lock-lost type="double">25</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
+				<max-report-distance type="double">65</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
 				<!--avionics sounds-->
-				<vol-search></vol-search>
-				<vol-track></vol-track>
+				<vol-search type="double">0</vol-search> <!-- sound volume when searcing -->
+				<vol-track type="double">0</vol-track> <!-- sound volume when having lock -->
 				<!--launching conditions-->
-				<rail></rail>
-				<rail-length-m></rail-length-m>
-				<rail-point-forward></rail-point-forward>
-				<rail-pitch-deg></rail-pitch-deg>
-				<drop-time></drop-time>
-				<deploy-time></deploy-time>
+				<rail type="bool">true</rail> <!-- if the weapon is rail or tube fired set to true. If dropped 7ft before ignited set to false. -->
+				<rail-length-m type="double">3.0</rail-length-m> <!-- length of tube/rail -->
+				<rail-point-forward type="bool">true</rail-point-forward> <!-- true for rail, false for rail/tube with a pitch -->
+				<drop-time type="double">0.0</drop-time> <!-- Time to fall before stage 1 thrust starts. -->
 				<!--countermeasures-->
-				<chaff-resistnace></chaff-resistnace>
-				<flare-resistance></flare-resistance>
+				<chaff-resistnace type="double">0.950</chaff-resistnace> <!-- Float 0-1. Amount of resistance to chaff. Default 0.950. [optional] -->
+				<flare-resistance type="double">0.950</flare-resistance> <!-- Float 0-1. Amount of resistance to flare. Default 0.950. [optional] -->
 				<!--datalink-->
-				<telemetry></telemetry>
-				<DLZ></DLZ>
-				<DLZ-optimal-alt-feet></DLZ-optimal-alt-feet>
-				<DLZ-optimal-closing-mach></DLZ-optimal-closing-mach>
-
-				<sound-on-off type="bool">false</sound-on-off>
-				<sound-volume type="double">0.0</sound-volume>
-				<vol-search type="double">0.00</vol-search>
-				<vol-track type="double">0.00</vol-track>
-				<vol-track-weak type="double">0.00</vol-track-weak>
-				<guidance type="string">heat</guidance>
-				<all-aspect type="bool">false</all-aspect>
-				<max-fire-range-nm type="double">4.32</max-fire-range-nm>
-				<FCS-field-deg type="int">35</FCS-field-deg>
-				<seeker-field-deg type="int">110</seeker-field-deg>
-				<max-g type="int">30</max-g>
-				<max-launch-g type="int">7</max-launch-g>
-				<thrust-lbf-stage-1 type="double">1281.41</thrust-lbf-stage-1>
-				<thrust-lbf-stage-2 type="double">0.0</thrust-lbf-stage-2>
-				<stage-1-duration-sec type="double">4.0</stage-1-duration-sec>
-				<stage-2-duration-sec type="double">0.0</stage-2-duration-sec>
-				<weight-launch-lbs type="double">96</weight-launch-lbs>
-				<weight-warhead-lbs type="double">6.6</weight-warhead-lbs>
-				<drag-coeff type="double">0.5</drag-coeff>
-				<cross-section-sqft type="double">0.12</cross-section-sqft>
-				<searcher-beam-width type="double">2.0</searcher-beam-width>
-				<arming-time-sec type="double">0.4</arming-time-sec> 
-				<min-speed-for-guiding-mach type="double">0.7</min-speed-for-guiding-mach>
-				<self-destruct-time-sec type="double">43</self-destruct-time-sec>
-				<seeker-angular-speed-dps type="double">14.9</seeker-angular-speed-dps>
-				<loft-altitude>0</loft-altitude>
-				<min-fire-range-nm type="double">0.15</min-fire-range-nm>
-				<rail type="bool">true</rail>
-				<rail-point-forward type="bool">true</rail-point-forward>
-				<rail-length-m type="double">3.0</rail-length-m>
-				<max-report-distance type="double">65</max-report-distance>
-				<class type="string">AG</class>
-				<fire-msg>Aphid</fire-msg>
-				<lock-on-sun-deg type="double">5</lock-on-sun-deg>
-				<navigation type="string">APN</navigation>
-				<sound-on-off type="bool">false</sound-on-off>
-				<sound-fire-on-off type="bool">false</sound-fire-on-off>
-				<sound-volume type="double">0.0</sound-volume>
+				<telemetry type="bool">false</telemetry> <!-- Boolean. Data link back to aircraft when missile is flying. [optional] -->
+				<DLZ type="bool">false</DLZ> <!-- Supports dynamic launch zone info. For now only works with A/A. [optional] -->
 			</r-60>
 
 			 <r-27r1>
-				<sound-on-off type="bool">false</sound-on-off>
-				<sound-volume type="double">0.0</sound-volume>
-				<vol-search type="double">0.00</vol-search>
-				<vol-track type="double">0.00</vol-track>
-				<vol-track-weak type="double">0.00</vol-track-weak>
-				<guidance type="string">semi-radar</guidance>
-				<all-aspect type="bool">true</all-aspect>
-				<max-fire-range-nm type="double">39.41</max-fire-range-nm>
-				<FCS-field-deg type="int">35</FCS-field-deg>
-				<seeker-field-deg type="int">110</seeker-field-deg>
-				<max-g type="int">28</max-g>
-				<max-launch-g type="int">7</max-launch-g>
-				<thrust-lbf-stage-1 type="double">8500</thrust-lbf-stage-1>
-				<thrust-lbf-stage-2 type="double">1000</thrust-lbf-stage-2>
-				<stage-1-duration-sec type="double">9.2</stage-1-duration-sec>
-				<stage-2-duration-sec type="double">14.0</stage-2-duration-sec>
-				<weight-launch-lbs type="double">560</weight-launch-lbs>
-				<weight-warhead-lbs type="double">85.98</weight-warhead-lbs>
-				<drag-coeff type="double">0.5</drag-coeff>
-				<cross-section-sqft type="double">0.143</cross-section-sqft>
-				<searcher-beam-width type="double">2.5</searcher-beam-width>
-				<arming-time-sec type="double">1.6</arming-time-sec> 
-				<min-speed-for-guiding-mach type="double">0.8</min-speed-for-guiding-mach>
-				<self-destruct-time-sec type="double">43</self-destruct-time-sec>
-				<seeker-angular-speed-dps type="double">14.9</seeker-angular-speed-dps>
-				<loft-altitude>36000</loft-altitude>
-				<min-fire-range-nm type="double">1.0</min-fire-range-nm>
-				<rail type="bool">false</rail>
-				<max-report-distance type="double">65</max-report-distance>
-				<class type="string">A</class>
-				<fire-msg>Alamo</fire-msg>
-				<sound-on-off type="bool">false</sound-on-off>
-				<sound-fire-on-off type="bool">false</sound-fire-on-off>
-				<sound-volume type="double">0.0</sound-volume>
+			 	<!--detection and firing-->
+				<max-fire-range-nm type="double">39.41</max-fire-range-nm> <!-- max range that the FCS allows firing -->
+				<min-fire-range-nm type="double">1.0</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
+				<FCS-field-deg type="int">35</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
+				<class type="string">A</class> <!-- put in letters here that represent the types the missile can fire at. A=air, M=marine, G=ground -->
+				<fire-msg type="string">Fox 1</fire-msg> <!-- what the pilot will call out over the comm when he fires this weapon -->
+				<coolable type="bool">false</coolable> <!-- If the seeker supports being cooled. (AIM-9L or later supports) -->
+				<cool-time type="double">10000</cool-time> <!-- Time to cold the seeker from fully warm. -->
+				<cool-duration type="int">10000</cool-duration> <!-- Typically 2.5 hours for cooling fluids. Much higher for electrical. -->
+				<warm-detect-range-nm type="double">10.0</warm-detect-range-nm> <!-- Current guidance mode detect range. (when warm) -->
+				<detect-range-nm type="double">10.0</detect-range-nm> <!-- Current guidance mode default detect range. (when cold) -->
+				<seeker-beam-width-deg type="double">2.5</seeker-beam-width-deg> <!-- Seeker detector field of view diameter -->
+				<ready-time type="double">0.2</ready-time> <!-- time to get ready after standby mode. -->
+				<!--navigation, guiding and seekerhead-->
+				<seeker-field-deg type="int">110</seeker-field-deg> <!-- missiles own seekers total FOV diameter. -->
+				<guidance type="string">semi-radar</guidance> <!-- heat/radar/semi-radar/laser/gps/vision/unguided/pitch/gyro-pitch/radiation/inertial -->
+				<guidanceLaw type="string">PN</guidanceLaw> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
+				<all-aspect type="bool">true</all-aspect> <!-- bool. set to false if missile only locks on reliably to rear of target aircraft -->
+				<seeker-angular-speed-dps type="double">14.9</seeker-angular-speed-dps> <!-- only for heat/vision seeking missiles. Max angular speed that the target can move as seen from seeker, before seeker loses lock. -->
+				<lock-on-sun-deg type="double">0.0</lock-on-sun-deg> <!-- only for heat seeking missiles. If it looks at sun within this angle, it will lose lock on target. -->
+				<loft-altitude type="int">40000</loft-altitude> <!-- if 0 then no snap up. Below 10000 then cruise altitude above ground. Above 10000 max altitude it will snap up to. -->
+				<terrain-follow type="bool">false</terrain-follow> <!-- bool. used for anti-ship missiles that should be able to terrain follow instead of purely sea skimming. -->
+				<reaquire type="bool">true</reaquire> <!-- bool. If weapon will try to reaquire lock after losing it. [optional] -->
+				<!--engine-->
+				<thrust-lbf-stage-1 type="double">8500</thrust-lbf-stage-1> <!-- stage 1 thrust [optional] -->
+				<thrust-lbf-stage-2 type="double">1000</thrust-lbf-stage-2> <!-- stage 2 thrust [optional] -->
+				<stage-1-duration-sec type="double">9.2</stage-1-duration-sec> <!-- stage 1 duration [optional] -->
+				<stage-2-duration-sec type="double">14.0</stage-2-duration-sec> <!-- stage 2 duration [optional] -->
+				<weight-fuel-lbm type="double">300</weight-fuel-lbm> <!-- fuel weight [optional]. If this property is not present, it won't lose weight as the fuel is used. -->
+				<vector-thrust type="bool">false</vector-thrust> <!-- Boolean. [optional] -->
+				<!--aerodynamic-->
+				<weight-launch-lbs type="double">560</weight-launch-lbs> <!-- total weight of armament, including fuel and warhead. -->
+				<drag-coeff type="double">0.5</drag-coeff> <!-- drag coefficient -->
+				<cross-section-sqft type="double">0.143</cross-section-sqft> <!-- normally is crosssection area of munition (without fins) -->
+				<max-g type="int">28</max-g> <!-- max G-force the missile can pull at sealevel -->
+				<min-speed-for-guiding-mach type="double">0.8</min-speed-for-guiding-mach> <!-- minimum speed before the missile steers, before it reaches this speed it will fly ballistic. -->
+				<!--detonation-->
+				<weight-warhead-lbs type="double">85.98</weight-warhead-lbs> <!-- warhead weight -->
+				<arming-time-sec type="double">1.6</arming-time-sec> <!-- time for weapon to arm -->
+				<self-destruct-time-sec type="double">43</self-destruct-time-sec> <!-- time before selfdestruct -->
+				<self-destruct-at-lock-lost type="double">25</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
+				<max-report-distance type="double">65</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
+				<!--avionics sounds-->
+				<vol-search type="double">0.0</vol-search> <!-- sound volume when searcing -->
+				<vol-track type="double">0.0</vol-track> <!-- sound volume when having lock -->
+				<!--launching conditions-->
+				<rail type="bool">false</rail> <!-- if the weapon is rail or tube fired set to true. If dropped 7ft before ignited set to false. -->
+				<drop-time type="double">0.0</drop-time> <!-- Time to fall before stage 1 thrust starts. -->
+				<!--countermeasures-->
+				<chaff-resistnace type="double">0.950</chaff-resistnace> <!-- Float 0-1. Amount of resistance to chaff. Default 0.950. [optional] -->
+				<flare-resistance type="double">0.950</flare-resistance> <!-- Float 0-1. Amount of resistance to flare. Default 0.950. [optional] -->
+				<!--datalink-->
+				<telemetry type="bool">true</telemetry> <!-- Boolean. Data link back to aircraft when missile is flying. [optional] -->
+				<DLZ type="bool">false</DLZ> <!-- Supports dynamic launch zone info. For now only works with A/A. [optional] -->
 			</r-27r1>
 			<r-27t1>
-				<sound-on-off type="bool">false</sound-on-off>
-				<sound-volume type="double">0.0</sound-volume>
-				<vol-search type="double">0.00</vol-search>
-				<vol-track type="double">0.00</vol-track>
-				<vol-track-weak type="double">0.00</vol-track-weak>
-				<guidance type="string">level</guidance>
-				<all-aspect type="bool">true</all-aspect>
-				<max-fire-range-nm type="double">39.41</max-fire-range-nm>
-				<FCS-field-deg type="int">35</FCS-field-deg>
-				<seeker-field-deg type="int">110</seeker-field-deg>
-				<max-g type="int">28</max-g>
-				<max-launch-g type="int">7</max-launch-g>
-				<thrust-lbf-stage-1 type="double">8500</thrust-lbf-stage-1>
-				<thrust-lbf-stage-2 type="double">1000</thrust-lbf-stage-2>
-				<stage-1-duration-sec type="double">9.2</stage-1-duration-sec>
-				<stage-2-duration-sec type="double">14.0</stage-2-duration-sec>
-				<weight-launch-lbs type="double">560</weight-launch-lbs>
-				<weight-warhead-lbs type="double">85.98</weight-warhead-lbs>
-				<drag-coeff type="double">0.5</drag-coeff>
-				<cross-section-sqft type="double">0.143</cross-section-sqft>
-				<searcher-beam-width type="double">2.5</searcher-beam-width>
-				<arming-time-sec type="double">1.6</arming-time-sec> 
-				<min-speed-for-guiding-mach type="double">0.8</min-speed-for-guiding-mach>
-				<self-destruct-time-sec type="double">43</self-destruct-time-sec>
-				<seeker-angular-speed-dps type="double">14.9</seeker-angular-speed-dps>
-				<loft-altitude>34000</loft-altitude>
-				<lock-on-sun-deg>5</lock-on-sun-deg>
-				<min-fire-range-nm type="double">1.0</min-fire-range-nm>
-				<rail type="bool">false</rail>
-				<max-report-distance type="double">65</max-report-distance>
-				<class type="string">AG</class>
-				<fire-msg>Alamo</fire-msg>
-				<sound-on-off type="bool">false</sound-on-off>
-				<sound-fire-on-off type="bool">false</sound-fire-on-off>
-				<sound-volume type="double">0.0</sound-volume>
+			 	<!--detection and firing-->
+				<max-fire-range-nm type="double">39.41</max-fire-range-nm> <!-- max range that the FCS allows firing -->
+				<min-fire-range-nm type="double">1.0</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
+				<FCS-field-deg type="int">35</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
+				<class type="string">A</class> <!-- put in letters here that represent the types the missile can fire at. A=air, M=marine, G=ground -->
+				<fire-msg type="string">Fox 1</fire-msg> <!-- what the pilot will call out over the comm when he fires this weapon -->
+				<coolable type="bool">true</coolable> <!-- If the seeker supports being cooled. (AIM-9L or later supports) -->
+				<cool-time type="double">1.5</cool-time> <!-- Time to cold the seeker from fully warm. -->
+				<cool-duration type="int">9000</cool-duration> <!-- Typically 2.5 hours for cooling fluids. Much higher for electrical. -->
+				<warm-detect-range-nm type="double">6.5</warm-detect-range-nm> <!-- Current guidance mode detect range. (when warm) -->
+				<detect-range-nm type="double">8.5</detect-range-nm> <!-- Current guidance mode default detect range. (when cold) -->
+				<seeker-beam-width-deg type="double">2.5</seeker-beam-width-deg> <!-- Seeker detector field of view diameter -->
+				<ready-time type="double">0.2</ready-time> <!-- time to get ready after standby mode. -->
+				<!--navigation, guiding and seekerhead-->
+				<seeker-field-deg type="int">110</seeker-field-deg> <!-- missiles own seekers total FOV diameter. -->
+				<guidance type="string">heat</guidance> <!-- heat/radar/semi-radar/laser/gps/vision/unguided/pitch/gyro-pitch/radiation/inertial -->
+				<guidanceLaw type="string">PN</guidanceLaw> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
+				<all-aspect type="bool">true</all-aspect> <!-- bool. set to false if missile only locks on reliably to rear of target aircraft -->
+				<seeker-angular-speed-dps type="double">14.9</seeker-angular-speed-dps> <!-- only for heat/vision seeking missiles. Max angular speed that the target can move as seen from seeker, before seeker loses lock. -->
+				<lock-on-sun-deg type="double">0.0</lock-on-sun-deg> <!-- only for heat seeking missiles. If it looks at sun within this angle, it will lose lock on target. -->
+				<loft-altitude type="int">40000</loft-altitude> <!-- if 0 then no snap up. Below 10000 then cruise altitude above ground. Above 10000 max altitude it will snap up to. -->
+				<terrain-follow type="bool">false</terrain-follow> <!-- bool. used for anti-ship missiles that should be able to terrain follow instead of purely sea skimming. -->
+				<reaquire type="bool">true</reaquire> <!-- bool. If weapon will try to reaquire lock after losing it. [optional] -->
+				<!--engine-->
+				<thrust-lbf-stage-1 type="double">8500</thrust-lbf-stage-1> <!-- stage 1 thrust [optional] -->
+				<thrust-lbf-stage-2 type="double">1000</thrust-lbf-stage-2> <!-- stage 2 thrust [optional] -->
+				<stage-1-duration-sec type="double">9.2</stage-1-duration-sec> <!-- stage 1 duration [optional] -->
+				<stage-2-duration-sec type="double">14.0</stage-2-duration-sec> <!-- stage 2 duration [optional] -->
+				<weight-fuel-lbm type="double">300</weight-fuel-lbm> <!-- fuel weight [optional]. If this property is not present, it won't lose weight as the fuel is used. -->
+				<vector-thrust type="bool">false</vector-thrust> <!-- Boolean. [optional] -->
+				<!--aerodynamic-->
+				<weight-launch-lbs type="double">560</weight-launch-lbs> <!-- total weight of armament, including fuel and warhead. -->
+				<drag-coeff type="double">0.5</drag-coeff> <!-- drag coefficient -->
+				<cross-section-sqft type="double">0.143</cross-section-sqft> <!-- normally is crosssection area of munition (without fins) -->
+				<max-g type="int">28</max-g> <!-- max G-force the missile can pull at sealevel -->
+				<min-speed-for-guiding-mach type="double">0.8</min-speed-for-guiding-mach> <!-- minimum speed before the missile steers, before it reaches this speed it will fly ballistic. -->
+				<!--detonation-->
+				<weight-warhead-lbs type="double">85.98</weight-warhead-lbs> <!-- warhead weight -->
+				<arming-time-sec type="double">1.6</arming-time-sec> <!-- time for weapon to arm -->
+				<self-destruct-time-sec type="double">43</self-destruct-time-sec> <!-- time before selfdestruct -->
+				<self-destruct-at-lock-lost type="double">25</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
+				<max-report-distance type="double">65</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
+				<!--avionics sounds-->
+				<vol-search type="double">0.0</vol-search> <!-- sound volume when searcing -->
+				<vol-track type="double">0.0</vol-track> <!-- sound volume when having lock -->
+				<!--launching conditions-->
+				<rail type="bool">false</rail> <!-- if the weapon is rail or tube fired set to true. If dropped 7ft before ignited set to false. -->
+				<drop-time type="double">0.0</drop-time> <!-- Time to fall before stage 1 thrust starts. -->
+				<!--countermeasures-->
+				<chaff-resistnace type="double">0.950</chaff-resistnace> <!-- Float 0-1. Amount of resistance to chaff. Default 0.950. [optional] -->
+				<flare-resistance type="double">0.950</flare-resistance> <!-- Float 0-1. Amount of resistance to flare. Default 0.950. [optional] -->
+				<!--datalink-->
+				<telemetry type="bool">true</telemetry> <!-- Boolean. Data link back to aircraft when missile is flying. [optional] -->
+				<DLZ type="bool">false</DLZ> <!-- Supports dynamic launch zone info. For now only works with A/A. [optional] -->
 			</r-27t1>
+
+			<kh-66>
+				<!--detection and firing-->
+				<max-fire-range-nm type="double">5.0</max-fire-range-nm> <!-- max range that the FCS allows firing -->
+				<min-fire-range-nm type="double">0.5</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
+				<FCS-field-deg type="int">15</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
+				<class type="string">AGM</class> <!-- put in letters here that represent the types the missile can fire at. A=air, M=marine, G=ground -->
+				<fire-msg type="string">Fox 1</fire-msg> <!-- what the pilot will call out over the comm when he fires this weapon -->
+				<coolable type="bool">false</coolable> <!-- If the seeker supports being cooled. (AIM-9L or later supports) -->
+				<cool-time type="double">0.0</cool-time> <!-- Time to cold the seeker from fully warm. -->
+				<cool-duration type="int">0.0</cool-duration> <!-- Typically 2.5 hours for cooling fluids. Much higher for electrical. -->
+				<warm-detect-range-nm type="double">5.0</warm-detect-range-nm> <!-- Current guidance mode detect range. (when warm) -->
+				<detect-range-nm type="double">5.0</detect-range-nm> <!-- Current guidance mode default detect range. (when cold) -->
+				<seeker-beam-width-deg type="double">3.0</seeker-beam-width-deg> <!-- Seeker detector field of view diameter -->
+				<ready-time type="double">0.3</ready-time> <!-- time to get ready after standby mode. -->
+				<!--navigation, guiding and seekerhead-->
+				<seeker-field-deg type="int">5.0</seeker-field-deg> <!-- missiles own seekers total FOV diameter. -->
+				<guidance type="string">semi-radar</guidance> <!-- heat/radar/semi-radar/laser/gps/vision/unguided/pitch/gyro-pitch/radiation/inertial -->
+				<guidanceLaw type="string">direct</guidanceLaw> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
+				<all-aspect type="bool">true</all-aspect> <!-- bool. set to false if missile only locks on reliably to rear of target aircraft -->
+				<seeker-angular-speed-dps type="double"></seeker-angular-speed-dps> <!-- only for heat/vision seeking missiles. Max angular speed that the target can move as seen from seeker, before seeker loses lock. -->
+				<lock-on-sun-deg type="double"></lock-on-sun-deg> <!-- only for heat seeking missiles. If it looks at sun within this angle, it will lose lock on target. -->
+				<loft-altitude type="int">0</loft-altitude> <!-- if 0 then no snap up. Below 10000 then cruise altitude above ground. Above 10000 max altitude it will snap up to. -->
+				<terrain-follow type="bool">false</terrain-follow> <!-- bool. used for anti-ship missiles that should be able to terrain follow instead of purely sea skimming. -->
+				<reaquire type="bool">true</reaquire> <!-- bool. If weapon will try to reaquire lock after losing it. [optional] -->
+				<!--engine-->
+				<thrust-lbf-stage-1 type="double">4000</thrust-lbf-stage-1> <!-- stage 1 thrust [optional] -->
+				<thrust-lbf-stage-2 type="double">0.0</thrust-lbf-stage-2> <!-- stage 2 thrust [optional] -->
+				<stage-1-duration-sec type="double">15.0</stage-1-duration-sec> <!-- stage 1 duration [optional] -->
+				<stage-2-duration-sec type="double">0.0</stage-2-duration-sec> <!-- stage 2 duration [optional] -->
+				<weight-fuel-lbm type="double">200</weight-fuel-lbm> <!-- fuel weight [optional]. If this property is not present, it won't lose weight as the fuel is used. -->
+				<vector-thrust type="bool">false</vector-thrust> <!-- Boolean. [optional] -->
+				<!--aerodynamic-->
+				<weight-launch-lbs type="double">633</weight-launch-lbs> <!-- total weight of armament, including fuel and warhead. -->
+				<drag-coeff type="double">0.5</drag-coeff> <!-- drag coefficient -->
+				<cross-section-sqft type="double">0.059</cross-section-sqft> <!-- normally is crosssection area of munition (without fins) -->
+				<max-g type="int"></max-g> <!-- max G-force the missile can pull at sealevel -->
+				<min-speed-for-guiding-mach type="double">0.5</min-speed-for-guiding-mach> <!-- minimum speed before the missile steers, before it reaches this speed it will fly ballistic. -->
+				<!--detonation-->
+				<weight-warhead-lbs type="double">245</weight-warhead-lbs> <!-- warhead weight -->
+				<arming-time-sec type="double">0.4</arming-time-sec> <!-- time for weapon to arm -->
+				<self-destruct-time-sec type="double">40</self-destruct-time-sec> <!-- time before selfdestruct -->
+				<self-destruct-at-lock-lost type="double">40</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
+				<max-report-distance type="double">65</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
+				<!--avionics sounds-->
+				<vol-search type="double">0.0</vol-search> <!-- sound volume when searcing -->
+				<vol-track type="double">0.0</vol-track> <!-- sound volume when having lock -->
+				<!--launching conditions-->
+				<rail type="bool">true</rail> <!-- if the weapon is rail or tube fired set to true. If dropped 7ft before ignited set to false. -->
+				<rail-length-m type="double">1.5</rail-length-m> <!-- length of tube/rail -->
+				<rail-point-forward type="bool">true</rail-point-forward> <!-- true for rail, false for rail/tube with a pitch -->
+				<drop-time type="double">0.0</drop-time> <!-- Time to fall before stage 1 thrust starts. -->
+				<deploy-time type="double">0.0</deploy-time> <!-- Time to deploy wings etc. Time starts when drop ends or rail passed. -->
+				<!--countermeasures-->
+				<chaff-resistnace type="double">0.950</chaff-resistnace> <!-- Float 0-1. Amount of resistance to chaff. Default 0.950. [optional] -->
+				<flare-resistance type="double">0.950</flare-resistance> <!-- Float 0-1. Amount of resistance to flare. Default 0.950. [optional] -->
+				<!--datalink-->
+				<telemetry type="bool">false</telemetry> <!-- Boolean. Data link back to aircraft when missile is flying. [optional] -->
+				<DLZ type="bool">false</DLZ> <!-- Supports dynamic launch zone info. For now only works with A/A. [optional] -->
+			</kh-66>
+
+			<template>
+				<!--detection and firing-->
+				<max-fire-range-nm type="double"></max-fire-range-nm> <!-- max range that the FCS allows firing -->
+				<min-fire-range-nm type="double"></min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
+				<FCS-field-deg type="int"></FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
+				<class type="string"></class> <!-- put in letters here that represent the types the missile can fire at. A=air, M=marine, G=ground -->
+				<fire-msg type="string"></fire-msg> <!-- what the pilot will call out over the comm when he fires this weapon -->
+				<coolable type="bool"></coolable> <!-- If the seeker supports being cooled. (AIM-9L or later supports) -->
+				<cool-time type="double"></cool-time> <!-- Time to cold the seeker from fully warm. -->
+				<cool-duration type="int"></cool-duration> <!-- Typically 2.5 hours for cooling fluids. Much higher for electrical. -->
+				<warm-detect-range-nm type="double"></warm-detect-range-nm> <!-- Current guidance mode detect range. (when warm) -->
+				<detect-range-nm type="double"></detect-range-nm> <!-- Current guidance mode default detect range. (when cold) -->
+				<seeker-beam-width-deg type="double"></seeker-beam-width-deg> <!-- Seeker detector field of view diameter -->
+				<ready-time type="double"></ready-time> <!-- time to get ready after standby mode. -->
+				<!--navigation, guiding and seekerhead-->
+				<seeker-field-deg type="int"></seeker-field-deg> <!-- missiles own seekers total FOV diameter. -->
+				<guidance type="string"></guidance> <!-- heat/radar/semi-radar/laser/gps/vision/unguided/pitch/gyro-pitch/radiation/inertial -->
+				<guidanceLaw type="string"></guidanceLaw> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
+				<proportionality-constant type="double"></proportionality-constant> <!-- Constant for how sensitive proportional navigation is to target speed/acc. Normally between 3-6. [optional] -->
+				<all-aspect type="bool"></all-aspect> <!-- bool. set to false if missile only locks on reliably to rear of target aircraft -->
+				<seeker-angular-speed-dps type="double"></seeker-angular-speed-dps> <!-- only for heat/vision seeking missiles. Max angular speed that the target can move as seen from seeker, before seeker loses lock. -->
+				<lock-on-sun-deg type="double"></lock-on-sun-deg> <!-- only for heat seeking missiles. If it looks at sun within this angle, it will lose lock on target. -->
+				<loft-altitude type="int"></loft-altitude> <!-- if 0 then no snap up. Below 10000 then cruise altitude above ground. Above 10000 max altitude it will snap up to. -->
+				<terrain-follow type="bool"></terrain-follow> <!-- bool. used for anti-ship missiles that should be able to terrain follow instead of purely sea skimming. -->
+				<reaquire type="bool"></reaquire> <!-- bool. If weapon will try to reaquire lock after losing it. [optional] -->
+				<!--engine-->
+				<thrust-lbf-stage-1 type="double"></thrust-lbf-stage-1> <!-- stage 1 thrust [optional] -->
+				<thrust-lbf-stage-2 type="double"></thrust-lbf-stage-2> <!-- stage 2 thrust [optional] -->
+				<stage-1-duration-sec type="double"></stage-1-duration-sec> <!-- stage 1 duration [optional] -->
+				<stage-2-duration-sec type="double"></stage-2-duration-sec> <!-- stage 2 duration [optional] -->
+				<weight-fuel-lbm type="double"></weight-fuel-lbm> <!-- fuel weight [optional]. If this property is not present, it won't lose weight as the fuel is used. -->
+				<vector-thrust type="bool"></vector-thrust> <!-- Boolean. [optional] -->
+				<!--aerodynamic-->
+				<weight-launch-lbs type="double"></weight-launch-lbs> <!-- total weight of armament, including fuel and warhead. -->
+				<drag-coeff type="double"></drag-coeff> <!-- drag coefficient -->
+				<cross-section-sqft type="double"></cross-section-sqft> <!-- normally is crosssection area of munition (without fins) -->
+				<max-g type="int"></max-g> <!-- max G-force the missile can pull at sealevel -->
+				<min-speed-for-guiding-mach type="double"></min-speed-for-guiding-mach> <!-- minimum speed before the missile steers, before it reaches this speed it will fly ballistic. -->
+				<!--detonation-->
+				<weight-warhead-lbs type="double"></weight-warhead-lbs> <!-- warhead weight -->
+				<arming-time-sec type="double"></arming-time-sec> <!-- time for weapon to arm -->
+				<self-destruct-time-sec type="double"></self-destruct-time-sec> <!-- time before selfdestruct -->
+				<self-destruct-at-lock-lost type="double"></self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
+				<max-report-distance type="double"></max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
+				<!--avionics sounds-->
+				<vol-search type="double"></vol-search> <!-- sound volume when searcing -->
+				<vol-track type="double"></vol-track> <!-- sound volume when having lock -->
+				<!--launching conditions-->
+				<rail type="bool"></rail> <!-- if the weapon is rail or tube fired set to true. If dropped 7ft before ignited set to false. -->
+				<rail-length-m type="double"></rail-length-m> <!-- length of tube/rail -->
+				<rail-point-forward type="bool"></rail-point-forward> <!-- true for rail, false for rail/tube with a pitch -->
+				<rail-pitch-deg type="double"></rail-pitch-deg> <!-- Only used when rail is not forward. 90 for vertical tube. -->
+				<drop-time type="double"></drop-time> <!-- Time to fall before stage 1 thrust starts. -->
+				<deploy-time type="double"></deploy-time> <!-- Time to deploy wings etc. Time starts when drop ends or rail passed. -->
+				<!--countermeasures-->
+				<chaff-resistnace type="double"></chaff-resistnace> <!-- Float 0-1. Amount of resistance to chaff. Default 0.950. [optional] -->
+				<flare-resistance type="double"></flare-resistance> <!-- Float 0-1. Amount of resistance to flare. Default 0.950. [optional] -->
+				<!--datalink-->
+				<telemetry type="bool"></telemetry> <!-- Boolean. Data link back to aircraft when missile is flying. [optional] -->
+				<DLZ type="bool"></DLZ> <!-- Supports dynamic launch zone info. For now only works with A/A. [optional] -->
+				<DLZ-optimal-alt-feet type="double"></DLZ-optimal-alt-feet> <!-- Minimum altitude required to hit the target at max range. -->
+				<DLZ-optimal-closing-mach type="double"></DLZ-optimal-closing-mach> <!-- Closing speed required to hit the target at max range at minimum altitude. -->
+			</template>
 		</armament>
 	</payload>
 

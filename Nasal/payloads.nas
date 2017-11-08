@@ -398,7 +398,7 @@ var missile_release_listener = func {
 				missile_release(armSelect[0]);
 				#print("type2: " ~ selected0.type);
 			}
-			if ( armSelect[1] != -1 and getprop("payload" ~ virtual1 ~ "weight["~(armSelect[1])~"]/selected") != "none") {
+			if ( armSelect[1] != -1 and selected1.name != "none") {
 				if ((selected1.type == "ir" and getprop(ir_sar_switch) == 0 ) or ( selected1.type == "radar" and getprop(ir_sar_switch) == 2 )) { #if is IR/Radar missile, and weapon selector is in missile range
 					settimer(func { 
 						missile_release(armSelect[1]);
@@ -413,8 +413,8 @@ var missile_release_listener = func {
 			if (selected0.type == "bomb") {
 				bomb_release(armSelect[0]);
 			}
-			if ( armSelect[1] != -1 and getprop("payload" ~ virtual1 ~ "weight["~(armSelect[1])~"]/selected") != "none") {
-				if (selected0.type == "bomb") {
+			if ( armSelect[1] != -1 and selected1.name != "none") {
+				if (selected1.type == "bomb") {
 					bomb_release(armSelect[1]);
 				}
 			}
@@ -430,7 +430,6 @@ var missile_release_listener = func {
 		}
 		
 		if (armSelect[2] <= 2 ){
-			print("racket triga");
 			setprop("/controls/armament/rocket-trigger",1);
 		}
 
@@ -439,12 +438,18 @@ var missile_release_listener = func {
 			if (selected0.type == "heavyrocket" and getprop(ag_panel_switch) == 2 ) {
 				bomb_release(armSelect[0]);
 			}
-			if ( armSelect[1] != -1 and getprop("payload" ~ virtual1 ~ "weight["~(armSelect[1])~"]/selected") != "none") {
-				if (selected0.type == "heavyrocket" and getprop(ag_panel_switch) == 2 ) {
+			if ( armSelect[1] != -1 and selected1.name != "none") {
+				if (selected1.type == "heavyrocket" and getprop(ag_panel_switch) == 2 ) {
 					settimer(func  {
 						bomb_release(armSelect[1]);
 					},0.1);
 				}
+			}
+
+			if (selected0.type == "beam" and getprop(ag_panel_switch) != 1 ) {
+				missile_release(armSelect[0]);
+			} elsif (selected0.type == "none" and selected1.type == "beam" and getprop(ag_panel_switch) != 1 ) {
+				missile_release(armselect[1]);
 			}
 		}
 		#print("type4: " ~ selected0.type);
@@ -501,17 +506,17 @@ var missile_release = func(pylon) {
 	#print("gettie: " ~ getprop("payload"~virtual~"weight["~(pylon)~"]/selected"));
 	if(selected != "none") { 
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on. The gear check is prevent missiles from firing when changing airport location.
-		if (armament.AIM.active[pylon] != nil ) {
-			print("not nil");
-		} else {
-			print("is nil");
-		}
-		print("status: " ~ armament.AIM.active[pylon].status);
-		if (radar_logic.selection != nil){
-			print('selection: not nil');
-		} else {
-			print('slection: nil');
-		}
+		#if (armament.AIM.active[pylon] != nil ) {
+		#	print("not nil");
+		#} else {
+		#	print("is nil");
+		#}
+		#print("status: " ~ armament.AIM.active[pylon].status);
+		#if (radar_logic.selection != nil){
+		#	print('selection: not nil');
+		#} else {
+		#	print('slection: nil');
+		#}
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
 			#missile locked, fire it.
 
@@ -522,7 +527,7 @@ var missile_release = func(pylon) {
 
 			#if missile is R-27R1 or R-27T1, recalculate drop time
 
-			if ( selected == "R-27R1" or brevity == "R-27T1" ) {
+			if ( selected == "R-27R1" or selected == "R-27T1" ) {
 				var prs_inhg = getprop("/environment/pressure-inhg");
 				if ( prs_inhg > 25 ) {
 					#print("pressure: " ~ math.clamp(interp(prs_inhg,33,0,25,1.5),0,4));
@@ -544,6 +549,19 @@ var missile_release = func(pylon) {
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 			setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
 			var phrase = brevity ~ " at: " ~ callsign;
+			if (getprop("payload/armament/msg")) {
+				defeatSpamFilter(phrase);
+			} else {
+				setprop("/sim/messages/atc", phrase);
+			}
+		} elsif ( armament.AIM.active[pylon] != nil and selected == "Kh-66" ) {
+			armament.AIM.active[pylon].releaseAtNothing();
+
+			var brevity = armament.AIM.active[pylon].brevity;
+
+			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+			setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
+			var phrase = brevity ~ " released:";
 			if (getprop("payload/armament/msg")) {
 				defeatSpamFilter(phrase);
 			} else {

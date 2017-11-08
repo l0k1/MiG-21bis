@@ -1,12 +1,13 @@
 
 var ir_sar_switch = "/controls/armament/panel/ir-sar-switch";
+var fixed_beam_switch = "/controls/radar/power-panel/fixed-beam";
 var TRUE = 1;
 var FALSE = 0;
 
 ##### RADAR TARGET LOCKING
 
 var radar_seekTarget = func() {
-	if ( getprop(ir_sar_switch) == 2 ) {
+	if ( getprop(ir_sar_switch) == 2 and getprop("fixed_beam_switch") != 1 ) {
 		var c_dist = 999999;
 		var c_most = nil;
 		var lowerBar = (getprop("/controls/radar/lock-bars-pos")/950) * radar_logic.radarRange;
@@ -38,7 +39,7 @@ var radar_seekTarget = func() {
 ##### IR TARGET LOCKING
 
 var ir_seekTarget= func() {
-	if ( getprop(ir_sar_switch) == 0 ) {
+	if ( getprop(ir_sar_switch) == 0 and getprop("fixed_beam_switch") != 1 ) {
 		#print("checking for IR target");
 		var c_dist = 999999;
 		var c_most = nil;
@@ -166,29 +167,31 @@ var beam_search = func(myPos) {
 		gps_lock_geo.set_xyz(v[0],v[1],v[2]);
 		#var terrainDist = myPos.direct_distance_to(gps_lock_geo);
 		#printf("terrain found %0.1f meters down the beam", terrainDist);
+	} else {
+		gps_lock_geo.set_xyz(beam.x(),beam.y(),beam.z());
 	}
 }
 
 var gps_lock_geo = geo.Coord.new().set_xyz(0,0,0);
 var beam_update_rate = 0.15;
-var beam_max_close = 35; # an mp target will need to be at least this close to be "locked"
+var closest_dist = 100000;
 var closest_track = nil;
 var gps_contact = radar_logic.ContactGPS.new("BEAMTGT", gps_lock_geo);
 
 var beam_target_lock = func() {
-	if ( getprop("controls/radar/power-panel/fixed-beam") == 1 ) {
+	if ( getprop(fixed_beam_switch) == 1 ) {
 		var my_geo = geo.aircraft_position();
-		var closest_dist = beam_max_close;
-		var i = -1;
+		closest_dist = 100000;
 		closest_track = nil;
 		foreach(var track; radar_logic.tracks) {
-			dist_to_track = gps_lock_geo.direct_distance_to(track.get_Coord());
-			if ( dist_to_track < closest_dist ) {
-				closest_dist = dist_to_track;
+			var track_info = track.get_polar(); # 0 - distance, 1 - azimuth, 2 - pitch
+			# tolerance of +/- 0.75 degrees outside of the radar beam.
+			if(track_info[0] < closest_dist and track_info[2] > -2.25 * D2R and track_info[2] < -0.75 * D2R and track_info[1] > -0.75 * D2R and track_info[1] < 0.75 * D2R) {
+				closest_dist = track_info[0];
 				closest_track = track;
 			}
 		}
-		if ( closest_track != nil ) {
+		if ( closest_track != nil and radar_logic.selection != closest_track) {
 			lockTarget(closest_track);
 		} else {
 			gps_contact.coord = gps_lock_geo;
@@ -203,6 +206,10 @@ var beam_target_lock = func() {
 		}
 		settimer(func(){beam_target_lock();},beam_update_rate);
 	}
+}
+
+var kh25_guidance = func(time, dist, mach, coord) {
+	return nil;
 }
 
 setlistener("controls/radar/power-panel/fixed-beam", func() {

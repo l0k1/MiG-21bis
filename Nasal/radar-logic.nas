@@ -303,7 +303,7 @@ var RadarLogic = {
     me.distance = nil;
     me.distanceDirect = nil;
 
-    print("Checking for: " ~ node.getChild("callsign").getValue());
+    #print("Checking for: " ~ node.getChild("callsign").getValue());
     
     call(func {me.distance = self.distance_to(aircraftPos); me.distanceDirect = self.direct_distance_to(aircraftPos);}, nil, var err = []);
 
@@ -324,10 +324,10 @@ var RadarLogic = {
         return nil;
       }
     }
-    print("behind terrain: FALSE");
+    #print("behind terrain: FALSE");
 
-    print("me.distanceDirect: " ~ me.distanceDirect);
-    print("range: " ~ range);
+    #print("me.distanceDirect: " ~ me.distanceDirect);
+    #print("range: " ~ range);
 
     if (me.distanceDirect < range) {
       # Node with valid position data (and "distance!=nil").
@@ -372,8 +372,8 @@ var RadarLogic = {
         me.ya_rad = me.ya_rad + 2*math.pi;
       }
 
-      print("ya_rad: " ~ me.ya_rad * R2D);
-      print("xa_rad: " ~ me.xa_rad * R2D);
+      #print("ya_rad: " ~ me.ya_rad * R2D);
+      #print("xa_rad: " ~ me.xa_rad * R2D);
 
       if(me.ya_rad > RADAR_BOTTOM_LIMIT * D2R and me.ya_rad < RADAR_TOP_LIMIT * D2R and me.xa_rad > RADAR_LEFT_LIMIT * D2R and me.xa_rad < RADAR_RIGHT_LIMIT * D2R) {
         #is within the radar cone
@@ -394,10 +394,10 @@ var RadarLogic = {
         me.contact = Contact.new(node, type);
 
         if (rcs.inRadarRange(me.contact, radarPowerRange * M2NM, radarPowerRCS) == TRUE) {
-          print("rcs: TRUE");
+          #print("rcs: TRUE");
           return me.contact;
         } else {
-          print("rcs: FALSE");
+          #print("rcs: FALSE");
           return nil;
         }        
 
