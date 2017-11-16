@@ -127,7 +127,9 @@
 		    			<value>60</value>
 		    		</div>
 		    		<tan>
-		    			<property>/position/latitude-deg</property>
+                        <deg2rad>
+		    			   <property>/position/latitude-deg</property>
+                        </deg2rad>
 		    		</tan>
 		    	</product>
 		    	<property>/sim/time/delta-hour</property>
