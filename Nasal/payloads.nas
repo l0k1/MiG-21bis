@@ -117,11 +117,11 @@ var update_loop = func {
 					if(selected == "R-60x2") {
 						#print("R-60x2 detected");
 						if(i == 0){
-							#print('setting pylon 1');
+							print('setting pylon 1');
 							setprop("payload/virtual/weight[7]/selected","R-60");
 							setprop("payload/virtual/weight[7]/weight-lb",0);
 						} elsif(i == 4){
-							#print('setting pylon 3');
+							print('setting pylon 3');
 							setprop("payload/virtual/weight[8]/selected","R-60");
 							setprop("payload/virtual/weight[8]/weight-lb",0);
 						}
@@ -218,7 +218,7 @@ var update_loop = func {
 				}
 			} elsif (payloads[selected].name == "R-60") {
 				selected0 = getprop("payload/weight[0]/selected");
-				selected1 = getprop("payload/weight[1]/selected");
+				selected1 = getprop("payload/weight[4]/selected");
 				if ( i == 7 and selected0 != nil and ( selected0 != "R-60x2" ) ) {
 					if ( getprop("payload/virtual/weight["~ (i) ~"]/weight-lb") != 0 ) {
 						setprop("payload/virtual/weight["~ (i) ~"]/weight-lb", 0);
@@ -231,7 +231,7 @@ var update_loop = func {
 						setprop("payload/virtual/weight["~ (i) ~"]/selected", "none");
 					}
 					setprop("payload/released/"~payloads[selected].name~"["~i~"]",0);
-				} elsif ( i == 8 and selected0 != nil and ( selected1 != "R-60x2" ) )  {
+				} elsif ( i == 8 and selected1 != nil and ( selected1 != "R-60x2" ) )  {
 					if ( getprop("payload/virtual/weight["~ (i) ~"]/weight-lb") != 0 ) {
 						setprop("payload/virtual/weight["~ (i) ~"]/weight-lb", 0);
 						setprop("payload/virtual/weight["~ (i) ~"]/selected", "none");
