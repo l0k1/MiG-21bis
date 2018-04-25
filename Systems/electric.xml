@@ -1,138 +1,301 @@
-<?xml version="1.0"?>
-
-<property value="0">electric/external-connected</property>
-<property value="26">electric/battery-volts</property>
-<property value="0">electric/volts-required</property>
-
 <system name="electric">
-    <channel name="sources">
-        
-        <switch name="electric/sources/external-volt-ac">
-			<default value="0"/>
-			<test logic="AND" value="115">
-				electric/external-connected == 1
+
+	<property value="0">electric/external-connected</property>  <!-- if the external ground cart is connected -->
+	<property value="0">electric/battery-mode</property>		<!-- 0 = batteries in parallel, 1 = batteries in series -->
+	<property value="0">electric/busses/bus-switch[0]</property>
+	<property value="0">electric/busses/bus-switch[1]</property>
+	<property value="0">electric/busses/bus-switch[2]</property>
+
+	<channel name="sources">
+	
+		<!-- 
+			sources of electricity are:
+			an external ground cart provides DC and AC
+			dc generator
+			ac alternator
+			two batteries in either series or parallel
+		-->
+		
+		<!-- dc generator -->
+		
+		<fcs_function name="trash/electric/sources/dc-gen">
+			<function>
+				<ifthen>
+					<property>electric/external-connected</property>
+					<value>29.0</value>
+					<table>
+						<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
+						<tableData>
+							0.0	 0.0
+							30.0	25.0
+							100.0   29.0
+						</tableData>
+					</table>
+				</ifthen>
+			</function>
+			<output>electric/sources/dc-gen</output>
+		</fcs_function>
+		
+		<!-- ac generator -->
+		
+		<fcs_function name="trash/electric/sources/ac-gen">
+			<function>
+				<ifthen>
+					<property>electric/external-connected</property>
+					<value>115.0</value>
+					<table>
+						<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
+						<tableData>
+							0.0	 0.0
+							30.0	112.0
+							100.0   116.0
+						</tableData>
+					</table>
+				</ifthen>
+			</function>
+			<output>electric/sources/ac-volts</output>
+		</fcs_function>
+		
+		<!-- battery #1 charge -->
+		
+		<!-- charge from dc gen -->
+		<!-- the value of 25000 is the charge rate, bigger number is less charge -->
+		<fcs_function name="trash/electric/sources/battery-dc-charge[0]">
+			<function>
+				<sum>
+					<ifthen>
+						<gt>
+							<!-- ((dcg - bat) / 25000) -->
+							<quotient>
+								<difference>
+									<property>electric/sources/dc-gen</property>
+									<property>electric/sources/battery[0]</property>
+								</difference>
+								<value>25000</value>
+							</quotient>
+							<value>0.0</value>
+						</gt>
+						<quotient>
+							<difference>
+								<property>electric/sources/dc-gen</property>
+								<property>electric/sources/battery[0]</property>
+							</difference>
+							<value>25000</value>
+						</quotient>
+						<value>0.0</value>
+					</ifthen>
+					<property>electric/sources/battery[0]</property>
+				</sum>
+			</function>
+			<output>electric/sources/battery-dc-charge[0]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/battery-dc-charge[1]">
+			<function>
+				<sum>
+					<ifthen>
+						<gt>
+							<!-- ((dcg - bat) / 25000) -->
+							<quotient>
+								<difference>
+									<property>electric/sources/dc-gen</property>
+									<property>electric/sources/battery[1]</property>
+								</difference>
+								<value>25000</value>
+							</quotient>
+							<value>0.0</value>
+						</gt>
+						<quotient>
+							<difference>
+								<property>electric/sources/dc-gen</property>
+								<property>electric/sources/battery[1]</property>
+							</difference>
+							<value>25000</value>
+						</quotient>
+						<value>0.0</value>
+					</ifthen>
+					<property>electric/sources/battery[1]</property>
+				</sum>
+			</function>
+			<output>electric/sources/battery-dc-charge[1]</output>
+		</fcs_function>
+		
+		<!-- cross charge from the other battery -->
+		<!-- only if batteries are in parallel -->
+		<fcs_function name="trash/electric/sources/battery[0]">
+			<function>
+				<ifthen>
+					<property>electric/battery-mode</property>
+					<property>electric/sources/battery-dc-charge[0]</property>
+					<sum>
+						<quotient>
+							<difference>
+								<property>electric/sources/battery-dc-charge[1]</property>
+								<property>electric/sources/battery-dc-charge[0]</property>
+							</difference>
+							<value>25000</value>
+						</quotient>
+						<property>electric/sources/battery-dc-charge[0]</property>
+					</sum>
+				</ifthen>
+			</function>
+			<output>electric/sources/battery[0]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/battery[1]">
+			<function>
+				<ifthen>
+					<property>electric/battery-mode</property>
+					<property>electric/sources/battery-dc-charge[1]</property>
+					<sum>
+						<quotient>
+							<difference>
+								<property>electric/sources/battery-dc-charge[0]</property>
+								<property>electric/sources/battery-dc-charge[1]</property>
+							</difference>
+							<value>25000</value>
+						</quotient>
+						<property>electric/sources/battery-dc-charge[1]</property>
+					</sum>
+				</ifthen>
+			</function>
+			<output>electric/sources/battery[1]</output>
+		</fcs_function>
+		
+		<!-- battery voltage should be average of both batteries in parallel
+			or combined in serial. -->
+		<fcs_function name="trash/electric/sources/battery-volts">
+			<function>
+				<ifthen>
+					<property>electric/battery-mode</property>
+					<sum>
+						<property>electric/sources/battery[0]</property>
+						<property>electric/sources/battery[1]</property>
+					</sum>
+					<avg>
+						<property>electric/sources/battery[0]</property>
+						<property>electric/sources/battery[1]</property>
+					</avg>
+				</ifthen>
+			</function>
+			<output>electric/sources/battery-volts</output>
+		</fcs_function>
+					
+		
+		<!-- final dc output -->
+		
+		<switch name="electric/sources/dc-volts">
+			<default value="electric/sources/dc-gen"/>
+			<test logic="AND" value="electric/sources/battery-volts">
+				electric/sources/battery-volts gt electric/sources/dc-gen
 			</test>
 		</switch>
 		
-		<fcs_function name="trash/electric/sources/alternator-volt-dc">
+	</channel>
+	
+	<channel name="inverters">
+		<!--
+		inverters available
+		PO-750A x 2	 115v
+		PO-1500VT	   115v
+		PT-500Ts		36v
+		PT-125C		 36v
+		-->
+		
+		<fcs_function name="trash/electric/inverters/po-750a[0]">
 			<function>
 				<table>
-					<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
+					<independentVar lookup="row">electric/sources/dc-volts</independentVar>
 					<tableData>
-						0.00	0.00
-						6.00	20.0
-						30.0	28.1
-						97.0    29.7
+						0.0	 0.0
+						22.0	115.0
 					</tableData>
 				</table>
 			</function>
-			<output>electric/sources/alternator-volt-dc</output>
+			<output>electric/inverters/po-750a[0]</output>
 		</fcs_function>
 		
-        <pure_gain name="electric/sources/battery-alternator-charge-volt-dc">
-            <input>electric/sources/alternator-volt-dc</input>
-            <gain>0.0001</gain>
-            <clipto>
-                <min>0.000</min>
-                <max>0.003</max>
-            </clipto>
-        </pure_gain>
+		<fcs_function name="trash/electric/inverters/po-750a[1]">
+			<function>
+				<table>
+					<independentVar lookup="row">electric/sources/dc-volts</independentVar>
+					<tableData>
+						0.0	 0.0
+						22.0	115.0
+					</tableData>
+				</table>
+			</function>
+			<output>electric/inverters/po-750a[1]</output>
+		</fcs_function>
 		
-		<switch name="electric/sources/battery-drain-volt-dc">
+		<fcs_function name="trash/electric/inverters/po-1500vt">
+			<function>
+				<table>
+					<independentVar lookup="row">electric/sources/dc-volts</independentVar>
+					<tableData>
+						0.0	 0.0
+						22.0	115.0
+					</tableData>
+				</table>
+			</function>
+			<output>electric/inverters/po-1500vt</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/inverters/pt-500ts">
+			<function>
+				<table>
+					<independentVar lookup="row">electric/sources/dc-volts</independentVar>
+					<tableData>
+						0.0	 0.0
+						22.0	36.0
+					</tableData>
+				</table>
+			</function>
+			<output>electric/inverters/pt-500ts</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/inverters/pt-125c">
+			<function>
+				<table>
+					<independentVar lookup="row">electric/sources/dc-volts</independentVar>
+					<tableData>
+						0.0	 0.0
+						22.0	36.0
+					</tableData>
+				</table>
+			</function>
+			<output>electric/inverters/pt-125c</output>
+		</fcs_function>
+		
+	</channel>
+	
+	<channel name="buses">
+		<!-- 3 buses -->
+		
+		<switch name="electric/buses/bus[0]">
 			<default value="0"/>
-			<test logic="AND" value="electric/volts-required">
-				electric/sources/battery-volt-dc gt 0
+			<test logic="AND" value="electric/inverters/po-750a[0]">
+				electric/busses/bus-switch[0] == 1
 			</test>
 		</switch>
 		
-		<summer name="trash/battery-volt-dc">
-			<input>electric/sources/battery-alternator-charge-volt-dc</input>
-			<input>-electric/sources/battery-drain-volt-dc</input>
-			<output>electric/sources/battery-volt-dc</output>
-		</summer>
-        
-    </channel>
-    
-    <channel name="inverters">
-        <!-- DC - AC 115 -->
-        <!-- DC - AC 365 -->
-        
-        <switch name="electric/inverters/115v-volts-ac">
-            <default value="0"/>
-            <test logic="AND" value="115">
-                electric/sources/battery-volt-dc gt 0
-                electric/inverters/115v-switch == 1
-            </test>
-        </switch>
-        
-        <pure_gain name="electric/inverters/115v-volts-used">
-            <input>electric/inverters/115v-volts-ac</input>
-            <gain>0.000001</gain>
-            <clipto>
-                <min>0.000000</min>
-                <max>0.000115</max>
-            </clipto>
-        </pure_gain>
-        
-        <switch name="electric/inverters/365v-volts-ac">
-            <default value="0"/>
-            <test logic="AND" value="365">
-                electric/sources/battery-volt-dc gt 0
-                electric/inverters/365v-switch == 1
-            </test>
-        </switch>
-        
-        <pure_gain name="electric/inverters/365v-volts-used">
-            <input>electric/inverters/365v-volts-ac</input>
-            <gain>0.0000005</gain>
-            <clipto>
-                <min>0.000000</min>
-                <max>0.000115</max>
-            </clipto>
-        </pure_gain>
-        
-    </channel>
-    
-    <channel name="busses">
-        <!-- 3 busses -->
-        
-        <fcs_function name="trash/voltage-per-buss">
-    		<function>
-    		    <quotient>
-    			    <sum>
-    			        <property>electric/busses/buss-1-switch</property>
-    			        <property>electric/busses/buss-2-switch</property>
-    			        <property>electric/busses/buss-3-switch</property>
-    			    </sum>
-        			<property>electric/sources/battery-volt-dc</property>
-        		</quotient>
-    		</function>
-    		<output>electric/busses/volts-per-buss</output>
-	    </fcs_function>
-        
-        
-        <switch name="electric/busses/buss-1">
-            <default value="0"/>
-            <test logic="AND" value="electric/busses/volts-per-buss">
-                electric/sources/battery-volt-dc gt 0
-                electric/busses/buss-1-switch == 1
-            </test>
-        </switch>
-        
-        <switch name="electric/busses/buss-2">
-            <default value="0"/>
-            <test logic="AND" value="electric/busses/volts-per-buss">
-                electric/sources/battery-volt-dc gt 0
-                electric/busses/buss-2-switch == 1
-            </test>
-        </switch>
-        
-        <switch name="electric/busses/buss-3">
-            <default value="0"/>
-            <test logic="AND" value="electric/busses/volts-per-buss">
-                electric/sources/battery-volt-dc gt 0
-                electric/busses/buss-3-switch == 1
-            </test>
-        </switch>
-    </channel>
+		<switch name="electric/buses/bus[1]">
+			<default value="0"/>
+			<test logic="AND" value="electric/inverters/po-750a[1]">
+				electric/busses/bus-switch[1] == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/buses/bus[2]">
+			<default value="0"/>
+			<test logic="AND" value="electric/inverters/po-1500vt">
+				electric/busses/bus-switch[2] == 1
+			</test>
+		</switch>
+		
+	</channel>
+	
+	<channel name="output">
+	</channel>
+	
 </system>

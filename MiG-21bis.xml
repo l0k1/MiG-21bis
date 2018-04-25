@@ -662,6 +662,7 @@
  <system file="fuel"/>
  <system file="throttle"/>
  <system file="payloads"/>
+ <system file="electric"/>
 
  <flight_control name="none"/>
 

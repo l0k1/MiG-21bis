@@ -320,7 +320,7 @@ var RadarLogic = {
       # is multiplayer or 2017.2.1+
       if (me.isNotBehindTerrain(aircraftPos) == FALSE) {
         #hidden behind terrain
-        print("behind terrain: TRUE");
+        #print("behind terrain: TRUE");
         return nil;
       }
     }
