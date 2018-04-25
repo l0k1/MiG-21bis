@@ -182,6 +182,7 @@ var rwr_database = {
     "F-14B":					rwr_datum.new(65,65,200 * NM2M),
     "F-15C":                    rwr_datum.new(65,65,150 * NM2M),
     "F-15D":                    rwr_datum.new(65,65,150 * NM2M),
+    "F-16":						rwr_datum.new(60,60,100 * NM2M),
     "JA37-Viggen":              rwr_datum.new(70,70,150 * NM2M),
     "AJ37-Viggen":              rwr_datum.new(70,70,150 * NM2M),
     "AJS37-Viggen":             rwr_datum.new(70,70,150 * NM2M),
@@ -235,6 +236,7 @@ var radiation_source = {
 		m.heading =     source.getNode("orientation/true-heading-deg");
 		m.pitch =       source.getNode("orientation/pitch-deg");
 		m.roll =        source.getNode("orientation/roll-deg");
+		m.radar =		source.getNode("sim/multiplay/int[2]");
 		m.sig_str =     0;
 		m.bearing =     0;
 		m.distance =    0;
@@ -256,7 +258,7 @@ var radiation_source = {
 		return m;
 	},
 	update: func() {
-		if ( me.valid.getValue() == 1 ) {
+		if ( me.valid.getValue() == 1 and me.radar.getValue() == 0 ) {
 			var myCoord = geo.aircraft_position();
 			me.geo.set_latlon(me.lat.getValue(),me.lon.getValue(),me.alt.getValue() * FT2M);
 			
