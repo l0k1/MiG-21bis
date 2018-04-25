@@ -725,7 +725,7 @@ var Contact = {
       
       # check if radar is on
       
-      if (me.isRadarActive() != TRUE) {
+      if (me.isRadarActive() != 0) {
         return FALSE;
       }
       
