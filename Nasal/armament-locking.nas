@@ -218,26 +218,32 @@ var kh25_guidance = func(input) {
 #{guidance, guidanceLaw, target}
 
 var r27t1_guidance = func(input) {
+	print("weapon pitch:" ~ input.weapon_pitch);
+	detect_range = input.seeker_detect_range * NM2M;
 	if (input.guidance == "ir") {
 		return {};
 	}
 	foreach (track; radar_logic.tracks) {
-		if (track.coord.distance_to(input.weapon_position) > seeker_detect_range) {
+		print("track distance: " ~ track.coord.distance_to(input.weapon_position));
+		print("seeker range:   " ~ detect_range);
+		if (track.coord.distance_to(input.weapon_position) > detect_range) {
 			continue;
 		}
-		var target_alt = track.coord.alt();
 		
 		#ground angle
-		yg_rad = vector.Math.getPitch(input.weapon_position, track.coord) * D2R - weapon_pitch;
-		xg_rad = (input.weapon_position.course_to(track.coord) - weapon_heading) * D2R;
+		yg_rad = vector.Math.getPitch(input.weapon_position, track.coord) * D2R - input.weapon_pitch;
+		xg_rad = (input.weapon_position.course_to(track.coord) - input.weapon_heading) * D2R;
 	
-		while ( xg_rad >  math.pi ) { xg_rad = xg_rad - 2 * math.pi; }	
+		while ( xg_rad >  math.pi ) { xg_rad = xg_rad - 2 * math.pi; }
 		while ( xg_rad < -math.pi ) { xg_rad = xg_rad + 2 * math.pi; }
 		while ( yg_rad >  math.pi ) { yg_rad = yg_rad - 2 * math.pi; }
 		while ( yg_rad < -math.pi ) { yg_rad = yg_rad + 2 * math.pi; }
+
+		print("found target at pitch: " ~ yg_rad * R2D ~ " | heading: " ~ xg_rad);
       
-    	var seeker_fov_rad = seeker_fov;
+    	var seeker_fov_rad = input.seeker_fov * D2R;
 		if (yg_rad > -seeker_fov_rad and yg_rad < seeker_fov_rad and xg_rad > -seeker_fov_rad  and xg_rad < seeker_fov_rad) {
+			print("locked!");
 			return {guidance: "ir", target: track};
 		}
 	}

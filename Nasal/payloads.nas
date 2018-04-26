@@ -40,7 +40,7 @@ input = {
 };
 
 var pos_arm = {
-	new: func(name, brevity, weight, type, hit_max_distance = 65, ammo_count = 0) {
+	new: func(name, brevity, weight, type, hit_max_distance = 65, ammo_count = 0,guidance_func = nil) {
 		var m = {parents:[pos_arm]};
 		m.name = name;
 		m.brevity = brevity;
@@ -48,13 +48,14 @@ var pos_arm = {
 		m.type = type;
 		m.ammo_count = ammo_count;
 		m.hit_max_distance = hit_max_distance;
+		m.guidance_func = guidance_func;
 		return m;
 	}
 };
 
 var payloads = {
 	#payload format is:
-	#name: pos_arm.new(name, brevity code, weight, type/guidance, hit message max distance (not used for guided missiles), ammo count (optional)
+	#name: pos_arm.new(name, brevity code, weight, type/guidance, hit message max distance (not used for guided missiles), ammo count (optional), guidance function (optional)
 	#bomb names can NOT have spaces in them.
 	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy
 	#regarding hit distance, the GSh-23 is coded as 35m seperately in this file
@@ -62,7 +63,7 @@ var payloads = {
 	# ir missiles
 	"R-60":					pos_arm.new("R-60","R-60",96,"ir"),
 	"R-60x2":				pos_arm.new("R-60","R-60",96,"ir",,2),
-	"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir"),
+	"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir",,,arm_locking.r27t1_guidance),
 	# radar missiles
 	"R-27R1":				pos_arm.new("R-27R1","R-27R1",560,"radar"),
 	# bombs
@@ -127,7 +128,7 @@ var update_loop = func {
 						}
 					}
 					#print('setting up pylon ' ~ i ~ ' as ' ~ payloads[selected].name);
-					if(armament.AIM.new(i, payloads[selected].name, payloads[selected].brevity) == -1 and armament.AIM.active[i].status == MISSILE_FLYING) {
+					if(armament.AIM.new(i, payloads[selected].name, payloads[selected].brevity, payloads[selected].guidance_func) == -1 and armament.AIM.active[i].status == MISSILE_FLYING) {
 						setprop("controls/armament/station["~(i+1)~"]/released", TRUE);
 						setprop("payload/weight["~ (i) ~"]/selected", "none");
 					}
@@ -197,7 +198,7 @@ var update_loop = func {
 						armament.AIM.active[i].del();
 					}
 					#print('setting up pylon ' ~ i ~ ' as ' ~ payloads[selected].name);
-					if(armament.AIM.new(i, payloads[selected].name, payloads[selected].brevity) == -1 and armament.AIM.active[i].status == MISSILE_FLYING) {
+					if(armament.AIM.new(i, payloads[selected].name, payloads[selected].brevity, payloads[selected].guidance_func) == -1 and armament.AIM.active[i].status == MISSILE_FLYING) {
 						setprop("controls/armament/station["~(i+1)~"]/released", TRUE);
 						setprop("payload/virtual/weight["~ (i) ~"]/selected", "none");
 						setprop("payload/virtual/weight["~ (i) ~"]/weight-lb", 0);
@@ -554,6 +555,21 @@ var missile_release = func(pylon) {
 			} else {
 				setprop("/sim/messages/atc", phrase);
 			}
+		} elsif ( armament.AIM.active[pylon] != nil and selected == "R-27T1" ) {
+			var brevity = armament.AIM.active[pylon].brevity;
+
+			armament.AIM.active[pylon].guidance = "level";
+			armament.AIM.active[pylon].releaseAtNothing();
+
+			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+			setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
+			var phrase = brevity ~ " released:";
+			if (getprop("payload/armament/msg")) {
+				defeatSpamFilter(phrase);
+			} else {
+				setprop("/sim/messages/atc", phrase);
+			}
+
 		} elsif ( armament.AIM.active[pylon] != nil and selected == "Kh-66" ) {
 			armament.AIM.active[pylon].releaseAtNothing();
 
@@ -757,6 +773,7 @@ var paint_the_rainbow = func(timer) {
 		return;
 	}
 }
+
 
 ############################# main init ###############
 

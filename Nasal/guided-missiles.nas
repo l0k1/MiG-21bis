@@ -969,7 +969,16 @@ var AIM = {
 			me.SwSoundFireOnOff.setBoolValue(TRUE);
 		}
 		if(me.mfFunction != nil) {
-			me.settings = me.mfFunction({time_s: me.life_time, dist_m: me.dist_curr_direct, mach: me.speed_m, weapon_position: me.coord});
+			me.settings = me.mfFunction({	time_s: 				me.life_time, 
+											dist_m: 				me.dist_curr_direct, 
+											mach: 					me.speed_m, 
+											weapon_position: 		me.coord, 
+											guidance: 				me.guidance, 
+											seeker_detect_range: 	me.detect_range_curr_nm, 
+											seeker_fov: 			me.max_seeker_dev, 
+											weapon_pitch: 			me.pitch, 
+											weapon_heading: 		me.hdg,
+										});
 			if (me.settings["guidance"] != nil) {
 				me.guidance = me.settings.guidance;
 				#me.printGuide("Guidance switched to "~me.guidance);
@@ -1279,8 +1288,8 @@ var AIM = {
 			#
 			# check stats while flying:
 			#
-			me.printFlight(sprintf("Mach %04.2f , time %05.1f s , thrust %05.1f lbf , G-force %05.2f", me.speed_m, me.life_time, me.thrust_lbf, me.g));
-			me.printFlight(sprintf("Alt %07.1f ft , direct distance to target %04.1f NM", me.alt_ft, me.direct_dist_m*M2NM));			
+			#me.printFlight(sprintf("Mach %04.2f , time %05.1f s , thrust %05.1f lbf , G-force %05.2f", me.speed_m, me.life_time, me.thrust_lbf, me.g));
+			#me.printFlight(sprintf("Alt %07.1f ft , direct distance to target %04.1f NM", me.alt_ft, me.direct_dist_m*M2NM));			
 			
 			if (me.exploded == TRUE) {
 				me.printStats(sprintf("%s max absolute %.2f Mach. Max relative %.2f Mach. Max alt %6d ft. Terminal %.2f mach.", me.type, me.maxMach, me.maxMach-me.startMach, me.maxAlt, me.speed_m));

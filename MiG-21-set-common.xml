@@ -840,10 +840,10 @@
 		<lights>			<file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>			</lights>
 		<Eject>				<file>Aircraft/MiG-21bis/Nasal/eject.nas</file>				</Eject>			<!-- depreciated -->
 		<tyresmoke>			<file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>			</tyresmoke>
-		<payloads>			<file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>			</payloads>			<!-- store handling -->
 		<radar_logic>		<file>Aircraft/MiG-21bis/Nasal/radar-logic.nas</file>		</radar_logic>		<!-- radar logic and missile locking -->
 		<arm_locking>		<file>Aircraft/MiG-21bis/Nasal/armament-locking.nas</file>	</arm_locking>		<!-- radar locks and missile in-flight logic -->
 		<radar_canvas>		<file>Aircraft/MiG-21bis/Nasal/radar-canvas.nas</file>		</radar_canvas>		<!-- radar canvas -->
+		<payloads>			<file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>			</payloads>			<!-- store handling -->
 		<gunsight_canvas>	<file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>	</gunsight_canvas>	<!-- gunsight canvas -->
 		<blackout>			<file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>			</blackout>			<!-- legacy blackout code -->
 		<armament>			<file>Aircraft/MiG-21bis/Nasal/guided-missiles.nas</file>	</armament>			<!-- guided missile control, oprf standard -->
