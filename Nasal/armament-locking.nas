@@ -218,14 +218,13 @@ var kh25_guidance = func(input) {
 #{guidance, guidanceLaw, target}
 
 var r27t1_guidance = func(input) {
-	print("weapon pitch:" ~ input.weapon_pitch);
+	#print("weapon pitch:" ~ input.weapon_pitch);
 	detect_range = input.seeker_detect_range * NM2M;
 	if (input.guidance == "ir") {
 		return {};
 	}
 	foreach (track; radar_logic.tracks) {
-		print("track distance: " ~ track.coord.distance_to(input.weapon_position));
-		print("seeker range:   " ~ detect_range);
+		print("track distance: " ~ track.coord.distance_to(input.weapon_position) ~ " | seeker range:   " ~ detect_range);
 		if (track.coord.distance_to(input.weapon_position) > detect_range) {
 			continue;
 		}

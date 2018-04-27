@@ -558,7 +558,7 @@ var missile_release = func(pylon) {
 		} elsif ( armament.AIM.active[pylon] != nil and selected == "R-27T1" ) {
 			var brevity = armament.AIM.active[pylon].brevity;
 
-			armament.AIM.active[pylon].guidance = "level";
+			armament.AIM.active[pylon].guidance = "gyro-pitch";
 			armament.AIM.active[pylon].releaseAtNothing();
 
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);

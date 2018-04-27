@@ -3,6 +3,7 @@ UPDATE_TIME = 0.15;
 
 var main_loop = func (){
 	performance();
+  logTime();
 	settimer(func{main_loop();},UPDATE_TIME);
 }
 
@@ -40,6 +41,17 @@ setlistener("/instrumentation/misc-panel-1/hlt-heat-rqst",func() {
     setprop("/instrumentation/misc-panel-1/hlt-heat",getprop("/instrumentation/misc-panel-1/hlt-heat-rqst"));
   }
 });
+
+var logTime = func{
+  #log time and date for outputing ucsv files for converting into KML files for google earth.
+  if (getprop("logging/log[0]/enabled") == 1 and getprop("sim/time/utc/year") != nil) {
+    var date = getprop("sim/time/utc/year")~"/"~getprop("sim/time/utc/month")~"/"~getprop("sim/time/utc/day");
+    var time = getprop("sim/time/utc/hour")~":"~getprop("sim/time/utc/minute")~":"~getprop("sim/time/utc/second");
+
+    setprop("logging/date-log", date);
+    setprop("logging/time-log", time);
+  }
+}
 
 test_support();
 main_loop();

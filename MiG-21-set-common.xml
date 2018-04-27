@@ -862,4 +862,140 @@
 
 	</nasal>
 
+
+	<logging>
+		<log>
+			<filename>C:/Users/soweli/AppData/Roaming/flightgear.org/Export/mig_flightlog.csv</filename>
+			<enabled>false</enabled>
+			<interval-ms>500</interval-ms>
+			<delimiter>,</delimiter>
+			<entry>
+				<enabled>true</enabled>
+				<title>Latitude</title>
+				<property>/position/latitude-deg</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>Longitude</title>
+				<property>/position/longitude-deg</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>alt ft</title>
+				<property>/position/altitude-ft</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>date</title>
+				<property>logging/date-log</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>time</title>
+				<property>logging/time-log</property>
+			</entry>
+		</log>
+		<log>
+			<filename>C:/Users/soweli/AppData/Roaming/flightgear.org/Export/mp_0_flightlog.csv</filename>
+			<enabled>false</enabled>
+			<interval-ms>100</interval-ms>
+			<delimiter>,</delimiter>
+			<entry>
+				<enabled>true</enabled>
+				<title>Latitude</title>
+				<property>/ai/models/multiplayer/position/latitude-deg</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>Longitude</title>
+				<property>/ai/models/multiplayer/position/longitude-deg</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>alt ft</title>
+				<property>/ai/models/multiplayer/position/altitude-ft</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>date</title>
+				<property>sim/time/date-log</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>time</title>
+				<property>sim/time/time-log</property>
+			</entry>
+		</log>
+		<log>
+			<filename>C:/Users/soweli/AppData/Roaming/flightgear.org/Export/missile_flightlog.csv</filename>
+			<enabled>false</enabled>
+			<interval-ms>50</interval-ms>
+			<delimiter>,</delimiter>
+			<entry>
+				<enabled>true</enabled>
+				<title>Latitude</title>
+				<property>/logging/missile/latitude-deg</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>longitude</title>
+				<property>/logging/missile/longitude-deg</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>Altitude</title>
+				<property>/logging/missile/altitude-ft</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>Speed</title>
+				<property>/logging/missile/speed-m</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>Thrust</title>
+				<property>/logging/missile/thrust-lbf</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>Guidance</title>
+				<property>/logging/missile/guidance</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>date</title>
+				<property>sim/time/date-log</property>
+			</entry>
+			<entry>
+				<enabled>true</enabled>
+				<title>time</title>
+				<property>sim/time/time-log</property>
+			</entry>
+		</log>
+		<time-log type="string">0:0:0</time-log>
+		<date-log type="string">0/0/0</date-log>
+		<missile>
+			<!-- for google earth -->
+			<altitude-ft type="double">0.0</altitude-ft>
+			<longitude-deg type="double">0.0</longitude-deg>
+			<latitude-deg type="double">0.0</latitude-deg>
+			<t-altitude-ft type="double">0.0</t-altitude-ft>
+			<t-longitude-deg type="double">0.0</t-longitude-deg>
+			<t-latitude-deg type="double">0.0</t-latitude-deg>
+
+			<!-- for plotting performance -->
+			<dist-m type="double">0.0</dist-m>
+			<alt-m type="double">0.0</alt-m>
+			<speed-m type="double">0.0</speed-m>
+			<drag-lbf type="double">0.0</drag-lbf>
+			<thrust-lbf type="double">0.0</thrust-lbf>
+
+			<!-- test -->
+			<LOS-rate type="double">0.0</LOS-rate>
+			<dt type="double">0.0</dt>
+		</missile>
+	</logging>
+
+
+
 </PropertyList>
