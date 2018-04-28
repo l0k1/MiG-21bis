@@ -487,6 +487,7 @@
 				<cross-section-sqft type="double">0.143</cross-section-sqft> <!-- normally is crosssection area of munition (without fins) -->
 				<max-g type="int">28</max-g> <!-- max G-force the missile can pull at sealevel -->
 				<min-speed-for-guiding-mach type="double">0.8</min-speed-for-guiding-mach> <!-- minimum speed before the missile steers, before it reaches this speed it will fly ballistic. -->
+				<ignore-wind-at-release type="bool">true</ignore-wind-at-release>
 				<!--detonation-->
 				<weight-warhead-lbs type="double">85.98</weight-warhead-lbs> <!-- warhead weight -->
 				<arming-time-sec type="double">1.6</arming-time-sec> <!-- time for weapon to arm -->
@@ -543,6 +544,7 @@
 				<cross-section-sqft type="double">0.143</cross-section-sqft> <!-- normally is crosssection area of munition (without fins) -->
 				<max-g type="int">28</max-g> <!-- max G-force the missile can pull at sealevel -->
 				<min-speed-for-guiding-mach type="double">0.8</min-speed-for-guiding-mach> <!-- minimum speed before the missile steers, before it reaches this speed it will fly ballistic. -->
+				<ignore-wind-at-release type="bool">true</ignore-wind-at-release>
 				<!--detonation-->
 				<weight-warhead-lbs type="double">85.98</weight-warhead-lbs> <!-- warhead weight -->
 				<arming-time-sec type="double">1.6</arming-time-sec> <!-- time for weapon to arm -->
