@@ -556,6 +556,18 @@ var missile_release = func(pylon) {
 				setprop("/sim/messages/atc", phrase);
 			}
 		} elsif ( armament.AIM.active[pylon] != nil and selected == "R-27T1" ) {
+			var prs_inhg = getprop("/environment/pressure-inhg");
+			if ( prs_inhg > 25 ) {
+				#print("pressure: " ~ math.clamp(interp(prs_inhg,33,0,25,1.5),0,4));
+				#print("altitude: " ~ math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1));
+				armament.AIM.active[pylon].drop_time = math.clamp(interp(prs_inhg,33,0,25,1.5),0,4) * math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1);
+				#armament.AIM.active[pylon].drop_time = 3;
+			} else {
+				#print("pressure: " ~ math.clamp(interp(prs_inhg,25,1.5,5,4),0,4));
+				#print("altitude: " ~ math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1));
+				armament.AIM.active[pylon].drop_time = math.clamp(interp(prs_inhg,25,1.5,5,4),0,4) * math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1);
+				#armament.AIM.active[pylon].drop_time = 3;
+			}
 			var brevity = armament.AIM.active[pylon].brevity;
 
 			armament.AIM.active[pylon].guidance = "gyro-pitch";
