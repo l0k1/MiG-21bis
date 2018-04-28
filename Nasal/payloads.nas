@@ -560,13 +560,11 @@ var missile_release = func(pylon) {
 			if ( prs_inhg > 25 ) {
 				#print("pressure: " ~ math.clamp(interp(prs_inhg,33,0,25,1.5),0,4));
 				#print("altitude: " ~ math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1));
-				armament.AIM.active[pylon].drop_time = math.clamp(interp(prs_inhg,33,0,25,1.5),0,4) * math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1);
-				#armament.AIM.active[pylon].drop_time = 3;
+				armament.AIM.active[pylon].drop_time = math.clamp(interp(prs_inhg,33,0,25,1.5),0,4);
 			} else {
 				#print("pressure: " ~ math.clamp(interp(prs_inhg,25,1.5,5,4),0,4));
 				#print("altitude: " ~ math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1));
-				armament.AIM.active[pylon].drop_time = math.clamp(interp(prs_inhg,25,1.5,5,4),0,4) * math.clamp(interp(radar_logic.selection.get_range(),0,0,15,1),0,1);
-				#armament.AIM.active[pylon].drop_time = 3;
+				armament.AIM.active[pylon].drop_time = math.clamp(interp(prs_inhg,25,1.5,5,2),0,4);
 			}
 			var brevity = armament.AIM.active[pylon].brevity;
 

@@ -224,7 +224,7 @@ var r27t1_guidance = func(input) {
 		return {};
 	}
 	foreach (track; radar_logic.tracks) {
-		print("track distance: " ~ track.coord.distance_to(input.weapon_position) ~ " | seeker range:   " ~ detect_range);
+		#print("track distance: " ~ track.coord.distance_to(input.weapon_position) ~ " | seeker range:   " ~ detect_range);
 		if (track.coord.distance_to(input.weapon_position) > detect_range) {
 			continue;
 		}
@@ -238,11 +238,11 @@ var r27t1_guidance = func(input) {
 		while ( yg_rad >  math.pi ) { yg_rad = yg_rad - 2 * math.pi; }
 		while ( yg_rad < -math.pi ) { yg_rad = yg_rad + 2 * math.pi; }
 
-		print("found target at pitch: " ~ yg_rad * R2D ~ " | heading: " ~ xg_rad);
+		#print("found target at pitch: " ~ yg_rad * R2D ~ " | heading: " ~ xg_rad);
       
     	var seeker_fov_rad = input.seeker_fov * D2R;
 		if (yg_rad > -seeker_fov_rad and yg_rad < seeker_fov_rad and xg_rad > -seeker_fov_rad  and xg_rad < seeker_fov_rad) {
-			print("locked!");
+			#print("locked!");
 			return {guidance: "ir", target: track};
 		}
 	}
