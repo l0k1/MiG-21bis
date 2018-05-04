@@ -13,7 +13,7 @@ var lock_bars_pos = "/controls/radar/lock-bars-pos";
 var radar_mode = "/controls/radar/mode";
 var show_callsigns = "/controls/radar/panel/iff";
 
-var radarRange = 60000;
+var radarRange = radar_logic.radarRange;
 var radarRange10k = radarRange / 1000;
 
 var RADAR_BOTTOM_LIMIT = -30;

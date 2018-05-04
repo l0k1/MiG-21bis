@@ -573,7 +573,7 @@ var missile_release = func(pylon) {
 
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 			setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
-			var phrase = brevity ~ " released:";
+			var phrase = brevity ~ " Maddog released";
 			if (getprop("payload/armament/msg")) {
 				defeatSpamFilter(phrase);
 			} else {
