@@ -2,9 +2,9 @@
 
 	<property value="0">electric/external-connected</property>  <!-- if the external ground cart is connected -->
 	<property value="0">electric/battery-mode</property>		<!-- 0 = batteries in parallel, 1 = batteries in series -->
-	<property value="0">electric/busses/bus-switch[0]</property>
-	<property value="0">electric/busses/bus-switch[1]</property>
-	<property value="0">electric/busses/bus-switch[2]</property>
+	<property value="0">electric/buses/bus-switch[0]</property>
+	<property value="0">electric/buses/bus-switch[1]</property>
+	<property value="0">electric/buses/bus-switch[2]</property>
 
 	<channel name="sources">
 	
@@ -275,21 +275,21 @@
 		<switch name="electric/buses/bus[0]">
 			<default value="0"/>
 			<test logic="AND" value="electric/inverters/po-750a[0]">
-				electric/busses/bus-switch[0] == 1
+				electric/buses/bus-switch[0] == 1
 			</test>
 		</switch>
 		
 		<switch name="electric/buses/bus[1]">
 			<default value="0"/>
 			<test logic="AND" value="electric/inverters/po-750a[1]">
-				electric/busses/bus-switch[1] == 1
+				electric/buses/bus-switch[1] == 1
 			</test>
 		</switch>
 		
 		<switch name="electric/buses/bus[2]">
 			<default value="0"/>
 			<test logic="AND" value="electric/inverters/po-1500vt">
-				electric/busses/bus-switch[2] == 1
+				electric/buses/bus-switch[2] == 1
 			</test>
 		</switch>
 		
