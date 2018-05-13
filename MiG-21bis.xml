@@ -663,6 +663,7 @@
  <system file="throttle"/>
  <system file="payloads"/>
  <system file="electric"/>
+ <system file="hydraulic"/>
 
  <flight_control name="none"/>
 

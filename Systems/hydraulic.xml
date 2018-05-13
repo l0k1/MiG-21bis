@@ -13,7 +13,7 @@
 					<tableData>
 						0.00	0.00
 						6.00	140.0
-						30.0	181.0
+						30.0	191.0
 						90.0    213.0
 						110.0   216.0
 					</tableData>
@@ -29,7 +29,7 @@
 					<tableData>
 						0.00	0.00
 						6.00	140.0
-						30.0	181.0
+						30.0	191.0
 						90.0    213.0
 						110.0   216.0
 					</tableData>
@@ -37,7 +37,6 @@
 			</function>
 			<output>hydraulic/source/bar[1]</output>
 		</fcs_function>
-		
     </channel>
     
     <channel name="crossfeed">
