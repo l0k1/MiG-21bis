@@ -1,0 +1,117 @@
+<system name="warning-lights">
+
+	<property value="1">/instrumentation/warning-lights/dimmer[4]</property>  <!-- if the external ground cart is connected -->
+
+	<channel name="lights4">
+	
+		<!-- 
+			electric/sources/dc-volts
+			There are 4 lights on this panel:
+			VENT DROP TK EMPTY: If the ventral drop tank (tank 11) is empty
+			NO 1 TK GP EMPTY: If the wing tanks (tanks 7,8,9,10) are empty
+			450L FUEL REMAIN: If there is 450L of fuel
+			NO 3 TK GP EMPTY: Tanks 3,4,5,6 are empty
+		-->
+
+		<!-- VENT DROP TK EMPTY -->
+
+		<switch name="warning-lights/vent-drop-tk-empty-switch">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				propulsion/tank[11]/contents-lbs le 1.5
+			</test>
+		</switch>
+		
+		<fcs_function name="trash/warning-lights/vent-drop-tk-empty">
+			<function>
+				<product>
+					<property>/instrumentation/warning-lights/dimmer[4]</property>
+					<property>warning-lights/vent-drop-tk-empty-switch</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/vent-drop-tk-empty</output>
+		</fcs_function>
+
+		<!-- NO 1 TK GP EMPTY -->
+
+		<switch name="warning-lights/no-1-gp-empty-switch">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				propulsion/tank[7]/contents-lbs le 1.5
+				propulsion/tank[8]/contents-lbs le 1.5
+				propulsion/tank[9]/contents-lbs le 1.5
+				propulsion/tank[10]/contents-lbs le 1.5
+			</test>
+		</switch>
+		
+		<fcs_function name="trash/warning-lights/no-1-gp-empty">
+			<function>
+				<product>
+					<property>/instrumentation/warning-lights/dimmer[4]</property>
+					<property>warning-lights/no-1-gp-empty-switch</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/no-1-gp-empty</output>
+		</fcs_function>
+
+		<!-- 450L FUEL REMAIN -->
+
+		<switch name="warning-lights/L450-switch">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				propulsion/total-fuel-lbs le 772
+			</test>
+		</switch>
+		
+		<fcs_function name="trash/warning-lights/L450">
+			<function>
+				<product>
+					<property>/instrumentation/warning-lights/dimmer[4]</property>
+					<property>warning-lights/L450-switch</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/L450</output>
+		</fcs_function>
+
+		<!-- NO 3 TK GP EMPTY -->
+
+		<switch name="warning-lights/no-3-gp-empty-switch">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				propulsion/tank[3]/contents-lbs le 2.5
+				propulsion/tank[4]/contents-lbs le 2.5
+				propulsion/tank[5]/contents-lbs le 2.5
+				propulsion/tank[6]/contents-lbs le 2.5
+			</test>
+		</switch>
+		
+		<fcs_function name="trash/warning-lights/no-3-gp-empty">
+			<function>
+				<product>
+					<property>/instrumentation/warning-lights/dimmer[4]</property>
+					<property>warning-lights/no-3-gp-empty-switch</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/no-3-gp-empty</output>
+		</fcs_function>
+
+	</channel>
+
+	
+</system>

@@ -664,6 +664,7 @@
  <system file="payloads"/>
  <system file="electric"/>
  <system file="hydraulic"/>
+ <system file="warning-lights"/>
 
  <flight_control name="none"/>
 
