@@ -506,7 +506,31 @@
             <pitch-deg>-7</pitch-deg>
             <x-m>-3.93039</x-m>
             <y-m> 0.24960</y-m>
-            <z-m> 0.57006</z-m>v
+            <z-m> 0.57006</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>lowerRightLightBank</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/LightPanels/lowerRightLightBank.xml</path>
+        <offsets>
+            <heading-deg>-33.3</heading-deg>
+            <pitch-deg></pitch-deg>
+            <x-m>-3.90710</x-m>
+            <y-m> 0.39652</y-m>
+            <z-m> 0.47709</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>upperRightLightBank</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/LightPanels/upperRightLightBank.xml</path>
+        <offsets>
+            <heading-deg>-33.3</heading-deg>
+            <pitch-deg>0</pitch-deg>
+            <x-m>-3.89783</x-m>
+            <y-m> 0.41120</y-m>
+            <z-m> 0.58140</z-m>
         </offsets>
     </model>
 
