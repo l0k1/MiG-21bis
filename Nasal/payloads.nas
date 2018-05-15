@@ -803,61 +803,42 @@ var pylon_select = func() {
 	#8: 2 msl
 	#9: 3 msl
 	#10: 4 msl
-	#pylons go 1,3,4,2 left to right IRL
+	#pylons go 3,1,2,4 left to right IRL
 	#pylons go 0,1,3,4 left to right internally
 	
 	var knobpos = getprop("controls/armament/panel/pylon-knob");
 	if ( knobpos == 0 ) {
 		setprop("/controls/armament/rocket-setting",16);
-		return [0,4,knobpos];
+		return [1,3,knobpos];
 	} elsif ( knobpos == 1 ) {
 		setprop("/controls/armament/rocket-setting",8);
-		return [1,3,knobpos];
+		return [0,4,knobpos];
 	} elsif ( knobpos == 2 ) {
 		setprop("/controls/armament/rocket-setting",4);
 		return [0,3,knobpos];
 	} elsif ( knobpos == 3 ) {
-		return [0,4,knobpos];
+		return [1,3,knobpos];
 	} elsif ( knobpos == 4 ) {
-		return [1,3,knobpos];
+		return [0,4,knobpos];
 	} elsif ( knobpos == 5 ) {
-		return [1,3,knobpos];
-	} elsif ( knobpos == 6 ) {
-		if ( getprop("payload/virtual/weight[7]/selected") == "R-60" ) {
-			var ret1 = 7;
-		} else {
-			var ret1 = 0;
-		}
-		if ( getprop("payload/virtual/weight[8]/selected") == "R-60" ) {
-			var ret2 = 8;
-		} else {
-			var ret2 = 4;
-		}
+		var ret1 = getprop("payload/virtual/weight[7]/selected") == "R-60" ? 7 : 0;
+		var ret2 = getprop("payload/virtual/weight[8]/selected") == "R-60" ? 8 : 4;
 		return [ret1,ret2,knobpos];
+	} elsif ( knobpos == 6 ) {
+		return [1,3,knobpos];
 	} elsif ( knobpos == 7 ) {
-		if ( getprop("payload/virtual/weight[7]/selected") == "R-60" ) {
-			var ret1 = 7;
-			return [7,-1,knobpos];
-		} else {
-			return [0,-1,knobpos];
-		}
-	} elsif ( knobpos == 8 ) {
-		if ( getprop("payload/virtual/weight[8]/selected") == "R-60" ) {
-			var ret1 = 7;
-			return [8,-1,knobpos];
-		} else {
-			return [4,-1,knobpos];
-		}
-	} elsif ( knobpos == 9 ) {
 		return [1,-1,knobpos];
-	} elsif ( knobpos == 10 ) {
+	} elsif ( knobpos == 8 ) {
 		return [3,-1,knobpos];
+	} elsif ( knobpos == 9 ) {
+		return getprop("payload/virtual/weight[7]/selected") == "R-60" ? [7,-1,knobpos] : [0,-1,knobpos];
+	} elsif ( knobpos == 10 ) {
+		return getprop("payload/virtual/weight[8]/selected") == "R-60" ? [8,-1,knobpos] : [4,-1,knobpos];
 	}
 }
 	
 
 var main_init = func {
-  print("initting!");
   setprop("sim/time/elapsed-at-init-sec", getprop("sim/time/elapsed-sec"));
 
   setprop("/consumables/fuel/tank[11]/jettisoned", FALSE);
@@ -865,7 +846,7 @@ var main_init = func {
   setprop("/consumables/fuel/tank[13]/jettisoned", FALSE);
 
   # Load exterior at startup to avoid stale sim at first external view selection. ( taken from TU-154B )
-  print("Loading exterior, wait...");
+  # print("Loading exterior, wait...");
   # return to cabin to next cycle
   settimer( load_interior, 0 );
   setprop("/sim/current-view/view-number", 1);
@@ -889,7 +870,7 @@ var main_init = func {
 
 var load_interior = func{
     setprop("/sim/current-view/view-number", 0);
-    print("..Done!");
+    #print("..Done!");
 }
 
 var main_init_listener = setlistener("sim/signals/fdm-initialized", func {
