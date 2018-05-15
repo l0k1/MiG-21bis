@@ -63,7 +63,7 @@
 
 	<payload>
 		<weight n="0">
-			<name>Left wing outboard pylon (#1)</name>
+			<name>Left wing outboard pylon (#3)</name>
 			<selected>none</selected>
 			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]"/>
 			<opt>
@@ -108,7 +108,7 @@
 			</opt>
 		</weight>
 		<weight n="1">
-			<name>Left wing inboard pylon (#3)</name>
+			<name>Left wing inboard pylon (#1)</name>
 			<selected>none</selected>
 			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]"/>
 			<opt>
@@ -199,7 +199,7 @@
 			</opt>
 		</weight>
 		<weight n="3">
-			<name>Right wing inboard pylon (#4)</name>
+			<name>Right wing inboard pylon (#2)</name>
 			<selected>none</selected>
 			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[3]"/>
 			<opt>
@@ -259,7 +259,7 @@
 			</opt>-->
 		</weight>
 		<weight n="4">
-			<name>Right wing outboard pylon (#2)</name>
+			<name>Right wing outboard pylon (#4)</name>
 			<selected>none</selected>
 			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[4]"/>
 			<opt>

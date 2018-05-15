@@ -48,7 +48,94 @@
 			NO 2 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
 			NO 3 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
 			NO 4 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
+
+
+    22 ~ S-5 pylon 0
+    23 ~ S-5 pylon 1
+    24 ~ S-5 pylon 3
+    25 ~ S-5 pylon 4
+
 		-->
+
+		<!-- NO 1 RKT ZERO PSN -->
+
+		<fcs_function name="trash/warning-lights/no-1-rkt-zero-psn">
+			<function>
+				<product>
+					<eq>
+						<property>/ai/submodels/submodel[23]/count</property>
+						<value>0</value>
+					</eq>
+					<property>/instrumentation/warning-lights/dimmer[2]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/no-1-rkt-zero-psn</output>
+		</fcs_function>
+
+		<!-- NO 2 RKT ZERO PSN -->
+
+		<fcs_function name="trash/warning-lights/no-2-rkt-zero-psn">
+			<function>
+				<product>
+					<eq>
+						<property>/ai/submodels/submodel[24]/count</property>
+						<value>0</value>
+					</eq>
+					<property>/instrumentation/warning-lights/dimmer[2]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/no-2-rkt-zero-psn</output>
+		</fcs_function>
+
+		<!-- NO 3 RKT ZERO PSN -->
+
+		<fcs_function name="trash/warning-lights/no-3-rkt-zero-psn">
+			<function>
+				<product>
+					<eq>
+						<property>/ai/submodels/submodel[22]/count</property>
+						<value>0</value>
+					</eq>
+					<property>/instrumentation/warning-lights/dimmer[2]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/no-3-rkt-zero-psn</output>
+		</fcs_function>
+
+		<!-- NO 4 RKT ZERO PSN -->
+
+		<fcs_function name="trash/warning-lights/no-4-rkt-zero-psn">
+			<function>
+				<product>
+					<eq>
+						<property>/ai/submodels/submodel[25]/count</property>
+						<value>0</value>
+					</eq>
+					<property>/instrumentation/warning-lights/dimmer[2]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/no-4-rkt-zero-psn</output>
+		</fcs_function>
 	
 	</channel>
 	
