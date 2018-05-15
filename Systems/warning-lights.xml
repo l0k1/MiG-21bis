@@ -1,32 +1,94 @@
 <system name="warning-lights">
 
-	<property value="1">/instrumentation/warning-lights/dimmer[4]</property>  <!-- if the external ground cart is connected -->
+	<property value="1">/instrumentation/warning-lights/dimmer[0]</property>
+	<property value="1">/instrumentation/warning-lights/dimmer[1]</property>
+	<property value="1">/instrumentation/warning-lights/dimmer[2]</property>
+	<property value="1">/instrumentation/warning-lights/dimmer[3]</property>
+	<property value="1">/instrumentation/warning-lights/dimmer[4]</property>
+	<property value="1">/instrumentation/warning-lights/dimmer[5]</property>
 
-	<channel name="lights4">
+	<channel name="lights-dc" execrate="20">
+		<fcs_function name="trash/warning-lights/lights-dc">
+			<function>
+				<interpolate1d>
+					<property>electric/inverters/pt-125c</property>
+					<value> 0.00 </value> <value> 0.00 </value>
+					<value> 10.0 </value> <value> 0.00 </value>
+					<value> 14.0 </value> <value> 0.20 </value>
+					<value> 23.0 </value> <value> 0.50 </value>
+					<value> 26.0 </value> <value> 1.00 </value>
+					<value> 40.0 </value> <value> 1.00 </value>
+				</interpolate1d>
+			</function>
+			<clipto>
+				<min>0.0</min>
+				<max>1.0</max>
+			</clipto>
+			<output>warning-lights/lights-dc</output>
+		</fcs_function>
+	</channel>
+	
+	<channel name="lights1" execrate="20">
 	
 		<!-- 
-			electric/sources/dc-volts
+			There are 4 lights on this panel:
+			MARKER: the plane is passing over an NDB marker beacon
+			CONE EXTENDED: the nosecone is extended
+			STAB FOR LDG: If the flaps and BLC are set for landing
+			TRIM NEUTRAL: if the trim is in a neutral position
+		-->
+	
+	</channel>
+	
+	<channel name="lights2" execrate="20">
+	
+		<!-- 
+			There are 4 lights on this panel:
+			NO 1 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
+			NO 2 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
+			NO 3 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
+			NO 4 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
+		-->
+	
+	</channel>
+	
+	<channel name="lights3" execrate="20">
+	
+		<!-- 
+			There are 8 lights on this panel:
+			WG DROP TKS EMPTY: Wing drop tanks are empty (tanks 12 and 13)
+			VENT DROP TK ATTACHD: ventral drop tank is attached
+			INBOARD STATION 1: something attached on this pylon
+			INBOARD STATION 2: something attached on this pylon
+			OUTBOARD STATION 3: something attached on this pylon
+			OUTBOARD STATION 4: something attached on this pylon
+			PORT JATO: jato/cm attached on port side
+			STBD JATO: jato/cm attached on starboard side
+		-->
+	
+	</channel>
+
+	<channel name="lights4" execrate="20">
+	
+		<!-- 
 			There are 4 lights on this panel:
 			VENT DROP TK EMPTY: If the ventral drop tank (tank 11) is empty
 			NO 1 TK GP EMPTY: If the wing tanks (tanks 7,8,9,10) are empty
 			450L FUEL REMAIN: If there is 450L of fuel
 			NO 3 TK GP EMPTY: Tanks 3,4,5,6 are empty
 		-->
-
+		
 		<!-- VENT DROP TK EMPTY -->
 
-		<switch name="warning-lights/vent-drop-tk-empty-switch">
-			<default value="0"/>
-			<test logic="AND" value="1">
-				propulsion/tank[11]/contents-lbs le 1.5
-			</test>
-		</switch>
-		
 		<fcs_function name="trash/warning-lights/vent-drop-tk-empty">
 			<function>
 				<product>
+					<le>
+						<property>propulsion/tank[11]/contents-lbs</property>
+						<value>1.5</value>
+					</le>
 					<property>/instrumentation/warning-lights/dimmer[4]</property>
-					<property>warning-lights/vent-drop-tk-empty-switch</property>
+					<property>warning-lights/lights-dc</property>
 				</product>
 			</function>
 			<clipto>
@@ -38,21 +100,27 @@
 
 		<!-- NO 1 TK GP EMPTY -->
 
-		<switch name="warning-lights/no-1-gp-empty-switch">
-			<default value="0"/>
-			<test logic="AND" value="1">
-				propulsion/tank[7]/contents-lbs le 1.5
-				propulsion/tank[8]/contents-lbs le 1.5
-				propulsion/tank[9]/contents-lbs le 1.5
-				propulsion/tank[10]/contents-lbs le 1.5
-			</test>
-		</switch>
-		
 		<fcs_function name="trash/warning-lights/no-1-gp-empty">
 			<function>
 				<product>
+					<le>
+						<property>propulsion/tank[7]/contents-lbs</property>
+						<value>2.5</value>
+					</le>
+					<le>
+						<property>propulsion/tank[8]/contents-lbs</property>
+						<value>2.5</value>
+					</le>
+					<le>
+						<property>propulsion/tank[9]/contents-lbs</property>
+						<value>2.5</value>
+					</le>
+					<le>
+						<property>propulsion/tank[10]/contents-lbs</property>
+						<value>2.5</value>
+					</le>
 					<property>/instrumentation/warning-lights/dimmer[4]</property>
-					<property>warning-lights/no-1-gp-empty-switch</property>
+					<property>warning-lights/lights-dc</property>
 				</product>
 			</function>
 			<clipto>
@@ -63,19 +131,16 @@
 		</fcs_function>
 
 		<!-- 450L FUEL REMAIN -->
-
-		<switch name="warning-lights/L450-switch">
-			<default value="0"/>
-			<test logic="AND" value="1">
-				propulsion/total-fuel-lbs le 772
-			</test>
-		</switch>
 		
 		<fcs_function name="trash/warning-lights/L450">
 			<function>
 				<product>
+					<le>
+						<property>propulsion/total-fuel-lbs</property>
+						<value>772.0</value>
+					</le>
 					<property>/instrumentation/warning-lights/dimmer[4]</property>
-					<property>warning-lights/L450-switch</property>
+					<property>warning-lights/lights-dc</property>
 				</product>
 			</function>
 			<clipto>
@@ -86,22 +151,28 @@
 		</fcs_function>
 
 		<!-- NO 3 TK GP EMPTY -->
-
-		<switch name="warning-lights/no-3-gp-empty-switch">
-			<default value="0"/>
-			<test logic="AND" value="1">
-				propulsion/tank[3]/contents-lbs le 2.5
-				propulsion/tank[4]/contents-lbs le 2.5
-				propulsion/tank[5]/contents-lbs le 2.5
-				propulsion/tank[6]/contents-lbs le 2.5
-			</test>
-		</switch>
 		
 		<fcs_function name="trash/warning-lights/no-3-gp-empty">
 			<function>
 				<product>
+					<le>
+						<property>propulsion/tank[3]/contents-lbs</property>
+						<value>2.5</value>
+					</le>
+					<le>
+						<property>propulsion/tank[4]/contents-lbs</property>
+						<value>2.5</value>
+					</le>
+					<le>
+						<property>propulsion/tank[5]/contents-lbs</property>
+						<value>2.5</value>
+					</le>
+					<le>
+						<property>propulsion/tank[6]/contents-lbs</property>
+						<value>2.5</value>
+					</le>
 					<property>/instrumentation/warning-lights/dimmer[4]</property>
-					<property>warning-lights/no-3-gp-empty-switch</property>
+					<property>warning-lights/lights-dc</property>
 				</product>
 			</function>
 			<clipto>
@@ -111,6 +182,24 @@
 			<output>warning-lights/no-3-gp-empty</output>
 		</fcs_function>
 
+	</channel>
+	
+	<channel name="lights5" execrate="20">
+	
+		<!-- 
+			There are 10 lights on this panel:
+			SWITCH OFF IGNITION: ?
+			SERVICE TANK: ?
+			FIRST REHEAT: Regular A/B is on
+			SECOND REHEAT: Second A/B is on
+			DC GEN OFF: DC generator is off/malfunctioning
+			AC GEN OFF: AC generator is off/malfunctioning
+			FIRE: the engine is on fire
+			JET NOZZLE OPEN: ?
+			WTCH MAIN SYST PRES: Main hydraulic system pressure is low
+			WTCH BKUP SYST PRES: Second hydraulic system pressure is low
+		-->
+	
 	</channel>
 
 	
