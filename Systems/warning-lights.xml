@@ -6,6 +6,7 @@
 	<property value="1">/instrumentation/warning-lights/dimmer[3]</property>
 	<property value="1">/instrumentation/warning-lights/dimmer[4]</property>
 	<property value="1">/instrumentation/warning-lights/dimmer[5]</property>
+	<property value="0">/consumables/fuel/tank[11]/selected</property>
 
 	<channel name="lights-dc" execrate="20">
 		<fcs_function name="trash/warning-lights/lights-dc">
@@ -62,10 +63,38 @@
 		<fcs_function name="trash/warning-lights/no-1-rkt-zero-psn">
 			<function>
 				<product>
-					<eq>
-						<property>/ai/submodels/submodel[23]/count</property>
-						<value>0</value>
-					</eq>
+					<or>
+						<and>
+							<eq>
+								<property>/payload/weight[1]/weight-lb</property>
+								<value>141</value>
+							</eq>
+							<eq>
+								<property>/ai/submodels/submodel[23]/count</property>
+								<value>0</value>
+							</eq>
+						</and>
+						<and>
+							<or>
+								<eq>
+									<property>/ai/submodels/submodel[23]/count</property>
+									<value>0</value>
+								</eq>
+								<eq>
+									<property>/ai/submodels/submodel[23]/count</property>
+									<value>16</value>
+								</eq>
+							</or>
+							<eq>
+								<property>/payload/weight[1]/weight-lb</property>
+								<value>582</value>
+							</eq>
+						</and>
+						<eq>
+							<property>/payload/weight[1]/weight-lb</property>
+							<value>0</value>
+						</eq>
+					</or>
 					<property>/instrumentation/warning-lights/dimmer[2]</property>
 					<property>warning-lights/lights-dc</property>
 				</product>
@@ -82,10 +111,38 @@
 		<fcs_function name="trash/warning-lights/no-2-rkt-zero-psn">
 			<function>
 				<product>
-					<eq>
-						<property>/ai/submodels/submodel[24]/count</property>
-						<value>0</value>
-					</eq>
+					<or>
+						<and>
+							<eq>
+								<property>/payload/weight[3]/weight-lb</property>
+								<value>141</value>
+							</eq>
+							<eq>
+								<property>/ai/submodels/submodel[24]/count</property>
+								<value>0</value>
+							</eq>
+						</and>
+						<and>
+							<or>
+								<eq>
+									<property>/ai/submodels/submodel[24]/count</property>
+									<value>0</value>
+								</eq>
+								<eq>
+									<property>/ai/submodels/submodel[24]/count</property>
+									<value>16</value>
+								</eq>
+							</or>
+							<eq>
+								<property>/payload/weight[3]/weight-lb</property>
+								<value>582</value>
+							</eq>
+						</and>
+						<eq>
+							<property>/payload/weight[3]/weight-lb</property>
+							<value>0</value>
+						</eq>
+					</or>
 					<property>/instrumentation/warning-lights/dimmer[2]</property>
 					<property>warning-lights/lights-dc</property>
 				</product>
@@ -102,10 +159,38 @@
 		<fcs_function name="trash/warning-lights/no-3-rkt-zero-psn">
 			<function>
 				<product>
-					<eq>
-						<property>/ai/submodels/submodel[22]/count</property>
-						<value>0</value>
-					</eq>
+					<or>
+						<and>
+							<eq>
+								<property>/payload/weight[0]/weight-lb</property>
+								<value>141</value>
+							</eq>
+							<eq>
+								<property>/ai/submodels/submodel[22]/count</property>
+								<value>0</value>
+							</eq>
+						</and>
+						<and>
+							<or>
+								<eq>
+									<property>/ai/submodels/submodel[22]/count</property>
+									<value>0</value>
+								</eq>
+								<eq>
+									<property>/ai/submodels/submodel[22]/count</property>
+									<value>16</value>
+								</eq>
+							</or>
+							<eq>
+								<property>/payload/weight[0]/weight-lb</property>
+								<value>582</value>
+							</eq>
+						</and>
+						<eq>
+							<property>/payload/weight[0]/weight-lb</property>
+							<value>0</value>
+						</eq>
+					</or>
 					<property>/instrumentation/warning-lights/dimmer[2]</property>
 					<property>warning-lights/lights-dc</property>
 				</product>
@@ -122,10 +207,38 @@
 		<fcs_function name="trash/warning-lights/no-4-rkt-zero-psn">
 			<function>
 				<product>
-					<eq>
-						<property>/ai/submodels/submodel[25]/count</property>
-						<value>0</value>
-					</eq>
+					<or>
+						<and>
+							<eq>
+								<property>/payload/weight[4]/weight-lb</property>
+								<value>141</value>
+							</eq>
+							<eq>
+								<property>/ai/submodels/submodel[25]/count</property>
+								<value>0</value>
+							</eq>
+						</and>
+						<and>
+							<or>
+								<eq>
+									<property>/ai/submodels/submodel[25]/count</property>
+									<value>0</value>
+								</eq>
+								<eq>
+									<property>/ai/submodels/submodel[25]/count</property>
+									<value>16</value>
+								</eq>
+							</or>
+							<eq>
+								<property>/payload/weight[4]/weight-lb</property>
+								<value>582</value>
+							</eq>
+						</and>
+						<eq>
+							<property>/payload/weight[4]/weight-lb</property>
+							<value>0</value>
+						</eq>
+					</or>
 					<property>/instrumentation/warning-lights/dimmer[2]</property>
 					<property>warning-lights/lights-dc</property>
 				</product>
@@ -152,6 +265,48 @@
 			PORT JATO: jato/cm attached on port side
 			STBD JATO: jato/cm attached on starboard side
 		-->
+
+		<fcs_function name="trash/warning-lights/wg-drop-tks-empty">
+			<function>
+				<product>
+					<and>
+						<le>
+							<property>propulsion/tank[12]/contents-lbs</property>
+							<value>1.5</value>
+						</le>
+						<le>
+							<property>propulsion/tank[13]/contents-lbs</property>
+							<value>1.5</value>
+						</le>
+					</and>
+					<property>/instrumentation/warning-lights/dimmer[3]]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/wg-drop-tks-empty</output>
+		</fcs_function>
+
+		<fcs_function name="trash/warning-lights/vent-droptk-attchd">
+			<function>
+				<product>
+					<eq>
+						<property>/consumables/fuel/tank[11]/selected</property>
+						<value>1</value>
+					</eq>
+					<property>/instrumentation/warning-lights/dimmer[3]]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/vent-drop-tk-attchd</output>
+		</fcs_function>
 	
 	</channel>
 
