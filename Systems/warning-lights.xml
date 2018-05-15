@@ -307,7 +307,81 @@
 			</clipto>
 			<output>warning-lights/vent-drop-tk-attchd</output>
 		</fcs_function>
+
+
+
+		<fcs_function name="trash/warning-lights/inboard-station-1">
+			<function>
+				<product>
+					<gt>
+						<property>/payload/weight[1]/weight-lb</property>
+						<value>0</value>
+					</gt>
+					<property>/instrumentation/warning-lights/dimmer[3]]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/inboard-station-1</output>
+		</fcs_function>
+
+		<fcs_function name="trash/warning-lights/inboard-station-2">
+			<function>
+				<product>
+					<gt>
+						<property>/payload/weight[3]/weight-lb</property>
+						<value>0</value>
+					</gt>
+					<property>/instrumentation/warning-lights/dimmer[3]]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/inboard-station-2</output>
+		</fcs_function>
 	
+		<fcs_function name="trash/warning-lights/outboard-station-3">
+			<function>
+				<product>
+					<gt>
+						<property>/payload/weight[0]/weight-lb</property>
+						<value>0</value>
+					</gt>
+					<property>/instrumentation/warning-lights/dimmer[3]]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/outboard-station-3</output>
+		</fcs_function>
+
+		<fcs_function name="trash/warning-lights/outboard-station-4">
+			<function>
+				<product>
+					<gt>
+						<property>/payload/weight[4]/weight-lb</property>
+						<value>0</value>
+					</gt>
+					<property>/instrumentation/warning-lights/dimmer[3]]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/outboard-station-4</output>
+		</fcs_function>
+
 	</channel>
 
 	<channel name="lights4" execrate="20">

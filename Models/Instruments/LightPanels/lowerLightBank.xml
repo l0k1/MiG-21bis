@@ -238,5 +238,49 @@
 			<factor-prop>/fdm/jsbsim/warning-lights/vent-drop-tk-attchd</factor-prop>
 		</emission> 
 	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>inboardStation1Light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/inboard-station-1</factor-prop>
+		</emission> 
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>inboardStation2Light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/inboard-station-2</factor-prop>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>outboardStation3Light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/outboard-station-3</factor-prop>
+		</emission> 
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>outboardStation4Light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/outboard-station-4</factor-prop>
+		</emission> 
+	</animation>
 	
 </PropertyList>
