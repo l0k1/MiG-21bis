@@ -613,4 +613,14 @@
         </offsets>
     </model>
 
+    <model>
+        <name>Flaps Panel</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/Flaps/flapControlPanel.xml</path>
+        <offsets>
+            <heading-deg>90</heading-deg>
+            <x-m>-3.51789</x-m>
+            <y-m>-0.37866</y-m>
+            <z-m> 0.44232</z-m>
+        </offsets>
+    </model>
 </PropertyList>

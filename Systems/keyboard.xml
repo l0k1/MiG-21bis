@@ -313,6 +313,26 @@
 		</binding>
 	</key>
 
+	<key n="93">
+		<name>]</name>
+		<desc>Flaps Down</desc>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>mig21.flap_keybind(0)</script>
+		</binding>
+	</key>
+
+	<key n="91">
+		<name>[]]</name>
+		<desc>Flaps Up</desc>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>mig21.flap_keybind(1)</script>
+		</binding>
+	</key>
+
 	 <key n="261">
   <name>F5</name>
   <repeatable type="bool">true</repeatable>

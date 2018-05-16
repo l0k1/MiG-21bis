@@ -269,6 +269,11 @@
 	<controls>
 		<flight>
 			<flaps>0</flaps>
+			<flap-panel>
+				<up type="bool">1</up>
+				<takeoff type="bool">0</takeoff>
+				<landing type="bool">0</landing>
+			</flap-panel>
 			<elevator-trim>0.00</elevator-trim>
 			<chute_jettisoned type="int">0</chute_jettisoned>
 		</flight>

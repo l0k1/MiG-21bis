@@ -53,5 +53,50 @@ var logTime = func{
   }
 }
 
+var flap_setting = func(button) {
+  # button 0 = off
+  # button 1 = up
+  # button 2 = takeoff
+  # button 3 = landing
+  if ( button == 0 ) {
+    setprop("/controls/flight/flap-panel/up",0);
+    setprop("/controls/flight/flap-panel/takeoff",0);
+    setprop("/controls/flight/flap-panel/landing",0);
+  } elsif ( button == 1 ) {
+    setprop("/controls/flight/flap-panel/up",1);
+    setprop("/controls/flight/flap-panel/takeoff",0);
+    setprop("/controls/flight/flap-panel/landing",0);
+    setprop("/controls/flight/flaps",0);
+  } elsif ( button == 2 ) {
+    setprop("/controls/flight/flap-panel/up",0);
+    setprop("/controls/flight/flap-panel/takeoff",1);
+    setprop("/controls/flight/flap-panel/landing",0);
+    setprop("/controls/flight/flaps",0.5);
+  } elsif ( button == 3 ) {
+    setprop("/controls/flight/flap-panel/up",0);
+    setprop("/controls/flight/flap-panel/takeoff",0);
+    setprop("/controls/flight/flap-panel/landing",1);
+    setprop("/controls/flight/flaps",1);
+  }
+}
+
+var flap_keybind = func(button) {
+  # button = 0 increase (flaps down)
+  # button = 1 decrease (flaps up)
+  if ( button == 0 ) {
+    if (getprop("/controls/flight/flap-panel/up")) {
+      flap_setting(2);
+    } elsif (getprop("/controls/flight/flap-panel/takeoff")) {
+      flap_setting(3);
+    }
+  } else {
+    if (getprop("/controls/flight/flap-panel/landing")) {
+      flap_setting(2);
+    } elsif (getprop("/controls/flight/flap-panel/takeoff")) {
+      flap_setting(1);
+    }
+  }
+}
+
 test_support();
 main_loop();
