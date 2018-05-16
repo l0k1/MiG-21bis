@@ -515,6 +515,48 @@
 			WTCH MAIN SYST PRES: Main hydraulic system pressure is low
 			WTCH BKUP SYST PRES: Second hydraulic system pressure is low
 		-->
+
+		<fcs_function name="trash/warning-lights/first-reheat">
+			<function>
+				<product>
+					<eq>
+						<property>fcs/aug-active</property>
+						<value>1</value>
+					</eq>
+					<property>/instrumentation/warning-lights/dimmer[5]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/first-reheat</output>
+		</fcs_function>
+
+		<fcs_function name="trash/warning-lights/second-reheat">
+			<function>
+				<product>
+					<and>
+						<eq>
+							<property>fcs/aug-active</property>
+							<value>1</value>
+						</eq>
+						<eq>
+							<property>propulsion/clr</property>
+							<value>1</value>
+						</eq>
+					</and>
+					<property>/instrumentation/warning-lights/dimmer[5]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/second-reheat</output>
+		</fcs_function>
 	
 	</channel>
 
