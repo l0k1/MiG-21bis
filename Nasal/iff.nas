@@ -17,7 +17,7 @@
 # <iff_unique_id type="string">
 # optional, default "". if you'd like to only have your planes match with a certain subset, set iff_unique_id to "NATO" or "WARSAW" or whatever you'd like.
 # <iff_refresh_rate type="int">
-# optional, default 180. how quickly the hash will change. this needs to be an int, and synced with other planes.
+# optional, default 120. how quickly the hash will change. this needs to be an int, and synced with other planes.
 #
 #
 # to use:
