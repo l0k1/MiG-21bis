@@ -296,6 +296,213 @@
 	</channel>
 	
 	<channel name="output">
+	
+		<!-- 
+		
+		switches
+		
+		power source delineated by cockpit proximity until an authoritative source can be found
+		
+		-->
+		
+		<!-- rear right panel -->
+		
+		<switch name="electric/output/air-brakes">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/air-brake == 1
+			</test>
+		</switch>
+		
+		<!-- landing gear and flaps-->
+		<switch name="electric/output/lg-wg-flaps">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/lg-wg-flaps == 1
+			</test>
+		</switch>
+		
+		<!-- nav lights -->
+		<switch name="electric/output/lg-sig-nav-lts">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/lg-sig-nav-lts == 1
+			</test>
+		</switch>
+		
+		<!-- nosecone shutters -->
+		<switch name="electric/output/cone-and-as-shutters-gtl">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/cone-and-as-shutters-gtl == 1
+			</test>
+		</switch>
+		
+		<!-- weapon jettison -->
+		<switch name="electric/output/msl-rgm-emer-lcn-lchr-rkt-bombs-jett">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/msl-rgm-emer-lcn-lchr-rkt-bombs-jett == 1
+			</test>
+		</switch>
+		
+		<!-- heat lights -->
+		<switch name="electric/output/oxy-eq-heat-extn-lamp-wht-lt">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/oxy-eq-heat-extn-lamp-wht-lt == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/drag-chute">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/drag-chute == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/drop-tanks-jett">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/drop-tanks-jett == 1
+			</test>
+		</switch>
+		
+		<!-- stabilizer -->
+		<switch name="electric/output/apy-syst-man-ctl">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/apy-syst-man-ctl == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/taxi-ldg-lts-lg-ext-sig">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/taxi-ldg-lts-lg-ext-sig == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/booster-system-off-hyd-syst-sig">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/booster-system-off-hyd-syst-sig == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/hydr-pres-gauge-tanks-sig">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/booster-system-off-hyd-syst-sig == 1
+			</test>
+		</switch>
+		
+		<!--tbh no idea lol-->
+		<switch name="electric/output/anh-pnl-lampst-test-copu-warn-syst">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/anh-pnl-lampst-test-copu-warn-syst == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/ext-stores-sig">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/ext-stores-sig == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/blc-syst-shutters-control-1">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/blc-syst-shutters-control-1 == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/blc-syst-shutters-control-2">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/blc-syst-shutters-control-2 == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/tac-rls-1-2">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/tac-rls-1-2 == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/cabin-air-sup">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/cabin-air-sup == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/firing-button">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/firing-button == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/cdr-atc-xponder">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/cdr-atc-xponder == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/apy-syst-auto-ctl">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/apy-syst-auto-ctl == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/tac-rls-3-4">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/tac-rls-3-4 == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/battery-heat">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/battery-heat == 1
+			</test>
+		</switch>
+		
+		
+		<!-- 
+		
+		lights
+		
+		-->
+		
+		<!-- warning lights - do we need to split out over every panel? -->
+		<fcs_function name="trash/warning-lights/lights-dc">
+			<function>
+				<interpolate1d>
+					<property>electric/inverters/pt-125c</property>
+					<value> 0.00 </value> <value> 0.00 </value>
+					<value> 10.0 </value> <value> 0.00 </value>
+					<value> 14.0 </value> <value> 0.20 </value>
+					<value> 23.0 </value> <value> 0.50 </value>
+					<value> 26.0 </value> <value> 1.00 </value>
+					<value> 40.0 </value> <value> 1.00 </value>
+				</interpolate1d>
+			</function>
+			<clipto>
+				<min>0.0</min>
+				<max>1.0</max>
+			</clipto>
+			<output>warning-lights/lights-dc</output>
+		</fcs_function>
+	
+	
 	</channel>
 	
 </system>
