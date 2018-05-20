@@ -623,4 +623,16 @@
             <z-m> 0.44232</z-m>
         </offsets>
     </model>
+
+    <model>
+        <name>Flap and Gear Indicator</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/FlapAndGearIndicator/flapAndGearIndicator.xml</path>
+        <offsets>
+            <heading-deg>57.6</heading-deg>
+            <x-m>-3.87615</x-m>
+            <y-m>-0.38081</y-m>
+            <z-m> 0.52138</z-m>
+        </offsets>
+    </model>
+
 </PropertyList>
