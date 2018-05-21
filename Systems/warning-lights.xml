@@ -560,5 +560,104 @@
 	
 	</channel>
 
+	<channel name="lights_other">
+
+		<fcs_function name="trash/warning-lights/fagp/gear-down">
+			<function>
+				<product>
+					<eq>
+						<property>gear/gear-pos-norm</property>
+						<value>1</value>
+					</eq>
+					<property>/instrumentation/warning-lights/dimmer[0]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/fagp/gear-down</output>
+		</fcs_function>
+
+		<fcs_function name="trash/warning-lights/fagp/gear-up">
+			<function>
+				<product>
+					<eq>
+						<property>gear/gear-pos-norm</property>
+						<value>0</value>
+					</eq>
+					<property>/instrumentation/warning-lights/dimmer[0]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/fagp/gear-up</output>
+		</fcs_function>
+
+		<fcs_function name="trash/warning-lights/fagp/flaps-down">
+			<function>
+				<product>
+					<gt>
+						<property>fcs/flap-pos-norm</property>
+						<value>0.49</value>
+					</gt>
+					<property>/instrumentation/warning-lights/dimmer[0]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/fagp/flaps-down</output>
+		</fcs_function>
+
+		<fcs_function name="trash/warning-lights/fagp/airbrake-extd">
+			<function>
+				<product>
+					<gt>
+						<property>fcs/speedbrake-pos-norm</property>
+						<value>0.1</value>
+					</gt>
+					<property>/instrumentation/warning-lights/dimmer[0]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/fagp/airbrake-extd</output>
+		</fcs_function>
+
+		<fcs_function name="trash/warning-lights/fagp/extend-lg">
+			<function>
+				<product>
+					<and>
+						<gt>
+							<property>fcs/flap-pos-norm</property>
+							<value>0.49</value>
+						</gt>
+						<lt>
+							<property>gear/gear-pos-norm</property>
+							<value>1</value>
+						</lt>
+					</and>
+					<property>/instrumentation/warning-lights/dimmer[0]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/fagp/extend-lg</output>
+		</fcs_function>
+
+	</channel>
 	
 </system>
