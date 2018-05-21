@@ -5,6 +5,29 @@
 	<property value="0">electric/buses/bus-switch[0]</property>
 	<property value="0">electric/buses/bus-switch[1]</property>
 	<property value="0">electric/buses/bus-switch[2]</property>
+	<property value="1">electric/switches/air-brake</property>
+	<property value="1">electric/switches/lg-wg-flaps</property>
+	<property value="1">electric/switches/lg-sig-nav-lts</property>
+	<property value="1">electric/switches/cone-and-as-shutters-gtl</property>
+	<property value="1">electric/switches/msl-rgm-emer-lcn-lchr-rkt-bombs-jett</property>
+	<property value="1">electric/switches/oxy-eq-heat-extn-lamp-wht-lt</property>
+	<property value="1">electric/switches/drag-chute</property>
+	<property value="1">electric/switches/drop-tanks-jett</property>
+	<property value="1">electric/switches/apy-syst-man-ctl</property>
+	<property value="1">electric/switches/taxi-ldg-lts-lg-ext-sig</property>
+	<property value="1">electric/switches/booster-system-off-hyd-syst-sig</property>
+	<property value="1">electric/switches/hydr-pres-gauge-tanks-sig</property>
+	<property value="1">electric/switches/anh-pnl-lampst-test-copu-warn-syst</property>
+	<property value="1">electric/switches/ext-stores-sig</property>
+	<property value="1">electric/switches/blc-syst-shutters-control-1</property>
+	<property value="1">electric/switches/blc-syst-shutters-control-2</property>
+	<property value="1">electric/switches/tac-rls-1-2</property>
+	<property value="1">electric/switches/cabin-air-sup</property>
+	<property value="1">electric/switches/firing-button</property>
+	<property value="1">electric/switches/cdr-atc-xponder</property>
+	<property value="1">electric/switches/apy-syst-auto-ctl</property>
+	<property value="1">electric/switches/tac-rls-3-4</property>
+	<property value="1">electric/switches/battery-heat</property>
 
 	<channel name="sources">
 	
