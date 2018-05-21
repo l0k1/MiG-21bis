@@ -8,27 +8,6 @@
 	<property value="1">/instrumentation/warning-lights/dimmer[5]</property>
 	<property value="0">/consumables/fuel/tank[11]/selected</property>
 
-	<channel name="lights-dc" execrate="20">
-		<fcs_function name="trash/warning-lights/lights-dc">
-			<function>
-				<interpolate1d>
-					<property>electric/inverters/pt-125c</property>
-					<value> 0.00 </value> <value> 0.00 </value>
-					<value> 10.0 </value> <value> 0.00 </value>
-					<value> 14.0 </value> <value> 0.20 </value>
-					<value> 23.0 </value> <value> 0.50 </value>
-					<value> 26.0 </value> <value> 1.00 </value>
-					<value> 40.0 </value> <value> 1.00 </value>
-				</interpolate1d>
-			</function>
-			<clipto>
-				<min>0.0</min>
-				<max>1.0</max>
-			</clipto>
-			<output>warning-lights/lights-dc</output>
-		</fcs_function>
-	</channel>
-	
 	<channel name="lights1" execrate="20">
 	
 		<!-- 
