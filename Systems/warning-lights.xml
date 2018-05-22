@@ -499,7 +499,7 @@
 			<function>
 				<product>
 					<eq>
-						<property>fcs/aug-active</property>
+						<property>/engines/engine[0]/augmentation</property>
 						<value>1</value>
 					</eq>
 					<property>/instrumentation/warning-lights/dimmer[5]</property>
@@ -518,7 +518,7 @@
 				<product>
 					<and>
 						<eq>
-							<property>fcs/aug-active</property>
+							<property>/engines/engine[0]/augmentation</property>
 							<value>1</value>
 						</eq>
 						<eq>
