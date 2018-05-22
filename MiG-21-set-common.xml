@@ -279,6 +279,8 @@
 		</flight>
 		<gear>
 			<brake-parking type="double">1</brake-parking>
+			<requested-setting type="int">0</requested-setting>
+			<up-pin type="bool">false</up-pin>
 		</gear>
 		<lighting>
 			<instruments-norm>0.3</instruments-norm>

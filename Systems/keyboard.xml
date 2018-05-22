@@ -324,12 +324,32 @@
 	</key>
 
 	<key n="91">
-		<name>[]]</name>
+		<name>[</name>
 		<desc>Flaps Up</desc>
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
 			<script>mig21.flap_keybind(1)</script>
+		</binding>
+	</key>
+
+	<key n="103">
+		<name>g</name>
+		<desc>Gear Handle Up</desc>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>mig21.gear_setting(1);</script>
+		</binding>
+	</key>
+
+	<key n="71">
+		<name>G</name>
+		<desc>Gear Handle Down</desc>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>mig21.gear_setting(-1);</script>
 		</binding>
 	</key>
 

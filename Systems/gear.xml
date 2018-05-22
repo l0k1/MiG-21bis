@@ -4,10 +4,11 @@
 <!-- GPLv2+ -->
 
 <system name="gear">
+<property value="1">gear/gear-rqst-norm</property>
 
   <channel name="Landing Gear">
    <kinematic name="Gear Control">
-     <input>gear/gear-cmd-norm</input>
+     <input>gear/gear-rqst-norm</input>
      <traverse>
        <setting>
           <position> 0 </position>

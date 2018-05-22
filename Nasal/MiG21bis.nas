@@ -98,5 +98,29 @@ var flap_keybind = func(button) {
   }
 }
 
+var gear_setting = func(dir) {
+  # dir = -1, decrease (neutral/gears down)
+  # dir = 1, increase (neutral/gears up)
+  var cur_setting = getprop("/controls/gear/requested-setting");
+  var pin_setting = getprop("/controls/gear/up-pin");
+  if (dir == 1) {
+    if (cur_setting == -1) {
+      setprop("/controls/gear/requested-setting",0);
+      setprop("fdm/jsbsim/gear/gear-rqst-norm",getprop("fdm/jsbsim/gear/gear-pos-norm"));
+    } elsif (cur_setting == 0 and pin_setting) {
+      setprop("/controls/gear/requested-setting",1);
+      setprop("fdm/jsbsim/gear/gear-rqst-norm",0);
+    }
+  } elsif (dir == -1) {
+    if (cur_setting == 1) {
+      setprop("/controls/gear/requested-setting",0);
+      setprop("fdm/jsbsim/gear/gear-rqst-norm",getprop("fdm/jsbsim/gear/gear-pos-norm"));
+    } elsif (cur_setting == 0) {
+      setprop("/controls/gear/requested-setting",-1);
+      setprop("fdm/jsbsim/gear/gear-rqst-norm",1);
+    }
+  }
+}
+
 test_support();
 main_loop();
