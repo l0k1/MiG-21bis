@@ -81,7 +81,7 @@
     <animation>
         <type>rotate</type>
         <object-name>radialNeedle</object-name>
-        <property>/instrumentation/nav[0]/radials/target-radial-deg</property>
+        <property>/instrumentation/nav[0]/radials/selected-deg</property>
         <factor>-1</factor>
         <axis>
             <x>1</x>
