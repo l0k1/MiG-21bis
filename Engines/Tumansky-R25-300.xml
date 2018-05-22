@@ -72,7 +72,7 @@
                     <value>0</value>
                 </eq>
                 <eq>
-                    <property>/propulsion/engine[0]/nozzle-pos-norm-corrected</property>
+                    <property>propulsion/engine[0]/nozzle-pos-norm-corrected</property>
                     <value>1</value>
                 </eq>
                 <gt>
