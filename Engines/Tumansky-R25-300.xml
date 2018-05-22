@@ -73,8 +73,12 @@
                 </eq>
                 <eq>
                     <property>/propulsion/engine[0]/nozzle-pos-norm-corrected</property>
-                    <value>0</value>
+                    <value>1</value>
                 </eq>
+                <gt>
+                    <property>fcs/throttle-redist-mil</property>
+                    <value>0.1</value>
+                </gt>
             </and>
             <value>0.1</value>
             <value>1</value>

@@ -144,13 +144,13 @@ ignition, a delay of up to 9 seconds was experienced.
 						<property>fcs/throttle-redist-aug-predelay</property>
 						<value>0</value>
 					</gt>
-					<value>0</value>
+					<value>1</value>
 					<property>/engines/engine[0]/nozzle-pos-norm</property>
 				</ifthen>
 			</function>
 			<clipto>
 				<min>0.0</min>
-				<max>0.0</max>
+				<max>1.0</max>
 			</clipto>
 			<output>propulsion/engine[0]/nozzle-pos-norm-corrected</output>
 		</fcs_function>
