@@ -125,3 +125,34 @@ ignition, a delay of up to 9 seconds was experienced.
 
 </system>
 
+<property value="0">/engines/engine[0]/nozzle-pos-norm</property>
+<!-- the nozzle can be opened prior to ignition if the throttle is put into the a/b zone -->
+<system name="nozzle">
+	<channel name="nozzle">
+	
+	<!--
+	flow thoughts
+	if fcs/throttle-redist-aug-predelay is less than or equal to 0, use /engines/engine[0]/nozzle-pos-norm
+	if fcs/throttle-redist-aug-predelay is greater than 0, nozzle = 1
+	this gets us away from the nozzle only being open when the afterburner is ignited
+	-->
+	
+		<fcs_function name="trash/propulsion/engine[0]/nozzle-pos-norm-corrected">
+			<function>
+				<ifthen>
+					<gt>
+						<property>fcs/throttle-redist-aug-predelay</property>
+						<value>0</value>
+					</gt>
+					<value>0</value>
+					<property>/engines/engine[0]/nozzle-pos-norm</property>
+				</ifthen>
+			</function>
+			<clipto>
+				<min>0.0</min>
+				<max>0.0</max>
+			</clipto>
+			<output>propulsion/engine[0]/nozzle-pos-norm-corrected</output>
+		</fcs_function>
+	</channel>
+</system>
