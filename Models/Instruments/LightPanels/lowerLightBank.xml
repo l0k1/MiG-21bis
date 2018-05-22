@@ -116,7 +116,7 @@
 
     <animation>
         <type>pick</type>
-        <object-name>dimmerKnob2</object-name>
+        <object-name>dimmerKnob3</object-name>
         <action>
             <button>0</button>
             <repeatable>true</repeatable>
