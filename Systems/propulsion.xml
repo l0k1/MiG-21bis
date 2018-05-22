@@ -155,4 +155,5 @@ ignition, a delay of up to 9 seconds was experienced.
 			<output>propulsion/engine[0]/nozzle-pos-norm-corrected</output>
 		</fcs_function>
 	</channel>
+	
 </system>
