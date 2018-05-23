@@ -20,7 +20,7 @@ ignition, a delay of up to 9 seconds was experienced.
 					<independentVar lookup="row">fcs/throttle-cmd-norm</independentVar>
 					<tableData>
 						0.00	0.00
-						0.80	1.00
+						0.75	1.00
 						1.00	1.00
 					</tableData>
 				</table>
