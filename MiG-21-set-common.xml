@@ -599,6 +599,9 @@
 			<preset type="double" n="18" userarchive="y">108.00</preset>
 			<preset type="double" n="19" userarchive="y">108.00</preset>
 		</ils-radio>
+		<comm n="1">
+			<volume>0</volume>
+		</comm>
 		<comm-radio>
 			<selection type="int" userarchive="y">0</selection>
 			<vol type="double">0.0</vol>
