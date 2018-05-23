@@ -657,7 +657,7 @@
  <system file="chute"/>
  <system file="canopy"/>
  <system file="fuel"/>
- <system file="throttle"/>
+ <system file="propulsion"/>
  <system file="payloads"/>
  <system file="electric"/>
  <system file="hydraulic"/>

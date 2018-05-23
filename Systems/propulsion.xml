@@ -8,7 +8,7 @@ throttle was not placed in the full afterburner detent for
 ignition, a delay of up to 9 seconds was experienced. 
 -->
 
-<system name="throttle">
+<system name="propulsion">
 
 	<channel name="Throttle">
 
@@ -121,13 +121,9 @@ ignition, a delay of up to 9 seconds was experienced.
 			<output>fcs/throttle-pos-norm</output>
 		</fcs_function>
 
-	</channel>
+	</channel>	
 
-</system>
 
-<property value="0">/engines/engine[0]/nozzle-pos-norm</property>
-<!-- the nozzle can be opened prior to ignition if the throttle is put into the a/b zone -->
-<system name="nozzle">
 	<channel name="nozzle">
 	
 	<!--
@@ -154,6 +150,7 @@ ignition, a delay of up to 9 seconds was experienced.
 			</clipto>
 			<output>propulsion/engine[0]/nozzle-pos-norm-corrected</output>
 		</fcs_function>
+
 	</channel>
-	
+
 </system>
