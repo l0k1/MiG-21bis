@@ -409,26 +409,16 @@ var radar_screen = {
 		#print("updating radar, mode: " ~ mode);
 		
 		if ( mode == "off" ) {
-		
-			foreach(var elem; me.radar_group.getChildren()) {
-				elem.hide();
-			}
 			
-			foreach(var elem; me.blips.getChildren()) {
-				elem.hide();
-			}
-			
-			foreach(var elem; me.dumb.getChildren()) {
-				elem.hide();
-			}
+			me.radar_group.hide();
+			me.blips.hide();
+			me.dumb.hide();
 	
 		} elsif ( mode == "test" ) {
 		
 		} elsif ( mode == "normal-init" ) {
-		
-			foreach(var elem; me.radar_group.getChildren()) {
-				elem.show();
-			}
+			
+			me.radar_group.show();
 			setprop(radar_mode, "normal");
 		
 		} elsif ( mode == "normal" ) {
@@ -549,17 +539,9 @@ var radar_screen = {
 			}
 			
 		} elsif ( mode == "locked-init" ) {
-			foreach(var elem; me.radar_group.getChildren()) {
-				elem.hide();
-			}
-			
-			foreach(var elem; me.blips.getChildren()) {
-				elem.hide();
-			}
-			
-			foreach(var elem; me.dumb.getChildren()) {
-				elem.hide();
-			}
+			me.radar_group.hide();
+			me.blips.hide();
+			me.dumb.hide();
 			
 			setprop(radar_mode, "locked");
 			
