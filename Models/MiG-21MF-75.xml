@@ -636,7 +636,7 @@
 	</model>
 
 	<effect>
-		<inherits-from>Aircraft/MiG-21bis/Models/Effects/normal_map</inherits-from>
+        <inherits-from>Aircraft/MiG-21bis/Models/Effects/fuselage/mig21-fuselage</inherits-from>
 		<object-name>spoiler</object-name>
 		<object-name>cone</object-name>
 		<object-name>hull</object-name>
