@@ -7,7 +7,8 @@
     <animation>
         <type>material</type>
         <object-name>engineRPMFace</object-name>
-        <object-name>engineRPMNeedle</object-name>
+        <object-name>N1Needle</object-name>
+        <object-name>N2Needle</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
@@ -18,8 +19,28 @@
     
 	<animation>
 		<type>rotate</type>
-		<object-name>engineRPMNeedle</object-name>
+		<object-name>N1Needle</object-name>
 		<property>/engines/engine/n1</property>
+		<interpolation>
+			<entry><ind>  0.0</ind><dep> -315 </dep></entry>     
+			<entry><ind> 110</ind><dep>  30 </dep></entry>     
+		</interpolation>
+        <center>
+            <x-m>-0.00220</x-m>
+            <y-m> 0.00020</y-m>
+            <z-m>-0.00034</z-m>
+        </center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+    
+	<animation>
+		<type>rotate</type>
+		<object-name>N2Needle</object-name>
+		<property>/engines/engine/n2</property>
 		<interpolation>
 			<entry><ind>  0.0</ind><dep> -315 </dep></entry>     
 			<entry><ind> 110</ind><dep>  30 </dep></entry>     
