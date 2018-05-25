@@ -350,7 +350,7 @@ var radar_screen = {
 			.move(-50,0)
 			.arcSmallCW(50,50,0,100,0)
 			.arcSmallCW(50,50,0,-100,0)
-			.setStrokeLineWidth(lw)
+			.setStrokeLineWidth(lW)
 			.setColor(dR, dG, dB)
 			.setTranslation(506,520);
 		
@@ -376,7 +376,7 @@ var radar_screen = {
 			# y is 520, x1 is 100, x2 is 390
 			.line(290,0)
 			.setColor(dR,dG,dB)
-			.setStrokeLineWidth(lw + 1)
+			.setStrokeLineWidth(lW + 1)
 			.setStrokeLineCap("round")
 			.setTranslation(100,520);
 			
@@ -384,7 +384,7 @@ var radar_screen = {
 			#y is 520, x1 is 622, x2 is 912
 			.line(290,0)
 			.setColor(dR,dG,dB)
-			.setStrokeLineWidth(lw + 1)
+			.setStrokeLineWidth(lW + 1)
 			.setStrokeLineCap("round")
 			.setTranslation(622,520);
 			
@@ -694,8 +694,8 @@ var radar_screen = {
 					
 					#491 and 521 are where the "0" distance marks would be
 					#100, 440, 602, and 912 are arbitrarily selected for the min/max of the distance triangle.
-					me.leftDistanceMarker.setTranslation(math.clamp(dist_rad[0] / distanceMarker_pixels_per_m - 491,100,440),520);
-					me.rightDistanceMarker.setTranslation(math.clam(dist_rad[0] / distanceMarker_pixels_per_m + 521,602,912),520);
+					me.leftDistanceMarker.setTranslation(math.clamp(dist_rad[0] * -distanceMarker_pixels_per_m + 491,100,440),520);
+					me.rightDistanceMarker.setTranslation(math.clamp(dist_rad[0] * distanceMarker_pixels_per_m + 521,602,912),520);
 				}
 			} else {
 				#print("exit2");
@@ -727,4 +727,3 @@ var on_off = func() {
 
 setlistener("controls/radar/power-panel/run", func { on_off(); });
 on_off();
-	
