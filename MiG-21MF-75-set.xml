@@ -20,7 +20,7 @@
 		</rating>
 
 		<flight-model>jsb</flight-model>
-		<aero>MiG-21bis</aero>
+		<aero>MiG-21MF-75</aero>
 
 		<gui>
             <style>

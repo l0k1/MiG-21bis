@@ -654,13 +654,14 @@
  <system file="FCS-Pitch"/>
  <system file="FCS-Roll"/>
  <system file="FCS-Yaw"/>
- <!--<system file="alpha-Buffet"/>-->
  <system file="chute"/>
- <!--<system file="dump"/>-->
  <system file="canopy"/>
- <!--<system file="particles"/>-->
  <system file="fuel"/>
- <system file="throttle"/>
+ <system file="propulsion"/>
+ <system file="payloads"/>
+ <system file="electric"/>
+ <system file="hydraulic"/>
+ <system file="warning-lights"/>
 
  <flight_control name="none"/>
 

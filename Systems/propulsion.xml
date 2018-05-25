@@ -60,7 +60,7 @@ ignition, a delay of up to 9 seconds was experienced.
 		<switch name="aug-delay-switch">
 			<default value="0"/>
 			<test logic="AND" value="1">
-				propulsion/engine[0]/n1 ge 100
+				propulsion/engine[0]/n2 ge 100
 			</test>
 		</switch>
 		
@@ -99,7 +99,7 @@ ignition, a delay of up to 9 seconds was experienced.
 		<switch name="aug-active">
 			<default value="0"/>
 			<test logic="AND" value="1">
-				propulsion/engine[0]/n1 ge 100
+				propulsion/engine[0]/n2 ge 100
 				fcs/aug-delay ge fcs/throttle-aug-compare
 			</test>
 		</switch>
