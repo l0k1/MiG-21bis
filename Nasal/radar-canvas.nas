@@ -12,9 +12,11 @@ var lock_bars_scale = "/controls/radar/lock-bars-scale";
 var lock_bars_pos = "/controls/radar/lock-bars-pos";
 var radar_mode = "/controls/radar/mode";
 var show_callsigns = "/controls/radar/panel/iff";
+var iff_control = "/controls/radar/panel/iff";
 
 var radarRange = radar_logic.radarRange;
 var radarRange10k = radarRange / 1000;
+var distanceMarker_pixels_per_m = 175 / (radarRange / 6);
 
 var RADAR_BOTTOM_LIMIT = -30;
 var RADAR_TOP_LIMIT = 30;
@@ -57,6 +59,8 @@ var radar_screen = {
 		m.radar_canvas.setColorBackground(0.100,0.161,0.106,1);
 
 		m.radar_group = m.radar_canvas.createGroup();
+		m.scan_mode = m.radar_canvas.createGroup();
+		m.autotrack_mode = m.radar_canvas.createGroup();
 		m.blips = m.radar_canvas.createGroup();
 		m.dumb = m.radar_canvas.createGroup();
 		
@@ -130,36 +134,36 @@ var radar_screen = {
 
 		#text - middle numbers
 		m.r10_left = m.radar_group.createChild("text", "10 horiz left")
-			.setTranslation(141,595)
+			.setTranslation(141,580)
 			.setAlignment("center-center")
 			.setFont("LiberationFonts/LiberationMono-Regular.ttf")
 			.setFontSize(fS)
 			.setColor(dR,dG,dB)
-			.setText("10");
+			.setText(int(radarRange10k/3));
 			
 		m.r5_left = m.radar_group.createChild("text", "5 horiz left")
-			.setTranslation(316,595)
+			.setTranslation(316,580)
 			.setAlignment("center-center")
 			.setFont("LiberationFonts/LiberationMono-Regular.ttf")
 			.setFontSize(fS)
 			.setColor(dR,dG,dB)
-			.setText("5");
+			.setText(int(radarRange10k/3/2));
 			
 		m.r10_right = m.radar_group.createChild("text", "10 horiz right")
-			.setTranslation(871,595)
+			.setTranslation(871,580)
 			.setAlignment("center-center")
 			.setFont("LiberationFonts/LiberationMono-Regular.ttf")
 			.setFontSize(fS)
 			.setColor(dR,dG,dB)
-			.setText("10");
+			.setText(int(radarRange10k/3));
 			
 		m.r5_right = m.radar_group.createChild("text", "5 horiz right")
-			.setTranslation(696,595)
+			.setTranslation(696,580)
 			.setAlignment("center-center")
 			.setFont("LiberationFonts/LiberationMono-Regular.ttf")
 			.setFontSize(fS)
 			.setColor(dR,dG,dB)
-			.setText("5");
+			.setText(int(radarRange10k/3/2));
 			
 		#paths - top lines
 		m.vertlinetop1 = m.radar_group.createChild("path", "top1-vert")
@@ -196,12 +200,12 @@ var radar_screen = {
 			
 		#paths - middle vertical lines	
 		m.vertlinemid1 = m.radar_group.createChild("path", "mid1-vert")
-			.move(0,(lL/2)-lL)
-			.line(0,lL/2)
-			.setColor(dR,dG,dB)
-			.setStrokeLineWidth(lW)
+			.move(0,(lL/2)-lL) # 80 / 2 - 80 = 40 - 80 = -40
+			.line(0,lL/2) # draw a line from set point to 40 pixels up
+			.setColor(dR,dG,dB) #520 should be at center, so 540
+			.setStrokeLineWidth(lW) #15 pix up
 			.setStrokeLineCap("round")
-			.setTranslation(141,555);
+			.setTranslation(141,540);
 			
 		m.vertlinemid2 = m.radar_group.createChild("path", "mid2-vert")
 			.move(0,(lL/2)-lL)
@@ -209,7 +213,7 @@ var radar_screen = {
 			.setColor(dR,dG,dB)
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
-			.setTranslation(316,555);
+			.setTranslation(316,540);
 			
 		m.vertlinemid3 = m.radar_group.createChild("path", "mid3-vert")
 			.move(0,(lL/2)-lL)
@@ -217,7 +221,7 @@ var radar_screen = {
 			.setColor(dR,dG,dB)
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
-			.setTranslation(871,555);
+			.setTranslation(871,540);
 
 		m.vertlinemid4 = m.radar_group.createChild("path", "mid4-vert")
 			.move(0,(lL/2)-lL)
@@ -225,7 +229,7 @@ var radar_screen = {
 			.setColor(dR,dG,dB)
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
-			.setTranslation(696,555);
+			.setTranslation(696,540);
 
 		#paths - horizontal lines
 		m.horizline30L = m.radar_group.createChild("path", "line30L")
@@ -278,13 +282,13 @@ var radar_screen = {
 
 		#middle box
 		m.lockbox = m.radar_group.createChild("path", "lockbox")
-			.move(-20,0)
-			.line(-30,0)
-			.line(0,-573)
-			.line(30,0)
-			.move(40,0)
-			.line(30,0)
-			.line(0,573)
+			.move(-20,0) #486,950
+			.line(-30,0) #456,950
+			.line(0,-573) #456,377
+			.line(30,0) #486,377
+			.move(40,0) #526,377
+			.line(30,0) #556,377
+			.line(0,573) #556,950
 			.line(-30,0)
 			.setColor(dR,dG,dB)
 			.setStrokeLineWidth(lW)
@@ -331,9 +335,27 @@ var radar_screen = {
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
 			.setTranslation(834,900);
+			
+		#target pointer and circle
+		m.target_pointer = m.radar_group.createChild("path", "target_pointer")
+			.move(-45,0)
+			.line(90,0)
+			.move(-45,-30)
+			.line(0,60)
+			.setStrokeLineWidth(lW + 1)
+			.setColor(dR, dG, dB)
+			.setTranslation(506,520);
+		
+		m.target_circle = m.radar_group.createChild("path", "target_circle")
+			.move(-50,0)
+			.arcSmallCW(50,50,0,100,0)
+			.arcSmallCW(50,50,0,-100,0)
+			.setStrokeLineWidth(lw)
+			.setColor(dR, dG, dB)
+			.setTranslation(506,520);
 		
 		#lock bars
-		m.lowerBar = m.radar_group.createChild("path","lowerBar")
+		m.lowerBar = m.scan_mode.createChild("path","lowerBar")
 			.move(-50,0)
 			.line(100,0)
 			.setColor(dR,dG,dB)
@@ -341,20 +363,60 @@ var radar_screen = {
 			.setStrokeLineCap("round")
 			.setTranslation(506,950);
 			
-		m.upperBar = m.radar_group.createChild("path","upperBar")
+		m.upperBar = m.scan_mode.createChild("path","upperBar")
 			.move(-50,0)
 			.line(100,0)
 			.setColor(dR,dG,dB)
 			.setStrokeLineWidth(lW + 2)
 			.setStrokeLineCap("round")
 			.setTranslation(506,750);
+			
+		#distance bars
+		m.leftDistanceBar = m.autotrack_mode.createChild("path","leftDistanceBar")
+			# y is 520, x1 is 100, x2 is 390
+			.line(290,0)
+			.setColor(dR,dG,dB)
+			.setStrokeLineWidth(lw + 1)
+			.setStrokeLineCap("round")
+			.setTranslation(100,520);
+			
+		m.rightDistanceBar = m.autotrack_mode.createChild("path","rightDistanceBar")
+			#y is 520, x1 is 622, x2 is 912
+			.line(290,0)
+			.setColor(dR,dG,dB)
+			.setStrokeLineWidth(lw + 1)
+			.setStrokeLineCap("round")
+			.setTranslation(622,520);
+			
+		#distance markers
+		m.leftDistanceMarker = m.autotrack_mode.createChild("path","leftDistanceMarker")
+			# in the code below, Y should always be at 520
+			.line(-15,0)
+			.line(15,-40)
+			.line(15,40)
+			.line(-15,0)
+			.setColor(dR,dG,dB)
+			.setStrokeLineWidth(lW+3)
+			.setStrokeLineCap("round");
+			
+		m.rightDistanceMarker = m.autotrack_mode.createChild("path","rightDistanceMarker")
+			# in the code below, Y should always be at 520
+			.line(-15,0)
+			.line(15,-40)
+			.line(15,40)
+			.line(-15,0)
+			.setColor(dR,dG,dB)
+			.setStrokeLineWidth(lW+3)
+			.setStrokeLineCap("round");
 		
 		# radar contacts
 		m.below_blip = [];
 		m.even_blip = [];
 		m.above_blip = [];
+		m.f_addon_blip = [];
 		m.blip_text = [];
 		for(var i=0; i < m.no_blip; i = i+1) {
+			# below blip
 			var b_blip = m.blips.createChild("path", "b_blip" ~ i)
 			.move(-30,0)
 			.line(60,0)
@@ -363,6 +425,7 @@ var radar_screen = {
 			.setStrokeLineWidth(lW)
 			.setColor(dR, dG, dB);
 			
+			# even blip
 			var e_blip = m.blips.createChild("path", "e_blip" ~ i)
 			.move(-30,0)
 			.line(60,0)
@@ -371,6 +434,7 @@ var radar_screen = {
 			.setStrokeLineWidth(lW)
 			.setColor(dR, dG, dB);
 			
+			# above blip
 			var a_blip = m.blips.createChild("path", "a_blip" ~ i)
 			.move(-30,0)
 			.line(60,0)
@@ -378,6 +442,14 @@ var radar_screen = {
 			.line(0,-60)
 			.setStrokeLineWidth(lW)
 			.setColor(dR, dG, dB);
+			
+			#friendly addition
+			var f_addon = m.blips.createChild("path", "f_add" ~ i)
+			.move(-30,-10)
+			.line(60,0)
+			.setStrokeLineWidth(lW)
+			.setColor(dR, dG, dB);
+			
 			
 			var blip_text = m.blips.createChild("text", "blip_text" ~ i)
 				.setFont("liberationFonts/LiberationMono-Regular.ttf")
@@ -387,11 +459,13 @@ var radar_screen = {
 			b_blip.hide();
 			e_blip.hide();
 			a_blip.hide();
+			f_addon.hide();
 			blip_text.hide();
 			
 			append(m.below_blip,b_blip);
 			append(m.even_blip,e_blip);
 			append(m.above_blip,a_blip);
+			append(m.f_addon_blip,f_addon);
 			append(m.blip_text,blip_text);
 		}
 		m.lock = m.radar_group.createChild("path") #probably will never use this
@@ -411,6 +485,8 @@ var radar_screen = {
 		if ( mode == "off" ) {
 			
 			me.radar_group.hide();
+			me.scan_mode.hide();
+			me.autotrack_mode.hide();
 			me.blips.hide();
 			me.dumb.hide();
 	
@@ -419,6 +495,12 @@ var radar_screen = {
 		} elsif ( mode == "normal-init" ) {
 			
 			me.radar_group.show();
+			me.scan_mode.show();
+			me.blips.show();
+			foreach (var blip; me.blips.getChildren()) {
+				blip.hide();
+			}
+			me.autotrack_mode.hide();
 			setprop(radar_mode, "normal");
 		
 		} elsif ( mode == "normal" ) {
@@ -514,8 +596,12 @@ var radar_screen = {
 								me.blip_text[b_i].setAlignment("left-center");
 								me.blip_text[b_i].show();
 							}
+							if (iff.interrogate(mp.getNode())) {
+								 me.f_addon_blip[b_i].show();
+							}
 						} else {
 							me.blip_text[b_i].hide();
+							me.f_addon_blip[b_i].hide();
 						}
 						#if (locked == TRUE) {
 						#	pixelXL = pixelX;
@@ -539,8 +625,13 @@ var radar_screen = {
 			}
 			
 		} elsif ( mode == "locked-init" ) {
-			me.radar_group.hide();
-			me.blips.hide();
+			me.radar_group.show();
+			me.autotrack_mode.show();
+			me.scan_mode.hide();
+			me.blips.show();
+			foreach (var blip; me.blips.getChildren()) {
+				blip.hide();
+			}
 			me.dumb.hide();
 			
 			setprop(radar_mode, "locked");
@@ -561,7 +652,7 @@ var radar_screen = {
 					#ar pixelX = ((xa_rad * R2D / RADAR_LEFT_LIMIT) * -506) + 506; #506 is half width of radar screen
 					var pixelX = ((dist_rad[1] * R2D / 15) * 506) + 506; #506 is half width of radar screen, and 180 is starting from the left, go over this much
 					#var pixelY = ((ya_ang * R2D) / 5) * 425 + 100; #425 is half vertically, 100 is starting from the top
-					var pixelY = ((ya_ang / 15) * -425) + 425; #506 is half width of radar screen
+					var pixelY = ((ya_ang / 15) * -425) + 520; #520 is half width of radar screen
 					pixelX = clamp(pixelX, 180, 836);
 					pixelY = clamp(pixelY, 100,950);
 					
@@ -600,6 +691,11 @@ var radar_screen = {
 					} else {
 						me.blip_text[1].hide();
 					}
+					
+					#491 and 521 are where the "0" distance marks would be
+					#100, 440, 602, and 912 are arbitrarily selected for the min/max of the distance triangle.
+					me.leftDistanceMarker.setTranslation(math.clamp(dist_rad[0] / distanceMarker_pixels_per_m - 491,100,440),520);
+					me.rightDistanceMarker.setTranslation(math.clam(dist_rad[0] / distanceMarker_pixels_per_m + 521,602,912),520);
 				}
 			} else {
 				#print("exit2");
