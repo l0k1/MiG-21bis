@@ -17,7 +17,7 @@
             <z-m> 0.10</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Throttle</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Throttle/Throttle.xml</path>
@@ -59,7 +59,7 @@
             <z-m> 0.58641</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>GMeter</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/GMeter/GMeter.xml</path>
@@ -81,7 +81,7 @@
             <z-m> 0.66935</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Heading Indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/HI/HI.xml</path>
@@ -92,7 +92,7 @@
             <z-m> 0.53679</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Machometer</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Mach/Mach.xml</path>
@@ -103,7 +103,7 @@
             <z-m> 0.55852</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Clock</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Clock/Clock.xml</path>
@@ -114,7 +114,7 @@
             <z-m> 0.47257</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>DA-200 Combo VSI and TC Indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/VSI/VSI.xml</path>
@@ -125,7 +125,7 @@
             <z-m> 0.65361</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Voltmeter and Ampmeter</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Volt/Volt.xml</path>
@@ -136,7 +136,7 @@
             <z-m> 0.45716</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Air Speed Indicator</name>
         <!--path>Aircraft/MiG-21bis/Models/Instruments/ASI/ASI.xml</path-->
@@ -149,7 +149,7 @@
             <z-m> 0.68672</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Altimeter</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/ALT/ALT.xml</path>
@@ -161,7 +161,7 @@
             <z-m> 0.58687</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Radio Distance Magnetic Indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/RadarAltimeter/RadarAltimeter.xml</path>
@@ -173,7 +173,7 @@
             <z-m> 0.49945</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Oil Pressure indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/OilPressure/OilPressure.xml</path>
@@ -195,7 +195,7 @@
             <z-m> 0.18785</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Doubled Tachometer</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Tachometer/Tachometer.xml</path>
@@ -207,7 +207,7 @@
             <z-m> 0.67870</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Jet Pipe Temperature</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/JPT/JPT.xml</path>
@@ -219,7 +219,7 @@
             <z-m> 0.58691</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Fuel Indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Fuel/Fuel.xml</path>
@@ -231,7 +231,7 @@
             <z-m> 0.48865</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Angle Of Attack</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/AOA/AOA.xml</path>
@@ -242,7 +242,7 @@
             <z-m> 0.85450</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>Doubled Main Hydraulic Manometer</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Hydraulics/Hydraulics.xml</path>
@@ -254,7 +254,7 @@
             <z-m> 0.48146</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>PPD1M Range Finder</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/DME/DME.xml</path>
@@ -265,7 +265,7 @@
             <z-m> 0.93034</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>ARU-3G Indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/ARU/ARU.xml</path>
@@ -276,7 +276,7 @@
             <z-m> 0.83918</z-m>
         </offsets>
     </model>
-    
+
     <model>
         <name>UPES-3 Conus Indicator</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/UPES/UPES.xml</path>
@@ -322,7 +322,7 @@
             <z-m> 0.82671</z-m>
         </offsets>
 	</model>
-	
+
 	<model>
 		<name>Radar Control Panel</name>
 		<path>Aircraft/MiG-21bis/Models/Instruments/RadarControlPanel/radar-control-panel.xml</path>
@@ -333,7 +333,7 @@
             <z-m> 0.75973</z-m>
         </offsets>
 	</model>
-	
+
 	<model>
 		<name>Radar Power Panel</name>
 		<path>Aircraft/MiG-21bis/Models/Instruments/RadarPowerPanel/radar-power-panel.xml</path>
@@ -344,7 +344,7 @@
             <z-m> 0.47574</z-m>
         </offsets>
 	</model>
-	
+
 	<model>
         <name>Nav Radio</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/NavRadio/radio.xml</path>
@@ -633,7 +633,7 @@
             <y-m>-0.38081</y-m>
             <z-m> 0.52138</z-m>
         </offsets>
-    </model>    
+    </model>
 
     <model>
         <name>Gear Handle</name>
@@ -643,6 +643,16 @@
             <x-m>-3.89543</x-m>
             <y-m>-0.367262</y-m>
             <z-m> 0.603926</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>Horizontal Upper Left Switch Panel</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/MiscPanel2/horizontal_upper_left_switch_panel.xml</path>
+        <offsets>
+            <x-m>-3.82735</x-m>
+            <y-m>-0.36973</y-m>
+            <z-m> 0.43543</z-m>
         </offsets>
     </model>
 
