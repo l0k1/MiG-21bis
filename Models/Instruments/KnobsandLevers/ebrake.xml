@@ -3,6 +3,39 @@
 
     <path>ebrake.ac</path>
 
-	<!--lights-->
-	
+
+    	<animation>
+    		<type>pick</type>
+    		<object-name>ebrakeHandle</object-name>
+    		<action>
+    			<button>0</button>
+    			<repeatable>false</repeatable>
+      		<binding>
+      			<command>property-toggle</command>
+      			<property>/controls/gear/brake-parking</property>
+      		</binding>
+    		</action>
+    		<action>
+    			<button>1</button>
+    			<repeatable>false</repeatable>
+      		<binding>
+      			<command>property-toggle</command>
+      			<property>/controls/gear/brake-parking</property>
+      		</binding>
+    		</action>
+    	</animation>
+
+      <animation>
+            <type>translate</type>
+            <object-name>ebrakeHandle</object-name>
+            <property>/controls/gear/brake-parking</property>
+            <factor>0.03</factor>
+            <offset-m>0</offset-m>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+        </animation>
+
 </PropertyList>
