@@ -656,4 +656,15 @@
         </offsets>
     </model>
 
+    <model>
+        <name>Engine Start Panel</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/EngineStartPanel/engine_start_panel.xml</path>
+        <offsets>
+            <heading-deg>90</heading-deg>
+            <x-m>-3.39170</x-m>
+            <y-m>-0.42420</y-m>
+            <z-m> 0.58720</z-m>
+        </offsets>
+    </model>
+
 </PropertyList>
