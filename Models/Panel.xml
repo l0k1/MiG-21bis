@@ -18,7 +18,7 @@
         </offsets>
     </model>
 
-    <model>
+    <!--<model>
         <name>Throttle</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Throttle/Throttle.xml</path>
         <offsets>
@@ -26,7 +26,7 @@
             <y-m> 0.00</y-m>
             <z-m> 0.00</z-m>
         </offsets>
-    </model>
+    </model>-->
 
     <model>
         <name>Pedals</name>
