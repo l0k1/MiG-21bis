@@ -667,4 +667,15 @@
         </offsets>
     </model>
 
+    <model>
+        <name>Power Panel</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/MiscPanel3/horizUpperRightSwitchPanel.xml</path>
+        <offsets>
+            <heading-deg>-5</heading-deg>
+            <x-m>-3.55045</x-m>
+            <y-m> 0.38486</y-m>
+            <z-m> 0.43428</z-m>
+        </offsets>
+    </model>
+
 </PropertyList>

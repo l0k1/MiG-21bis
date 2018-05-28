@@ -4,4 +4,17 @@
 
     <path>engineStartPanel.ac</path>
 
+    <animation>
+        <type>material</type>
+          <object-name>groundStartingLabel</object-name>
+          <object-name>coldCrankingLabel</object-name>
+          <object-name>engineStartLabel</object-name>
+        <emission>
+           <red>0.6</red>
+           <green>0.3</green>
+           <blue>0.3</blue>
+          <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
 </PropertyList>
