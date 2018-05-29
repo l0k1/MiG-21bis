@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <!--switch x/y/z
+
+  adCheckButton
+  0.00203
+  -0.04713
+  0.01942
+
+  antiSkidUnitSwitch
+  -0.00528
+  -0.1801
+  0.01908
+
+  fullThrottleReheatSwitch
+  -0.00528
+  0.00496
+  0.01908
+
+  airRelightSwitch
+  -0.00528
+  0.2863
+  0.01908
+
+  engineStartingUnitSwitch
+  -0.00528
+  0.00496
+  -0.04164
+
+  fireFtgEqptSwitch
+  -0.00528
+  0.02863
+  -0.04164
+
+-->
+
+
+    <path>verticalForwardLeftPanel.ac</path>
+    <animation>
+        <type>material</type>
+          <object-name>verticalForwardLeftSwitchLabels</object-name>
+        <emission>
+           <red>0.6</red>
+           <green>0.3</green>
+           <blue>0.3</blue>
+          <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
+</PropertyList>
