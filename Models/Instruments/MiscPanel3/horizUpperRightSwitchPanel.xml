@@ -3,7 +3,7 @@
 <PropertyList>
 
     <path>horizupperrightswitchpanel.ac</path>
-    <animation>
+        <animation>
             <type>material</type>
               <object-name>horizupperrightswitchpanellabels</object-name>
             <emission>
@@ -13,10 +13,6 @@
               <factor-prop>controls/lighting/instruments-norm</factor-prop>
             </emission>
         </animation>
-
-
-        	<property value="1">electric/switches/rhfsp/no-3-tk-gp-pump</property>
-        	<property value="1">electric/switches/rhfsp/no-1-tk-gp-pump</property>
 
           <animation>
             <type>pick</type>

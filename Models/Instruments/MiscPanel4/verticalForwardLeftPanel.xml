@@ -2,51 +2,160 @@
 
 <PropertyList>
 
+      <path>verticalForwardLeftPanel.ac</path>
+      <animation>
+          <type>material</type>
+            <object-name>verticalForwardLeftSwitchLabels</object-name>
+          <emission>
+             <red>0.6</red>
+             <green>0.3</green>
+             <blue>0.3</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+          </emission>
+      </animation>
+
   <!--switch x/y/z
 
   adCheckButton
+  electric/switches/lvfsp/ad-check
   0.00203
   -0.04713
   0.01942
 
-  antiSkidUnitSwitch
-  -0.00528
-  -0.1801
-  0.01908
-
-  fullThrottleReheatSwitch
-  -0.00528
-  0.00496
-  0.01908
-
   airRelightSwitch
+  electric/switches/lvfsp/air-relight
   -0.00528
   0.2863
   0.01908
 
-  engineStartingUnitSwitch
-  -0.00528
-  0.00496
-  -0.04164
-
-  fireFtgEqptSwitch
-  -0.00528
-  0.02863
-  -0.04164
-
 -->
 
+  <animation>
+    <type>pick</type>
+    <object-name>fireFtgEqptSwitch</object-name>
+    <action>
+      <button>0</button>
+      <button>1</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>/fdm/jsbsim/electric/switches/lvfsp/fire-ftg-eqpt</property>
+      </binding>
+    </action>
+  </animation>
 
-    <path>verticalForwardLeftPanel.ac</path>
+  <animation>
+    <object-name>fireFtgEqptSwitch</object-name>
+    <type>rotate</type>
+    <property>/fdm/jsbsim/electric/switches/lvfsp/fire-ftg-eqpt</property>
+    <factor>-60</factor>
+    <offset-deg>30</offset-deg>
+    <center>
+      <x-m>-0.00528</x-m>
+      <y-m> 0.02863</y-m>
+      <z-m>-0.04164</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>engineStartingUnitSwitch</object-name>
+    <action>
+      <button>0</button>
+      <button>1</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>/fdm/jsbsim/electric/switches/lvfsp/engine-starting-unit</property>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <object-name>engineStartingUnitSwitch</object-name>
+    <type>rotate</type>
+    <property>/fdm/jsbsim/electric/switches/lvfsp/engine-starting-unit</property>
+    <factor>-60</factor>
+    <offset-deg>30</offset-deg>
+    <center>
+      <x-m>-0.00528</x-m>
+      <y-m> 0.00496</y-m>
+      <z-m>-0.04164</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>fullThrottleReheatSwitch</object-name>
+    <action>
+      <button>0</button>
+      <button>1</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>/fdm/jsbsim/electric/switches/lvfsp/full-throttle-reheat</property>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <object-name>fullThrottleReheatSwitch</object-name>
+    <type>rotate</type>
+    <property>/fdm/jsbsim/electric/switches/lvfsp/full-throttle-reheat</property>
+    <factor>-60</factor>
+    <offset-deg>30</offset-deg>
+    <center>
+      <x-m>-0.00528</x-m>
+      <y-m> 0.00496</y-m>
+      <z-m> 0.01908</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
     <animation>
-        <type>material</type>
-          <object-name>verticalForwardLeftSwitchLabels</object-name>
-        <emission>
-           <red>0.6</red>
-           <green>0.3</green>
-           <blue>0.3</blue>
-          <factor-prop>controls/lighting/instruments-norm</factor-prop>
-        </emission>
+      <type>pick</type>
+      <object-name>antiSkidUnitSwitch</object-name>
+      <action>
+        <button>0</button>
+        <button>1</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>/fdm/jsbsim/electric/switches/lvfsp/anti-skid-unit</property>
+        </binding>
+      </action>
+    </animation>
+
+    <animation>
+      <object-name>antiSkidUnitSwitch</object-name>
+      <type>rotate</type>
+      <property>/fdm/jsbsim/electric/switches/lvfsp/anti-skid-unit</property>
+      <factor>-60</factor>
+      <offset-deg>30</offset-deg>
+      <center>
+        <x-m>-0.00528</x-m>
+        <y-m>-0.18010</y-m>
+        <z-m> 0.01908</z-m>
+      </center>
+      <axis>
+        <x>0</x>
+        <y>1</y>
+        <z>0</z>
+      </axis>
     </animation>
 
 </PropertyList>
