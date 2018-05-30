@@ -16,7 +16,7 @@ var performance = func () {
 setprop("/mig21/advanced-radar",0);
 
 var test_support = func {
- 
+
   var versionString = getprop("sim/version/flightgear");
   var version = split(".", versionString);
   var major = num(version[0]);
@@ -31,7 +31,7 @@ var test_support = func {
 
 setlistener("/instrumentation/misc-panel-1/hlt-heat-rqst",func() {
   # if the guard is down, the switch can move up but not down
-  # 
+  #
   if ( getprop("/instrumentation/misc-panel-1/guard") == 0 ) {
     if ( getprop("/instrumentation/misc-panel-1/hlt-heat-rqst") == 0 ) {
       setprop("/instrumentation/misc-panel-1/hlt-heat",0);
@@ -122,24 +122,49 @@ var gear_setting = func(dir) {
   }
 }
 
+var runthru = 0;
+var starter_time = 0;
+
+var dc_prop = props.globals.getNode("/fdm/jsbsim/electric/output/engine-starting-unit"); # most of the electrical routing happens in the electric.xml jsbsim file
+var n1 = props.globals.getNode("/engines/engine[0]/n1");
+var eng_running = props.globals.getNode("/engines/engine[0]/running");
+var start_button = props.globals.getNode("/controls/engines/engine[0]/start-button");
+var start_mode = props.globals.getNode("/controls/engines/engine[0]/starting-switch");
+var starter = props.globals.getNode("/controls/engines/engine[0]/starter");
+var cutoff = props.globals.getNode("/controls/engines/engine[0]/cutoff");
+var start_ignition_signal = props.globals.getNode("/controls/engines/engine[0]/start-ignition-signal");
+
 var engine_startup = func() {
   # props not yet accounted for, r/set circuit breaker, service tk pump circuit breaker
-  if ( getprop("/controls/engine[0]/starting-switch") == 0 ) { return; }  # engine start mode set to not cold cranking
-  var dc_prop = props.Globals.getNode("/fdm/jsbsim/electric/output/engine-starting-unit"); # most of the electrical routing happens in the electric.xml jsbsim file
-  var n1 = props.Globals.getNode("/engines/engine[0]/n1");
-  var start_button = props.Globals.getNode("/controls/engines/engine[0]/starter");
-  var cutoff = props.Globals.getNode("/controls/engines/engine[0]/cutoff");
-  if ( n1.getValue() > 6 ) {
-      cutoff.setValue(0);
-  } else {
+  if ( start_mode.getValue == 0 or
+					dc_prop.getValue < 100 or
+					(start_button.getValue() == 0 and systime() - starter_time < 3)) {
+		starter.setValue(0);
+		cutoff.setValue(0);
+		start_ignition_signal.setValue(0);
+		runthru = 0;
+		return;
+	}
+
+	if ( runthru == 0 ) {
+		starter.setValue(1);
+		cutoff.setValue(1);
+		starter_time = systime();
+		runthru = 1;
+	} elsif ( runthru == 1 ) {
+		cutoff.setValue(0);
+		runthru = 2;
+	} elsif (eng_running.getValue()) {
+		runthru = 0;
+		starter.setValue(0);
+	} else {
       settimer(func(){engine_startup();},0.2);
   }
 }
-  
+
   #/controls/engines/engine[~n~]/starter set to true
-  #/controls/engines/engine[~n~]/cutoff set to true
+  #/controls/engines/engine[~n~]/cutoff toggled with 0.1 sec delay
   #after n1 stabs
-  #/controls/engines/engine[~n~]/cutoff set to false
   #/controls/engines/engine[~n~]/starter set to false
 
 test_support();

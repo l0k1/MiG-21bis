@@ -191,11 +191,11 @@
 		<string n="15" alias="/payload/weight[4]/selected"/>
 			</generic>
 		</multiplay>
-		
+
 		<!-- persistent properties -->
-		
+
 		<aircraft-data>
-		
+
 			<path>/instrumentation/vor-radio/preset[0]</path>
 			<path>/instrumentation/vor-radio/preset[1]</path>
 			<path>/instrumentation/vor-radio/preset[2]</path>
@@ -216,7 +216,7 @@
 			<path>/instrumentation/vor-radio/preset[17]</path>
 			<path>/instrumentation/vor-radio/preset[18]</path>
 			<path>/instrumentation/vor-radio/preset[19]</path>
-			
+
 			<path>/instrumentation/ils-radio/preset[0]</path>
 			<path>/instrumentation/ils-radio/preset[1]</path>
 			<path>/instrumentation/ils-radio/preset[2]</path>
@@ -239,7 +239,7 @@
 			<path>/instrumentation/ils-radio/preset[19]</path>
 
 			<path>/instrumentation/gyro-compass/gyro-heading-deg</path>
-			
+
 		</aircraft-data>
 
 		<rendering>
@@ -264,7 +264,7 @@
         </rendering>
 
 	</sim>
-	
+
 	<consumables>
 		<fuel>
 			<tank n="0"><name>Dorsal</name></tank>
@@ -286,7 +286,7 @@
 	</consumables>
 
 	<!-- Misc Settings -->
-	
+
 	<controls>
 		<flight>
 			<flaps>0</flaps>
@@ -306,9 +306,11 @@
 		<lighting>
 			<instruments-norm>0.3</instruments-norm>
 		</lighting>
-		<engine>
-			<starting-switch type="int">0</starting-switch> <!-- 0 is cold cranking, 1 is engine start -->
-		</engine>
+		<engines>
+			<engine>
+				<starting-switch type="int">0</starting-switch> <!-- 0 is cold cranking, 1 is engine start -->
+			</engine>
+		</engines>
 		<armament>
 			<panel>
 				<!--switches, knobbins and buttons-->
