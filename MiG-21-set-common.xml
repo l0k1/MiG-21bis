@@ -306,6 +306,9 @@
 		<lighting>
 			<instruments-norm>0.3</instruments-norm>
 		</lighting>
+		<engine>
+			<starting-switch type="int">0</starting-switch> <!-- 0 is cold cranking, 1 is engine start -->
+		</engine>
 		<armament>
 			<panel>
 				<!--switches, knobbins and buttons-->

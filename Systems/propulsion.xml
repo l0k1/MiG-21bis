@@ -111,6 +111,10 @@ ignition, a delay of up to 9 seconds was experienced.
 					<product>
 						<property>fcs/throttle-redist-aug</property>
 						<property>fcs/aug-active</property>
+						<gt>
+							<property>electric/output/full-throttle-reheat</property>
+							<value>110</value>
+						</gt>
 					</product>
 				</sum>
 			</function>

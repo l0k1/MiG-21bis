@@ -122,5 +122,25 @@ var gear_setting = func(dir) {
   }
 }
 
+var engine_startup = func() {
+  # props not yet accounted for, r/set circuit breaker, service tk pump circuit breaker
+  if ( getprop("/controls/engine[0]/starting-switch") == 0 ) { return; }  # engine start mode set to not cold cranking
+  var dc_prop = props.Globals.getNode("/fdm/jsbsim/electric/output/engine-starting-unit"); # most of the electrical routing happens in the electric.xml jsbsim file
+  var n1 = props.Globals.getNode("/engines/engine[0]/n1");
+  var start_button = props.Globals.getNode("/controls/engines/engine[0]/starter");
+  var cutoff = props.Globals.getNode("/controls/engines/engine[0]/cutoff");
+  if ( n1.getValue() > 6 ) {
+      cutoff.setValue(0);
+  } else {
+      settimer(func(){engine_startup();},0.2);
+  }
+}
+  
+  #/controls/engines/engine[~n~]/starter set to true
+  #/controls/engines/engine[~n~]/cutoff set to true
+  #after n1 stabs
+  #/controls/engines/engine[~n~]/cutoff set to false
+  #/controls/engines/engine[~n~]/starter set to false
+
 test_support();
 main_loop();
