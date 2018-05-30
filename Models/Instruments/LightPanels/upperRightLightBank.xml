@@ -96,7 +96,7 @@
             <green>1.0</green>
             <blue>0.0</blue>
             <factor-prop>/fdm/jsbsim/warning-lights/first-reheat</factor-prop>
-        </emission> 
+        </emission>
     </animation>
 
     <animation>
@@ -107,18 +107,30 @@
             <green>1.0</green>
             <blue>0.0</blue>
             <factor-prop>/fdm/jsbsim/warning-lights/second-reheat</factor-prop>
-        </emission> 
+        </emission>
     </animation>
-	
-    <animation>
-        <type>material</type>
-        <object-name>jetNozzleOpenLight</object-name>
-        <emission>
-            <red>0.0</red>
-            <green>1.0</green>
-            <blue>0.0</blue>
-            <factor-prop>/fdm/jsbsim/warning-lights/jet-nozzle-open</factor-prop>
-        </emission> 
-    </animation>
+
+      <animation>
+          <type>material</type>
+          <object-name>jetNozzleOpenLight</object-name>
+          <emission>
+              <red>0.0</red>
+              <green>1.0</green>
+              <blue>0.0</blue>
+              <factor-prop>/fdm/jsbsim/warning-lights/jet-nozzle-open</factor-prop>
+          </emission>
+      </animation>
+
+
+        <animation>
+            <type>material</type>
+            <object-name>switchOffIgnitionLight</object-name>
+            <emission>
+                <red>1.0</red>
+                <green>0.0</green>
+                <blue>0.0</blue>
+                <factor-prop>/fdm/jsbsim/warning-lights/switch-off-ignition</factor-prop>
+            </emission>
+        </animation>
 
 </PropertyList>

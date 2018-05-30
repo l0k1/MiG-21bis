@@ -17,4 +17,69 @@
         </emission>
     </animation>
 
+    <animation>
+  		<type>pick</type>
+  		<object-name>groundStartingButton</object-name>
+  		<action>
+  			<button>0</button>
+  			<button>1</button>
+  			<repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>/controls/engines/engine[0]/start-button</property>
+        </binding>
+        <mod-up>
+          <binding>
+            <command>property-toggle</command>
+            <property>/controls/engines/engine[0]/start-button</property>
+          </binding>
+        </mod-up>
+  		</action>
+  	</animation>
+
+  	<animation>
+  		<type>translate</type>
+  		<object-name>groundStartingButton</object-name>
+  		<property>/controls/engines/engine[0]/start-button</property>
+  		<factor>-0.001</factor>
+  		<offset-m>0.001</offset-m>
+  		<axis>
+  			<x>1</x>
+  			<y>0</y>
+  			<z>0</z>
+  		</axis>
+  	</animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>engineStartModeSwitch</object-name>
+      <action>
+        <button>0</button>
+        <button>1</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>/controls/engines/engine[0]/starting-switch</property>
+        </binding>
+      </action>
+    </animation>
+
+    <animation>
+      <object-name>engineStartModeSwitch</object-name>
+      <type>rotate</type>
+      <property>/controls/engines/engine[0]/starting-switch</property>
+      <factor>-40</factor>
+      <offset-deg>20</offset-deg>
+      <center>
+        <x-m>-0.00655</x-m>
+        <y-m> 0.009781</y-m>
+        <z-m>-0.008648</z-m>
+      </center>
+      <axis>
+        <x>0</x>
+        <y>1</y>
+        <z>0</z>
+      </axis>
+    </animation>
+
 </PropertyList>

@@ -113,14 +113,15 @@
 
 	<key n="115">
 		<name>s</name>
-		<desc>Toggle starter valves</desc>
+		<desc>Press start button</desc>
 		<binding>
 			<command>property-toggle</command>
-			<property>controls/engines/engine[0]/starter</property>
+			<property>/controls/engines/engine[0]/start-button</property>
 		</binding>
 		<mod-up>
 			<binding>
-				<command>null</command>
+				<command>property-toggle</command>
+				<property>/controls/engines/engine[0]/start-button</property>
 			</binding>
 		</mod-up>
 	</key>
@@ -133,7 +134,7 @@
 			<property>fdm/jsbsim/propulsion/clr</property>
 		</binding>
 	</key>
-	
+
 	<key n="110">
 		<name>n</name>
 		<desc>Lock on target</desc>
@@ -142,7 +143,7 @@
 			<script>arm_locking.radar_seekTarget();</script>
 		</binding>
 	</key>
-	
+
 	<key n="78">
 		<name>N</name>
 		<desc>Unlock Target</desc>
@@ -173,7 +174,7 @@
 			<wrap>false</wrap>
 		</binding>
 	</key>
-	
+
 	<key n="73">
 		<name>I</name>
 		<desc>Move locking box up - fine</desc>
@@ -195,7 +196,7 @@
 			<wrap>false</wrap>
 		</binding>
 	</key>
-	
+
 	<key n="107">
 		<name>k</name>
 		<desc>Move locking box down</desc>
@@ -217,7 +218,7 @@
 			<wrap>false</wrap>
 		</binding>
 	</key>
-	
+
 	<key n="75">
 		<name>K</name>
 		<desc>Move locking box down - fine</desc>
@@ -239,7 +240,7 @@
 			<wrap>false</wrap>
 		</binding>
 	</key>
-	
+
 	<key n="83">
 		<name>S</name>
 		<desc>Activate Smokepod</desc>

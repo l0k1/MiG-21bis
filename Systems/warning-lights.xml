@@ -9,20 +9,20 @@
 	<property value="0">/consumables/fuel/tank[11]/selected</property>
 
 	<channel name="lights1" execrate="20">
-	
-		<!-- 
+
+		<!--
 			There are 4 lights on this panel:
 			MARKER: the plane is passing over an NDB marker beacon
 			CONE EXTENDED: the nosecone is extended
 			STAB FOR LDG: If the flaps and BLC are set for landing
 			TRIM NEUTRAL: if the trim is in a neutral position
 		-->
-	
+
 	</channel>
-	
+
 	<channel name="lights2" execrate="20">
-	
-		<!-- 
+
+		<!--
 			There are 4 lights on this panel:
 			NO 1 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
 			NO 2 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
@@ -228,12 +228,12 @@
 			</clipto>
 			<output>warning-lights/no-4-rkt-zero-psn</output>
 		</fcs_function>
-	
+
 	</channel>
-	
+
 	<channel name="lights3" execrate="20">
-	
-		<!-- 
+
+		<!--
 			There are 8 lights on this panel:
 			WG DROP TKS EMPTY: Wing drop tanks are empty (tanks 12 and 13)
 			VENT DROP TK ATTACHD: ventral drop tank is attached
@@ -324,7 +324,7 @@
 			</clipto>
 			<output>warning-lights/inboard-station-2</output>
 		</fcs_function>
-	
+
 		<fcs_function name="trash/warning-lights/outboard-station-3">
 			<function>
 				<product>
@@ -364,15 +364,15 @@
 	</channel>
 
 	<channel name="lights4" execrate="20">
-	
-		<!-- 
+
+		<!--
 			There are 4 lights on this panel:
 			VENT DROP TK EMPTY: If the ventral drop tank (tank 11) is empty
 			NO 1 TK GP EMPTY: If the wing tanks (tanks 7,8,9,10) are empty
 			450L FUEL REMAIN: If there is 450L of fuel
 			NO 3 TK GP EMPTY: Tanks 3,4,5,6 are empty
 		-->
-		
+
 		<!-- VENT DROP TK EMPTY -->
 
 		<fcs_function name="trash/warning-lights/vent-drop-tk-empty">
@@ -426,7 +426,7 @@
 		</fcs_function>
 
 		<!-- 450L FUEL REMAIN -->
-		
+
 		<fcs_function name="trash/warning-lights/L450">
 			<function>
 				<product>
@@ -446,7 +446,7 @@
 		</fcs_function>
 
 		<!-- NO 3 TK GP EMPTY -->
-		
+
 		<fcs_function name="trash/warning-lights/no-3-gp-empty">
 			<function>
 				<product>
@@ -478,12 +478,12 @@
 		</fcs_function>
 
 	</channel>
-	
+
 	<channel name="lights5" execrate="20">
-	
-		<!-- 
+
+		<!--
 			There are 10 lights on this panel:
-			SWITCH OFF IGNITION: ?
+			SWITCH OFF IGNITION: controls/engines/engine[0]/start-ignition-signal
 			SERVICE TANK: ?
 			FIRST REHEAT: Regular A/B is on
 			SECOND REHEAT: Second A/B is on
@@ -494,6 +494,24 @@
 			WTCH MAIN SYST PRES: Main hydraulic system pressure is low
 			WTCH BKUP SYST PRES: Second hydraulic system pressure is low
 		-->
+
+		<fcs_function name="trash/warning-lights/switch-off-ignition">
+			<function>
+				<product>
+					<eq>
+						<property>/controls/engines/engine[0]/start-ignition-signal</property>
+						<value>1</value>
+					</eq>
+					<property>/instrumentation/warning-lights/dimmer[5]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/switch-off-ignition</output>
+		</fcs_function>
 
 		<fcs_function name="trash/warning-lights/first-reheat">
 			<function>
@@ -556,7 +574,7 @@
 			</clipto>
 			<output>warning-lights/jet-nozzle-open</output>
 		</fcs_function>
-	
+
 	</channel>
 
 	<channel name="lights_other">
@@ -658,5 +676,5 @@
 		</fcs_function>
 
 	</channel>
-	
+
 </system>

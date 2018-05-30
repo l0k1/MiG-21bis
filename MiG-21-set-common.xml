@@ -309,6 +309,7 @@
 		<engines>
 			<engine>
 				<starting-switch type="int">0</starting-switch> <!-- 0 is cold cranking, 1 is engine start -->
+				<start-ignition-signal type="bool">false</start-ignition-signal>
 			</engine>
 		</engines>
 		<armament>
@@ -458,7 +459,7 @@
 
 	<engines>
 		<engine n="0">
-			<running>true</running>
+			<running>false</running>
 		</engine>
 	</engines>
 

@@ -5,6 +5,8 @@
 	<property value="0">electric/buses/bus-switch[0]</property>
 	<property value="0">electric/buses/bus-switch[1]</property>
 	<property value="0">electric/buses/bus-switch[2]</property>
+	<property value="29">electric/sources/battery[0]</property>
+	<property value="29">electric/sources/battery[1]</property>
 
 	<!--
 	right vertical rear switch panel
@@ -40,17 +42,17 @@
 	rhfsp for short
 	-->
 
-	<property value="1">electric/switches/rhfsp/no-3-tk-gp-pump</property>
-	<property value="1">electric/switches/rhfsp/no-1-tk-gp-pump</property>
-	<property value="1">electric/switches/rhfsp/service-tk-pump</property>
-	<property value="1">electric/switches/rhfsp/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig</property>
-	<property value="1">electric/switches/rhfsp/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr</property>
-	<property value="1">electric/switches/rhfsp/inv-emerg-crsovr</property>
-	<property value="1">electric/switches/rhfsp/bat-ext-pwr-sup</property>
-	<property value="1">electric/switches/rhfsp/dc-gen</property>
-	<property value="1">electric/switches/rhfsp/jato-start</property>
-	<property value="1">electric/switches/rhfsp/jato-jett</property>
-	<property value="1">electric/switches/rhfsp/ac-gen-ext-pwr</property>
+	<property value="0">electric/switches/rhfsp/no-3-tk-gp-pump</property>
+	<property value="0">electric/switches/rhfsp/no-1-tk-gp-pump</property>
+	<property value="0">electric/switches/rhfsp/service-tk-pump</property>
+	<property value="0">electric/switches/rhfsp/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig</property>
+	<property value="0">electric/switches/rhfsp/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr</property>
+	<property value="0">electric/switches/rhfsp/inv-emerg-crsovr</property>
+	<property value="0">electric/switches/rhfsp/bat-ext-pwr-sup</property>
+	<property value="0">electric/switches/rhfsp/dc-gen</property>
+	<property value="0">electric/switches/rhfsp/jato-start</property>
+	<property value="0">electric/switches/rhfsp/jato-jett</property>
+	<property value="0">electric/switches/rhfsp/ac-gen-ext-pwr</property>
 
 	<!--
 	left vertical front switch panel
@@ -61,8 +63,8 @@
 	<property value="1">electric/switches/lvfsp/anti-skid-unit</property>
 	<property value="1">electric/switches/lvfsp/full-throttle-reheat</property>
 	<property value="1">electric/switches/lvfsp/air-relight</property>
-	<property value="1">electric/switches/lvfsp/engine-starting-unit</property>
-	<property value="1">electric/switches/lvfsp/fire-ftg-eqpt</property>
+	<property value="0">electric/switches/lvfsp/engine-starting-unit</property>
+	<property value="0">electric/switches/lvfsp/fire-ftg-eqpt</property>
 
 	<channel name="sources">
 
@@ -236,17 +238,20 @@
 			or combined in serial. -->
 		<fcs_function name="trash/electric/sources/battery-volts">
 			<function>
-				<ifthen>
-					<property>electric/battery-mode</property>
-					<sum>
-						<property>electric/sources/battery[0]</property>
-						<property>electric/sources/battery[1]</property>
-					</sum>
-					<avg>
-						<property>electric/sources/battery[0]</property>
-						<property>electric/sources/battery[1]</property>
-					</avg>
-				</ifthen>
+				<product>
+					<ifthen>
+						<property>electric/battery-mode</property>
+						<sum>
+							<property>electric/sources/battery[0]</property>
+							<property>electric/sources/battery[1]</property>
+						</sum>
+						<avg>
+							<property>electric/sources/battery[0]</property>
+							<property>electric/sources/battery[1]</property>
+						</avg>
+					</ifthen>
+					<property>electric/switches/rhfsp/bat-ext-pwr-sup</property>
+				</product>
 			</function>
 			<output>electric/sources/battery-volts</output>
 		</fcs_function>

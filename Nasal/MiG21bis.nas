@@ -124,6 +124,7 @@ var gear_setting = func(dir) {
 
 var runthru = 0;
 var starter_time = 0;
+var starter_time_req = 0;
 
 var dc_prop = props.globals.getNode("/fdm/jsbsim/electric/output/engine-starting-unit"); # most of the electrical routing happens in the electric.xml jsbsim file
 var n1 = props.globals.getNode("/engines/engine[0]/n1");
@@ -136,9 +137,15 @@ var start_ignition_signal = props.globals.getNode("/controls/engines/engine[0]/s
 
 var engine_startup = func() {
   # props not yet accounted for, r/set circuit breaker, service tk pump circuit breaker
-  if ( start_mode.getValue == 0 or
-					dc_prop.getValue < 100 or
-					(start_button.getValue() == 0 and systime() - starter_time < 3)) {
+	if (runthru == 0) {
+		starter_time = systime();
+		starter_time_req = (rand() * 2) + 3.75;
+		#print(starter_time_req);
+	}
+  if ( start_mode.getValue() == 0 or
+					dc_prop.getValue() < 100 or
+					(start_button.getValue() == 0 and systime() - starter_time < starter_time_req)) {
+						#print("starter failed");
 		starter.setValue(0);
 		cutoff.setValue(0);
 		start_ignition_signal.setValue(0);
@@ -146,14 +153,21 @@ var engine_startup = func() {
 		return;
 	}
 
+	#print(runthru);
+
 	if ( runthru == 0 ) {
 		starter.setValue(1);
 		cutoff.setValue(1);
-		starter_time = systime();
+		start_ignition_signal.setValue(1);
 		runthru = 1;
+		settimer(func(){engine_startup();},0.2);
 	} elsif ( runthru == 1 ) {
 		cutoff.setValue(0);
 		runthru = 2;
+		settimer(func(){engine_startup();},0.2);
+	} elsif (systime() - starter_time >= starter_time_req and start_ignition_signal.getValue() == 1 ) {
+		start_ignition_signal.setValue(0);
+		settimer(func(){engine_startup();},0.2);
 	} elsif (eng_running.getValue()) {
 		runthru = 0;
 		starter.setValue(0);
@@ -161,6 +175,14 @@ var engine_startup = func() {
       settimer(func(){engine_startup();},0.2);
   }
 }
+
+setlistener("/controls/engines/engine[0]/start-button",engine_startup);
+setlistener("/controls/engines/engine[0]/starting-switch",func(){
+	if (start_mode.getValue() == 0){
+		starter.setValue(0);
+		cutoff.setValue(1);
+	}
+	});
 
   #/controls/engines/engine[~n~]/starter set to true
   #/controls/engines/engine[~n~]/cutoff toggled with 0.1 sec delay
