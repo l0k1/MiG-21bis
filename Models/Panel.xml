@@ -689,4 +689,15 @@
         </offsets>
     </model>
 
+    <model>
+        <name>Misc Panel 5</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/MiscPanel5/verticalMidLeftPanel.xml</path>
+        <offsets>
+            <heading-deg>90.952</heading-deg>
+            <x-m>-3.54328</x-m>
+            <y-m>-0.42543</y-m>
+            <z-m> 0.63978</z-m>
+        </offsets>
+    </model>
+
 </PropertyList>
