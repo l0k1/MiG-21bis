@@ -7,7 +7,10 @@
 # load this nasal file at the bottom of your set file like normal.
 # in your set file, under <instrumentation> <iff>
 #
-# <channel type="string">
+# <power_prop type="string">
+# required. property path to whatever property your want to use to power on or off this iff module.
+# the power property should be a bool, 0 for off, 1 for on.
+# <channel_prop type="string">
 # required. property path to whatever property your using to keep track of your iff channel selection.
 # channels can be ints, strings, or floats.
 # <iff_mp_string type="int">
@@ -33,51 +36,50 @@ var iff_hash_length = getprop("/instrumentation/iff/iff_hash_length") or 3;
 var iff_mp_string = getprop("/instrumentation/iff/iff_mp_string") or 4;
 
 var node = {
-	channel:		getprop("/instrumentation/iff/channel"),
-	hash:			"/sim/multiplay/generic/string["~iff_mp_string~"]",
-	callsign:		"/sim/multiplay/callsign",
+	power:			props.Globals.getNode(getprop("/instrumentation/iff/power_prop")),
+	channel:		props.Globals.getNode(getprop("/instrumentation/iff/channel_prop")),
+	hash:			props.Globals.getNode("/sim/multiplay/generic/string["~iff_mp_string~"]"),
+	callsign:		props.Globals.getNode("/sim/multiplay/callsign"),
 };
-
-foreach(var name; keys(node)) {
-	node[name] = props.globals.getNode(node[name], 1);
-}
 
 var iff_hash = {
 	new: func() {
 		var m = {parents:[iff_hash]};
 		m.int_systime = int(systime());
-		m.update_time = 0;
-		m.time = 0; # time used in hash
-		m.timer = nil; # time between loops
+		m.update_time = int(math.mod(me.int_systime,iff_refresh_rate));
+		m.time = me.int_systime - me.update_time; # time used in hash
+		m.timer = maketimer(iff_refresh_rate - me.update_time,func(){me.loop()});
 		m.callsign = node.callsign.getValue();
 		return m;
 	},
 	
 	loop: func() {
-		me.int_systime = int(systime());
-		me.update_time = int(math.mod(me.int_systime,iff_refresh_rate));
-		me.time = me.int_systime - me.update_time;
-		node.hash.setValue(_calculate_hash(me.time, me.callsign, node.channel.getValue()));
-		#print("update time " ~ (iff_refresh_rate - me.update_time));
-		if ( me.timer != nil ) {
-			me.timer.restart(iff_refresh_rate - me.update_time);
+		if (node.power.getValue()) {
+			if (me.timer.isRunning == 0) {
+				me.timer.start();
+			}
+			me.int_systime = int(systime());
+			me.update_time = int(math.mod(me.int_systime,iff_refresh_rate));
+			me.time = me.int_systime - me.update_time;
+			node.hash.setValue(_calculate_hash(me.time, me.callsign, node.channel.getValue()));
 		} else {
-			me.timer = maketimer(iff_refresh_rate - me.update_time,func(){me.loop()});
-			me.timer.start();
+			me.timer.stop();
 		}
 	},
 };
 
+var hash1 = "";
+var hash2 = "";
+var check_hash = "";
+
 var interrogate = func(tgt) {
-	var hash1 = _calculate_hash(int(systime()) - int(math.mod(int(systime()),iff_refresh_rate)), tgt.getChild("callsign").getValue(),node.channel.getValue());
-	var hash2 = _calculate_hash(int(systime()) - int(math.mod(int(systime()),iff_refresh_rate)) - iff_refresh_rate, tgt.getChild("callsign").getValue(),node.channel.getValue());
-	var check_hash = tgt.getNode("sim/multiplay/generic/string["~iff_mp_string~"]").getValue();
+	hash1 = _calculate_hash(int(systime()) - int(math.mod(int(systime()),iff_refresh_rate)), tgt.getChild("callsign").getValue(),node.channel.getValue());
+	hash2 = _calculate_hash(int(systime()) - int(math.mod(int(systime()),iff_refresh_rate)) - iff_refresh_rate, tgt.getChild("callsign").getValue(),node.channel.getValue());
+	check_hash = tgt.getNode("sim/multiplay/generic/string["~iff_mp_string~"]").getValue();
 	#print("hash1 " ~ hash1);
 	#print("hash2 " ~ hash2);
 	#print("check_hash " ~ check_hash);
-	if ( hash1 == check_hash ) {
-		return 1;
-	} elsif (hash2 == check_hash) {
+	if ( hash1 == check_hash or hash2 == check_hash ) {
 		return 1;
 	} else {
 		return 0;
@@ -94,4 +96,5 @@ var _calculate_hash = func(time, callsign, channel) {
 
 var new_hashing = iff_hash.new();
 new_hashing.loop();
-setlistener("/instrumentation/iff/channel-selection",func(){new_hashing.loop();});
+setlistener(node.channel.getPath(),func(){new_hashing.loop();});
+setlistener(node.power.getPath(),func(){new_hashing.loop();});
