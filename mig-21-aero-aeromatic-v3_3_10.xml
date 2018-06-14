@@ -335,7 +335,7 @@
            <property>metrics/cbarw-ft</property>
            <property>aero/alpha-rad</property>
            <product>
-             <value> -0.1562 </value>
+             <value> -0.1462 </value>
              <property>tune/pitch/alpha</property>
            </product>
        </product>
@@ -354,10 +354,10 @@
               <independentVar lookup="column">aero/alpha-rad</independentVar>
               <tableData>
                         0.0         0.26    0.436   0.61    1.0
-                0.0    -1.26134155  -1.23   -1.15   -0.65   0.0
-                0.2    -1.086193     -0.98   -0.82   -0.38   0.0
-                0.3    -0.53205     -0.51   -0.45   -0.25   0.0
-                2.0    -0.1049      -0.10   -0.09   -0.07   0.0
+                0.0    -1.26134155  -1.23   -1.15   -0.69   0.0
+                0.2    -1.086193     -0.98   -0.82   -0.40   0.0
+                0.3    -0.53205     -0.55   -0.48   -0.27   0.0
+                2.0    -0.1049      -0.11   -0.10   -0.08   0.0
               </tableData>
             </table>
             <property>tune/pitch/elevator</property>
@@ -389,7 +389,7 @@
            <property>aero/ci2vel</property>
            <property>aero/alphadot-rad_sec</property>
            <product>
-             <value> -3.4053 </value>
+             <value> -3.2053 </value>
              <property>tune/pitch/alphadot</property>
            </product>
        </product>
