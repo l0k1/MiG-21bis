@@ -367,6 +367,11 @@
 				electric/buses/bus-switch[2] == 1
 			</test>
 		</switch>
+		
+		<summer name="trash/electric/buses/bus[3]">
+			<input>electric/sources/dc-volts</input>
+			<output>electric/buses/bus[3]</output>
+		</summer>
 
 	</channel>
 
@@ -558,35 +563,35 @@
 
 		<switch name="electric/output/full-throttle-reheat">
 			<default value="0"/>
-			<test logic="AND" value="electric/inverters/po-750a[0]">
+			<test logic="AND" value="electric/buses/bus[3]">
 				electric/switches/lvfsp/full-throttle-reheat == 1
 			</test>
 		</switch>
 
 		<switch name="electric/output/anti-skid-unit">
 			<default value="0"/>
-			<test logic="AND" value="electric/inverters/po-750a[0]">
+			<test logic="AND" value="electric/buses/bus[3]">
 				electric/switches/lvfsp/anti-skid-unit == 1
 			</test>
 		</switch>
 
 		<switch name="electric/output/air-relight">
 			<default value="0"/>
-			<test logic="AND" value="electric/inverters/po-750a[0]">
+			<test logic="AND" value="electric/buses/bus[3]">
 				electric/switches/lvfsp/air-relight == 1
 			</test>
 		</switch>
 
 		<switch name="electric/output/engine-starting-unit">
 			<default value="0"/>
-			<test logic="AND" value="electric/inverters/po-750a[0]">
+			<test logic="AND" value="electric/buses/bus[3]">
 				electric/switches/lvfsp/engine-starting-unit == 1
 			</test>
 		</switch>
 
 		<switch name="electric/output/fire-ftg-eqpt">
 			<default value="0"/>
-			<test logic="AND" value="electric/inverters/po-750a[0]">
+			<test logic="AND" value="electric/buses/bus[3]">
 				electric/switches/lvfsp/fire-ftg-eqpt == 1
 			</test>
 		</switch>
@@ -620,4 +625,85 @@
 
 	</channel>
 
+	<channel name="system_load" execrate="4">
+		<!-- the current load on the electrical system, to determine discharge rate -->
+
+		<fcs_function name="trash/electric/discharge/bus_1_load">
+			<!-- the sum of the output voltages divided by the input voltage will give us the amount of systems running -->
+			<function>
+				<quotient>
+					<sum>
+					</sum>
+					<property>electric/buses/bus[0]</property>
+				</quotient>
+			</function>
+			<output>electric/discharge/bus_1_load</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/discharge/bus_2_load">
+			<!-- the sum of the output voltages divided by the input voltage will give us the amount of systems running -->
+			<function>
+				<quotient>
+					<sum>
+					</sum>
+					<property>electric/buses/bus[1]</property>
+				</quotient>
+			</function>
+			<output>electric/discharge/bus_2_load</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/discharge/bus_3_load">
+			<!-- the sum of the output voltages divided by the input voltage will give us the amount of systems running -->
+			<function>
+				<quotient>
+					<sum>
+						<property>electric/output/air-brakes</property>
+						<property>electric/output/lg-wg-flaps</property>
+						<property>electric/output/lg-sig-nav-lts</property>
+						<property>electric/output/cone-and-as-shutters-gtl</property>
+						<property>electric/output/msl-rgm-emer-lcn-lchr-rkt-bombs-jett</property>
+						<property>electric/output/oxy-eq-heat-extn-lamp-wht-lt</property>
+						<property>electric/output/drag-chute</property>
+						<property>electric/output/drop-tanks-jett</property>
+						<property>electric/output/apy-syst-man-ctl</property>
+						<property>electric/output/taxi-ldg-lts-lg-ext-sig</property>
+						<property>electric/output/booster-system-off-hyd-syst-sig</property>
+						<property>electric/output/hydr-pres-gauge-tanks-sig</property>
+						<property>electric/output/anh-pnl-lampst-test-copu-warn-syst</property>
+						<property>electric/output/ext-stores-sig</property>
+						<property>electric/output/blc-syst-shutters-control-1</property>
+						<property>electric/output/blc-syst-shutters-control-2</property>
+						<property>electric/output/tac-rls-1-2</property>
+						<property>electric/output/cabin-air-sup</property>
+						<property>electric/output/firing-button</property>
+						<property>electric/output/cdr-atc-xponder</property>
+						<property>electric/output/apy-syst-auto-ctl</property>
+						<property>electric/output/tac-rls-3-4</property>
+						<property>electric/output/battery-heat</property>
+					</sum>
+					<property>electric/buses/bus[2]</property>
+				</quotient>
+			</function>
+			<output>electric/discharge/bus_3_load</output>
+		</fcs_function>
+		
+		<!-- bus 4 is directly fed from DC final -->
+		<fcs_function name="trash/electric/discharge/bus_4_load">
+			<!-- the sum of the output voltages divided by the input voltage will give us the amount of systems running -->
+			<function>
+				<quotient>
+					<sum>
+						<property>electric/output/full-throttle-reheat</property>
+						<property>electric/output/anti-skid-unit</property>
+						<property>electric/output/air-relight</property>
+						<property>electric/output/engine-starting-unit</property>
+						<property>electric/output/fire-ftg-eqpt</property>
+					</sum>
+					<property>electric/sources/dc-volts</property>
+				</quotient>
+			</function>
+			<output>electric/discharge/bus_4_load</output>
+		</fcs_function>
+
+	</channel>
 </system>
