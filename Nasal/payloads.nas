@@ -118,11 +118,11 @@ var update_loop = func {
 					if(selected == "R-60x2") {
 						#print("R-60x2 detected");
 						if(i == 0){
-							print('setting pylon 1');
+							#print('setting pylon 1');
 							setprop("payload/virtual/weight[7]/selected","R-60");
 							setprop("payload/virtual/weight[7]/weight-lb",0);
 						} elsif(i == 4){
-							print('setting pylon 3');
+							#print('setting pylon 3');
 							setprop("payload/virtual/weight[8]/selected","R-60");
 							setprop("payload/virtual/weight[8]/weight-lb",0);
 						}
@@ -676,7 +676,7 @@ var impact_listener = func {
 				#var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
 				# distance from ballistic impact point to mp point
 				distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
-				print("callsign " ~ mp.getNode("callsign").getValue() ~ " distance = " ~ distance);
+				#print("callsign " ~ mp.getNode("callsign").getValue() ~ " distance = " ~ distance);
 				if (distance < typeOrd.closest_distance) {
 					typeOrd.closest_distance = distance;
 					inside_callsign = mp.getNode("callsign").getValue();
@@ -687,7 +687,7 @@ var impact_listener = func {
 				#we have a successful hit
 				if ( inside_callsign == typeOrd.hit_callsign ) {
 					typeOrd.hit_count = typeOrd.hit_count + 1;
-					print("hit_count: " ~ hit_count);
+					#print("hit_count: " ~ hit_count);
 				} else {
 					typeOrd.hit_callsign = inside_callsign;
 					typeOrd.hit_count = 1;
