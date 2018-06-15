@@ -53,18 +53,6 @@
 	<property value="0">electric/switches/rhfsp/jato-start</property>
 	<property value="0">electric/switches/rhfsp/jato-jett</property>
 	<property value="0">electric/switches/rhfsp/ac-gen-ext-pwr</property>
-
-	<!--
-	left vertical front switch panel
-			or
-	lvfsp for short
-	-->
-	<property value="0">electric/switches/lvfsp/ad-check</property>
-	<property value="1">electric/switches/lvfsp/anti-skid-unit</property>
-	<property value="1">electric/switches/lvfsp/full-throttle-reheat</property>
-	<property value="1">electric/switches/lvfsp/air-relight</property>
-	<property value="0">electric/switches/lvfsp/engine-starting-unit</property>
-	<property value="0">electric/switches/lvfsp/fire-ftg-eqpt</property>
 	
 	<!--
 	rght vertical mid switch panel
@@ -92,6 +80,32 @@
 	<property value="0">electric/switches/rvmsp/srzo-iff</property>
 	<property value="0">electric/switches/rvmsp/formation-lights</property>
 	<property value="0">electric/switches/rvmsp/recorder</property>
+
+	<!--
+	left vertical front switch panel
+			or
+	lvfsp for short
+	-->
+	<property value="0">electric/switches/lvfsp/ad-check</property>
+	<property value="1">electric/switches/lvfsp/anti-skid-unit</property>
+	<property value="1">electric/switches/lvfsp/full-throttle-reheat</property>
+	<property value="1">electric/switches/lvfsp/air-relight</property>
+	<property value="0">electric/switches/lvfsp/engine-starting-unit</property>
+	<property value="0">electric/switches/lvfsp/fire-ftg-eqpt</property>
+	
+	<!--
+	left vertical mid switch panel
+	        or
+	lvmsp for short
+	-->
+	<property value="0">electric/switches/lvmsp/seat-height</property>
+	<property value="0">electric/switches/lvmsp/psn-nozzle-emerg-ctl</property>
+	<property value="0">electric/switches/lvmsp/air-temp</property>
+	<property value="0">electric/switches/lvmsp/blc</property>
+	<property value="0">electric/switches/lvmsp/ident</property>
+	<property value="0">electric/switches/lvmsp/apu-ctlr-auto-man</property>
+	<property value="0">electric/switches/lvmsp/apu-ctlr-hi-spd-low</property>
+	<property value="0">electric/switches/lvmsp/lockon-hi-lo</property>
 
 	<channel name="sources">
 
@@ -790,6 +804,68 @@
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/recorder == 1
+			</test>
+		</switch>
+
+		<!--
+		
+		left vertical mid switch panel
+		
+		-->
+
+		<switch name="electric/output/seat-height">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/seat-height == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/psn-nozzle-emerg-ctl">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/psn-nozzle-emerg-ctl == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/air-temp">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/air-temp == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/blc">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/blc == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/ident">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/ident == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/apu-ctlr-auto-man">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/apu-ctlr-auto-man == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/apu-ctlr-hi-spd-low">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/apu-ctlr-hi-spd-low == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/lockon-hi-lo">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/lockon-hi-lo == 1
 			</test>
 		</switch>
 
