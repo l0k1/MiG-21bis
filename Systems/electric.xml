@@ -36,12 +36,12 @@
 	<property value="1">electric/switches/rvrsp/apy-syst-auto-ctl</property>
 	<property value="1">electric/switches/rvrsp/tac-rls-3-4</property>
 	<property value="1">electric/switches/rvrsp/battery-heat</property>
+	
 	<!--
 	right horizontal front switch panel
 			or
 	rhfsp for short
 	-->
-
 	<property value="0">electric/switches/rhfsp/no-3-tk-gp-pump</property>
 	<property value="0">electric/switches/rhfsp/no-1-tk-gp-pump</property>
 	<property value="0">electric/switches/rhfsp/service-tk-pump</property>
@@ -65,6 +65,33 @@
 	<property value="1">electric/switches/lvfsp/air-relight</property>
 	<property value="0">electric/switches/lvfsp/engine-starting-unit</property>
 	<property value="0">electric/switches/lvfsp/fire-ftg-eqpt</property>
+	
+	<!--
+	rght vertical mid switch panel
+			or
+	rvmsp for short
+	-->
+	<property value="0">electric/switches/rvmsp/cone</property>
+	<property value="0">electric/switches/rvmsp/pump-unit</property>
+	<property value="0">electric/switches/rvmsp/trim</property>
+	<property value="0">electric/switches/rvmsp/rset</property>
+	<property value="0">electric/switches/rvmsp/arc</property>
+	<property value="0">electric/switches/rvmsp/rad-alt</property> <!-- check me? -->
+	<property value="0">electric/switches/rvmsp/rsbn</property>
+	<property value="0">electric/switches/rvmsp/gyro</property>
+	<property value="0">electric/switches/rvmsp/fds</property>
+	<property value="0">electric/switches/rvmsp/afcs</property>
+	<property value="0">electric/switches/rvmsp/afcs-pitch</property>
+	<property value="0">electric/switches/rvmsp/msl-rgm-gr-heat</property>
+	<property value="0">electric/switches/rvmsp/msl-rgm-rkt-lch</property>
+	<property value="0">electric/switches/rvmsp/pwr-to-pylons-1-2</property>
+	<property value="0">electric/switches/rvmsp/pwr-to-pylons-3-4</property>
+	<property value="0">electric/switches/rvmsp/gun</property>
+	<property value="0">electric/switches/rvmsp/gunsight</property>
+	<property value="0">electric/switches/rvmsp/guncam</property>
+	<property value="0">electric/switches/rvmsp/srzo-iff</property>
+	<property value="0">electric/switches/rvmsp/formation-lights</property>
+	<property value="0">electric/switches/rvmsp/recorder</property>
 
 	<channel name="sources">
 
@@ -593,6 +620,176 @@
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[3]">
 				electric/switches/lvfsp/fire-ftg-eqpt == 1
+			</test>
+		</switch>
+		
+
+		<!--
+
+		right vertical mid switch panel
+
+		-->
+		
+		<switch name="electric/output/cone">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/cone == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/pump-unit">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/pump-unit == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/trim">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/trim == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/rset">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/rset == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/arc">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/arc == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/rad-alt">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/rad-alt == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/rsbn">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/rsbn == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/gyro">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/gyro == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/fds">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/fds == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/afcs">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/afcs == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/afcs-pitch">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/afcs-pitch == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/msl-rgm-gr-heat">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/msl-rgm-gr-heat == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/msl-rgm-rkt-lch">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/msl-rgm-rkt-lch == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/pwr-to-pylons-1-2">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/pwr-to-pylons-1-2 == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/pwr-to-pylons-3-4">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/pwr-to-pylons-3-4 == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/gun">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/gun == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/gunsight">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/gunsight == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/guncam">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/guncam == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/srzo-iff">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/srzo-iff == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/formation-lights">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/formation-lights == 1
+			</test>
+		</switch>
+		
+		<fcs_function name="trash/electric/output/formation-lights">
+			<function>
+				<product>
+					<switch>
+						<property>electric/switches/rvmsp/formation-lights</property>
+						<value>0.00</value>
+						<value>0.33</value>
+						<value>0.66</value>
+						<value>1.00</value>
+					</switch>
+					<property>electric/buses/bus[1]</property>
+				</product>
+			</function>
+			<output>electric/output/formation-lights</output>
+		</fcs_function>
+		
+		<switch name="electric/output/recorder">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/recorder == 1
 			</test>
 		</switch>
 
