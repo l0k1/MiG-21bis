@@ -95,7 +95,7 @@ var update_loop = func {
 		# replay is active, skip rest of loop.
 		settimer(update_loop, UPDATE_PERIOD);
 	}
-	
+
 	# pylon payloads
 	for(var i=0; i<=6; i=i+1) {
 		var selected = getprop("payload/weight["~ (i) ~"]/selected");
@@ -106,8 +106,8 @@ var update_loop = func {
 				#print("updating station " ~ i);
 				setprop("controls/armament/station["~(i)~"]/released", FALSE);
 				#print("type: " ~ payloads[selected].type);
-				if (payloads[selected].type == "ir" or 
-						payloads[selected].type == "radar" or 
+				if (payloads[selected].type == "ir" or
+						payloads[selected].type == "radar" or
 						payloads[selected].type == "antirad" or
 						payloads[selected].type == "beam") {
 					if(armament.AIM.active[i] != nil and armament.AIM.active[i].type != payloads[selected].name) {
@@ -118,11 +118,11 @@ var update_loop = func {
 					if(selected == "R-60x2") {
 						#print("R-60x2 detected");
 						if(i == 0){
-							print('setting pylon 1');
+							#print('setting pylon 1');
 							setprop("payload/virtual/weight[7]/selected","R-60");
 							setprop("payload/virtual/weight[7]/weight-lb",0);
 						} elsif(i == 4){
-							print('setting pylon 3');
+							#print('setting pylon 3');
 							setprop("payload/virtual/weight[8]/selected","R-60");
 							setprop("payload/virtual/weight[8]/weight-lb",0);
 						}
@@ -166,7 +166,7 @@ var update_loop = func {
 					} elsif (i == 4 ) {
 						setprop("payload/virtual/weight[8]/selected","none");
 					}
-				} 
+				}
 
 				if ( i == 0 ) {
 					setprop("/ai/submodels/submodel[22]/count",0);
@@ -189,8 +189,8 @@ var update_loop = func {
 			if(payloads[selected].name != "none" and getprop("payload/virtual/weight["~ (i) ~"]/weight-lb") == 0) {
 				#print("updating station " ~ i);
 				setprop("controls/armament/station["~(i)~"]/released", FALSE);
-				if (payloads[selected].type == "ir" or 
-						payloads[selected].type == "radar" or 
+				if (payloads[selected].type == "ir" or
+						payloads[selected].type == "radar" or
 						payloads[selected].type == "antirad" or
 						payloads[selected].type == "beam") {
 					if(armament.AIM.active[i] != nil and armament.AIM.active[i].type != payloads[selected].name) {
@@ -258,8 +258,8 @@ var update_loop = func {
 			}
 		}
 	}
-	
-	
+
+
 	############ MISSILE ARMING LOGIC ################
 	var armSelect = pylon_select();
 	for ( i = 0; i <= 10; i += 1 ) {
@@ -282,7 +282,7 @@ var update_loop = func {
 			}
 		}
 	}
-	
+
 	############ JSBSIM SET MASS ##############
 	var selected = nil;
 	for(var i=0; i<=10; i=i+1) { # set JSBSim mass
@@ -292,7 +292,7 @@ var update_loop = func {
 			var virtual = "/virtual/";
 		}
 		selected = getprop("payload"~virtual~"weight["~i~"]/selected");
-		
+
 		if (getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != nil and getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]") != payloads[selected].weight) {
 			#print("setting weight of " ~ payloads[selected].weight ~ " on pylon " ~ i);
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~ (i) ~"]", payloads[selected].weight);
@@ -336,7 +336,7 @@ var update_loop = func {
 			}
 		}
 	}
-	
+
 	settimer(update_loop, UPDATE_PERIOD);
 }
 
@@ -374,9 +374,9 @@ var missile_release_listener = func {
 	} else {
 		var virtual1 = "/virtual/";
 	}
-	
+
 	selected0 = payloads[getprop("payload" ~ virtual0 ~ "weight["~(armSelect[0])~"]/selected") ];
-	if ( armSelect[1] != -1 ) {	
+	if ( armSelect[1] != -1 ) {
 		selected1 = payloads[getprop("payload" ~ virtual1 ~ "weight["~(armSelect[1])~"]/selected") ];
 	}
 	#print("in listener");
@@ -388,8 +388,8 @@ var missile_release_listener = func {
 		#print("selected0.name: " ~ selected0.name);
 		#print("selected0.type: " ~ selected0.type);
 		#print("iar_sar_switch: " ~ getprop(ir_sar_switch));
-		
-		
+
+
 		if (armSelect[2] >= 5 ) {
 			# missile launch logic
 			if ((selected0.type == "ir" and getprop(ir_sar_switch) == 0 ) or ( selected0.type == "radar" and getprop(ir_sar_switch) == 2 )) {
@@ -401,13 +401,13 @@ var missile_release_listener = func {
 			}
 			if ( armSelect[1] != -1 and selected1.name != "none") {
 				if ((selected1.type == "ir" and getprop(ir_sar_switch) == 0 ) or ( selected1.type == "radar" and getprop(ir_sar_switch) == 2 )) { #if is IR/Radar missile, and weapon selector is in missile range
-					settimer(func { 
+					settimer(func {
 						missile_release(armSelect[1]);
 						#print("type3: " ~ selected1.type);
 					}, 0.2);
 				}
 			}
-		}	
+		}
 
 		if (armSelect[2] < 2  and getprop(ag_panel_switch) == 2 ) {
 			#bombs and/or multi-rockets
@@ -429,7 +429,7 @@ var missile_release_listener = func {
 				}
 			}
 		}
-		
+
 		if (armSelect[2] <= 2 ){
 			setprop("/controls/armament/rocket-trigger",1);
 		}
@@ -466,7 +466,7 @@ var heavy_release_listener = func {
 		bomb_release(2);
 	}
 }
-  
+
   #pylon knob
   #0: 1/2 bomb | 16 rkt
   #1: 3/4 bomb | 8 rkt
@@ -505,7 +505,7 @@ var missile_release = func(pylon) {
 	var selected = getprop("payload"~virtual~"weight["~(pylon)~"]/selected");
 	#print("virtual: " ~ virtual);
 	#print("gettie: " ~ getprop("payload"~virtual~"weight["~(pylon)~"]/selected"));
-	if(selected != "none") { 
+	if(selected != "none") {
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on. The gear check is prevent missiles from firing when changing airport location.
 		#if (armament.AIM.active[pylon] != nil ) {
 		#	print("not nil");
@@ -653,18 +653,20 @@ var distance = 0;
 var typeOrdName = "";
 
 var impact_listener = func {
-    var ballistic = props.globals.getNode(input.impact.getValue(), 0);
+  var ballistic = props.globals.getNode(input.impact.getValue(), 0);
 	inside_callsign = "";
 	#print("inside listener");
-    if (ballistic != nil and ballistic.getNode("name") != nil and ballistic.getNode("impact/type") != nil) {
-		#var typeNode = ballistic.getNode("impact/type");
+  if (ballistic != nil and ballistic.getNode("name") != nil and ballistic.getNode("impact/type") != nil) {
+      print("woo");
+		var typeNode = ballistic.getNode("impact/type");
 		typeOrdName = ballistic.getNode("name").getValue();
 		#var lat = ballistic.getNode("impact/latitude-deg").getValue();
 		#var lon = ballistic.getNode("impact/longitude-deg").getValue();
 		#var impactPos = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue());
 		#if (typeOrd == "GSh-23" and typeNode.getValue() != "terrain") {
 		if ( cr_typeord[typeOrdName] != nil and (cr_typeord[typeOrdName].inc_terrain == TRUE or ballistic.getNode("impact/type").getValue() != "terrain") ) {
-			var typeOrd = cr_typeord[typeOrdName];
+      #print("its a gun hit");
+      var typeOrd = cr_typeord[typeOrdName];
 			typeOrd.closest_distance = 35;
 			foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
 				#print("Submodel impact - hit: " ~ typeNode.getValue());
@@ -673,8 +675,8 @@ var impact_listener = func {
 				#var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
 				#var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
 				# distance from ballistic impact point to mp point
-				distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
-				#print("distance = " ~ distance);
+				distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
+				#print("callsign " ~ mp.getNode("callsign").getValue() ~ " distance = " ~ distance);
 				if (distance < typeOrd.closest_distance) {
 					typeOrd.closest_distance = distance;
 					inside_callsign = mp.getNode("callsign").getValue();
@@ -696,13 +698,14 @@ var impact_listener = func {
 				}
 			}
 		}elsif (payloads[typeOrdName] != nil and ( payloads[typeOrdName].type == "bomb" or payloads[typeOrdName].type == "heavy" or payloads[typeOrdName].type == "heavyrocket" ))  {
-			foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
+      print("a bomb dropped");
+      foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
 				#var mlat = mp.getNode("position/latitude-deg").getValue();
 				#var mlon = mp.getNode("position/longitude-deg").getValue();
 				#var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
 				#var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
 				# distance from ballistic impact point to mp point
-				distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
+				distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
 				if (distance < payloads[typeOrdName].hit_max_distance) {
 					defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
 				}
@@ -726,11 +729,11 @@ setlistener("/controls/smokepod/trigger", func() {
 	trig = getprop("/controls/smokepod/trigger");
 	if ( trig ) {
 		var color = getprop("/controls/smokepod/color");
-		if (color == "white") { 
+		if (color == "white") {
 			var cn = 1
 		}
-		elsif (color == "red") { 
-			var cn = 2 
+		elsif (color == "red") {
+			var cn = 2
 		}
 		elsif (color == "orange") {
 			var cn = 3
@@ -739,13 +742,13 @@ setlistener("/controls/smokepod/trigger", func() {
 			var cn = 4
 		}
 		elsif (color == "green") {
-			var cn = 5 
+			var cn = 5
 		}
-		elsif (color == "blue") { 
+		elsif (color == "blue") {
 			var cn = 6
 		}
-		elsif (color == "purple") { 
-			var cn = 7 
+		elsif (color == "purple") {
+			var cn = 7
 		}
 		elsif (color == "rainbow (2 sec)"){
 			paint_the_rainbow(2.0);
@@ -759,7 +762,7 @@ setlistener("/controls/smokepod/trigger", func() {
 			red_white_black(2.0);
 			return;
 		}
-		else { 
+		else {
 			var cn = 8;
 		}
 		setprop("/sim/multiplay/generic/int[19]",cn);
@@ -790,7 +793,7 @@ var paint_the_rainbow = func(timer) {
 var pylon_select = func() {
 	#return array of active pylons
 	#returning -1 means no pylon selected
-	
+
 	#pylon knob
 	#0: 1/2 bomb | 16 rkt
 	#1: 3/4 bomb | 8 rkt
@@ -805,7 +808,7 @@ var pylon_select = func() {
 	#10: 4 msl
 	#pylons go 3,1,2,4 left to right IRL
 	#pylons go 0,1,3,4 left to right internally
-	
+
 	var knobpos = getprop("controls/armament/panel/pylon-knob");
 	if ( knobpos == 0 ) {
 		setprop("/controls/armament/rocket-setting",16);
@@ -836,7 +839,7 @@ var pylon_select = func() {
 		return getprop("payload/virtual/weight[8]/selected") == "R-60" ? [8,-1,knobpos] : [4,-1,knobpos];
 	}
 }
-	
+
 
 var main_init = func {
   setprop("sim/time/elapsed-at-init-sec", getprop("sim/time/elapsed-sec"));
@@ -863,7 +866,7 @@ var main_init = func {
 
   # setup impact listener
   setlistener("/ai/models/model-impact", impact_listener, 0, 0);
-  
+
   # start the main loop
 	settimer(func { update_loop() }, 0.1);
 }
@@ -907,7 +910,7 @@ var defeatSpamFilter = func (str) {
   for (var i = 0; i < size(spamList); i += 1) {
     append(newList, spamList[i]);
   }
-  spamList = newList;  
+  spamList = newList;
 }
 
 

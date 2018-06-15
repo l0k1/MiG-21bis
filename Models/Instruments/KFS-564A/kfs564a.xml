@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+  <path>kfs564a.ac</path>
+
+  <animation>
+        <type>knob</type>
+        <object-name>kfs564aVolKnob</object-name>
+        <property>/instrumentation/nav/volume</property>
+        <factor>235</factor>
+        <center>
+            <x-m> 0.01546</x-m>
+            <y-m>-0.01608</y-m>
+            <z-m>-0.01090</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+
+        <increase>
+          <binding>
+              <command>nasal</command>
+              <script>kfs564a.volume_knob(0.05);</script>
+          </binding>
+        </increase>
+        <decrease>
+          <binding>
+              <command>nasal</command>
+              <script>kfs564a.volume_knob(-0.05);</script>
+          </binding>
+        </decrease>
+    </animation>
+
+    <animation>
+          <type>knob</type>
+          <object-name>kfs564aLargeFreq</object-name>
+          <property>/instrumentation/nav/large-knob-pos</property>
+          <factor>10</factor>
+          <center>
+              <x-m> 0.01721</x-m>
+              <y-m> 0.00708</y-m>
+              <z-m>-0.01096</z-m>
+          </center>
+          <axis>
+              <x>1</x>
+              <y>0</y>
+              <z>0</z>
+          </axis>
+          <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/nav/large-knob-pos</property>
+                <factor>1.0</factor>
+            </binding>
+          </action>
+          <increase>
+            <binding>
+                <command>nasal</command>
+                <script>kfs564a.change_freq(1.0);</script>
+            </binding>
+          </increase>
+          <decrease>
+            <binding>
+                <command>nasal</command>
+                <script>kfs564a.change_freq(-1.0);</script>
+            </binding>
+          </decrease>
+      </animation>
+
+      <animation>
+            <type>knob</type>
+            <object-name>kfs564aSmallFreq</object-name>
+            <property>/instrumentation/nav/small-knob-pos</property>
+            <factor>10</factor>
+            <center>
+                <x-m> 0.01721</x-m>
+                <y-m> 0.00708</y-m>
+                <z-m>-0.01096</z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+            <action>
+              <binding>
+                  <command>property-adjust</command>
+                  <property>/instrumentation/nav/large-knob-pos</property>
+                  <factor>1.0</factor>
+              </binding>
+            </action>
+            <increase>
+              <binding>
+                  <command>nasal</command>
+                  <script>kfs564a.change_freq(0.05);</script>
+              </binding>
+            </increase>
+            <decrease>
+              <binding>
+                  <command>nasal</command>
+                  <script>kfs564a.change_freq(-0.05);</script>
+              </binding>
+            </decrease>
+        </animation>
+
+        <animation>
+          <type>pick</type>
+          <object-name>kfs564aChanButton</object-name>
+          <action>
+            <button>0</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>nasal</command>
+              <script>kfs564a.channel_button(0);</script>
+            </binding>
+            <mod-up>
+              <binding>
+                <command>nasal</command>
+                <script>kfs564a.channel_button(1);</script>
+              </binding>
+            </mod-up>
+          </action>
+        </animation>
+
+        <animation>
+          <type>pick</type>
+          <object-name>kfs564aTransferButton</object-name>
+          <action>
+            <button>0</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>nasal</command>
+              <script>kfs564a.transfer_button(0);</script>
+            </binding>
+            <mod-up>
+              <binding>
+                <command>nasal</command>
+                <script>kfs564a.transfer_button(1);</script>
+              </binding>
+            </mod-up>
+          </action>
+        </animation>
+
+</PropertyList>

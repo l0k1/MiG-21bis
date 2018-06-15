@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
- 
+
 <PropertyList>
 
 	<fx>
-	
+
 <!-- Engine -->
  <engine>
       <name>engine-start-inside</name>
@@ -31,14 +31,14 @@
       <max-dist>1000</max-dist>
    </engine>
 
-   
+
    <engine>
       <name>engine-start-outside</name>
       <mode>once</mode>
       <path>Aircraft/MiG-21bis/Sounds/Samples/mig21startup.wav</path>
       <condition>
 <and>
-  <greater-than>  
+  <greater-than>
    <property>/engines/engine[0]/rpm</property>
    <value>0.5</value>
   </greater-than>
@@ -97,7 +97,7 @@
       <max-dist>1000</max-dist>
     </engine>
 
- 
+
 		<jet>
 			<name>jet</name>
 			<path>Sounds/jet.wav</path>
@@ -105,7 +105,7 @@
 			<condition>
 			<equals>
 			<property>engines/engine/running</property>
-			<value>1</value>	
+			<value>1</value>
 			</equals>
 			</condition>
 			<volume>
@@ -130,7 +130,7 @@
 			<outer-gain>0.5</outer-gain>
 			</orientation>
 		</jet>
-		
+
 		   <engine>
       <name>engine</name>
       <path>Aircraft/MiG-21bis/Sounds/Samples/jet-blast.wav</path>
@@ -155,17 +155,17 @@
     <outer-angle>90</outer-angle>
     <outer-gain>0.45</outer-gain>
    </orientation>
- 
+
    <volume>
     <property>engines/engine[0]/n1</property>
     <factor>0.014</factor>
     <offset>-0.45</offset>
    </volume>
- 
+
    <reference-dist>20</reference-dist>
    <max-dist>3000</max-dist>
     </engine>
-	
+
 		<engine>
 			<name>engine</name>
 			<mode>looped</mode>
@@ -197,7 +197,7 @@
 			<max>0.5</max>
 			</volume>
 		</engine>
-	
+
 		 <engine>
       <name>whine-int</name>
       <path>Aircraft/MiG-21bis/Sounds/Samples/f16-engine-int.wav</path>
@@ -219,7 +219,7 @@
         <offset>-0.1</offset>
       </pitch>
     </engine>
-	
+
 		<engine>
 			<name>burner</name>
 			<mode>looped</mode>
@@ -251,7 +251,7 @@
 			<max>0.5</max>
 			</volume>
 		</engine>
-		
+
 		<engine>
 			<name>burner-from-cockpit</name>
 			<mode>looped</mode>
@@ -273,7 +273,7 @@
 			<max>0.1</max>
 			</volume>
 		</engine>
-		
+
 		<engine>
 			<name>compressor whine</name>
 			<path>Sounds/turbojet_fan.wav</path>
@@ -311,9 +311,9 @@
 			<max>0.15</max>
 			</volume>
 		</engine>
-		
+
 <!-- Gear -->
-	
+
 		<tire-rumble>
 			<name>tire-rumble</name>
 			<mode>looped</mode>
@@ -332,7 +332,7 @@
 			<max>0.3</max>
 			</volume>
 		</tire-rumble>
-		
+
 		<gear-wind>
 			<name>gear-wind</name>
 			<mode>looped</mode>
@@ -350,7 +350,7 @@
 			<max>1.0</max>
 			</volume>
 		</gear-wind>
-		
+
 		<air-brakes>
 		  <name>air-brakes</name>
 		  <mode>in-transit</mode>
@@ -360,7 +360,7 @@
 			<factor>0.25</factor>
 		  </volume>
 		</air-brakes>
-	  
+
 	   <gear>
 		  <name>gear</name>
 		  <mode>in-transit</mode>
@@ -372,7 +372,7 @@
 			<factor>-0.04</factor>
 		  </pitch>
 		</gear>
-	  
+
 		 <flap>
 		  <name>flaps</name>
 		  <mode>in-transit</mode>
@@ -382,7 +382,7 @@
 		  <offset>0.25</offset>
 		  </volume>
 		</flap>
-		
+
 		<squeal>
 			<name>squeal</name>
 			<path>Sounds/squeal.wav</path>
@@ -414,9 +414,9 @@
 			<offset>1.2</offset>
 			</pitch>
 		</squeal>
-		
+
 <!-- Enviromental -->
-		
+
 		<wind>
 			<name>wind</name>
 			<mode>looped</mode>
@@ -437,7 +437,7 @@
 			<offset>1.25</offset>
 			</pitch>
 		</wind>
-		
+
 		<buffet>
 			<name>alpha-buffet</name>
 			<mode>looped</mode>
@@ -463,9 +463,9 @@
 			<factor>0.005</factor>
 			</pitch>
 		</buffet>
-		
+
 <!-- Sonic boom -->
-	  
+
 		<sonicboom>
 			<name>Sonic Boom</name>
 			<mode>once</mode>
@@ -487,9 +487,9 @@
 				</and>
 			</condition>
 		</sonicboom>
-		
+
 <!-- Stall warning -->
-		
+
 		<stall>
 			<name>stall</name>
 			<mode>looped</mode>
@@ -509,7 +509,7 @@
 			</condition>
 			<volume><factor>0.6</factor></volume>
 		</stall>
-		
+
 <!-- Aircraft crash -->
 
 		<crash>
@@ -519,10 +519,10 @@
 			</condition>
 			<path>Sounds/crash.wav</path>
 		</crash>
-		
+
 <!-- Pilot-G -->
-		
-		<voice>
+
+		<!--<voice>
 			<name>G-Force Breath Vox</name>
 			<path>Aircraft/MiG-21bis/Sounds/Samples/GForce.wav</path>
 			<condition>
@@ -532,13 +532,13 @@
 						<property>/accelerations/pilot/z-accel-fps_sec</property>
 						<value>-161</value>
 					</greater-than>
-				</and> 
+				</and>
 			</condition>
 			<volume>
 				<factor>0.9</factor>
 			</volume>
 		</voice>
-		
+
 		<voice>
 			<name>G-Force Vox</name>
 			<path>Aircraft/MiG-21bis/Sounds/Samples/G-Force.wav</path>
@@ -549,17 +549,17 @@
 						<property>/accelerations/pilot/z-accel-fps_sec</property>
 						<value>-225</value>
 					</less-than>
-				</and>  
+				</and>
 			</condition>
 			<volume>
 				<factor>0.9</factor>
 			</volume>
-		</voice>
-		
+		</voice>-->
+
 <!-- Weapons -->
-		
+
 <!-- Guns fire -->
-		
+
 		<guns>
 			<name>gunfire</name>
 			<mode>looped</mode>
@@ -568,9 +568,9 @@
 			</condition>
 			<path>Aircraft/MiG-21bis/Sounds/Samples/gun.wav</path>
 		</guns>
-	
+
 <!-- Missile fire -->
-	
+
 		<crash>
 		   <name>missile 1</name>
 		   <condition>
@@ -578,7 +578,7 @@
 		   </condition>
 		   <path>Aircraft/MiG-21bis/Sounds/Samples/rocket_away.wav</path>
 		</crash>
-		  
+
 		<crash>
 		   <name>missile 2</name>
 		   <condition>
@@ -586,7 +586,7 @@
 		   </condition>
 		   <path>Aircraft/MiG-21bis/Sounds/Samples/rocket_away.wav</path>
 		</crash>
-	
+
 <!-- Bomb release -->
 
 		 <crash>
@@ -596,7 +596,7 @@
 		   </condition>
 		   <path>Aircraft/MiG-21bis/Sounds/Samples/bomb_away.wav</path>
 		 </crash>
-	
+
 		 <crash>
 		   <name>bomb_away 2</name>
 		   <condition>
@@ -604,9 +604,9 @@
 		   </condition>
 		   <path>Aircraft/MiG-21bis/Sounds/Samples/bomb_away.wav</path>
 		 </crash>
-		 
+
 <!-- Tank release -->
-	
+
 		<crash>
 		   <name>tank</name>
 		   <condition>
@@ -614,7 +614,7 @@
 		   </condition>
 		   <path>Aircraft/MiG-21bis/Sounds/Samples/bomb_away.wav</path>
 		 </crash>
-		 
+
 		 <!-- flyby -->
 		<flyby>
 			<name>fly-by</name>
@@ -640,7 +640,7 @@
 				<property>velocities/airspeed-kt</property>
 				<factor>0.001</factor>
 			</volume>
-			
+
 		</flyby>
 
 <!-- Crash and stress -->
@@ -772,5 +772,5 @@
 
 
 	</fx>
- 
+
 </PropertyList>
