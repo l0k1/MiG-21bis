@@ -69,6 +69,9 @@ var iff_hash = {
 };
 
 var interrogate = func(tgt) {
+	if ( tgt.getChild("callsign").getValue() == nil or tgt.getNode("sim/multiplay/generic/string["~iff_mp_string~"]").getValue() == nil ) {
+		return 0;
+	}
 	var hash1 = _calculate_hash(int(systime()) - int(math.mod(int(systime()),iff_refresh_rate)), tgt.getChild("callsign").getValue(),node.channel.getValue());
 	var hash2 = _calculate_hash(int(systime()) - int(math.mod(int(systime()),iff_refresh_rate)) - iff_refresh_rate, tgt.getChild("callsign").getValue(),node.channel.getValue());
 	var check_hash = tgt.getNode("sim/multiplay/generic/string["~iff_mp_string~"]").getValue();
