@@ -669,17 +669,17 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/outside-left-trigger</trigger>
         <trigger-once>true</trigger-once>
-        <speed>1200.0</speed>
+        <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>0.1</delay>
-        <life>0.1</life>
+        <life>0.05</life>
         <count>-1</count>
         <offsets>
             <x-m> 1.54588</x-m>
             <y-m>-2.73430</y-m>
             <z-m>-0.34673</z-m>
         </offsets>
-        <yaw-offset>0.0</yaw-offset>
+        <yaw-offset>180.0</yaw-offset>
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
@@ -693,17 +693,17 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/inside-left-trigger</trigger>
         <trigger-once>true</trigger-once>
-        <speed>1200.0</speed>
+        <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>0.1</delay>
-        <life>0.1</life>
+        <life>0.05</life>
         <count>-1</count>
         <offsets>
             <x-m> 0.61079</x-m>
             <y-m>-2.10844</y-m>
             <z-m>-0.31276</z-m>
         </offsets>
-        <yaw-offset>0.0</yaw-offset>
+        <yaw-offset>180.0</yaw-offset>
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
@@ -717,17 +717,17 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/inside-right-trigger</trigger>
         <trigger-once>true</trigger-once>
-        <speed>1200.0</speed>
+        <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>0.1</delay>
-        <life>0.1</life>
+        <life>0.05</life>
         <count>-1</count>
         <offsets>
             <x-m> 0.61079</x-m>
             <y-m> 2.10844</y-m>
             <z-m>-0.31276</z-m>
         </offsets>
-        <yaw-offset>0.0</yaw-offset>
+        <yaw-offset>180.0</yaw-offset>
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
@@ -741,17 +741,17 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/outside-right-trigger</trigger>
         <trigger-once>true</trigger-once>
-        <speed>1200.0</speed>
+        <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>0.1</delay>
-        <life>0.1</life>
+        <life>0.05</life>
         <count>-1</count>
         <offsets>
             <x-m> 1.54588</x-m>
             <y-m> 2.73430</y-m>
             <z-m>-0.34673</z-m>
         </offsets>
-        <yaw-offset>0.0</yaw-offset>
+        <yaw-offset>180.0</yaw-offset>
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>

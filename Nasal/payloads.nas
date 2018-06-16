@@ -657,7 +657,7 @@ var impact_listener = func {
 	inside_callsign = "";
 	#print("inside listener");
   if (ballistic != nil and ballistic.getNode("name") != nil and ballistic.getNode("impact/type") != nil) {
-      print("woo");
+      #print("woo");
 		var typeNode = ballistic.getNode("impact/type");
 		typeOrdName = ballistic.getNode("name").getValue();
 		#var lat = ballistic.getNode("impact/latitude-deg").getValue();
