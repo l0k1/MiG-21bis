@@ -37,10 +37,10 @@ var iff_hash_length = getprop("/instrumentation/iff/iff_hash_length") or 3;
 var iff_mp_string = getprop("/instrumentation/iff/iff_mp_string") or 4;
 
 var node = {
-	power:			props.Globals.getNode(getprop("/instrumentation/iff/power_prop")),
-	channel:		props.Globals.getNode(getprop("/instrumentation/iff/channel_prop")),
-	hash:			props.Globals.getNode("/sim/multiplay/generic/string["~iff_mp_string~"]"),
-	callsign:		props.Globals.getNode("/sim/multiplay/callsign"),
+	power:			props.globals.getNode(getprop("/instrumentation/iff/power_prop")),
+	channel:		props.globals.getNode(getprop("/instrumentation/iff/channel_prop")),
+	hash:				props.globals.getNode("/sim/multiplay/generic/string["~iff_mp_string~"]"),
+	callsign:		props.globals.getNode("/sim/multiplay/callsign"),
 };
 
 var iff_hash = {

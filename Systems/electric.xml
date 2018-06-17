@@ -36,7 +36,7 @@
 	<property value="1">electric/switches/rvrsp/apy-syst-auto-ctl</property>
 	<property value="1">electric/switches/rvrsp/tac-rls-3-4</property>
 	<property value="1">electric/switches/rvrsp/battery-heat</property>
-	
+
 	<!--
 	right horizontal front switch panel
 			or
@@ -53,7 +53,7 @@
 	<property value="0">electric/switches/rhfsp/jato-start</property>
 	<property value="0">electric/switches/rhfsp/jato-jett</property>
 	<property value="0">electric/switches/rhfsp/ac-gen-ext-pwr</property>
-	
+
 	<!--
 	rght vertical mid switch panel
 			or
@@ -92,7 +92,7 @@
 	<property value="1">electric/switches/lvfsp/air-relight</property>
 	<property value="0">electric/switches/lvfsp/engine-starting-unit</property>
 	<property value="0">electric/switches/lvfsp/fire-ftg-eqpt</property>
-	
+
 	<!--
 	left vertical mid switch panel
 	        or
@@ -408,7 +408,7 @@
 				electric/buses/bus-switch[2] == 1
 			</test>
 		</switch>
-		
+
 		<summer name="trash/electric/buses/bus[3]">
 			<input>electric/sources/dc-volts</input>
 			<output>electric/buses/bus[3]</output>
@@ -636,154 +636,154 @@
 				electric/switches/lvfsp/fire-ftg-eqpt == 1
 			</test>
 		</switch>
-		
+
 
 		<!--
 
 		right vertical mid switch panel
 
 		-->
-		
+
 		<switch name="electric/output/cone">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/cone == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/pump-unit">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/pump-unit == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/trim">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/trim == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/rset">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/rset == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/arc">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/arc == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/rad-alt">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/rad-alt == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/rsbn">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/rsbn == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/gyro">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/gyro == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/fds">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/fds == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/afcs">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/afcs == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/afcs-pitch">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/afcs-pitch == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/msl-rgm-gr-heat">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/msl-rgm-gr-heat == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/msl-rgm-rkt-lch">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/msl-rgm-rkt-lch == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/pwr-to-pylons-1-2">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/pwr-to-pylons-1-2 == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/pwr-to-pylons-3-4">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/pwr-to-pylons-3-4 == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/gun">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/gun == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/gunsight">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/gunsight == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/guncam">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/guncam == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/srzo-iff">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/srzo-iff == 1
 			</test>
 		</switch>
-		
+
 		<switch name="electric/output/formation-lights">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/formation-lights == 1
 			</test>
 		</switch>
-		
+
 		<fcs_function name="trash/electric/output/formation-lights">
 			<function>
 				<product>
@@ -799,7 +799,7 @@
 			</function>
 			<output>electric/output/formation-lights</output>
 		</fcs_function>
-		
+
 		<switch name="electric/output/recorder">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
@@ -808,9 +808,9 @@
 		</switch>
 
 		<!--
-		
+
 		left vertical mid switch panel
-		
+
 		-->
 
 		<switch name="electric/output/seat-height">
@@ -906,25 +906,29 @@
 			<function>
 				<quotient>
 					<sum>
+						<value>1</value>
+						<value>1</value>
 					</sum>
 					<property>electric/buses/bus[0]</property>
 				</quotient>
 			</function>
 			<output>electric/discharge/bus_1_load</output>
 		</fcs_function>
-		
+
 		<fcs_function name="trash/electric/discharge/bus_2_load">
 			<!-- the sum of the output voltages divided by the input voltage will give us the amount of systems running -->
 			<function>
 				<quotient>
 					<sum>
+						<value>1</value>
+						<value>1</value>
 					</sum>
 					<property>electric/buses/bus[1]</property>
 				</quotient>
 			</function>
 			<output>electric/discharge/bus_2_load</output>
 		</fcs_function>
-		
+
 		<fcs_function name="trash/electric/discharge/bus_3_load">
 			<!-- the sum of the output voltages divided by the input voltage will give us the amount of systems running -->
 			<function>
@@ -959,7 +963,7 @@
 			</function>
 			<output>electric/discharge/bus_3_load</output>
 		</fcs_function>
-		
+
 		<!-- bus 4 is directly fed from DC final -->
 		<fcs_function name="trash/electric/discharge/bus_4_load">
 			<!-- the sum of the output voltages divided by the input voltage will give us the amount of systems running -->
