@@ -1,6 +1,6 @@
 <PropertyList>
-    
-    <!-- 
+
+    <!--
     table of contents
      0 ~ flares left
      1 ~ flares right
@@ -32,7 +32,7 @@
     27 ~ Braking Chute
     28 ~ Jettison Fuel Tank
     -->
-    
+
     <submodel>
         <name>flaresL</name>
         <model>Aircraft/MiG-21bis/Models/Effects/Flare/flare.xml</model>
@@ -54,7 +54,7 @@
         <no-roll>true</no-roll>
         <wind>true</wind>
     </submodel>
-    
+
     <submodel>
         <name>flaresR</name>
         <model>Aircraft/MiG-21bis/Models/Effects/Flare/flare.xml</model>
@@ -140,7 +140,7 @@
         <wind>false</wind>
         <weight>0.1069</weight>
         <cd>0.193</cd>
-        <eda>0.00136354</eda> 
+        <eda>0.00136354</eda>
     </submodel>
 
     <submodel>
@@ -159,7 +159,7 @@
         <wind>false</wind>
         <weight>0.1069</weight>
         <cd>0.193</cd>
-        <eda>0.00136354</eda> 
+        <eda>0.00136354</eda>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/bullet</collision-report>
         <impact>true</impact>
@@ -184,7 +184,7 @@
         <wind>false</wind>
         <weight>0.1069</weight>
         <cd>0.193</cd>
-        <eda>0.00136354</eda> 
+        <eda>0.00136354</eda>
     </submodel>
 
     <submodel>
@@ -203,14 +203,14 @@
         <wind>false</wind>
         <weight>0.1069</weight>
         <cd>0.193</cd>
-        <eda>0.00136354</eda> 
+        <eda>0.00136354</eda>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/bullet</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bullet</impact-report>
         <submodel-path>Aircraft/MiG-21bis/Models/Stores/Bullet-Submodel.xml</submodel-path>
     </submodel>
-    
+
     <submodel>
         <name>FAB-500</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-500/FAB-500-sub.xml</model>
@@ -233,7 +233,7 @@
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-500/fab-500-sub.xml</submodel-path>
-  
+
     </submodel>
 
     <submodel>
@@ -259,7 +259,7 @@
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-500/fab-500-sub.xml</submodel-path>
     </submodel>
-    
+
     <submodel>
         <name>FAB-250</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250-sub.xml</model>
@@ -281,9 +281,9 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
-    
+
     <submodel>
         <name>FAB-250</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250-sub.xml</model>
@@ -305,7 +305,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -329,7 +329,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -352,9 +352,9 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
-    
+
     <submodel>
         <name>FAB-100</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
@@ -376,9 +376,9 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
-    
+
     <submodel>
         <name>FAB-100</name>
         <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
@@ -400,7 +400,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -424,7 +424,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -447,7 +447,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
 
 
@@ -474,7 +474,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -500,7 +500,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -526,7 +526,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -552,7 +552,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
     </submodel>
 
 
@@ -574,6 +574,7 @@
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
+        <bouyancy>24</bouyancy>
         <cd>0.47</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
@@ -600,12 +601,13 @@
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
+        <bouyancy>24</bouyancy>
         <cd>0.47</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/rocket</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-5/s-5-explosion-sub.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-5/s-5-explosion-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -626,12 +628,13 @@
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
+        <bouyancy>24</bouyancy>
         <cd>0.47</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/rocket</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-5/s-5-explosion-sub.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-5/s-5-explosion-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -652,12 +655,13 @@
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
+        <bouyancy>24</bouyancy>
         <cd>0.47</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/rocket</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-5/s-5-explosion-sub.xml</submodel-path>  
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-5/s-5-explosion-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -665,17 +669,17 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/outside-left-trigger</trigger>
         <trigger-once>true</trigger-once>
-        <speed>1200.0</speed>
+        <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>0.1</delay>
-        <life>0.1</life>
+        <life>0.05</life>
         <count>-1</count>
         <offsets>
             <x-m> 1.54588</x-m>
             <y-m>-2.73430</y-m>
             <z-m>-0.34673</z-m>
         </offsets>
-        <yaw-offset>0.0</yaw-offset>
+        <yaw-offset>180.0</yaw-offset>
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
@@ -689,17 +693,17 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/inside-left-trigger</trigger>
         <trigger-once>true</trigger-once>
-        <speed>1200.0</speed>
+        <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>0.1</delay>
-        <life>0.1</life>
+        <life>0.05</life>
         <count>-1</count>
         <offsets>
             <x-m> 0.61079</x-m>
             <y-m>-2.10844</y-m>
             <z-m>-0.31276</z-m>
         </offsets>
-        <yaw-offset>0.0</yaw-offset>
+        <yaw-offset>180.0</yaw-offset>
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
@@ -713,17 +717,17 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/inside-right-trigger</trigger>
         <trigger-once>true</trigger-once>
-        <speed>1200.0</speed>
+        <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>0.1</delay>
-        <life>0.1</life>
+        <life>0.05</life>
         <count>-1</count>
         <offsets>
             <x-m> 0.61079</x-m>
             <y-m> 2.10844</y-m>
             <z-m>-0.31276</z-m>
         </offsets>
-        <yaw-offset>0.0</yaw-offset>
+        <yaw-offset>180.0</yaw-offset>
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
@@ -737,17 +741,17 @@
         <model>Aircraft/MiG-21bis/Models/Stores/S-5/s-5-backblast.xml</model>
         <trigger>/fdm/jsbsim/systems/armament/rockets/outside-right-trigger</trigger>
         <trigger-once>true</trigger-once>
-        <speed>1200.0</speed>
+        <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>0.1</delay>
-        <life>0.1</life>
+        <life>0.05</life>
         <count>-1</count>
         <offsets>
             <x-m> 1.54588</x-m>
             <y-m> 2.73430</y-m>
             <z-m>-0.34673</z-m>
         </offsets>
-        <yaw-offset>0.0</yaw-offset>
+        <yaw-offset>180.0</yaw-offset>
         <pitch-offset>0.9</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
@@ -770,7 +774,7 @@
         <pitch-offset>0</pitch-offset>
         <buoyancy>25</buoyancy>
         <wind>true</wind>
-        <life>4.0</life> 
+        <life>4.0</life>
         <eda>250</eda>
         <weight>50</weight>
         <aero-stabilised>false</aero-stabilised>

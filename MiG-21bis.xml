@@ -46,13 +46,13 @@
    <ixz unit="SLUG*FT2">         0 </ixz>
    <iyz unit="SLUG*FT2">         0 </iyz>
    <emptywt unit="LBS" >     12996 </emptywt> <!-- source: http://www.mig-21.de/english/technicaldata.htm -->
-   
+
    <location name="CG" unit="M"> <!-- source: mig21bis weight and balance document -->
      <x>  -0.03445 </x>
      <y>   0.00 </y>
      <z>  0.19160 </z>
    </location>
-   
+
    <pointmass name="station1"><!-- left wing outboard pylon pointmass 0 -->
       <weight unit="LBS"> 0 </weight>
       <location name="POINTMASS" unit="M">
@@ -61,7 +61,7 @@
           <z> -0.15 </z>
       </location>
    </pointmass>
-   
+
    <pointmass name="station2"><!-- left wing inboard pylon pointmass 1 -->
       <weight unit="LBS"> 0 </weight>
       <location name="POINTMASS" unit="M">
@@ -70,7 +70,7 @@
           <z> -0.13 </z>
       </location>
    </pointmass>
-   
+
    <pointmass name="station3"><!-- empty centerline fuel tank pointmass 2 -->
       <weight unit="LBS"> 0 </weight>
       <location name="POINTMASS" unit="M">
@@ -79,7 +79,7 @@
           <z> -0.60 </z>
       </location>
    </pointmass>
-   
+
    <pointmass name="station4"><!-- right wing inboard pylon pointmass 3 -->
       <weight unit="LBS"> 0 </weight>
       <location name="POINTMASS" unit="M">
@@ -88,7 +88,7 @@
           <z> -0.13 </z>
       </location>
    </pointmass>
-   
+
    <pointmass name="station5"><!-- right wing outboard pylon pointmass 4 -->
       <weight unit="LBS"> 0 </weight>
       <location name="POINTMASS" unit="M">
@@ -410,15 +410,15 @@
   6 internal tanks ("group 2" is fuel tanks #1-3, "group 3" is fuel tanks #4-6)
   4 wing tanks
   3 drop tanks
-  
+
   - flow -
-  
+
   all the time:
   level the fuel between 1 and 2 and 7
   level the fuel between 4, 5, and 6
   fuel in 2 pumps into 3
   fuel in 3 goes straight to engine
-  
+
   ventral drop tank flows into 2
   wing tanks flow into 2
   wing drop tanks flow into wing tanks as wing tanks are emptied
@@ -426,7 +426,7 @@
   #1,2 emptied
   #3 emptied
   -->
-  
+
   	<!-- Tanks:
 	0 - internal
 	1 - internal
@@ -443,11 +443,11 @@
 	12 - left drop tank
 	13 - right drop tank
 	14 - accumulator (inside Main tank)
-	
+
 	***** FUEL AMOUNTS PER TANK ARE FICTIONAL ******* but the total fuel matches
 	***** LOCATIONS ARE ESTIMATES ***** i didn't have a map of tank 1 is here, tank 2 is there. just a cutaway.
 	-->
-  
+
   <!-- internal fuel 1 -->
   <tank type="FUEL" number="0">
      <location unit="M">
@@ -458,10 +458,10 @@
      <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 413.6 </capacity>
-     <contents unit="LBS"> 400 </contents>
-     <standpipe unit="LBS"> 0 </standpipe> 
+     <contents unit="LBS"> 413.6 </contents>
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
-  
+
   <tank type="FUEL" number="1">
      <location unit="M">
        <x> -1.75 </x>
@@ -471,10 +471,10 @@
      <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 1267.2 </capacity>
-     <contents unit="LBS"> 1200 </contents>
-     <standpipe unit="LBS"> 400 </standpipe> 
+     <contents unit="LBS"> 1267.2 </contents>
+     <standpipe unit="LBS"> 400 </standpipe>
   </tank>
-  
+
   <tank type="FUEL" number="2">
      <location unit="M">
        <x> -0.50 </x>
@@ -484,10 +484,10 @@
      <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 410.4 </capacity>
-     <contents unit="LBS"> 384 </contents>
-     <standpipe unit="LBS"> 100 </standpipe> 
+     <contents unit="LBS"> 410.4 </contents>
+     <standpipe unit="LBS"> 100 </standpipe>
   </tank>
-  
+
   <tank type="FUEL" number="3">
      <location unit="M">
        <x> 0.55 </x>
@@ -497,10 +497,10 @@
      <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 352 </capacity>
-     <contents unit="LBS"> 330 </contents>
-     <standpipe unit="LBS"> 0 </standpipe> 
+     <contents unit="LBS"> 352 </contents>
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
-  
+
   <tank type="FUEL" number="4">
      <location unit="M">
        <x> 1.50 </x>
@@ -510,10 +510,10 @@
      <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 422.4 </capacity>
-     <contents unit="LBS"> 400 </contents>
-     <standpipe unit="LBS"> 0 </standpipe> 
+     <contents unit="LBS"> 422.4 </contents>
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
-  
+
   <tank type="FUEL" number="5">
      <location unit="M">
        <x> 2.55 </x>
@@ -523,10 +523,10 @@
      <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 422.4 </capacity>
-     <contents unit="LBS"> 400 </contents>
-     <standpipe unit="LBS"> 0 </standpipe> 
+     <contents unit="LBS"> 422.4 </contents>
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
-  
+
   <tank type="FUEL" number="6">
      <location unit="M">
        <x> -1.25 </x>
@@ -536,12 +536,12 @@
      <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 1003.2 </capacity>
-     <contents unit="LBS"> 950 </contents>
-     <standpipe unit="LBS"> 0 </standpipe> 
+     <contents unit="LBS"> 1003.2 </contents>
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
-  
+
   <!-- wing tanks -->
-  
+
   <tank type="FUEL" number="7">
      <location unit="M">
        <x> -0.29435 </x>
@@ -551,10 +551,10 @@
      <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 308 </capacity>
-     <contents unit="LBS"> 225 </contents>
-     <standpipe unit="LBS"> 0 </standpipe> 
+     <contents unit="LBS"> 308 </contents>
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
-  
+
   <tank type="FUEL" number="8">
      <location unit="M">
        <x> 1.09838 </x>
@@ -564,10 +564,10 @@
      <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 193.6 </capacity>
-     <contents unit="LBS"> 100 </contents>
-     <standpipe unit="LBS"> 0 </standpipe> 
+     <contents unit="LBS"> 193.6 </contents>
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
-  
+
   <tank type="FUEL" number="9">
      <location unit="M">
        <x> -0.29435 </x>
@@ -577,10 +577,10 @@
      <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 308 </capacity>
-     <contents unit="LBS"> 225 </contents>
-     <standpipe unit="LBS"> 0 </standpipe> 
+     <contents unit="LBS"> 308 </contents>
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
-  
+
   <tank type="FUEL" number="10">
      <location unit="M">
        <x> 1.09838 </x>
@@ -590,8 +590,8 @@
      <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 193.6 </capacity>
-     <contents unit="LBS"> 100 </contents>
-     <standpipe unit="LBS"> 0 </standpipe> 
+     <contents unit="LBS"> 193.6 </contents>
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
 
   <!-- drop tanks -->
@@ -641,15 +641,15 @@
      <density>6.5</density>
      <capacity unit="LBS"> 56 </capacity>
      <contents unit="LBS"> 56 </contents>
-     <standpipe unit="LBS"> 0 </standpipe> 
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
-  
+
 
   <dump-rate unit="LBS/MIN"> 1500 </dump-rate>
  </propulsion>
 
- <system file="gear"/> 
- <system file="flaps"/> 
+ <system file="gear"/>
+ <system file="flaps"/>
  <system file="speedbrakes"/>
  <system file="FCS-Pitch"/>
  <system file="FCS-Roll"/>

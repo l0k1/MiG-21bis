@@ -1,6 +1,7 @@
 # IFF system
 # turns a channel number into an iff md5 hash
 #
+# gplv2 by pinto aka justin nicholson
 #
 # installation instructions:
 #
@@ -52,7 +53,7 @@ var iff_hash = {
 		m.callsign = node.callsign.getValue();
 		return m;
 	},
-	
+
 	loop: func() {
 		if (node.power.getValue()) {
 			if (me.timer.isRunning == 0) {
@@ -73,6 +74,9 @@ var hash2 = "";
 var check_hash = "";
 
 var interrogate = func(tgt) {
+	if ( tgt.getChild("callsign") == nil or tgt.getNode("sim/multiplay/generic/string["~iff_mp_string~"]") == nil ) {
+		return 0;
+	}
 	hash1 = _calculate_hash(int(systime()) - int(math.mod(int(systime()),iff_refresh_rate)), tgt.getChild("callsign").getValue(),node.channel.getValue());
 	hash2 = _calculate_hash(int(systime()) - int(math.mod(int(systime()),iff_refresh_rate)) - iff_refresh_rate, tgt.getChild("callsign").getValue(),node.channel.getValue());
 	check_hash = tgt.getNode("sim/multiplay/generic/string["~iff_mp_string~"]").getValue();

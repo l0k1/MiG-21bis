@@ -12,7 +12,7 @@
             <green>0.3</green>
             <blue>0.3</blue>
             <factor-prop>/controls/lighting/instruments-norm</factor-prop>
-        </emission> 
+        </emission>
     </animation>
 
 	<animation>
@@ -25,16 +25,16 @@
             <entry><ind> 2</ind><dep>   60</dep></entry>
             <entry><ind> 3</ind><dep>   30</dep></entry>
             <entry><ind> 4</ind><dep>    0</dep></entry>
-            <entry><ind> 5</ind><dep>  -45</dep></entry>
-            <entry><ind> 6</ind><dep>  -90</dep></entry>
-            <entry><ind> 7</ind><dep> -105</dep></entry>
+            <entry><ind> 5</ind><dep>  -30</dep></entry>
+            <entry><ind> 6</ind><dep>  -60</dep></entry>
+            <entry><ind> 7</ind><dep>  -90</dep></entry>
             <entry><ind> 8</ind><dep> -120</dep></entry>
         </interpolation>
         <axis>
             <x>1</x>
         </axis>
-    </animation> 
-    
+    </animation>
+
     <animation>
         <type>pick</type>
         <object-name>radarAltLimitSelectorFace</object-name>
@@ -135,5 +135,5 @@
 		<property>/sim/panel-hotspots</property>
 	</condition>
 </animation>
-	
+
 </PropertyList>
