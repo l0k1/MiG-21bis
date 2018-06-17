@@ -39,7 +39,8 @@ var iff_mp_string = getprop("/instrumentation/iff/iff_mp_string") or 4;
 var node = {
 	power:			props.globals.getNode(getprop("/instrumentation/iff/power_prop")),
 	channel:		props.globals.getNode(getprop("/instrumentation/iff/channel_prop")),
-	hash:				props.globals.getNode("/sim/multiplay/generic/string["~iff_mp_string~"]"),
+	#hash:				props.globals.getNode("/sim/multiplay/generic/string["~iff_mp_string~"]"),
+	hash:				props.globals.initNode("/sim/multiplay/generic/string["~iff_mp_string~"]","AAA","STRING"),
 	callsign:		props.globals.getNode("/sim/multiplay/callsign"),
 };
 
@@ -47,9 +48,9 @@ var iff_hash = {
 	new: func() {
 		var m = {parents:[iff_hash]};
 		m.int_systime = int(systime());
-		m.update_time = int(math.mod(me.int_systime,iff_refresh_rate));
-		m.time = me.int_systime - me.update_time; # time used in hash
-		m.timer = maketimer(iff_refresh_rate - me.update_time,func(){me.loop()});
+		m.update_time = int(math.mod(m.int_systime,iff_refresh_rate));
+		m.time = m.int_systime - m.update_time; # time used in hash
+		m.timer = maketimer(iff_refresh_rate - m.update_time,func(){m.loop()});
 		m.callsign = node.callsign.getValue();
 		return m;
 	},

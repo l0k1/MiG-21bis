@@ -5,7 +5,7 @@ Afterburner ignition required 2 to 3 seconds from
 initiation to full CRT. [...] The afterburner
 did not ignite until 100 percent RPM was attained. If the
 throttle was not placed in the full afterburner detent for
-ignition, a delay of up to 9 seconds was experienced. 
+ignition, a delay of up to 9 seconds was experienced.
 -->
 
 <system name="propulsion">
@@ -13,7 +13,7 @@ ignition, a delay of up to 9 seconds was experienced.
 	<channel name="Throttle">
 
 		<!-- throttle distributions, split milthrust, augthrust and clrthrust -->
-		
+
 		<fcs_function name="trash/asdf1234">
 			<function>
 				<table>
@@ -27,7 +27,7 @@ ignition, a delay of up to 9 seconds was experienced.
 			</function>
 			<output>fcs/throttle-redist-mil</output>
 		</fcs_function>
-		
+
 		<fcs_function name="trash/asdeeefsd">
 			<function>
 				<table>
@@ -41,7 +41,7 @@ ignition, a delay of up to 9 seconds was experienced.
 			</function>
 			<output>fcs/throttle-redist-aug-predelay</output>
 		</fcs_function>
-		
+
 		<kinematic name="throttle-redist-aug">
             <input>fcs/throttle-redist-aug-predelay</input>
             <traverse>
@@ -63,7 +63,7 @@ ignition, a delay of up to 9 seconds was experienced.
 				propulsion/engine[0]/n2 ge 100
 			</test>
 		</switch>
-		
+
 		<kinematic name="aug-delay">
 			<input>fcs/aug-delay-switch</input>
 			<noscale/>
@@ -78,7 +78,7 @@ ignition, a delay of up to 9 seconds was experienced.
 				</setting>
 			</traverse>
 		</kinematic>
-		
+
 		<fcs_function name="trash/asdfp3df32">
 			<function>
 				<table>
@@ -95,7 +95,7 @@ ignition, a delay of up to 9 seconds was experienced.
 			</clipto>
 			<output>fcs/throttle-aug-compare</output>
 		</fcs_function>
-		
+
 		<switch name="aug-active">
 			<default value="0"/>
 			<test logic="AND" value="1">
@@ -103,7 +103,7 @@ ignition, a delay of up to 9 seconds was experienced.
 				fcs/aug-delay ge fcs/throttle-aug-compare
 			</test>
 		</switch>
-		
+
 		<fcs_function name="trash/asdfp32">
 			<function>
 				<sum>
@@ -113,7 +113,7 @@ ignition, a delay of up to 9 seconds was experienced.
 						<property>fcs/aug-active</property>
 						<gt>
 							<property>electric/output/full-throttle-reheat</property>
-							<value>110</value>
+							<value>25</value>
 						</gt>
 					</product>
 				</sum>
@@ -125,18 +125,18 @@ ignition, a delay of up to 9 seconds was experienced.
 			<output>fcs/throttle-pos-norm</output>
 		</fcs_function>
 
-	</channel>	
+	</channel>
 
 
 	<channel name="nozzle">
-	
+
 	<!--
 	flow thoughts
 	if fcs/throttle-redist-aug-predelay is less than or equal to 0, use /engines/engine[0]/nozzle-pos-norm
 	if fcs/throttle-redist-aug-predelay is greater than 0, nozzle = 1
 	this gets us away from the nozzle only being open when the afterburner is ignited
 	-->
-	
+
 		<fcs_function name="trash/propulsion/engine[0]/nozzle-pos-norm-corrected">
 			<function>
 				<ifthen>

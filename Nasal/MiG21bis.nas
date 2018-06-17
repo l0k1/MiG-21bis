@@ -143,7 +143,7 @@ var engine_startup = func() {
 		#print(starter_time_req);
 	}
   if ( start_mode.getValue() == 0 or
-					dc_prop.getValue() < 100 or
+					dc_prop.getValue() < 25 or
 					(start_button.getValue() == 0 and systime() - starter_time < starter_time_req)) {
 						#print("starter failed");
 		starter.setValue(0);
