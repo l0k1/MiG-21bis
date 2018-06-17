@@ -733,4 +733,15 @@
         </offsets>
     </model>
 
+    <model>
+        <name>Voltage Regulator Box</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/VoltageReg/voltageReg.xml</path>
+        <offsets>
+            <heading-deg></heading-deg>
+            <x-m>-3.08039</x-m>
+            <y-m> 0.37296</y-m>
+            <z-m> 0.42818</z-m>
+        </offsets>
+    </model>
+
 </PropertyList>
