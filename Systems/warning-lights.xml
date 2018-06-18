@@ -8,7 +8,7 @@
 	<property value="1">/instrumentation/warning-lights/dimmer[5]</property>
 	<property value="0">/consumables/fuel/tank[11]/selected</property>
 
-	<channel name="lights1" execrate="20">
+	<channel name="lights1" execrate="3">
 
 		<!--
 			There are 4 lights on this panel:
@@ -20,7 +20,7 @@
 
 	</channel>
 
-	<channel name="lights2" execrate="20">
+	<channel name="lights2" execrate="3">
 
 		<!--
 			There are 4 lights on this panel:
@@ -231,7 +231,7 @@
 
 	</channel>
 
-	<channel name="lights3" execrate="20">
+	<channel name="lights3" execrate="3">
 
 		<!--
 			There are 8 lights on this panel:
@@ -363,7 +363,7 @@
 
 	</channel>
 
-	<channel name="lights4" execrate="20">
+	<channel name="lights4" execrate="3">
 
 		<!--
 			There are 4 lights on this panel:
@@ -479,7 +479,7 @@
 
 	</channel>
 
-	<channel name="lights5" execrate="20">
+	<channel name="lights5" execrate="3">
 
 		<!--
 			There are 10 lights on this panel:

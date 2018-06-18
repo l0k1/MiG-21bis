@@ -898,7 +898,7 @@
 
 	</channel>
 
-	<channel name="system_load" execrate="4">
+	<channel name="system_load" execrate="3">
 		<!-- the current load on the electrical system, to determine discharge rate -->
 
 		<fcs_function name="trash/electric/discharge/bus_1_load">
