@@ -5,7 +5,7 @@
 
 	<!-- todo:
 	[done] flow from 6 into 0 based on gravity and vice versa
-	flow from 6 into 4 and 5 based on gravity and vice versa
+	[done] flow from 6 into 4 and 5 based on gravity and vice versa
 	[done] gravity based flow from 1 to 2
 
 	under normal gravity, flow rate is approx 12 liters per second. it scales linearly with gravitational pull.
@@ -194,6 +194,138 @@
 			</test>
 			<output>propulsion/tank[5]/levelling-flow-to-4</output>
 		</switch>
+		
+		<!-- flow flow from 6 to 4 -->
+
+		<fcs_function name="trash/propulsion/tank[6]/levelling-flow-to-4">
+			<function>
+				<product>
+					<or>
+						<!-- flow from 6 to 1 -->
+						<and>
+							<gt>
+								<property>accelerations/Nz</property>
+								<value>0</value>
+							</gt>
+							<gt>
+								<property>propulsion/tank[6]/contents-lbs</property>
+								<value>1</value>
+							</gt>
+							<lt>
+								<property>propulsion/tank[4]/contents-lbs</property>
+								<value>420</value>
+							</lt>
+							<lt>
+								<quotient>
+									<abs><property>attitude/roll-rad</property></abs>
+									<pi/>
+								</quotient>
+								<quotient>
+									<property>propulsion/tank[6]/pct-full</property>
+									<value>100</value>
+								</quotient>
+							</lt>
+						</and>
+						<!-- flow from 1 to 6 -->
+						<and>
+							<lt>
+								<property>accelerations/Nz</property>
+								<value>0</value>
+							</lt>
+							<lt>
+								<property>propulsion/tank[6]/contents-lbs</property>
+								<value>1000</value>
+							</lt>
+							<gt>
+								<property>propulsion/tank[4]/contents-lbs</property>
+								<value>1</value>
+							</gt>
+							<gt>
+								<quotient>
+									<abs><property>attitude/roll-rad</property></abs>
+									<pi/>
+								</quotient>
+								<quotient>
+									<property>propulsion/tank[6]/pct-full</property>
+									<value>100</value>
+								</quotient>
+							</gt>
+						</and>
+					</or>
+					<product>
+						<property>accelerations/Nz</property>
+						<value>-20.6</value> <!-- 12 liters per second -->
+					</product>
+				</product>
+			</function>
+			<output>propulsion/tank[6]/levelling-flow-to-4</output>
+		</fcs_function>
+		
+		<!-- flow flow from 6 to 1 -->
+
+		<fcs_function name="trash/propulsion/tank[6]/levelling-flow-to-5">
+			<function>
+				<product>
+					<or>
+						<!-- flow from 6 to 1 -->
+						<and>
+							<gt>
+								<property>accelerations/Nz</property>
+								<value>0</value>
+							</gt>
+							<gt>
+								<property>propulsion/tank[6]/contents-lbs</property>
+								<value>1</value>
+							</gt>
+							<lt>
+								<property>propulsion/tank[5]/contents-lbs</property>
+								<value>420</value>
+							</lt>
+							<lt>
+								<quotient>
+									<abs><property>attitude/roll-rad</property></abs>
+									<pi/>
+								</quotient>
+								<quotient>
+									<property>propulsion/tank[6]/pct-full</property>
+									<value>100</value>
+								</quotient>
+							</lt>
+						</and>
+						<!-- flow from 1 to 6 -->
+						<and>
+							<lt>
+								<property>accelerations/Nz</property>
+								<value>0</value>
+							</lt>
+							<lt>
+								<property>propulsion/tank[6]/contents-lbs</property>
+								<value>1000</value>
+							</lt>
+							<gt>
+								<property>propulsion/tank[5]/contents-lbs</property>
+								<value>1</value>
+							</gt>
+							<gt>
+								<quotient>
+									<abs><property>attitude/roll-rad</property></abs>
+									<pi/>
+								</quotient>
+								<quotient>
+									<property>propulsion/tank[6]/pct-full</property>
+									<value>100</value>
+								</quotient>
+							</gt>
+						</and>
+					</or>
+					<product>
+						<property>accelerations/Nz</property>
+						<value>-20.6</value> <!-- 12 liters per second -->
+					</product>
+				</product>
+			</function>
+			<output>propulsion/tank[6]/levelling-flow-to-5</output>
+		</fcs_function>
 
 		<!-- tank 1 being pumped into tank 2 -->
 
@@ -368,6 +500,8 @@
 			<input>-propulsion/tank[3]/pumping-flow-to-0</input>
 			<input>-propulsion/tank[4]/pumping-flow-to-0</input>
 			<input>-propulsion/tank[6]/levelling-flow-to-0</input>
+			<input>-propulsion/tank[6]/levelling-flow-to-4</input>
+			<input>-propulsion/tank[6]/levelling-flow-to-5</input>
 			<output>propulsion/tank[0]/external-flow-rate-pps</output>
 		</summer>
 
@@ -407,6 +541,7 @@
 			<input>propulsion/tank[4]/pumping-flow-to-0</input>
 			<input>propulsion/tank[4]/levelling-flow-to-5</input>
 			<input>propulsion/tank[4]/levelling-flow-to-3</input>
+			<input>-propulsion/tank[6]/levelling-flow-to-4</input>
 			<input>-propulsion/tank[3]/levelling-flow-to-4</input>
 			<input>-propulsion/tank[5]/levelling-flow-to-4</input>
 			<output>propulsion/tank[4]/external-flow-rate-pps</output>
@@ -415,6 +550,7 @@
 		<!-- tank 5 -->
 		<summer name="trash/fuelrefuel21">
 			<input>propulsion/tank[5]/levelling-flow-to-4</input>
+			<input>-propulsion/tank[6]/levelling-flow-to-5</input>
 			<input>-propulsion/tank[4]/levelling-flow-to-5</input>
 			<output>propulsion/tank[5]/external-flow-rate-pps</output>
 		</summer>
@@ -422,6 +558,8 @@
 		<!-- tank 6 -->
 		<summer name="trash/fuelrefuel22qq">
 			<input>propulsion/tank[6]/levelling-flow-to-0</input>
+			<input>propulsion/tank[6]/levelling-flow-to-4</input>
+			<input>propulsion/tank[6]/levelling-flow-to-5</input>
 			<output>propulsion/tank[6]/external-flow-rate-pps</output>
 		</summer>
 
