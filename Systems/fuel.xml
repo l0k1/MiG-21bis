@@ -55,8 +55,6 @@
   #1,2 emptied
   #3 emptied-->
 
-	<property value="1">propulsion/tank[2]/accumulator-valve</property>
-
 	<channel name="Fuel System">
 
 		<!--
@@ -194,7 +192,7 @@
 			</test>
 			<output>propulsion/tank[5]/levelling-flow-to-4</output>
 		</switch>
-		
+
 		<!-- flow flow from 6 to 4 -->
 
 		<fcs_function name="trash/propulsion/tank[6]/levelling-flow-to-4">
@@ -260,7 +258,7 @@
 			</function>
 			<output>propulsion/tank[6]/levelling-flow-to-4</output>
 		</fcs_function>
-		
+
 		<!-- flow flow from 6 to 1 -->
 
 		<fcs_function name="trash/propulsion/tank[6]/levelling-flow-to-5">
@@ -477,15 +475,14 @@
 			<output>propulsion/tank[4]/pumping-flow-to-0</output>
 		</switch>
 
-		<!-- accumulator fed from 3 when G<-0.5 -->
+		<!-- accumulator fed from 3 when service tank pump is running-->
 
 		<switch name="trash/fuelaccumulator">
-			<default value="-15"/>
-			<test logic="OR" value="0">
-				propulsion/tank[2]/accumulator-valve EQ 0
-				propulsion/tank[2]/contents-lbs LE 1
-				propulsion/tank[14]/contents-lbs GE 54
-				accelerations/Nz LE -0.5
+			<default value="0"/>
+			<test logic="AND" value="-25">
+				propulsion/tank[2]/contents-lbs ge 1
+				propulsion/tank[14]/contents-lbs le 1.9
+				electric/output/service-tk-pump ge 23
 			</test>
 			<output>propulsion/tank[2]/flow-to-accumulator</output>
 		</switch>
