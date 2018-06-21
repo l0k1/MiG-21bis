@@ -70,7 +70,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[0]/contents-lbs gt 1
 				propulsion/tank[0]/contents-lbs gt propulsion/tank[1]/contents-lbs
-				propulsion/tank[1]/contents-lbs lt 1264
+				propulsion/tank[1]/contents-lbs lt 343
 			</test>
 			<output>propulsion/tank[0]/levelling-flow-to-1</output>
 		</switch>
@@ -80,7 +80,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[1]/contents-lbs gt 1
 				propulsion/tank[0]/contents-lbs lt propulsion/tank[1]/contents-lbs
-				propulsion/tank[0]/contents-lbs lt 410
+				propulsion/tank[0]/contents-lbs lt 386
 			</test>
 			<output>propulsion/tank[1]/levelling-flow-to-0</output>
 		</switch>
@@ -103,7 +103,7 @@
 							</gt>
 							<lt>
 								<property>propulsion/tank[0]/contents-lbs</property>
-								<value>413</value>
+								<value>386</value>
 							</lt>
 							<lt>
 								<quotient>
@@ -124,7 +124,7 @@
 							</lt>
 							<lt>
 								<property>propulsion/tank[6]/contents-lbs</property>
-								<value>1000</value>
+								<value>257</value>
 							</lt>
 							<gt>
 								<property>propulsion/tank[0]/contents-lbs</property>
@@ -158,7 +158,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[3]/contents-lbs gt 1
 				propulsion/tank[3]/contents-lbs gt propulsion/tank[4]/contents-lbs
-				propulsion/tank[4]/contents-lbs lt 419
+				propulsion/tank[4]/contents-lbs lt 154
 			</test>
 			<output>propulsion/tank[3]/levelling-flow-to-4</output>
 		</switch>
@@ -168,7 +168,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[4]/contents-lbs gt 1
 				propulsion/tank[4]/contents-lbs gt propulsion/tank[3]/contents-lbs
-				propulsion/tank[3]/contents-lbs lt 319
+				propulsion/tank[3]/contents-lbs lt 197
 			</test>
 			<output>propulsion/tank[4]/levelling-flow-to-3</output>
 		</switch>
@@ -178,7 +178,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[4]/contents-lbs gt 1
 				propulsion/tank[4]/contents-lbs gt propulsion/tank[5]/contents-lbs
-				propulsion/tank[5]/contents-lbs lt 419
+				propulsion/tank[5]/contents-lbs lt 120
 			</test>
 			<output>propulsion/tank[4]/levelling-flow-to-5</output>
 		</switch>
@@ -188,7 +188,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[5]/contents-lbs gt 1
 				propulsion/tank[5]/contents-lbs gt propulsion/tank[4]/contents-lbs
-				propulsion/tank[4]/contents-lbs lt 419
+				propulsion/tank[4]/contents-lbs lt 154
 			</test>
 			<output>propulsion/tank[5]/levelling-flow-to-4</output>
 		</switch>
@@ -211,7 +211,7 @@
 							</gt>
 							<lt>
 								<property>propulsion/tank[4]/contents-lbs</property>
-								<value>420</value>
+								<value>154</value>
 							</lt>
 							<lt>
 								<quotient>
@@ -232,7 +232,7 @@
 							</lt>
 							<lt>
 								<property>propulsion/tank[6]/contents-lbs</property>
-								<value>1000</value>
+								<value>257</value>
 							</lt>
 							<gt>
 								<property>propulsion/tank[4]/contents-lbs</property>
@@ -277,7 +277,7 @@
 							</gt>
 							<lt>
 								<property>propulsion/tank[5]/contents-lbs</property>
-								<value>420</value>
+								<value>120</value>
 							</lt>
 							<lt>
 								<quotient>
@@ -298,7 +298,7 @@
 							</lt>
 							<lt>
 								<property>propulsion/tank[6]/contents-lbs</property>
-								<value>1000</value>
+								<value>257</value>
 							</lt>
 							<gt>
 								<property>propulsion/tank[5]/contents-lbs</property>
@@ -347,7 +347,7 @@
 						</gt>
 						<lt>
 							<property>propulsion/tank[2]/contents-lbs</property>
-							<value>407</value>
+							<value>257</value>
 						</lt>
 						<lt>
 							<quotient>
@@ -375,7 +375,7 @@
 			<default value="0"/>
 			<test logic="AND" value="-15">
 				propulsion/tank[11]/contents-lbs gt 1
-				propulsion/tank[1]/contents-lbs lt 1264
+				propulsion/tank[1]/contents-lbs lt 343
 			</test>
 			<output>propulsion/tank[11]/pumping-flow-to-1</output>
 		</switch>
@@ -387,7 +387,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[11]/contents-lbs lt 1
 				propulsion/tank[12]/contents-lbs gt 1
-				propulsion/tank[1]/contents-lbs lt 1264
+				propulsion/tank[1]/contents-lbs lt 343
 			</test>
 			<output>propulsion/tank[12]/pumping-flow-to-1</output>
 		</switch>
@@ -397,7 +397,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[11]/contents-lbs lt 1
 				propulsion/tank[13]/contents-lbs gt 1
-				propulsion/tank[1]/contents-lbs lt 1264
+				propulsion/tank[1]/contents-lbs lt 343
 			</test>
 			<output>propulsion/tank[13]/pumping-flow-to-1</output>
 		</switch>
@@ -410,7 +410,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[12]/contents-lbs lt 2
 				propulsion/tank[7]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 1264
+				propulsion/tank[1]/contents-lbs lt 343
 			</test>
 			<output>propulsion/tank[7]/pumping-flow-to-1</output>
 		</switch>
@@ -420,7 +420,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[12]/contents-lbs lt 2
 				propulsion/tank[8]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 1264
+				propulsion/tank[1]/contents-lbs lt 343
 			</test>
 			<output>propulsion/tank[8]/pumping-flow-to-1</output>
 		</switch>
@@ -432,7 +432,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[13]/contents-lbs lt 2
 				propulsion/tank[9]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 1264
+				propulsion/tank[1]/contents-lbs lt 343
 			</test>
 			<output>propulsion/tank[9]/pumping-flow-to-1</output>
 		</switch>
@@ -442,7 +442,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[13]/contents-lbs lt 2
 				propulsion/tank[10]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 1264
+				propulsion/tank[1]/contents-lbs lt 343
 			</test>
 			<output>propulsion/tank[10]/pumping-flow-to-1</output>
 		</switch>
@@ -457,7 +457,7 @@
 				propulsion/tank[9]/contents-lbs lt 2
 				propulsion/tank[10]/contents-lbs lt 2
 				propulsion/tank[3]/contents-lbs gt 2
-				propulsion/tank[0]/contents-lbs lt 410
+				propulsion/tank[0]/contents-lbs lt 386
 			</test>
 			<output>propulsion/tank[3]/pumping-flow-to-0</output>
 		</switch>
@@ -470,7 +470,7 @@
 				propulsion/tank[9]/contents-lbs lt 2
 				propulsion/tank[10]/contents-lbs lt 2
 				propulsion/tank[4]/contents-lbs gt 2
-				propulsion/tank[0]/contents-lbs lt 410
+				propulsion/tank[0]/contents-lbs lt 386
 			</test>
 			<output>propulsion/tank[4]/pumping-flow-to-0</output>
 		</switch>
