@@ -639,8 +639,8 @@
      </location>
      <priority>1</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 56 </capacity>
-     <contents unit="LBS"> 56 </contents>
+     <capacity unit="LBS"> 2 </capacity>
+     <contents unit="LBS"> 2 </contents>
      <standpipe unit="LBS"> 0 </standpipe>
   </tank>
 
@@ -656,10 +656,10 @@
  <system file="FCS-Yaw"/>
  <system file="chute"/>
  <system file="canopy"/>
+ <system file="electric"/>
  <system file="fuel"/>
  <system file="propulsion"/>
  <system file="payloads"/>
- <system file="electric"/>
  <system file="hydraulic"/>
  <system file="warning-lights"/>
 

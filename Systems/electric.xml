@@ -870,6 +870,89 @@
 		</switch>
 
 		<!--
+		right horizontal front switch panel
+				or
+		rhfsp for short
+		-->
+
+		<switch name="electric/output/no-3-tk-gp-pump">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/no-3-tk-gp-pump == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/no-1-tk-gp-pump">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/no-1-tk-gp-pump == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/service-tk-pump">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/service-tk-pump == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/inv-emerg-crsovr">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/inv-emerg-crsovr == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/bat-ext-pwr-sup">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/bat-ext-pwr-sup == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/dc-gen">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/dc-gen == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/jato-start">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/jato-start == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/jato-jett">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/jato-jett == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/ac-gen-ext-pwr">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/ac-gen-ext-pwr == 1
+			</test>
+		</switch>
+
+		<!--
 
 		lights
 
