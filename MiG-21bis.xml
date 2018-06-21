@@ -451,7 +451,7 @@
   <!-- internal fuel 1 -->
   <tank type="FUEL" number="0">
      <location unit="M">
-       <x> -2.50 </x>
+       <x> -3.20 </x>
        <y>   0.00 </y>
        <z> 0.50 </z>
      </location>
@@ -464,7 +464,7 @@
 
   <tank type="FUEL" number="1">
      <location unit="M">
-       <x> -1.75 </x>
+       <x> -2.55 </x>
        <y>   0.00 </y>
        <z> 0.50 </z>
      </location>
@@ -477,7 +477,7 @@
 
   <tank type="FUEL" number="2">
      <location unit="M">
-       <x> -0.50 </x>
+       <x> -1.30 </x>
        <y>   0.00 </y>
        <z>  0.50 </z>
      </location>
@@ -490,7 +490,7 @@
 
   <tank type="FUEL" number="3">
      <location unit="M">
-       <x> 0.55 </x>
+       <x>   -0.35 </x>
        <y>   0.00 </y>
        <z>   0.45 </z>
      </location>
@@ -503,7 +503,7 @@
 
   <tank type="FUEL" number="4">
      <location unit="M">
-       <x> 1.50 </x>
+       <x> 0.65 </x>
        <y>   0.00 </y>
        <z>   0.45 </z>
      </location>
@@ -516,7 +516,7 @@
 
   <tank type="FUEL" number="5">
      <location unit="M">
-       <x> 2.55 </x>
+       <x> 1.50 </x>
        <y>   0.00 </y>
        <z> 0.45 </z>
      </location>
@@ -529,7 +529,7 @@
 
   <tank type="FUEL" number="6">
      <location unit="M">
-       <x> -1.25 </x>
+       <x> -1.75 </x>
        <y>   0.00 </y>
        <z> 1.12 </z>
      </location>
@@ -544,7 +544,7 @@
 
   <tank type="FUEL" number="7">
      <location unit="M">
-       <x> -0.29435 </x>
+       <x> -0.89435 </x>
        <y>   -1.75428</y>
        <z>   0.1971 </z>
      </location>
@@ -557,7 +557,7 @@
 
   <tank type="FUEL" number="8">
      <location unit="M">
-       <x> 1.09838 </x>
+       <x> 0.49838 </x>
        <y>   -1.27481 </y>
        <z>   0.1971 </z>
      </location>
@@ -570,7 +570,7 @@
 
   <tank type="FUEL" number="9">
      <location unit="M">
-       <x> -0.29435 </x>
+       <x> -0.89435 </x>
        <y>   1.75428</y>
        <z>   0.1971 </z>
      </location>
@@ -583,7 +583,7 @@
 
   <tank type="FUEL" number="10">
      <location unit="M">
-       <x> 1.09838 </x>
+       <x> 0.49838 </x>
        <y>   1.27481 </y>
        <z>   0.1971 </z>
      </location>
