@@ -1041,7 +1041,7 @@
 						<property>electric/output/tac-rls-3-4</property>
 						<property>electric/output/battery-heat</property>
 					</sum>
-					<property>electric/buses/bus[2]</property>
+					<property>electric/buses/bus[3]</property>
 				</quotient>
 			</function>
 			<output>electric/discharge/bus_3_load</output>
@@ -1058,6 +1058,17 @@
 						<property>electric/output/air-relight</property>
 						<property>electric/output/engine-starting-unit</property>
 						<property>electric/output/fire-ftg-eqpt</property>
+						<property>electric/output/no-3-tk-gp-pump</property>
+						<property>electric/output/no-1-tk-gp-pump</property>
+						<property>electric/output/service-tk-pump</property>
+						<property>electric/output/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig</property>
+						<property>electric/output/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr</property>
+						<property>electric/output/inv-emerg-crsovr</property>
+						<property>electric/output/bat-ext-pwr-sup</property>
+						<property>electric/output/dc-gen</property>
+						<property>electric/output/jato-start</property>
+						<property>electric/output/jato-jett</property>
+						<property>electric/output/ac-gen-ext-pwr</property>
 					</sum>
 					<property>electric/sources/dc-volts</property>
 				</quotient>
