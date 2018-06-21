@@ -375,7 +375,7 @@
 			<default value="0"/>
 			<test logic="AND" value="-15">
 				propulsion/tank[11]/contents-lbs gt 1
-				propulsion/tank[1]/contents-lbs lt 343
+				propulsion/tank[0]/contents-lbs lt 386
 			</test>
 			<output>propulsion/tank[11]/pumping-flow-to-1</output>
 		</switch>
@@ -387,7 +387,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[11]/contents-lbs lt 1
 				propulsion/tank[12]/contents-lbs gt 1
-				propulsion/tank[1]/contents-lbs lt 343
+				propulsion/tank[0]/contents-lbs lt 386
 			</test>
 			<output>propulsion/tank[12]/pumping-flow-to-1</output>
 		</switch>
@@ -397,7 +397,7 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[11]/contents-lbs lt 1
 				propulsion/tank[13]/contents-lbs gt 1
-				propulsion/tank[1]/contents-lbs lt 343
+				propulsion/tank[0]/contents-lbs lt 386
 			</test>
 			<output>propulsion/tank[13]/pumping-flow-to-1</output>
 		</switch>
@@ -410,7 +410,8 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[12]/contents-lbs lt 2
 				propulsion/tank[7]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 343
+				propulsion/tank[0]/contents-lbs lt 386
+				electric/output/no-1-tk-gp-pump gt 23
 			</test>
 			<output>propulsion/tank[7]/pumping-flow-to-1</output>
 		</switch>
@@ -420,7 +421,8 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[12]/contents-lbs lt 2
 				propulsion/tank[8]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 343
+				propulsion/tank[0]/contents-lbs lt 386
+				electric/output/no-1-tk-gp-pump gt 23
 			</test>
 			<output>propulsion/tank[8]/pumping-flow-to-1</output>
 		</switch>
@@ -432,7 +434,8 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[13]/contents-lbs lt 2
 				propulsion/tank[9]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 343
+				propulsion/tank[0]/contents-lbs lt 386
+				electric/output/no-1-tk-gp-pump gt 23
 			</test>
 			<output>propulsion/tank[9]/pumping-flow-to-1</output>
 		</switch>
@@ -442,7 +445,8 @@
 			<test logic="AND" value="-15">
 				propulsion/tank[13]/contents-lbs lt 2
 				propulsion/tank[10]/contents-lbs gt 2
-				propulsion/tank[1]/contents-lbs lt 343
+				propulsion/tank[0]/contents-lbs lt 386
+				electric/output/no-1-tk-gp-pump gt 23
 			</test>
 			<output>propulsion/tank[10]/pumping-flow-to-1</output>
 		</switch>
@@ -458,6 +462,7 @@
 				propulsion/tank[10]/contents-lbs lt 2
 				propulsion/tank[3]/contents-lbs gt 2
 				propulsion/tank[0]/contents-lbs lt 386
+				electric/output/no-3-tk-gp-pump gt 23
 			</test>
 			<output>propulsion/tank[3]/pumping-flow-to-0</output>
 		</switch>
@@ -471,6 +476,7 @@
 				propulsion/tank[10]/contents-lbs lt 2
 				propulsion/tank[4]/contents-lbs gt 2
 				propulsion/tank[0]/contents-lbs lt 386
+				electric/output/no-3-tk-gp-pump gt 23
 			</test>
 			<output>propulsion/tank[4]/pumping-flow-to-0</output>
 		</switch>
