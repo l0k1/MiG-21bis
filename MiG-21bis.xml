@@ -457,8 +457,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 386.36 </capacity>
-     <contents unit="LBS"> 386.36 </contents>
+     <capacity unit="LBS"> 257.57 </capacity>
+     <contents unit="LBS"> 257.57 </contents>
      <standpipe unit="LBS"> 0 </standpipe>
   </tank>
 
@@ -470,8 +470,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 343.43 </capacity>
-     <contents unit="LBS"> 343.43 </contents>
+     <capacity unit="LBS"> 214.64 </capacity>
+     <contents unit="LBS"> 214.64 </contents>
      <standpipe unit="LBS"> 300 </standpipe>
   </tank>
 
@@ -483,8 +483,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 257.57 </capacity>
-     <contents unit="LBS"> 257.57 </contents>
+     <capacity unit="LBS"> 128.79 </capacity>
+     <contents unit="LBS"> 128.79 </contents>
      <standpipe unit="LBS"> 100 </standpipe>
   </tank>
 
@@ -496,8 +496,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 197.47 </capacity>
-     <contents unit="LBS"> 197.47 </contents>
+     <capacity unit="LBS"> 283.33 </capacity>
+     <contents unit="LBS"> 283.33 </contents>
      <standpipe unit="LBS"> 0 </standpipe>
   </tank>
 
@@ -509,8 +509,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 154.54 </capacity>
-     <contents unit="LBS"> 154.54 </contents>
+     <capacity unit="LBS"> 240.40 </capacity>
+     <contents unit="LBS"> 240.40 </contents>
      <standpipe unit="LBS"> 0 </standpipe>
   </tank>
 
@@ -522,8 +522,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 120.20 </capacity>
-     <contents unit="LBS"> 120.20 </contents>
+     <capacity unit="LBS"> 171.71 </capacity>
+     <contents unit="LBS"> 171.71 </contents>
      <standpipe unit="LBS"> 0 </standpipe>
   </tank>
 
@@ -535,8 +535,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 257.57 </capacity>
-     <contents unit="LBS"> 257.57 </contents>
+     <capacity unit="LBS"> 506.56 </capacity>
+     <contents unit="LBS"> 506.56 </contents>
      <standpipe unit="LBS"> 0 </standpipe>
   </tank>
 
