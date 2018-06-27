@@ -11,9 +11,13 @@
                                 fully disabling the autopilot.
     -->
 
-	<property>/instrumentation/altimeter/indicated-altitude-ft</property>
-	<property>/autopilot/locks/mode</property>
-	<property>fcs/elevator-ap-override</property>
+	<property>				/instrumentation/altimeter/indicated-altitude-ft		</property>
+	<property>				/instrumentation/airspeed-indicator/indicated-speed-kt	</property>
+	<property>				/autopilot/locks/mode									</property>
+	<property>				fcs/elevator-ap-override								</property>
+	<property value="0.4">	fcs/aru-min												</property> <!-- minimum value the ARU can be at, normalized 0 to 1 -->
+	<property value="0.0">	fcs/aru-override-switch									</property> <!-- if 1, ARU always returns fcs/aru-setting -->
+	<property>				fcs/aru-setting											</property> <!-- if overriding default settings, ARU gets set to this -->
 
   <channel name="Pitch">
   
@@ -52,53 +56,55 @@
 		<output>fcs/pitch-trim-sum</output>
 	</fcs_function>
 
-   <!--<summer name="Pitch Trim Sum">
-      <input>fcs/elevator-cmd-norm</input>
-      <input>fcs/elevator-ap-cmd-norm</input>
-      <input>fcs/pitch-trim-cmd-norm</input>
-      <clipto>
-        <min> -1 </min>
-        <max>  1 </max>
-      </clipto>
-   </summer>-->
    
-      <fcs_function name="pitch-gearing">
-	  <!--There is a q-feel system called ARU, that changes the pitch control gearing ratio proportionally with speed and altitude. 
-	  At low altitudes and high IAS the stabilizer moves less. At low IAS and high altitude it moves more with the total stick movement being the same. 
-	  This prevents overcontrolling at high IAS and still gives you enough elevator power at high altitudes and slow airspeeds.
-	  https://ww2aircraft.net/forum/threads/mig-21-evaluation-in-the-usa.42979/ Some excerpts from the book "MiG-21 in Finnish Air Force" (bilingual Finnish/English)
-	  by Jyrki Laukkanen-->
+	<!--There is a q-feel system called ARU, that changes the pitch control gearing ratio proportionally with speed and altitude. 
+	At low altitudes and high IAS the stabilizer moves less. At low IAS and high altitude it moves more with the total stick movement being the same. 
+	This prevents overcontrolling at high IAS and still gives you enough elevator power at high altitudes and slow airspeeds.
+	https://ww2aircraft.net/forum/threads/mig-21-evaluation-in-the-usa.42979/ Some excerpts from the book "MiG-21 in Finnish Air Force" (bilingual Finnish/English)
+	by Jyrki Laukkanen-->
+	<!-- ARU percentages are extrapolated from the gauge markings, where:
+				7000m & 485kmh = 1
+				6000m & 615kmh = 2/3rds
+				5000m & 745kmh = 1/3rds
+				4000m & 875kmh = minval
+	-->
+
+	<fcs_function name="aru-prefilter">
 		<function>
-			<product>
-				<property>fcs/pitch-trim-sum</property>
-				<table>
-					<independentVar lookup="column">/instrumentation/altimeter/indicated-altitude-ft</independentVar>
-					<independentVar lookup="row">velocities/vc-kts</independentVar>
-					<independentVar lookup="table">fcs/pitch-gearing-enable</independentVar>
-					 <tableData breakPoint="0">
-								            0.0		 80000.0
-						0.0		        1.0		1.0
-						10000.0		1.0		1.0
-					</tableData>
-					<tableData breakPoint="1">
-					
-										0.0		10000.0		20000.0		30000.0		40000.0		50000.0		60000.0		70000.0		80000.0
-						0.0			1.0		1.0				1.0				1.0				1.0				1.0				1.0				1.0				1.0
-						200.0		1.0		1.0				1.0				1.0				1.0				1.0				1.0				1.0				1.0
-						300.0		0.9		1.0				1.0				1.0				1.0				1.0				1.0				1.0				1.0
-						400.0		0.8		0.9				0.95				1.0				1.0				1.0				1.0				1.0				1.0
-						500.0		0.7		0.8				0.875			0.95				1.0				1.0				1.0				1.0				1.0
-						600.0		0.6		0.7				0.8				0.90				1.0				1.0				1.0				1.0				1.0
-						700.0		0.5		0.6				0.7				0.85				1.0				1.0				1.0				1.0				1.0
-						800.0		0.4		0.5				0.55				0.80				1.0				1.0				1.0				1.0				1.0
-					</tableData>
-				</table>
-			</product>
+			<ifthen>
+				<property>fcs/aru-override-switch</property>
+				<property>fcs/aru-setting</property>
+				<avg>
+					<interpolate1d>
+						<property>/instrumentation/altimeter/indicated-altitude-ft</property>
+						<value>7k</value> <value>1</value>
+						<value>4k</value> <property>fcs/aru-min</property>
+					</interpolate1d>
+					<interpolate1d>
+						<property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+						<value>485</value> <property>fcs/aru-min</property>
+						<value>875</value> <value>1</value>
+					</interpolate1d>
+				</avg>
+			</ifthen>
 		</function>
+		<clipto>
+			<min>fcs/aru-min</min>
+			<max>1</max>
+		</clipto>
 	</fcs_function>
 	
+	<lag_filter name="aru">
+		<input>fcs/aru-prefilter</input>
+		<c1>5.5</c1>
+		<clipto>
+			<min>fcs/aru-min</min>
+			<max>1</max>
+		</clipto>
+	</lag_filter>
+	
 	<kinematic name="Elevator Delay">
-     <input>fcs/pitch-gearing</input>
+     <input>fcs/aru</input>
 	 <traverse>
 		<setting>
 			<position>-1</position>
