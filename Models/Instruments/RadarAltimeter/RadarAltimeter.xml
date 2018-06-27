@@ -20,7 +20,7 @@
     <animation>
     <type>rotate</type>
     <object-name>radarAltimeterNeedle</object-name>
-    <property>/instrumentation/altimeter/radar-altimeter-ft</property>
+    <property>fdm/jsbsim/instrumentation/radar-alt/radar-altimeter-ft-filtered</property>
         <interpolation>
             <entry><ind>  0</ind><dep>     120</dep></entry>
             <entry><ind> 65.6</ind><dep>    90</dep></entry>

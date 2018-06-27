@@ -1,3 +1,7 @@
+<?xml version="1.0"?>
+
+<!-- gauges are handled in instrumentation.xml -->
+
 <system name="electric">
 
 	<property value="0">electric/external-connected</property>  <!-- if the external ground cart is connected -->
@@ -390,21 +394,21 @@
 
 		<switch name="electric/buses/bus[0]">
 			<default value="0"/>
-			<test logic="AND" value="electric/inverters/po-750a[0]">
+			<test logic="AND" value="electric/inverters/pt-500ts">
 				electric/buses/bus-switch[0] == 1
 			</test>
 		</switch>
 
 		<switch name="electric/buses/bus[1]">
 			<default value="0"/>
-			<test logic="AND" value="electric/inverters/po-750a[1]">
+			<test logic="AND" value="electric/inverters/pt-125c">
 				electric/buses/bus-switch[1] == 1
 			</test>
 		</switch>
 
 		<switch name="electric/buses/bus[2]">
 			<default value="0"/>
-			<test logic="AND" value="electric/inverters/po-1500vt">
+			<test logic="AND" value="electric/inverters/po-750a[0]">
 				electric/buses/bus-switch[2] == 1
 			</test>
 		</switch>
@@ -951,7 +955,7 @@
 				electric/switches/rhfsp/ac-gen-ext-pwr == 1
 			</test>
 		</switch>
-
+		
 		<!--
 
 		lights
