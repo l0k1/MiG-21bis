@@ -1,7 +1,7 @@
 AC3Db
 MATERIAL "DefaultWhite.010" rgb 1.000 1.000 1.000  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 64 trans 0.000
 MATERIAL "DefaultWhite.011" rgb 0.800 0.800 0.800  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 64 trans 0.000
-MATERIAL "ac3dmat14" rgb 0.640 0.640 0.640  amb 0.200 0.200 0.200  emis 0.000 0.000 0.000  spec 0.200 0.200 0.200  shi 50 trans 0.900
+MATERIAL "ac3dmat14" rgb 0.640 0.640 0.640  amb 0.200 0.200 0.200  emis 0.000 0.000 0.000  spec 0.200 0.200 0.200  shi 50 trans 0.200
 MATERIAL "cage.001" rgb 0.640 0.640 0.640  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.688 0.688 0.688  shi 105 trans 0.000
 MATERIAL "cage" rgb 0.800 0.800 0.800  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 1.000 1.000 1.000  shi 104 trans 0.000
 MATERIAL "DefaultWhite.012" rgb 1.000 1.000 1.000  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.500 0.500 0.500  shi 64 trans 0.000

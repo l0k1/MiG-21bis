@@ -2,12 +2,6 @@
 
 <PropertyList>
 
-    <animation>
-        <type>range</type>
-        <min-m>0</min-m>
-        <max-m>10</max-m>
-    </animation>
-
     <model>
         <name>Stick</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Stick/Stick.xml</path>
