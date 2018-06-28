@@ -83,8 +83,8 @@ clock
                 	</gt>
                 	<quotient>
                     	<difference>
-                    	    <property>electric/buses/bus[2]
-                    	    <value>107<value>
+                    	    <property>electric/buses/bus[2]</property>
+                    	    <value>107</value>
                     	</difference>
                     	<value>8</value>
                     </quotient>
@@ -117,8 +117,43 @@ clock
         tachometer
         jet pipe temp
         hydr pressure-->
+
+        
         
     
+    </channel>
+
+
+    <channel name="switches" execrate="4">
+        <fcs_function name="trash/aru/setting-control">
+            <function>
+                <ifthen>
+                    <and>
+                        <eq>
+                            <property>fcs/aru-override-switch</property>
+                            <value>1</value>
+                        </eq>
+                        <gt>
+                            <property>electric/output/aru-syst-man-ctl</property>
+                            <value>107</value>
+                        </gt>
+                    </and>
+                    <sum>
+                        <product>
+                            <value>0.0083</value>
+                            <property>fcs/aru-spd-switch</property>
+                        </product>
+                        <property>fcs/aru-setting-pos</property>
+                    </sum>
+                    <property>fcs/aru-setting-pos</property>
+                </ifthen>
+            </function>
+            <clipto>
+                <min>0.3</min>
+                <max>1.0</max>
+            </clipto>
+            <output>fcs/aru-setting-pos</output>
+        </fcs_function>
     </channel>
 
 </system>

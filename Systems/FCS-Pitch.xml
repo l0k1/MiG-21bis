@@ -17,6 +17,7 @@
 	<property>				fcs/elevator-ap-override								</property>
 	<property value="0.3">	fcs/aru-min												</property> <!-- minimum value the ARU can be at, normalized 0 to 1 -->
 	<property value="0.0">	fcs/aru-override-switch									</property> <!-- if 1, ARU always returns fcs/aru-setting -->
+	<property value="0.0">	fcs/aru-spd-switch										</property>
 	<property value="1.0">	fcs/aru-setting-pos										</property> <!-- if overriding default settings, ARU gets set to this -->	
 	<property value="1.0">	fcs/aru-setting-rqst									</property> <!-- if overriding default settings, ARU gets set to this -->
 	<property value="1.0">	fcs/aru-prefilter										</property>
@@ -113,18 +114,11 @@
 			</setting>
 			<setting>
 				<position>1.0</position>
-				<time>1.5</time>
+				<time>2.5</time>
 			</setting>
 		</traverse>
+		<noscale/>
 	</kinematic>
-	
-	<!-- for manual control, used elsewhere -->
-	<switch name="aru-setting-pos">
-		<default value="fcs/aru-setting-rqst"/>
-		<test logic="AND" value="fcs/aru">
-			fcs/aru-override-switch eq 0
-		</test>
-	</switch>
 
 	<fcs_function name="elevator-post-aru">
 		<function>

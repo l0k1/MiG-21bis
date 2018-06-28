@@ -661,6 +661,7 @@
  <system file="propulsion"/>
  <system file="payloads"/>
  <system file="hydraulic"/>
+ <system file="instrumentation"/>
  <system file="warning-lights"/>
 
  <flight_control name="none"/>

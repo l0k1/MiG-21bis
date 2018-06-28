@@ -13,4 +13,87 @@
             <factor-prop>controls/lighting/instruments-norm</factor-prop>
           </emission>
       </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>apuModeSwitch</object-name>
+    <property>/fdm/jsbsim/fcs/aru-override-switch</property>
+    <factor>70</factor>
+    <offset-deg>-35</offset-deg>
+    <center>
+      <x-m>-0.008107</x-m>
+      <y-m> 0.072812</y-m>
+      <z-m>-0.00485</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+
+    <action>
+      <binding>
+        <command>property-toggle</command>
+        <property>/fdm/jsbsim/fcs/aru-override-switch</property>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>apuSpdSwitch</object-name>
+    <property>/fdm/jsbsim/fcs/aru-spd-switch</property>
+    <factor>35</factor>
+    <offset-deg>0</offset-deg>
+    <center>
+      <x-m>-0.008107</x-m>
+      <y-m> 0.114866</y-m>
+      <z-m>-0.00485</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>apuSpdSwitch</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-assign</command>
+        <property>/fdm/jsbsim/fcs/aru-spd-switch</property>
+        <value>1</value>
+      </binding>
+      <mod-up>
+        <binding>
+          <command>property-assign</command>
+          <property>/fdm/jsbsim/fcs/aru-spd-switch</property>
+          <value>0</value>
+        </binding>
+      </mod-up>
+    </action>
+    <action>
+      <button>1</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-assign</command>
+        <property>/fdm/jsbsim/fcs/aru-spd-switch</property>
+        <value>-1</value>
+      </binding>
+      <mod-up>
+        <binding>
+          <command>property-assign</command>
+          <property>/fdm/jsbsim/fcs/aru-spd-switch</property>
+          <value>0</value>
+        </binding>
+      </mod-up>
+    </action>
+  </animation>
+
+
+
 </PropertyList>

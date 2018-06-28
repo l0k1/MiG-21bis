@@ -184,6 +184,10 @@ setlistener("/controls/engines/engine[0]/starting-switch",func(){
 	}
 	});
 
+setlistener("/fdm/jsbsim/fcs/aru-override-switch",func(){
+  setprop("/fdm/jsbsim/fcs/aru-setting-pos",getprop("/fdm/jsbsim/fcs/aru"));
+});
+
   #/controls/engines/engine[~n~]/starter set to true
   #/controls/engines/engine[~n~]/cutoff toggled with 0.1 sec delay
   #after n1 stabs
