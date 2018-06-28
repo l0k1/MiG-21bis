@@ -6,9 +6,9 @@
 
 	<property value="0">electric/external-connected</property>  <!-- if the external ground cart is connected -->
 	<property value="0">electric/battery-mode</property>		<!-- 0 = batteries in parallel, 1 = batteries in series -->
-	<property value="0">electric/buses/bus-switch[0]</property>
-	<property value="0">electric/buses/bus-switch[1]</property>
-	<property value="0">electric/buses/bus-switch[2]</property>
+	<property value="1">electric/buses/bus-switch[0]</property>
+	<property value="1">electric/buses/bus-switch[1]</property>
+	<property value="1">electric/buses/bus-switch[2]</property>
 	<property value="29">electric/sources/battery[0]</property>
 	<property value="29">electric/sources/battery[1]</property>
 

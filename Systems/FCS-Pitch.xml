@@ -15,9 +15,12 @@
 	<property>				/instrumentation/airspeed-indicator/indicated-speed-kt	</property>
 	<property>				/autopilot/locks/mode									</property>
 	<property>				fcs/elevator-ap-override								</property>
-	<property value="0.4">	fcs/aru-min												</property> <!-- minimum value the ARU can be at, normalized 0 to 1 -->
+	<property value="0.3">	fcs/aru-min												</property> <!-- minimum value the ARU can be at, normalized 0 to 1 -->
 	<property value="0.0">	fcs/aru-override-switch									</property> <!-- if 1, ARU always returns fcs/aru-setting -->
-	<property>				fcs/aru-setting											</property> <!-- if overriding default settings, ARU gets set to this -->
+	<property value="1.0">	fcs/aru-setting-pos										</property> <!-- if overriding default settings, ARU gets set to this -->	
+	<property value="1.0">	fcs/aru-setting-rqst									</property> <!-- if overriding default settings, ARU gets set to this -->
+	<property value="1.0">	fcs/aru-prefilter										</property>
+	<property value="1.0">	fcs/aru													</property>
 
   <channel name="Pitch">
   
@@ -73,7 +76,7 @@
 		<function>
 			<ifthen>
 				<property>fcs/aru-override-switch</property>
-				<property>fcs/aru-setting</property>
+				<property>fcs/aru-setting-pos</property>
 				<ifthen>
 					<gt>
 						<property>electric/output/aru-syst-auto-ctl</property>
@@ -87,8 +90,8 @@
 						</interpolate1d>
 						<interpolate1d>
 							<property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
-							<value>261.879</value> <property>fcs/aru-min</property>
-							<value>472.462</value> <value>1</value>
+							<value>261.879</value> <value>1</value>
+							<value>472.462</value> <property>fcs/aru-min</property>
 						</interpolate1d>
 					</avg>
 					<property>fcs/aru-prefilter</property>
@@ -100,26 +103,40 @@
 			<max>1</max>
 		</clipto>
 	</fcs_function>
-	
-	<lag_filter name="aru">
+
+	<kinematic name="aru">
 		<input>fcs/aru-prefilter</input>
-		<c1>5.5</c1>
-		<clipto>
-			<min>fcs/aru-min</min>
-			<max>1</max>
-		</clipto>
-	</lag_filter>
+		<traverse>
+			<setting>
+				<position>0.3</position>
+				<time>0.0</time>
+			</setting>
+			<setting>
+				<position>1.0</position>
+				<time>1.5</time>
+			</setting>
+		</traverse>
+	</kinematic>
 	
 	<!-- for manual control, used elsewhere -->
-	<switch name="aru-setting">
-		<default value="fcs/aru-setting"/>
+	<switch name="aru-setting-pos">
+		<default value="fcs/aru-setting-rqst"/>
 		<test logic="AND" value="fcs/aru">
-			fcs/aru-override-switch eq 1
+			fcs/aru-override-switch eq 0
 		</test>
 	</switch>
+
+	<fcs_function name="elevator-post-aru">
+		<function>
+			<product>
+				<property>fcs/pitch-trim-sum</property>
+				<property>fcs/aru</property>
+			</product>
+		</function>
+	</fcs_function>
 	
 	<kinematic name="Elevator Delay">
-     <input>fcs/aru</input>
+     <input>fcs/elevator-post-aru</input>
 	 <traverse>
 		<setting>
 			<position>-1</position>
