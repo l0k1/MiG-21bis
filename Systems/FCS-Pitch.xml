@@ -77,7 +77,7 @@
 				<ifthen>
 					<gt>
 						<property>electric/output/aru-syst-auto-ctl</property>
-						<value>107</gt>
+						<value>107</value>
 					</gt>
 					<avg>
 						<interpolate1d>
@@ -112,7 +112,7 @@
 	
 	<!-- for manual control, used elsewhere -->
 	<switch name="aru-setting">
-		<default value="fcs/aru-setting">
+		<default value="fcs/aru-setting"/>
 		<test logic="AND" value="fcs/aru">
 			fcs/aru-override-switch eq 1
 		</test>
