@@ -44,12 +44,24 @@
 				<splash type="bool">true</splash>
 				<path>Splash.png</path>
 			</preview>
+			<preview>
+				<type>exterior</type>
+				<splash type="bool">true</splash>
+				<path>Splash2.png</path>
+			</preview>
+			<preview>
+				<type>exterior</type>
+				<splash type="bool">true</splash>
+				<path>Splash3.png</path>
+			</preview>
 		</previews>
 
 
 		<startup>
 			<splash-title>МиГ-21БИС САУ (75Б)</splash-title>
 			<splash-texture>Aircraft/MiG-21bis/Splash.png</splash-texture>
+			<splash-texture>Aircraft/MiG-21bis/Splash2.png</splash-texture>
+			<splash-texture>Aircraft/MiG-21bis/Splash3.png</splash-texture>
 		</startup>
 
 		<!-- Models -->
