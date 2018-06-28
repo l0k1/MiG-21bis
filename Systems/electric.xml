@@ -25,7 +25,7 @@
 	<property value="1">electric/switches/rvrsp/oxy-eq-heat-extn-lamp-wht-lt</property>
 	<property value="1">electric/switches/rvrsp/drag-chute</property>
 	<property value="1">electric/switches/rvrsp/drop-tanks-jett</property>
-	<property value="1">electric/switches/rvrsp/apy-syst-man-ctl</property>
+	<property value="1">electric/switches/rvrsp/aru-syst-man-ctl</property>
 	<property value="1">electric/switches/rvrsp/taxi-ldg-lts-lg-ext-sig</property>
 	<property value="1">electric/switches/rvrsp/booster-system-off-hyd-syst-sig</property>
 	<property value="1">electric/switches/rvrsp/hydr-pres-gauge-tanks-sig</property>
@@ -37,7 +37,7 @@
 	<property value="1">electric/switches/rvrsp/cabin-air-sup</property>
 	<property value="1">electric/switches/rvrsp/firing-button</property>
 	<property value="1">electric/switches/rvrsp/cdr-atc-xponder</property>
-	<property value="1">electric/switches/rvrsp/apy-syst-auto-ctl</property>
+	<property value="1">electric/switches/rvrsp/aru-syst-auto-ctl</property>
 	<property value="1">electric/switches/rvrsp/tac-rls-3-4</property>
 	<property value="1">electric/switches/rvrsp/battery-heat</property>
 
@@ -494,10 +494,10 @@
 		</switch>
 
 		<!-- stabilizer -->
-		<switch name="electric/output/apy-syst-man-ctl">
+		<switch name="electric/output/aru-syst-man-ctl">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[2]">
-				electric/switches/rvrsp/apy-syst-man-ctl == 1
+				electric/switches/rvrsp/aru-syst-man-ctl == 1
 			</test>
 		</switch>
 
@@ -579,10 +579,10 @@
 			</test>
 		</switch>
 
-		<switch name="electric/output/apy-syst-auto-ctl">
+		<switch name="electric/output/aru-syst-auto-ctl">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[2]">
-				electric/switches/rvrsp/apy-syst-auto-ctl == 1
+				electric/switches/rvrsp/aru-syst-auto-ctl == 1
 			</test>
 		</switch>
 
@@ -1029,7 +1029,7 @@
 						<property>electric/output/oxy-eq-heat-extn-lamp-wht-lt</property>
 						<property>electric/output/drag-chute</property>
 						<property>electric/output/drop-tanks-jett</property>
-						<property>electric/output/apy-syst-man-ctl</property>
+						<property>electric/output/aru-syst-man-ctl</property>
 						<property>electric/output/taxi-ldg-lts-lg-ext-sig</property>
 						<property>electric/output/booster-system-off-hyd-syst-sig</property>
 						<property>electric/output/hydr-pres-gauge-tanks-sig</property>
@@ -1041,11 +1041,11 @@
 						<property>electric/output/cabin-air-sup</property>
 						<property>electric/output/firing-button</property>
 						<property>electric/output/cdr-atc-xponder</property>
-						<property>electric/output/apy-syst-auto-ctl</property>
+						<property>electric/output/aru-syst-auto-ctl</property>
 						<property>electric/output/tac-rls-3-4</property>
 						<property>electric/output/battery-heat</property>
 					</sum>
-					<property>electric/buses/bus[3]</property>
+					<property>electric/buses/bus[2]</property>
 				</quotient>
 			</function>
 			<output>electric/discharge/bus_3_load</output>
@@ -1074,7 +1074,7 @@
 						<property>electric/output/jato-jett</property>
 						<property>electric/output/ac-gen-ext-pwr</property>
 					</sum>
-					<property>electric/sources/dc-volts</property>
+					<property>electric/buses/bus[3]</property>
 				</quotient>
 			</function>
 			<output>electric/discharge/bus_4_load</output>
