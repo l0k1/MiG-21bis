@@ -110,7 +110,7 @@
             </axis>
           </animation>
 
-          <animation>
+          <!-- <animation>
             <type>pick</type>
             <object-name>vertGyroSwitch</object-name>
             <action>
@@ -122,7 +122,7 @@
                 <property>/fdm/jsbsim/electric/switches/rhfsp/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig</property>
               </binding>
             </action>
-          </animation>
+          </animation> -->
 
           <animation>
             <object-name>vertGyroSwitch</object-name>
@@ -142,7 +142,7 @@
             </axis>
           </animation>
 
-          <animation>
+          <!-- <animation>
             <type>pick</type>
             <object-name>da200Switch</object-name>
             <action>
@@ -154,7 +154,7 @@
                 <property>/fdm/jsbsim/electric/switches/rhfsp/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr</property>
               </binding>
             </action>
-          </animation>
+          </animation> -->
 
           <animation>
             <object-name>da200Switch</object-name>
@@ -174,7 +174,7 @@
             </axis>
           </animation>
 
-          <animation>
+          <!-- <animation>
             <type>pick</type>
             <object-name>invEmerCrsover</object-name>
             <action>
@@ -186,7 +186,7 @@
                 <property>/fdm/jsbsim/electric/switches/rhfsp/inv-emerg-crsovr</property>
               </binding>
             </action>
-          </animation>
+          </animation> -->
 
           <animation>
             <object-name>invEmerCrsover</object-name>
@@ -270,7 +270,7 @@
         		</axis>
         	</animation>
 
-          <animation>
+          <!-- <animation>
         		<type>pick</type>
         		<object-name>jatoStartSwitch</object-name>
         		<action>
@@ -282,7 +282,7 @@
         				<property>/fdm/jsbsim/electric/switches/rhfsp/jato-start</property>
         			</binding>
         		</action>
-        	</animation>
+        	</animation> -->
 
         	<animation>
         		<object-name>jatoStartSwitch</object-name>
@@ -303,7 +303,7 @@
         	</animation>
 
 
-          <animation>
+          <!-- <animation>
         		<type>pick</type>
         		<object-name>jatoJettSwitch</object-name>
         		<action>
@@ -315,7 +315,7 @@
         				<property>/fdm/jsbsim/electric/switches/rhfsp/jato-jett</property>
         			</binding>
         		</action>
-        	</animation>
+        	</animation> -->
 
         	<animation>
         		<object-name>jatoJettSwitch</object-name>
@@ -333,7 +333,7 @@
         			<y>1</y>
         			<z>0</z>
         		</axis>
-        	</animation>
+        	</animation>-->
 
           <animation>
         		<type>pick</type>

@@ -27,7 +27,7 @@
 	<!-- picks and translations -->
 
 
-	<animation>
+	<!-- <animation>
 		<type>pick</type>
 		<object-name>miscPanel1HltHeatFastButton</object-name>
 		<action>
@@ -48,7 +48,7 @@
 			</binding>
 			</mod-up>
 		</action>
-	</animation>
+	</animation> -->
 
 	<animation>
 		<type>translate</type>
@@ -102,7 +102,7 @@
 		</axis>
 	</animation>
 
-	<animation>
+	<!-- <animation>
 		<type>pick</type>
 		<object-name>miscPanel1HltHeatAutoSwitch</object-name>
 		<action>
@@ -121,7 +121,7 @@
 				<property>/instrumentation/misc-panel-1/auto-off</property>
 			</binding>
 		</action>
-	</animation>
+	</animation> -->
 
 	<animation>
 		<object-name>miscPanel1HltHeatAutoSwitch</object-name>
@@ -141,7 +141,7 @@
 		</axis>
 	</animation>
 
-	<animation>
+	<!-- <animation>
 		<type>pick</type>
 		<object-name>miscPanel1NozzleSwitch</object-name>
 		<action>
@@ -160,7 +160,7 @@
 				<property>/instrumentation/misc-panel-1/cone-auto-man</property>
 			</binding>
 		</action>
-	</animation>
+	</animation> -->
 
 	<animation>
 		<object-name>miscPanel1NozzleSwitch</object-name>
@@ -180,7 +180,7 @@
 		</axis>
 	</animation>
 
-	<animation>
+	<!-- <animation>
 		<type>pick</type>
 		<object-name>miscPanel1HltHeatSwitch</object-name>
 		<action>
@@ -199,7 +199,7 @@
 				<property>/instrumentation/misc-panel-1/hlt-heat-rqst</property>
 			</binding>
 		</action>
-	</animation>
+	</animation> -->
 
 	<animation>
 		<object-name>miscPanel1HltHeatSwitch</object-name>
@@ -219,7 +219,7 @@
 		</axis>
 	</animation>
 
-	<animation>
+	<!-- <animation>
 		<type>pick</type>
 		<object-name>miscPanel1SwitchGuard</object-name>
 		<object-name>miscPanel1Chain</object-name>
@@ -239,7 +239,7 @@
 				<property>/instrumentation/misc-panel-1/guard</property>
 			</binding>
 		</action>
-	</animation>
+	</animation> -->
 
 	<animation>
 		<object-name>miscPanel1SwitchGuard</object-name>

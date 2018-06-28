@@ -19,7 +19,7 @@
     <animation>
 		<type>rotate</type>
 		<object-name>ARUneedle</object-name>
-		<property>/fdm/jsbsim/fcs/aru</property>
+		<property>/fdm/jsbsim/instrumentation/aru/aru-display</property>
 		<interpolation>
 			<entry><ind>  0.3</ind><dep>  230</dep></entry>
             <entry><ind>  1.0</ind><dep>   40</dep></entry>
@@ -34,7 +34,7 @@
 <text>
 	<name>LabelText</name>
 	<type type="string">literal</type>
-		<text type="string">ARU-3G Indicator NOT WORKING</text>
+		<text type="string">ARU-3G Indicator</text>
 	<draw-text type="bool">true</draw-text>
 	<font>Helvetica.txf</font>
 		<character-size type="double">0.012</character-size>

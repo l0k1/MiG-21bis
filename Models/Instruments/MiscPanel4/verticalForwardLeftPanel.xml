@@ -126,7 +126,7 @@
     </axis>
   </animation>
 
-    <animation>
+    <!-- <animation>
       <type>pick</type>
       <object-name>antiSkidUnitSwitch</object-name>
       <action>
@@ -138,7 +138,7 @@
           <property>/fdm/jsbsim/electric/switches/lvfsp/anti-skid-unit</property>
         </binding>
       </action>
-    </animation>
+    </animation> -->
 
     <animation>
       <object-name>antiSkidUnitSwitch</object-name>
