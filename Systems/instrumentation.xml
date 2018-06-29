@@ -70,7 +70,7 @@ clock
             <c1>4.5</c1>
             <clipto>
                 <min>0.0</min>
-                <max>610.0</max>
+                <max>2000.0</max>
             </clipto>
         </lag_filter>
         
