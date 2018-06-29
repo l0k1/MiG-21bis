@@ -1,7 +1,7 @@
 #todo: make sure we have enough voltage. update me.power() for that.
 #todo: the other fixed gunsight thingy. scale-sight?
 
-var gunsight_power = "electric/output/gunsight";
+var gunsight_power = "/fdm/jsbsim/electric/output/gunsight";
 
 var fixednetswitch = "/controls/armament/gunsight/fixed-net-power-switch";
 var redpath = "/controls/armament/gunsight/red";
@@ -342,6 +342,8 @@ var gun_sight = {
 		m.update();
 	},
 	update: func() {
+		me.pipper_power();
+		me.fixed_net_power();
 		me.pipper_move();
 		settimer(func { me.update(); }, 0);
 	},
