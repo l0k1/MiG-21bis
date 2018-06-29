@@ -716,7 +716,12 @@ var impact_listener = func {
 
 var hitmessage = func(typeOrd) {
 	#print("inside hitmessage");
-	message = typeOrd.name ~ " hit: " ~ typeOrd.hit_callsign ~ ": " ~ typeOrd.hit_count ~ " hits";
+	if (typeOrd.name == "S-5" ) {
+		var ordname = "S-5 rocket";
+	} else {
+		var ordname = typeOrd.name;
+	}
+	message = ordname ~ " hit: " ~ typeOrd.hit_callsign ~ ": " ~ typeOrd.hit_count ~ " hits";
 	defeatSpamFilter(message);
 	typeOrd.hit_callsign = "";
 	typeOrd.hit_timer = 0;
