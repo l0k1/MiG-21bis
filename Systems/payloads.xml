@@ -70,6 +70,7 @@
             <default value="0"/>
             <test logic="AND" value="1">
                 /controls/armament/trigger == 1
+                electric/output/gun gt 33
                 /fdm/jsbsim/systems/armament/GSh-23-jammed == 0
             </test>
         </switch>
@@ -78,6 +79,7 @@
         <switch name="systems/armament/GSh-23-ready">
         	<default value="0"/>
         	<test logic="AND" value="1">
+        		electric/output/gun gt 33
         		/ai/submodels/submodel[5]/count gt 0
         	</test>
         </switch>
