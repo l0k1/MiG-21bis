@@ -374,7 +374,7 @@ var gun_sight = {
 		if ( getprop(pipperpowerswitch) == 1 and getprop(gunsight_power) > 33 ) {
 			me.pipper.show();
 		} else {
-			me.pipper.hide():
+			me.pipper.hide();
 		}
 	},
 	
