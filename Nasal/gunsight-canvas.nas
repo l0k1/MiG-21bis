@@ -1,6 +1,8 @@
 #todo: make sure we have enough voltage. update me.power() for that.
 #todo: the other fixed gunsight thingy. scale-sight?
 
+var gunsight_power = "electric/output/gunsight";
+
 var fixednetswitch = "/controls/armament/gunsight/fixed-net-power-switch";
 var redpath = "/controls/armament/gunsight/red";
 var bluepath = "/controls/armament/gunsight/blue";
@@ -344,8 +346,7 @@ var gun_sight = {
 		settimer(func { me.update(); }, 0);
 	},
 	fixed_net_power: func() {
-		var switch_state = getprop(fixednetswitch);
-		if ( switch_state == 1 ) {
+		if ( getprop(fixednetswitch) == 1 and getprop(gunsight_power) > 33 ) {
 			for (var i = 0; i < size(me.gschild); i += 1 ) {
 				me.gschild[i].show();
 			}
@@ -370,15 +371,10 @@ var gun_sight = {
     },
 	
 	pipper_power: func() {
-		var switch_state = getprop(pipperpowerswitch);
-		if ( switch_state == 1 ) {
-			foreach ( var elem; me.pipper.getChildren() ) {
-				elem.show();
-			}
+		if ( getprop(pipperpowerswitch) == 1 and getprop(gunsight_power) > 33 ) {
+			me.pipper.show();
 		} else {
-		foreach ( var elem; me.pipper.getChildren() ) {
-				elem.hide();
-			}
+			me.pipper.hide():
 		}
 	},
 	
