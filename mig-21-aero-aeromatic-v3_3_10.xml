@@ -144,7 +144,7 @@
            <property>metrics/Sw-sqft</property>
            <property>aero/cl-squared</property>
            <product>
-             <value> 0.2097 </value>
+             <value> 0.1650 </value>
              <property>tune/drag/induced</property>
            </product>
          </product>
