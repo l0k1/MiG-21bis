@@ -7,13 +7,15 @@
 	<b type="float">1000000</b>
 	<c type="float">0</c>-->
 	<sim>
-
+		
+		<status>v0.2.1</status>
+		
 		<submodels>
 			<serviceable type="bool">true</serviceable>
 			<path>Aircraft/MiG-21bis/Submodels.xml</path>
 		</submodels>
 
-		<minimum-fg-version>1.9.1</minimum-fg-version>
+		<minimum-fg-version>2018.1.1</minimum-fg-version>
 
 		<!-- System Settings -->
 
