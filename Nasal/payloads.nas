@@ -360,6 +360,56 @@ setlistener("controls/armament/panel/reload[2]", func { unjam(2); } );
 
 ###########  listener for handling the trigger #########
 
+var pylon_select = func() {
+	#return array of active pylons
+	#returning -1 means no pylon selected
+
+	#pylon knob
+	#0: 1/2 bomb | 16 rkt
+	#1: 3/4 bomb | 8 rkt
+	#2: 1/4 bomb | 4 rkt
+	#3: 1/2 rkt
+	#4: 3/4 rkt
+	#5: 3/4 msl
+	#6: 1/2 msl
+	#7: 1 msl
+	#8: 2 msl
+	#9: 3 msl
+	#10: 4 msl
+	#pylons go 3,1,2,4 left to right IRL
+	#pylons go 0,1,3,4 left to right internally
+
+	var knobpos = getprop("controls/armament/panel/pylon-knob");
+	if ( knobpos == 0 ) {
+		setprop("/controls/armament/rocket-setting",16);
+		return [1,3,knobpos];
+	} elsif ( knobpos == 1 ) {
+		setprop("/controls/armament/rocket-setting",8);
+		return [0,4,knobpos];
+	} elsif ( knobpos == 2 ) {
+		setprop("/controls/armament/rocket-setting",4);
+		return [0,3,knobpos];
+	} elsif ( knobpos == 3 ) {
+		return [1,3,knobpos];
+	} elsif ( knobpos == 4 ) {
+		return [0,4,knobpos];
+	} elsif ( knobpos == 5 ) {
+		var ret1 = getprop("payload/virtual/weight[7]/selected") == "R-60" ? 7 : 0;
+		var ret2 = getprop("payload/virtual/weight[8]/selected") == "R-60" ? 8 : 4;
+		return [ret1,ret2,knobpos];
+	} elsif ( knobpos == 6 ) {
+		return [1,3,knobpos];
+	} elsif ( knobpos == 7 ) {
+		return [1,-1,knobpos];
+	} elsif ( knobpos == 8 ) {
+		return [3,-1,knobpos];
+	} elsif ( knobpos == 9 ) {
+		return getprop("payload/virtual/weight[7]/selected") == "R-60" ? [7,-1,knobpos] : [0,-1,knobpos];
+	} elsif ( knobpos == 10 ) {
+		return getprop("payload/virtual/weight[8]/selected") == "R-60" ? [8,-1,knobpos] : [4,-1,knobpos];
+	}
+}
+
 var missile_release_listener = func {
 	var armSelect = pylon_select();
 
@@ -467,35 +517,6 @@ var heavy_release_listener = func {
 	}
 }
 
-  #pylon knob
-  #0: 1/2 bomb | 16 rkt
-  #1: 3/4 bomb | 8 rkt
-  #2: 1/4 bomb | 4 rkt
-  #3: 1/2 rkt
-  #4: 3/4 rkt
-  #5: 3/4 msl
-  #6: 1/2 msl
-  #7: 1 msl
-  #8: 2 msl
-  #9: 3 msl
-  #10: 4 msl
-  #pylons go 1,3,4,2 left to right IRL
-  #pylons go 0,1,3,4 left to right internally
-
-  #if masterarm is on and HUD in tactical mode, propagate trigger to station
-#  if(!(armSelect == 0) {
-#  } else {
-#    setprop("/controls/armament/station["~armSelect~"]/trigger", FALSE);
-#    if (armSelect == 1) {
-#      setprop("/controls/armament/station[8]/trigger", FALSE);
-#    }
-#    if (armSelect == 3) {
-#      setprop("/controls/armament/station[9]/trigger", FALSE);
-#    }
-#    if (armSelect == 7) {
-#      setprop("/controls/armament/station[10]/trigger", FALSE);
-#    }
-#  }
 var missile_release = func(pylon) {
 	if (pylon < 7) {
 		var virtual = "/";
@@ -794,57 +815,6 @@ var paint_the_rainbow = func(timer) {
 
 
 ############################# main init ###############
-
-var pylon_select = func() {
-	#return array of active pylons
-	#returning -1 means no pylon selected
-
-	#pylon knob
-	#0: 1/2 bomb | 16 rkt
-	#1: 3/4 bomb | 8 rkt
-	#2: 1/4 bomb | 4 rkt
-	#3: 1/2 rkt
-	#4: 3/4 rkt
-	#5: 3/4 msl
-	#6: 1/2 msl
-	#7: 1 msl
-	#8: 2 msl
-	#9: 3 msl
-	#10: 4 msl
-	#pylons go 3,1,2,4 left to right IRL
-	#pylons go 0,1,3,4 left to right internally
-
-	var knobpos = getprop("controls/armament/panel/pylon-knob");
-	if ( knobpos == 0 ) {
-		setprop("/controls/armament/rocket-setting",16);
-		return [1,3,knobpos];
-	} elsif ( knobpos == 1 ) {
-		setprop("/controls/armament/rocket-setting",8);
-		return [0,4,knobpos];
-	} elsif ( knobpos == 2 ) {
-		setprop("/controls/armament/rocket-setting",4);
-		return [0,3,knobpos];
-	} elsif ( knobpos == 3 ) {
-		return [1,3,knobpos];
-	} elsif ( knobpos == 4 ) {
-		return [0,4,knobpos];
-	} elsif ( knobpos == 5 ) {
-		var ret1 = getprop("payload/virtual/weight[7]/selected") == "R-60" ? 7 : 0;
-		var ret2 = getprop("payload/virtual/weight[8]/selected") == "R-60" ? 8 : 4;
-		return [ret1,ret2,knobpos];
-	} elsif ( knobpos == 6 ) {
-		return [1,3,knobpos];
-	} elsif ( knobpos == 7 ) {
-		return [1,-1,knobpos];
-	} elsif ( knobpos == 8 ) {
-		return [3,-1,knobpos];
-	} elsif ( knobpos == 9 ) {
-		return getprop("payload/virtual/weight[7]/selected") == "R-60" ? [7,-1,knobpos] : [0,-1,knobpos];
-	} elsif ( knobpos == 10 ) {
-		return getprop("payload/virtual/weight[8]/selected") == "R-60" ? [8,-1,knobpos] : [4,-1,knobpos];
-	}
-}
-
 
 var main_init = func {
   setprop("sim/time/elapsed-at-init-sec", getprop("sim/time/elapsed-sec"));

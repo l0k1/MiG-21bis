@@ -112,7 +112,7 @@
 					</item>
 				</menu>
 				<menu n="101">
-					<label>FDM Tuning</label>
+					<label>Debug</label>
 					<item>
 						<label>Tune Drag</label>
 						<binding>
@@ -155,7 +155,20 @@
 							<script>dialog.tuner_yaw_dialog.open()</script>
 						</binding>
 					</item>
-				</menu>
+					<item>
+						<name>a-submenu</name>
+						<enabled>false</enabled>
+					</item>
+					<item>
+						<label>Dump Prop Tree</label>
+						<binding>
+							<command>nasal</command><![CDATA[some stuff]]>
+							<script>
+								io.write_properties( path: getprop("/sim/fg-home") ~ "/Export/MiG-21bis/prop_tree_dump.xml", prop: "/" );
+							</script>
+						</binding>
+					</item>
+				</menu>			
 			</default>
 		</menubar>
 
