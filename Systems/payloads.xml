@@ -435,6 +435,244 @@
 			</test>
 		</switch>
 		
-	</channel> 
+	</channel>
+	
+	<channel name="pylon-heating" execrate="12">
+	
+		<!-- pylon 0 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[0]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[0]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[0]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[0]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[0]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[0]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.000333</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+							</product>
+						</pow>
+					</product>
+				</sum>	
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[0]</output>
+		</fcs_function>
+		
+		<!-- pylon 1 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[1]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[1]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[1]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[1]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[1]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[1]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.000333</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+							</product>
+						</pow>
+					</product>
+				</sum>	
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[1]</output>
+		</fcs_function>
+		
+		<!-- pylon 2 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[2]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[2]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[2]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[2]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[2]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[2]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.000333</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+							</product>
+						</pow>
+					</product>
+				</sum>	
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[2]</output>
+		</fcs_function>
+		
+		<!-- pylon 3 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[3]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[3]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[3]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[3]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[3]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[3]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.000333</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+							</product>
+						</pow>
+					</product>
+				</sum>	
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[3]</output>
+		</fcs_function>
+		
+		<!-- pylon 4 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[4]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[4]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[4]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[4]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[4]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[4]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.000333</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+							</product>
+						</pow>
+					</product>
+				</sum>	
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[4]</output>
+		</fcs_function>
+		
+		<!-- pylon 5 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[5]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[5]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[5]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[5]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[5]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[5]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.000333</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+							</product>
+						</pow>
+					</product>
+				</sum>	
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[5]</output>
+		</fcs_function>
+		
+	</channel>
 
 </system>
