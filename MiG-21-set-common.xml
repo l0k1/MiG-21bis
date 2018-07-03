@@ -8,7 +8,7 @@
 	<c type="float">0</c>-->
 	<sim>
 		
-		<status>v0.2.1</status>
+		<status>v0.2.2</status>
 		
 		<submodels>
 			<serviceable type="bool">true</serviceable>
