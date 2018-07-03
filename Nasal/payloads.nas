@@ -46,6 +46,12 @@ var pos_arm = {
 		m.brevity = brevity;
 		m.weight = weight;
 		m.type = type;
+		m.type_norm = 1;
+		if ( type == "radar" ) {
+			m.type_norm = 2;
+		} else {
+			m.type_norm = 0;
+		}
 		m.ammo_count = ammo_count;
 		m.hit_max_distance = hit_max_distance;
 		m.guidance_func = guidance_func;
@@ -358,7 +364,9 @@ setlistener("controls/armament/panel/reload[0]", func { unjam(0); } );
 setlistener("controls/armament/panel/reload[1]", func { unjam(1); } );
 setlistener("controls/armament/panel/reload[2]", func { unjam(2); } );
 
-###########  listener for handling the trigger #########
+###########  trigger propogation  ###########
+
+var missile_firing_order = [[1,3,0,4],[3,1,0,4],[0,4,1,3],[4,1,3,0]];
 
 var pylon_select = func() {
 	#return array of active pylons
@@ -379,142 +387,98 @@ var pylon_select = func() {
 	#pylons go 3,1,2,4 left to right IRL
 	#pylons go 0,1,3,4 left to right internally
 
-	var knobpos = getprop("controls/armament/panel/pylon-knob");
-	if ( knobpos == 0 ) {
-		setprop("/controls/armament/rocket-setting",16);
-		return [1,3,knobpos];
-	} elsif ( knobpos == 1 ) {
-		setprop("/controls/armament/rocket-setting",8);
-		return [0,4,knobpos];
-	} elsif ( knobpos == 2 ) {
-		setprop("/controls/armament/rocket-setting",4);
-		return [0,3,knobpos];
-	} elsif ( knobpos == 3 ) {
-		return [1,3,knobpos];
-	} elsif ( knobpos == 4 ) {
-		return [0,4,knobpos];
-	} elsif ( knobpos == 5 ) {
-		var ret1 = getprop("payload/virtual/weight[7]/selected") == "R-60" ? 7 : 0;
-		var ret2 = getprop("payload/virtual/weight[8]/selected") == "R-60" ? 8 : 4;
-		return [ret1,ret2,knobpos];
-	} elsif ( knobpos == 6 ) {
-		return [1,3,knobpos];
-	} elsif ( knobpos == 7 ) {
-		return [1,-1,knobpos];
-	} elsif ( knobpos == 8 ) {
-		return [3,-1,knobpos];
-	} elsif ( knobpos == 9 ) {
-		return getprop("payload/virtual/weight[7]/selected") == "R-60" ? [7,-1,knobpos] : [0,-1,knobpos];
-	} elsif ( knobpos == 10 ) {
-		return getprop("payload/virtual/weight[8]/selected") == "R-60" ? [8,-1,knobpos] : [4,-1,knobpos];
-	}
-}
-
-var missile_release_listener = func {
-	var armSelect = pylon_select();
-
-	if (armSelect[0] < 7) {
-		var virtual0 = "/";
-	} else {
-		var virtual0 = "/virtual/";
-	}
-
-	if (armSelect[1] < 7) {
-		var virtual1 = "/";
-	} else {
-		var virtual1 = "/virtual/";
-	}
-
-	selected0 = payloads[getprop("payload" ~ virtual0 ~ "weight["~(armSelect[0])~"]/selected") ];
-	if ( armSelect[1] != -1 ) {
-		selected1 = payloads[getprop("payload" ~ virtual1 ~ "weight["~(armSelect[1])~"]/selected") ];
-	}
-	#print("in listener");
-	#print("armselect0: " ~ armSelect[0]);
-	#print("armselect1: " ~ armSelect[1]);
-	#print("armselect2: " ~ armSelect[2]);
-	#print("release prop: " ~ getprop("/fdm/jsbsim/systems/armament/release"));
-	if (getprop("/fdm/jsbsim/systems/armament/release") == 1 )  {
-		#print("selected0.name: " ~ selected0.name);
-		#print("selected0.type: " ~ selected0.type);
-		#print("iar_sar_switch: " ~ getprop(ir_sar_switch));
-
-
-		if (armSelect[2] >= 5 ) {
-			# missile launch logic
-			if ((selected0.type == "ir" and getprop(ir_sar_switch) == 0 ) or ( selected0.type == "radar" and getprop(ir_sar_switch) == 2 )) {
-				#print("armSelect[0]");
-				#print(selected0.name);
-				#print(getprop("payload/virtual/weight[7]/selected"));
-				missile_release(armSelect[0]);
-				#print("type2: " ~ selected0.type);
-			}
-			if ( armSelect[1] != -1 and selected1.name != "none") {
-				if ((selected1.type == "ir" and getprop(ir_sar_switch) == 0 ) or ( selected1.type == "radar" and getprop(ir_sar_switch) == 2 )) { #if is IR/Radar missile, and weapon selector is in missile range
-					settimer(func {
-						missile_release(armSelect[1]);
-						#print("type3: " ~ selected1.type);
-					}, 0.2);
-				}
-			}
-		}
-
-		if (armSelect[2] < 2  and getprop(ag_panel_switch) == 2 ) {
-			#bombs and/or multi-rockets
-			if (selected0.type == "bomb") {
-				bomb_release(armSelect[0]);
-			}
-			if ( armSelect[1] != -1 and selected1.name != "none") {
-				if (selected1.type == "bomb") {
-					bomb_release(armSelect[1]);
-				}
-			}
-		}
-
-		if (armSelect[2] == 2 and getprop(ag_panel_switch) == 2 ) {
-			#bombs
-			for ( i = 0; i <= 4; i = i + 1 ) {
-				if ( i != 2 and payloads[getprop("payload/weight["~i~"]/selected")].type == "bomb" ) {
-					bomb_release(i);
-				}
-			}
-		}
-
-		if (armSelect[2] <= 2 ){
-			setprop("/controls/armament/rocket-trigger",1);
-		}
-
-
-		if (armSelect[2] == 3 or armSelect[2] == 4) {
-			if (selected0.type == "heavyrocket" and getprop(ag_panel_switch) == 2 ) {
-				bomb_release(armSelect[0]);
-			}
-			if ( armSelect[1] != -1 and selected1.name != "none") {
-				if (selected1.type == "heavyrocket" and getprop(ag_panel_switch) == 2 ) {
-					settimer(func  {
-						bomb_release(armSelect[1]);
-					},0.1);
-				}
-			}
-
-			if (selected0.type == "beam" and getprop(ag_panel_switch) != 1 ) {
-				missile_release(armSelect[0]);
-			} elsif (selected0.type == "none" and selected1.type == "beam" and getprop(ag_panel_switch) != 1 ) {
-				missile_release(armselect[1]);
-			}
-		}
-		#print("type4: " ~ selected0.type);
-		#print("type5: " ~ selected1.type);
-	} else {
+	# missile preference is set by the IR/SAR switch
+	# missile order is determined by the armament selector knob
+	# 1: order is 1,2,3,4
+	# 2: order is 2,1,3,4
+	# 3: order is 3,4,1,2
+	# 4: order is 4,1,2,3
+	# if pylon is unpowered, skip it
+	# if pylon is powered but fails, don't skip it
+	
+	if ( getprop("/fdm/jsbsim/systems/armament/release") != 1 ) {
 		setprop("/controls/armament/rocket-trigger",0);
+	} else {
+	
+		var knobpos = getprop("controls/armament/panel/pylon-knob");
+		if ( knobpos == 0 ) {
+			setprop("/controls/armament/rocket-setting",16);
+			setprop("/controls/armament/rocket-trigger",1);
+			bomb_release(1,"bomb");
+			bomb_release(3,"bomb");
+		} elsif ( knobpos == 1 ) {
+			setprop("/controls/armament/rocket-setting",8);
+			setprop("/controls/armament/rocket-trigger",1);
+			bomb_release(0,"bomb");
+			bomb_release(4,"bomb");
+		} elsif ( knobpos == 2 ) {
+			setprop("/controls/armament/rocket-setting",4);
+			setprop("/controls/armament/rocket-trigger",1);
+			bomb_release(0,"bomb");
+			bomb_release(1,"bomb");
+			bomb_release(2,"bomb");
+			bomb_release(3,"bomb");
+			return [0,3,knobpos];
+		} elsif ( knobpos == 3 ) {
+			bomb_release(1,"heavyrocket");
+			settimer(func{
+				bomb_release(3,"heavyrocket");
+			},0.1);
+		} elsif ( knobpos == 4 ) {
+			bomb_release(0,"heavyrocket");
+			settimer(func{
+				bomb_release(4,"heavyrocket");
+			},0.1);
+		} elsif ( knobpos == 5 ) {
+			var ret1 = getprop("payload/virtual/weight[7]/selected") == "R-60" ? 7 : 0;
+			var ret2 = getprop("payload/virtual/weight[8]/selected") == "R-60" ? 8 : 4;		
+			missile_release(ret1);
+			settimer(func{
+				missile_release(ret2);
+			},0.1);
+		} elsif ( knobpos == 6 ) {
+			missile_release(1);
+			settimer(func{
+				missile_release(3);
+			},0.1);
+		} elsif ( knobpos >= 7 ) {
+			# missile_firing_order
+			var pylon_check = -1;
+			var pylon_select = -1;
+			var selected_type = 1; # 0 is IR, 2 is RGM
+			var virtual = "";
+			for(var i = 0; i <= 3; i = i + 1){
+				# get missile pylon
+				pylon_check = missile_firing_order[knobpos - 7][i];
+				
+				# check that the pylon is powered
+				if ( getprop("/fdm/jsbsim/electric/output/pwr-to-pylons",pylon_check) < 32 ) { continue; }
+				
+				#propogate out for our R-60's
+				if( pylon_check == 0 and getprop("payload/virtual/weight[7]/selected") == "R-60" ) { pylon_check = 7; }
+				if( pylon_check == 4 and getprop("payload/virtual/weight[8]/selected") == "R-60" ) { pylon_check = 8; }	
+				
+				virtual = pylon_check < 7 ? "/" : "/virtual/";
+				
+				if ( selected_type == 1 or 
+					 (selected_type != getprop(ir_sar_switch) and 
+					 payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm == getprop(ir_sar_switch)) ) {
+					 	pylon_select = pylon_check;
+					 	break;
+				} elsif ( selected_type == 1 and payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm != 1 ) {
+					pylon_select = pylon_check;
+					selected_type = payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm;
+				}
+			}
+			missile_release(pylon_select);
+		}
 	}
 }
+
+
 
 var heavy_release_listener = func {
-	var selected = getprop("payload/weight[2]/selected");
-	if ( payloads[selected].type = "heavy" ) {
-		bomb_release(2);
-	}
+	bomb_release(2,"heavy");
 }
 
 var missile_release = func(pylon) {
@@ -618,14 +582,14 @@ var missile_release = func(pylon) {
 	}
 }
 
-var bomb_release = func(pylon) {
+var bomb_release = func(pylon,type="bomb") {
 	if (pylon < 7) {
 		var virtual = "/";
 	} else {
 		var virtual = "/virtual/";
 	}
 	var selected = getprop("payload"~virtual~"weight[" ~ ( pylon ) ~ "]/selected");
-	if ( selected != "none" ) {
+	if ( payloads[selected].type == type ) {
 		#print("dropping bomb: " ~ payloads[selected].brevity ~ ": pylon " ~ pylon);
 		#print("selected: " ~ selected ~ "| pylon: " ~ pylon);
 		setprop("payload/released/"~selected~"["~pylon~"]",1);

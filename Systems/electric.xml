@@ -739,14 +739,28 @@
 			</test>
 		</switch>
 
-		<switch name="electric/output/pwr-to-pylons-1-2">
+		<switch name="electric/output/pwr-to-pylons[1]">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/pwr-to-pylons-1-2 == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/pwr-to-pylons[3]">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/pwr-to-pylons-1-2 == 1
 			</test>
 		</switch>
 
-		<switch name="electric/output/pwr-to-pylons-3-4">
+		<switch name="electric/output/pwr-to-pylons[0]">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/pwr-to-pylons-3-4 == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/pwr-to-pylons[4]">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[1]">
 				electric/switches/rvmsp/pwr-to-pylons-3-4 == 1
