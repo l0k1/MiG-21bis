@@ -368,7 +368,7 @@ setlistener("controls/armament/panel/reload[2]", func { unjam(2); } );
 
 var missile_firing_order = [[1,3,0,4],[3,1,0,4],[0,4,1,3],[4,1,3,0]];
 
-var pylon_select = func() {
+var trigger_propogation = func() {
 	#return array of active pylons
 	#returning -1 means no pylon selected
 
@@ -800,8 +800,8 @@ var main_init = func {
   }
 
   screen.log.write("Welcome to MiG-21bis!", 1.0, 0.2, 0.2);
-  setlistener("/fdm/jsbsim/systems/armament/release", missile_release_listener);
-  setlistener("fdm/jsbsim/systems/armament/heavy-release", heavy_release_listener);
+  setlistener("/fdm/jsbsim/systems/armament/release", trigger_propogation);
+  setlistener("/fdm/jsbsim/systems/armament/heavy-release", heavy_release_listener);
 
   # setup impact listener
   setlistener("/ai/models/model-impact", impact_listener, 0, 0);
