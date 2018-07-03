@@ -65,8 +65,6 @@ var ir_seekTarget= func() {
 	settimer( func { ir_seekTarget(); }, 0.1);
 }
 
-ir_seekTarget();
-
 var lockTarget = func(c_most) {
 	radar_logic.selection = c_most;
 	radar_logic.radarLogic.paint(c_most.getNode(), TRUE);
@@ -241,6 +239,8 @@ var r27t1_guidance = func(input) {
 	}
 	return {};
 }
+
+ir_seekTarget();
 
 setlistener("controls/radar/power-panel/fixed-beam", func() {
 	if (getprop("controls/radar/power-panel/fixed-beam") == 1) {
