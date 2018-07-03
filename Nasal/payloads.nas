@@ -488,10 +488,9 @@ var missile_release = func(pylon) {
 	var selected = getprop("payload"~virtual~"weight["~(pylon)~"]/selected");
 	if(selected != "none") {
 		# check power
-		if ( getprop("/fdm/jsbsim/electric/output/pwr-to-pylons",pylon < 32 ) {	return;	}
+		if ( getprop("/fdm/jsbsim/electric/output/pwr-to-pylons",pylon) < 32 ) {	return;	}
 		# check temprature, will begin failing at 5*C and guaranteed failure at -5*c
 		if ( interp( getprop("/fdm/jsbsim/systems/armament/pylon-heating/pylon-temp",pylon), -5,0,5,1) < rand() ) { return;	}
-		systems/armament/pylon-heating/pylon-temp[5]
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on.
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
 			#missile locked, fire it.
@@ -842,6 +841,34 @@ var defeatSpamFilter = func (str) {
   spamList = newList;
 }
 
+var pylon_select = func() {
+	var knobpos = getprop("controls/armament/panel/pylon-knob");
+	if ( knobpos == 0 ) {
+		return [1,3,knobpos];
+	} elsif ( knobpos == 1 ) {
+		return [0,4,knobpos];
+	} elsif ( knobpos == 2 ) {
+		return [0,3,knobpos];
+	} elsif ( knobpos == 3 ) {
+		return [1,3,knobpos];
+	} elsif ( knobpos == 4 ) {
+		return [0,4,knobpos];
+	} elsif ( knobpos == 5 ) {
+		var ret1 = getprop("payload/virtual/weight[7]/selected") == "R-60" ? 7 : 0;
+		var ret2 = getprop("payload/virtual/weight[8]/selected") == "R-60" ? 8 : 4;
+		return [ret1,ret2,knobpos];
+	} elsif ( knobpos == 6 ) {
+		return [1,3,knobpos];
+	} elsif ( knobpos == 7 ) {
+		return [1,-1,knobpos];
+	} elsif ( knobpos == 8 ) {
+		return [3,-1,knobpos];
+	} elsif ( knobpos == 9 ) {
+		return getprop("payload/virtual/weight[7]/selected") == "R-60" ? [7,-1,knobpos] : [0,-1,knobpos];
+	} elsif ( knobpos == 10 ) {
+		return getprop("payload/virtual/weight[8]/selected") == "R-60" ? [8,-1,knobpos] : [4,-1,knobpos];
+	}
+}
 
 var spamLoop = func {
   var spam = pop(spamList);

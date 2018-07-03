@@ -8,6 +8,12 @@
 	<property value="0">systems/armament/GSh-23-trigger</property>
 	<property value="0">systems/armament/rockets/current-count-left</property>
 	<property value="0">systems/armament/rockets/current-count-right</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[0]</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[1]</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[2]</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[3]</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[4]</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[5]</property>
 
     <channel name="GSh-23">
 
@@ -468,8 +474,19 @@
 						<pow>
 							<value>2.71828</value>
 							<product>
-								<value>-0.000333</value><!-- this value is the magic -->
+								<value>-0.00166</value><!-- this value is the magic -->
 								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
 							</product>
 						</pow>
 					</product>
@@ -507,8 +524,19 @@
 						<pow>
 							<value>2.71828</value>
 							<product>
-								<value>-0.000333</value><!-- this value is the magic -->
+								<value>-0.00166</value><!-- this value is the magic -->
 								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
 							</product>
 						</pow>
 					</product>
@@ -546,8 +574,19 @@
 						<pow>
 							<value>2.71828</value>
 							<product>
-								<value>-0.000333</value><!-- this value is the magic -->
+								<value>-0.00166</value><!-- this value is the magic -->
 								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
 							</product>
 						</pow>
 					</product>
@@ -585,8 +624,19 @@
 						<pow>
 							<value>2.71828</value>
 							<product>
-								<value>-0.000333</value><!-- this value is the magic -->
+								<value>-0.00166</value><!-- this value is the magic -->
 								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
 							</product>
 						</pow>
 					</product>
@@ -624,8 +674,19 @@
 						<pow>
 							<value>2.71828</value>
 							<product>
-								<value>-0.000333</value><!-- this value is the magic -->
+								<value>-0.00166</value><!-- this value is the magic -->
 								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
 							</product>
 						</pow>
 					</product>
@@ -663,12 +724,23 @@
 						<pow>
 							<value>2.71828</value>
 							<product>
-								<value>-0.000333</value><!-- this value is the magic -->
+								<value>-0.00166</value><!-- this value is the magic -->
 								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
 							</product>
 						</pow>
 					</product>
-				</sum>	
+				</sum>
 			</function>
 			<output>systems/armament/pylon-heating/pylon-temp[5]</output>
 		</fcs_function>
