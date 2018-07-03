@@ -682,7 +682,7 @@ var impact_listener = func {
 				}
 			}
 		}elsif (payloads[typeOrdName] != nil and ( payloads[typeOrdName].type == "bomb" or payloads[typeOrdName].type == "heavy" or payloads[typeOrdName].type == "heavyrocket" ))  {
-      print("a bomb dropped");
+      #print("a bomb dropped");
       foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
 				#var mlat = mp.getNode("position/latitude-deg").getValue();
 				#var mlon = mp.getNode("position/longitude-deg").getValue();
