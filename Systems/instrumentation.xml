@@ -50,7 +50,7 @@ clock
             <function>
                 <ifthen>
                     <gt>
-                        <property>electric/buses/bus[2]</property>
+                        <property>electric/output/rad-alt</property>
                         <value>107</value>
                     </gt>
                     <quotient>
@@ -83,7 +83,7 @@ clock
                 	</gt>
                 	<quotient>
                     	<difference>
-                    	    <property>electric/buses/bus[2]</property>
+                    	    <property>electric/output/rad-alt</property>
                     	    <value>107</value>
                     	</difference>
                     	<value>8</value>
