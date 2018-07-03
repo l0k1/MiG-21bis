@@ -475,8 +475,6 @@ var trigger_propogation = func() {
 	}
 }
 
-
-
 var heavy_release_listener = func {
 	bomb_release(2,"heavy");
 }
@@ -488,21 +486,13 @@ var missile_release = func(pylon) {
 		var virtual = "/virtual/";
 	}
 	var selected = getprop("payload"~virtual~"weight["~(pylon)~"]/selected");
-	#print("virtual: " ~ virtual);
-	#print("gettie: " ~ getprop("payload"~virtual~"weight["~(pylon)~"]/selected"));
 	if(selected != "none") {
-		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on. The gear check is prevent missiles from firing when changing airport location.
-		#if (armament.AIM.active[pylon] != nil ) {
-		#	print("not nil");
-		#} else {
-		#	print("is nil");
-		#}
-		#print("status: " ~ armament.AIM.active[pylon].status);
-		#if (radar_logic.selection != nil){
-		#	print('selection: not nil');
-		#} else {
-		#	print('slection: nil');
-		#}
+		# check power
+		if ( getprop("/fdm/jsbsim/electric/output/pwr-to-pylons",pylon < 32 ) {	return;	}
+		# check temprature, will begin failing at 5*C and guaranteed failure at -5*c
+		if ( interp( getprop("/fdm/jsbsim/systems/armament/pylon-heating/pylon-temp",pylon), -5,0,5,1) < rand() ) { return;	}
+		systems/armament/pylon-heating/pylon-temp[5]
+		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on.
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
 			#missile locked, fire it.
 

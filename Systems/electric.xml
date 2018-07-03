@@ -74,10 +74,10 @@
 	<property value="0">electric/switches/rvmsp/fds</property>
 	<property value="0">electric/switches/rvmsp/afcs</property>
 	<property value="0">electric/switches/rvmsp/afcs-pitch</property>
-	<property value="0">electric/switches/rvmsp/msl-rgm-gr-heat</property>
+	<property value="1">electric/switches/rvmsp/msl-rgm-gr-heat</property>
 	<property value="0">electric/switches/rvmsp/msl-rgm-rkt-lch</property>
-	<property value="0">electric/switches/rvmsp/pwr-to-pylons-1-2</property>
-	<property value="0">electric/switches/rvmsp/pwr-to-pylons-3-4</property>
+	<property value="1">electric/switches/rvmsp/pwr-to-pylons-1-2</property>
+	<property value="1">electric/switches/rvmsp/pwr-to-pylons-3-4</property>
 	<property value="1">electric/switches/rvmsp/gun</property>
 	<property value="1">electric/switches/rvmsp/gunsight</property>
 	<property value="0">electric/switches/rvmsp/guncam</property>
