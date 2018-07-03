@@ -49,7 +49,7 @@ var pos_arm = {
 		m.type_norm = 1;
 		if ( type == "radar" ) {
 			m.type_norm = 2;
-		} else {
+		} elsif (type == "ir" ) {
 			m.type_norm = 0;
 		}
 		m.ammo_count = ammo_count;
@@ -276,13 +276,10 @@ var update_loop = func {
 			var payloadName = getprop("/payload/virtual/weight[" ~ i ~ "]/selected");
 		}
 		if ( armament.AIM.active[i] != nil ) {
-			if ( armSelect[0] != i and armSelect[1] != i and armament.AIM.active[i].status != MISSILE_FLYING ) {
+			if ( armament.AIM.active[i].status != MISSILE_STANDBY and armament.AIM.active[i] != MISSILE_FLYING and payloadName == "none" ) {
 				#print("setting pylon " ~ i ~ " to standby");
 				armament.AIM.active[i].stop();
-			} elsif ( armament.AIM.active[i].status != MISSILE_STANDBY and armament.AIM.active[i] != MISSILE_FLYING and payloadName == "none" ) {
-				#print("setting pylon " ~ i ~ " to standby");
-				armament.AIM.active[i].stop();
-			} elsif ( (armSelect[0] == i or armSelect[1] == i ) and armament.AIM.active[i].status == MISSILE_STANDBY ) {
+			} elsif ( armament.AIM.active[i].status == MISSILE_STANDBY ) {
 				#print("missile " ~i~ " should be searching.");
 				armament.AIM.active[i].start();
 			}
@@ -443,6 +440,11 @@ var trigger_propogation = func() {
 			},0.1);
 		} elsif ( knobpos >= 7 ) {
 			# missile_firing_order
+			#
+			# issues
+			# if ir/sar is not set, pick first missile
+			# check virtual pylons
+			#
 			var pylon_check = -1;
 			var pylon_select = -1;
 			var selected_type = 1; # 0 is IR, 2 is RGM
@@ -456,13 +458,12 @@ var trigger_propogation = func() {
 				
 				#propogate out for our R-60's
 				if( pylon_check == 0 and getprop("payload/virtual/weight[7]/selected") == "R-60" ) { pylon_check = 7; }
-				if( pylon_check == 4 and getprop("payload/virtual/weight[8]/selected") == "R-60" ) { pylon_check = 8; }	
+				if( pylon_check == 4 and getprop("payload/virtual/weight[8]/selected") == "R-60" ) { pylon_check = 8; }
+				#print("loop: " ~ i ~ ":pylon:" ~ pylon_check~":type:"~selected_type);
 				
 				virtual = pylon_check < 7 ? "/" : "/virtual/";
 				
-				if ( selected_type == 1 or 
-					 (selected_type != getprop(ir_sar_switch) and 
-					 payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm == getprop(ir_sar_switch)) ) {
+				if ( (getprop(ir_sar_switch) == 1 and payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm != 1 ) or (selected_type != getprop(ir_sar_switch) and payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm == getprop(ir_sar_switch)) ) {
 					 	pylon_select = pylon_check;
 					 	break;
 				} elsif ( selected_type == 1 and payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm != 1 ) {
@@ -470,7 +471,9 @@ var trigger_propogation = func() {
 					selected_type = payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm;
 				}
 			}
-			missile_release(pylon_select);
+			if (pylon_select != -1 ) {
+				missile_release(pylon_select);
+			}
 		}
 	}
 }
@@ -485,12 +488,19 @@ var missile_release = func(pylon) {
 	} else {
 		var virtual = "/virtual/";
 	}
+	var t_p = pylon;		
+	if (pylon == 7) {
+		t_p = 0;
+	} elsif ( pylon == 8 ) {
+		t_p = 4;
+	}
+	#print(pylon);
 	var selected = getprop("payload"~virtual~"weight["~(pylon)~"]/selected");
 	if(selected != "none") {
 		# check power
-		if ( getprop("/fdm/jsbsim/electric/output/pwr-to-pylons",pylon) < 32 ) {	return;	}
+		if ( getprop("/fdm/jsbsim/electric/output/pwr-to-pylons",t_p) < 32 ) { return; }
 		# check temprature, will begin failing at 5*C and guaranteed failure at -5*c
-		if ( interp( getprop("/fdm/jsbsim/systems/armament/pylon-heating/pylon-temp",pylon), -5,0,5,1) < rand() ) { return;	}
+		if ( interp( getprop("/fdm/jsbsim/systems/armament/pylon-heating/pylon-temp",t_p), -5,0,5,1) < rand() ) { return;	}
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on.
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
 			#missile locked, fire it.
