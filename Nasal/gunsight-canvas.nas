@@ -347,6 +347,7 @@ var gun_sight = {
 		me.pipper_move();
 		settimer(func { me.update(); }, 0);
 	},
+
 	fixed_net_power: func() {
 		if ( getprop(fixednetswitch) == 1 and getprop(gunsight_power) > 33 ) {
 			for (var i = 0; i < size(me.gschild); i += 1 ) {
@@ -385,8 +386,8 @@ var gun_sight = {
 		var pip_cen_x = me.pipper_center[0]; # + getprop("aax"); #use aax and aay for manual testing
 		var pip_cen_y = me.pipper_center[1]; # + getprop("aay");
 		
-		var pipper_adjust_x = 0;
-		var pipper_adjust_y = 0;
+		var pipper_adjust_x = 0; # in degrees
+		var pipper_adjust_y = 0; # in degrees
 		
 		#center element ghosting
 		var ghost_x = -1 * (startViewX-getprop(viewX))*getprop(ghosting_x);
@@ -399,33 +400,6 @@ var gun_sight = {
 		var range = 10000; #decrease me for more accuracy.
 		
 		#calculate range and pipper location
-		
-		################## FIXED BEAM ##################
-		if ( getprop(ir_sar_switch) != 0 and getprop("controls/radar/power-panel/fixed-beam") == 1 and getprop(air_gnd_switch) == 0) {
-			
-			# lock pipper to -1.5, get range from radar info
-			pipper_adjust_y = -1.5; 
-			
-		################## IR SEEKING ##################
-
-		} elsif ( getprop(ir_sar_switch) == 0 ) {
-			# IR won't calculate range, so putting it seperate from the auto-range functions.
-			# in theory, the pipper could "surround" the heat source, so letting the range thing slide for now.
-			var locked_target = radar_logic.selection;
-			if ( locked_target != nil ) {
-				var dist_rad = locked_target.get_polar();
-				#var x_ang = dist_rad[1] * R2D;
-				#var y_ang = dist_rad[2] * R2D;
-				range = dist_rad[0];
-				if ( getprop(gun_missile_switch) == 1 ) {
-					pipper_adjust_x = (dist_rad[1] * R2D);
-					pipper_adjust_y = (dist_rad[2] * R2D);
-					#pipper_adjust_x = getprop("/aax");
-					#pipper_adjust_y = getprop("/aay");
-				}
-				#print("x deg: " ~ (dist_rad[1] * R2D) ~ " |y deg: " ~ (dist_rad[2] * R2D) ~ " |adjust x: " ~ math.cos(getprop("orientation/roll-deg") * D2R) ~ " |adjust y: " ~ ( -1 * math.sin(getprop("orientation/roll-deg") * D2R)) ~ " |finalx: " ~ pipper_adjust_x ~ " |finaly: " ~ pipper_adjust_y);
-			}
-		}
 		
 		################## PIPPER SCALING ##################
 
