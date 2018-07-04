@@ -532,21 +532,3 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
 #  var hud_copilot = HUD.new({"node": "HUD.l.canvas.001"});
 #  hud_copilot.update();
 });
-
-
-
-########################### OTHER NOT-CANVAS, BUT STILL GUNSIGHT RELATED THINGS
-
-#get the current missile max launch range, and set it to a certain property
-var max_launch_range_finder = func() {
-	var cur_missile = getprop("payload/weight["~(payloads.pylon_select()[0])~"]/selected") ;
-	var min = getprop("payload/armament/" ~ cur_missile ~ "/min-fire-range-nm");
-	var max = getprop("payload/armament/" ~ cur_missile ~ "/max-fire-range-nm");
-	if ( min != nil ) {
-		setprop("instrumentation/gunsight/min-launch-range",min);
-	}
-	if ( max != nil ) {
-		setprop("instrumentation/gunsight/max-launch-range",max);
-	}
-	settimer( func { max_launch_range_finder(); }, 1);
-}
