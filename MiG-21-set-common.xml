@@ -593,6 +593,9 @@
 			<min-launch-range type="float">0</min-launch-range>
 			<max-launch-range type="float">0</max-launch-range>
 			<range-to-target type="float">0</range-to-target>
+			<ir-lock type="bool" n="0">0</ir-lock-left>
+			<ir-lock type="bool" n="1">0</ir-lock-right>
+			<ir-lock type="bool" n="2">0</ir-lock-new>
 		</gunsight>
 		<fuel>
 			<knob-level type="float">0</knob-level>
