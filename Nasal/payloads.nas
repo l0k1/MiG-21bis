@@ -250,7 +250,7 @@ var missile_arming_loop = func() {
 				print("setting pylon " ~ i ~ " to standby");
 				armament.AIM.active[i].stop();
 			} elsif ( armament.AIM.active[i].status == MISSILE_STANDBY ) {
-				print("missile " ~i~ " should be searching.");
+				#print("missile " ~i~ " should be searching.");
 				armament.AIM.active[i].start();
 			}
 		}
