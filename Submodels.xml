@@ -131,11 +131,11 @@
         <repeat>true</repeat>
         <delay>0.1665</delay>
         <count>25</count>
-        <x-offset>20.0</x-offset>
-        <y-offset>-1.0</y-offset>
-        <z-offset>-2.0</z-offset>
+        <x-offset>-9.17880</x-offset>
+        <y-offset>-0.16217</y-offset>
+        <z-offset>-1.28799</z-offset>
         <yaw-offset>0.0</yaw-offset>
-        <pitch-offset>1.0</pitch-offset>
+        <pitch-offset>0.8</pitch-offset>
         <life>3.0</life>
         <wind>false</wind>
         <weight>0.1069</weight>
@@ -151,10 +151,10 @@
         <repeat>true</repeat>
         <delay>0.0333</delay>
         <count>125</count>
-        <x-offset> 20.0</x-offset>
-        <y-offset> -1.0</y-offset>
-        <z-offset> -2.0</z-offset>
-        <pitch-offset>1.0</pitch-offset>
+        <x-offset>-9.17880</x-offset>
+        <y-offset>-0.16217</y-offset>
+        <z-offset>-1.28799</z-offset>
+        <pitch-offset>0.8</pitch-offset>
         <life>10.0</life>
         <wind>false</wind>
         <weight>0.1069</weight>
@@ -175,11 +175,11 @@
         <repeat>true</repeat>
         <delay>0.1665</delay>
         <count>25</count>
-        <x-offset>20.0</x-offset>
-        <y-offset>1.0</y-offset>
-        <z-offset>-2.0</z-offset>
+        <x-offset>-9.17880</x-offset>
+        <y-offset> 0.16217</y-offset>
+        <z-offset>-1.28799</z-offset>
         <yaw-offset>0.0</yaw-offset>
-        <pitch-offset>1.0</pitch-offset>
+        <pitch-offset>0.8</pitch-offset>
         <life>3.0</life>
         <wind>false</wind>
         <weight>0.1069</weight>
@@ -195,10 +195,10 @@
         <repeat>true</repeat>
         <delay>0.0333</delay>
         <count>125</count>
-        <x-offset> 20.0</x-offset>
-        <y-offset>  1.0</y-offset>
-        <z-offset> -2.0</z-offset>
-        <pitch-offset>1.0</pitch-offset>
+        <x-offset>-9.17880</x-offset>
+        <y-offset> 0.16217</y-offset>
+        <z-offset>-1.28799</z-offset>
+        <pitch-offset>0.8</pitch-offset>
         <life>10.0</life>
         <wind>false</wind>
         <weight>0.1069</weight>
