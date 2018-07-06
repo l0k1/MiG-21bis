@@ -67,6 +67,10 @@ var payloads = {
 	#regarding hit distance, the GSh-23 is coded as 35m seperately in this file
 	"none":					pos_arm.new("none","none",0,"none"),
 	# ir missiles
+	"RS-2US":				pos_arm.new("RS-2US","RS-2US",182,"ir"),
+	"R-55S":				pos_arm.new("R-55S","R-55S",199,"ir"),
+	"R-3S":					pos_arm.new("R-3S","R-3S",165,"ir"),
+	"R-13M":				pos_arm.new("R-13M","R-13M",194,"ir"),
 	"R-60":					pos_arm.new("R-60","R-60",96,"ir"),
 	"R-60x2":				pos_arm.new("R-60","R-60",96,"ir",,2),
 	"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir",,,arm_locking.r27t1_guidance),
