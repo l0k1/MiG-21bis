@@ -5123,7 +5123,7 @@ refs 4
 52 0.800939 0.273655
 kids 0
 OBJECT poly
-name "radarLockLight"
+name "newIRLockLight"
 data 10
 Sphere.010
 crease 35.0
@@ -5410,7 +5410,7 @@ refs 3
 36 0.132191 0.687515
 kids 0
 OBJECT poly
-name "radarLockLightHouse"
+name "newIRLockLightHouse"
 data 12
 Cylinder.191
 crease 75.0
