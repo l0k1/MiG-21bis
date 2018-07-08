@@ -338,7 +338,9 @@ var gun_sight = {
 											m.pipper_move();});
 		setlistener(viewY,func { m.fixednet_updateXY();
 											m.pipper_move();});
-		
+
+		m.gyro = gunsight_logic.pipper_gyro.new();
+		m.gyro.gunGyroMain();
 		m.update();
 	},
 	update: func() {
@@ -403,7 +405,6 @@ var gun_sight = {
 		
 		################## PIPPER SCALING ##################
 
-
 		if ( getprop(pipperautomanual) == 0 ) {
 			#calculate pipper scale based on range value (i.e. automatically)
 			#currently assuming a width of 15m, need to fix when the correct instrument is implemented.
@@ -450,8 +451,11 @@ var gun_sight = {
 		#translate center to proper position
 		# ^ if that works, we can easily do a clamp to set the max amount of movement based on the gyro/miss switch
 		
-		pipper_adjust_x = pipper_adjust_x / pipper_translation_degree_per_pixel;
-		pipper_adjust_y = -1 * pipper_adjust_y / pipper_translation_degree_per_pixel;
+		#pipper_adjust_x = pipper_adjust_x / pipper_translation_degree_per_pixel;
+		#pipper_adjust_y = -1 * pipper_adjust_y / pipper_translation_degree_per_pixel;
+
+		pipper_adjust_x = (me.gyro.getAzimuth() * 0.05625) / pipper_translation_degree_per_pixel;
+		pipper_adjust_y = (me.gyro.getElevation() * 0.05625) / pipper_translation_degree_per_pixel;
 		
 		me.pDx = pipper_adjust_x;
 		me.pDy = pipper_adjust_y;

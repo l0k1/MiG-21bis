@@ -902,6 +902,7 @@
 		<arm_locking>		<file>Aircraft/MiG-21bis/Nasal/armament-locking.nas</file>	</arm_locking>		<!-- radar locks and missile in-flight logic -->
 		<radar_canvas>		<file>Aircraft/MiG-21bis/Nasal/radar-canvas.nas</file>		</radar_canvas>		<!-- radar canvas -->
 		<payloads>			<file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>			</payloads>			<!-- store handling -->
+		<gunsight_logic>	<file>Aircraft/MiG-21bis/Nasal/gunsight-logic.nas</file>	</gunsight_logic>	<!-- gunsight logic -->
 		<gunsight_canvas>	<file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>	</gunsight_canvas>	<!-- gunsight canvas -->
 		<blackout>			<file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>			</blackout>			<!-- legacy blackout code -->
 		<damage>			<file>Aircraft/MiG-21bis/Nasal/damage.nas</file>			</damage>			<!-- oprf damage code -->
