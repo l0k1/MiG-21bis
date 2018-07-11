@@ -73,7 +73,7 @@ var lockTarget = func(c_most,mode) {
 	#print("locked target");
 }
 
-var lock_mode = "none"
+var lock_mode = "none";
 
 var unlockTarget = func() {
 	if ( radar_logic.selection != nil ) {

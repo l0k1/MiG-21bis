@@ -46,7 +46,6 @@ var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 var FALSE = 0;
 var TRUE  = 1;
 
-
 var gun_sight = {
 	
 	
@@ -315,7 +314,7 @@ var gun_sight = {
 			.setTranslation(441,583)
 			.setRotation(315 * D2R,0));
 			
-		m.pipper_center = [500,509];
+		m.pipper_center = [500,360];
 			
 		setlistener(pipperpowerswitch, func { m.pipper_power(); } );
 		setlistener(pipperscale, func { m.pipper_move(); } );
@@ -340,7 +339,7 @@ var gun_sight = {
 											m.pipper_move();});
 
 		m.gyro = gunsight_logic.AFALCOS.new();
-		m.gyro.gyroTimer.start();
+		return m;
 	},
 	update: func() {
 		me.pipper_power();
@@ -384,8 +383,8 @@ var gun_sight = {
 	
 	pipper_move: func() {
 		#get current center coords
-		var pip_cen_x = me.pipper_center[0]; # + getprop("aax"); #use aax and aay for manual testing
-		var pip_cen_y = me.pipper_center[1]; # + getprop("aay");
+		var pip_cen_x = me.pipper_center[0];# + getprop("aax"); #use aax and aay for manual testing
+		var pip_cen_y = me.pipper_center[1];# + getprop("aay");
 		
 		var pipper_adjust_x = 0; # in degrees
 		var pipper_adjust_y = 0; # in degrees
@@ -415,7 +414,7 @@ var gun_sight = {
 				me.pipper_elems[i].setTranslation(pip_cen_x + scale * math.cos(angle), pip_cen_y + -1 * scale * math.sin(angle));
 			}
 		}
-		setprop("instrumentation/gunsight/range-to-target",range);
+		#setprop("instrumentation/gunsight/range-to-target",range);
 	},
 	
 	

@@ -1,20 +1,29 @@
 # AFALCOS - lead computing optical sight
 
+var MIL2DEG =  0.05625;
+var DEG2MIL = 17.77778;
+
 var AFALCOS = {
     new: func() {
         var m = {parents: [AFALCOS]};
 
         m.GA = 0.8 * D2R;   # gun angle in radians down from x axis(?)
         m.VM = 2350.0;   # muzzle speed in feet per second
-        m.DT = 0.1;   # integration step size in seconds (loop update rate)
+        m.DT = 0.05;   # integration step size in seconds (loop update rate)
+        m.GAIN = 1.2; #sight sensitivity parameter - 0.8 nominally
+        m.HUDY = 0; # sorta educated guess: y distance from gun to hud
+        m.HUDZ = 4.69; # sorta educated guess: z distance from gun to hud
+
+        m.maxAz = 5; # in degrees
+        m.maxEl = 5; # in degrees
         
         m.gyroTimer = maketimer(m.DT,func(){m.update();});
         
         # properties
         # p, q, r are body angular rates in radians per second
-        m.AX = 0;   # aircraft accelerations in ft/sec^2
-        m.AY = 0;
-        m.AZ = 0;
+        m.AX = props.globals.getNode("/accelerations/pilot/x-accel-fps_sec");   # aircraft accelerations in ft/sec^2
+        m.AY = props.globals.getNode("/accelerations/pilot/y-accel-fps_sec");
+        m.AZ = props.globals.getNode("/accelerations/pilot/z-accel-fps_sec");
         m.P =  props.globals.getNode("/orientation/p-body");
         m.Q =  props.globals.getNode("/orientation/q-body");
         m.R =  props.globals.getNode("/orientation/r-body");
@@ -28,6 +37,8 @@ var AFALCOS = {
         m.VA = 0;   # aircraft speed in ft/sec
         m.ALA = 0;
         m.ELA = 0;
+        m.ALAH = 0;
+        m.ELAH = 0;
         m.T = 0;        
         m.rangeRateArray = std.Vector.new([0,0,0,0]);
         me.oldRange = 0;
@@ -35,6 +46,8 @@ var AFALCOS = {
         m.D = 0;    # range to target in feet
         
         m.gyroTimer.start(); # should be moved into a better control loop later
+
+        return m;
     },
     
     update: func() {
@@ -45,12 +58,14 @@ var AFALCOS = {
         
         me.VA = 1.68781 * (661.47 * me.mach.getValue() * math.sqrt((me.ambientTemprature.getValue() + 273.15) / 288.15)); # true airspeed in feet
         
-        if (me.HA.getValue(); > 36000) {
+        if (me.HA.getValue() > 36000) {
             me.DH = HA.getValue() - 36000;
             me.RHO = math.pow((0.018828 + (0.039227E-10 * me.DH - 0.043877E-5 ) * me.DH),2) * 2;
         } else {
             me.RHO = math.pow((0.034475 + (0.019213E-10 * me.HA.getValue() - 0.050381E-5 ) * me.HA.getValue()),2) * 2;
         }
+
+        me.D = me.D == 0 ? 1 : me.D;
         
         me.DRATIO = me.RHO / 0.00238;
         me.VP = me.VM + me.VA;
@@ -58,7 +73,10 @@ var AFALCOS = {
         me.VLS = me.D * me.KB * math.pow(me.VP,0.5) * me.DRATIO;
         me.VC = -me.DDOT;
         me.VOS = me.VM + me.VC - me.VLS;
-        me.VCM = math.pow(math.pow(me.VOS,2) - 4 * (me.VA - me.VC) * me.VLS,0.5);
+        #print("VOS: " ~ me.VOS ~ "|VA: " ~ me.VA ~ "|VC: " ~ me.VC ~ "|VLS: " ~ me.VLS);
+        me.VCMsub = math.pow(me.VOS,2) - 4 * (me.VA - me.VC) * me.VLS;
+        me.VCM = math.pow(math.abs(me.VCMsub),0.5);
+        me.VCM = me.VCMsub < 0 ? -me.VCM : me.VCM;
         me.RTF = 0.5 * (me.VOS + me.VCM) / me.D;
         me.TF = 1.0 / me.RTF;   #TF is bullet time of flight
         me.VF = me.D / me.TF - me.VC;
@@ -69,27 +87,30 @@ var AFALCOS = {
         me.GAL = me.AL - me.GA; # GAL is the gun angle of attack
         me.C6 = me.D + me.DDOT + me.TF;
         me.C7 = me.TF * me.D * me.P.getValue() / 2.0 / me.C6;
+        #print("TF: " ~ me.TF ~ "|D: " ~ me.D ~ "|P: " ~ me.P.getValue() ~ "|C6: " ~ me.C6);
         me.C1 = me.VF / me.C6;
         me.C2 = me.JV * me.VA / me.C6;
         me.C3 = me.TF / 2.0 / me.C6;
-        me.BXAN2 = -me.B1 * me.AZ + me.AX * me.B3;
-        me.BXAN3 = me.B1 * me.AY - me.AX * me.B2;
+        me.BXAN2 = -me.B1 * me.AZ.getValue() + me.AX.getValue() * me.B3;
+        me.BXAN3 = me.B1 * me.AY.getValue() - me.AX.getValue() * me.B2;
         me.SL1 = me.B1 + me.B2 * me.ALA - me.B3 * me.ELA; ### SL is sight line unit vector
         me.SL2 = me.B2 - me.B1 * me.ALA;
         me.SL3 = me.B3 + me.B1 * me.ELA;
         me.W2 = -me.C1 * me.ELA - me.C2 * me.GAL + me.C3 * 
-                (me.BXAN2 - (me.AY * me.ELA + me.AZ * me.ALA) * me.B2 +
-                (me.AX * me.B1 + me.AY * me.B2 + me.AZ * me.B3) * me.ELA);
+                (me.BXAN2 - (me.AY.getValue() * me.ELA + me.AZ.getValue() * me.ALA) * me.B2 +
+                (me.AX.getValue() * me.B1 + me.AY.getValue() * me.B2 + me.AZ.getValue() * me.B3) * me.ELA);
         me.W3 = -me.C1 * me.ALA + me.C3 * 
-                (me.BXAN3 - (me.AY * me.ELA + me.AZ * me.ALA) * me.B3 +
-                (me.AX * me.B1 + me.AY * me.B2 + me.AZ * me.B3) * me.ALA);
+                (me.BXAN3 - (me.AY.getValue() * me.ELA + me.AZ.getValue() * me.ALA) * me.B3 +
+                (me.AX.getValue() * me.B1 + me.AY.getValue() * me.B2 + me.AZ.getValue() * me.B3) * me.ALA);
         me.W2 = me.W2 + (-me.SL1 * me.SL3 + me.C7 * me.SL3) * me.P.getValue() + 
                 (1.0 - math.pow(me.SL2,2)) * me.Q.getValue() - 
                 (me.SL2 * me.SL3 + me.C7 * me.SL1) * me.R.getValue();
         me.W3 = me.W3 - (me.SL1 * me.SL3 + me.C7 * me.SL2) * me.P.getValue() + 
                 (-me.SL2 * me.SL3 + me.C7 * me.SL1) * me.Q.getValue() + 
                 (1.0 - math.pow(me.SL3,2)) * me.R.getValue();
+        #print("C7: " ~ me.C7 ~ "|SL1: " ~ me.SL1);
         me.C5 =  me.C7 * me.SL1;
+        #print("SL2: " ~ me.SL2 ~ "|SL3: " ~ me.SL3 ~ "|C5: " ~ me.C5);
         me.DET = 1.0 - math.pow(me.SL2,2) - math.pow(me.SL3,2) + math.pow(me.C5,2);
         me.AINVW2 = ((1.0 - math.pow(me.SL3,2)) * me.W2 + (me.SL2 * me.SL3 + me.C5) * me.W3) / me.DET;
         me.AINVW3 = ((me.SL2 * me.SL3 - me.C5) * me.W2 + (1.0 - math.pow(me.SL2,2)) * me.W3) / me.DET;
@@ -123,6 +144,8 @@ var AFALCOS = {
             # the 15 in (15 / 2) is the inputted diameter. this should be changed to the appropriate property once that instrument is implemented
             me.D = ((15 / 2) / math.tan((getprop(gunsight_canvas.pipperscale) * gunsight_canvas.pipper_scale_degree_per_pixel) * D2R / 2)) * M2FT;
         }
+
+        me.D = 2000;
             
     },
     
@@ -134,10 +157,10 @@ var AFALCOS = {
     },
     
     getAzimuth: func() {
-        return me.ALAH;
+        return math.clamp(me.ALAH,-me.maxAz * DEG2MIL, me.maxAz * DEG2MIL);
     },
     
     getElevation: func() {
-        return me.ELAH;
+        return math.clamp(-me.ELAH,-me.maxEl * DEG2MIL, me.maxEl * DEG2MIL);
     },
 }
