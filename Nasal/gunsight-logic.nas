@@ -102,7 +102,6 @@ var AFALCOS = {
         me.ALAB = me.B1 * me.ALA;
         me.ELAH = -(me.ELA - me.HUDZ / (me.VF * me.TF) + me.GA) * 1000; # hud EL in mils
         me.ALAH = -(me.ALA - me.HUDY / (me.VF * me.TF)) * 1000;         # hud AZ in mils
-        settimer(func(){me.update();},me.DT);
     },
     
     updateRange: func() {
@@ -112,15 +111,17 @@ var AFALCOS = {
         # 2 - manual input
         
         # get range input from radar
-        if (radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
-            me.D = radar_logic.selection.get_polar()[0] * M2FT;
-            # we also need to update the pipper scaling
-			setprop(gunsight_canvas.pipperscale, math.clamp(((2 * (math.atan2(15,2*me.D))) * R2D) / gunsight_canvas.pipper_scale_degree_per_pixel,5,220));
+        if (getprop("/controls/armament/gunsight/auto-man-switch") == 0) {
+            if (radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
+                me.D = radar_logic.selection.get_polar()[0] * M2FT;
+                # we also need to update the pipper scaling
+    			setprop(gunsight_canvas.pipperscale, math.clamp(((2 * (math.atan2(15,2*me.D))) * R2D) / gunsight_canvas.pipper_scale_degree_per_pixel,5,220));
+            }
             
         # get range input from manual input, i.e. pipper scale and inputted diameter
         } else {
             # the 15 in (15 / 2) is the inputted diameter. this should be changed to the appropriate property once that instrument is implemented
-            me.D = (15 / 2) / math.tan((getprop(gunsight_canvas.pipperscale) * gunsight_canvas.pipper_scale_degree_per_pixel) * D2R / 2);
+            me.D = ((15 / 2) / math.tan((getprop(gunsight_canvas.pipperscale) * gunsight_canvas.pipper_scale_degree_per_pixel) * D2R / 2)) * M2FT;
         }
             
     },

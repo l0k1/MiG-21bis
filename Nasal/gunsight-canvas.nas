@@ -339,9 +339,8 @@ var gun_sight = {
 		setlistener(viewY,func { m.fixednet_updateXY();
 											m.pipper_move();});
 
-		m.gyro = gunsight_logic.pipper_gyro.new();
-		m.gyro.gunGyroMain();
-		m.update();
+		m.gyro = gunsight_logic.AFALCOS.new();
+		m.gyro.gyroTimer.start();
 	},
 	update: func() {
 		me.pipper_power();
@@ -391,71 +390,13 @@ var gun_sight = {
 		var pipper_adjust_x = 0; # in degrees
 		var pipper_adjust_y = 0; # in degrees
 		
-		#center element ghosting
+		# center element ghosting
 		var ghost_x = -1 * (startViewX-getprop(viewX))*getprop(ghosting_x);
 		var ghost_y = (startViewY-getprop(viewY))*getprop(ghosting_y);
-	
-		#calculate range to target
-		#if radar is on and locked, we can use that range. (auto)
-		#if radar is set to ground mode, we can calculate range ourselves (auto)
-		#otherwise, distance knob and pipper will be our friend. (manual)
-		var range = 10000; #decrease me for more accuracy.
-		
-		#calculate range and pipper location
-		
-		################## PIPPER SCALING ##################
 
-		if ( getprop(pipperautomanual) == 0 ) {
-			#calculate pipper scale based on range value (i.e. automatically)
-			#currently assuming a width of 15m, need to fix when the correct instrument is implemented.
-			var ang_diam = 2 * (math.atan2(15,2*range));
-			var scale = math.clamp((ang_diam * R2D) / pipper_scale_degree_per_pixel,5,220);
-			setprop(pipperscale, scale);
-			#print("range: " ~ range ~ " | angular diamater: " ~ (ang_diam * R2D) ~ " | scale: " ~  scale);
-		} else {
-			#calculate range based on pipperscale and inputted diameter.
-			#still assuming a width of 15m, still need to fix.
-			var scale = getprop(pipperscale);
-			var ang_diam = (scale * pipper_scale_degree_per_pixel) * D2R;
-			#print("ang_diam " ~ ang_diam);
-			range = (15 / 2) / math.tan(ang_diam / 2);
-			#print("range " ~ range);
-		}
-		
-		################## PIPPER GUN POSITION ##################
-
-		if ( getprop(gun_missile_switch) == 0 ) {
-			#gun pipper movement logic. need to do it after range has been calculated.
-			#2840 ft/sec if we are calculating for gun.
-			var airspeed = getprop("/velocities/airspeed-kt") * KT2MPS;
-			var b_speed = 3000 + airspeed; #projectile speed
-			var l_angle = 1;    #launch angle adjustment
-			if ( getprop(pipperangularcorrection) == 0 ) { 
-				#guns default until the knobbin gets installed
-				b_speed = (2350 * FT2M) + airspeed; 
-				l_angle = 1;
-			}
-			#adjust launch angle to account for aircraft roll
-			#assuming heading variation is 0, otherwise we will need to account for that.
-			#using angle of reach formula, hopefully this is accurate enough. adjusted for initial down pitch of -1.
-			#print("range: " ~ range ~ " | b_speed: " ~ b_speed);
-			angle_of_reach = l_angle + -1 * (0.5 * math.asin((9.81 * range) / math.pow(b_speed,2)) * R2D);
-			#adjust x,y for hud
-			pipper_adjust_x = -1 * angle_of_reach * math.sin(getprop("/orientation/roll-deg") * D2R);
-			pipper_adjust_y = angle_of_reach * math.cos(getprop("/orientation/roll-deg") * D2R);
-		}
-			
-	
-		################## PIPPER FINAL LOCATION CALCULATION ##################
-	
-		#translate center to proper position
-		# ^ if that works, we can easily do a clamp to set the max amount of movement based on the gyro/miss switch
-		
-		#pipper_adjust_x = pipper_adjust_x / pipper_translation_degree_per_pixel;
-		#pipper_adjust_y = -1 * pipper_adjust_y / pipper_translation_degree_per_pixel;
-
-		pipper_adjust_x = (me.gyro.getAzimuth() * 0.05625) / pipper_translation_degree_per_pixel;
-		pipper_adjust_y = (me.gyro.getElevation() * 0.05625) / pipper_translation_degree_per_pixel;
+		# movement due to gunsight gyro
+		var pipper_adjust_x = (me.gyro.getAzimuth() * 0.05625) / pipper_translation_degree_per_pixel;
+		var pipper_adjust_y = (me.gyro.getElevation() * 0.05625) / pipper_translation_degree_per_pixel;
 		
 		me.pDx = pipper_adjust_x;
 		me.pDy = pipper_adjust_y;
@@ -484,9 +425,6 @@ var gun_sight = {
 		var dG = me.getColor(greenpath);
 		var dA = getprop(fixed_net_alphapath);
 		var dAp = getprop(pipperbrightness);
-		#for (var i = 0; i < size(me.gschild); i += 1 ) {
-		#	me.gschild[i].setColor(dR,dG,dB,dA);
-		#}
 		me.gsight.setColor(dR,dG,dB,dA);
 		me.pipper.setColor(dR,dG,dB,dAp);
 	},
@@ -504,9 +442,6 @@ var gun_sight = {
 };
 
 var init = setlistener("/sim/signals/fdm-initialized", func() {
-  #print("inniting");
   removelistener(init); # only call once
   var gs = gun_sight.new({"node": "sight"});
-#  var hud_copilot = HUD.new({"node": "HUD.l.canvas.001"});
-#  hud_copilot.update();
 });
