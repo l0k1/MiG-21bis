@@ -28,7 +28,6 @@ var AFALCOS = {
         m.Q =  props.globals.getNode("/orientation/q-body");
         m.R =  props.globals.getNode("/orientation/r-body");
         m.HA = props.globals.getNode("/position/altitude-ft");
-        m.AL = 0;
         m.ALprop = props.globals.getNode("/orientation/alpha-deg");
         m.ambientTemprature = props.globals.getNode("/environment/temperature-degc");
         m.mach = props.globals.getNode("/velocities/mach");
@@ -39,11 +38,15 @@ var AFALCOS = {
         m.ELA = 0;
         m.ALAH = 0;
         m.ELAH = 0;
-        m.T = 0;        
+        m.AL = 0;
         m.rangeRateArray = std.Vector.new([0,0,0,0]);
         me.oldRange = 0;
         m.DDOT = 0; # delta of range to target in feet per second
         m.D = 0;    # range to target in feet
+        
+        m.GAINdamp = 1;
+        m.gyroDamage = [1,1,1];
+        m.gyroEnable = 1;
         
         m.gyroTimer.start(); # should be moved into a better control loop later
 
@@ -86,8 +89,8 @@ var AFALCOS = {
         me.B3 = math.sin(me.GA);
         me.GAL = me.AL - me.GA; # GAL is the gun angle of attack
         me.C6 = me.D + me.DDOT + me.TF;
-        me.C7 = me.TF * me.D * me.P.getValue() / 2.0 / me.C6;
-        #print("TF: " ~ me.TF ~ "|D: " ~ me.D ~ "|P: " ~ me.P.getValue() ~ "|C6: " ~ me.C6);
+        me.C7 = me.TF * me.D * me._getP() / 2.0 / me.C6;
+        #print("TF: " ~ me.TF ~ "|D: " ~ me.D ~ "|P: " ~ me._getP() ~ "|C6: " ~ me.C6);
         me.C1 = me.VF / me.C6;
         me.C2 = me.JV * me.VA / me.C6;
         me.C3 = me.TF / 2.0 / me.C6;
@@ -102,23 +105,22 @@ var AFALCOS = {
         me.W3 = -me.C1 * me.ALA + me.C3 * 
                 (me.BXAN3 - (me.AY.getValue() * me.ELA + me.AZ.getValue() * me.ALA) * me.B3 +
                 (me.AX.getValue() * me.B1 + me.AY.getValue() * me.B2 + me.AZ.getValue() * me.B3) * me.ALA);
-        me.W2 = me.W2 + (-me.SL1 * me.SL3 + me.C7 * me.SL3) * me.P.getValue() + 
-                (1.0 - math.pow(me.SL2,2)) * me.Q.getValue() - 
-                (me.SL2 * me.SL3 + me.C7 * me.SL1) * me.R.getValue();
-        me.W3 = me.W3 - (me.SL1 * me.SL3 + me.C7 * me.SL2) * me.P.getValue() + 
-                (-me.SL2 * me.SL3 + me.C7 * me.SL1) * me.Q.getValue() + 
-                (1.0 - math.pow(me.SL3,2)) * me.R.getValue();
+        me.W2 = me.W2 + (-me.SL1 * me.SL3 + me.C7 * me.SL3) * me._getP() + 
+                (1.0 - math.pow(me.SL2,2)) * me._getQ() - 
+                (me.SL2 * me.SL3 + me.C7 * me.SL1) * me._getR();
+        me.W3 = me.W3 - (me.SL1 * me.SL3 + me.C7 * me.SL2) * me._getP() + 
+                (-me.SL2 * me.SL3 + me.C7 * me.SL1) * me._getQ() + 
+                (1.0 - math.pow(me.SL3,2)) * me._getR();
         #print("C7: " ~ me.C7 ~ "|SL1: " ~ me.SL1);
         me.C5 =  me.C7 * me.SL1;
         #print("SL2: " ~ me.SL2 ~ "|SL3: " ~ me.SL3 ~ "|C5: " ~ me.C5);
         me.DET = 1.0 - math.pow(me.SL2,2) - math.pow(me.SL3,2) + math.pow(me.C5,2);
         me.AINVW2 = ((1.0 - math.pow(me.SL3,2)) * me.W2 + (me.SL2 * me.SL3 + me.C5) * me.W3) / me.DET;
         me.AINVW3 = ((me.SL2 * me.SL3 - me.C5) * me.W2 + (1.0 - math.pow(me.SL2,2)) * me.W3) / me.DET;
-        me.DELA = me.GAIN * me.AINVW2;
-        me.DALA = me.GAIN * me.AINVW3;
+        me.DELA = me.getGain() * me.AINVW2;
+        me.DALA = me.getGain() * me.AINVW3;
         me.ELA = me.ELA + me.DT * me.DELA;  #ELA and ALA are EL and AZ lead angle components w.r.t. gun
         me.ALA = me.ALA + me.DT * me.DALA;
-        me.T = me.T + me.DT;    # may not need this?
         me.ELAB = me.B1 * me.ELA;   # ELAB and ALAB are EL and AZ lead angles in body coordinates
         me.ALAB = me.B1 * me.ALA;
         me.ELAH = -(me.ELA - me.HUDZ / (me.VF * me.TF) + me.GA) * 1000; # hud EL in mils
@@ -162,5 +164,52 @@ var AFALCOS = {
     
     getElevation: func() {
         return math.clamp(-me.ELAH,-me.maxEl * DEG2MIL, me.maxEl * DEG2MIL);
+    },
+    
+    setGyroEnable: func(val) {
+        # 1 is enable, 0 is disable
+        me.gyroEnable = math.clamp(math.floor(val),0,1);;
+    },
+    
+    setGyroDamage: func(body, amount, absolute = 1) {
+        # damage of 0 means gyro is nonfunctioning
+        # damage of 1 means gyro is functioning normally
+        # damage of 2 means gyro is returning oversensitive
+        # body == 0 is P, 1 is Q, and 2 is R
+        if (absolute) {
+            me.gyroDamage[body] = amount;
+        } else {
+            me.gyroDamage[body] = me.gyroDamage[body] + amount;
+        }
+        math.clamp(me.gyroDamage[body],0,1);
+    },
+    
+    getGain: func() {
+        return me.GAIN * me.GAINdamp;
+    },
+    
+    setGain: func(val) {
+        me.GAIN = math.clamp(val,0.4,5.0);
+    },
+    
+    setGainDamp: func(val) {
+        me.GAINdamp = val;
+    },
+    
+    gainUndamp: func() {
+        me.GAINdamp = 1;
+    },
+    
+    ### internal functions
+    _getP: func() {
+        return me.P.getValue() * me.gyroDamage[0] * me.gyroEnable;
+    },
+    
+    _getQ: func() {
+        return me.Q.getValue() * me.gyroDamage[1] * me.gyroEnable;
+    },
+    
+    _getR: func() {
+        return me.R.getValue() * me.gyroDamageR[2] * me.gyroEnable;
     },
 }
