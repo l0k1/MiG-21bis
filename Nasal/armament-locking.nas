@@ -31,7 +31,7 @@ var radar_seekTarget = func() {
 		}
 		if ( c_most != nil ) {
 			radar_logic.input.radarMode.setValue("locked-init");
-			lockTarget(c_most);
+			lockTarget(c_most,"radar");
 		}
 	}
 }
@@ -57,7 +57,7 @@ var ir_seekTarget= func() {
 		}
 	}
 	if ( c_most != nil and c_most != radar_logic.selection ) {
-		lockTarget(c_most);
+		lockTarget(c_most,"ir");
 	} elsif ( c_most == nil ) {
 		#print("unlocking 1");
 		unlockTarget();
@@ -65,16 +65,20 @@ var ir_seekTarget= func() {
 	settimer( func { ir_seekTarget(); }, 0.1);
 }
 
-var lockTarget = func(c_most) {
+var lockTarget = func(c_most,mode) {
 	radar_logic.selection = c_most;
 	radar_logic.radarLogic.paint(c_most.getNode(), TRUE);
 	armament.contact = radar_logic.selection;
+	lock_mode = mode;
 	#print("locked target");
 }
+
+var lock_mode = "none"
 
 var unlockTarget = func() {
 	if ( radar_logic.selection != nil ) {
 		#print("unlocking target");
+		lock_mode = "none";
 		radar_logic.radarLogic.paint(radar_logic.selection.getNode(), FALSE);
 		radar_logic.selection = nil;
 		armament.contact = nil;

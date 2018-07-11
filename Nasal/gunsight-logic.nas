@@ -107,7 +107,22 @@ var AFALCOS = {
     
     updateRange: func() {
         #need range in feet
-        me.D = 2000;
+        # range will be received in this order of priority:
+        # 1 - radar input
+        # 2 - manual input
+        
+        # get range input from radar
+        if (radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
+            me.D = radar_logic.selection.get_polar()[0] * M2FT;
+            # we also need to update the pipper scaling
+			setprop(gunsight_canvas.pipperscale, math.clamp(((2 * (math.atan2(15,2*me.D))) * R2D) / gunsight_canvas.pipper_scale_degree_per_pixel,5,220));
+            
+        # get range input from manual input, i.e. pipper scale and inputted diameter
+        } else {
+            # the 15 in (15 / 2) is the inputted diameter. this should be changed to the appropriate property once that instrument is implemented
+            me.D = (15 / 2) / math.tan((getprop(gunsight_canvas.pipperscale) * gunsight_canvas.pipper_scale_degree_per_pixel) * D2R / 2);
+        }
+            
     },
     
     updateRangeRate: func() {
@@ -115,5 +130,13 @@ var AFALCOS = {
         pop(me.rangeRateArray.vector);
         me.rangeRateArray.insert(0, (me.oldRange - me.D) / me.DT);
         me.DDOT = (me.rangeRateArray.vector[0] + me.rangeRateArray.vector[1] + me.rangeRateArray.vector[2] + me.rangeRateArray.vector[3]) / 4;
+    },
+    
+    getAzimuth: func() {
+        return me.ALAH;
+    },
+    
+    getElevation: func() {
+        return me.ELAH;
     },
 }
