@@ -2,6 +2,8 @@
 
 var MIL2DEG =  0.05625;
 var DEG2MIL = 17.77778;
+var RAD2MIL = 1018.591636;
+var MIL2RAD = 0.00098174770424681;
 
 var interp = func(x, x0, x1, y0, y1) {
     return y0 + (x - x0) * ((y1 - y0) / (x1 - x0));
@@ -16,14 +18,16 @@ var pipper_scale = props.globals.getNode("/controls/armament/gunsight/pipper-sca
 
 var min_drum = 0;
 var max_drum = 1;
-var min_pip = 10; # in mils
-var max_pip = 40; # in mils
+var min_pip = 10; # radius in mils
+var max_pip = 40; # radius in mils
 var min_gate = 0; # in km
 var max_gate = radar_logic.radarRange / 3 * 2; # in km
 
 ###
 
 var AFALCOS = {
+    # returns lead angles in mils
+    
     new: func() {
         var m = {parents: [AFALCOS]};
         m.GA = 0.8 * D2R;   # gun angle in radians down from x axis(?)
@@ -260,11 +264,14 @@ var asp_pfd = {
         var span = 15; # needs to be replaced by the property
         if (throttle_drum.getValue() == 1) {
             me.lcos.D = 300 * M2FT;
-            pipper_scale.setValue(math.clamp(2 * math.atan2(span,2*(me.lcos.D*FT2M)) / 1000, min_pip, max_pip));
+            # determine angle = arctan(opp/adj) = arctan((span/2)/distance) = atan2(y,x)
+            # multiply by 1000 to change to mils
+            # remember pipper_scale is radius, not diameter.
+            pipper_scale.setValue(math.clamp(math.atan2(span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
         } else {
             if (auto_man_switch.getValue()) {
                 # manual mode, determine distance via pipperscale
-                me.lcos.D = (span / 2) / math.tan((pipper_scale.getValue() / 1000)) * M2FT;
+                me.lcos.D = (span / 2) / math.tan((pipper_scale.getValue() * MIL2RAD)) * M2FT;
             } else {
                 # auto mode
                 if(radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
@@ -272,7 +279,9 @@ var asp_pfd = {
                 } else {
                     me.lcos.D = 600 * M2FT;
                 }
-                pipper_scale.setValue(math.clamp(2 * math.atan2(span,2*(me.lcos.D*FT2M)) / 1000, min_pip, max_pip));
+                # determine angle = arctan(opp/adj) = arctan(span/distance)
+                # remember pipper_scale is radius, not diameter.
+                pipper_scale.setValue(math.clamp(math.atan2(span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
             }
         }
         print("D: " ~ me.lcos.D);

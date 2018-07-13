@@ -47,6 +47,8 @@ var FALSE = 0;
 var TRUE  = 1;
 var MIL2DEG =  0.05625;
 var DEG2MIL = 17.77778;
+var RAD2MIL = 1018.591636;
+var MIL2RAD = 0.00098174770424681;
 
 var gun_sight = {
 	
@@ -397,8 +399,8 @@ var gun_sight = {
 		var ghost_y = (startViewY-getprop(viewY))*getprop(ghosting_y);
 
 		# movement due to gunsight gyro
-		var pipper_adjust_x = (me.asp_gunsight.getAzimuth() * 0.05625) / pipper_translation_degree_per_pixel;
-		var pipper_adjust_y = (me.asp_gunsight.getElevation() * 0.05625) / pipper_translation_degree_per_pixel;
+		var pipper_adjust_x = (me.asp_gunsight.getAzimuth() * MIL2DEG) / pipper_translation_degree_per_pixel;
+		var pipper_adjust_y = (me.asp_gunsight.getElevation() * MIL2DEG) / pipper_translation_degree_per_pixel;
 		
 		me.pDx = pipper_adjust_x;
 		me.pDy = pipper_adjust_y;
