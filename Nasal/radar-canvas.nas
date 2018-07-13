@@ -518,8 +518,10 @@ var radar_screen = {
 			#scale takes precedence over position
 			#lower limit is lpos = 0
 			#upper limit is upper-bound = 377
+
+			var lpos_mod = (radar_logic.radarRange / 3 * 2) / 473;
 			var lscale = getprop(lock_bars_scale);
-			var lpos = getprop(lock_bars_pos);
+			var lpos = getprop(lock_bars_pos) * lpos_mod;
 			
 			lscale = clamp(lscale, 50, 250);
 			lpos = clamp(lpos, 0, 900);
@@ -531,7 +533,7 @@ var radar_screen = {
 			}
 			
 			setprop(lock_bars_scale, lscale);
-			setprop(lock_bars_pos, lpos);
+			setprop(lock_bars_pos, lpos * lpos_mod);
 			
 			me.lowerBar.setTranslation(506, 950 - lpos);
 			me.upperBar.setTranslation(506, 950 - ( lpos + lscale ));

@@ -351,7 +351,7 @@
 				<red type="int">239</red>
 				<green type="int">197</green>
 				<blue type="int">31</blue>
-				<thickness type="int">6</thickness>
+				<thickness type="int">5</thickness>
 				<font-size type="int">60</font-size>
 				<!--gunsight switches and knobbins-->
 				<gun-missile-switch type="int">0</gun-missile-switch>
@@ -362,7 +362,8 @@
 				<target-size-knob type="float">0</target-size-knob>
 				<pipper-angular-correction-knob type="int">0</pipper-angular-correction-knob> <!-- 0 for gun -->
 				<pipper-brightness-knob type="float">1</pipper-brightness-knob>
-				<pipper-scale type="float">5</pipper-scale>
+				<pipper-scale type="float">11</pipper-scale>
+				<throttle-drum type="float">0</throttle-drum>
 				<fixed-net-brightness-knob type="float">1</fixed-net-brightness-knob>
 			</gunsight>
 			<missile-release type="int" alias="/fdm/jsbsim/systems/armament/release">0</missile-release>

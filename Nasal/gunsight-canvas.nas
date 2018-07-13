@@ -45,6 +45,8 @@ var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 
 var FALSE = 0;
 var TRUE  = 1;
+var MIL2DEG =  0.05625;
+var DEG2MIL = 17.77778;
 
 var gun_sight = {
 	
@@ -219,9 +221,9 @@ var gun_sight = {
 			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW)
 			.setStrokeLineCap("round")
-			.moveTo(-7,0)
-			.arcSmallCW(7,7,0,14,0)
-			.arcSmallCW(7,7,0,-14,0)
+			.moveTo(-3,0)
+			.arcSmallCW(3,3,0,6,0)
+			.arcSmallCW(3,3,0,-6,0)
 			.setTranslation(512,240)
 			.setColorFill(dR,dG,dB,dAp));
 			
@@ -230,10 +232,10 @@ var gun_sight = {
 			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
-			.line(-24,9)
-			.line(-6,-9)
-			.line(6,-9)
-			.line(24,9)
+			.line(-10,3)
+			.line(-5,-3)
+			.line(5,-3)
+			.line(10,3)
 			.setTranslation(412,512)
 			.setRotation(0,0));
 			
@@ -241,10 +243,10 @@ var gun_sight = {
 			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
-			.line(-24,9)
-			.line(-6,-9)
-			.line(6,-9)
-			.line(24,9)
+			.line(-10,3)
+			.line(-5,-3)
+			.line(5,-3)
+			.line(10,3)
 			.setTranslation(441,441)
 			.setRotation(45 * D2R,0));
 			
@@ -252,10 +254,10 @@ var gun_sight = {
 			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
-			.line(-24,9)
-			.line(-6,-9)
-			.line(6,-9)
-			.line(24,9)
+			.line(-10,3)
+			.line(-5,-3)
+			.line(5,-3)
+			.line(10,3)
 			.setTranslation(512,412)
 			.setRotation(90 * D2R,0));
 			
@@ -263,10 +265,10 @@ var gun_sight = {
 			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
-			.line(-24,9)
-			.line(-6,-9)
-			.line(6,-9)
-			.line(24,9)
+			.line(-10,3)
+			.line(-5,-3)
+			.line(5,-3)
+			.line(10,3)
 			.setTranslation(583,441)
 			.setRotation(135 * D2R,0));
 			
@@ -274,10 +276,10 @@ var gun_sight = {
 			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
-			.line(-24,9)
-			.line(-6,-9)
-			.line(6,-9)
-			.line(24,9)
+			.line(-10,3)
+			.line(-5,-3)
+			.line(5,-3)
+			.line(10,3)
 			.setTranslation(612,512)
 			.setRotation(180 * D2R,0));
 			
@@ -285,10 +287,10 @@ var gun_sight = {
 			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
-			.line(-24,9)
-			.line(-6,-9)
-			.line(6,-9)
-			.line(24,9)
+			.line(-10,3)
+			.line(-5,-3)
+			.line(5,-3)
+			.line(10,3)
 			.setTranslation(583,583)
 			.setRotation(225 * D2R,0));
 			
@@ -296,10 +298,10 @@ var gun_sight = {
 			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
-			.line(-24,9)
-			.line(-6,-9)
-			.line(6,-9)
-			.line(24,9)
+			.line(-10,3)
+			.line(-5,-3)
+			.line(5,-3)
+			.line(10,3)
 			.setTranslation(512,612)
 			.setRotation(270 * D2R,0));
 			
@@ -307,17 +309,19 @@ var gun_sight = {
 			.setColor(dR,dG,dB,dAp)
 			.setStrokeLineWidth(lW * 0.95)
 			.setStrokeLineCap("round")
-			.line(-24,9)
-			.line(-6,-9)
-			.line(6,-9)
-			.line(24,9)
+			.line(-10,3)
+			.line(-5,-3)
+			.line(5,-3)
+			.line(10,3)
 			.setTranslation(441,583)
 			.setRotation(315 * D2R,0));
 			
 		m.pipper_center = [500,360];
+
+		m.asp_gunsight = gunsight_logic.asp_pfd.new();
 			
 		setlistener(pipperpowerswitch, func { m.pipper_power(); } );
-		setlistener(pipperscale, func { m.pipper_move(); } );
+		#setlistener(pipperscale, func { m.pipper_move(); } );
 		
 		m.pipper_power();
 		
@@ -333,12 +337,10 @@ var gun_sight = {
 		
 		setlistener(linewidthpath,func { m.updateWidth() });
 		
-		setlistener(viewX,func { m.fixednet_updateXY();
-											m.pipper_move();});
-		setlistener(viewY,func { m.fixednet_updateXY();
-											m.pipper_move();});
+		setlistener(viewX,func { m.fixednet_updateXY(); });
+		setlistener(viewY,func { m.fixednet_updateXY(); });
 
-		m.gyro = gunsight_logic.AFALCOS.new();
+		m.update();
 		return m;
 	},
 	update: func() {
@@ -383,6 +385,7 @@ var gun_sight = {
 	
 	pipper_move: func() {
 		#get current center coords
+		
 		var pip_cen_x = me.pipper_center[0];# + getprop("aax"); #use aax and aay for manual testing
 		var pip_cen_y = me.pipper_center[1];# + getprop("aay");
 		
@@ -394,8 +397,8 @@ var gun_sight = {
 		var ghost_y = (startViewY-getprop(viewY))*getprop(ghosting_y);
 
 		# movement due to gunsight gyro
-		var pipper_adjust_x = (me.gyro.getAzimuth() * 0.05625) / pipper_translation_degree_per_pixel;
-		var pipper_adjust_y = (me.gyro.getElevation() * 0.05625) / pipper_translation_degree_per_pixel;
+		var pipper_adjust_x = (me.asp_gunsight.getAzimuth() * 0.05625) / pipper_translation_degree_per_pixel;
+		var pipper_adjust_y = (me.asp_gunsight.getElevation() * 0.05625) / pipper_translation_degree_per_pixel;
 		
 		me.pDx = pipper_adjust_x;
 		me.pDy = pipper_adjust_y;
@@ -406,7 +409,8 @@ var gun_sight = {
 		me.pipper_elems[0].setTranslation(pip_cen_x, pip_cen_y);
 		
 		#translate diamonds based on center element
-		var scale = getprop(pipperscale);
+		var scale = getprop(pipperscale); # radius in mils
+		scale = scale * MIL2DEG / pipper_translation_degree_per_pixel;
 		forindex ( var i ; me.pipper_elems ) {
 			#only translate the outside elements.
 			if ( i != 0 ) {
@@ -440,7 +444,9 @@ var gun_sight = {
 	}
 };
 
+var gs = 0;
+
 var init = setlistener("/sim/signals/fdm-initialized", func() {
   removelistener(init); # only call once
-  var gs = gun_sight.new({"node": "sight"});
+  gs = gun_sight.new({"node": "sight"});
 });

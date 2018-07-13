@@ -68,6 +68,11 @@
 		<object-name>sight</object-name>
 		<object-name>gunsight_glass</object-name>
 	</animation>
+
+	<effect>
+        <inherits-from>Effects/hud</inherits-from>
+        <object-name>sight</object-name>
+    </effect>
 	
 	<!-- Animations -->
 	
@@ -146,7 +151,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>controls/armament/gunsight/auto-man-switch</property>
+				<property>/controls/armament/gunsight/auto-man-switch</property>
 			</binding>
 		</action>
 	</animation>

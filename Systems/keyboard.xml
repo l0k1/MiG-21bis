@@ -155,88 +155,56 @@
 
 	<key n="105">
 		<name>i</name>
-		<desc>Move locking box up</desc>
+		<desc>rotate throttle drum up grossly</desc>
 		<repeatable>true</repeatable>
 		<binding>
 			<command>property-adjust</command>
-			<property>controls/radar/lock-bars-pos</property>
-			<step>10</step>
+			<property>controls/armament/gunsight/throttle-drum</property>
+			<step>0.05</step>
 			<min>0</min>
-			<max>900</max>
-			<wrap>false</wrap>
-		</binding>
-		<binding>
-			<command>property-adjust</command>
-			<property>controls/armament/gunsight/pipper-scale</property>
-			<step>4</step>
-			<min>5</min>
-			<max>220</max>
+			<max>1</max>
 			<wrap>false</wrap>
 		</binding>
 	</key>
 
 	<key n="73">
 		<name>I</name>
-		<desc>Move locking box up - fine</desc>
+		<desc>rotate throttle drum up fine</desc>
 		<repeatable>true</repeatable>
 		<binding>
 			<command>property-adjust</command>
-			<property>controls/radar/lock-bars-pos</property>
-			<step>2</step>
+			<property>controls/armament/gunsight/throttle-drum</property>
+			<step>0.01</step>
 			<min>0</min>
-			<max>900</max>
-			<wrap>false</wrap>
-		</binding>
-		<binding>
-			<command>property-adjust</command>
-			<property>controls/armament/gunsight/pipper-scale</property>
-			<step>1</step>
-			<min>5</min>
-			<max>220</max>
+			<max>1</max>
 			<wrap>false</wrap>
 		</binding>
 	</key>
 
 	<key n="107">
 		<name>k</name>
-		<desc>Move locking box down</desc>
+		<desc>rotate throttle drum down gross</desc>
 		<repeatable>true</repeatable>
 		<binding>
 			<command>property-adjust</command>
-			<property>controls/radar/lock-bars-pos</property>
-			<step>-10</step>
+			<property>controls/armament/gunsight/throttle-drum</property>
+			<step>-0.05</step>
 			<min>0</min>
-			<max>900</max>
-			<wrap>false</wrap>
-		</binding>
-		<binding>
-			<command>property-adjust</command>
-			<property>controls/armament/gunsight/pipper-scale</property>
-			<step>-4</step>
-			<min>5</min>
-			<max>220</max>
+			<max>1</max>
 			<wrap>false</wrap>
 		</binding>
 	</key>
 
 	<key n="75">
 		<name>K</name>
-		<desc>Move locking box down - fine</desc>
+		<desc>rotate throttle drum down fine</desc>
 		<repeatable>true</repeatable>
 		<binding>
 			<command>property-adjust</command>
-			<property>controls/radar/lock-bars-pos</property>
-			<step>-2</step>
+			<property>controls/armament/gunsight/throttle-drum</property>
+			<step>-0.01</step>
 			<min>0</min>
-			<max>900</max>
-			<wrap>false</wrap>
-		</binding>
-		<binding>
-			<command>property-adjust</command>
-			<property>controls/armament/gunsight/pipper-scale</property>
-			<step>-1</step>
-			<min>5</min>
-			<max>220</max>
+			<max>1</max>
 			<wrap>false</wrap>
 		</binding>
 	</key>

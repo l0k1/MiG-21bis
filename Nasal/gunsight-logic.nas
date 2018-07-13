@@ -3,10 +3,29 @@
 var MIL2DEG =  0.05625;
 var DEG2MIL = 17.77778;
 
+var interp = func(x, x0, x1, y0, y1) {
+    return y0 + (x - x0) * ((y1 - y0) / (x1 - x0));
+}
+
+### MiG-21 specific variables for the ASP-PFD gunsight
+
+var auto_man_switch = props.globals.getNode("/controls/armament/gunsight/auto-man-switch");
+var throttle_drum = props.globals.getNode("/controls/armament/gunsight/throttle-drum");
+var lock_bars_pos = props.globals.getNode("controls/radar/lock-bars-pos");
+var pipper_scale = props.globals.getNode("/controls/armament/gunsight/pipper-scale");
+
+var min_drum = 0;
+var max_drum = 1;
+var min_pip = 10; # in mils
+var max_pip = 40; # in mils
+var min_gate = 0; # in km
+var max_gate = radar_logic.radarRange / 3 * 2; # in km
+
+###
+
 var AFALCOS = {
     new: func() {
         var m = {parents: [AFALCOS]};
-
         m.GA = 0.8 * D2R;   # gun angle in radians down from x axis(?)
         m.VM = 2350.0;   # muzzle speed in feet per second
         m.DT = 0.05;   # integration step size in seconds (loop update rate)
@@ -134,6 +153,11 @@ var AFALCOS = {
         # 2 - manual input
         
         # get range input from radar
+
+        #disabling this for now
+
+        return;
+
         if (getprop("/controls/armament/gunsight/auto-man-switch") == 0) {
             if (radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
                 me.D = radar_logic.selection.get_polar()[0] * M2FT;
@@ -145,6 +169,10 @@ var AFALCOS = {
         } else {
             # the 15 in (15 / 2) is the inputted diameter. this should be changed to the appropriate property once that instrument is implemented
             me.D = ((15 / 2) / math.tan((getprop(gunsight_canvas.pipperscale) * gunsight_canvas.pipper_scale_degree_per_pixel) * D2R / 2)) * M2FT;
+        }
+
+        if (me.D < 300 * M2FT) {
+            me.D = 300 * M2FT;
         }
 
         me.D = 2000;
@@ -210,6 +238,83 @@ var AFALCOS = {
     },
     
     _getR: func() {
-        return me.R.getValue() * me.gyroDamageR[2] * me.gyroEnable;
+        return me.R.getValue() * me.gyroDamage[2] * me.gyroEnable;
     },
-}
+};
+
+# mig-21 specific stuff
+
+var asp_pfd = {
+    new: func() {
+        var m = {parents:[asp_pfd]};
+        # gyro object
+        m.lcos = AFALCOS.new();
+
+        # listeners
+        #m.pipperListener = setlistener(m.pipper_scale.getPath(), func() {m.updatePipperScale});
+        m.update();
+        return m;
+    },
+
+    update: func() {
+        var span = 15; # needs to be replaced by the property
+        if (throttle_drum.getValue() == 1) {
+            me.lcos.D = 300 * M2FT;
+            pipper_scale.setValue(math.clamp(2 * math.atan2(span,2*(me.lcos.D*FT2M)) / 1000, min_pip, max_pip));
+        } else {
+            if (auto_man_switch.getValue()) {
+                # manual mode, determine distance via pipperscale
+                me.lcos.D = (span / 2) / math.tan((pipper_scale.getValue() / 1000)) * M2FT;
+            } else {
+                # auto mode
+                if(radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
+                    me.lcos.D = radar_logic.selection.get_polar()[0] * M2FT;
+                } else {
+                    me.lcos.D = 600 * M2FT;
+                }
+                pipper_scale.setValue(math.clamp(2 * math.atan2(span,2*(me.lcos.D*FT2M)) / 1000, min_pip, max_pip));
+            }
+        }
+        print("D: " ~ me.lcos.D);
+        settimer(func(){me.update();},0.05);
+    },
+
+    updatePipperScale: func() {
+        # scale is radius in mils, measured from outside diamond edge
+        # minimum diameter of 22 mils
+        if (me.pipper_scale.getValue() < 11) {
+            me.pipper_scale.setValue(11);
+        }
+    },
+
+    getAzimuth: func() {
+        #print("A:" ~ me.lcos.getAzimuth());
+        return me.lcos.getAzimuth();
+    },
+    
+    getElevation: func() {
+        #print("E:" ~ me.lcos.getElevation());
+        return me.lcos.getElevation();
+    },
+
+};
+
+setlistener(throttle_drum.getPath(),func(){
+# if in auto mode, move radar lock bars
+# if in manual mode, move pipper
+    if (auto_man_switch.getValue()) {
+        #manual mode
+        pipper_scale.setValue(interp(throttle_drum.getValue(), min_drum, max_drum, min_pip, max_pip));
+    } else {
+        #auto mode
+        lock_bars_pos.setValue(interp(throttle_drum.getValue(), min_drum, max_drum, min_gate, max_gate));
+    }
+});
+
+setlistener(auto_man_switch.getPath(), func() {
+    if (auto_man_switch.getValue()) {
+        lock_bars_pos.setValue(0);
+    } else {
+        pipper_scale.setValue(0);
+    }
+});
