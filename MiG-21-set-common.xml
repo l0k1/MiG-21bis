@@ -364,6 +364,10 @@
 				<pipper-brightness-knob type="float">1</pipper-brightness-knob>
 				<pipper-scale type="float">11</pipper-scale>
 				<throttle-drum type="float">0</throttle-drum>
+				<angle-setting-prefilter type="float">0</angle-setting-prefilter>
+				<angle-setting-postfilter type="float">0</angle-setting-postfilter>
+				<angle-setting-autorotate type="bool">0</angle-setting-autorotate>
+				<angle-setting-motorcontrol type="bool">0</angle-setting-motorcontrol>
 				<fixed-net-brightness-knob type="float">1</fixed-net-brightness-knob>
 			</gunsight>
 			<missile-release type="int" alias="/fdm/jsbsim/systems/armament/release">0</missile-release>

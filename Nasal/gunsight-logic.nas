@@ -15,6 +15,8 @@ var auto_man_switch = props.globals.getNode("/controls/armament/gunsight/auto-ma
 var throttle_drum = props.globals.getNode("/controls/armament/gunsight/throttle-drum");
 var lock_bars_pos = props.globals.getNode("controls/radar/lock-bars-pos");
 var pipper_scale = props.globals.getNode("/controls/armament/gunsight/pipper-scale");
+var angle_setting_pre = props.globals.getNode("/controls/armament/gunsight/angle-setting-prefilter");
+var angle_setting_postfilter = props.globals.getNode("/controls/armament/gunsight/angle-setting-postfilter");
 
 var min_drum = 0;
 var max_drum = 1;
@@ -30,7 +32,7 @@ var AFALCOS = {
     
     new: func() {
         var m = {parents: [AFALCOS]};
-        m.GA = 0.8 * D2R;   # gun angle in radians down from x axis(?)
+        m.GA = 0.0;   # gun angle in radians (pos is up) - should be set in wrapper class
         m.VM = 2350.0;   # muzzle speed in feet per second
         m.DT = 0.05;   # integration step size in seconds (loop update rate)
         m.GAIN = 1.2; #sight sensitivity parameter - 0.8 nominally
@@ -77,7 +79,7 @@ var AFALCOS = {
     },
     
     update: func() {
-        me.updateRange();
+        #me.updateRange();
         me.updateRangeRate();
         me.AL = me.ALprop.getValue() * D2R;
         math.clamp(me.AL,-45,45);
@@ -151,36 +153,8 @@ var AFALCOS = {
     },
     
     updateRange: func() {
-        #need range in feet
-        # range will be received in this order of priority:
-        # 1 - radar input
-        # 2 - manual input
-        
-        # get range input from radar
-
         #disabling this for now
-
         return;
-
-        if (getprop("/controls/armament/gunsight/auto-man-switch") == 0) {
-            if (radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
-                me.D = radar_logic.selection.get_polar()[0] * M2FT;
-                # we also need to update the pipper scaling
-    			setprop(gunsight_canvas.pipperscale, math.clamp(((2 * (math.atan2(15,2*me.D))) * R2D) / gunsight_canvas.pipper_scale_degree_per_pixel,5,220));
-            }
-            
-        # get range input from manual input, i.e. pipper scale and inputted diameter
-        } else {
-            # the 15 in (15 / 2) is the inputted diameter. this should be changed to the appropriate property once that instrument is implemented
-            me.D = ((15 / 2) / math.tan((getprop(gunsight_canvas.pipperscale) * gunsight_canvas.pipper_scale_degree_per_pixel) * D2R / 2)) * M2FT;
-        }
-
-        if (me.D < 300 * M2FT) {
-            me.D = 300 * M2FT;
-        }
-
-        me.D = 2000;
-            
     },
     
     updateRangeRate: func() {
@@ -248,6 +222,8 @@ var AFALCOS = {
 
 # mig-21 specific stuff
 
+#todo: when a bomb/rkt or gun/shoot switch is flipped, set /controls/armament/gunsight/angle-setting-prefilter to desired angle and /controls/armament/gunsight/angle-setting-motorcontrol to 1
+
 var asp_pfd = {
     new: func() {
         var m = {parents:[asp_pfd]};
@@ -256,6 +232,7 @@ var asp_pfd = {
 
         # listeners
         #m.pipperListener = setlistener(m.pipper_scale.getPath(), func() {m.updatePipperScale});
+        m.angleListener = setlistener(angle_setting_post.getPath(), func() {m.updateAngle();});
         m.update();
         return m;
     },
@@ -284,8 +261,13 @@ var asp_pfd = {
                 pipper_scale.setValue(math.clamp(math.atan2(span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
             }
         }
-        print("D: " ~ me.lcos.D);
+        #print("D: " ~ me.lcos.D);
         settimer(func(){me.update();},0.05);
+    },
+    
+        
+    updateAngle: func() {
+        me.lcos.GA = angle_setting_post.getValue(); # the angle_setting is ran through a jsbsim instrument kinematic for smoothness
     },
 
     updatePipperScale: func() {

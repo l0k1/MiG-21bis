@@ -137,6 +137,75 @@ clock
         </lag_filter>
     
     </channel>
+    
+    <channel name="gunsight" execrate="4">
+        <!-- auto-rotation happens if autorotate = 1 and pre - post > 0.02 -->
+        <!-- autorotate == 1 if pre - post > 0.02 and motor-control = 1 -->
+        <!-- autorotate can only be 0 if pre - post > 0.02 and autorotate = 0 -->
+        
+        <fcs_function name="trash/gunsight/autorotate">
+            <function>
+                <ifthen>
+                    <or>
+                        <and>
+                            <property>/controls/armament/gunsight/angle-setting-motorcontrol</property>
+                            <value>1</value>
+                            <lt>
+                                <abs>
+                                    <difference>
+                                        <property>/controls/armament/gunsight/angle-setting-prefilter</property>
+                                        <property>/controls/armament/gunsight/angle-setting-postfilter</property>
+                                    </difference>
+                                </abs>
+                                <value>0.1</value>
+                            </lt>
+                        </and>
+                        <and>
+                            <property>/controls/armament/gunsight/angle-setting-autorotate</property>
+                            <value>1</value>
+                            <lt>
+                                <abs>
+                                    <difference>
+                                        <property>/controls/armament/gunsight/angle-setting-prefilter</property>
+                                        <property>/controls/armament/gunsight/angle-setting-postfilter</property>
+                                    </difference>
+                                </abs>
+                                <value>0.1</value>
+                            </lt>
+                        </and>
+                    </or>
+                    <value>1</value>
+                    <value>0</value>
+                </ifthen>
+            </function>
+            <output>/controls/armament/gunsight/angle-setting-autorotate</output>
+        </fcs_function>
+        
+        <fcs_function name="trash/gunsight/angle-control">
+            <function>
+                <ifthen>
+                    <eq>
+                        <property>/controls/armament/gunsight/angle-setting-autorotate</property>
+                        <value>1</value>
+                    </eq>
+                    <sum>
+                        <property>/controls/armament/gunsight/angle-setting-postfilter</property>
+                        <ifthen>
+                            <lt>
+                                <property>/controls/armament/gunsight/angle-setting-prefilter</property>
+                                <property>/controls/armament/gunsight/angle-setting-postfilter</property>
+                            </lt>
+                            <value>-0.05</value>
+                            <value>0.05</value>
+                        </ifthen>
+                    </sum>
+                    <property>/controls/armament/gunsight/angle-setting-postfilter</property>
+                </ifthen>
+            </function>
+            <output>/controls/armament/gunsight/angle-setting-postfilter</output>
+        </fcs_function>
+        
+    </channel>
 
 
     <channel name="switches" execrate="4">
