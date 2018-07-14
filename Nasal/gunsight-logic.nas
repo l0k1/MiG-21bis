@@ -16,11 +16,11 @@ var throttle_drum = props.globals.getNode("/controls/armament/gunsight/throttle-
 var lock_bars_pos = props.globals.getNode("controls/radar/lock-bars-pos");
 var pipper_scale = props.globals.getNode("/controls/armament/gunsight/pipper-scale");
 var angle_setting_pre = props.globals.getNode("/controls/armament/gunsight/angle-setting-prefilter");
-var angle_setting_postfilter = props.globals.getNode("/controls/armament/gunsight/angle-setting-postfilter");
+var angle_setting_post = props.globals.getNode("/controls/armament/gunsight/angle-setting-postfilter");
 
 var min_drum = 0;
 var max_drum = 1;
-var min_pip = 10; # radius in mils
+var min_pip = 5; # radius in mils
 var max_pip = 40; # radius in mils
 var min_gate = 0; # in km
 var max_gate = radar_logic.radarRange / 3 * 2; # in km
