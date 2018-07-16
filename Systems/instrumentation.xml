@@ -150,28 +150,28 @@ clock
                         <and>
                             <property>/controls/armament/gunsight/angle-setting-motorcontrol</property>
                             <value>1</value>
-                            <lt>
+                            <gt>
                                 <abs>
                                     <difference>
                                         <property>/controls/armament/gunsight/angle-setting-prefilter</property>
                                         <property>/controls/armament/gunsight/angle-setting-postfilter</property>
                                     </difference>
                                 </abs>
-                                <value>0.1</value>
-                            </lt>
+                                <value>0.026</value>
+                            </gt>
                         </and>
                         <and>
                             <property>/controls/armament/gunsight/angle-setting-autorotate</property>
                             <value>1</value>
-                            <lt>
+                            <gt>
                                 <abs>
                                     <difference>
                                         <property>/controls/armament/gunsight/angle-setting-prefilter</property>
                                         <property>/controls/armament/gunsight/angle-setting-postfilter</property>
                                     </difference>
                                 </abs>
-                                <value>0.1</value>
-                            </lt>
+                                <value>0.026</value>
+                            </gt>
                         </and>
                     </or>
                     <value>1</value>
@@ -203,6 +203,13 @@ clock
                 </ifthen>
             </function>
             <output>/controls/armament/gunsight/angle-setting-postfilter</output>
+        </fcs_function>
+        
+        <fcs_function name="trash/gunsight/nullify-motor">
+            <function>
+                <value>0</value>
+            </function>
+            <output>/controls/armament/gunsight/angle-setting-motorcontrol</output>
         </fcs_function>
         
     </channel>
