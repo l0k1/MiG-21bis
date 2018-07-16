@@ -285,10 +285,22 @@
 		<action>
 			<button>0</button>
 			<repeatable>true</repeatable>
-			<interval-sec>0.3</interval-sec>
+			<interval-sec>0.1</interval-sec>
 			<binding>
 				<command>property-adjust</command>
-				<property>controls/armament/gunsight/target-size-knob</property>
+				<property>/controls/armament/gunsight/target-size-knob</property>
+				<step>0.05</step>
+				<min>0</min>
+				<max>10</max>
+			</binding>
+		</action>
+		<action>
+			<button>3</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/controls/armament/gunsight/target-size-knob</property>
 				<step>1</step>
 				<min>0</min>
 				<max>10</max>
@@ -297,10 +309,22 @@
 		<action>
 			<button>1</button>
 			<repeatable>true</repeatable>
-			<interval-sec>0.3</interval-sec>
+			<interval-sec>0.1</interval-sec>
 			<binding>
 				<command>property-adjust</command>
-				<property>controls/armament/gunsight/target-size-knob</property>
+				<property>/controls/armament/gunsight/target-size-knob</property>
+				<step>-0.05</step>
+				<min>0</min>
+				<max>10</max>
+			</binding>
+		</action>
+		<action>
+			<button>4</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/controls/armament/gunsight/target-size-knob</property>
 				<step>-1</step>
 				<min>0</min>
 				<max>10</max>
@@ -309,32 +333,98 @@
 	</animation>
 	
 	<animation>
+		<object-name>gunsight_pipper_diameter_knob</object-name>
+		<type>rotate</type>
+		<property>/controls/armament/gunsight/target-size-knob</property>
+		<factor>23.5</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>-3.96079</x-m>
+			<y-m>-0.097878</y-m>
+			<z-m> 0.928743</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>gunsight_pipper_diameter_display</object-name>
+		<property>/controls/armament/gunsight/target-size-knob</property>
+		<bias>0.0000001</bias>
+		<factor>0.0571435546875</factor>
+		<step>0.01</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+
+	<animation>
 		<type>pick</type>
 		<object-name>gunsight_pipper_angular_correction_knob</object-name>
 		<action>
 			<button>0</button>
+			<button>3</button>
 			<repeatable>true</repeatable>
-			<interval-sec>0.3</interval-sec>
+			<interval-sec>0.1</interval-sec>
 			<binding>
 				<command>property-adjust</command>
-				<property>controls/armament/gunsight/pipper-angular-correction-knob</property>
-				<step>1</step>
+				<property>/controls/armament/gunsight/angle-setting-postfilter</property>
+				<step>0.1</step>
 				<min>0</min>
 				<max>10</max>
 			</binding>
 		</action>
 		<action>
 			<button>1</button>
+			<button>4</button>
 			<repeatable>true</repeatable>
-			<interval-sec>0.3</interval-sec>
+			<interval-sec>0.1</interval-sec>
 			<binding>
 				<command>property-adjust</command>
-				<property>controls/armament/gunsight/pipper-angular-correction-knob</property>
-				<step>-1</step>
+				<property>/controls/armament/gunsight/angle-setting-postfilter</property>
+				<step>-0.1</step>
 				<min>0</min>
 				<max>10</max>
 			</binding>
 		</action>
+	</animation>
+
+	<animation>
+		<object-name>gunsight_pipper_angular_correction_knob</object-name>
+		<type>rotate</type>
+		<property>/controls/armament/gunsight/angle-setting-postfilter</property>
+		<factor>-23.75</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>-3.96079</x-m>
+			<y-m> 0.089507</y-m>
+			<z-m> 0.927763</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>gunsight_ang_corr_display</object-name>
+		<property>/controls/armament/gunsight/angle-setting-postfilter</property>
+		<bias>0.0000001</bias>
+		<factor>-0.014892578125</factor>
+		<step>0.01</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
 	</animation>
 	
 	<animation>

@@ -17,6 +17,7 @@ var lock_bars_pos = props.globals.getNode("controls/radar/lock-bars-pos");
 var pipper_scale = props.globals.getNode("/controls/armament/gunsight/pipper-scale");
 var angle_setting_pre = props.globals.getNode("/controls/armament/gunsight/angle-setting-prefilter");
 var angle_setting_post = props.globals.getNode("/controls/armament/gunsight/angle-setting-postfilter");
+var span_prop = props.globals.getNode("/controls/armament/gunsight/target-size-knob");
 
 var min_drum = 0;
 var max_drum = 1;
@@ -32,7 +33,7 @@ var AFALCOS = {
     
     new: func() {
         var m = {parents: [AFALCOS]};
-        m.GA = 0.0;   # gun angle in radians (pos is up) - should be set in wrapper class
+        m.GA = 0.1;   # gun angle in radians (pos is up) - should be set in wrapper class
         m.VM = 2350.0;   # muzzle speed in feet per second
         m.DT = 0.05;   # integration step size in seconds (loop update rate)
         m.GAIN = 1.2; #sight sensitivity parameter - 0.8 nominally
@@ -229,26 +230,28 @@ var asp_pfd = {
         var m = {parents:[asp_pfd]};
         # gyro object
         m.lcos = AFALCOS.new();
+        m.span = m.updateSpan();
 
         # listeners
         #m.pipperListener = setlistener(m.pipper_scale.getPath(), func() {m.updatePipperScale});
         m.angleListener = setlistener(angle_setting_post.getPath(), func() {m.updateAngle();});
+        m.spanListener = setlistener(span_prop.getPath(),func() {m.updateSpan();});
+        m.throttleDrumListener = setlistener(throttle_drum.getPath(),func() {m.updateSpan();});
         m.update();
         return m;
     },
 
     update: func() {
-        var span = 15; # needs to be replaced by the property
-        if (throttle_drum.getValue() == 1) {
+        if (throttle_drum.getValue() >= 1) {
             me.lcos.D = 300 * M2FT;
             # determine angle = arctan(opp/adj) = arctan((span/2)/distance) = atan2(y,x)
             # multiply by 1000 to change to mils
             # remember pipper_scale is radius, not diameter.
-            pipper_scale.setValue(math.clamp(math.atan2(span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
+            pipper_scale.setValue(math.clamp(math.atan2(me.span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
         } else {
             if (auto_man_switch.getValue()) {
                 # manual mode, determine distance via pipperscale
-                me.lcos.D = (span / 2) / math.tan((pipper_scale.getValue() * MIL2RAD)) * M2FT;
+                me.lcos.D = (me.span / 2) / math.tan((pipper_scale.getValue() * MIL2RAD)) * M2FT;
             } else {
                 # auto mode
                 if(radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
@@ -258,7 +261,7 @@ var asp_pfd = {
                 }
                 # determine angle = arctan(opp/adj) = arctan(span/distance)
                 # remember pipper_scale is radius, not diameter.
-                pipper_scale.setValue(math.clamp(math.atan2(span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
+                pipper_scale.setValue(math.clamp(math.atan2(me.span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
             }
         }
         #print("D: " ~ me.lcos.D);
@@ -267,7 +270,20 @@ var asp_pfd = {
     
         
     updateAngle: func() {
-        me.lcos.GA = angle_setting_post.getValue(); # the angle_setting is ran through a jsbsim instrument kinematic for smoothness
+        me.lcos.GA = angle_setting_post.getValue() * D2R; # the angle_setting is ran through a jsbsim instrument kinematic for smoothness
+    },
+
+    updateSpan: func() {
+        if( throttle_drum.getValue() >= 1 ) {
+            if (span_prop.getValue() < 2 ) {
+                me.span = interp(span_prop.getValue(),0,2,7,9);
+            } else {
+                me.span = interp(span_prop.getValue(),2,10,9,27);
+            }
+        }else{
+            me.span = interp(span_prop.getValue(),0,10,2,80);
+        }
+        print(me.span);
     },
 
     updatePipperScale: func() {

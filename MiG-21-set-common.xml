@@ -359,8 +359,7 @@
 				<auto-man-switch type="int">0</auto-man-switch>
 				<pipper-accuracy-switch type="int">0</pipper-accuracy-switch>
 				<pipper-power-switch type="int">0</pipper-power-switch>
-				<target-size-knob type="float">0</target-size-knob>
-				<pipper-angular-correction-knob type="int">0</pipper-angular-correction-knob> <!-- 0 for gun -->
+				<target-size-knob type="float">1.65</target-size-knob>
 				<pipper-brightness-knob type="float">1</pipper-brightness-knob>
 				<pipper-scale type="float">11</pipper-scale>
 				<throttle-drum type="float">0</throttle-drum>
