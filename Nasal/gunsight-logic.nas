@@ -26,6 +26,7 @@ var gyroMslSwitch = props.globals.getNode("controls/armament/gunsight/pipper-acc
 var damper = props.globals.getNode("controls/armament/gunsight/damping");
 var distance_scale = props.globals.getNode("controls/armament/gunsight/scale-dial-prefilter");
 var missile_scale = props.globals.getNode("controls/armament/gunsight/missile-scale-prefilter");
+var gunsight_power = props.globals.getNode("fdm/jsbsim/electric/switches/rvmsp/gunsight");
 
 var min_drum = 0;
 var max_drum = 1;
@@ -219,15 +220,15 @@ var AFALCOS = {
     
     ### internal functions
     _getP: func() {
-        return me.P.getValue() * me.gyroDamage[0] * (me.gyroEnable == 0 ? 0.3333 : 1);
+        return me.P.getValue() * me.gyroDamage[0] * (me.gyroEnable == 0 ? 0.3333 : 1) * (gunsight_power.getValue() > 32 ? 0 : 1);
     },
     
     _getQ: func() {
-        return me.Q.getValue() * me.gyroDamage[1] * (me.gyroEnable == 0 ? 0.3333 : 1);
+        return me.Q.getValue() * me.gyroDamage[1] * (me.gyroEnable == 0 ? 0.3333 : 1) * (gunsight_power.getValue() > 32 ? 0 : 1);
     },
     
     _getR: func() {
-        return me.R.getValue() * me.gyroDamage[2] * (me.gyroEnable == 0 ? 0.3333 : 1);
+        return me.R.getValue() * me.gyroDamage[2] * (me.gyroEnable == 0 ? 0.3333 : 1) * (gunsight_power.getValue() > 32 ? 0 : 1);
     },
 };
 
@@ -287,21 +288,23 @@ var asp_pfd = {
             }
             
             #missile scale logic
-            if(radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
+            if(radar_logic.selection != nil and arm_locking.lock_mode == "radar" and gunsight_power.getValue() > 32) {
                 missile_scale.setValue(interp(radar_logic.selection.get_polar()[0],2000,5000,0,1));
             } else {
                 missile_scale.setValue(0);
             }
             
             #distance scale logic
-            if (throttle_drum.getValue() < 1) {
+            if (throttle_drum.getValue() < 1 and gunsight_power.getValue() > 32) {
                 if (shoot_bomb_switch.getValue() == 0 and gun_rkt_switch.getValue() and knobpos.getValue() > 4) {
                     distance_scale.setValue(interp(me.lcos.D,0,8000,0,1));
                 } else (throttle_drum.getValue() < 1) {
                     distance_scale.setValue(interp(me.lcos.D,400,2000,0,1));
                 }
-            } else {
+            } elsif (gunsight_power.getValue() > 32) {
                 distance_scale.setValue(interp(pipper_scale.getValue(),min_pip,max_pip,0,1));
+            } else {
+                distance_scale.setValue(0);
             }
         }
         #print("D: " ~ me.lcos.D);
@@ -314,6 +317,9 @@ var asp_pfd = {
     },
 
     setAutoAngle: func() {
+        if (gunsight_power.getValue() < 32) {
+            return;
+        }
         me.lcos.VM = 2350.0;   # muzzle speed in feet per second
         if (auto_man_switch.getValue() == 0) {
             # automode == 0, manmode == 1
