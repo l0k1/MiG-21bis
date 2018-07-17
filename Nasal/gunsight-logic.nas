@@ -11,13 +11,19 @@ var interp = func(x, x0, x1, y0, y1) {
 
 ### MiG-21 specific variables for the ASP-PFD gunsight
 
+var gun_rkt_switch = props.globals.getNode("controls/armament/gunsight/gun-missile-switch");
+var shoot_bomb_switch = props.globals.getNode("controls/armament/gunsight/pip-mode-select-switch");
 var auto_man_switch = props.globals.getNode("/controls/armament/gunsight/auto-man-switch");
 var throttle_drum = props.globals.getNode("/controls/armament/gunsight/throttle-drum");
 var lock_bars_pos = props.globals.getNode("controls/radar/lock-bars-pos");
 var pipper_scale = props.globals.getNode("/controls/armament/gunsight/pipper-scale");
 var angle_setting_pre = props.globals.getNode("/controls/armament/gunsight/angle-setting-prefilter");
 var angle_setting_post = props.globals.getNode("/controls/armament/gunsight/angle-setting-postfilter");
+var angle_motorcontrol = props.globals.getNode("/controls/armament/gunsight/angle-setting-motorcontrol");
 var span_prop = props.globals.getNode("/controls/armament/gunsight/target-size-knob");
+var knobpos = props.globals.getNode("controls/armament/panel/pylon-knob");
+var gyroMslSwitch = props.globals.getNode("controls/armament/gunsight/pipper-accuracy-switch");
+var damper = props.globals.getNode("controls/armament/gunsight/damping");
 
 var min_drum = 0;
 var max_drum = 1;
@@ -36,12 +42,12 @@ var AFALCOS = {
         m.GA = 0.1;   # gun angle in radians (pos is up) - should be set in wrapper class
         m.VM = 2350.0;   # muzzle speed in feet per second
         m.DT = 0.05;   # integration step size in seconds (loop update rate)
-        m.GAIN = 1.2; #sight sensitivity parameter - 0.8 nominally
+        m.GAIN = 1.5; #sight sensitivity parameter - 0.8 nominally
         m.HUDY = 0; # sorta educated guess: y distance from gun to hud
         m.HUDZ = 4.69; # sorta educated guess: z distance from gun to hud
 
-        m.maxAz = 5; # in degrees
-        m.maxEl = 5; # in degrees
+        m.maxAz = 7; # in degrees
+        m.maxEl = 7; # in degrees
         
         m.gyroTimer = maketimer(m.DT,func(){m.update();});
         
@@ -145,8 +151,10 @@ var AFALCOS = {
         me.AINVW3 = ((me.SL2 * me.SL3 - me.C5) * me.W2 + (1.0 - math.pow(me.SL2,2)) * me.W3) / me.DET;
         me.DELA = me.getGain() * me.AINVW2;
         me.DALA = me.getGain() * me.AINVW3;
-        me.ELA = me.ELA + me.DT * me.DELA;  #ELA and ALA are EL and AZ lead angle components w.r.t. gun
-        me.ALA = me.ALA + me.DT * me.DALA;
+        me.ELA = damper.getValue() == 1 ? me.ELA / 1.1 : me.ELA + me.DT * me.DELA;
+        me.ALA = damper.getValue() == 1 ? me.ALA / 1.1 : me.ALA + me.DT * me.DALA;
+        #me.ELA = me.ELA + me.DT * me.DELA;  #ELA and ALA are EL and AZ lead angle components w.r.t. gun
+        #me.ALA = me.ALA + me.DT * me.DALA;
         me.ELAB = me.B1 * me.ELA;   # ELAB and ALAB are EL and AZ lead angles in body coordinates
         me.ALAB = me.B1 * me.ALA;
         me.ELAH = -(me.ELA - me.HUDZ / (me.VF * me.TF) + me.GA) * 1000; # hud EL in mils
@@ -209,15 +217,15 @@ var AFALCOS = {
     
     ### internal functions
     _getP: func() {
-        return me.P.getValue() * me.gyroDamage[0] * me.gyroEnable;
+        return me.P.getValue() * me.gyroDamage[0] * (me.gyroEnable == 0 ? 0.3333 : 1);
     },
     
     _getQ: func() {
-        return me.Q.getValue() * me.gyroDamage[1] * me.gyroEnable;
+        return me.Q.getValue() * me.gyroDamage[1] * (me.gyroEnable == 0 ? 0.3333 : 1);
     },
     
     _getR: func() {
-        return me.R.getValue() * me.gyroDamage[2] * me.gyroEnable;
+        return me.R.getValue() * me.gyroDamage[2] * (me.gyroEnable == 0 ? 0.3333 : 1);
     },
 };
 
@@ -237,6 +245,11 @@ var asp_pfd = {
         m.angleListener = setlistener(angle_setting_post.getPath(), func() {m.updateAngle();});
         m.spanListener = setlistener(span_prop.getPath(),func() {m.updateSpan();});
         m.throttleDrumListener = setlistener(throttle_drum.getPath(),func() {m.updateSpan();});
+        m.gunRktListener = setlistener(gun_rkt_switch.getPath(),func(){m.setAutoAngle();});
+        m.shootBombListener = setlistener(shoot_bomb_switch.getPath(),func(){m.setAutoAngle();});
+        m.weaponknobListener = setlistener(knobpos.getPath(),func(){m.setAutoAngle();});
+        m.gyroMslListener = setlistener(gyroMslSwitch.getPath(), func(){m.setGyroMsl();});
+        m.setAutoAngle();
         m.update();
         return m;
     },
@@ -267,10 +280,43 @@ var asp_pfd = {
         #print("D: " ~ me.lcos.D);
         settimer(func(){me.update();},0.05);
     },
-    
-        
+
+
     updateAngle: func() {
         me.lcos.GA = angle_setting_post.getValue() * D2R; # the angle_setting is ran through a jsbsim instrument kinematic for smoothness
+    },
+
+    setAutoAngle: func() {
+        me.lcos.VM = 2350.0;   # muzzle speed in feet per second
+        if (auto_man_switch.getValue() == 0) {
+            # automode == 0, manmode == 1
+            if (shoot_bomb_switch.getValue()) {
+                #switch set to bomb
+                angle_setting_pre.setValue(0); # totally fictional, no idea what this should be
+                me.lcos.VM = 1.0;   # muzzle speed in feet per second
+            } else {
+                #switch set to shoot
+                if (gun_rkt_switch.getValue()) {
+                    #switch set to rkt
+                    #angle based off of knobpos
+                    if (knobpos.getValue() <= 2) {
+                        # s-5 rocket
+                        angle_setting_pre.setValue(1.7);
+                    } elsif (knobpos.getValue() <= 4) {
+                        # s-24 rocket
+                        angle_setting_pre.setValue(2.1);
+                    } else {
+                        # missile
+                        angle_setting_pre.setValue(0.0);
+                    }
+
+                } else {
+                    #switch set to gun
+                    angle_setting_pre.setValue(0.8);
+                }
+            }
+            angle_motorcontrol.setValue(1);
+        }
     },
 
     updateSpan: func() {
@@ -283,7 +329,7 @@ var asp_pfd = {
         }else{
             me.span = interp(span_prop.getValue(),0,10,2,80);
         }
-        print(me.span);
+        #print(me.span);
     },
 
     updatePipperScale: func() {
@@ -292,6 +338,11 @@ var asp_pfd = {
         if (me.pipper_scale.getValue() < 11) {
             me.pipper_scale.setValue(11);
         }
+    },
+
+    setGyroMsl: func() {
+        me.lcos.setGyroEnable(gyroMslSwitch.getValue() * -1 + 1); 
+        print(me.lcos.gyroEnable);
     },
 
     getAzimuth: func() {
