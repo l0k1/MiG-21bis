@@ -25,6 +25,7 @@ var knobpos = props.globals.getNode("controls/armament/panel/pylon-knob");
 var gyroMslSwitch = props.globals.getNode("controls/armament/gunsight/pipper-accuracy-switch");
 var damper = props.globals.getNode("controls/armament/gunsight/damping");
 var distance_scale = props.globals.getNode("controls/armament/gunsight/scale-dial-prefilter");
+var missile_scale = props.globals.getNode("controls/armament/gunsight/missile-scale-prefilter");
 
 var min_drum = 0;
 var max_drum = 1;
@@ -283,6 +284,13 @@ var asp_pfd = {
                 # determine angle = arctan(opp/adj) = arctan(span/distance)
                 # remember pipper_scale is radius, not diameter.
                 pipper_scale.setValue(math.clamp(math.atan2(me.span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
+            }
+            
+            #missile scale logic
+            if(radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
+                missile_scale.setValue(interp(radar_logic.selection.get_polar()[0],2000,5000,0,1));
+            } else {
+                missile_scale.setValue(0);
             }
             
             #distance scale logic

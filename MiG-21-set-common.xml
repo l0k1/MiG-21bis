@@ -370,6 +370,8 @@
 				<fixed-net-brightness-knob type="float">1</fixed-net-brightness-knob>
 				<scale-dial-prefilter type="float">0</scale-dial-prefilter>
 				<scale-dial-postfilter type="float">0</scale-dial-postfilter>
+				<missile-scale-prefilter type="float">0</missile-scale-prefilter>
+				<missile-scale-postfilter type="float">0</missile-scale-postfilter>
 				<damping type="bool">0</damping>
 			</gunsight>
 			<missile-release type="int" alias="/fdm/jsbsim/systems/armament/release">0</missile-release>
