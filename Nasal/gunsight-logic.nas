@@ -269,7 +269,6 @@ var asp_pfd = {
             # multiply by 1000 to change to mils
             # remember pipper_scale is radius, not diameter.
             pipper_scale.setValue(math.clamp(math.atan2(me.span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
-            distance_scale.setValue(interp(pipper_scale.getValue(),min_pip,max_pip,0,1));
         } else {
             if (auto_man_switch.getValue()) {
                 # manual mode, determine distance via pipperscale
@@ -293,6 +292,8 @@ var asp_pfd = {
                 } else (throttle_drum.getValue() < 1) {
                     distance_scale.setValue(interp(me.lcos.D,400,2000,0,1));
                 }
+            } else {
+                distance_scale.setValue(interp(pipper_scale.getValue(),min_pip,max_pip,0,1));
             }
         }
         #print("D: " ~ me.lcos.D);
