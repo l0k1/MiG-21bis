@@ -24,6 +24,7 @@ var span_prop = props.globals.getNode("/controls/armament/gunsight/target-size-k
 var knobpos = props.globals.getNode("controls/armament/panel/pylon-knob");
 var gyroMslSwitch = props.globals.getNode("controls/armament/gunsight/pipper-accuracy-switch");
 var damper = props.globals.getNode("controls/armament/gunsight/damping");
+var distance_scale = props.globals.getNode("controls/armament/gunsight/scale-dial-prefilter");
 
 var min_drum = 0;
 var max_drum = 1;
@@ -255,12 +256,20 @@ var asp_pfd = {
     },
 
     update: func() {
+        #the scales in the middle of the gunsight (afaik):
+        #if in 300m mode, display mils
+        #if in gun, display range per second highest scale
+        #if in rkt/msl, use second lowest scale
+        #if in rkt/rkt, use lowest scale
+        #distance_scale.setValue()
+        
         if (throttle_drum.getValue() >= 1) {
             me.lcos.D = 300 * M2FT;
             # determine angle = arctan(opp/adj) = arctan((span/2)/distance) = atan2(y,x)
             # multiply by 1000 to change to mils
             # remember pipper_scale is radius, not diameter.
             pipper_scale.setValue(math.clamp(math.atan2(me.span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
+            distance_scale.setValue(interp(pipper_scale.getValue(),min_pip,max_pip,0,1));
         } else {
             if (auto_man_switch.getValue()) {
                 # manual mode, determine distance via pipperscale
@@ -275,6 +284,15 @@ var asp_pfd = {
                 # determine angle = arctan(opp/adj) = arctan(span/distance)
                 # remember pipper_scale is radius, not diameter.
                 pipper_scale.setValue(math.clamp(math.atan2(me.span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
+            }
+            
+            #distance scale logic
+            if (throttle_drum.getValue() < 1) {
+                if (shoot_bomb_switch.getValue() == 0 and gun_rkt_switch.getValue() and knobpos.getValue() > 4) {
+                    distance_scale.setValue(interp(me.lcos.D,0,8000,0,1));
+                } else (throttle_drum.getValue() < 1) {
+                    distance_scale.setValue(interp(me.lcos.D,400,2000,0,1));
+                }
             }
         }
         #print("D: " ~ me.lcos.D);

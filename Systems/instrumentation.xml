@@ -212,6 +212,12 @@ clock
             <output>/controls/armament/gunsight/angle-setting-motorcontrol</output>
         </fcs_function>
         
+        
+        <lag_filter name="/controls/armament/gunsight/scale-dial-postfilter">
+            <input>/controls/armament/gunsight/scale-dial-prefilter</input>
+            <c1>9.0</c1>
+        </lag_filter>        
+        
     </channel>
 
 
