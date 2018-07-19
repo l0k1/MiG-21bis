@@ -12,7 +12,7 @@ var interp = func(x, x0, x1, y0, y1) {
 ### MiG-21 specific variables for the ASP-PFD gunsight
 
 var gun_rkt_switch = props.globals.getNode("controls/armament/gunsight/gun-missile-switch");
-var shoot_bomb_switch = props.globals.getNode("controls/armament/gunsight/pip-mode-select-switch");
+var shoot_bomb_switch = props.globals.getNode("controls/armament/gunsight/pipper-mode-select-switch");
 var auto_man_switch = props.globals.getNode("/controls/armament/gunsight/auto-man-switch");
 var throttle_drum = props.globals.getNode("/controls/armament/gunsight/throttle-drum");
 var lock_bars_pos = props.globals.getNode("controls/radar/lock-bars-pos");
@@ -300,39 +300,41 @@ var asp_pfd = {
 
         }
 
-        
         #distance scale logic
         if (throttle_drum.getValue() < 1 and gunsight_power.getValue() > 32) {
             if (shoot_bomb_switch.getValue() == 0 and gun_rkt_switch.getValue() and knobpos.getValue() > 4) {
                 distance_scale.setValue(math.clamp(interp(me.lcos.D * FT2M,0,8000,0,1),0,1));
-                print("distancescale1");
             } elsif (throttle_drum.getValue() < 1) {
                 distance_scale.setValue(math.clamp(interp(me.lcos.D * FT2M,400,2000,0,1),0,1));
-                print("distancescale2");
-                print(throttle_drum.getValue());
             }
         } elsif (gunsight_power.getValue() > 32) {
             distance_scale.setValue(math.clamp(interp(pipper_scale.getValue(),min_pip,max_pip,0,1),0,1));
-                print("distancescale3");
         } else {
             distance_scale.setValue(0);
-
-                print("distancescale0");
         }
     
         #breakoff light logic
-        if (air_gnd_switch == -1 and gunsight_power.getValue() > 32) {
-            if (me.lcos.D < 1950 * FT2M) {
+        if (air_gnd_switch.getValue() == 2 and gunsight_power.getValue() > 32) {
+            print('brkofflnch');
+            print("lcos:" ~ (me.lcos.D * FT2M));
+            print("sb: " ~ shoot_bomb_switch.getValue());
+            if (me.lcos.D < (1950 * M2FT)) {
                 launch_light.setValue(1);
+            print('lnch1');
             } else {
                 launch_light.setValue(0);
+            print('lnch2');
             }
-            if (shoot_bomb_siwtch.getValue() == 0) {
-                if (gun_rkt_switch.getValue() == 0 and me.lcos.D < 1200 * FT2M) {
+            if (shoot_bomb_switch.getValue() == 0) {
+            print('brkoff1');
+                if (gun_rkt_switch.getValue() == 0 and me.lcos.D < (1200 * M2FT)) {
+            print('brkoff2');
                     breakoff_light.setValue(1);
-                } elsif (gun_rkt_switch.getValue() and ((knobpos.getValue() <=2 and m.lcos.D < 1200 * FT2M) or (knobpos.getValue() > 2 and knobpos.getValue() < 5 and m.lcos.D < 1600 * FT2M))) {
+                } elsif (gun_rkt_switch.getValue() and ((knobpos.getValue() <=2 and me.lcos.D < (1200 * M2FT)) or (knobpos.getValue() > 2 and knobpos.getValue() < 5 and me.lcos.D < (1600 * M2FT)))) {
+            print('brkoff3');
                     breakoff_light.setValue(1);
                 } else {
+            print('brkoff4');
                     breakoff_light.setValue(0);
                 }
             }

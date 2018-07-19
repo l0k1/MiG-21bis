@@ -109,23 +109,44 @@
 
     <animation>
 		<type>material</type>
-		<object-name>gunsight_lock_light</object-name>
-		<emission>
-			<red>0.1</red>
-			<green>1.0</green>
-			<blue>0.1</blue>
-			<factor-prop>controls/armament/gunsight/lock-light</factor-prop>
-		</emission> 
-	</animation>
-
-
-    <animation>
-		<type>material</type>
 		<object-name>gunsight_glass_guage</object-name>
 		<emission>
 			<red>1.0</red>
 			<green>0.8</green>
 			<blue>0.8</blue>
+			<factor-prop>/controls/armament/gunsight/scale-dial-brightness</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>gunsight_distance_scales_needle</object-name>
+		<emission>
+			<red>1.0</red>
+			<green>0.8</green>
+			<blue>0.8</blue>
+			<factor-prop>/controls/armament/gunsight/scale-dial-brightness</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>gunsight_pipper_diameter_display</object-name>
+		<emission>
+			<red>0.6</red>
+			<green>0.4</green>
+			<blue>0.4</blue>
+			<factor-prop>/controls/armament/gunsight/scale-dial-brightness</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>gunsight_ang_corr_display</object-name>
+		<emission>
+			<red>0.6</red>
+			<green>0.4</green>
+			<blue>0.4</blue>
 			<factor-prop>/controls/armament/gunsight/scale-dial-brightness</factor-prop>
 		</emission> 
 	</animation>
