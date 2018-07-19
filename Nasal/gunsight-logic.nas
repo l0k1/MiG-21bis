@@ -26,11 +26,11 @@ var gyroMslSwitch = props.globals.getNode("controls/armament/gunsight/pipper-acc
 var damper = props.globals.getNode("controls/armament/gunsight/damping");
 var distance_scale = props.globals.getNode("controls/armament/gunsight/scale-dial-prefilter");
 var missile_scale = props.globals.getNode("controls/armament/gunsight/missile-scale-prefilter");
-var gunsight_power = props.globals.getNode("fdm/jsbsim/electric/switches/rvmsp/gunsight");
+var gunsight_power = props.globals.getNode("fdm/jsbsim/electric/output/gunsight");
 var air_gnd_switch = props.globals.getNode("controls/armament/panel/air-gnd-switch");
-var lock_light = props.globals.getNode("controls/armament/gunsight/lock_light");
-var launch_light = props.globals.getNode("controls/armament/gunsight/launch_light");
-var breakoff_light = props.globals.getNode("controls/armament/gunsight/breakoff_light");
+var lock_light = props.globals.getNode("controls/armament/gunsight/lock-light");
+var launch_light = props.globals.getNode("controls/armament/gunsight/launch-light");
+var breakoff_light = props.globals.getNode("controls/armament/gunsight/breakoff-light");
 
 var min_drum = 0;
 var max_drum = 1;
@@ -302,7 +302,7 @@ var asp_pfd = {
             if (throttle_drum.getValue() < 1 and gunsight_power.getValue() > 32) {
                 if (shoot_bomb_switch.getValue() == 0 and gun_rkt_switch.getValue() and knobpos.getValue() > 4) {
                     distance_scale.setValue(interp(me.lcos.D * FT2M,0,8000,0,1));
-                } else (throttle_drum.getValue() < 1) {
+                } elsif (throttle_drum.getValue() < 1) {
                     distance_scale.setValue(interp(me.lcos.D * FT2M,400,2000,0,1));
                 }
             } elsif (gunsight_power.getValue() > 32) {
@@ -322,7 +322,7 @@ var asp_pfd = {
             if (shoot_bomb_siwtch.getValue() == 0) {
                 if (gun_rkt_switch.getValue() == 0 and me.lcos.D < 1200 * FT2M) {
                     breakoff_light.setValue(1);
-                } elsif (gun_rkt_switch.getValue() and ((knobpos.getValue() <=2 and m.lcos.D < 1200 * FT2M) or (knobpos.getValue() > 2 and knobpos.getValue() < 5 and m.lcos.D < 1600 * FT2M)){
+                } elsif (gun_rkt_switch.getValue() and ((knobpos.getValue() <=2 and m.lcos.D < 1200 * FT2M) or (knobpos.getValue() > 2 and knobpos.getValue() < 5 and m.lcos.D < 1600 * FT2M))) {
                     breakoff_light.setValue(1);
                 } else {
                     breakoff_light.setValue(0);
@@ -348,7 +348,9 @@ var asp_pfd = {
     },
 
     setAutoAngle: func() {
+        print('setting auto angle');
         if (gunsight_power.getValue() < 32) {
+            print('not enough power');
             return;
         }
         me.lcos.VM = 2350.0;   # muzzle speed in feet per second
@@ -357,7 +359,7 @@ var asp_pfd = {
             if (shoot_bomb_switch.getValue()) {
                 #switch set to bomb
                 angle_setting_pre.setValue(0); # totally fictional, no idea what this should be
-                me.lcos.VM = 1.0;   # muzzle speed in feet per second
+                me.lcos.VM = 250.0;   # muzzle speed in feet per second
             } else {
                 #switch set to shoot
                 if (gun_rkt_switch.getValue()) {
