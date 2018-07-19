@@ -27,6 +27,10 @@ var damper = props.globals.getNode("controls/armament/gunsight/damping");
 var distance_scale = props.globals.getNode("controls/armament/gunsight/scale-dial-prefilter");
 var missile_scale = props.globals.getNode("controls/armament/gunsight/missile-scale-prefilter");
 var gunsight_power = props.globals.getNode("fdm/jsbsim/electric/switches/rvmsp/gunsight");
+var air_gnd_switch = props.globals.getNode("controls/armament/panel/air-gnd-switch");
+var lock_light = props.globals.getNode("controls/armament/gunsight/lock_light");
+var launch_light = props.globals.getNode("controls/armament/gunsight/launch_light");
+var breakoff_light = props.globals.getNode("controls/armament/gunsight/breakoff_light");
 
 var min_drum = 0;
 var max_drum = 1;
@@ -297,9 +301,9 @@ var asp_pfd = {
             #distance scale logic
             if (throttle_drum.getValue() < 1 and gunsight_power.getValue() > 32) {
                 if (shoot_bomb_switch.getValue() == 0 and gun_rkt_switch.getValue() and knobpos.getValue() > 4) {
-                    distance_scale.setValue(interp(me.lcos.D,0,8000,0,1));
+                    distance_scale.setValue(interp(me.lcos.D * FT2M,0,8000,0,1));
                 } else (throttle_drum.getValue() < 1) {
-                    distance_scale.setValue(interp(me.lcos.D,400,2000,0,1));
+                    distance_scale.setValue(interp(me.lcos.D * FT2M,400,2000,0,1));
                 }
             } elsif (gunsight_power.getValue() > 32) {
                 distance_scale.setValue(interp(pipper_scale.getValue(),min_pip,max_pip,0,1));
@@ -307,6 +311,33 @@ var asp_pfd = {
                 distance_scale.setValue(0);
             }
         }
+        
+        #breakoff light logic
+        if (air_gnd_switch == -1) {
+            if (me.lcos.D < 1950 * FT2M) {
+                launch_light.setValue(1);
+            } else {
+                launch_light.setValue(0);
+            }
+            if (shoot_bomb_siwtch.getValue() == 0) {
+                if (gun_rkt_switch.getValue() == 0 and me.lcos.D < 1200 * FT2M) {
+                    breakoff_light.setValue(1);
+                } elsif (gun_rkt_switch.getValue() and ((knobpos.getValue() <=2 and m.lcos.D < 1200 * FT2M) or (knobpos.getValue() > 2 and knobpos.getValue() < 5 and m.lcos.D < 1600 * FT2M)){
+                    breakoff_light.setValue(1);
+                } else {
+                    breakoff_light.setValue(0);
+                }
+            }
+        }
+        
+        if (radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
+            lock_light.setValue(1);
+        }else{
+            lock_light.setValue(0);
+        }
+                
+                
+        
         #print("D: " ~ me.lcos.D);
         settimer(func(){me.update();},0.05);
     },
