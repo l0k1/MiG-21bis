@@ -368,6 +368,8 @@
 				<angle-setting-autorotate type="bool">0</angle-setting-autorotate>
 				<angle-setting-motorcontrol type="bool">0</angle-setting-motorcontrol>
 				<fixed-net-brightness-knob type="float">1</fixed-net-brightness-knob>
+				<scale-dial-brightness-knob type="float">1</scale-dial-brightness-knob>
+				<scale-dial-brightness type="float">1</scale-dial-brightness>
 				<scale-dial-prefilter type="float">0</scale-dial-prefilter>
 				<scale-dial-postfilter type="float">0</scale-dial-postfilter>
 				<missile-scale-prefilter type="float">0</missile-scale-prefilter>

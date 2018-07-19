@@ -290,30 +290,38 @@ var asp_pfd = {
                 # remember pipper_scale is radius, not diameter.
                 pipper_scale.setValue(math.clamp(math.atan2(me.span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
             }
-            
+
             #missile scale logic
             if(radar_logic.selection != nil and arm_locking.lock_mode == "radar" and gunsight_power.getValue() > 32) {
-                missile_scale.setValue(interp(radar_logic.selection.get_polar()[0],2000,5000,0,1));
+                missile_scale.setValue(math.clamp(interp(radar_logic.selection.get_polar()[0],2000,5000,0,1),0,1));
             } else {
                 missile_scale.setValue(0);
             }
-            
-            #distance scale logic
-            if (throttle_drum.getValue() < 1 and gunsight_power.getValue() > 32) {
-                if (shoot_bomb_switch.getValue() == 0 and gun_rkt_switch.getValue() and knobpos.getValue() > 4) {
-                    distance_scale.setValue(interp(me.lcos.D * FT2M,0,8000,0,1));
-                } elsif (throttle_drum.getValue() < 1) {
-                    distance_scale.setValue(interp(me.lcos.D * FT2M,400,2000,0,1));
-                }
-            } elsif (gunsight_power.getValue() > 32) {
-                distance_scale.setValue(interp(pipper_scale.getValue(),min_pip,max_pip,0,1));
-            } else {
-                distance_scale.setValue(0);
-            }
+
         }
+
         
+        #distance scale logic
+        if (throttle_drum.getValue() < 1 and gunsight_power.getValue() > 32) {
+            if (shoot_bomb_switch.getValue() == 0 and gun_rkt_switch.getValue() and knobpos.getValue() > 4) {
+                distance_scale.setValue(math.clamp(interp(me.lcos.D * FT2M,0,8000,0,1),0,1));
+                print("distancescale1");
+            } elsif (throttle_drum.getValue() < 1) {
+                distance_scale.setValue(math.clamp(interp(me.lcos.D * FT2M,400,2000,0,1),0,1));
+                print("distancescale2");
+                print(throttle_drum.getValue());
+            }
+        } elsif (gunsight_power.getValue() > 32) {
+            distance_scale.setValue(math.clamp(interp(pipper_scale.getValue(),min_pip,max_pip,0,1),0,1));
+                print("distancescale3");
+        } else {
+            distance_scale.setValue(0);
+
+                print("distancescale0");
+        }
+    
         #breakoff light logic
-        if (air_gnd_switch == -1) {
+        if (air_gnd_switch == -1 and gunsight_power.getValue() > 32) {
             if (me.lcos.D < 1950 * FT2M) {
                 launch_light.setValue(1);
             } else {
@@ -330,7 +338,7 @@ var asp_pfd = {
             }
         }
         
-        if (radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
+        if (radar_logic.selection != nil and arm_locking.lock_mode == "radar" and gunsight_power.getValue() > 32) {
             lock_light.setValue(1);
         }else{
             lock_light.setValue(0);
@@ -348,9 +356,9 @@ var asp_pfd = {
     },
 
     setAutoAngle: func() {
-        print('setting auto angle');
+        #print('setting auto angle');
         if (gunsight_power.getValue() < 32) {
-            print('not enough power');
+            #print('not enough power');
             return;
         }
         me.lcos.VM = 2350.0;   # muzzle speed in feet per second

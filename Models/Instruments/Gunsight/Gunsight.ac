@@ -4,13 +4,13 @@ MATERIAL "DefaultWhite.001" rgb 1.000 1.000 1.000  amb 0.200 0.200 0.200  emis 0
 MATERIAL "gunsight_red" rgb 0.800 0.098 0.073  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.537 0.347 0.323  shi 22 trans 0.000
 MATERIAL "leather" rgb 0.017 0.017 0.017  amb 0.943 0.943 0.943  emis 0.000 0.000 0.000  spec 0.082 0.082 0.082  shi 97 trans 0.000
 MATERIAL "gunsight_glass_01" rgb 0.800 0.800 0.800  amb 0.209 0.209 0.209  emis 0.000 0.000 0.000  spec 0.348 0.348 0.348  shi 78 trans 0.816
-MATERIAL "gunsight_glass_01.001" rgb 0.800 0.800 0.800  amb 0.209 0.209 0.209  emis 0.000 0.000 0.000  spec 0.348 0.348 0.348  shi 78 trans 0.816
+MATERIAL "gunsight_glass_01.001" rgb 0.800 0.800 0.800  amb 0.705 0.705 0.705  emis 0.000 0.000 0.000  spec 1.000 1.000 1.000  shi 78 trans 0.000
 MATERIAL "rubber_sunshade" rgb 0.800 0.800 0.800  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.262 0.262 0.262  shi 5 trans 0.000
 MATERIAL "gunsight_light" rgb 0.700 0.711 0.689  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.239 0.203 0.141  shi 46 trans 0.000
 MATERIAL "canvas_mat" rgb 0.800 0.800 0.800  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 1.000 1.000 1.000  shi 123 trans 0.000
 OBJECT world
 name "Blender_exporter_v2.25__Gunsight.ac"
-kids 27
+kids 28
 OBJECT poly
 name "gunsight"
 data 12
@@ -9641,11 +9641,11 @@ data 9
 Plane.009
 crease 35.0
 numvert 5
--3.99232 0.99682 0.09571
--3.99232 0.98357 0.09623
--3.99232 0.98357 0.09519
--3.99232 0.99531 0.09623
--3.99232 0.99531 0.09519
+-3.99232 0.99343 0.10456
+-3.99232 0.98322 0.0961
+-3.99232 0.98392 0.09532
+-3.99232 0.99196 0.10394
+-3.99232 0.99265 0.10317
 numsurf 2
 SURF 0X0
 mat 1
@@ -11000,6 +11000,32 @@ refs 16
 26 0.638575 0.198171
 28 0.641048 0.195698
 30 0.64428 0.194359
+kids 0
+OBJECT poly
+name "gunsight_distance_scales_needle"
+data 9
+Plane.000
+crease 35.0
+numvert 5
+-3.95566 1.01377 0.05212
+-3.95566 0.96337 0.04017
+-3.95566 0.96359 0.03929
+-3.95566 1.01218 0.05226
+-3.95566 1.01243 0.05125
+numsurf 2
+SURF 0X0
+mat 1
+refs 4
+3 0 0
+1 0 0
+2 0 0
+4 0 0
+SURF 0X0
+mat 1
+refs 3
+0 0 0
+3 0 0
+4 0 0
 kids 0
 OBJECT poly
 name "gunsight_fixed_net_illum_knob"
