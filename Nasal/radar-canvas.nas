@@ -519,9 +519,8 @@ var radar_screen = {
 			#lower limit is lpos = 0
 			#upper limit is upper-bound = 377
 
-			var lpos_mod = (radar_logic.radarRange / 3 * 2) / 473;
 			var lscale = getprop(lock_bars_scale);
-			var lpos = getprop(lock_bars_pos) * lpos_mod;
+			var lpos = getprop(lock_bars_pos);
 			
 			lscale = clamp(lscale, 50, 250);
 			lpos = clamp(lpos, 0, 900);
@@ -533,7 +532,7 @@ var radar_screen = {
 			}
 			
 			setprop(lock_bars_scale, lscale);
-			setprop(lock_bars_pos, lpos * lpos_mod);
+			setprop(lock_bars_pos, lpos);
 			
 			me.lowerBar.setTranslation(506, 950 - lpos);
 			me.upperBar.setTranslation(506, 950 - ( lpos + lscale ));
@@ -725,6 +724,11 @@ var on_off = func() {
 		#print("exit3");
 		setprop(radar_mode, "normal-init");
 	}
+}
+
+
+var interp = func(x, x0, x1, y0, y1) {
+    return y0 + (x - x0) * ((y1 - y0) / (x1 - x0));
 }
 
 setlistener("controls/radar/power-panel/run", func { on_off(); });

@@ -36,8 +36,8 @@ var min_drum = 0;
 var max_drum = 1;
 var min_pip = 5; # radius in mils
 var max_pip = 40; # radius in mils
-var min_gate = 0; # in km
-var max_gate = radar_logic.radarRange / 3 * 2; # in km
+var min_gate = 0; # in px
+var max_gate = 473; # in px
 
 ###
 
