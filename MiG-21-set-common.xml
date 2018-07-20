@@ -368,14 +368,16 @@
 				<angle-setting-autorotate type="bool">0</angle-setting-autorotate>
 				<angle-setting-motorcontrol type="bool">0</angle-setting-motorcontrol>
 				<fixed-net-brightness-knob type="float">1</fixed-net-brightness-knob>
+				<scale-dial-brightness-knob type="float">1</scale-dial-brightness-knob>
+				<scale-dial-brightness type="float">1</scale-dial-brightness>
 				<scale-dial-prefilter type="float">0</scale-dial-prefilter>
 				<scale-dial-postfilter type="float">0</scale-dial-postfilter>
 				<missile-scale-prefilter type="float">0</missile-scale-prefilter>
 				<missile-scale-postfilter type="float">0</missile-scale-postfilter>
 				<damping type="bool">0</damping>
-				<lock-light type="bool">0</lock-light>
-				<launch-light type="bool">0</launch-light>
-				<breakoff-light type="bool">0</breakoff-light>
+				<lock-light type="float">0</lock-light>
+				<launch-light type="float">0</launch-light>
+				<breakoff-light type="float">0</breakoff-light>
 			</gunsight>
 			<missile-release type="int" alias="/fdm/jsbsim/systems/armament/release">0</missile-release>
 					   <trigger type="bool">false</trigger>

@@ -12,7 +12,7 @@ var interp = func(x, x0, x1, y0, y1) {
 ### MiG-21 specific variables for the ASP-PFD gunsight
 
 var gun_rkt_switch = props.globals.getNode("controls/armament/gunsight/gun-missile-switch");
-var shoot_bomb_switch = props.globals.getNode("controls/armament/gunsight/pip-mode-select-switch");
+var shoot_bomb_switch = props.globals.getNode("controls/armament/gunsight/pipper-mode-select-switch");
 var auto_man_switch = props.globals.getNode("/controls/armament/gunsight/auto-man-switch");
 var throttle_drum = props.globals.getNode("/controls/armament/gunsight/throttle-drum");
 var lock_bars_pos = props.globals.getNode("controls/radar/lock-bars-pos");
@@ -26,11 +26,11 @@ var gyroMslSwitch = props.globals.getNode("controls/armament/gunsight/pipper-acc
 var damper = props.globals.getNode("controls/armament/gunsight/damping");
 var distance_scale = props.globals.getNode("controls/armament/gunsight/scale-dial-prefilter");
 var missile_scale = props.globals.getNode("controls/armament/gunsight/missile-scale-prefilter");
-var gunsight_power = props.globals.getNode("fdm/jsbsim/electric/switches/rvmsp/gunsight");
+var gunsight_power = props.globals.getNode("fdm/jsbsim/electric/output/gunsight");
 var air_gnd_switch = props.globals.getNode("controls/armament/panel/air-gnd-switch");
-var lock_light = props.globals.getNode("controls/armament/gunsight/lock_light");
-var launch_light = props.globals.getNode("controls/armament/gunsight/launch_light");
-var breakoff_light = props.globals.getNode("controls/armament/gunsight/breakoff_light");
+var lock_light = props.globals.getNode("controls/armament/gunsight/lock-light");
+var launch_light = props.globals.getNode("controls/armament/gunsight/launch-light");
+var breakoff_light = props.globals.getNode("controls/armament/gunsight/breakoff-light");
 
 var min_drum = 0;
 var max_drum = 1;
@@ -224,15 +224,15 @@ var AFALCOS = {
     
     ### internal functions
     _getP: func() {
-        return me.P.getValue() * me.gyroDamage[0] * (me.gyroEnable == 0 ? 0.3333 : 1) * (gunsight_power.getValue() > 32 ? 0 : 1);
+        return me.P.getValue() * me.gyroDamage[0] * (me.gyroEnable == 0 ? 0.3333 : 1) * (gunsight_power.getValue() > 32 ? 1 : 0);
     },
     
     _getQ: func() {
-        return me.Q.getValue() * me.gyroDamage[1] * (me.gyroEnable == 0 ? 0.3333 : 1) * (gunsight_power.getValue() > 32 ? 0 : 1);
+        return me.Q.getValue() * me.gyroDamage[1] * (me.gyroEnable == 0 ? 0.3333 : 1) * (gunsight_power.getValue() > 32 ? 1 : 0);
     },
     
     _getR: func() {
-        return me.R.getValue() * me.gyroDamage[2] * (me.gyroEnable == 0 ? 0.3333 : 1) * (gunsight_power.getValue() > 32 ? 0 : 1);
+        return me.R.getValue() * me.gyroDamage[2] * (me.gyroEnable == 0 ? 0.3333 : 1) * (gunsight_power.getValue() > 32 ? 1 : 0);
     },
 };
 
@@ -290,39 +290,40 @@ var asp_pfd = {
                 # remember pipper_scale is radius, not diameter.
                 pipper_scale.setValue(math.clamp(math.atan2(me.span / 2,(me.lcos.D*FT2M)) * RAD2MIL, min_pip, max_pip));
             }
-            
+
             #missile scale logic
             if(radar_logic.selection != nil and arm_locking.lock_mode == "radar" and gunsight_power.getValue() > 32) {
-                missile_scale.setValue(interp(radar_logic.selection.get_polar()[0],2000,5000,0,1));
+                missile_scale.setValue(math.clamp(interp(radar_logic.selection.get_polar()[0],2000,5000,0,1),0,1));
             } else {
                 missile_scale.setValue(0);
             }
-            
-            #distance scale logic
-            if (throttle_drum.getValue() < 1 and gunsight_power.getValue() > 32) {
-                if (shoot_bomb_switch.getValue() == 0 and gun_rkt_switch.getValue() and knobpos.getValue() > 4) {
-                    distance_scale.setValue(interp(me.lcos.D * FT2M,0,8000,0,1));
-                } else (throttle_drum.getValue() < 1) {
-                    distance_scale.setValue(interp(me.lcos.D * FT2M,400,2000,0,1));
-                }
-            } elsif (gunsight_power.getValue() > 32) {
-                distance_scale.setValue(interp(pipper_scale.getValue(),min_pip,max_pip,0,1));
-            } else {
-                distance_scale.setValue(0);
-            }
+
         }
-        
+
+        #distance scale logic
+        if (throttle_drum.getValue() < 1 and gunsight_power.getValue() > 32) {
+            if (shoot_bomb_switch.getValue() == 0 and gun_rkt_switch.getValue() and knobpos.getValue() > 4) {
+                distance_scale.setValue(math.clamp(interp(me.lcos.D * FT2M,0,8000,0,1),0,1));
+            } elsif (throttle_drum.getValue() < 1) {
+                distance_scale.setValue(math.clamp(interp(me.lcos.D * FT2M,400,2000,0,1),0,1));
+            }
+        } elsif (gunsight_power.getValue() > 32) {
+            distance_scale.setValue(math.clamp(interp(pipper_scale.getValue(),min_pip,max_pip,0,1),0,1));
+        } else {
+            distance_scale.setValue(0);
+        }
+    
         #breakoff light logic
-        if (air_gnd_switch == -1) {
-            if (me.lcos.D < 1950 * FT2M) {
+        if (air_gnd_switch.getValue() == 2 and gunsight_power.getValue() > 32) {
+            if (me.lcos.D < (1950 * M2FT)) {
                 launch_light.setValue(1);
             } else {
                 launch_light.setValue(0);
             }
-            if (shoot_bomb_siwtch.getValue() == 0) {
-                if (gun_rkt_switch.getValue() == 0 and me.lcos.D < 1200 * FT2M) {
+            if (shoot_bomb_switch.getValue() == 0) {
+                if (gun_rkt_switch.getValue() == 0 and me.lcos.D < (1200 * M2FT)) {
                     breakoff_light.setValue(1);
-                } elsif (gun_rkt_switch.getValue() and ((knobpos.getValue() <=2 and m.lcos.D < 1200 * FT2M) or (knobpos.getValue() > 2 and knobpos.getValue() < 5 and m.lcos.D < 1600 * FT2M)){
+                } elsif (gun_rkt_switch.getValue() and ((knobpos.getValue() <=2 and me.lcos.D < (1200 * M2FT)) or (knobpos.getValue() > 2 and knobpos.getValue() < 5 and me.lcos.D < (1600 * M2FT)))) {
                     breakoff_light.setValue(1);
                 } else {
                     breakoff_light.setValue(0);
@@ -330,7 +331,7 @@ var asp_pfd = {
             }
         }
         
-        if (radar_logic.selection != nil and arm_locking.lock_mode == "radar") {
+        if (radar_logic.selection != nil and arm_locking.lock_mode == "radar" and gunsight_power.getValue() > 32) {
             lock_light.setValue(1);
         }else{
             lock_light.setValue(0);
@@ -348,7 +349,9 @@ var asp_pfd = {
     },
 
     setAutoAngle: func() {
+        #print('setting auto angle');
         if (gunsight_power.getValue() < 32) {
+            #print('not enough power');
             return;
         }
         me.lcos.VM = 2350.0;   # muzzle speed in feet per second
@@ -357,7 +360,7 @@ var asp_pfd = {
             if (shoot_bomb_switch.getValue()) {
                 #switch set to bomb
                 angle_setting_pre.setValue(0); # totally fictional, no idea what this should be
-                me.lcos.VM = 1.0;   # muzzle speed in feet per second
+                me.lcos.VM = 250.0;   # muzzle speed in feet per second
             } else {
                 #switch set to shoot
                 if (gun_rkt_switch.getValue()) {

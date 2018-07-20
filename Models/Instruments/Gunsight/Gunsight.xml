@@ -73,6 +73,83 @@
         <inherits-from>Effects/hud</inherits-from>
         <object-name>sight</object-name>
     </effect>
+
+    <animation>
+		<type>material</type>
+		<object-name>gunsight_launch_light</object-name>
+		<emission>
+			<red>1.0</red>
+			<green>0.1</green>
+			<blue>0.1</blue>
+			<factor-prop>controls/armament/gunsight/launch-light</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>gunsight_break_light</object-name>
+		<emission>
+			<red>1.0</red>
+			<green>0.1</green>
+			<blue>0.1</blue>
+			<factor-prop>controls/armament/gunsight/breakoff-light</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>gunsight_lock_light</object-name>
+		<emission>
+			<red>0.1</red>
+			<green>1.0</green>
+			<blue>0.1</blue>
+			<factor-prop>controls/armament/gunsight/lock-light</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>gunsight_glass_guage</object-name>
+		<emission>
+			<red>1.0</red>
+			<green>0.8</green>
+			<blue>0.8</blue>
+			<factor-prop>/controls/armament/gunsight/scale-dial-brightness</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>gunsight_distance_scales_needle</object-name>
+		<emission>
+			<red>1.0</red>
+			<green>0.8</green>
+			<blue>0.8</blue>
+			<factor-prop>/controls/armament/gunsight/scale-dial-brightness</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>gunsight_pipper_diameter_display</object-name>
+		<emission>
+			<red>0.6</red>
+			<green>0.4</green>
+			<blue>0.4</blue>
+			<factor-prop>/controls/armament/gunsight/scale-dial-brightness</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>gunsight_ang_corr_display</object-name>
+		<emission>
+			<red>0.6</red>
+			<green>0.4</green>
+			<blue>0.4</blue>
+			<factor-prop>/controls/armament/gunsight/scale-dial-brightness</factor-prop>
+		</emission> 
+	</animation>
 	
 	<!-- Animations -->
 	
@@ -198,6 +275,42 @@
 			<x-m>-3.98895</x-m>
 			<y-m>-0.09091</y-m>
 			<z-m> 0.87915</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<object-name>gunsight_aa_guage_needle</object-name>
+		<type>rotate</type>
+		<property>controls/armament/gunsight/missile-scale-postfilter</property>
+		<factor>-82.82</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>-3.99232</x-m>
+			<y-m>-0.09571</y-m>
+			<z-m> 0.98357</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<object-name>gunsight_distance_scales_needle</object-name>
+		<type>rotate</type>
+		<property>controls/armament/gunsight/scale-dial-postfilter</property>
+		<factor>-27.6</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>-3.95566</x-m>
+			<y-m>-0.005277</y-m>
+			<z-m>0.823558</z-m>
 		</center>
 		<axis>
 			<x>1</x>
@@ -432,6 +545,7 @@
 		<object-name>gunsight_pipper_illum_knob</object-name>
 		<action>
 			<button>0</button>
+			<button>3</button>
 			<repeatable>true</repeatable>
 			<interval-sec>0.2</interval-sec>
 			<binding>
@@ -444,6 +558,7 @@
 		</action>
 		<action>
 			<button>1</button>
+			<button>4</button>
 			<repeatable>true</repeatable>
 			<interval-sec>0.2</interval-sec>
 			<binding>
@@ -457,10 +572,29 @@
 	</animation>
 
 	<animation>
+		<object-name>gunsight_pipper_illum_knob</object-name>
+		<type>rotate</type>
+		<property>/controls/armament/gunsight/pipper-brightness-knob</property>
+		<factor>-360</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>-3.96079</x-m>
+			<y-m> 0.08518</y-m>
+			<z-m> 0.878275</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
 		<type>pick</type>
 		<object-name>gunsight_fixed_net_illum_knob</object-name>
 		<action>
 			<button>0</button>
+			<button>3</button>
 			<repeatable>true</repeatable>
 			<interval-sec>0.2</interval-sec>
 			<binding>
@@ -473,6 +607,7 @@
 		</action>
 		<action>
 			<button>1</button>
+			<button>4</button>
 			<repeatable>true</repeatable>
 			<interval-sec>0.2</interval-sec>
 			<binding>
@@ -483,6 +618,73 @@
 				<max>1.05</max>
 			</binding>
 		</action>
+	</animation>
+
+	<animation>
+		<object-name>gunsight_fixed_net_illum_knob</object-name>
+		<type>rotate</type>
+		<property>/controls/armament/gunsight/fixed-net-brightness-knob</property>
+		<factor>-280</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>-4.05158</x-m>
+			<y-m>-0.095295</y-m>
+			<z-m> 0.810045</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>gunsight_distance_scale_illum_knob</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/gunsight/scale-dial-brightness-knob</property>
+				<step>0.05</step>
+				<min>0</min>
+				<max>1.05</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/armament/gunsight/scale-dial-brightness-knob</property>
+				<step>-0.05</step>
+				<min>0</min>
+				<max>1.05</max>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>gunsight_distance_scale_illum_knob</object-name>
+		<type>rotate</type>
+		<property>/controls/armament/gunsight/scale-dial-brightness-knob</property>
+		<factor>-360</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>-3.96074</x-m>
+			<y-m>-0.090865</y-m>
+			<z-m> 0.84267</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
 	</animation>
 
 </PropertyList>

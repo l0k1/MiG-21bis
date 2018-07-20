@@ -579,6 +579,23 @@
 
 	<channel name="lights_other">
 
+		<fcs_function name="trash/warning-lights/gunsight-scale-illumination">
+			<function>
+				<product>
+					<property>/controls/armament/gunsight/scale-dial-brightness-knob</property>
+					<quotient>
+						<property>electric/output/gunsight</property>
+						<value>32</value>
+					</quotient>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>/controls/armament/gunsight/scale-dial-brightness</output>
+		</fcs_function>
+
 		<fcs_function name="trash/warning-lights/fagp/gear-down">
 			<function>
 				<product>
