@@ -547,7 +547,7 @@ var radar_screen = {
 					var ya_ang = p[2] * R2D;
 
 					#make blip
-					if (b_i < me.no_blip and distance != nil and distance < me.radar_range ){#and alt-100 > getprop("/environment/ground-elevation-m")){
+					if (b_i < me.no_blip and distance != nil and distance < me.radar_range ){ #and alt-100 > getprop("/environment/ground-elevation-m")){
 						#print("contact is valid");
 						#aircraft is within the radar ray cone
 						#var locked = FALSE;
@@ -611,7 +611,46 @@ var radar_screen = {
 					}
 					b_i += 1;
 				}
+			} else {
+				if (radar_logic.selection != nil) {
+					var p = radar_logic.selection.get_polar();
+					var distance = p[0];
+					var xa_rad = p[3];
+					var ya_ang = p[2] * R2D;
+					if (distance != nil and distance < me.radar_range ){
+						var pixelDistance = -distance*((950)/me.radar_range); #distance in pixels
+						#translate from polar coords to cartesian coords
+						var pixelX = ((xa_rad * R2D / RADAR_LEFT_LIMIT) * -506) + 506; #506 is half width of radar screen
+						var pixelY = pixelDistance + 950;
+						pixelX = clamp(pixelX, 180, 836);
+						pixelY = clamp(pixelY, 100,950);
+						
+						me.even_blip[0].setTranslation(pixelX, pixelY);
+						me.even_blip[0].show();
+						me.below_blip[0].hide();
+						me.above_blip[0].hide();
+						me.f_addon_blip[b_i].hide();
+						
+						if ( getprop(show_callsigns) == 1 ) {
+							if ( pixelX <= 506 ) {
+								me.blip_text[b_i].setTranslation(pixelX - 50, pixelY);
+								me.blip_text[b_i].setText(radar_logic.selection.get_Callsign());
+								me.blip_text[b_i].setAlignment("right-center");
+								me.blip_text[b_i].show();
+							} else {
+							me.blip_text[b_i].setTranslation(pixelX + 50, pixelY);
+								me.blip_text[b_i].setText(radar_logic.selection.get_Callsign());
+								me.blip_text[b_i].setAlignment("left-center");
+								me.blip_text[b_i].show();
+							}
+						} else {
+							me.blip_text[b_i].hide();
+						}
+						b_i = 1;
+					}
+				}
 			}
+					
 			#if (lock == FALSE) {
 			#	me.lock.hide();
 			#} else {
