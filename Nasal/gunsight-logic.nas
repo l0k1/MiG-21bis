@@ -269,7 +269,7 @@ var asp_pfd = {
         #if in rkt/rkt, use lowest scale
         #distance_scale.setValue()
         
-        if (throttle_drum.getValue() >= 1) {
+        if (throttle_drum.getValue() <= 0) {
             me.lcos.D = 300 * M2FT;
             # determine angle = arctan(opp/adj) = arctan((span/2)/distance) = atan2(y,x)
             # multiply by 1000 to change to mils
@@ -301,10 +301,10 @@ var asp_pfd = {
         }
 
         #distance scale logic
-        if (throttle_drum.getValue() < 1 and gunsight_power.getValue() > 32) {
+        if (throttle_drum.getValue() > 0 and gunsight_power.getValue() > 32) {
             if (shoot_bomb_switch.getValue() == 0 and gun_rkt_switch.getValue() and knobpos.getValue() > 4) {
                 distance_scale.setValue(math.clamp(interp(me.lcos.D * FT2M,0,8000,0,1),0,1));
-            } elsif (throttle_drum.getValue() < 1) {
+            } elsif (throttle_drum.getValue() > 0) {
                 distance_scale.setValue(math.clamp(interp(me.lcos.D * FT2M,400,2000,0,1),0,1));
             }
         } elsif (gunsight_power.getValue() > 32) {
@@ -387,7 +387,7 @@ var asp_pfd = {
     },
 
     updateSpan: func() {
-        if( throttle_drum.getValue() >= 1 ) {
+        if( throttle_drum.getValue() <= 0 ) {
             if (span_prop.getValue() < 2 ) {
                 me.span = interp(span_prop.getValue(),0,2,7,9);
             } else {
