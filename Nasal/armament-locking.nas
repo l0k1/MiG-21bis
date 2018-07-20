@@ -187,16 +187,17 @@ var beam_target_lock = func() {
 			}
 		}
 		if ( closest_track != nil and radar_logic.selection != closest_track) {
-			lockTarget(closest_track);
+			lockTarget(closest_track,"radar");
 		} else {
+			beam_search();
 			gps_contact.coord = gps_lock_geo;
 			if ( radar_logic.selection != nil ) {
 				if ( radar_logic.selection.get_Callsign != "BEAMTGT" ) {
 					unlockTarget();
-					lockTarget(gps_contact);
+					lockTarget(gps_contact,"radar");
 				}
 			} else {
-				lockTarget(gps_contact);
+				lockTarget(gps_contact,"radar");
 			}
 		}
 		settimer(func(){beam_target_lock();},beam_update_rate);
