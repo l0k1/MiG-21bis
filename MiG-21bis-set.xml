@@ -63,6 +63,8 @@
 			<splash-texture>Aircraft/MiG-21bis/Splash3.png</splash-texture>
 		</startup>
 
+		<!--<checklists include="Docs/checklists-bis.xml"/>-->
+
 		<!-- Models -->
 
 		<model>
