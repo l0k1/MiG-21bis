@@ -429,7 +429,7 @@ setlistener(throttle_drum.getPath(),func(){
 # if in manual mode, move pipper
     if (auto_man_switch.getValue()) {
         #manual mode
-        pipper_scale.setValue(interp(throttle_drum.getValue(), min_drum, max_drum, min_pip, max_pip));
+        pipper_scale.setValue(interp(throttle_drum.getValue(), min_drum, max_drum, max_pip, min_pip));
     } else {
         #auto mode
         lock_bars_pos.setValue(interp(throttle_drum.getValue(), min_drum, max_drum, min_gate, max_gate));
