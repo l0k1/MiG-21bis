@@ -7,6 +7,11 @@
             <name>DC Battery/Ext Power</name>
             <value>ON</value>
         </item>
+        
+        <item>
+            <name>Engine Start</name>
+            <value>ON</value>
+        </item>
     </checklist>
     
     <checklist>
