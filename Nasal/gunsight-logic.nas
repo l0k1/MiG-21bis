@@ -101,7 +101,7 @@ var AFALCOS = {
         me.VA = 1.68781 * (661.47 * me.mach.getValue() * math.sqrt((me.ambientTemprature.getValue() + 273.15) / 288.15)); # true airspeed in feet
         
         if (me.HA.getValue() > 36000) {
-            me.DH = HA.getValue() - 36000;
+            me.DH = me.HA.getValue() - 36000;
             me.RHO = math.pow((0.018828 + (0.039227E-10 * me.DH - 0.043877E-5 ) * me.DH),2) * 2;
         } else {
             me.RHO = math.pow((0.034475 + (0.019213E-10 * me.HA.getValue() - 0.050381E-5 ) * me.HA.getValue()),2) * 2;
@@ -409,7 +409,7 @@ var asp_pfd = {
 
     setGyroMsl: func() {
         me.lcos.setGyroEnable(gyroMslSwitch.getValue() * -1 + 1); 
-        print(me.lcos.gyroEnable);
+        #print(me.lcos.gyroEnable);
     },
 
     getAzimuth: func() {
