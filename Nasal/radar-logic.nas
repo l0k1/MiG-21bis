@@ -1246,61 +1246,63 @@ var ContactGPS = {
     return [hud_pos_x, hud_pos_y];
   },
 
-  get_polar: func() {
+    get_polar: func() {
+      me.get_Coord();
+      var aircraftAlt = me.coord.alt();
 
-    var aircraftAlt = me.coord.alt();
+      var self      =  geo.aircraft_position();
+      var myPitch   =  input.pitch.getValue()*D2R;
+      var myRoll    =  0;#input.roll.getValue()*deg2rads;  Ignore roll, since a real radar does that
+      var myAlt     =  self.alt();
+      var myHeading =  input.hdgReal.getValue();
+      var distance  =  self.distance_to(me.coord);
+      self._cupdate;
+      me.coord._cupdate;
 
-    var self      =  geo.aircraft_position();
-    var myPitch   =  input.pitch.getValue()*deg2rads;
-    var myRoll    =  0;#input.roll.getValue()*deg2rads;  Ignore roll, since a real radar does that
-    var myAlt     =  self.alt();
-    var myHeading =  input.hdgReal.getValue();
-    var distance  =  self.distance_to(me.coord);
+      var yg_rad = vector.Math.getPitch(self, me.coord)*D2R-myPitch;#math.atan2(aircraftAlt-myAlt, distance) - myPitch; 
+      var xg_rad = (self.course_to(me.coord) - myHeading) * deg2rads;
+      
+      while (xg_rad > math.pi) {
+        xg_rad = xg_rad - 2*math.pi;
+      }
+      while (xg_rad < -math.pi) {
+        xg_rad = xg_rad + 2*math.pi;
+      }
+      while (yg_rad > math.pi) {
+        yg_rad = yg_rad - 2*math.pi;
+      }
+      while (yg_rad < -math.pi) {
+        yg_rad = yg_rad + 2*math.pi;
+      }
 
-    var yg_rad = vector.Math.getPitch(self, me.coord)*D2R-myPitch;#math.atan2(aircraftAlt-myAlt, distance) - myPitch; 
-    var xg_rad = (self.course_to(me.coord) - myHeading) * deg2rads;
-    
-    while (xg_rad > math.pi) {
-      xg_rad = xg_rad - 2*math.pi;
-    }
-    while (xg_rad < -math.pi) {
-      xg_rad = xg_rad + 2*math.pi;
-    }
-    while (yg_rad > math.pi) {
-      yg_rad = yg_rad - 2*math.pi;
-    }
-    while (yg_rad < -math.pi) {
-      yg_rad = yg_rad + 2*math.pi;
-    }
+      #aircraft angle
+      var ya_rad = xg_rad * math.sin(myRoll) + yg_rad * math.cos(myRoll);
+      var xa_rad = xg_rad * math.cos(myRoll) - yg_rad * math.sin(myRoll);
+      var xa_rad_corr = xg_rad;
 
-    #aircraft angle
-    var ya_rad = xg_rad * math.sin(myRoll) + yg_rad * math.cos(myRoll);
-    var xa_rad = xg_rad * math.cos(myRoll) - yg_rad * math.sin(myRoll);
-    var xa_rad_corr = xg_rad;
+      while (xa_rad_corr < -math.pi) {
+        xa_rad_corr = xa_rad_corr + 2*math.pi;
+      }
+      while (xa_rad_corr > math.pi) {
+        xa_rad_corr = xa_rad_corr - 2*math.pi;
+      }
+      while (xa_rad < -math.pi) {
+        xa_rad = xa_rad + 2*math.pi;
+      }
+      while (xa_rad > math.pi) {
+        xa_rad = xa_rad - 2*math.pi;
+      }
+      while (ya_rad > math.pi) {
+        ya_rad = ya_rad - 2*math.pi;
+      }
+      while (ya_rad < -math.pi) {
+        ya_rad = ya_rad + 2*math.pi;
+      }
 
-    while (xa_rad_corr < -math.pi) {
-      xa_rad_corr = xa_rad_corr + 2*math.pi;
-    }
-    while (xa_rad_corr > math.pi) {
-      xa_rad_corr = xa_rad_corr - 2*math.pi;
-    }
-    while (xa_rad < -math.pi) {
-      xa_rad = xa_rad + 2*math.pi;
-    }
-    while (xa_rad > math.pi) {
-      xa_rad = xa_rad - 2*math.pi;
-    }
-    while (ya_rad > math.pi) {
-      ya_rad = ya_rad - 2*math.pi;
-    }
-    while (ya_rad < -math.pi) {
-      ya_rad = ya_rad + 2*math.pi;
-    }
+      var distanceRadar = distance;#/math.cos(myPitch);
 
-    var distanceRadar = distance;#/math.cos(myPitch);
-
-    return [distanceRadar, xa_rad_corr, xa_rad, ya_rad, ya_rad+myPitch];
-  },
+      return [distanceRadar, xa_rad, ya_rad, xa_rad_corr];
+    },
 };
 
 var ContactGhost = {

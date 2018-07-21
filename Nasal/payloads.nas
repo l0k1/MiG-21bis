@@ -47,7 +47,7 @@ var pos_arm = {
 		m.weight = weight;
 		m.type = type;
 		m.type_norm = 1;
-		if ( type == "radar" ) {
+		if ( type == "radar" or type == "beam" ) {
 			m.type_norm = 2;
 		} elsif (type == "ir" ) {
 			m.type_norm = 0;
@@ -137,6 +137,7 @@ var update_pylons = func(pylon) {
                     armament.AIM.active[v_p].del();
                 }
                 if (armament.AIM.new(v_p, payload.name, payload.brevity, payload.guidance_func) == -1 and armament.AIM.active[v_p].status == MISSILE_FLYING) {
+                	setprop("controls/armament/station["~(v_p+1)~"]/released", TRUE);
 					setprop("payload/virtual/weight["~v_p~"]/selected", "none");
 					setprop("payload/virtual/weight["~v_p~"]/weight-lb", 0);
 				}
@@ -147,6 +148,7 @@ var update_pylons = func(pylon) {
             
             # create new guided-missiles.nas entity
             if (armament.AIM.new(pylon, payload.name, payload.brevity, payload.guidance_func) == -1 and armament.AIM.active[pylon].status == MISSILE_FLYING) {
+                setprop("controls/armament/station["~(pylon+1)~"]/released", TRUE);
                 setprop("/payload/weight["~pylon~"]/selected","none");
             }
         }
@@ -490,7 +492,7 @@ var missile_release = func(pylon) {
 		# check temprature, will begin failing at 5*C and guaranteed failure at -5*c
 		if ( interp( getprop("/fdm/jsbsim/systems/armament/pylon-heating/pylon-temp",t_p), -5,0,5,1) < rand() ) { return;	}
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on.
-		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil) {
+		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil and getprop("controls/radar/power-panel/fixed-beam") == 0) {
 			#missile locked, fire it.
 
 			#print("firing missile: "~pylon);
@@ -527,7 +529,7 @@ var missile_release = func(pylon) {
 			} else {
 				setprop("/sim/messages/atc", phrase);
 			}
-		} elsif ( armament.AIM.active[pylon] != nil and selected == "R-27T1" ) {
+		} elsif ( armament.AIM.active[pylon] != nil and selected == "R-27T1" and getprop("controls/radar/power-panel/fixed-beam") == 0) {
 			var prs_inhg = getprop("/environment/pressure-inhg");
 			if ( prs_inhg > 25 ) {
 				#print("pressure: " ~ math.clamp(interp(prs_inhg,33,0,25,1.5),0,4));
@@ -553,13 +555,19 @@ var missile_release = func(pylon) {
 			}
 
 		} elsif ( armament.AIM.active[pylon] != nil and selected == "Kh-66" ) {
-			armament.AIM.active[pylon].releaseAtNothing();
 
 			var brevity = armament.AIM.active[pylon].brevity;
 
+			if (radar_logic.selection == nil) {
+				var phrase = brevity ~ " Maddog released";
+				armament.AIM.active[pylon].releaseAtNothing();
+			} else {
+				var phrase = brevity ~ " released:";
+				armament.AIM.active[pylon].release();
+			}
+			
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 			setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
-			var phrase = brevity ~ " released:";
 			if (getprop("payload/armament/msg")) {
 				defeatSpamFilter(phrase);
 			} else {

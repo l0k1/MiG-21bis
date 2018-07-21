@@ -59,7 +59,7 @@ var ir_seekTarget= func() {
 	if ( c_most != nil and c_most != radar_logic.selection ) {
 		lockTarget(c_most,"ir");
 	} elsif ( c_most == nil ) {
-		#print("unlocking 1");
+		print("unlocking 1");
 		unlockTarget();
 	}
 	settimer( func { ir_seekTarget(); }, 0.1);
@@ -77,7 +77,7 @@ var lock_mode = "none";
 
 var unlockTarget = func() {
 	if ( radar_logic.selection != nil ) {
-		#print("unlocking target");
+		print("unlocking target");
 		lock_mode = "none";
 		radar_logic.radarLogic.paint(radar_logic.selection.getNode(), FALSE);
 		radar_logic.selection = nil;
@@ -99,6 +99,7 @@ var getGPS = func(x, y, z, ac) {
 	#
 
 	if(x == 0 and y==0 and z==0) {
+		print("returning ac");
 		return geo.Coord.new(ac);
 	}
 
@@ -142,8 +143,8 @@ var getGPS = func(x, y, z, ac) {
 	#var mlat = ac.lat() + out[0];
 	#var mlon = ac.lon() + out[1];
 	#var malt = (ac.alt() * M2FT) + out[2];
-	
-	return geo.Coord.new().set_latlon(ac.lat() + out[0], ac.lon() + out[1], (ac.alt() * M2FT) + out[2] * FT2M);
+
+	return geo.Coord.new().set_latlon(ac.lat() + out[0], ac.lon() + out[1], ((ac.alt() * M2FT) + out[2]) * FT2M);
 }
 
 var beam_search = func(myPos) {
@@ -154,12 +155,12 @@ var beam_search = func(myPos) {
 	#var beam_y = 0;
 	#var beam_z = 15000*math.sin(-1.5*D2R);
 	#var beam = getGPS(beam_x, beam_y, beam_z, myPos);
-	var beam = getGPS(-15000*math.cos(-1.5*D2R), 0, 15000*math.sin(-1.5*D2R), myPos);
+	var beam = getGPS(-100000*math.cos(-1.5*D2R), 0, 100000*math.sin(-1.5*D2R), myPos);
 	
 	#we now find the vector the beam is pointed in:
-	v = get_cart_ground_intersection(myPos.x(), myPos.y(), myPos.z(), beam.x()-myPos.x(), beam.y()-myPos.y(), beam.z()-myPos.z());
+	v = get_cart_ground_intersection({"x":myPos.x(), "y":myPos.y(), "z":myPos.z()}, {"x":beam.x()-myPos.x(), "y":beam.y()-myPos.y(), "z":beam.z()-myPos.z()});
 	if (v != nil) {
-		gps_lock_geo.set_xyz(v[0],v[1],v[2]);
+		gps_lock_geo.set_latlon(v.lat, v.lon, v.elevation);
 		#var terrainDist = myPos.direct_distance_to(gps_lock_geo);
 		#printf("terrain found %0.1f meters down the beam", terrainDist);
 	} else {
@@ -188,18 +189,22 @@ var beam_target_lock = func() {
 		}
 		if ( closest_track != nil and radar_logic.selection != closest_track) {
 			lockTarget(closest_track,"radar");
+			#print("got me a real boy");
 		} else {
-			beam_search();
+			beam_search(my_geo);
 			gps_contact.coord = gps_lock_geo;
-			if ( radar_logic.selection != nil ) {
-				if ( radar_logic.selection.get_Callsign != "BEAMTGT" ) {
-					unlockTarget();
-					lockTarget(gps_contact,"radar");
-				}
-			} else {
+			if ( radar_logic.selection != nil and radar_logic.selection.get_Callsign() != "BEAMTGT") {
+				#print("unlocked");
+				unlockTarget();
+				lockTarget(gps_contact,"radar");
+			} elsif (radar_logic.selection == nil) {
+				#print("locked on that radar tgt");
 				lockTarget(gps_contact,"radar");
 			}
 		}
+		print('lat: ' ~ gps_contact.get_Latitude());
+		print('lon: ' ~ gps_contact.get_Longitude());
+		print('alt: ' ~ gps_contact.get_altitude());
 		settimer(func(){beam_target_lock();},beam_update_rate);
 	}
 }
@@ -245,7 +250,7 @@ var r27t1_guidance = func(input) {
 	return {};
 }
 
-ir_seekTarget();
+#ir_seekTarget(); disabling for now
 
 setlistener("controls/radar/power-panel/fixed-beam", func() {
 	if (getprop("controls/radar/power-panel/fixed-beam") == 1) {

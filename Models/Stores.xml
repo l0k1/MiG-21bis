@@ -790,7 +790,7 @@
 
 	<model>
 		<name>Kh-66 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Kh-66/Kh-66.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
 		<offsets>
 			<x-m> 1.05241</x-m>
 			<y-m>-2.73047</y-m>
@@ -812,7 +812,7 @@
 
 	<model>
 		<name>Kh-66 Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Kh-66/Kh-66.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
 		<offsets>
 			<x-m> 0.16698</x-m>
 			<y-m>-2.10773</y-m>
@@ -834,7 +834,7 @@
 
 	<model>
 		<name>Kh-66 Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Kh-66/Kh-66.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
 		<offsets>
 			<x-m> 0.16698</x-m>
 			<y-m> 2.10773</y-m>
@@ -856,7 +856,7 @@
 
 	<model>
 		<name>Kh-66 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Kh-66/Kh-66.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
 		<offsets>
 			<x-m> 1.05241</x-m>
 			<y-m> 2.73047</y-m>

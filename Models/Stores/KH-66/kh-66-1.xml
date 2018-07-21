@@ -1,17 +1,17 @@
 <PropertyList>
 
-	<path>kh-66.ac</path>
+	<path>Kh-66.ac</path>
 
 	<animation>
 		<type>select</type>
 		<object-name>Kh-66</object-name>
 		<condition>
-			<property>payload/armament/kh-66/flags/msl-id-3</property>
+			<property>payload/armament/kh-66/flags/msl-id-1</property>
 		</condition>
 	</animation>
 
 	<model>
-		<path>Aircraft/MiG-21bis/Models/Stores/Kh-66/motor-smoke-3.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/motor-smoke-1.xml</path>
 		<offsets>
 			<x-m>1.44</x-m>
 			<y-m>0</y-m>
@@ -21,7 +21,7 @@
 
 	<model>
 		<name>explosion</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Kh-66/explosion-3.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/explosion-1.xml</path>
 		<offsets>
 			<x-m>0</x-m>
 			<y-m>0</y-m>
