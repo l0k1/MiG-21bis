@@ -6,42 +6,20 @@
         <item>
             <name>DC Battery/Ext Power</name>
             <value>ON</value>
-            <condition>
-                <equals>
-                    <property>/controls/anti-ice/engine[0]/carb-heat</property>
-                    <value>0</value>
-                </equals>
-            </condition>
-            <!--<marker>
-                <x-m>-0.3225</x-m>
-                <y-m>-0.0850</y-m>
-                <z-m>-0.2117</z-m>
-                <scale>2.0500</scale>
-            </marker>
-            <binding>
-                <command>property-assign</command>
-                <value>0</value>
-            </binding>-->
         </item>
+    </checklist>
+    
+    <checklist>
+        <title>Before Takeoff</title>  
         <item>
-            <name>DC Battery/Ext Power</name>
-            <value>ON</value>
-            <condition>
+            <name>Canopy</name>
+            <value>SEALED</value>
+            <!--<condition>
                 <equals>
                     <property>/controls/anti-ice/engine[0]/carb-heat</property>
                     <value>0</value>
                 </equals>
-            </condition>
-            <!--<marker>
-                <x-m>-0.3225</x-m>
-                <y-m>-0.0850</y-m>
-                <z-m>-0.2117</z-m>
-                <scale>2.0500</scale>
-            </marker>
-            <binding>
-                <command>property-assign</command>
-                <value>0</value>
-            </binding>-->
+            </condition>-->
         </item>
     </checklist>
 </PropertyList>
