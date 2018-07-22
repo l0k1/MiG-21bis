@@ -318,7 +318,7 @@ var gun_sight = {
 			.setTranslation(441,583)
 			.setRotation(315 * D2R,0));
 			
-		m.pipper_center = [500,360];
+		m.pipper_center = [512,275];
 
 		m.asp_gunsight = gunsight_logic.asp_pfd.new();
 			

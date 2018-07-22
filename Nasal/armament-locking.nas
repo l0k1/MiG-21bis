@@ -77,7 +77,6 @@ var lock_mode = "none";
 
 var unlockTarget = func() {
 	if ( radar_logic.selection != nil ) {
-		print("unlocking target");
 		lock_mode = "none";
 		radar_logic.radarLogic.paint(radar_logic.selection.getNode(), FALSE);
 		radar_logic.selection = nil;
@@ -155,6 +154,7 @@ var beam_search = func(myPos) {
 	#var beam_y = 0;
 	#var beam_z = 15000*math.sin(-1.5*D2R);
 	#var beam = getGPS(beam_x, beam_y, beam_z, myPos);
+
 	var beam = getGPS(-100000*math.cos(-1.5*D2R), 0, 100000*math.sin(-1.5*D2R), myPos);
 	
 	#we now find the vector the beam is pointed in:
@@ -174,6 +174,35 @@ var closest_dist = 100000;
 var closest_track = nil;
 var gps_contact = radar_logic.ContactGPS.new("BEAMTGT", gps_lock_geo);
 
+var n = props.globals.getNode("models",1);
+var i = 0;
+for (i = 0; 1==1; i += 1) {
+	if (n.getChild("model",i,0) == nil) {
+		break;
+	}
+}
+
+var objModel = n.getChild("model",i,1);
+
+objModel.getNode("elevation",1).setDoubleValue(0);
+objModel.getNode("latitude",1).setDoubleValue(0);
+objModel.getNode("longitude",1).setDoubleValue(0);
+objModel.getNode("elevation-ft-prop",1).setValue(objModel.getPath()~"/elevation");
+objModel.getNode("latitude-deg-prop",1).setValue(objModel.getPath()~"/latitude");
+objModel.getNode("longitude-deg-prop",1).setValue(objModel.getPath()~"/longitude");
+objModel.getNode("heading",1).setDoubleValue(0);
+objModel.getNode("pitch",1).setDoubleValue(0);
+objModel.getNode("roll",1).setDoubleValue(0);
+objModel.getNode("heading-deg-prop",1).setValue(objModel.getPath()~"/heading");
+objModel.getNode("pitch-deg-prop",1).setValue(objModel.getPath()~"/pitch");
+objModel.getNode("roll-deg-prop",1).setValue(objModel.getPath()~"/roll");
+
+objModel.getNode("path",1).setValue("Aircraft/MiG-21bis/Models/tgtsphere.xml"); # this is the model to be loaded.
+
+var loadNode = objModel.getNode("load", 1);
+loadNode.setBoolValue(1);
+loadNode.remove();
+
 var beam_target_lock = func() {
 	if ( getprop(fixed_beam_switch) == 1 ) {
 		var my_geo = geo.aircraft_position();
@@ -189,22 +218,23 @@ var beam_target_lock = func() {
 		}
 		if ( closest_track != nil and radar_logic.selection != closest_track) {
 			lockTarget(closest_track,"radar");
-			#print("got me a real boy");
-		} else {
+			print("got me a real boy");
+		} elsif (closest_track == nil) {
 			beam_search(my_geo);
 			gps_contact.coord = gps_lock_geo;
+
 			if ( radar_logic.selection != nil and radar_logic.selection.get_Callsign() != "BEAMTGT") {
-				#print("unlocked");
+				print("unlocked");
 				unlockTarget();
 				lockTarget(gps_contact,"radar");
 			} elsif (radar_logic.selection == nil) {
-				#print("locked on that radar tgt");
+				print("locked on that radar tgt");
 				lockTarget(gps_contact,"radar");
 			}
 		}
-		print('lat: ' ~ gps_contact.get_Latitude());
-		print('lon: ' ~ gps_contact.get_Longitude());
-		print('alt: ' ~ gps_contact.get_altitude());
+		#print('lat: ' ~ gps_contact.get_Latitude());
+		#print('lon: ' ~ gps_contact.get_Longitude());
+		#print('alt: ' ~ gps_contact.get_altitude());
 		settimer(func(){beam_target_lock();},beam_update_rate);
 	}
 }

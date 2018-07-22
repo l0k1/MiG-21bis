@@ -136,8 +136,8 @@ var SURFACE = 2;
 var ORDNANCE = 3;
 
 # set these to print stuff to console:
-var DEBUG_STATS            = FALSE;#most basic stuff
-var DEBUG_FLIGHT           = FALSE;#for creating missiles sometimes good to have this on to see how it flies.
+var DEBUG_STATS            = TRUE;#most basic stuff
+var DEBUG_FLIGHT           = TRUE;#for creating missiles sometimes good to have this on to see how it flies.
 
 # set these to debug the code:
 var DEBUG_STATS_DETAILS    = FALSE;
@@ -3438,25 +3438,25 @@ var AIM = {
 
 	printFlight: func {
 		if (DEBUG_FLIGHT) {
-			call(sprintf,arg);
+			print(call(sprintf,arg));
 		}
 	},
 
 	printFlightDetails: func {
 		if (DEBUG_FLIGHT_DETAILS) {
-			call(sprintf,arg);
+			print(call(sprintf,arg));
 		}
 	},
 
 	printStats: func {
 		if (DEBUG_STATS) {
-			call(sprintf,arg);
+			print(call(sprintf,arg));
 		}
 	},
 
 	printStatsDetails: func {
 		if (DEBUG_STATS_DETAILS) {
-			call(sprintf,arg);
+			print(call(sprintf,arg));
 		}
 	},
 

@@ -141,6 +141,7 @@ var AFALCOS = {
         me.SL2 = me.B2 - me.B1 * me.ALA;
         me.SL2 = math.abs(me.SL2) > 1000 ? 1000 * math.sgn(me.SL2) : me.SL2;
         me.SL3 = me.B3 + me.B1 * me.ELA;
+        me.SL3 = math.abs(me.SL3) > 1000 ? 1000 * math.sgn(me.SL3) : me.SL3;
         #print(me.SL3);
         me.W2 = -me.C1 * me.ELA - me.C2 * me.GAL + me.C3 * 
                 (me.BXAN2 - (me.AY.getValue() * me.ELA + me.AZ.getValue() * me.ALA) * me.B2 +
