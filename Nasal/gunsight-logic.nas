@@ -94,6 +94,8 @@ var AFALCOS = {
     
     update: func() {
         #me.updateRange();
+        #$print("d: " ~ me.D);
+        #print("a: " ~ me.GA);
         me.updateRangeRate();
         me.AL = me.ALprop.getValue() * D2R;
         math.clamp(me.AL,-45,45);
@@ -107,7 +109,7 @@ var AFALCOS = {
             me.RHO = math.pow((0.034475 + (0.019213E-10 * me.HA.getValue() - 0.050381E-5 ) * me.HA.getValue()),2) * 2;
         }
 
-        me.D = me.D == 0 ? 1 : me.D;
+        me.D = me.D < 300 * M2FT ? 300 * M2FT : me.D;
         
         me.DRATIO = me.RHO / 0.00238;
         me.VP = me.VM + me.VA;
@@ -137,7 +139,9 @@ var AFALCOS = {
         me.BXAN3 = me.B1 * me.AY.getValue() - me.AX.getValue() * me.B2;
         me.SL1 = me.B1 + me.B2 * me.ALA - me.B3 * me.ELA; ### SL is sight line unit vector
         me.SL2 = me.B2 - me.B1 * me.ALA;
+        me.SL2 = math.abs(me.SL2) > 1000 ? 1000 * math.sgn(me.SL2) : me.SL2;
         me.SL3 = me.B3 + me.B1 * me.ELA;
+        #print(me.SL3);
         me.W2 = -me.C1 * me.ELA - me.C2 * me.GAL + me.C3 * 
                 (me.BXAN2 - (me.AY.getValue() * me.ELA + me.AZ.getValue() * me.ALA) * me.B2 +
                 (me.AX.getValue() * me.B1 + me.AY.getValue() * me.B2 + me.AZ.getValue() * me.B3) * me.ELA);
