@@ -563,7 +563,7 @@ var missile_release = func(pylon) {
 				armament.AIM.active[pylon].releaseAtNothing();
 			} else {
 				var phrase = brevity ~ " released:";
-				armament.AIM.active[pylon].release();
+				armament.AIM.active[pylon].release(arm_locking.cx_master_list);
 			}
 			
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);

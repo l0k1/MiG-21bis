@@ -206,31 +206,16 @@ loadNode.remove();
 var beam_target_lock = func() {
 	if ( getprop(fixed_beam_switch) == 1 ) {
 		var my_geo = geo.aircraft_position();
-		closest_dist = 100000;
-		closest_track = nil;
-		foreach(var track; radar_logic.tracks) {
-			var track_info = track.get_polar(); # 0 - distance, 1 - azimuth, 2 - pitch
-			# tolerance of +/- 0.75 degrees outside of the radar beam.
-			if(track_info[0] < closest_dist and track_info[2] > -2.25 * D2R and track_info[2] < -0.75 * D2R and track_info[1] > -0.75 * D2R and track_info[1] < 0.75 * D2R) {
-				closest_dist = track_info[0];
-				closest_track = track;
-			}
-		}
-		if ( closest_track != nil and radar_logic.selection != closest_track) {
-			lockTarget(closest_track,"radar");
-			print("got me a real boy");
-		} elsif (closest_track == nil) {
-			beam_search(my_geo);
-			gps_contact.coord = gps_lock_geo;
+		beam_search(my_geo);
+		gps_contact.coord = gps_lock_geo;
 
-			if ( radar_logic.selection != nil and radar_logic.selection.get_Callsign() != "BEAMTGT") {
-				print("unlocked");
-				unlockTarget();
-				lockTarget(gps_contact,"radar");
-			} elsif (radar_logic.selection == nil) {
-				print("locked on that radar tgt");
-				lockTarget(gps_contact,"radar");
-			}
+		if ( radar_logic.selection != nil and radar_logic.selection.get_Callsign() != "BEAMTGT") {
+			#print("unlocked");
+			unlockTarget();
+			lockTarget(gps_contact,"radar");
+		} elsif (radar_logic.selection == nil) {
+			#print("locked on that radar tgt");
+			lockTarget(gps_contact,"radar");
 		}
 		#print('lat: ' ~ gps_contact.get_Latitude());
 		#print('lon: ' ~ gps_contact.get_Longitude());
@@ -280,6 +265,30 @@ var r27t1_guidance = func(input) {
 	return {};
 }
 
+# master contact list, for IR/LOAL/Kh-66 multihit messaging
+
+var cx_master_list = [];
+var matching = 0;
+var gather = [];
+
+var gather_contacts = func() {
+	foreach(var mp; props.globals.getNode("/ai/models/").getChildren("multiplayer")) {
+		matching = 0;
+		foreach(var cx; cx_master_list) {
+			if ( mp.getPath() == cx.getNode().getPath() ) {
+				matching = 1;
+				break;
+			}
+		}
+		if (matching == 0) {
+			append(cx_master_list,radar_logic.Contact.new(mp,0));
+		}
+	}
+	settimer(func(){
+		gather_contacts();
+		},1);
+}
+gather_contacts();
 #ir_seekTarget(); disabling for now
 
 setlistener("controls/radar/power-panel/fixed-beam", func() {
