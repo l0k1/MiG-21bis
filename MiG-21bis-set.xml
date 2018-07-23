@@ -407,7 +407,7 @@
 				<!-- info on Komar seeker head: http://www.ausairpower.net/APA-Legacy-SAM-Upgrades.html -->
 				<!--detection and firing-->
 				<max-fire-range-nm type="double">4.32</max-fire-range-nm> <!-- max range that the FCS allows firing -->
-				<min-fire-range-nm type="double">0.15</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
+				<min-fire-range-nm type="double">0.001</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
 				<FCS-field-deg type="int">24</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
 				<class type="string">AG</class> <!-- put in letters here that represent the types the missile can fire at. A=air, M=marine, G=ground -->
 				<fire-msg type="string">Fox 2</fire-msg> <!-- what the pilot will call out over the comm when he fires this weapon -->

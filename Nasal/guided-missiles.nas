@@ -142,7 +142,7 @@ var DEBUG_STATS_DETAILS    = FALSE;
 var DEBUG_GUIDANCE         = FALSE;
 var DEBUG_GUIDANCE_DETAILS = FALSE;
 var DEBUG_FLIGHT_DETAILS   = 0;
-var DEBUG_SEARCH           = FALSE;
+var DEBUG_SEARCH           = 0;
 var DEBUG_CODE             = FALSE;
 
 var g_fps        = 9.80665 * M2FT;
@@ -3014,7 +3014,6 @@ var AIM = {
 			if (!me.testMe.isValid()) {
 				continue;
 			}
-			print("whoop, there it is");
 			var min_distance = me.testMe.get_Coord().direct_distance_to(explode_coord);
 			if (min_distance < me.reportDist and me.testMe.getUnique() != me.Tgt.getUnique()) {
 				var phrase = sprintf("%s %s: %.1f meters from: %s", me.type,event, min_distance, me.testMe.get_Callsign());

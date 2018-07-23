@@ -254,6 +254,17 @@ var missile_arming_loop = func() {
 			} elsif ( armament.AIM.active[i].status == MISSILE_STANDBY ) {
 				#print("missile " ~i~ " should be searching.");
 				armament.AIM.active[i].start();
+				if (payloads[payloadName].type = "ir") {
+					print("setting bore");
+					#armament.AIM.active[i].setBore(1);setAutoUncage
+					armament.AIM.active[i].setAutoUncage(0);
+					armament.AIM.active[i].setCaged(0);
+				}
+			}
+			if (payloads[payloadName].type = "ir") {
+				#print('passing cx list');
+				#print(size(arm_locking.cx_master_list));
+				armament.AIM.active[i].setContacts(arm_locking.cx_master_list);
 			}
 		}
     }
@@ -302,6 +313,7 @@ var ir_lock_inform = func() {
         }
         if (pwr_check != nil and pwr_check > 32) {
             if (payloads[selected].type == "ir") {
+            	#print("status: " ~ armament.AIM.active[pylon].status);
                 if (armament.AIM.active[pylon].status == MISSILE_LOCK) {
                     if (selected == "RS-2US" or
                         selected == "R-55S" or
@@ -484,7 +496,6 @@ var missile_release = func(pylon) {
 	} elsif ( pylon == 8 ) {
 		t_p = 4;
 	}
-	#print(pylon);
 	var selected = getprop("payload"~virtual~"weight["~(pylon)~"]/selected");
 	if(selected != "none") {
 		# check power
@@ -492,7 +503,7 @@ var missile_release = func(pylon) {
 		# check temprature, will begin failing at 5*C and guaranteed failure at -5*c
 		if ( interp( getprop("/fdm/jsbsim/systems/armament/pylon-heating/pylon-temp",t_p), -5,0,5,1) < rand() ) { return;	}
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on.
-		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and radar_logic.selection != nil and getprop("controls/radar/power-panel/fixed-beam") == 0) {
+		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and (payloads[selected].type_norm == 0 or (payloads[selected].type_norm == 2 and radar_logic.selection != nil and getprop("controls/radar/power-panel/fixed-beam") == 0)) ) {
 			#missile locked, fire it.
 
 			#print("firing missile: "~pylon);
@@ -885,6 +896,90 @@ var pylon_select = func() {
 		return getprop("payload/virtual/weight[7]/selected") == "R-60" ? [7,-1,knobpos] : [0,-1,knobpos];
 	} elsif ( knobpos == 10 ) {
 		return getprop("payload/virtual/weight[8]/selected") == "R-60" ? [8,-1,knobpos] : [4,-1,knobpos];
+	}
+}
+
+var pylon_select_2 = func() {
+	#return array of active pylons
+	#returning -1 means no pylon selected
+
+	#pylon knob
+	#0: 1/2 bomb | 16 rkt
+	#1: 3/4 bomb | 8 rkt
+	#2: 1/4 bomb | 4 rkt
+	#3: 1/2 rkt
+	#4: 3/4 rkt
+	#5: 3/4 msl
+	#6: 1/2 msl
+	#7: 1 msl
+	#8: 2 msl
+	#9: 3 msl
+	#10: 4 msl
+	#pylons go 3,1,2,4 left to right IRL
+	#pylons go 0,1,3,4 left to right internally
+
+	# missile preference is set by the IR/SAR switch
+	# missile order is determined by the armament selector knob
+	# 1: order is 1,2,3,4
+	# 2: order is 2,1,3,4
+	# 3: order is 3,4,1,2
+	# 4: order is 4,1,2,3
+	# if pylon is unpowered, skip it
+	# if pylon is powered but fails, don't skip it
+	
+	var knobpos = getprop("controls/armament/panel/pylon-knob");
+	if ( knobpos == 0 ) {
+		return [1,3,-1,-1];
+	} elsif ( knobpos == 1 ) {
+		return [0,4,-1,-1];
+	} elsif ( knobpos == 2 ) {
+		return [0,1,2,3]
+	} elsif ( knobpos == 3 ) {
+		return [1,3,-1,-1];
+	} elsif ( knobpos == 4 ) {
+		return [0,4,-1,-1];
+	} elsif ( knobpos == 5 ) {
+		var ret1 = getprop("payload/virtual/weight[7]/selected") == "R-60" ? 7 : 0;
+		var ret2 = getprop("payload/virtual/weight[8]/selected") == "R-60" ? 8 : 4;		
+		return [ret1, ret2, -1, -1];
+	} elsif ( knobpos == 6 ) {
+		return [1,3,-1,-1];
+	} elsif ( knobpos >= 7 ) {
+		# missile_firing_order
+		#
+		# issues
+		# if ir/sar is not set, pick first missile
+		# check virtual pylons
+		#
+		var pylon_check = -1;
+		var pylon_select = -1;
+		var selected_type = 1; # 0 is IR, 2 is RGM
+		var virtual = "";
+		for(var i = 0; i <= 3; i = i + 1){
+			# get missile pylon
+			pylon_check = missile_firing_order[knobpos - 7][i];
+			
+			# check that the pylon is powered
+			if ( getprop("/fdm/jsbsim/electric/output/pwr-to-pylons",pylon_check) < 32 ) { continue; }
+			
+			#propogate out for our R-60's
+			if( pylon_check == 0 and getprop("payload/virtual/weight[7]/selected") == "R-60" ) { pylon_check = 7; }
+			if( pylon_check == 4 and getprop("payload/virtual/weight[8]/selected") == "R-60" ) { pylon_check = 8; }
+			#print("loop: " ~ i ~ ":pylon:" ~ pylon_check~":type:"~selected_type);
+			
+			virtual = pylon_check < 7 ? "/" : "/virtual/";
+			
+			if ( (getprop(ir_sar_switch) == 1 and payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm != 1 ) or (selected_type != getprop(ir_sar_switch) and payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm == getprop(ir_sar_switch)) ) {
+				 	pylon_select = pylon_check;
+				 	break;
+			} elsif ( selected_type == 1 and payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm != 1 ) {
+				pylon_select = pylon_check;
+				selected_type = payloads[getprop("payload" ~ virtual ~ "weight["~pylon_check~"]/selected")].type_norm;
+			}
+		}
+		if (pylon_select != -1 ) {
+			return [pylon_select,-1,-1,-1];
+		}
 	}
 }
 
