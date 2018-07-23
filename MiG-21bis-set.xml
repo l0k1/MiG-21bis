@@ -621,7 +621,7 @@
 				<self-destruct-time-sec type="double">40</self-destruct-time-sec> <!-- time before selfdestruct -->
 				<self-destruct-at-lock-lost type="double">40</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
 				<max-report-distance type="double">200</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
-				<hit-everything-nearby type="bool">true</hit-everything-nearby>
+				<hit-everything-nearby type="bool">true</hit-everything-nearby> <!-- acts like a bomb, will check for nearby targets if true (99% of the time should be false)
 				<!--avionics sounds-->
 				<vol-search type="double">0.0</vol-search> <!-- sound volume when searcing -->
 				<vol-track type="double">0.0</vol-track> <!-- sound volume when having lock -->
@@ -640,6 +640,9 @@
 			</kh-66>
 
 			<template>
+				<!--name-->
+				<long-name type="string"></long-name> <!--Longer name of the weapon-->
+				<short-name type="string"></short-name> <!--Shorter name of the weapon-->
 				<!--detection and firing-->
 				<max-fire-range-nm type="double"></max-fire-range-nm> <!-- max range that the FCS allows firing -->
 				<min-fire-range-nm type="double"></min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
@@ -653,10 +656,14 @@
 				<detect-range-nm type="double"></detect-range-nm> <!-- Current guidance mode default detect range. (when cold) -->
 				<seeker-beam-width-deg type="double"></seeker-beam-width-deg> <!-- Seeker detector field of view diameter -->
 				<ready-time type="double"></ready-time> <!-- time to get ready after standby mode. -->
+				<lock-on-after-launch type="bool"></lock-on-after-launch> <!--bool. LOAL supported. For loal to work [optional]-->
+				<auto-switch-target-allowed type="bool"></auto-switch-target-allowed> <!--bool. Can switch target at will if it loses lock [optional]-->
+				<prowl-flight type="string"></prowl-flight> <!--unguided/level/gyro-pitch for LOAL and that stuff, when not locked onto stuff.-->
+				<switch-time-sec type="double"></switch-time-sec> <!--auto switch of targets in flight: time to scan FoV.-->
 				<!--navigation, guiding and seekerhead-->
 				<seeker-field-deg type="int"></seeker-field-deg> <!-- missiles own seekers total FOV diameter. -->
 				<guidance type="string"></guidance> <!-- heat/radar/semi-radar/laser/gps/vision/unguided/pitch/gyro-pitch/radiation/inertial -->
-				<guidanceLaw type="string"></guidanceLaw> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
+				<navigation type="string"></navigation> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
 				<proportionality-constant type="double"></proportionality-constant> <!-- Constant for how sensitive proportional navigation is to target speed/acc. Normally between 3-6. [optional] -->
 				<all-aspect type="bool"></all-aspect> <!-- bool. set to false if missile only locks on reliably to rear of target aircraft -->
 				<seeker-angular-speed-dps type="double"></seeker-angular-speed-dps> <!-- only for heat/vision seeking missiles. Max angular speed that the target can move as seen from seeker, before seeker loses lock. -->
@@ -664,6 +671,7 @@
 				<loft-altitude type="int"></loft-altitude> <!-- if 0 then no snap up. Below 10000 then cruise altitude above ground. Above 10000 max altitude it will snap up to. -->
 				<terrain-follow type="bool"></terrain-follow> <!-- bool. used for anti-ship missiles that should be able to terrain follow instead of purely sea skimming. -->
 				<reaquire type="bool"></reaquire> <!-- bool. If weapon will try to reaquire lock after losing it. [optional] -->
+				<max-pitch-deg type="double"></max-pitch-deg> <!--After propulsion it will not be able to steer up more than this. [optional]-->
 				<!--engine-->
 				<thrust-lbf-stage-1 type="double"></thrust-lbf-stage-1> <!-- stage 1 thrust [optional] -->
 				<thrust-lbf-stage-2 type="double"></thrust-lbf-stage-2> <!-- stage 2 thrust [optional] -->
@@ -677,12 +685,15 @@
 				<cross-section-sqft type="double"></cross-section-sqft> <!-- normally is crosssection area of munition (without fins) -->
 				<max-g type="int"></max-g> <!-- max G-force the missile can pull at sealevel -->
 				<min-speed-for-guiding-mach type="double"></min-speed-for-guiding-mach> <!-- minimum speed before the missile steers, before it reaches this speed it will fly ballistic. -->
+				<ignore-wind-at-release type="bool"></ignore-wind-at-release> <!--Boolean. If true dropped weapons will ignore sideslip and AOA and start flying in aircraft bore direction.-->
+				<lateral-dps type="double"><lateral-dps> <!--Lateral speed in degrees per second. This is mostly for cosmetics.-->
 				<!--detonation-->
 				<weight-warhead-lbs type="double"></weight-warhead-lbs> <!-- warhead weight -->
 				<arming-time-sec type="double"></arming-time-sec> <!-- time for weapon to arm -->
 				<self-destruct-time-sec type="double"></self-destruct-time-sec> <!-- time before selfdestruct -->
 				<self-destruct-at-lock-lost type="double"></self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
 				<max-report-distance type="double"></max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
+				<hit-everything-nearby type="bool"></hit-everything-nearby> <!-- acts like a bomb, will check for nearby targets if true (99% of the time should be false)
 				<!--avionics sounds-->
 				<vol-search type="double"></vol-search> <!-- sound volume when searcing -->
 				<vol-track type="double"></vol-track> <!-- sound volume when having lock -->
