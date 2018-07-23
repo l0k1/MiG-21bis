@@ -621,7 +621,7 @@
 				<self-destruct-time-sec type="double">40</self-destruct-time-sec> <!-- time before selfdestruct -->
 				<self-destruct-at-lock-lost type="double">40</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
 				<max-report-distance type="double">200</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
-				<hit-everything-nearby type="bool">true</hit-everything-nearby> <!-- acts like a bomb, will check for nearby targets if true (99% of the time should be false)
+				<hit-everything-nearby type="bool">true</hit-everything-nearby> <!-- acts like a bomb, will check for nearby targets if true (99% of the time should be false) -->
 				<!--avionics sounds-->
 				<vol-search type="double">0.0</vol-search> <!-- sound volume when searcing -->
 				<vol-track type="double">0.0</vol-track> <!-- sound volume when having lock -->
@@ -686,14 +686,14 @@
 				<max-g type="int"></max-g> <!-- max G-force the missile can pull at sealevel -->
 				<min-speed-for-guiding-mach type="double"></min-speed-for-guiding-mach> <!-- minimum speed before the missile steers, before it reaches this speed it will fly ballistic. -->
 				<ignore-wind-at-release type="bool"></ignore-wind-at-release> <!--Boolean. If true dropped weapons will ignore sideslip and AOA and start flying in aircraft bore direction.-->
-				<lateral-dps type="double"><lateral-dps> <!--Lateral speed in degrees per second. This is mostly for cosmetics.-->
+				<lateral-dps type="double"></lateral-dps> <!--Lateral speed in degrees per second. This is mostly for cosmetics.-->
 				<!--detonation-->
 				<weight-warhead-lbs type="double"></weight-warhead-lbs> <!-- warhead weight -->
 				<arming-time-sec type="double"></arming-time-sec> <!-- time for weapon to arm -->
 				<self-destruct-time-sec type="double"></self-destruct-time-sec> <!-- time before selfdestruct -->
 				<self-destruct-at-lock-lost type="double"></self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
 				<max-report-distance type="double"></max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
-				<hit-everything-nearby type="bool"></hit-everything-nearby> <!-- acts like a bomb, will check for nearby targets if true (99% of the time should be false)
+				<hit-everything-nearby type="bool"></hit-everything-nearby> <!-- acts like a bomb, will check for nearby targets if true (99% of the time should be false) -->
 				<!--avionics sounds-->
 				<vol-search type="double"></vol-search> <!-- sound volume when searcing -->
 				<vol-track type="double"></vol-track> <!-- sound volume when having lock -->
