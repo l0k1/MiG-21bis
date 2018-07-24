@@ -255,10 +255,11 @@ var missile_arming_loop = func() {
 				#print("missile " ~i~ " should be searching.");
 				armament.AIM.active[i].start();
 				if (payloads[payloadName].type = "ir") {
+					#armament.AIM.active[i].setAutoUncage(0);
+					#armament.AIM.active[i].setCaged(0);
+					#armament.AIM.active[i].setUncagedPattern(8.5,8.5,-8.5); #  yaw, pitch up, pitch down
 					print("setting bore");
-					#armament.AIM.active[i].setBore(1);setAutoUncage
-					armament.AIM.active[i].setAutoUncage(0);
-					armament.AIM.active[i].setCaged(0);
+					armament.AIM.active[i].setBore(1);
 				}
 			}
 			if (payloads[payloadName].type = "ir") {
