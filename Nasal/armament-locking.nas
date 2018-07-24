@@ -7,7 +7,7 @@ var FALSE = 0;
 ##### RADAR TARGET LOCKING
 
 var radar_seekTarget = func() {
-	if ( getprop(ir_sar_switch) == 2 and getprop("fixed_beam_switch") != 1 ) {
+	if ( getprop("fixed_beam_switch") != 1 ) {
 		var c_dist = 999999;
 		var c_most = nil;
 		var lowerBar = (getprop("/controls/radar/lock-bars-pos")/950) * radar_logic.radarRange;
@@ -36,7 +36,7 @@ var radar_seekTarget = func() {
 	}
 }
 
-##### IR TARGET LOCKING
+##### IR TARGET LOCKING - no longer used
 
 var ir_seekTarget= func() {
 	#print("checking for IR target");
