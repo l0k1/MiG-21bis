@@ -534,6 +534,11 @@ var radar_screen = {
 			setprop(lock_bars_scale, lscale);
 			setprop(lock_bars_pos, lpos);
 			
+			if (getprop("controls/radar/power-panel/fixed-beam")) {
+				lpos = 330;
+				lscale = 200;
+			}
+			
 			me.lowerBar.setTranslation(506, 950 - lpos);
 			me.upperBar.setTranslation(506, 950 - ( lpos + lscale ));
 			
