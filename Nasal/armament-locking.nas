@@ -227,7 +227,39 @@ var beam_target_lock = func() {
 ##### CUSTOM MISSILE TARGETTING
 
 var kh25_guidance = func(input) {
-	return nil;
+	#print("weapon pitch:" ~ input.weapon_pitch);
+	detect_range = input.seeker_detect_range * NM2M;
+	if (input.guidance == "ir") {
+		return {};
+	}
+	foreach (track; cx_master_list) {
+		#print("track distance: " ~ track.coord.distance_to(input.weapon_position) ~ " | seeker range:   " ~ detect_range);
+		if (track.coord.distance_to(input.weapon_position) > detect_range) {
+			continue;
+		}
+
+		if (track.isRadiating(input.weapon_position) == 0 ) {
+			continue;
+		}
+		
+		#ground angle
+		yg_rad = vector.Math.getPitch(input.weapon_position, track.coord) * D2R - input.weapon_pitch;
+		xg_rad = (input.weapon_position.course_to(track.coord) - input.weapon_heading) * D2R;
+	
+		while ( xg_rad >  math.pi ) { xg_rad = xg_rad - 2 * math.pi; }
+		while ( xg_rad < -math.pi ) { xg_rad = xg_rad + 2 * math.pi; }
+		while ( yg_rad >  math.pi ) { yg_rad = yg_rad - 2 * math.pi; }
+		while ( yg_rad < -math.pi ) { yg_rad = yg_rad + 2 * math.pi; }
+
+		#print("found target at pitch: " ~ yg_rad * R2D ~ " | heading: " ~ xg_rad);
+      
+    	var seeker_fov_rad = input.seeker_fov * D2R;
+		if (yg_rad > -seeker_fov_rad and yg_rad < seeker_fov_rad and xg_rad > -seeker_fov_rad  and xg_rad < seeker_fov_rad) {
+			#print("locked!");
+			return {guidance: "radiation", target: track};
+		}
+	}
+	return {};
 }
 
 #{time_s, dist_m, mach, weapon_position, guidance, seeker_detect_range, seeker_fov, weapon_pitch, weapon_heading}
@@ -239,7 +271,7 @@ var r27t1_guidance = func(input) {
 	if (input.guidance == "ir") {
 		return {};
 	}
-	foreach (track; radar_logic.tracks) {
+	foreach (track; cx_master_list) {
 		#print("track distance: " ~ track.coord.distance_to(input.weapon_position) ~ " | seeker range:   " ~ detect_range);
 		if (track.coord.distance_to(input.weapon_position) > detect_range) {
 			continue;

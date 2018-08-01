@@ -86,7 +86,7 @@ var payloads = {
 	"RN-24":				pos_arm.new("RN-24","RN-24",860,"heavy",1000),
 	"RN-28":				pos_arm.new("RN-28","RN-28",1200,"heavy",1000),
 	# anti-radiation
-	"Kh-25MP":				pos_arm.new("Kh-25MP","Kh-25MP",695,"antirad"),
+	"Kh-25MP":				pos_arm.new("Kh-25MP","Kh-25MP",695,"antirad",,,arm_locking.kh25_guidance),
 	# beam
 	"Kh-66":				pos_arm.new("Kh-66","Kh-66",632,"beam"),
 	# rockets
@@ -438,10 +438,17 @@ var trigger_propogation = func() {
 			bomb_release(3,"bomb");
 			return [0,3,knobpos];
 		} elsif ( knobpos == 3 ) {
-			bomb_release(1,"heavyrocket");
-			settimer(func{
-				bomb_release(3,"heavyrocket");
-			},0.1);
+			
+			if ( getprop("payload/weight[1]/selected") == "Kh-25MP" ) {
+				missile_release(1);
+			} elsif ( getprop("payload/weight[3]/selected") == "Kh-25MP" and getprop("payload/weight[1]/selected") != "Kh-25MP" ) {
+				missile_release(3);
+			} else {
+				bomb_release(1,"heavyrocket");
+				settimer(func{
+					bomb_release(3,"heavyrocket");
+				},0.1);
+			}
 		} elsif ( knobpos == 4 ) {
 			bomb_release(0,"heavyrocket");
 			settimer(func{
@@ -504,6 +511,9 @@ var heavy_release_listener = func {
 }
 
 var missile_release = func(pylon) {
+
+	var knobpos = getprop("controls/armament/panel/pylon-knob");
+
 	if (pylon < 7) {
 		var virtual = "/";
 	} else {
@@ -516,6 +526,11 @@ var missile_release = func(pylon) {
 		t_p = 4;
 	}
 	var selected = getprop("payload"~virtual~"weight["~(pylon)~"]/selected");
+	if (selected == "Kh-25MP" and ( knobpos != 3 or knobpos != 4 )) { 
+		return;
+	} elsif ( selected != "Kh-25MP" and knobpos < 5 ) {
+		return;
+	}
 	if(selected != "none") {
 		# check power
 		if ( getprop("/fdm/jsbsim/electric/output/pwr-to-pylons",t_p) < 32 ) { return; }
@@ -598,6 +613,22 @@ var missile_release = func(pylon) {
 			
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 			setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
+			if (getprop("payload/armament/msg")) {
+				defeatSpamFilter(phrase);
+			} else {
+				setprop("/sim/messages/atc", phrase);
+			}
+		} elsif (armament.AIM.active[pylon] != nil and selected == "Kh-25MP") {
+
+			var brevity = armament.AIM.active[pylon].brevity;
+
+			armament.AIM.active[pylon].guidance = "gyro-pitch";
+			armament.AIM.active[pylon].releaseAtNothing();
+
+			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+			setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
+
+			var phrase = brevity ~ " Maddog released";
 			if (getprop("payload/armament/msg")) {
 				defeatSpamFilter(phrase);
 			} else {
