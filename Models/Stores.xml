@@ -178,26 +178,48 @@
 	</model>
 	
 	<model>
-		<name>Kh-25 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Kh-25/Kh-25L.xml</path>
+		<name>Kh-25MP Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/KH-25MP/KH-25MP.xml</path>
 		<offsets>
-			<x-m> 0.28</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.35</z-m>
+			<x-m> 0.23552 </x-m>
+			<y-m>-2.10877 </y-m>
+			<z-m>-0.25002 </z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+		<name>Kh-25MP Left</name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[12]</property>
+                  <value>Kh-25MP</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>Kh-25 Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/KH-25MP/KH-25MP.xml</path>
+		<offsets>
+			<x-m> 0.23552 </x-m>
+			<y-m> 2.10877 </y-m>
+			<z-m>-0.25002 </z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
 
-	<model>
+	<animation>
 		<name>Kh-25 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Kh-25/Kh-25R.xml</path>
-		<offsets>
-			<x-m> 0.28</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.35</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[14]</property>
+                  <value>Kh-25MP</value>
+            </equals>
+		</condition>
+	</animation>
 
 	<model>
 		<name>R-60 Missile Left</name>

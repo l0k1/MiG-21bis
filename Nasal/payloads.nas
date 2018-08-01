@@ -86,7 +86,7 @@ var payloads = {
 	"RN-24":				pos_arm.new("RN-24","RN-24",860,"heavy",1000),
 	"RN-28":				pos_arm.new("RN-28","RN-28",1200,"heavy",1000),
 	# anti-radiation
-	"Kh-25":				pos_arm.new("Kh-25","Kh-25",695,"antirad"),
+	"Kh-25MP":				pos_arm.new("Kh-25MP","Kh-25MP",695,"antirad"),
 	# beam
 	"Kh-66":				pos_arm.new("Kh-66","Kh-66",632,"beam"),
 	# rockets
@@ -277,7 +277,7 @@ var missile_arming_loop = func() {
 					armament.AIM.active[i].setBore(1);
 				}
 			}
-			if (payloads[payloadName].type = "ir") {
+			if (payloads[payloadName].type == "ir" or payloads[payloadName].type == "antirad") {
 				#print('passing cx list');
 				#print(size(arm_locking.cx_master_list));
 				armament.AIM.active[i].setContacts(arm_locking.cx_master_list);
@@ -344,6 +344,9 @@ var ir_lock_inform = func() {
                         pylon_status[2] = 1;
                     }
                 }
+            }
+            if (payloads[selected].type == "antirad") {
+            	print("antirad has a lock");
             }
         }
     }
