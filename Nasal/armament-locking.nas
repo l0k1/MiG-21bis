@@ -228,17 +228,22 @@ var beam_target_lock = func() {
 
 var kh25_guidance = func(input) {
 	#print("weapon pitch:" ~ input.weapon_pitch);
+	#print("guiding");
 	detect_range = input.seeker_detect_range * NM2M;
-	if (input.guidance == "ir") {
+	if (input.guidance == "radiation") {
+		#print("guidance is radiation");
 		return {};
 	}
 	foreach (track; cx_master_list) {
 		#print("track distance: " ~ track.coord.distance_to(input.weapon_position) ~ " | seeker range:   " ~ detect_range);
+		#print("checking track " ~ track.get_Callsign());
 		if (track.coord.distance_to(input.weapon_position) > detect_range) {
+			#print("not within range");
 			continue;
 		}
 
 		if (track.isRadiating(input.weapon_position) == 0 ) {
+			#print("not radiating");
 			continue;
 		}
 		

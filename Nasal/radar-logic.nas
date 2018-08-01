@@ -677,7 +677,9 @@ var Contact = {
     },
 
     isRadarActive: func {
-      if (me.rdrAct == nil or me.rdrAct.getValue() < 0 or me.rdrAct.getValue() > 1) {
+      if (me.rdrAct.getValue() == nil) {
+        return TRUE;
+      } elsif (me.rdrAct.getValue() < 0 or me.rdrAct.getValue() > 1) {
         return TRUE;
       }
       return me.rdrAct.getValue();
@@ -724,8 +726,11 @@ var Contact = {
     isRadiating: func (check_coord) {
       
       # check if radar is on
+
+      #print("well now");
       
-      if (me.isRadarActive() != 0) {
+      if (me.isRadarActive() == 0) {
+        #print("its false");
         return FALSE;
       }
       
@@ -736,7 +741,7 @@ var Contact = {
       # Check for terrain between own coord and target
       var gcgi = get_cart_ground_intersection({"x":me.coord.x(),"y":me.coord.y(),"z":me.coord.z()}, {"x":check_coord.x()-me.coord.x(),  "y":check_coord.y()-me.coord.y(), "z":check_coord.z()-me.coord.z()});
       if (gcgi == nil) {
-        #printf("No terrain, planes has clear view of each other");
+        #print("No terrain, planes has clear view of each other");
       } else {
        if (me.coord.direct_distance_to(geo.Coord.new().set_latlon(gcgi.lat, gcgi.lon, gcgi.elevation)) < me.coord.direct_distance_to(check_coord)) {
          #print("terrain found between the planes");
@@ -748,11 +753,13 @@ var Contact = {
       
       # check if they're in the radar cone
       
+      return TRUE;
+
       var pols = me.get_polar();
-      var model_info = rwr.rwr_database(me.get_model());
-      
-      if ( model_info == nil ) {
-        model_info = rwr.rwr_database("default");
+      if ( !contains(rwr.rwr_database,me.get_model()) ) {
+        var model_info = rwr.rwr_database("default");
+      } else {
+        var model_info = rwr.rwr_database[me.get_model()];
       }
 
       if(math.abs(pols[2]) < model_info[1] * D2R and math.abs(pols[1]) < model_info[0] and pols[0] < model_info[2]) {

@@ -512,6 +512,8 @@ var heavy_release_listener = func {
 
 var missile_release = func(pylon) {
 
+	#print("in release");
+
 	var knobpos = getprop("controls/armament/panel/pylon-knob");
 
 	if (pylon < 7) {
@@ -526,17 +528,22 @@ var missile_release = func(pylon) {
 		t_p = 4;
 	}
 	var selected = getprop("payload"~virtual~"weight["~(pylon)~"]/selected");
-	if (selected == "Kh-25MP" and ( knobpos != 3 or knobpos != 4 )) { 
+	if (selected == "Kh-25MP" and ( knobpos != 3 and knobpos != 4 )) { 
+		#print("return 1 " ~ selected ~ " " ~ knobpos);
 		return;
 	} elsif ( selected != "Kh-25MP" and knobpos < 5 ) {
+		#print("return 2 " ~ selected ~ " " ~ knobpos);
 		return;
 	}
 	if(selected != "none") {
 		# check power
 		if ( getprop("/fdm/jsbsim/electric/output/pwr-to-pylons",t_p) < 32 ) { return; }
+		#print("power good");
 		# check temprature, will begin failing at 5*C and guaranteed failure at -5*c
 		if ( interp( getprop("/fdm/jsbsim/systems/armament/pylon-heating/pylon-temp",t_p), -5,0,5,1) < rand() ) { return;	}
+		#print("temp good");
 		# trigger is pulled, a pylon is selected, the pylon has a missile that is locked on.
+		#print("power and temp is good");
 		if (armament.AIM.active[pylon] != nil and armament.AIM.active[pylon].status == 1 and (payloads[selected].type_norm == 0 or (payloads[selected].type_norm == 2 and radar_logic.selection != nil and getprop("controls/radar/power-panel/fixed-beam") == 0)) ) {
 			#missile locked, fire it.
 
@@ -619,6 +626,7 @@ var missile_release = func(pylon) {
 				setprop("/sim/messages/atc", phrase);
 			}
 		} elsif (armament.AIM.active[pylon] != nil and selected == "Kh-25MP") {
+			#print('mmm');
 
 			var brevity = armament.AIM.active[pylon].brevity;
 

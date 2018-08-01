@@ -4,19 +4,9 @@
 
 	<animation>
 		<type>select</type>
-		<object-name>Cylinder</object-name>
-		<object-name>Plane</object-name>
-		<object-name>Plane.001</object-name>
+		<object-name>Circle</object-name>
+		<object-name>Circle.001</object-name>
 		<object-name>Plane.002</object-name>
-		<object-name>Plane.003</object-name>
-		<object-name>Plane.004</object-name>
-		<object-name>Plane.005</object-name>
-		<object-name>Plane.006</object-name>
-		<object-name>Plane.007</object-name>
-		<object-name>Plane.008</object-name>
-		<object-name>Plane.009</object-name>
-		<object-name>Plane.010</object-name>
-		<object-name>Plane.011</object-name>
 		<condition>
 			<property>payload/armament/kh-25mp/flags/msl-id-3</property>
 		</condition>
@@ -42,19 +32,9 @@
 	</model>
 
 	<animation>
-		<object-name>Cylinder</object-name>
-		<object-name>Plane</object-name>
-		<object-name>Plane.001</object-name>
+		<object-name>Circle</object-name>
+		<object-name>Circle.001</object-name>
 		<object-name>Plane.002</object-name>
-		<object-name>Plane.003</object-name>
-		<object-name>Plane.004</object-name>
-		<object-name>Plane.005</object-name>
-		<object-name>Plane.006</object-name>
-		<object-name>Plane.007</object-name>
-		<object-name>Plane.008</object-name>
-		<object-name>Plane.009</object-name>
-		<object-name>Plane.010</object-name>
-		<object-name>Plane.011</object-name>
 		<enable-hot type="bool">false</enable-hot>
 	</animation>
 

@@ -215,7 +215,7 @@ var rwr_database = {
     "412-Griffin":              rwr_datum.new(0,0,0),
     "QF-4E":                    rwr_datum.new(70,70,100 * NM2M),
     "depot":                    rwr_datum.new(0,0,0),
-    "buk-m2":                   rwr_datum.new(180,90,75 * NM2M),
+    "buk-m2":                   rwr_datum.new(360,90,75 * NM2M),
     "truck":                    rwr_datum.new(0,0,0),
     "missile_frigate":          rwr_datum.new(180,90,120 * NM2M),
     "frigate":                  rwr_datum.new(180,90,120 * NM2M),
