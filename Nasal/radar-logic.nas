@@ -677,6 +677,9 @@ var Contact = {
     },
 
     isRadarActive: func {
+      if (me.rdrAct == nil) {
+        return TRUE;
+      }
       if (me.rdrAct.getValue() == nil) {
         return TRUE;
       } elsif (me.rdrAct.getValue() < 0 or me.rdrAct.getValue() > 1) {

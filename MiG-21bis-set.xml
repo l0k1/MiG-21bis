@@ -514,6 +514,10 @@
 				<detect-range-nm type="double">8.5</detect-range-nm> <!-- Current guidance mode default detect range. (when cold) -->
 				<seeker-beam-width-deg type="double">3.0</seeker-beam-width-deg> <!-- Seeker detector field of view diameter -->
 				<ready-time type="double">0.2</ready-time> <!-- time to get ready after standby mode. -->
+				<lock-on-after-launch type="bool">true</lock-on-after-launch> <!--bool. LOAL supported. For loal to work [optional]-->
+				<auto-switch-target-allowed type="bool">true</auto-switch-target-allowed> <!--bool. Can switch target at will if it loses lock [optional]-->
+				<prowl-flight type="string">gyro-pitch</prowl-flight> <!--unguided/level/gyro-pitch for LOAL and that stuff, when not locked onto stuff.-->
+				<switch-time-sec type="double">5.0</switch-time-sec> <!--auto switch of targets in flight: time to scan FoV.-->
 				<!--navigation, guiding and seekerhead-->
 				<seeker-field-deg type="int">110</seeker-field-deg> <!-- missiles own seekers total FOV diameter. -->
 				<guidance type="string">heat</guidance> <!-- heat/radar/semi-radar/laser/gps/vision/unguided/pitch/gyro-pitch/radiation/inertial -->
@@ -633,6 +637,10 @@
 				<detect-range-nm type="double">40.0</detect-range-nm> <!-- Current guidance mode default detect range. (when cold) -->
 				<seeker-beam-width-deg type="double">20.0</seeker-beam-width-deg> <!-- Seeker detector field of view diameter -->
 				<ready-time type="double">0.3</ready-time> <!-- time to get ready after standby mode. -->
+				<lock-on-after-launch type="bool">true</lock-on-after-launch> <!--bool. LOAL supported. For loal to work [optional]-->
+				<auto-switch-target-allowed type="bool">true</auto-switch-target-allowed> <!--bool. Can switch target at will if it loses lock [optional]-->
+				<prowl-flight type="string">gyro-pitch</prowl-flight> <!--unguided/level/gyro-pitch for LOAL and that stuff, when not locked onto stuff.-->
+				<switch-time-sec type="double">5.0</switch-time-sec> <!--auto switch of targets in flight: time to scan FoV.-->
 				<!--navigation, guiding and seekerhead-->
 				<seeker-field-deg type="int">20.0</seeker-field-deg> <!-- missiles own seekers total FOV diameter. -->
 				<guidance type="string">radiation</guidance> <!-- heat/radar/semi-radar/laser/gps/vision/unguided/pitch/gyro-pitch/radiation/inertial -->

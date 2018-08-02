@@ -229,6 +229,7 @@ var beam_target_lock = func() {
 var kh25_guidance = func(input) {
 	#print("weapon pitch:" ~ input.weapon_pitch);
 	#print("guiding");
+	print("guidance: " ~ input.guidance);
 	detect_range = input.seeker_detect_range * NM2M;
 	if (input.guidance == "radiation") {
 		#print("guidance is radiation");
@@ -309,7 +310,7 @@ var matching = 0;
 var gather = [];
 
 var gather_contacts = func() {
-	foreach(var mp; props.globals.getNode("/ai/models/").getChildren("multiplayer")) {
+	foreach(var mp; impact_listener_array) {
 		matching = 0;
 		foreach(var cx; cx_master_list) {
 			if ( mp.getPath() == cx.getNode().getPath() ) {
@@ -325,8 +326,46 @@ var gather_contacts = func() {
 		gather_contacts();
 		},1);
 }
+
+var impact_listener_array = [];
+var update_impact_listener_array = func() {
+	impact_listener_array = [];
+	foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
+		if (mp.getNode("valid").getValue() == 1) {
+			append(impact_listener_array,mp);
+		}
+	}
+	foreach(var mp; props.globals.getNode("/ai/models").getChildren("aircraft")){
+		if (mp.getNode("valid").getValue() == 1) {
+			append(impact_listener_array,mp);
+		}
+	}
+
+	foreach(var mp; props.globals.getNode("/ai/models").getChildren("tanker")){
+		if (mp.getNode("valid").getValue() == 1) {
+			append(impact_listener_array,mp);
+		}
+	}
+
+	foreach(var mp; props.globals.getNode("/ai/models").getChildren("ship")){
+		if (mp.getNode("valid").getValue() == 1) {
+			append(impact_listener_array,mp);
+		}
+	}
+
+	foreach(var mp; props.globals.getNode("/ai/models").getChildren("groundvehicle")){
+		if (mp.getNode("valid").getValue() == 1) {
+			append(impact_listener_array,mp);
+		}
+	}
+	settimer(func() {
+		update_impact_listener_array();
+	},1);
+	#print("working? " ~ size(impact_listener_array));
+}
+update_impact_listener_array();
+
 gather_contacts();
-#ir_seekTarget(); disabling for now
 
 setlistener("controls/radar/power-panel/fixed-beam", func() {
 	if (getprop("controls/radar/power-panel/fixed-beam") == 1) {

@@ -134,15 +134,15 @@ var SURFACE = 2;
 var ORDNANCE = 3;
 
 # set these to print stuff to console:
-var DEBUG_STATS            = 0;#most basic stuff
-var DEBUG_FLIGHT           = 0;#for creating missiles sometimes good to have this on to see how it flies.
+var DEBUG_STATS            = FALSE;#most basic stuff
+var DEBUG_FLIGHT           = TRUE;#for creating missiles sometimes good to have this on to see how it flies.
 
 # set these to debug the code:
 var DEBUG_STATS_DETAILS    = FALSE;
 var DEBUG_GUIDANCE         = FALSE;
 var DEBUG_GUIDANCE_DETAILS = FALSE;
-var DEBUG_FLIGHT_DETAILS   = 0;
-var DEBUG_SEARCH           = 0;
+var DEBUG_FLIGHT_DETAILS   = TRUE;
+var DEBUG_SEARCH           = FALSE;
 var DEBUG_CODE             = FALSE;
 
 var g_fps        = 9.80665 * M2FT;
@@ -1017,6 +1017,7 @@ var AIM = {
 		me.hdg = ac_hdg;
 
 		me.keepPitch = me.pitch;
+		print("updated keepPitch 1");
 
 		if (getprop("sim/flight-model") == "jsb") {
 			# currently not supported in Yasim
@@ -1411,6 +1412,7 @@ var AIM = {
 
 		if (me.prevGuidance != me.guidance) {
 			me.keepPitch = me.pitch;
+			print("updated keepPitch 2");
 		}
 		if (me.Tgt != nil and me.Tgt.isValid() == FALSE) {#TODO: verify that the following threaded code can handle invalid contact. As its read from property-tree, not mutex protected.
 			if (me.newTargetAssigned) {
@@ -1524,6 +1526,8 @@ var AIM = {
 		###################
 		#### Guidance.#####
 		###################
+		var done = 0;
+
 		if (me.Tgt != nil and me.t_coord !=nil and me.free == FALSE and me.guidance != "unguided"
 			and (me.rail == FALSE or me.rail_passed == TRUE) and me.arming_time != 5000) {
 				#
@@ -1544,13 +1548,17 @@ var AIM = {
 	            	if (me.adjst < 0) me.adjst = 0;
 	            	me.track_signal_e *= me.adjst;
 	            }
-	            me.pitch      += me.track_signal_e;
-            	me.hdg        += me.track_signal_h;
-	            me.printGuideDetails("%04.1f deg elevation command done, new pitch: %04.1f deg", me.track_signal_e, me.pitch);
-	            me.printGuideDetails("%05.1f deg bearing command done, new heading: %05.1f", me.last_track_h, me.hdg);
-	            me.observing = me.guidance;
-	    } elsif (me.guidance != "unguided" and (me.rail == FALSE or me.rail_passed == TRUE) and me.arming_time != 5000 and me.free == FALSE and me.t_coord == nil
-	    		and (me.newTargetAssigned or (me.canSwitch and (me.fovLost or me.lostLOS or me.radLostLock or me.semiLostLock or me.heatLostLock) or (me.loal and me.maddog)))) {
+                if (me.hasGuided or (me.guidance == "level" or me.guidance == "gyro-pitch")) {
+                    me.pitch      += me.track_signal_e;
+                    me.hdg        += me.track_signal_h;
+                    me.printGuideDetails("%04.1f deg elevation command done, new pitch: %04.1f deg", me.track_signal_e, me.pitch);
+                    me.printGuideDetails("%05.1f deg bearing command done, new heading: %05.1f", me.last_track_h, me.hdg);
+                    me.observing = me.guidance;
+                    done = 1;
+                }
+        }
+	    if (done == 0 and me.guidance != "unguided" and (me.rail == FALSE or me.rail_passed == TRUE) and me.arming_time != 5000 and me.free == FALSE
+                and (me.newTargetAssigned or (me.canSwitch and (me.fovLost or me.lostLOS or me.radLostLock or me.semiLostLock or me.heatLostLock) or (me.loal and me.maddog)))) {
 	    	# check for too low speed not performed on purpuse, difference between flying straight on A/P and making manouvres.
 	    	if (me.observing != me.standbyFlight) {
             	me.keepPitch = me.pitch;
@@ -1568,7 +1576,7 @@ var AIM = {
             me.printGuideDetails("%04.1f deg elevation command done, new pitch: %04.1f deg", me.track_signal_e, me.pitch);
             me.printGuideDetails("%05.1f deg bearing command done, new heading: %05.1f", me.last_track_h, me.hdg);
             me.observing = me.standbyFlight;
-		} else {
+		} elsif  (done == 0) {
 			me.observing = "unguided";
 			me.track_signal_e = 0;
 			me.track_signal_h = 0;
