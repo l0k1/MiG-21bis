@@ -580,7 +580,7 @@ var missile_release = func(pylon) {
 			} else {
 				setprop("/sim/messages/atc", phrase);
 			}
-		} elsif ( armament.AIM.active[pylon] != nil and selected == "R-27T1" and getprop("controls/radar/power-panel/fixed-beam") == 0) {
+		} elsif ( armament.AIM.active[pylon] != nil and (selected == "R-27T1" or selected == "R-27R1")) {
 			var prs_inhg = getprop("/environment/pressure-inhg");
 			if ( prs_inhg > 25 ) {
 				#print("pressure: " ~ math.clamp(interp(prs_inhg,33,0,25,1.5),0,4));
@@ -592,7 +592,6 @@ var missile_release = func(pylon) {
 				armament.AIM.active[pylon].drop_time = math.clamp(interp(prs_inhg,25,1.5,5,2),0,4);
 			}
 			var brevity = armament.AIM.active[pylon].brevity;
-			print("launching loal");
 			armament.AIM.active[pylon].release(arm_locking.cx_master_list);
 
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
