@@ -118,6 +118,11 @@
 				<weight-lb>582</weight-lb>
 			</opt>
 			<opt>
+				<name>S-24</name>
+				<lbs>518</lbs>
+				<weight-lb>518</weight-lb>
+			</opt>
+			<opt>
 				<name>FAB-100</name>
 				<lbs>220</lbs>
 				<weight-lb>220</weight-lb>
@@ -126,11 +131,6 @@
 				<name>FAB-250</name>
 				<lbs>551</lbs>
 				<weight-lb>551</weight-lb>
-			</opt>
-			<opt>
-				<name>S-24</name>
-				<lbs>518</lbs>
-				<weight-lb>518</weight-lb>
 			</opt>
 			<opt>
 				<name>PTB-490 Droptank</name>
@@ -163,6 +163,11 @@
 				<weight-lb>550</weight-lb>
 			</opt>
 			<opt>
+				<name>Kh-25MP</name>
+				<lbs>695</lbs>
+				<weight-lb>695</weight-lb>
+			</opt>
+			<opt>
 				<name>Kh-66</name>
 				<lbs>633</lbs>
 				<weight-lb>633</weight-lb>
@@ -178,6 +183,11 @@
 				<weight-lb>582</weight-lb>
 			</opt>
 			<opt>
+				<name>S-24</name>
+				<lbs>518</lbs>
+				<weight-lb>518</weight-lb>
+			</opt>
+			<opt>
 				<name>FAB-100</name>
 				<lbs>220</lbs>
 				<weight-lb>220</weight-lb>
@@ -191,16 +201,6 @@
 				<name>FAB-500</name>
 				<lbs>1146</lbs>
 				<weight-lb>1146</weight-lb>
-			</opt>
-			<opt>
-				<name>S-24</name>
-				<lbs>518</lbs>
-				<weight-lb>518</weight-lb>
-			</opt>
-			<opt>
-				<name>Kh-25MP</name>
-				<lbs>695</lbs>
-				<weight-lb>695</weight-lb>
 			</opt>
 		</weight>
 		<weight n="2">
@@ -259,6 +259,11 @@
 				<weight-lb>550</weight-lb>
 			</opt>
 			<opt>
+				<name>Kh-25MP</name>
+				<lbs>695</lbs>
+				<weight-lb>695</weight-lb>
+			</opt>
+			<opt>
 				<name>Kh-66</name>
 				<lbs>633</lbs>
 				<weight-lb>633</weight-lb>
@@ -274,6 +279,11 @@
 				<weight-lb>582</weight-lb>
 			</opt>
 			<opt>
+				<name>S-24</name>
+				<lbs>518</lbs>
+				<weight-lb>518</weight-lb>
+			</opt>
+			<opt>
 				<name>FAB-100</name>
 				<lbs>220</lbs>
 				<weight-lb>220</weight-lb>
@@ -287,16 +297,6 @@
 				<name>FAB-500</name>
 				<lbs>1146</lbs>
 				<weight-lb>1146</weight-lb>
-			</opt>
-			<opt>
-				<name>S-24</name>
-				<lbs>518</lbs>
-				<weight-lb>518</weight-lb>
-			</opt>
-			<opt>
-				<name>Kh-25MP</name>
-				<lbs>695</lbs>
-				<weight-lb>695</weight-lb>
 			</opt>
 		</weight>
 		<weight n="4">
@@ -344,6 +344,11 @@
 				<weight-lb>582</weight-lb>
 			</opt>
 			<opt>
+				<name>S-24</name>
+				<lbs>518</lbs>
+				<weight-lb>518</weight-lb>
+			</opt>
+			<opt>
 				<name>FAB-100</name>
 				<lbs>220</lbs>
 				<weight-lb>220</weight-lb>
@@ -352,11 +357,6 @@
 				<name>FAB-250</name>
 				<lbs>551</lbs>
 				<weight-lb>551</weight-lb>
-			</opt>
-			<opt>
-				<name>S-24</name>
-				<lbs>518</lbs>
-				<weight-lb>518</weight-lb>
 			</opt>
 			<opt>
 				<name>PTB-490 Droptank</name>
