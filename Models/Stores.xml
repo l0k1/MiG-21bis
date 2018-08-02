@@ -189,7 +189,7 @@
 	</model>
 	
 	<animation>
-		<name>Kh-25MP Left</name>
+		<object-name>Kh-25MP Left</object-name>
 		<type>select</type>
 		<condition>
 			<equals>
@@ -200,7 +200,7 @@
 	</animation>
 
 	<model>
-		<name>Kh-25 Right</name>
+		<name>Kh-25MP Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/KH-25MP/KH-25MP.xml</path>
 		<offsets>
 			<x-m> 0.23552 </x-m>
@@ -211,7 +211,7 @@
 	</model>
 
 	<animation>
-		<name>Kh-25 Right</name>
+		<object-name>Kh-25MP Right</object-name>
 		<type>select</type>
 		<condition>
 			<equals>
