@@ -135,13 +135,13 @@ var ORDNANCE = 3;
 
 # set these to print stuff to console:
 var DEBUG_STATS            = FALSE;#most basic stuff
-var DEBUG_FLIGHT           = TRUE;#for creating missiles sometimes good to have this on to see how it flies.
+var DEBUG_FLIGHT           = FALSE;#for creating missiles sometimes good to have this on to see how it flies.
 
 # set these to debug the code:
 var DEBUG_STATS_DETAILS    = FALSE;
 var DEBUG_GUIDANCE         = FALSE;
 var DEBUG_GUIDANCE_DETAILS = FALSE;
-var DEBUG_FLIGHT_DETAILS   = TRUE;
+var DEBUG_FLIGHT_DETAILS   = FALSE;
 var DEBUG_SEARCH           = FALSE;
 var DEBUG_CODE             = FALSE;
 
