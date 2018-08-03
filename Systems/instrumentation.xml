@@ -51,7 +51,7 @@ clock
                 <ifthen>
                     <gt>
                         <property>electric/output/rad-alt</property>
-                        <value>107</value>
+                        <value>32</value>
                     </gt>
                     <quotient>
                         <property>/position/altitude-agl-ft</property>
@@ -84,9 +84,9 @@ clock
                 	<quotient>
                     	<difference>
                     	    <property>electric/output/rad-alt</property>
-                    	    <value>107</value>
+                    	    <value>30</value>
                     	</difference>
-                    	<value>8</value>
+                    	<value>6</value>
                     </quotient>
                 </product>
             </function>
