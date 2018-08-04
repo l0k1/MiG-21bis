@@ -88,6 +88,11 @@
 				<weight-lb>165</weight-lb>
 			</opt>
 			<opt>
+				<name>R-3R</name>
+				<lbs>168</lbs>
+				<weight-lb>168</weight-lb>
+			</opt>
+			<opt>
 				<name>R-60</name>
 				<lbs>96</lbs>
 				<weight-lb>96</weight-lb>
@@ -156,6 +161,11 @@
 				<name>R-3S</name>
 				<lbs>165</lbs>
 				<weight-lb>165</weight-lb>
+			</opt>
+			<opt>
+				<name>R-3R</name>
+				<lbs>168</lbs>
+				<weight-lb>168</weight-lb>
 			</opt>
 			<opt>
 				<name>R-60</name>
@@ -259,6 +269,11 @@
 				<weight-lb>165</weight-lb>
 			</opt>
 			<opt>
+				<name>R-3R</name>
+				<lbs>168</lbs>
+				<weight-lb>168</weight-lb>
+			</opt>
+			<opt>
 				<name>R-60</name>
 				<lbs>96</lbs>
 				<weight-lb>96</weight-lb>
@@ -327,6 +342,11 @@
 				<name>R-3S</name>
 				<lbs>165</lbs>
 				<weight-lb>165</weight-lb>
+			</opt>
+			<opt>
+				<name>R-3R</name>
+				<lbs>168</lbs>
+				<weight-lb>168</weight-lb>
 			</opt>
 			<opt>
 				<name>R-60</name>

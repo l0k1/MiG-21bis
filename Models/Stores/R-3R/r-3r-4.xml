@@ -1,0 +1,37 @@
+<PropertyList>
+
+	<path>r-3r.ac</path>
+
+	<animation>
+		<type>select</type>
+		<object-name>body</object-name>
+		<condition>
+			<property>payload/armament/r-3r/flags/msl-id-4</property>
+		</condition>
+	</animation>
+
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-3R/motor-smoke-4.xml</path>
+		<offsets>
+			<x-m>1.44</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<name>explosion</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-3R/explosion-4.xml</path>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>body</object-name>
+		<enable-hot type="bool">false</enable-hot>
+	</animation>
+
+</PropertyList>
