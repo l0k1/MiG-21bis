@@ -1017,7 +1017,6 @@ var AIM = {
 		me.hdg = ac_hdg;
 
 		me.keepPitch = me.pitch;
-		print("updated keepPitch 1");
 
 		if (getprop("sim/flight-model") == "jsb") {
 			# currently not supported in Yasim
@@ -1412,7 +1411,6 @@ var AIM = {
 
 		if (me.prevGuidance != me.guidance) {
 			me.keepPitch = me.pitch;
-			print("updated keepPitch 2");
 		}
 		if (me.Tgt != nil and me.Tgt.isValid() == FALSE) {#TODO: verify that the following threaded code can handle invalid contact. As its read from property-tree, not mutex protected.
 			if (me.newTargetAssigned) {

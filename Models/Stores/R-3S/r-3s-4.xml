@@ -1,0 +1,39 @@
+<PropertyList>
+
+	<path>r-3s.ac</path>
+
+	<animation>
+		<type>select</type>
+		<object-name>body</object-name>
+		<object-name>glass</object-name>
+		<condition>
+			<property>payload/armament/r-3s/flags/msl-id-4</property>
+		</condition>
+	</animation>
+
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/motor-smoke-4.xml</path>
+		<offsets>
+			<x-m>1.44</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<name>explosion</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/explosion-4.xml</path>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>body</object-name>
+		<object-name>glass</object-name>
+		<enable-hot type="bool">false</enable-hot>
+	</animation>
+
+</PropertyList>

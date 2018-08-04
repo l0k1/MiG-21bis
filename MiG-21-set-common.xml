@@ -922,6 +922,82 @@
 				<trigger type="bool">false</trigger>
 				<jammed type="bool">false</jammed>
 			</GSh-30>
+
+			<r-3s>
+				<!--name-->
+				<long-name type="string">Vympel</long-name> <!--Longer name of the weapon-->
+				<short-name type="string">R-3S</short-name> <!--Shorter name of the weapon-->
+				<!--detection and firing-->
+				<max-fire-range-nm type="double">10</max-fire-range-nm> <!-- max range that the FCS allows firing -->
+				<min-fire-range-nm type="double">0.1</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
+				<FCS-field-deg type="int">15</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
+				<class type="string">AGM</class> <!-- put in letters here that represent the types the missile can fire at. A=air, M=marine, G=ground -->
+				<fire-msg type="string">Fox 1</fire-msg> <!-- what the pilot will call out over the comm when he fires this weapon -->
+				<coolable type="bool">false</coolable> <!-- If the seeker supports being cooled. (AIM-9L or later supports) -->
+				<cool-time type="double">1000</cool-time> <!-- Time to cold the seeker from fully warm. -->
+				<cool-duration type="int">1800</cool-duration> <!-- Typically 2.5 hours for cooling fluids. Much higher for electrical. -->
+				<warm-detect-range-nm type="double">3.8</warm-detect-range-nm> <!-- Current guidance mode detect range. (when warm) -->
+				<detect-range-nm type="double">3.8</detect-range-nm> <!-- Current guidance mode default detect range. (when cold) -->
+				<seeker-beam-width-deg type="double">1.5</seeker-beam-width-deg> <!-- Seeker detector field of view diameter -->
+				<ready-time type="double">1</ready-time> <!-- time to get ready after standby mode. -->
+				<lock-on-after-launch type="bool">false</lock-on-after-launch> <!--bool. LOAL supported. For loal to work [optional]-->
+				<auto-switch-target-allowed type="bool">false</auto-switch-target-allowed> <!--bool. Can switch target at will if it loses lock [optional]-->
+				<prowl-flight type="string">unguided</prowl-flight> <!--unguided/level/gyro-pitch for LOAL and that stuff, when not locked onto stuff.-->
+				<switch-time-sec type="double">1000</switch-time-sec> <!--auto switch of targets in flight: time to scan FoV.-->
+				<!--navigation, guiding and seekerhead-->
+				<seeker-field-deg type="int">50</seeker-field-deg> <!-- missiles own seekers total FOV diameter. -->
+				<guidance type="string">heat</guidance> <!-- heat/radar/semi-radar/laser/gps/vision/unguided/pitch/gyro-pitch/radiation/inertial -->
+				<navigation type="string">APN</navigation> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
+				<proportionality-constant type="double"></proportionality-constant> <!-- Constant for how sensitive proportional navigation is to target speed/acc. Normally between 3-6. [optional] -->
+				<all-aspect type="bool">false</all-aspect> <!-- bool. set to false if missile only locks on reliably to rear of target aircraft -->
+				<seeker-angular-speed-dps type="double">27</seeker-angular-speed-dps> <!-- only for heat/vision seeking missiles. Max angular speed that the target can move as seen from seeker, before seeker loses lock. -->
+				<lock-on-sun-deg type="double">20.0</lock-on-sun-deg> <!-- only for heat seeking missiles. If it looks at sun within this angle, it will lose lock on target. -->
+				<loft-altitude type="int">0</loft-altitude> <!-- if 0 then no snap up. Below 10000 then cruise altitude above ground. Above 10000 max altitude it will snap up to. -->
+				<terrain-follow type="bool">false</terrain-follow> <!-- bool. used for anti-ship missiles that should be able to terrain follow instead of purely sea skimming. -->
+				<reaquire type="bool">false</reaquire> <!-- bool. If weapon will try to reaquire lock after losing it. [optional] -->
+				<max-pitch-deg type="double"></max-pitch-deg> <!--After propulsion it will not be able to steer up more than this. [optional]-->
+				<!--engine-->
+				<thrust-lbf-stage-1 type="double">3821</thrust-lbf-stage-1> <!-- stage 1 thrust [optional] -->
+				<thrust-lbf-stage-2 type="double">0</thrust-lbf-stage-2> <!-- stage 2 thrust [optional] -->
+				<stage-1-duration-sec type="double">3.5</stage-1-duration-sec> <!-- stage 1 duration [optional] -->
+				<stage-2-duration-sec type="double">0</stage-2-duration-sec> <!-- stage 2 duration [optional] -->
+				<weight-fuel-lbm type="double">42</weight-fuel-lbm> <!-- fuel weight [optional]. If this property is not present, it won't lose weight as the fuel is used. -->
+				<vector-thrust type="bool">false</vector-thrust> <!-- Boolean. [optional] -->
+				<!--aerodynamic-->
+				<weight-launch-lbs type="double">165</weight-launch-lbs> <!-- total weight of armament, including fuel and warhead. -->
+				<drag-coeff type="double">0.85</drag-coeff> <!-- drag coefficient -->
+				<cross-section-sqft type="double">0.143</cross-section-sqft> <!-- normally is crosssection area of munition (without fins) -->
+				<max-g type="int">22</max-g> <!-- max G-force the missile can pull at sealevel -->
+				<min-speed-for-guiding-mach type="double">0.8</min-speed-for-guiding-mach> <!-- minimum speed before the missile steers, before it reaches this speed it will fly ballistic. -->
+				<ignore-wind-at-release type="bool">false</ignore-wind-at-release> <!--Boolean. If true dropped weapons will ignore sideslip and AOA and start flying in aircraft bore direction.-->
+				<lateral-dps type="double"></lateral-dps> <!--Lateral speed in degrees per second. This is mostly for cosmetics.-->
+				<!--detonation-->
+				<weight-warhead-lbs type="double">20</weight-warhead-lbs> <!-- warhead weight -->
+				<arming-time-sec type="double">1.4</arming-time-sec> <!-- time for weapon to arm -->
+				<self-destruct-time-sec type="double">43</self-destruct-time-sec> <!-- time before selfdestruct -->
+				<self-destruct-at-lock-lost type="bool">true</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
+				<max-report-distance type="double">65</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
+				<hit-everything-nearby type="bool">false</hit-everything-nearby> <!-- acts like a bomb, will check for nearby targets if true (99% of the time should be false) -->
+				<!--avionics sounds-->
+				<vol-search type="double">0.075</vol-search> <!-- sound volume when searcing -->
+				<vol-track type="double">0.25</vol-track> <!-- sound volume when having lock -->
+				<!--launching conditions-->
+				<rail type="bool">true</rail> <!-- if the weapon is rail or tube fired set to true. If dropped 7ft before ignited set to false. -->
+				<rail-length-m type="double">2.667</rail-length-m> <!-- length of tube/rail -->
+				<rail-point-forward type="bool">true</rail-point-forward> <!-- true for rail, false for rail/tube with a pitch -->
+				<rail-pitch-deg type="double">0</rail-pitch-deg> <!-- Only used when rail is not forward. 90 for vertical tube. -->
+				<drop-time type="double">0</drop-time> <!-- Time to fall before stage 1 thrust starts. -->
+				<deploy-time type="double">0</deploy-time> <!-- Time to deploy wings etc. Time starts when drop ends or rail passed. -->
+				<!--countermeasures-->
+				<chaff-resistnace type="double">0.950</chaff-resistnace> <!-- Float 0-1. Amount of resistance to chaff. Default 0.950. [optional] -->
+				<flare-resistance type="double">0.950</flare-resistance> <!-- Float 0-1. Amount of resistance to flare. Default 0.950. [optional] -->
+				<!--datalink-->
+				<telemetry type="bool"></telemetry> <!-- Boolean. Data link back to aircraft when missile is flying. [optional] -->
+				<DLZ type="bool"></DLZ> <!-- Supports dynamic launch zone info. For now only works with A/A. [optional] -->
+				<DLZ-optimal-alt-feet type="double"></DLZ-optimal-alt-feet> <!-- Minimum altitude required to hit the target at max range. -->
+				<DLZ-optimal-closing-mach type="double"></DLZ-optimal-closing-mach> <!-- Closing speed required to hit the target at max range at minimum altitude. -->
+			</r-3s>
+
 			<r-60>
 				<!-- launch reference: https://www.liveleak.com/view?i=879_1404076874 @ 2:25 -->
 				<!-- info on Komar seeker head: http://www.ausairpower.net/APA-Legacy-SAM-Upgrades.html -->

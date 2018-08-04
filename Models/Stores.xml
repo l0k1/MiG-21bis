@@ -222,6 +222,94 @@
 	</animation>
 
 	<model>
+		<name>R-3S Missile Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
+		<offsets>
+			<x-m> 0.852521</x-m>
+			<y-m>-2.732630</y-m>
+			<z-m>-0.208252</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+		<object-name>R-3S Missile Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[11]</property>
+                  <value>R-3S</value>
+            </equals>
+        </condition>
+	</animation>
+
+	<model>
+		<name>R-3S Missile Inner Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
+		<offsets>
+			<x-m>-0.048893</x-m>
+			<y-m>-2.10896</y-m>
+			<z-m>-0.178084</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+		<object-name>R-3S Missile Inner Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[12]</property>
+                  <value>R-3S</value>
+            </equals>
+        </condition>
+	</animation>
+
+	<model>
+		<name>R-3S Missile Inner Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
+		<offsets>
+			<x-m>-0.048893</x-m>
+			<y-m> 2.10896</y-m>
+			<z-m>-0.178084</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+		<object-name>R-3S Missile Inner Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[14]</property>
+                  <value>R-3S</value>
+            </equals>
+        </condition>
+	</animation>
+
+	<model>
+		<name>R-3S Missile Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
+		<offsets>
+			<x-m> 0.852521</x-m>
+			<y-m> 2.732630</y-m>
+			<z-m>-0.208252</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+		<object-name>R-3S Missile Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[15]</property>
+                  <value>R-3S</value>
+            </equals>
+        </condition>
+	</animation>
+
+	<model>
 		<name>R-60 Missile Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
 		<offsets>

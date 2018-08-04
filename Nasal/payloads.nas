@@ -73,9 +73,9 @@ var payloads = {
 	"R-13M":				pos_arm.new("R-13M","R-13M",194,"ir"),
 	"R-60":					pos_arm.new("R-60","R-60",96,"ir"),
 	"R-60x2":				pos_arm.new("R-60","R-60",96,"ir",,2),
-	#"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir",,,arm_locking.r27t1_guidance),
 	"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir"),
 	# radar missiles
+	"R-3R":					pos_arm.new("R-3R","R-3R",168,"radar"),
 	"R-27R1":				pos_arm.new("R-27R1","R-27R1",560,"radar"),
 	# bombs
 	"FAB-100":				pos_arm.new("FAB-100","FAB-100",220,"bomb",250),
@@ -87,7 +87,6 @@ var payloads = {
 	"RN-24":				pos_arm.new("RN-24","RN-24",860,"heavy",1000),
 	"RN-28":				pos_arm.new("RN-28","RN-28",1200,"heavy",1000),
 	# anti-radiation
-	#"Kh-25MP":				pos_arm.new("Kh-25MP","Kh-25MP",695,"antirad",,,arm_locking.kh25_guidance),
 	"Kh-25MP":				pos_arm.new("Kh-25MP","Kh-25MP",695,"antirad"),
 	# beam
 	"Kh-66":				pos_arm.new("Kh-66","Kh-66",632,"beam"),
