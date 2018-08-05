@@ -270,7 +270,7 @@ var missile_arming_loop = func() {
 			} elsif ( armament.AIM.active[i].status == MISSILE_STANDBY ) {
 				#print("missile " ~i~ " should be searching.");
 				armament.AIM.active[i].start();
-				if (payloads[payloadName].type = "ir") {
+				if (payloads[payloadName].type == "ir") {
 					#armament.AIM.active[i].setAutoUncage(0);
 					#armament.AIM.active[i].setCaged(0);
 					#armament.AIM.active[i].setUncagedPattern(8.5,8.5,-8.5); #  yaw, pitch up, pitch down

@@ -1006,7 +1006,7 @@
 				<max-fire-range-nm type="double">10</max-fire-range-nm> <!-- max range that the FCS allows firing -->
 				<min-fire-range-nm type="double">0.1</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
 				<FCS-field-deg type="int">15</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
-				<class type="string">AGM</class> <!-- put in letters here that represent the types the missile can fire at. A=air, M=marine, G=ground -->
+				<class type="string">A</class> <!-- put in letters here that represent the types the missile can fire at. A=air, M=marine, G=ground -->
 				<fire-msg type="string">Fox 2</fire-msg> <!-- what the pilot will call out over the comm when he fires this weapon -->
 				<coolable type="bool">false</coolable> <!-- If the seeker supports being cooled. (AIM-9L or later supports) -->
 				<cool-time type="double">1000</cool-time> <!-- Time to cold the seeker from fully warm. -->
