@@ -253,6 +253,37 @@
 			<path>/instrumentation/ils-radio/preset[18]</path>
 			<path>/instrumentation/ils-radio/preset[19]</path>
 
+			<path>/instrumentation/comm-radio/preset[0]</path>
+			<path>/instrumentation/comm-radio/preset[1]</path>
+			<path>/instrumentation/comm-radio/preset[2]</path>
+			<path>/instrumentation/comm-radio/preset[3]</path>
+			<path>/instrumentation/comm-radio/preset[4]</path>
+			<path>/instrumentation/comm-radio/preset[5]</path>
+			<path>/instrumentation/comm-radio/preset[6]</path>
+			<path>/instrumentation/comm-radio/preset[7]</path>
+			<path>/instrumentation/comm-radio/preset[8]</path>
+			<path>/instrumentation/comm-radio/preset[9]</path>
+			<path>/instrumentation/comm-radio/preset[10]</path>
+			<path>/instrumentation/comm-radio/preset[11]</path>
+			<path>/instrumentation/comm-radio/preset[12]</path>
+			<path>/instrumentation/comm-radio/preset[13]</path>
+			<path>/instrumentation/comm-radio/preset[14]</path>
+			<path>/instrumentation/comm-radio/preset[15]</path>
+			<path>/instrumentation/comm-radio/preset[16]</path>
+			<path>/instrumentation/comm-radio/preset[17]</path>
+			<path>/instrumentation/comm-radio/preset[18]</path>
+			<path>/instrumentation/comm-radio/preset[19]</path>
+
+			<path>/instrumentation/adf-radio/preset[0]</path>
+			<path>/instrumentation/adf-radio/preset[1]</path>
+			<path>/instrumentation/adf-radio/preset[2]</path>
+			<path>/instrumentation/adf-radio/preset[3]</path>
+			<path>/instrumentation/adf-radio/preset[4]</path>
+			<path>/instrumentation/adf-radio/preset[5]</path>
+			<path>/instrumentation/adf-radio/preset[6]</path>
+			<path>/instrumentation/adf-radio/preset[7]</path>
+			<path>/instrumentation/adf-radio/preset[8]</path>
+
 			<path>/instrumentation/gyro-compass/gyro-heading-deg</path>
 
 		</aircraft-data>
