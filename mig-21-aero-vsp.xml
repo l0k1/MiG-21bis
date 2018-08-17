@@ -1,0 +1,75 @@
+<aerodynamics>
+
+    <function name="aero/beta-deg-abs">
+        <description>Beta Absolute Value</description>
+        <abs>
+            <property>aero/beta-deg</property>
+        </abs>
+    </function>
+    
+    <!--
+    
+    LIFT
+    
+    -->
+    
+    <axis name="LIFT">
+    
+    </axis>
+    
+    <!--
+    
+    DRAG
+    
+    -->
+    
+    <function name="aero/force/CD0">
+        <description>Parasitic Drag</description>
+        <value>0.02798</value>
+    </function>
+    
+    <axis name="DRAG">
+        
+    </axis>
+    
+    <!--
+    
+    SIDE
+    
+    -->
+    
+    <axis name="SIDE">
+    
+    </axis>
+    
+    <!--
+    
+    PITCH
+    
+    -->
+    
+    <axis name="PITCH">
+    
+    </axis>
+    
+    <!--
+    
+    ROLL
+    
+    -->
+    
+    <axis name="ROLL">
+    
+    </axis>
+    
+    <!--
+    
+    YAW
+    
+    -->
+    
+    <axis name="YAW">
+    
+    </axis>
+
+</aerodynamics>
