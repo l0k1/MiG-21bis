@@ -86,13 +86,13 @@
 					<avg>
 						<interpolate1d>
 							<property>/instrumentation/altimeter/indicated-altitude-ft</property>
-							<value>22965.88</value> <value>1</value>
-							<value>13123.36</value> <property>fcs/aru-min</property>
+							<value>32808.40</value> <value> 1.7</value>
+							<value> 3280.84</value> <value>-0.4</value>
 						</interpolate1d>
 						<interpolate1d>
 							<property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
-							<value>261.879</value> <value>1</value>
-							<value>472.462</value> <property>fcs/aru-min</property>
+							<value> 51.296</value> <value> 1.7</value>
+							<value>683.045</value> <value>-0.4</value>
 						</interpolate1d>
 					</avg>
 					<property>fcs/aru-prefilter</property>
