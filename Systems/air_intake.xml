@@ -1,0 +1,14 @@
+<!-- offangle = atan with beta = adj and alpha = opp -->
+
+<!--
+The MiG-21 has an inlet cone that disrupts and slows the air flow. The cone
+can travel forwards and backwards. The plane also has anti-surge doors
+on either side of the fuselage, after the inlet but before the engine fans.
+
+I've no actual data on how much of an off angle was required to get an
+engine surge. Stall is at ~33 degrees, and there are videos showing
+a MiG-21 pilot flying at ~25 degrees. I'm guessing we can start the odds of
+a surge at ~22 degrees, and ramp up the odds to ~35 degrees.
+
+In addition, smoke from rockets or missiles had a chance to kill the engine.
+-->
