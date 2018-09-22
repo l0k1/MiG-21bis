@@ -15,7 +15,7 @@
 	<property>				/instrumentation/airspeed-indicator/indicated-speed-kt	</property>
 	<property>				/autopilot/locks/mode									</property>
 	<property>				fcs/elevator-ap-override								</property>
-	<property value="0.3">	fcs/aru-min												</property> <!-- minimum value the ARU can be at, normalized 0 to 1 -->
+	<property value="0.68">	fcs/aru-min												</property> <!-- minimum value the ARU can be at, normalized 0 to 1 -->
 	<property value="0.0">	fcs/aru-override-switch									</property> <!-- if 1, ARU always returns fcs/aru-setting -->
 	<property value="0.0">	fcs/aru-spd-switch										</property>
 	<property value="1.0">	fcs/aru-setting-pos										</property> <!-- if overriding default settings, ARU gets set to this -->	
@@ -66,11 +66,12 @@
 	This prevents overcontrolling at high IAS and still gives you enough elevator power at high altitudes and slow airspeeds.
 	https://ww2aircraft.net/forum/threads/mig-21-evaluation-in-the-usa.42979/ Some excerpts from the book "MiG-21 in Finnish Air Force" (bilingual Finnish/English)
 	by Jyrki Laukkanen-->
-	<!-- ARU percentages are extrapolated from the gauge markings, where:
-				7000m & 485kmh = 1
-				6000m & 615kmh = 2/3rds
-				5000m & 745kmh = 1/3rds
-				4000m & 875kmh = minval
+	<!-- 
+	ARU ratio data taken from "Samolet 75b - Rukovodstvo po Ekciluatachii i Tekhnicheskomu Obclushivanio, No Gk-381, Kniga 1 - Samolet i Ego Sistemi"
+	Max gear is 100% for most control, to 68% for least control
+	Below 3.8km, the gearing goes from 455km/h (max) to 850km/h (min)
+	Between 3.8km and 7km, the gearing is averaged between 455km/h (min) and 850km/h (max), and 3.8km (min) and 7km(max)
+	Above 7km, it is always max.
 	-->
 
 	<fcs_function name="aru-prefilter">
@@ -83,18 +84,36 @@
 						<property>electric/output/aru-syst-auto-ctl</property>
 						<value>107</value>
 					</gt>
-					<avg>
-						<interpolate1d>
+					<ifthen>
+						<lt>
 							<property>/instrumentation/altimeter/indicated-altitude-ft</property>
-							<value>32808.40</value> <value> 1.7</value>
-							<value> 3280.84</value> <value>-0.4</value>
-						</interpolate1d>
+							<value>12467.2</value>
+						</lt>
 						<interpolate1d>
 							<property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
-							<value> 51.296</value> <value> 1.7</value>
-							<value>683.045</value> <value>-0.4</value>
+							<value> 245.68 </value> <value> 1.0 </value>
+							<value> 458.96 </value> <property> fcs/aru-min </property>
 						</interpolate1d>
-					</avg>
+						<ifthen>
+							<lt>
+								<property>/instrumentation/altimeter/indicated-altitude-ft</property>
+								<value>22965.9</value>
+							</lt>
+							<avg>
+								<interpolate1d>
+									<property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+									<value> 245.68 </value> <value> 1.0 </value>
+									<value> 458.96 </value> <property> fcs/aru-min </property>
+								</interpolate1d>
+								<interpolate1d>
+									<property>/instrumentation/altimeter/indicated-altitude-ft</property>
+									<value>12467.2</value> <property> fcs/aru-min </property>
+									<value>22965.9</value> <value> 1.0</value>
+								</interpolate1d>
+							</avg>
+							<value>1</value>
+						</ifthen>
+					</ifthen>
 					<property>fcs/aru-prefilter</property>
 				</ifthen>
 			</ifthen>
@@ -109,7 +128,7 @@
 		<input>fcs/aru-prefilter</input>
 		<traverse>
 			<setting>
-				<position>0.3</position>
+				<position>0.68</position>
 				<time>0.0</time>
 			</setting>
 			<setting>

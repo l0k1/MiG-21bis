@@ -21,7 +21,7 @@
 		<object-name>ARUneedle</object-name>
 		<property>/fdm/jsbsim/instrumentation/aru/aru-display</property>
 		<interpolation>
-			<entry><ind>  0.3</ind><dep>  230</dep></entry>
+			<entry><ind>  0.68</ind><dep>  230</dep></entry>
             <entry><ind>  1.0</ind><dep>   40</dep></entry>
 		</interpolation>
 		<axis>
