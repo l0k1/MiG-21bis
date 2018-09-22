@@ -359,6 +359,7 @@
 			</engine>
 		</engines>
 		<armament>
+			<pickle-target alias="fdm/jsbsim/systems/armament/release">
 			<panel>
 				<!--switches, knobbins and buttons-->
 				<reload n="0" type="bool">false</reload>
