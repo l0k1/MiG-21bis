@@ -892,7 +892,7 @@ var main_init_listener = setlistener("sim/signals/fdm-initialized", func {
 }, 0, 0);
 
 var re_init_listener = setlistener("/sim/signals/reinit", func {
-  re_init();
+  # re_init();
 }, 0, 0);
 
 
