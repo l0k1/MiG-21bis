@@ -69,7 +69,7 @@
           <red><value>0.35</value></red>
           <green><value>0.30</value></green>
           <blue><value>1.0</value></blue>
-          <alpha><value>0.5</value></alpha>
+          <alpha><value>0.00000001</value></alpha>
         </color>
         <size>
           <value>45</value>
