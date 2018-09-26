@@ -147,7 +147,7 @@
            <property>metrics/Sw-sqft</property>
            <property>aero/cl-squared</property>
            <product>
-             <value> 0.1650 </value>
+             <value> 0.1255 </value>
              <property>tune/drag/induced</property>
            </product>
          </product>
@@ -164,7 +164,7 @@
                 <tableData>
                     0.00    0.00000
                     0.81    0.00000
-                    0.88    0.02000
+                    0.88    0.00280
                     1.05    0.02700
                     1.10    0.03000
                     1.25    0.01100
