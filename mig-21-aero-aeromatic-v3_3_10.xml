@@ -537,8 +537,8 @@
                <independentVar lookup="column">aero/Re</independentVar>
                <tableData>
                            15043185 16547504
-                   -0.3491  -0.2000   0.0000
-                    0.3491   0.2000   0.0000
+                   -0.3491  -0.1000   0.0000
+                    0.3491   0.1000   0.0000
                </tableData>
              </table>
              <property>tune/yaw/alpha</property>
