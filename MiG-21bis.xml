@@ -39,9 +39,9 @@
  </metrics>
 
  <mass_balance>
-   <ixx unit="SLUG*FT2">      9200 </ixx>
-   <iyy unit="SLUG*FT2">     42000 </iyy>
-   <izz unit="SLUG*FT2">     35000 </izz>
+   <ixx unit="SLUG*FT2">      4534 </ixx> <!-- source: https://forums.eagle.ru/showthread.php?t=194892 -->
+   <iyy unit="SLUG*FT2">     49792 </iyy>
+   <izz unit="SLUG*FT2">     56859 </izz>
    <ixy unit="SLUG*FT2">         0 </ixy>
    <ixz unit="SLUG*FT2">         0 </ixz>
    <iyz unit="SLUG*FT2">         0 </iyz>
