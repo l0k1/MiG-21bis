@@ -199,11 +199,12 @@
 				<float n="9" alias="/engines/engine[0]/nozzle-pos-norm" /> <!-- Reheat  -->
 				<float n="10" alias="/fdm/jsbsim/propulsion/clr" /> <!-- Reheat  -->
 				<string n="9" type="string"/>
-			<string n="11" alias="/payload/weight[0]/selected"/>
-		<string n="12" alias="/payload/weight[1]/selected"/>
-		<string n="13" alias="/payload/weight[2]/selected"/>
-		<string n="14" alias="/payload/weight[3]/selected"/>
-		<string n="15" alias="/payload/weight[4]/selected"/>
+				<string n="11" alias="/payload/weight[0]/selected"/>
+				<string n="12" alias="/payload/weight[1]/selected"/>
+				<string n="13" alias="/payload/weight[2]/selected"/>
+				<string n="14" alias="/payload/weight[3]/selected"/>
+				<string n="15" alias="/payload/weight[4]/selected"/>
+				<bool n="0" alias ="/instrumentation/gci/request"> <!-- gci request -->
 			</generic>
 		</multiplay>
 
@@ -581,6 +582,9 @@
 		<gyro-compass>
 			<gyro-heading-deg type="double" userarchive="y">0.0</gyro-heading-deg>
 		</gyro-compass>
+		<gci>
+			<request type="bool">false</request>
+		</gci>
 		<radar>
 			<range type="int" archive="y">20</range>
 			<range-factor type="double" archive="n">0.001888</range-factor>
