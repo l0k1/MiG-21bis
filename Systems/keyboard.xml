@@ -334,20 +334,15 @@
 		</binding>
 	</key>
 
-	 <key n="261">
-  <name>F5</name>
-  <repeatable type="bool">true</repeatable>
-  <mod-shift>
-   <desc>Reload autopilot configuration</desc>
-   <binding>
-    <command>nasal</command>
-    <script>
-     fgcommand('reinit', props.Node.new({ subsystem: "xml-autopilot" }));
-     print("xml-autopilot reinitialized!");
-    </script>
-   </binding>
-  </mod-shift>
-
- </key>
+	<key n="261">
+		<name>F5</name>
+		<repeatable type="bool">true</repeatable>
+		<desc>Request BRAA</desc>
+		<binding>
+			<command>property-assign</command>
+			<property>/instrumentation/gci/request</property>
+			<value>1</value>
+		</binding>
+	</key>
 
 </PropertyList>

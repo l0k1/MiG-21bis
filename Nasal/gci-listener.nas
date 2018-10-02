@@ -38,13 +38,15 @@ var msgdata = [];
 
 var main_loop = func() {
     if (gci_prop.getValue() == 1) {
+        print('prop set to 1');
         iter = iter + 1;
         my_callsign = cs_node.getValue();
         dist = 99999999;
         msgdata = [];
         foreach (var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")) {
-            model = remove_suffix(remove_suffix(split(".", split("/", source.getNode("sim/model/path").getValue())[-1])[0], "-model"), "-anim");
-            dist_to = geo.aircraft_position().distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg"),mp.getNode("position/longitude-deg")));
+            if ( mp.getNode("valid") == 0 ) { continue; }
+            model = remove_suffix(remove_suffix(split(".", split("/", mp.getNode("sim/model/path").getValue())[-1])[0], "-model"), "-anim");
+            dist_to = geo.aircraft_position().distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(),mp.getNode("position/longitude-deg").getValue()));
             if (find_match(model,gci_models) == 0) { continue; }
             if (dist_to < dist) {
                 foreach (var msg; mp.getChildren("sim/multiplay/generic/string")) {
@@ -61,14 +63,17 @@ var main_loop = func() {
             }
         }
         
-        if (msgdata[2] != nil) {
+        if (size(msgdata) > 0) {
             send_msg(msgdata);
             gci_prop.setValue(0);
+            iter = 0;
         }
         
+        print("iter: " ~ iter);
         if ( iter / update_rate > max_listen_time ) {
             screen.log.write("No response to the GCI request.", 1.0, 0.2, 0.2);
             gci_prop.setValue(0);
+            iter = 0;
         }
     }
     
