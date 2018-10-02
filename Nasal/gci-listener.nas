@@ -37,7 +37,7 @@ var cs_node = props.globals.getNode("/sim/multiplay/callsign");
 var msgdata = [];
 
 var main_loop = func() {
-    if gci_prop.getValue() == 1 {
+    if (gci_prop.getValue() == 1) {
         iter = iter + 1;
         my_callsign = cs_node.getValue();
         dist = 99999999;
@@ -63,6 +63,7 @@ var main_loop = func() {
         
         if (msgdata[2] != nil) {
             send_msg(msgdata);
+            gci_prop.setValue(0);
         }
         
         if ( iter / update_rate > max_listen_time ) {
@@ -71,8 +72,10 @@ var main_loop = func() {
         }
     }
     
-    setlistener(func() { main_loop(); }, update_rate);
+    settimer(func() { main_loop(); }, update_rate);
 }
+
+main_loop();
 
 var send_msg = func(msg) {
     # msg should be a vector in the form of: 
