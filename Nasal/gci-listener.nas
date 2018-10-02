@@ -34,49 +34,72 @@ var last_msg_id = -1;
 var model = "";
 var dist = 99999999;
 var cs_node = props.globals.getNode("/sim/multiplay/callsign");
+var ids = [];
 var msgdata = [];
+var timer_ct = 0;
 
 var main_loop = func() {
+    timer_ct = timer_ct + 1;
     if (gci_prop.getValue() == 1) {
-        print('prop set to 1');
         iter = iter + 1;
         my_callsign = cs_node.getValue();
         dist = 99999999;
         msgdata = [];
         foreach (var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")) {
-            if ( mp.getNode("valid") == 0 ) { continue; }
+            if ( mp.getNode("valid").getValue() == 0 ) { continue; }
             model = remove_suffix(remove_suffix(split(".", split("/", mp.getNode("sim/model/path").getValue())[-1])[0], "-model"), "-anim");
             dist_to = geo.aircraft_position().distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(),mp.getNode("position/longitude-deg").getValue()));
+            #print("model: " ~ model);
+            #print(dist_to);
             if (find_match(model,gci_models) == 0) { continue; }
             if (dist_to < dist) {
-                foreach (var msg; mp.getChildren("sim/multiplay/generic/string")) {
-                    if (find(cs_node.getValue(),msg.getValue()) == -1) { continue; }
-                    msgdata = split(":",msg.getValue());
-                    if (last_msg_id == msgdata[1]) { 
+                #print('yup');
+                for (var i = 0; i <= 10; i = i + 1) {
+                    var path = mp.getPath() ~ "/sim/multiplay/generic/string["~i~"]";
+                    #print(path);
+                    var msg = getprop(path);
+                #foreach (var msg; mp.getChildren("sim/multiplay/generic")) {
+                    #print(msg);
+                    if (msg == "") {continue;}
+                    if (msg == nil) {continue;}
+                    if (find(cs_node.getValue(),msg) == -1) { continue; }
+                    #print('bork');
+                    msgdata = split(":",msg);
+                    if (find_match(msgdata[1],ids)) { 
                         msgdata = [];
                         continue; 
                     } else {
                         dist = dist_to;
-                        msgdata[6] = mp.getNode("callsign");
+                        append(msgdata,mp.getNode("callsign").getValue());
+                        if (size(ids) < 10) {
+                            append(ids,msgdata[1]);
+                        } else {
+                            ids = push_and_pop(ids,msgdata[1]);
+                        }
                     }
+                    break;
                 }
             }
         }
         
         if (size(msgdata) > 0) {
+            timer_ct = 0;
             send_msg(msgdata);
             gci_prop.setValue(0);
             iter = 0;
         }
         
-        print("iter: " ~ iter);
+        #print("iter: " ~ iter);
         if ( iter / update_rate > max_listen_time ) {
             screen.log.write("No response to the GCI request.", 1.0, 0.2, 0.2);
             gci_prop.setValue(0);
             iter = 0;
         }
     }
-    
+    if (timer_ct > 20) {
+        ids = [];
+        timer_ct = 0;
+    }
     settimer(func() { main_loop(); }, update_rate);
 }
 
@@ -97,15 +120,15 @@ var send_msg = func(msg) {
     if ( msg[2] == "null" ) {
         output = output ~ "no contact to report.";
     } else {
-        output = output ~ "bandit " ~ msg[2] ~ " at " ~ int(round(msg[3],1000)/1000) ~ "km, ";
-        output = output ~ "altitude " ~ int(round(msg[3] * FT2M,100)) ~ "m, ";
-        msg[4] = math.abs(msg[4]);
+        output = output ~ "bandit " ~ msg[2] ~ " at " ~ int(math.round(msg[3],1000)/1000) ~ "km, ";
+        output = output ~ "altitude " ~ int(math.round(msg[4] * FT2M,100)) ~ "m, ";
+        msg[5] = math.abs(msg[5]);
         var aspect = "unknown aspect";
-        if (msg[4] > 110) {
+        if (msg[5] > 110) {
             aspect = "dragging";
-        } elsif (msg[4] > 70) {
+        } elsif (msg[5] > 70) {
             aspect = "beaming";
-        } elsif (msg[4] > 30) {
+        } elsif (msg[5] > 30) {
             aspect = "flanking";
         } else {
             aspect = "hot";
@@ -115,7 +138,18 @@ var send_msg = func(msg) {
     screen.log.write(output, 1.0, 0.2, 0.2);
 }
 
+var push_and_pop = func(vec, datum) {
+    var new_vec = [];
+    for (i = 0; i < size(vec) - 1; i = i + 1){
+        append(new_vec, vec[i+1]);
+    }
+    return new_vec;
+}
+
 var find_match = func(val,vec) {
+    if (size(vec) == 0) {
+        return 0;
+    }
     foreach (var a; vec) {
         if (a == val) { return 1; }
     }
