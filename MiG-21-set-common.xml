@@ -204,7 +204,9 @@
 				<string n="13" alias="/payload/weight[2]/selected"/>
 				<string n="14" alias="/payload/weight[3]/selected"/>
 				<string n="15" alias="/payload/weight[4]/selected"/>
-				<bool n="0" alias ="/instrumentation/gci/request"/> <!-- gci request -->
+				<bool n="0" alias ="/instrumentation/gci/picture"/> <!-- gci request -->
+				<bool n="1" alias ="/instrumentation/gci/bogeydope"/> <!-- gci request -->
+				<bool n="2" alias ="/instrumentation/gci/cutoff"/> <!-- gci request -->
 			</generic>
 		</multiplay>
 
@@ -583,7 +585,9 @@
 			<gyro-heading-deg type="double" userarchive="y">0.0</gyro-heading-deg>
 		</gyro-compass>
 		<gci>
-			<request type="bool">false</request>
+			<picture type="bool">false</picture>
+			<bogeydope type="bool">false</bogeydope>
+			<cutoff type="bool">false</cutoff>
 		</gci>
 		<radar>
 			<range type="int" archive="y">20</range>

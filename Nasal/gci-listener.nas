@@ -10,12 +10,14 @@
 # will only listen to the closest gci station, or the first non-null station
 
 
-# gci_prop is a bool.
+# these props are bools.
 # must be aliased to a /sim/multiplay/generic/bool node.
 # this node must also be synced with the gci database.
 # ask pinto about adding a new node for your model(s).
 
-var gci_prop = props.globals.getNode("/instrumentation/gci/request");
+var picture_prop = props.globals.getNode("/instrumentation/gci/picture");
+var bogeydope_prop = props.globals.getNode("/instrumentation/gci/bogeydope");
+var cutoff_prop = props.globals.getNode("/instrumentation/gci/cutoff");
 
 # time in seconds to wait for a GCI response, before setting gci_prop to false.
 var max_listen_time = 10;
@@ -38,119 +40,180 @@ var ids = [];
 var msgdata = [];
 var timer_ct = 0;
 
-var main_loop = func() {
-    timer_ct = timer_ct + 1;
-    if (gci_prop.getValue() == 1) {
-        iter = iter + 1;
-        my_callsign = cs_node.getValue();
-        dist = 99999999;
-        msgdata = [];
-        foreach (var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")) {
-            if ( mp.getNode("valid").getValue() == 0 ) { continue; }
-            model = remove_suffix(remove_suffix(split(".", split("/", mp.getNode("sim/model/path").getValue())[-1])[0], "-model"), "-anim");
-            dist_to = geo.aircraft_position().distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(),mp.getNode("position/longitude-deg").getValue()));
-            #print("model: " ~ model);
-            #print(dist_to);
-            if (find_match(model,gci_models) == 0) { continue; }
-            if (dist_to < dist) {
-                #print('yup');
-                for (var i = 0; i <= 10; i = i + 1) {
-                    var path = mp.getPath() ~ "/sim/multiplay/generic/string["~i~"]";
-                    #print(path);
-                    var msg = getprop(path);
-                #foreach (var msg; mp.getChildren("sim/multiplay/generic")) {
-                    #print(msg);
-                    if (msg == "") {continue;}
-                    if (msg == nil) {continue;}
-                    if (find(cs_node.getValue(),msg) == -1) { continue; }
-                    #print('bork');
-                    msgdata = split(":",msg);
-                    if (find_match(msgdata[1],ids)) { 
-                        msgdata = [];
-                        continue; 
-                    } else {
-                        dist = dist_to;
-                        append(msgdata,mp.getNode("callsign").getValue());
-                        if (size(ids) < 10) {
-                            append(ids,msgdata[1]);
-                        } else {
-                            ids = push_and_pop(ids,msgdata[1]);
-                        }
-                    }
-                    break;
+# find the closest AEW
+var aew_cx = nil;
+var find_aew_cx = func() {
+    #print('searching for aew');
+    aew_cx = nil;
+    ids = [];
+    dist = 99999999; # twice the diameter of earth
+    foreach (var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")) {
+        #print('checking ' ~ mp.getNode("callsign").getValue());
+        model = remove_suffix(remove_suffix(split(".", split("/", mp.getNode("sim/model/path").getValue())[-1])[0], "-model"), "-anim");
+        #print("is it " ~ model);
+        if (find_match(model,gci_models) == 0) { continue; }
+        dist_to = geo.aircraft_position().distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(),mp.getNode("position/longitude-deg").getValue()));
+        if (dist_to < dist) {
+            dist = dist_to;
+            aew_cx = mp;
+            for (var i = 0; i <= 10; i = i + 1) {
+                var msg = getprop(aew_cx.getPath() ~ "/sim/multiplay/generic/string["~i~"]");
+                if (msg == "") { continue; }
+                if (msg == nil) { continue; }
+                msgdata = split(":",msg);
+                if (msgdata[0] == cs_node.getValue()) {
+                    append(ids,msgdata[1]);
                 }
             }
-        }
-        
-        if (size(msgdata) > 0) {
-            timer_ct = 0;
-            send_msg(msgdata);
-            gci_prop.setValue(0);
-            iter = 0;
-        }
-        
-        #print("iter: " ~ iter);
-        if ( iter / update_rate > max_listen_time ) {
-            screen.log.write("No response to the GCI request.", 1.0, 0.2, 0.2);
-            gci_prop.setValue(0);
-            iter = 0;
+            #print('aew_cx found');
         }
     }
-    if (timer_ct > 20) {
-        ids = [];
-        timer_ct = 0;
+}
+
+# check AEW properties for messages
+var counter = 0;
+var check_messages = func() {
+    #debug.dump(ids);
+    if (aew_cx == nil) { return; }
+    #print('checking messages');
+    msgdata = [];
+    for (var i = 0; i <= 10; i = i + 1) {
+        var msg = getprop(aew_cx.getPath() ~ "/sim/multiplay/generic/string["~i~"]");
+        if (msg == "") { continue; }
+        if (msg == nil) { continue; }
+        msgdata = split(":",msg);
+        #debug.dump(msgdata);
+        if (msgdata[0] != cs_node.getValue() and msgdata[0] != "awacsgci") {
+            continue;
+        } elsif (find_match(msgdata[1],ids)) {
+            msgdata = [];
+            continue;
+        } else {
+            append(msgdata,aew_cx.getNode("callsign").getValue());
+            append(ids,msgdata[1]);
+            parse_msg(msgdata);
+            break;
+        }
     }
+    if (picture_prop.getValue() or bogeydope_prop.getValue() or cutoff_prop.getValue()) {
+        counter = counter + 1;
+    } else {
+        counter = 0;
+    }
+    if (counter == 7) {
+        screen.log.write("No contact from GCI.", 1.0, 0.2, 0.2);
+        picture_prop.setValue(0);
+        bogeydope_prop.setValue(0);
+        cutoff_prop.setValue(0);
+    }
+}
+
+var parse_msg = func(msg) {
+    # msg should be a vector in the form of: 
+    # destination callsign, id, type of message, bearing (degrees), range (meters), altitude (feet), aspect (degrees), sender callsign
+    # type of message:
+    # 0 - message completed sending
+    # 1 - no info to report
+    # 2 - picture
+    # 3 - bogey dope
+    # 4 - cutoff
+    # if the gci couldnt find anybody, it will send a 'null' string for [2] through [5]
+    # altitude is rounded to the nearest 100.
+    if (size(msg) != 8) {
+        print("AEW code received invalid message: " ~ debug.dump(msg));
+        return; # message is invalid
+    }
+    
+    if (msg[0] == "awacsgci") {
+        output = "Priority traffic from " ~ msg[7] ~ ": ";
+    } else {
+        var output = msg[0] ~ ", " ~ msg[7] ~ ", ";
+    }
+    
+    if (msg[2] == 0) {
+        if (picture_prop.getValue()) {
+            output = output ~ "all information sent, over.";
+        } else {
+            output = "";
+        }
+        picture_prop.setValue(0);
+        bogeydope_prop.setValue(0);
+        cutoff_prop.setValue(0);
+    } elsif (msg[2] == 1) {
+        output = output ~ "skies are clear, over.";
+        picture_prop.setValue(0);
+        bogeydope_prop.setValue(0);
+        cutoff_prop.setValue(0);
+    } elsif (msg[2] == 2) {
+        # PICTURE message
+        # 3:bearing, 4:range, 5:altitude, 6:blufor=0/opfor=1
+        output = msg[6] ? output ~ "OPFOR is " : output ~ "BLUFOR is ";
+        output = output ~ msg[3] ~ " at " ~ int(math.round(msg[4],1000)/1000) ~ "km, ";
+        output = output ~ "altitude " ~ int(math.round(msg[5] * FT2M,100)) ~ "m.";
+    } elsif (msg[2] == 3) {
+        # DOPE BOGEY message
+        # 3:bearing, 4:range, 5:altitude, 6:aspect
+        output = output ~ "bandit " ~ msg[3] ~ " at " ~ int(math.round(int(msg[4]),1000)/1000) ~ "km, ";
+        output = output ~ "altitude " ~ int(math.round(msg[5] * FT2M,100)) ~ "m, ";
+        msg[6] = math.abs(msg[6]);
+        if (msg[6] > 110) {
+            output = output ~ "dragging.";
+        } elsif (msg[6] > 70) {
+            output = output ~ "beaming";
+        } elsif (msg[6] > 30) {
+            output = output ~ "flanking";
+        } else {
+            output = output ~ "hot";
+        }
+        picture_prop.setValue(0);
+        bogeydope_prop.setValue(0);
+        cutoff_prop.setValue(0);
+    } elsif (msg[3] == 4) {
+        # cutoff vector
+        #requestor-callsign:unique-message-id:4:vector-heading:time:altitude:aspect
+        debug.print(msg);
+        output = output ~ "fly " ~ msg[3] ~ " at altitude " ~ int(math.round(msg[5] * FT2M,100)) ~ "m, ";
+        print(output);
+        output = output ~ "ETA " ~ int(msg[4]) ~ "s, ";
+        print(output);
+        msg[6] = math.abs(msg[6]);
+        if (msg[6] > 110) {
+            output = output ~ "dragging.";
+        } elsif (msg[6] > 70) {
+            output = output ~ "beaming";
+        } elsif (msg[6] > 30) {
+            output = output ~ "flanking";
+        } else {
+            output = output ~ "hot";
+        }
+        print(output);
+        picture_prop.setValue(0);
+        bogeydope_prop.setValue(0);
+        cutoff_prop.setValue(0);
+    }
+    
+    if (output != "") {
+        screen.log.write(output, 1.0, 0.2, 0.2);
+    }
+}
+
+var main_loop = func() {
+    if (iter == 1) {
+        find_aew_cx();
+    }
+    check_messages();
+    iter = iter > 10 ? 0 : iter + 1;
     settimer(func() { main_loop(); }, update_rate);
 }
 
 main_loop();
-
-var send_msg = func(msg) {
-    # msg should be a vector in the form of: 
-    # destination callsign, id, bearing (degrees), range (meters), altitude (feet), aspect (degrees), sender callsign
-    # if the gci couldnt find anybody, it will send a 'null' string for [2] through [5]
-    # altitude is rounded to the nearest 100.
-    
-    if ( size(msg) != 7 ) {
-        return; # message is invalid
-    }
-    
-    output = msg[0] ~ ", " ~ msg[6] ~ ", ";
-    
-    if ( msg[2] == "null" ) {
-        output = output ~ "no contact to report.";
-    } else {
-        output = output ~ "bandit " ~ msg[2] ~ " at " ~ int(math.round(msg[3],1000)/1000) ~ "km, ";
-        output = output ~ "altitude " ~ int(math.round(msg[4] * FT2M,100)) ~ "m, ";
-        msg[5] = math.abs(msg[5]);
-        var aspect = "unknown aspect";
-        if (msg[5] > 110) {
-            aspect = "dragging";
-        } elsif (msg[5] > 70) {
-            aspect = "beaming";
-        } elsif (msg[5] > 30) {
-            aspect = "flanking";
-        } else {
-            aspect = "hot";
-        }
-        output = output ~ aspect ~ ".";
-    }
-    screen.log.write(output, 1.0, 0.2, 0.2);
-}
-
-var push_and_pop = func(vec, datum) {
-    var new_vec = [];
-    for (i = 0; i < size(vec) - 1; i = i + 1){
-        append(new_vec, vec[i+1]);
-    }
-    return new_vec;
-}
 
 var find_match = func(val,vec) {
     if (size(vec) == 0) {
         return 0;
     }
     foreach (var a; vec) {
+        #print(a);
         if (a == val) { return 1; }
     }
     return 0;

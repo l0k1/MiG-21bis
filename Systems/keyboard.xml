@@ -337,10 +337,32 @@
 	<key n="261">
 		<name>F5</name>
 		<repeatable type="bool">true</repeatable>
-		<desc>Request BRAA</desc>
+		<desc>Request Picture</desc>
 		<binding>
 			<command>property-assign</command>
-			<property>/instrumentation/gci/request</property>
+			<property>/instrumentation/gci/picture</property>
+			<value>1</value>
+		</binding>
+	</key>
+
+	<key n="262">
+		<name>F6</name>
+		<repeatable type="bool">true</repeatable>
+		<desc>Request Bogey Dope</desc>
+		<binding>
+			<command>property-assign</command>
+			<property>/instrumentation/gci/bogeydope</property>
+			<value>1</value>
+		</binding>
+	</key>
+
+	<key n="263">
+		<name>F7</name>
+		<repeatable type="bool">true</repeatable>
+		<desc>Request Cutoff</desc>
+		<binding>
+			<command>property-assign</command>
+			<property>/instrumentation/gci/cutoff</property>
 			<value>1</value>
 		</binding>
 	</key>
