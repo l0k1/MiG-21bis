@@ -43,6 +43,10 @@ var timer_ct = 0;
 # find the closest AEW
 var aew_cx = nil;
 var find_aew_cx = func() {
+    if (picture_prop.getValue() or bogeydope_prop.getValue() or cutoff_prop.getValue()) {
+        # dont want to wipe this if we are in the middle of a request.
+        return;
+    }
     #print('searching for aew');
     aew_cx = nil;
     ids = [];
