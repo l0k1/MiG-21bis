@@ -659,6 +659,7 @@
  <system file="electric"/>
  <system file="fuel"/>
  <system file="propulsion"/>
+ <system file="air_intake.xml"/>
  <system file="payloads"/>
  <system file="hydraulic"/>
  <system file="instrumentation"/>

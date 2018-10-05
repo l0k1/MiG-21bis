@@ -134,6 +134,8 @@ var parse_msg = func(msg) {
         var output = msg[0] ~ ", " ~ msg[7] ~ ", ";
     }
     
+    #debug.dump(msg);
+
     if (msg[2] == 0) {
         if (picture_prop.getValue()) {
             output = output ~ "all information sent, over.";
@@ -172,14 +174,14 @@ var parse_msg = func(msg) {
         picture_prop.setValue(0);
         bogeydope_prop.setValue(0);
         cutoff_prop.setValue(0);
-    } elsif (msg[3] == 4) {
+    } elsif (msg[2] == 4) {
         # cutoff vector
         #requestor-callsign:unique-message-id:4:vector-heading:time:altitude:aspect
-        debug.print(msg);
+        #debug.dump(msg);
         output = output ~ "fly " ~ msg[3] ~ " at altitude " ~ int(math.round(msg[5] * FT2M,100)) ~ "m, ";
-        print(output);
+        #print(output);
         output = output ~ "ETA " ~ int(msg[4]) ~ "s, ";
-        print(output);
+        #print(output);
         msg[6] = math.abs(msg[6]);
         if (msg[6] > 110) {
             output = output ~ "dragging.";
@@ -190,7 +192,11 @@ var parse_msg = func(msg) {
         } else {
             output = output ~ "hot";
         }
-        print(output);
+        #print(output);
+        picture_prop.setValue(0);
+        bogeydope_prop.setValue(0);
+        cutoff_prop.setValue(0);
+    } else {
         picture_prop.setValue(0);
         bogeydope_prop.setValue(0);
         cutoff_prop.setValue(0);

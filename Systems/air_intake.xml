@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
 
 TL;DR - most of these numbers are educated guesses.
@@ -18,8 +19,6 @@ calculate shockwave angle off of nose.
 i'm assuming that the wind isn't a significant factor here.
 -->
 
-<?xml version="1.0"?>
-
 <system name="air_intake">
 
     <property value="1">systems/air-intake/intake-norm</property>
@@ -36,15 +35,17 @@ i'm assuming that the wind isn't a significant factor here.
 			            <value>1.0</value>
 			        </gt>
     			    <todegrees>
-        			    <sum>
+        			    <difference>
             			    <asin>
             			        <quotient>
             			            <value>1.0</value>
             			            <property>velocities/mach</property>
             			        </quotient>
             			    </asin>
-            			    <property>aero/alpha-rad</property>
-            	        </sum>
+                            <abs>
+                                <property>aero/alpha-rad</property>
+                            </abs>
+            	        </difference>
             	    </todegrees>
             	    <value>90</value>
             	</ifthen>
@@ -87,11 +88,47 @@ i'm assuming that the wind isn't a significant factor here.
 		    </function>
 		    <output>systems/air-intake/intake-norm</output>
 		</fcs_function>
+
+        <fcs_function name="trash/systems/air-intake/overspeed">
+            <!-- 
+            just to be clear, this is a very ugly hack. 
+            shy of completely modelling the air intake, this is as
+            good as it's gonna get.
+            -->
+            <function>
+                <table>
+                    <independentVar lookup="row">/environment/pressure-inhg</independentVar>
+                    <tableData>
+                        3.27    877
+                        5.52    864
+                        8.89    837
+                        20.6    770
+                        29.9    702
+                        32.1    675
+                    </tableData>
+                </table>
+            </function>
+            <output>systems/air-intake/overspeed</output>
+        </fcs_function>
+                    
+        
+        <switch name="trash/systems/air-intake/surge-set">
+            <default value="0"/>
+            <test logic="OR" value="1">
+                velocities/vc-kts gt systems/air-intake/overspeed
+                systems/air-intake/intake-norm lt 0.9
+                systems/air-intake/intake-norm gt 1.1
+                systems/air-intake/surging eq 1
+            </test>
+            <output>systems/air-intake/surge-set</output>
+        </switch>
+
+
     </channel>
     
     
     <channel name="cone_fcs">
-        <fcs_function name="trash/systems/air-intake/cone-pos-norm">
+        <fcs_function name="trash/systems/air-intake/cone-auto-logic">
             <function>
                 <table>
                     <independentVar lookup="row">systems/air-intake/shockwave-angle</independentVar>
@@ -122,8 +159,19 @@ i'm assuming that the wind isn't a significant factor here.
                     </tableData>
                 </table>
             </function>
-            <output>systems/air-intake/cone-pos-norm</output>
+            <output>systems/air-intake/cone-auto-logic</output>
         </fcs_function>
+
+        <kinematic name="trash/systems/air-intake/cone-pos-norm">
+            <input>systems/air-intake/cone-auto-logic</input>
+            <traverse>
+                <setting> <position>   0.0 </position> <time> 0.00 </time> </setting>
+                <setting> <position> 100.0 </position> <time> 0.75 </time> </setting>
+            </traverse>
+            <noscale/>
+            <output>systems/air-intake/cone-pos-norm</output>
+        </kinematic>
+
     </channel>
         
 </system>

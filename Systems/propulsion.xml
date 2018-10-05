@@ -9,6 +9,7 @@ ignition, a delay of up to 9 seconds was experienced.
 -->
 
 <system name="propulsion">
+    <property value="0">systems/air-intake/surging</property>
 
 	<channel name="Throttle">
 
@@ -106,17 +107,21 @@ ignition, a delay of up to 9 seconds was experienced.
 
 		<fcs_function name="trash/asdfp32">
 			<function>
-				<sum>
-					<property>fcs/throttle-redist-mil</property>
-					<product>
-						<property>fcs/throttle-redist-aug</property>
-						<property>fcs/aug-active</property>
-						<gt>
-							<property>electric/output/full-throttle-reheat</property>
-							<value>25</value>
-						</gt>
-					</product>
-				</sum>
+				<ifthen>
+					<property>systems/air-intake/surging</property>
+					<value>0</value>
+					<sum>
+						<property>fcs/throttle-redist-mil</property>
+						<product>
+							<property>fcs/throttle-redist-aug</property>
+							<property>fcs/aug-active</property>
+							<gt>
+								<property>electric/output/full-throttle-reheat</property>
+								<value>25</value>
+							</gt>
+						</product>
+					</sum>
+				</ifthen>
 			</function>
 			<clipto>
 				<min>0.0</min>
