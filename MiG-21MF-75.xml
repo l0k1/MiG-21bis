@@ -648,19 +648,21 @@
   <dump-rate unit="LBS/MIN"> 1500 </dump-rate>
  </propulsion>
 
- <system file="gear"/> 
- <system file="flaps"/> 
+ <system file="gear"/>
+ <system file="flaps"/>
  <system file="speedbrakes"/>
  <system file="FCS-Pitch"/>
  <system file="FCS-Roll"/>
  <system file="FCS-Yaw"/>
  <system file="chute"/>
  <system file="canopy"/>
+ <system file="electric"/>
  <system file="fuel"/>
  <system file="propulsion"/>
+ <system file="air_intake.xml"/>
  <system file="payloads"/>
- <system file="electric"/>
  <system file="hydraulic"/>
+ <system file="instrumentation"/>
  <system file="warning-lights"/>
 
  <flight_control name="none"/>
