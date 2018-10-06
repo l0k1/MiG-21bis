@@ -1181,7 +1181,7 @@
 				<!--detonation-->
 				<weight-warhead-lbs type="double">85.98</weight-warhead-lbs> <!-- warhead weight -->
 				<arming-time-sec type="double">1.6</arming-time-sec> <!-- time for weapon to arm -->
-				<self-destruct-time-sec type="double">43</self-destruct-time-sec> <!-- time before selfdestruct -->
+				<self-destruct-time-sec type="double">60</self-destruct-time-sec> <!-- time before selfdestruct -->
 				<self-destruct-at-lock-lost type="double">25</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
 				<max-report-distance type="double">65</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
 				<!--avionics sounds-->
@@ -1242,7 +1242,7 @@
 				<!--detonation-->
 				<weight-warhead-lbs type="double">85.98</weight-warhead-lbs> <!-- warhead weight -->
 				<arming-time-sec type="double">1.6</arming-time-sec> <!-- time for weapon to arm -->
-				<self-destruct-time-sec type="double">43</self-destruct-time-sec> <!-- time before selfdestruct -->
+				<self-destruct-time-sec type="double">60</self-destruct-time-sec> <!-- time before selfdestruct -->
 				<self-destruct-at-lock-lost type="double">25</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
 				<max-report-distance type="double">65</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
 				<!--avionics sounds-->
