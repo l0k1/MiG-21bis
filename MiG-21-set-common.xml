@@ -142,8 +142,8 @@
 					</item>
 				</menu>
 				<menu n="101">
-					<label>Debug</label>
-					<item>
+					<label>Dev</label>
+					<!--<item>
 						<label>Tune Drag</label>
 						<binding>
 							<command>nasal</command>
@@ -188,7 +188,7 @@
 					<item>
 						<name>a-submenu</name>
 						<enabled>false</enabled>
-					</item>
+					</item>-->
 					<item>
 						<label>Dump Prop Tree</label>
 						<binding>
