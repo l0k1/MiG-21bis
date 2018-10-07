@@ -137,6 +137,7 @@ var start_ignition_signal = props.globals.getNode("/controls/engines/engine[0]/s
 
 var engine_startup = func() {
   # props not yet accounted for, r/set circuit breaker, service tk pump circuit breaker
+  #print(getprop("/controls/engines/engine[0]/start-button"));
 	if (runthru == 0) {
 		starter_time = systime();
 		starter_time_req = (rand() * 2) + 3.75;
@@ -182,11 +183,55 @@ setlistener("/controls/engines/engine[0]/starting-switch",func(){
 		starter.setValue(0);
 		cutoff.setValue(1);
 	}
-	});
+});
 
 setlistener("/fdm/jsbsim/fcs/aru-override-switch",func(){
   setprop("/fdm/jsbsim/fcs/aru-setting-pos",getprop("/fdm/jsbsim/fcs/aru"));
 });
+
+var autostart_state = 0;
+var autostart = func() {
+  if (eng_running.getValue()) {
+    #engine is running running, shut it down
+    #print("shutting down engine");
+    autostart_state = 0;
+    cutoff.setValue(1);
+    return;
+  }
+  if (autostart_state == 0) {
+    #print("flipping switches");
+    setprop("/fdm/jsbsim/electric/switches/rhfsp/no-3-tk-gp-pump",1);
+    setprop("/fdm/jsbsim/electric/switches/rhfsp/no-1-tk-gp-pump",1);
+    setprop("/fdm/jsbsim/electric/switches/rhfsp/service-tk-pump",1);
+    setprop("/fdm/jsbsim/electric/switches/rhfsp/bat-ext-pwr-sup",1);
+    setprop("/fdm/jsbsim/electric/switches/rhfsp/dc-gen",1);
+    setprop("/fdm/jsbsim/electric/switches/rhfsp/ac-gen-ext-pwr",1);
+    setprop("/fdm/jsbsim/electric/switches/lvfsp/fire-ftg-eqpt",1);
+    setprop("/fdm/jsbsim/electric/switches/lvfsp/engine-starting-unit",1);
+    setprop("/controls/engines/engine[0]/starting-switch",1);
+
+    autostart_state = 1;
+    settimer(func(){autostart();},0.5);
+  } elsif (autostart_state == 1) {
+    if (dc_prop.getValue() > 25) {
+      autostart_state = 2;
+      setprop("/controls/engines/engine[0]/start-button",1);
+      settimer(func(){autostart();},2.0);
+    } else {
+      settimer(func(){autostart();},0.5);
+    }
+  } elsif (autostart_state == 2) {
+    if (!start_ignition_signal.getValue()) {
+      #print("signal not detected, returning to normal");
+      setprop("/controls/engines/engine[0]/start-button",0);
+      autostart_state = 0;
+      return;
+    } else {
+      #print("setting timer");
+      settimer(func(){autostart();},0.2);
+    }
+  }
+}
 
   #/controls/engines/engine[~n~]/starter set to true
   #/controls/engines/engine[~n~]/cutoff toggled with 0.1 sec delay
