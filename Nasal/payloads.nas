@@ -200,14 +200,15 @@ var create_pylon = func(pylon, payload, selected) {
         setprop("/payload/released/"~payload.name~"["~pylon~"]",FALSE);
     }
     if (payload.type == "rocket") {
+        print('adding ammo for pylon ' ~ pylon);
         if (pylon == 0) {
-            setprop("/ai/submodels/submode[22]/count",payload.ammo_count);
+            setprop("/ai/submodels/submodel[22]/count",payload.ammo_count);
         } elsif (pylon == 1){
-            setprop("/ai/submodels/submode[23]/count",payload.ammo_count);
+            setprop("/ai/submodels/submodel[23]/count",payload.ammo_count);
         } elsif (pylon == 3){
-            setprop("/ai/submodels/submode[24]/count",payload.ammo_count);
+            setprop("/ai/submodels/submodel[24]/count",payload.ammo_count);
         } elsif (pylon == 4){
-            setprop("/ai/submodels/submode[25]/count",payload.ammo_count);
+            setprop("/ai/submodels/submodel[25]/count",payload.ammo_count);
         }
     } else {
         if (pylon == 0) {
