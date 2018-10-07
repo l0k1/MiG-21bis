@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">Czech Splinter Camo</name>
+                <texture>Liveries/CzechSplinter.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/CzechSplinter.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>

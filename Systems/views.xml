@@ -29,6 +29,22 @@
 		</config>
 	</view>
 
+	<!--<view n="102">
+		<internal archive="y">true</internal>
+		<name>livery screenshot</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-3.3</pitch-offset-deg>
+			<heading-offset-deg>92.75</heading-offset-deg>
+			<x-offset-m archive="y"> 13.6783</x-offset-m>
+			<y-offset-m archive="y">  1.3667</y-offset-m>
+			<z-offset-m archive="y"> -0.9643</z-offset-m>
+			<default-field-of-view-deg type="double">55</default-field-of-view-deg>
+		</config>
+	</view>-->
+
 
 </PropertyList>
 
