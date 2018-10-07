@@ -58,6 +58,11 @@
 				<splash type="bool">true</splash>
 				<path>Splash4.png</path>
 			</preview>
+			<preview>
+				<type>exterior</type>
+				<splash type="bool">true</splash>
+				<path>Splash5.png</path>
+			</preview>
 		</previews>
 
 
@@ -67,6 +72,7 @@
 			<splash-texture>Aircraft/MiG-21bis/Splash2.png</splash-texture>
 			<splash-texture>Aircraft/MiG-21bis/Splash3.png</splash-texture>
 			<splash-texture>Aircraft/MiG-21bis/Splash4.png</splash-texture>
+			<splash-texture>Aircraft/MiG-21bis/Splash5.png</splash-texture>
 		</startup>
 
 		<!--<checklists include="Docs/checklists-bis.xml"/>-->
