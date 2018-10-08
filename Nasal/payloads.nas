@@ -482,6 +482,7 @@ var trigger_propogation = func() {
 				
 				# check that the pylon is powered
 				if ( getprop("/fdm/jsbsim/electric/output/pwr-to-pylons",pylon_check) < 32 ) { continue; }
+                if ( getprop("/fdm/jsbsim/electric/output/msl-rgm-rkt-lch") < 32) { continue; }
 				
 				#propogate out for our R-60's
 				if( pylon_check == 0 and getprop("payload/virtual/weight[7]/selected") == "R-60" ) { pylon_check = 7; }
