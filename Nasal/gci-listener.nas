@@ -1,19 +1,42 @@
 # (c) 2018 pinto
-# looks for and listens to gci stations
-# will send one gci request per "on" switch
-# will show up on screen as what appears to be a chat message,
-# but will only show up for that specific player.
 
-# change the format of the BRAA report in the send_msg() function.
-
-# todo:
-# will only listen to the closest gci station, or the first non-null station
-
-
-# these props are bools.
-# must be aliased to a /sim/multiplay/generic/bool node.
-# this node must also be synced with the gci database.
-# ask pinto about adding a new node for your model(s).
+# GCI/AWACS DESIGN DOC
+# 
+# possible requests from pilots to AEW:
+# 
+# PICTURE - full tactical picture
+# BOGEY DOPE - BRAA of nearest target
+# CUTOFF - vector to nearest target
+# 
+# The requesting plane has 3 boolean mp properties, one for each request.
+# The requestor plane sets 1 property. Setting another property should overwrite
+# the original request.
+# 
+# The AEW has a list of enemy planes. It monitors all non-enemy planes for the
+# boolean properties to be set. If it detects a boolean, it will respond using
+# a multiplay/generic/string[0-10] with the information needed. It may send
+# multiple strings at a rate of approximately 1 string per second.
+# 
+# String will always be a vector of size 7 after being split() with ':'. Format will be:
+# 
+# for PICTURE
+# requestor-callsign:unique-message-id:2:bearing:range:altitude:[BLUFOR=0|OPFOR=1]
+# repeat for all contacts/groups of contacts
+# 
+# for BOGEY DOPE
+# requestor-callsign:unique-message-id:3:bearing:range:altitude:aspect
+# 
+# for CUTOFF
+# requestor-callsign:unique-message-id:4:vector-heading:range:altitude:aspect
+# 
+# for no info available to send:
+# requestor-callsign:unique-message-id:1:n:n:n:n
+# 
+# for when all info is sent:
+# requestor-callsign:unique-message-id:0:d:d:d:d
+# 
+# The receiving aircraft will then parse these messages. Upon all messages read,
+# the receiving aircraft will set the boolean property to 0.
 
 var picture_prop = props.globals.getNode("/instrumentation/gci/picture");
 var bogeydope_prop = props.globals.getNode("/instrumentation/gci/bogeydope");
@@ -87,7 +110,7 @@ var check_messages = func() {
         if (msg == nil) { continue; }
         msgdata = split(":",msg);
         #debug.dump(msgdata);
-        if (msgdata[0] != cs_node.getValue() and msgdata[0] != "awacsgci") {
+        if (msgdata[0] != cs_node.getValue()) {
             continue;
         } elsif (find_match(msgdata[1],ids)) {
             msgdata = [];
