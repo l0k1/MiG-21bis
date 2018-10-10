@@ -210,7 +210,9 @@ var autostart = func() {
     setprop("/fdm/jsbsim/electric/switches/lvfsp/fire-ftg-eqpt",1);
     setprop("/fdm/jsbsim/electric/switches/lvfsp/engine-starting-unit",1);
     setprop("/controls/engines/engine[0]/starting-switch",1);
-
+    screen.log.write("Warning! Autostart only starts the engines!", 1.0, 0.2, 0);
+    screen.log.write("It is up to the you to set the gauges", 1.0, 0.2, 0);
+    screen.log.write("and switches according to your needs.", 1.0, 0.2, 0);
     autostart_state = 1;
     settimer(func(){autostart();},0.5);
   } elsif (autostart_state == 1) {
