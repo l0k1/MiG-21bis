@@ -1,9 +1,11 @@
+#This file is for mostly random one-off stuff that doesn't really need it's own file
+
 #GLOBAL VARS
 UPDATE_TIME = 0.15;
 
 var main_loop = func (){
 	performance();
-  logTime();
+    logTime();
 	settimer(func{main_loop();},UPDATE_TIME);
 }
 
@@ -16,7 +18,6 @@ var performance = func () {
 setprop("/mig21/advanced-radar",0);
 
 var test_support = func {
-
   var versionString = getprop("sim/version/flightgear");
   var version = split(".", versionString);
   var major = num(version[0]);
@@ -233,10 +234,15 @@ var autostart = func() {
   }
 }
 
-  #/controls/engines/engine[~n~]/starter set to true
-  #/controls/engines/engine[~n~]/cutoff toggled with 0.1 sec delay
-  #after n1 stabs
-  #/controls/engines/engine[~n~]/starter set to false
+var init = setlistener("/sim/signals/fdm-initialized", func() {
+    test_support();
+    main_loop();
+    # randomize startup values for DME, radial setting, compass, and fuel
+    setprop("/instrumentation/fuel/knob-level",int((rand() * 1600) + 169)); # fuel
+    setprop("/instrumentation/gyro-compass/mag-offset",int((rand() * 50) - 25)); # gyro compass heading
+    setprop("/instrumentation/dead-reckoner/distance-adjust",int((rand() * 30)); # dme
+    setprop("/instrumentation/dead-reckoner/azimuth-adjust",math.periodic(0, 360, int(rand() * 360))); #radial azimuth
+});
 
-test_support();
-main_loop();
+
+
