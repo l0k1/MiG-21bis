@@ -49,5 +49,57 @@
 			<z>0</z>
 		</axis>
 	</animation>
+
+	<animation>
+		<type>knob</type>
+		<object-name>jettAACover</object-name>
+		<property>/instrumentation/armament/msl-emergency-release/button-cover</property>
+		<factor>110</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m> 0.056786</x-m>
+			<y-m>-0.051063</y-m>
+			<z-m>-0.122403</z-m>
+		</center>
+		<axis>
+			<x> 0.5</x>
+			<y> 1.0</y>
+			<z>-1.0</z>
+		</axis>
+
+		<action>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/armament/msl-emergency-release/button-cover</property>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<type>slider</type>
+		<object-name>jettAAButton</object-name>
+		<property>/instrumentation/armament/msl-emergency-release/button</property>
+		<factor>0.002</factor>
+		<axis>
+			<x>-1.0</x>
+			<y> 0.0</y>
+			<z>-0.2</z>
+		</axis>
+
+		<action>
+			<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/armament/msl-emergency-release/button</property>
+				<value>1</value>
+			</binding>
+		</action>
+		<release>
+			<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/armament/msl-emergency-release/button</property>
+				<value>0</value>
+			</binding>
+		</release>
+	</animation>
 	
 </PropertyList>

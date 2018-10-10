@@ -592,6 +592,12 @@
 		<adf n="0">
 			<inbound-outbound-switch type="int">0</inbound-outbound-switch>
 		</adf>
+		<armament>
+			<msl-emergency-release>
+				<button-cover type="bool">false</button-cover>
+				<button type="bool">false</button>
+			</msl-emergency-release>
+		</armament>
 		<nav n="0">
 			<radials>
 				<selected-deg>0</selected-deg>

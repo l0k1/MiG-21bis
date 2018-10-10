@@ -944,8 +944,28 @@ var main_init = func {
 	setlistener("/payload/virtual/weight[7]/selected",func{update_pylons(7);});
 	setlistener("/payload/virtual/weight[8]/selected",func{update_pylons(8);});
 
-  # setup impact listener
-  setlistener("/ai/models/model-impact", impact_listener, 0, 0);
+    # setup impact listener
+    setlistener("/ai/models/model-impact", impact_listener, 0, 0);
+
+    # listener for missile emergency launch
+    setlistener("/instrumentation/armament/msl-emergency-release/button", func() {
+        if (getprop("/instrumentation/armament/msl-emergency-release/button") == 0 ) { return; }
+        for (var i = 0; i <= 5; i = i + 1) {
+            var selected = getprop("/payload/weight["~i~"]/selected");
+            if (selected == nil ){ return; }
+            if (payloads[selected].type != "ir" and
+                    payloads[selected].type != "radar" and
+                    payloads[selected].type != "beam" and
+                    payloads[selected].type != "antirad") {
+                return;
+            }
+            if (armament.AIM.active[i].status == MISSILE_LOCK) {
+                missile_release(i);
+            } elsif (armament.AIM.active[i].status != MISSILE_FLYING) {
+                armament.AIM.active[i].releaseAtNothing();
+            }
+        }
+    });
 
   # start the main loop
   armament_loop();
