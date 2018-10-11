@@ -116,34 +116,9 @@
 				<weight-lb>192</weight-lb>
 			</opt>
 			<opt>
-				<name>R-27R1</name>
-				<lbs>560</lbs>
-				<weight-lb>560</weight-lb>
-			</opt>
-			<opt>
-				<name>R-27T1</name>
-				<lbs>550</lbs>
-				<weight-lb>550</weight-lb>
-			</opt>
-			<opt>
-				<name>Kh-66</name>
-				<lbs>633</lbs>
-				<weight-lb>633</weight-lb>
-			</opt>
-			<opt>
 				<name>UB-16</name>
 				<lbs>141</lbs>
 				<weight-lb>141</weight-lb>
-			</opt>
-			<opt>
-				<name>UB-32</name>
-				<lbs>582</lbs>
-				<weight-lb>582</weight-lb>
-			</opt>
-			<opt>
-				<name>S-24</name>
-				<lbs>518</lbs>
-				<weight-lb>518</weight-lb>
 			</opt>
 			<opt>
 				<name>FAB-100</name>
@@ -382,16 +357,6 @@
 				<weight-lb>192</weight-lb>
 			</opt>
 			<opt>
-				<name>R-27R1</name>
-				<lbs>560</lbs>
-				<weight-lb>560</weight-lb>
-			</opt>
-			<opt>
-				<name>R-27T1</name>
-				<lbs>550</lbs>
-				<weight-lb>550</weight-lb>
-			</opt>
-			<opt>
 				<name>Kh-66</name>
 				<lbs>633</lbs>
 				<weight-lb>633</weight-lb>
@@ -400,16 +365,6 @@
 				<name>UB-16</name>
 				<lbs>141</lbs>
 				<weight-lb>141</weight-lb>
-			</opt>
-			<opt>
-				<name>UB-32</name>
-				<lbs>582</lbs>
-				<weight-lb>582</weight-lb>
-			</opt>
-			<opt>
-				<name>S-24</name>
-				<lbs>518</lbs>
-				<weight-lb>518</weight-lb>
 			</opt>
 			<opt>
 				<name>FAB-100</name>
