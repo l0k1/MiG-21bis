@@ -105,7 +105,7 @@ var payloads = {
 
 var update_pylons = func(pylon) {
     #set up our function
-    print("updating pylon " ~ pylon);
+    #print("updating pylon " ~ pylon);
     if (pylon < 7) {
         var selected = getprop("/payload/weight["~pylon~"]/selected");
         var pylon_weight = getprop("/payload/weight["~pylon~"]/weight-lb");
@@ -114,7 +114,7 @@ var update_pylons = func(pylon) {
         var pylon_weight = getprop("/payload/virtual/weight["~pylon~"]/weight-lb");
     }
     if ( selected == nil ) {
-        print("error in pylon updating: "~pylon~" selection was nil.");
+        #print("error in pylon updating: "~pylon~" selection was nil.");
         return;
     }
     var payload = payloads[selected];
@@ -123,18 +123,18 @@ var update_pylons = func(pylon) {
     #print("weight: " ~ pylon_weight);
 
     if (payload.name != "none" and pylon_weight == 0 and pylon < 7) {
-    	print('create pylon ' ~ pylon ~ ' with ' ~ payload.name);
+        #print('create pylon ' ~ pylon ~ ' with ' ~ payload.name);
     	create_pylon(pylon,payload,selected);
     } elsif (payload.name != "none" and pylon_weight != payload.weight and payload.name != "FAB-100x4") {
-    	print('reset pylon ' ~ pylon ~ ' with ' ~ payload.name);
+        #print('reset pylon ' ~ pylon ~ ' with ' ~ payload.name);
     	empty_pylon(pylon);
     	create_pylon(pylon,payload,selected);
     } elsif (payload.name == "FAB-100x4" and pylon_weight != 300 and pylon_weight != 520 and pylon_weight != 740 and pylon_weight != 960) {
-        print("fab-100x4 special handling on pylon " ~ pylon);
+        #print("fab-100x4 special handling on pylon " ~ pylon);
         empty_pylon(pylon);
         create_pylon(pylon,payload,selected);
     } elsif (payload.name == "none") {
-    	print('empty pylon ' ~ pylon);
+        #print('empty pylon ' ~ pylon);
     	empty_pylon(pylon);
     }
     
@@ -721,7 +721,7 @@ var bomb_release = func(pylon,type="bomb") {
             setprop("payload"~virtual~"weight[" ~ ( pylon ) ~ "]/selected", "none" );
             setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
         }
-        print("releasing: payload/released/"~selected~"["~pylon~"]");
+        #print("releasing: payload/released/"~selected~"["~pylon~"]");
 		setprop("payload/released/"~selected~"["~pylon~"]",1);
 		var phrase = payloads[selected].brevity ~ " released.";
 		if (getprop("payload/armament/msg")) {
@@ -951,18 +951,40 @@ var main_init = func {
     setlistener("/instrumentation/armament/msl-emergency-release/button", func() {
         if (getprop("/instrumentation/armament/msl-emergency-release/button") == 0 ) { return; }
         for (var i = 0; i <= 5; i = i + 1) {
+            if (i == 2) { continue; } # missiles can't be on the center pylon afaik
             var selected = getprop("/payload/weight["~i~"]/selected");
-            if (selected == nil ){ return; }
+            if (selected == nil ){ continue; }
+            if (getprop("/fdm/jsbsim/electric/output/pwr-to-pylons["~i~"]") < 32) { continue; }
             if (payloads[selected].type != "ir" and
                     payloads[selected].type != "radar" and
                     payloads[selected].type != "beam" and
                     payloads[selected].type != "antirad") {
-                return;
+                continue;
+            }
+
+            if( i == 0 and getprop("payload/virtual/weight[7]/selected") == "R-60" ) {
+                if (armament.AIM.active[7].status == MISSILE_LOCK) {
+                    missile_release(7);
+                } elsif (armament.AIM.active[7].status != MISSILE_FLYING) {
+                    armament.AIM.active[7].releaseAtNothing();
+                    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[7]",0);
+                    setprop("payload/virtual/weight[7]/selected", "none");
+                }
+            } elsif ( i == 4 and getprop("payload/virtual/weight[8]/selected") == "R-60" ) {
+                if (armament.AIM.active[8].status == MISSILE_LOCK) {
+                    missile_release(8);
+                } elsif (armament.AIM.active[8].status != MISSILE_FLYING) {
+                    armament.AIM.active[8].releaseAtNothing();
+                    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[8]",0);
+                    setprop("payload/virtual/weight[8]/selected", "none");
+                }
             }
             if (armament.AIM.active[i].status == MISSILE_LOCK) {
                 missile_release(i);
             } elsif (armament.AIM.active[i].status != MISSILE_FLYING) {
                 armament.AIM.active[i].releaseAtNothing();
+                setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~i~"]",0);
+                setprop("payload/weight["~i~"]/selected", "none");
             }
         }
     });

@@ -3,9 +3,14 @@
 #GLOBAL VARS
 UPDATE_TIME = 0.15;
 
+var a = 0;
 var main_loop = func (){
 	performance();
-    logTime();
+  logTime();
+  a = getprop("/orientation/alpha-deg");
+  a = a > 170 ? a - 180 : a;
+  a = math.abs(a) > 20 ? 20 * math.sgn(a) * -1 : a * -1;
+  setprop("/instrumentation/magnetic-compass/pitch-offset-deg",a);
 	settimer(func{main_loop();},UPDATE_TIME);
 }
 
@@ -242,8 +247,9 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
     # randomize startup values for DME, radial setting, compass, and fuel
     setprop("/instrumentation/fuel/knob-level",int((rand() * 1600) + 169)); # fuel
     setprop("/instrumentation/gyro-compass/mag-offset",int((rand() * 50) - 25)); # gyro compass heading
-    setprop("/instrumentation/dead-reckoner/distance-adjust",int((rand() * 30)); # dme
-    setprop("/instrumentation/dead-reckoner/azimuth-adjust",math.periodic(0, 360, int(rand() * 360))); #radial azimuth
+    setprop("/instrumentation/dead-reckoner/distance-adjust",int(rand() * 30)); # dme
+    setprop("/instrumentation/dead-reckoner/azimuth-adjust",math.periodic(0, 360, int(rand() * 360))); #ins azimuth
+    setprop("/instrumentation/nav/radials/selected-deg",math.periodic(0, 360, int(rand() * 360)))
 });
 
 
