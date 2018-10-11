@@ -163,8 +163,10 @@ var AFALCOS = {
         me.AINVW3 = ((me.SL2 * me.SL3 - me.C5) * me.W2 + (1.0 - math.pow(me.SL2,2)) * me.W3) / me.DET;
         me.DELA = me.getGain() * me.AINVW2;
         me.DALA = me.getGain() * me.AINVW3;
-        me.ELA = damper.getValue() == 1 ? me.ELA / 1.1 : me.ELA + me.DT * me.DELA;
-        me.ALA = damper.getValue() == 1 ? me.ALA / 1.1 : me.ALA + me.DT * me.DALA;
+        me.ELA = gyroMslSwitch.getValue() == 1 ? me.ELA / 1.1 : me.ELA + me.DT * me.DELA;
+        me.ALA = gyroMslSwitch.getValue() == 1 ? me.ALA / 1.1 : me.ALA + me.DT * me.DALA;
+        # me.ELA = damper.getValue() == 1 ? me.ELA / 1.1 : me.ELA + me.DT * me.DELA;
+        # me.ALA = damper.getValue() == 1 ? me.ALA / 1.1 : me.ALA + me.DT * me.DALA;
         #me.ELA = me.ELA + me.DT * me.DELA;  #ELA and ALA are EL and AZ lead angle components w.r.t. gun
         #me.ALA = me.ALA + me.DT * me.DALA;
         me.ELAB = me.B1 * me.ELA;   # ELAB and ALAB are EL and AZ lead angles in body coordinates
@@ -260,7 +262,7 @@ var asp_pfd = {
         m.gunRktListener = setlistener(gun_rkt_switch.getPath(),func(){m.setAutoAngle();});
         m.shootBombListener = setlistener(shoot_bomb_switch.getPath(),func(){m.setAutoAngle();});
         m.weaponknobListener = setlistener(knobpos.getPath(),func(){m.setAutoAngle();});
-        m.gyroMslListener = setlistener(gyroMslSwitch.getPath(), func(){m.setGyroMsl();});
+        m.damperListener = setlistener(damper.getPath(), func(){m.setGyroMsl();});
         m.setAutoAngle();
         m.update();
         return m;
@@ -413,7 +415,7 @@ var asp_pfd = {
     },
 
     setGyroMsl: func() {
-        me.lcos.setGyroEnable(gyroMslSwitch.getValue() * -1 + 1); 
+        me.lcos.setGyroEnable(damper.getValue() * -1 + 1); 
         #print(me.lcos.gyroEnable);
     },
 
