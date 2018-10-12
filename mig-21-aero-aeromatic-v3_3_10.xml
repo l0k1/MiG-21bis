@@ -109,7 +109,7 @@
           <property>aero/qbar-psf</property>
           <property>metrics/Sw-sqft</property>
           <product>
-            <value> 0.015912 </value>
+            <value> 0.0127296 </value>
             <property>tune/drag/minimum</property>
           </product>
        </product>
@@ -127,8 +127,8 @@
                  -1.57    1.4102
                  -0.71    0.1567
                   0.00    0.0000
-                  0.087   0.0300
-                  0.262   0.0800
+                  0.087   0.0265
+                  0.262   0.0750
                   0.436   0.1100
                   0.524   0.1567
                   0.611   0.3000
@@ -261,6 +261,221 @@
             <property>tune/drag/chute</property>
            </product>
          </product>
+    </function>
+
+    <function name="aero/coefficient/CAMissile0">
+      <description>
+      Left wing pylon axial Coefficient
+      </description>
+      <product>
+        <property>aero/qbar-psf</property>
+        <property>metrics/Sw-sqft</property>
+        <value>0.0001444</value> <!-- AIM-9 -->
+        <cos>
+          <property>aero/alpha-rad</property>
+        </cos>
+        <table>
+          <independentVar lookup="row">inertia/pointmass-weight-lbs[0]</independentVar>
+          <tableData>
+            <!--     1 means same as AIM-9 -->
+            0       0
+            96      0.833     <!-- R-60 -->
+            141     2.727     <!-- UB-16 -->
+            157     1.470     <!-- Smokepod -->
+            165     1.000     <!-- R-3S -->
+            168     0.984     <!-- R-3R -->
+            180     3.258     <!-- PTB-490 -->
+            192     1.667     <!-- R-60x2 -->
+            220     2.091     <!-- FAB-100 -->
+            230     4.015     <!-- PTB-800 -->
+            300     2.091     <!-- FAB-100x1 -->
+            518     1.818     <!-- S-24 -->
+            520     4.091     <!-- FAB-100x2 -->
+            550     1.742     <!-- R-27T1 -->
+            551     2.197     <!-- FAB-250 -->
+            560     1.742     <!-- R-27R1 -->
+            582     3.636     <!-- UB-32 -->
+            633     2.121     <!-- Kh-66 -->
+            695     2.061     <!-- Kh-25MP -->
+            740     4.091     <!-- FAB-100x3 -->
+            960     4.091     <!-- FAB-100x4 -->
+            1146    3.485     <!-- FAB-500 -->
+            1200    4.364     <!-- RN-28 -->
+          </tableData>
+        </table>
+      </product>
+    </function>
+
+    <function name="aero/coefficient/CAMissile1">
+      <description>
+      Left wing pylon axial Coefficient
+      </description>
+      <product>
+        <property>aero/qbar-psf</property>
+        <property>metrics/Sw-sqft</property>
+        <value>0.0001444</value> <!-- AIM-9 -->
+        <cos>
+          <property>aero/alpha-rad</property>
+        </cos>
+        <table>
+          <independentVar lookup="row">inertia/pointmass-weight-lbs[1]</independentVar>
+          <tableData>
+            <!--     1 means same as AIM-9 -->
+            0       0
+            96      0.833     <!-- R-60 -->
+            141     2.727     <!-- UB-16 -->
+            157     1.470     <!-- Smokepod -->
+            165     1.000     <!-- R-3S -->
+            168     0.984     <!-- R-3R -->
+            180     3.258     <!-- PTB-490 -->
+            192     1.667     <!-- R-60x2 -->
+            220     2.091     <!-- FAB-100 -->
+            230     4.015     <!-- PTB-800 -->
+            300     2.091     <!-- FAB-100x1 -->
+            518     1.818     <!-- S-24 -->
+            520     4.091     <!-- FAB-100x2 -->
+            550     1.742     <!-- R-27T1 -->
+            551     2.197     <!-- FAB-250 -->
+            560     1.742     <!-- R-27R1 -->
+            582     3.636     <!-- UB-32 -->
+            633     2.121     <!-- Kh-66 -->
+            695     2.061     <!-- Kh-25MP -->
+            740     4.091     <!-- FAB-100x3 -->
+            960     4.091     <!-- FAB-100x4 -->
+            1146    3.485     <!-- FAB-500 -->
+            1200    4.364     <!-- RN-28 -->
+          </tableData>
+        </table>
+      </product>
+    </function>
+
+    <function name="aero/coefficient/CAMissile2">
+      <description>
+      Left wing pylon axial Coefficient
+      </description>
+      <product>
+        <property>aero/qbar-psf</property>
+        <property>metrics/Sw-sqft</property>
+        <value>0.0001444</value> <!-- AIM-9 -->
+        <cos>
+          <property>aero/alpha-rad</property>
+        </cos>
+        <table>
+          <independentVar lookup="row">inertia/pointmass-weight-lbs[2]</independentVar>
+          <tableData>
+            <!--     1 means same as AIM-9 -->
+            0       0
+            96      0.833     <!-- R-60 -->
+            141     2.727     <!-- UB-16 -->
+            157     1.470     <!-- Smokepod -->
+            165     1.000     <!-- R-3S -->
+            168     0.984     <!-- R-3R -->
+            180     3.258     <!-- PTB-490 -->
+            192     1.667     <!-- R-60x2 -->
+            220     2.091     <!-- FAB-100 -->
+            230     4.015     <!-- PTB-800 -->
+            300     2.091     <!-- FAB-100x1 -->
+            518     1.818     <!-- S-24 -->
+            520     4.091     <!-- FAB-100x2 -->
+            550     1.742     <!-- R-27T1 -->
+            551     2.197     <!-- FAB-250 -->
+            560     1.742     <!-- R-27R1 -->
+            582     3.636     <!-- UB-32 -->
+            633     2.121     <!-- Kh-66 -->
+            695     2.061     <!-- Kh-25MP -->
+            740     4.091     <!-- FAB-100x3 -->
+            960     4.091     <!-- FAB-100x4 -->
+            1146    3.485     <!-- FAB-500 -->
+            1200    4.364     <!-- RN-28 -->
+          </tableData>
+        </table>
+      </product>
+    </function>
+
+    <function name="aero/coefficient/CAMissile3">
+      <description>
+      Left wing pylon axial Coefficient
+      </description>
+      <product>
+        <property>aero/qbar-psf</property>
+        <property>metrics/Sw-sqft</property>
+        <value>0.0001444</value> <!-- AIM-9 -->
+        <cos>
+          <property>aero/alpha-rad</property>
+        </cos>
+        <table>
+          <independentVar lookup="row">inertia/pointmass-weight-lbs[3]</independentVar>
+          <tableData>
+            <!--     1 means same as AIM-9 -->
+            0       0
+            96      0.833     <!-- R-60 -->
+            141     2.727     <!-- UB-16 -->
+            157     1.470     <!-- Smokepod -->
+            165     1.000     <!-- R-3S -->
+            168     0.984     <!-- R-3R -->
+            180     3.258     <!-- PTB-490 -->
+            192     1.667     <!-- R-60x2 -->
+            220     2.091     <!-- FAB-100 -->
+            230     4.015     <!-- PTB-800 -->
+            300     2.091     <!-- FAB-100x1 -->
+            518     1.818     <!-- S-24 -->
+            520     4.091     <!-- FAB-100x2 -->
+            550     1.742     <!-- R-27T1 -->
+            551     2.197     <!-- FAB-250 -->
+            560     1.742     <!-- R-27R1 -->
+            582     3.636     <!-- UB-32 -->
+            633     2.121     <!-- Kh-66 -->
+            695     2.061     <!-- Kh-25MP -->
+            740     4.091     <!-- FAB-100x3 -->
+            960     4.091     <!-- FAB-100x4 -->
+            1146    3.485     <!-- FAB-500 -->
+            1200    4.364     <!-- RN-28 -->
+          </tableData>
+        </table>
+      </product>
+    </function>
+
+    <function name="aero/coefficient/CAMissile4">
+      <description>
+      Left wing pylon axial Coefficient
+      </description>
+      <product>
+        <property>aero/qbar-psf</property>
+        <property>metrics/Sw-sqft</property>
+        <value>0.0002888</value> <!-- AIM-9 -->
+        <cos>
+          <property>aero/alpha-rad</property>
+        </cos>
+        <table>
+          <independentVar lookup="row">inertia/pointmass-weight-lbs[4]</independentVar>
+          <tableData>
+            <!--     1 means same as AIM-9 -->
+            0       0
+            96      0.833     <!-- R-60 -->
+            141     2.727     <!-- UB-16 -->
+            157     1.470     <!-- Smokepod -->
+            165     1.000     <!-- R-3S -->
+            168     0.984     <!-- R-3R -->
+            180     3.258     <!-- PTB-490 -->
+            192     1.667     <!-- R-60x2 -->
+            220     2.091     <!-- FAB-100 -->
+            230     4.015     <!-- PTB-800 -->
+            300     2.091     <!-- FAB-100x1 -->
+            518     1.818     <!-- S-24 -->
+            520     4.091     <!-- FAB-100x2 -->
+            550     1.742     <!-- R-27T1 -->
+            551     2.197     <!-- FAB-250 -->
+            560     1.742     <!-- R-27R1 -->
+            582     3.636     <!-- UB-32 -->
+            633     2.121     <!-- Kh-66 -->
+            695     2.061     <!-- Kh-25MP -->
+            740     4.091     <!-- FAB-100x3 -->
+            960     4.091     <!-- FAB-100x4 -->
+            1146    3.485     <!-- FAB-500 -->
+            1200    4.364     <!-- RN-28 -->
+          </tableData>
+        </table>
+      </product>
     </function>
 
   </axis>
