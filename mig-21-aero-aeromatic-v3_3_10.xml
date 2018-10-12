@@ -270,7 +270,7 @@
       <product>
         <property>aero/qbar-psf</property>
         <property>metrics/Sw-sqft</property>
-        <value>0.0001444</value> <!-- AIM-9 -->
+        <value>0.0002888</value> <!-- AIM-9 -->
         <cos>
           <property>aero/alpha-rad</property>
         </cos>
@@ -313,7 +313,7 @@
       <product>
         <property>aero/qbar-psf</property>
         <property>metrics/Sw-sqft</property>
-        <value>0.0001444</value> <!-- AIM-9 -->
+        <value>0.0002888</value> <!-- AIM-9 -->
         <cos>
           <property>aero/alpha-rad</property>
         </cos>
@@ -356,7 +356,7 @@
       <product>
         <property>aero/qbar-psf</property>
         <property>metrics/Sw-sqft</property>
-        <value>0.0001444</value> <!-- AIM-9 -->
+        <value>0.0002888</value> <!-- AIM-9 -->
         <cos>
           <property>aero/alpha-rad</property>
         </cos>
@@ -399,7 +399,7 @@
       <product>
         <property>aero/qbar-psf</property>
         <property>metrics/Sw-sqft</property>
-        <value>0.0001444</value> <!-- AIM-9 -->
+        <value>0.0002888</value> <!-- AIM-9 -->
         <cos>
           <property>aero/alpha-rad</property>
         </cos>
