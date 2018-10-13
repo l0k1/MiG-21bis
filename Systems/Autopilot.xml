@@ -782,7 +782,7 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-roll</property>
         </output>
         <config>
-            <Kp>-1.1</Kp>
+            <Kp>-1.0</Kp>
 			<Ki>-0.00001</Ki>
             <min>-5</min>
             <max>5</max>
@@ -1146,7 +1146,7 @@ check for Low Altitude Mode
             <property>/fdm/jsbsim/fcs/aileron-ap-cmd-norm</property>
         </output>
         <config>
-            <Kp>0.025</Kp>
+            <Kp>0.20</Kp>
             <Ti>0.45</Ti>
             <Td>0.001</Td>
             <u_min>-1.0</u_min>
