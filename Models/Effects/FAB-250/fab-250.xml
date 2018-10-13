@@ -1,10 +1,10 @@
 <PropertyList>
-  
-<particlesystem>
-   <name>explosion-smoke</name>
-   <texture>smoke2.png</texture>
 
-   <emissive type="bool">false</emissive>
+<particlesystem>
+   <name>explosion</name>
+   <texture>smoke.png</texture>
+
+   <emissive type="bool">true</emissive>
    <lighting type="bool">false</lighting>
 
    <attach>world</attach>
@@ -14,13 +14,13 @@
    </placer>
 
    <shooter>
-     <theta-min-deg>45</theta-min-deg>
-     <theta-max-deg>135</theta-max-deg>
-     <phi-min-deg>-45</phi-min-deg>
-     <phi-max-deg>45</phi-max-deg>
+     <theta-min-deg>-180</theta-min-deg>
+     <theta-max-deg>180</theta-max-deg>
+     <phi-min-deg>-90</phi-min-deg>
+     <phi-max-deg>90</phi-max-deg>
      <speed-mps>
-       <value>450</value>
-       <spread>10</spread>
+       <value>550</value>
+       <spread>40</spread>
      </speed-mps>
      <rotation-speed>
        <x-min-deg-sec>0</x-min-deg-sec>
@@ -28,13 +28,13 @@
        <z-min-deg-sec>0</z-min-deg-sec>
        <x-max-deg-sec>0</x-max-deg-sec>
        <y-max-deg-sec>0</y-max-deg-sec>
-       <z-max-deg-sec>90</z-max-deg-sec>
+       <z-max-deg-sec>0</z-max-deg-sec>
      </rotation-speed>
    </shooter>
 
    <counter>
      <particles-per-sec>
-       <value>50</value>
+       <value>250</value>
        <spread>15</spread>
      </particles-per-sec>
    </counter>
@@ -44,30 +44,30 @@
    <particle>
      <start>
        <color>
-         <red><value>   0.0 </value></red>
-         <green><value> 0.0 </value></green>
-         <blue><value>  0.05 </value></blue>
-         <alpha><value> 0.7 </value></alpha>
+         <red><value>   1.0 </value></red>
+         <green><value> 1.0 </value></green>
+         <blue><value>  0.4 </value></blue>
+         <alpha><value> 1 </value></alpha>
        </color>
        <size>
-         <value>0</value>
+         <value>15</value>
        </size>
      </start>
 
      <end>
        <color>
-         <red><value>   0.1 </value></red>
-         <green><value> 0.1 </value></green>
-         <blue><value>  0.1 </value></blue>
-         <alpha><value> 0.04 </value></alpha>
+         <red><value>   0.8 </value></red>
+         <green><value> 0.5 </value></green>
+         <blue><value>  0.2 </value></blue>
+         <alpha><value> 1 </value></alpha>
        </color>
        <size>
-         <value>90</value>
+         <value>25</value>
        </size>
      </end>
 
      <life-sec>
-       <value>2</value>
+       <value>0.5</value>
      </life-sec>
         
      <mass-kg>  5 </mass-kg>

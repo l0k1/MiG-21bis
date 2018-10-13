@@ -185,6 +185,7 @@ var engine_startup = func() {
 
 setlistener("/controls/engines/engine[0]/start-button",engine_startup);
 setlistener("/controls/engines/engine[0]/starting-switch",func(){
+  if (eng_running.getValue()) { return; }
 	if (start_mode.getValue() == 0){
 		starter.setValue(0);
 		cutoff.setValue(1);

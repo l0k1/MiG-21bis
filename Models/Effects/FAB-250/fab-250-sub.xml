@@ -2,7 +2,7 @@
 
   <submodel>
     <name>boom</name>
-    <model>Aircraft/MiG-21bis/Models/Effects/FAB-500/fab-500.xml</model>
+    <model>Aircraft/MiG-21bis/Models/Effects/FAB-250/fab-250.xml</model>
     <speed>0</speed>
     <repeat>false</repeat>
     <delay>0</delay>
@@ -22,7 +22,7 @@
 
   <submodel>
     <name>boom2</name>
-    <model>Aircraft/MiG-21bis/Models/Effects/FAB-500/fab-500-smoke.xml</model>
+    <model>Aircraft/MiG-21bis/Models/Effects/FAB-250/fab-250-smoke.xml</model>
     <speed>0</speed>
     <repeat>false</repeat>
     <delay>0</delay>
@@ -41,7 +41,7 @@
   </submodel>   
   <submodel>
     <name>boom3</name>
-    <model>Aircraft/MiG-21bis/Models/Effects/FAB-500/fab-500-smoke-linger.xml</model>
+    <model>Aircraft/MiG-21bis/Models/Effects/FAB-250/fab-250-smoke-linger.xml</model>
     <speed>0</speed>
     <repeat>false</repeat>
     <delay>0</delay>

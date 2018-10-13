@@ -19,7 +19,7 @@
      <phi-min-deg>-45</phi-min-deg>
      <phi-max-deg>45</phi-max-deg>
      <speed-mps>
-       <value>450</value>
+       <value>60</value>
        <spread>10</spread>
      </speed-mps>
      <rotation-speed>
@@ -62,12 +62,12 @@
          <alpha><value> 0.04 </value></alpha>
        </color>
        <size>
-         <value>90</value>
+         <value>40</value>
        </size>
      </end>
 
      <life-sec>
-       <value>2</value>
+       <value>1.25</value>
      </life-sec>
         
      <mass-kg>  5 </mass-kg>

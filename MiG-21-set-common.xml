@@ -39,6 +39,8 @@
 			</property-rule>
 		</systems>
 
+		<state include="States/test.xml" n="0"/>
+
 		<sound>
 			<path>Aircraft/MiG-21bis/Sounds/Sound.xml</path>
 		</sound>
