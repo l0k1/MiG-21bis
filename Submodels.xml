@@ -33,7 +33,7 @@
     28 ~ S-5 backblast pylon 3
     29 ~ S-5 backblast pylon 4
     30 ~ Braking Chute
-    31 ~ Jettison Fuel Tank
+    31 ~ Jettison Fuel Tank (legacy, dnu)
     32 ~ FAB-100 pylon 1 frontleft live
     33 ~ FAB-100 pylon 1 frontright live
     34 ~ FAB-100 pylon 1 rearleft live
@@ -42,6 +42,12 @@
     37 ~ FAB-100 pylon 3 frontright live
     38 ~ FAB-100 pylon 3 rearleft live
     39 ~ FAB-100 pylon 3 rearright live
+    40 ~ PTB-490 pylon 0 jettison
+    41 ~ PTB-490 pylon 4 jettison
+    42 ~ PTB-490 pylon 0 jettison (pyro)
+    43 ~ PTB-490 pylon 2 jettison (pyro)
+    44 ~ PTB-490 pylon 4 jettison (pyro)
+    45 ~ PTB-800 pylon 2 jettison (pyro)
     -->
 
     <submodel>
@@ -993,6 +999,126 @@
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
+    </submodel>
+
+    <submodel>
+        <name>PTB-490 pylon 0</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490-sub.xml</model>
+        <trigger>payload/jettison/PTB-490[0]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>20</delay>
+        <offsets>
+            <x-m>1.33</x-m>
+            <y-m>-2.73</y-m>
+            <z-m>0.51</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>false</collision>
+        <impact>false</impact>
+    </submodel>
+
+    <submodel>
+        <name>PTB-490 pylon 4</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490-sub.xml</model>
+        <trigger>payload/jettison/PTB-490[4]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>20</delay>
+        <offsets>
+            <x-m>1.33</x-m>
+            <y-m>2.73</y-m>
+            <z-m>0.51</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>false</collision>
+        <impact>false</impact>
+    </submodel>
+
+    <submodel>
+        <name>PTB-490 pylon 0 pyro</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490-sub.xml</model>
+        <trigger>payload/jettison/pyro/PTB-490[0]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>20</delay>
+        <offsets>
+            <x-m>1.33</x-m>
+            <y-m>-2.73</y-m>
+            <z-m>0.51</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>false</collision>
+        <impact>false</impact>
+    </submodel>
+
+    <submodel>
+        <name>PTB-490 pylon 2 pyro</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490-sub.xml</model>
+        <trigger>payload/jettison/pyro/PTB-490[2]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>20</delay>
+        <offsets>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>false</collision>
+        <impact>false</impact>
+    </submodel>
+
+    <submodel>
+        <name>PTB-490 pylon 4 pyro</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490-sub.xml</model>
+        <trigger>payload/jettison/pyro/PTB-490[4]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>20</delay>
+        <offsets>
+            <x-m>1.33</x-m>
+            <y-m>2.73</y-m>
+            <z-m>0.51</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>false</collision>
+        <impact>false</impact>
+    </submodel>
+    
+    <submodel>
+        <name>PTB-800 pylon 2 pyro</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-800/PTB-800-sub.xml</model>
+        <trigger>payload/jettison/pyro/PTB-800[2]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>20</delay>
+        <offsets>
+            <x-m>-0.3</x-m>
+            <y-m>0.00</y-m>
+            <z-m>-0.83</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>230.0</weight>
+        <cd>0.3</cd>
+        <collision>false</collision>
+        <impact>false</impact>
     </submodel>
 
 </PropertyList>

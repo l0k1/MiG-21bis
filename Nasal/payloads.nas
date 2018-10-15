@@ -733,6 +733,48 @@ var bomb_release = func(pylon,type="bomb") {
 	}
 }
 
+
+
+var jettison = func(pylons) {
+    var selected = "";
+    if (pylons[0] == -1) {
+        # wing tank jettison button
+        foreach (var pylon; [0,4]) {
+            selected = getprop("payload/weight[" ~ pylon ~ "]/selected");
+            if (payloads[selected].type == "tank") {
+                setprop("payload/jettison/pyro/"~selected~"["~pylon~"]");
+                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+            }
+        }
+    } elsif (pylons[0] == 2) {
+        # center tank jettison button
+        selected = getprop("payload/weight[2]/selected");
+        if (payloads[selected].type == "tank") {
+            setprop("payload/jettison/pyro/"~selected~"[2]");
+            setprop("payload/weight[2]/selected","none");
+        }
+    } else {
+        foreach (var pylon; pylons) {
+            selected = getprop("payload/weight[" ~ pylon ~ "]/selected");
+            if (selected == nil) { continue; }
+            if (selected == "none") { continue; }
+            if (payloads[selected].type == "tank") { continue; }
+            if (selected == "R-60x2") {
+                var virt = getprop("payload/virtual/weight[" ~ (pylon == 0 ? 7 : 8) ~"]/selected");
+                if (virt != nil) {
+                    setprop("payload/jettison/R-60["~(pylon == 0 ? 7 : 8)~"]",1);
+                    setprop("payload/virtual/weight["~(pylon == 0 ? 7 : 8)~"]/selected","none");
+                }
+                setprop("payload/jettison/R-60["~pylon~"]",1);
+                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+            } else {
+                setprop("payload/jettison/"~selected~"["~pylon~"]");
+                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+            }
+        }
+    }
+}
+
 var return_trigger = func(selected, pylon) {
 	setprop("payload/released/"~selected~"["~pylon~"]",0);
 }

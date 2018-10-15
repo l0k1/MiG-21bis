@@ -406,6 +406,15 @@
 				<!-- lights -->
 				<gun-ready type="bool">1</gun-ready>
 			</panel>
+			<jettison>
+				<tanks_cover type="bool">false</tanks_cover>
+				<tanks_jett type="bool">false</tanks_jett>
+				<inbd_cover type="bool">false</inbd_cover>
+				<inbd_jett type="bool">false</inbd_jett>
+				<outbd_cover type="bool">false</outbd_cover>
+				<outbd_jett type="bool">false</outbd_jett>
+				<center_tank type="bool">false</center_tank>
+			</jettison>
 			<gunsight>
 				<!--fixed net options-->
 				<ghosting-x type="double">5480</ghosting-x>
