@@ -269,6 +269,24 @@
 		</binding>
 	</key>
 
+	<key n="26">
+		<name>Ctrl+z</name>
+		<desc>center tank jettison</desc>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>property-assign</command>
+			<property>/controls/armament/jettison/center_tank</property>
+			<value>1</value>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/armament/jettison/center_tank</property>
+				<value>0</value>
+			</binding>
+		</mod-up>
+	</key>
+
 	<key n="87">
 		<name>W</name>
 		<desc>autopilot off</desc>

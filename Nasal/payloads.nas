@@ -734,11 +734,13 @@ var bomb_release = func(pylon,type="bomb") {
 }
 
 setlistener("/controls/armament/jettison/tanks_jett",func(){jettison([-1]);});
+setlistener("/controls/armament/jettison/center_tank",func(){jettison([2]);});
 
 var jettison = func(pylons) {
     var selected = "";
     if (pylons[0] == -1) {
         # wing tank jettison button
+        if (getprop("/fdm/jsbsim/electric/output/drop-tanks-jett") < 110) {return;}
         foreach (var pylon; [0,4]) {
             selected = getprop("payload/weight[" ~ pylon ~ "]/selected");
             if (payloads[selected].type == "tank") {
@@ -747,12 +749,11 @@ var jettison = func(pylons) {
                 setprop("payload/weight[" ~ pylon ~ "]/selected","none");
                 setprop("/controls/armament/jettison/boom",1);
                 settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.1);
-                settimer(func(){setprop("/controls/armament/jettison/boom",1);},0.2);
-                settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.3);
             }
         }
     } elsif (pylons[0] == 2) {
         # center tank jettison button
+        if (getprop("/fdm/jsbsim/electric/output/drop-tanks-jett") < 110) {return;}
         selected = getprop("payload/weight[2]/selected");
         if (payloads[selected].type == "tank") {
             selected = selected == "PTB-490 Droptank" ? "PTB-490" : "PTB-800";
