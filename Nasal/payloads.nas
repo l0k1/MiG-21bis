@@ -98,7 +98,7 @@ var payloads = {
 	"S-24":					pos_arm.new("S-24","S-24",518,"heavyrocket",60),
 	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank","PTB-490 Droptank",180,"tank"),
 	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank","PTB-800 Droptank",230,"tank"),
-	"Smokepod":				pos_arm.new("smokepod","smokepod",157,"tank")
+	"Smokepod":				pos_arm.new("Smokepod","Smokepod",157,"tank")
 };
 
 # add in virtual pylons too
@@ -769,16 +769,30 @@ var jettison = func(pylons) {
             if (selected == "none") { continue; }
             if (payloads[selected].type == "tank") { continue; }
             if (selected == "R-60x2") {
-                var virt = getprop("payload/virtual/weight[" ~ (pylon == 0 ? 7 : 8) ~"]/selected");
-                if (virt != nil) {
-                    setprop("payload/jettison/R-60["~(pylon == 0 ? 7 : 8)~"]",1);
-                    setprop("payload/virtual/weight["~(pylon == 0 ? 7 : 8)~"]/selected","none");
+            	var v_p = pylon == 0 ? 7 : 8;
+                var virt = getprop("payload/virtual/weight["~v_p~"]/selected");
+                if (virt != nil and armament.AIM.active[v_p] != nil) {
+                	armament.AIM.active[v_p].eject();
+					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~v_p~"]",0);
+					setprop("payload/virtual/weight["~v_p~"]/selected", "none");
                 }
-                setprop("payload/jettison/R-60["~pylon~"]",1);
-                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+                if (armament.AIM.active[pylon] != nil {
+                	armament.AIM.active[pylon].eject();
+					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+					setprop("payload/weight["~pylon~"]/selected", "none");
             } else {
-                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
-                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+            	if ((payloads[selected].type == "ir" or
+	            		payloads[selected].type == "radar" or
+	            		payloads[selected].type == "antirad" or
+	            		payloads[selected].type == "beam") and
+	            		armament.AIM.active[pylon] != nil) {
+                	armament.AIM.active[pylon].eject();
+					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+					setprop("payload/weight["~pylon~"]/selected", "none");
+	            } else {
+	                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
+	                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+	            }
             }
         }
     }
