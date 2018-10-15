@@ -414,6 +414,7 @@
 				<outbd_cover type="bool">false</outbd_cover>
 				<outbd_jett type="bool">false</outbd_jett>
 				<center_tank type="bool">false</center_tank>
+				<boom type="bool">false</boom>
 			</jettison>
 			<gunsight>
 				<!--fixed net options-->

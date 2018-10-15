@@ -733,7 +733,7 @@ var bomb_release = func(pylon,type="bomb") {
 	}
 }
 
-
+setlistener("/controls/armament/jettison/tanks_jett",func(){jettison([-1]);});
 
 var jettison = func(pylons) {
     var selected = "";
@@ -742,16 +742,24 @@ var jettison = func(pylons) {
         foreach (var pylon; [0,4]) {
             selected = getprop("payload/weight[" ~ pylon ~ "]/selected");
             if (payloads[selected].type == "tank") {
-                setprop("payload/jettison/pyro/"~selected~"["~pylon~"]");
+                selected = selected == "PTB-490 Droptank" ? "PTB-490" : "PTB-800";
+                setprop("payload/jettison/pyro/"~selected~"["~pylon~"]",1);
                 setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+                setprop("/controls/armament/jettison/boom",1);
+                settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.1);
+                settimer(func(){setprop("/controls/armament/jettison/boom",1);},0.2);
+                settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.3);
             }
         }
     } elsif (pylons[0] == 2) {
         # center tank jettison button
         selected = getprop("payload/weight[2]/selected");
         if (payloads[selected].type == "tank") {
-            setprop("payload/jettison/pyro/"~selected~"[2]");
+            selected = selected == "PTB-490 Droptank" ? "PTB-490" : "PTB-800";
+            setprop("payload/jettison/pyro/"~selected~"[2]",1);
             setprop("payload/weight[2]/selected","none");
+            setprop("/controls/armament/jettison/boom",1);
+            settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.2);
         }
     } else {
         foreach (var pylon; pylons) {
@@ -768,7 +776,7 @@ var jettison = func(pylons) {
                 setprop("payload/jettison/R-60["~pylon~"]",1);
                 setprop("payload/weight[" ~ pylon ~ "]/selected","none");
             } else {
-                setprop("payload/jettison/"~selected~"["~pylon~"]");
+                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
                 setprop("payload/weight[" ~ pylon ~ "]/selected","none");
             }
         }
