@@ -242,9 +242,56 @@ var autostart = func() {
   }
 }
 
+var load_radios = func() {
+  var path = getprop("/sim/aircraft-dir") ~ "/radios.txt";
+  if (io.stat(path) == nil){
+    print("nil");
+    return;
+  }
+  var mode = -1;
+  var index = 0;
+  var data = split("\n",string.replace(io.readfile(path),"\r",""));
+  foreach (var datum; data){
+    if (left(datum,1) == "#") { continue; }
+    if (datum == "nav") { 
+      mode = 0;
+      index = 0;
+      continue;
+    } elsif (datum == "adf") { 
+      mode = 1;
+      index = 0;
+      continue;
+    } elsif (datum == "comm") { 
+      mode = 2;
+      index = 0;
+      continue;
+    } elsif (datum == "ils") {
+      mode = 3;
+      index = 0;
+      continue;
+    }
+    if (mode == -1) { continue; }
+    if ( ((mode == 0 or mode == 2 or mode == 3) and index > 19) or (mode == 1 and index > 8) ) {continue;}
+
+    if (mode == 0) {
+      setprop("/instrumentation/vor-radio/preset["~index~"]",datum);
+    } elsif (mode == 1) {
+      setprop("/instrumentation/adf-radio/preset["~index~"]",datum);
+    } elsif (mode == 2) {
+      setprop("/instrumentation/comm-radio/preset["~index~"]",datum);
+    } elsif (mode == 3) {
+      setprop("/instrumentation/ils-radio/preset["~index~"]",datum);
+    }
+    index = index + 1;
+
+  }
+  debug.dump(data);
+}
+
 var init = setlistener("/sim/signals/fdm-initialized", func() {
     test_support();
     main_loop();
+    load_radios();
     # randomize startup values for DME, radial setting, compass, and fuel
     setprop("/instrumentation/fuel/knob-level",int((rand() * 1600) + 169)); # fuel
     setprop("/instrumentation/gyro-compass/mag-offset",int((rand() * 50) - 25)); # gyro compass heading

@@ -1,0 +1,17 @@
+# radio pretuning
+# dont put spaces beforehand
+# nav, comm, and ils each get 20 frequencies
+# adf gets 9
+
+nav
+111.11
+111.11
+
+comm
+111.11
+
+ils
+111.11
+
+adf
+1111
