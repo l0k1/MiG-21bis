@@ -776,10 +776,11 @@ var jettison = func(pylons) {
 					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~v_p~"]",0);
 					setprop("payload/virtual/weight["~v_p~"]/selected", "none");
                 }
-                if (armament.AIM.active[pylon] != nil {
+                if (armament.AIM.active[pylon] != nil) {
                 	armament.AIM.active[pylon].eject();
 					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 					setprop("payload/weight["~pylon~"]/selected", "none");
+                }
             } else {
             	if ((payloads[selected].type == "ir" or
 	            		payloads[selected].type == "radar" or

@@ -5,7 +5,7 @@ MATERIAL "number" rgb 0.800 0.800 0.800  amb 1.000 1.000 1.000  emis 0.000 0.000
 MATERIAL "navradioKnob" rgb 0.518 0.518 0.518  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.214 0.214 0.214  shi 11 trans 0.000
 MATERIAL "lightMat.000" rgb 0.821 0.821 0.821  amb 0.113 0.113 0.113  emis 0.000 0.000 0.000  spec 0.106 0.106 0.106  shi 31 trans 0.221
 OBJECT world
-name "Blender_exporter_v2.22__radio.ac"
+name "Blender_exporter_v2.25__radio.ac"
 kids 22
 OBJECT poly
 name "base"
@@ -538,10 +538,10 @@ numsurf 1
 SURF 0X0
 mat 2
 refs 4
-0 0.099017 0.893322
-2 0.000454 0.893322
-3 0.000454 0.104818
-1 0.099017 0.104818
+0 0.199017 0.893322
+2 0.100454 0.893322
+3 0.100454 0.104818
+1 0.199017 0.104818
 kids 0
 OBJECT poly
 name "ils10"
@@ -6628,10 +6628,10 @@ numsurf 1
 SURF 0X0
 mat 2
 refs 4
-0 0.099204 0.925721
-2 -0.000018 0.925721
-3 -0.000018 0.131946
-1 0.099204 0.131946
+0 0.199204 0.925721
+2 0.099982 0.925721
+3 0.099982 0.131946
+1 0.199204 0.131946
 kids 0
 OBJECT poly
 name "vor10"

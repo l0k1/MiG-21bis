@@ -115,7 +115,7 @@
 				<property>/instrumentation/vor-radio/selection</property>
 				<step>1</step>
 				<min>0</min>
-				<max>19</max>
+				<max>20</max>
 				<wrap>true</wrap>
 			</binding>
 		</action>
@@ -128,7 +128,7 @@
 				<property>/instrumentation/vor-radio/selection</property>
 				<step>-1</step>
 				<min>0</min>
-				<max>19</max>
+				<max>20</max>
 				<wrap>true</wrap>
 			</binding>
 		</action>
@@ -426,7 +426,7 @@
 		<type>textranslate</type>
 		<object-name>vor10</object-name>
 		<property>/instrumentation/vor-radio/selection</property>
-		<bias>0.0001</bias>
+		<bias>1.0001</bias>
 		<factor>0.01</factor>
 		<step>10</step>
 		<axis>
@@ -452,7 +452,7 @@
 		<type>textranslate</type>
 		<object-name>ils10</object-name>
 		<property>/instrumentation/ils-radio/selection</property>
-		<bias>0.0001</bias>
+		<bias>1.0001</bias>
 		<factor>0.01</factor>
 		<step>10</step>
 		<axis>

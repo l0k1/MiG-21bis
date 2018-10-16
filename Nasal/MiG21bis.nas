@@ -285,7 +285,7 @@ var load_radios = func() {
     index = index + 1;
 
   }
-  debug.dump(data);
+  #debug.dump(data);
 }
 
 var init = setlistener("/sim/signals/fdm-initialized", func() {
