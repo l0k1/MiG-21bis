@@ -242,14 +242,15 @@ var autostart = func() {
   }
 }
 
-var load_radios = func() {
-  var path = getprop("/sim/aircraft-dir") ~ "/radios.txt";
+var load_radios = func(path) {
+  path = path.getValue();
   if (io.stat(path) == nil){
     print("nil");
     return;
   }
   var mode = -1;
   var index = 0;
+  var vi = io.open(path,'r');
   var data = split("\n",string.replace(io.readfile(path),"\r",""));
   foreach (var datum; data){
     if (left(datum,1) == "#") { continue; }
@@ -288,10 +289,15 @@ var load_radios = func() {
   #debug.dump(data);
 }
 
+var get_radio_file_gui = func() {
+  var file_selector = gui.FileSelector.new(callback: load_radios, title: "Select Radio Config File", button: "Load");
+  file_selector.open();
+  file_selector.close();
+}
+
 var init = setlistener("/sim/signals/fdm-initialized", func() {
     test_support();
     main_loop();
-    load_radios();
     # randomize startup values for DME, radial setting, compass, and fuel
     setprop("/instrumentation/fuel/knob-level",int((rand() * 1600) + 169)); # fuel
     setprop("/instrumentation/gyro-compass/mag-offset",int((rand() * 50) - 25)); # gyro compass heading

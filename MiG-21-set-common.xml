@@ -84,6 +84,13 @@
 						</binding>
 					</item>
 					<item>
+						<label>Select Radio Config File</label>
+						<binding>
+							<command>nasal</command>
+							<script>mig21.get_radio_file_gui();</script>
+						</binding>
+					</item>
+					<item>
 						<label>VOR/ILS Radio</label>
 						<binding>
 							<command>nasal</command>

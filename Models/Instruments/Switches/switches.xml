@@ -51,10 +51,27 @@
 	</animation>
 
 	<animation>
-		<type>knob</type>
+		<type>pick</type>
 		<object-name>jettAACover</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/armament/msl-emergency-release/button-cover</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>jettAACover</object-name>
+		<type>rotate</type>
 		<property>/instrumentation/armament/msl-emergency-release/button-cover</property>
-		<factor>110</factor>
+		<factor>120</factor>
 		<offset-deg>0</offset-deg>
 		<center>
 			<x-m> 0.056786</x-m>
@@ -66,18 +83,36 @@
 			<y> 1.0</y>
 			<z>-1.0</z>
 		</axis>
-
-		<action>
-			<binding>
-				<command>property-toggle</command>
-				<property>/instrumentation/armament/msl-emergency-release/button-cover</property>
-			</binding>
-		</action>
 	</animation>
 
 	<animation>
-		<type>slider</type>
+		<type>pick</type>
 		<object-name>jettAAButton</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/armament/msl-emergency-release/button</property>
+				<value>1</value>
+			</binding>
+        	<mod-up>
+				<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/armament/msl-emergency-release/button</property>
+				<value>0</value>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>jettAAButton</object-name>
+		<type>translate</type>
 		<property>/instrumentation/armament/msl-emergency-release/button</property>
 		<factor>0.002</factor>
 		<axis>
@@ -85,22 +120,8 @@
 			<y> 0.0</y>
 			<z>-0.2</z>
 		</axis>
-
-		<action>
-			<binding>
-				<command>property-assign</command>
-				<property>/instrumentation/armament/msl-emergency-release/button</property>
-				<value>1</value>
-			</binding>
-		</action>
-		<release>
-			<binding>
-				<command>property-assign</command>
-				<property>/instrumentation/armament/msl-emergency-release/button</property>
-				<value>0</value>
-			</binding>
-		</release>
 	</animation>
+
 
 	<animation>
 		<type>pick</type>
