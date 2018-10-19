@@ -688,6 +688,8 @@ var missile_release = func(pylon) {
 	}
 }
 
+var is_boom_boom = FALSE;
+
 var bomb_release = func(pylon,type="bomb") {
 	if (pylon < 7) {
 		var virtual = "/";
@@ -695,34 +697,18 @@ var bomb_release = func(pylon,type="bomb") {
 		var virtual = "/virtual/";
 	}
     if (type == "heavyrocket" and getprop("/fdm/jsbsim/electric/output/msl-rgm-rkt-lch") < 32) { return; }
+    if (is_boom_boom) {return;}
 	var selected = getprop("payload"~virtual~"weight[" ~ ( pylon ) ~ "]/selected");
 	if ( payloads[selected].type == type ) {
 		#print("dropping bomb: " ~ payloads[selected].brevity ~ ": pylon " ~ pylon);
 		#print("selected: " ~ selected ~ "| pylon: " ~ pylon);
 
         if (selected == "FAB-100x4"){
-            var act_pylon = pylon;
             selected = "FAB-100";
-            var check_array = pylon == 1 ? [32,33,34,35] : [36,37,38,39];
-            foreach (var p; check_array){
-                if (getprop("/ai/submodels/submodel["~p~"]/count") > 0) {
-                    pylon = p;
-                    break;
-                }
-            }
-            if (pylon != p) {
-                setprop("payload/weight[" ~ ( act_pylon ) ~ "]/selected", "none" );
-                setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~act_pylon~"]",0);
-                return;
-            } else {
-                setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~act_pylon~"]",getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~act_pylon~"]") - 220);
-            }
-        } else {
-            setprop("payload"~virtual~"weight[" ~ ( pylon ) ~ "]/selected", "none" );
-            setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
         }
         #print("releasing: payload/released/"~selected~"["~pylon~"]");
 		setprop("payload/released/"~selected~"["~pylon~"]",1);
+		is_boom_boom = TRUE;
 		var phrase = payloads[selected].brevity ~ " released.";
 		if (getprop("payload/armament/msg")) {
 			defeatSpamFilter(phrase);
