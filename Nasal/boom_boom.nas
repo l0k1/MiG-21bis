@@ -126,4 +126,95 @@ var write_csv = func(path){
     }
     io.close(fi);
 }
+
+###########
+# main loop
+###########
+
+var bomb_in_flight = 0;
+var loft_timer = 0;
+var launch_pitch = 0;
+var launch_coord = geo.Coord.new();
+var bomb_coord = geo.Coord.new();
+
+var KT2KMH = 1.852;
+
+var main_logic = func() {
+    # basically:
+    # we are only doing one bomb at a time
+    # if a bomb is in air, dont launch another
+    # if flight parameters match a missing datapoint, launch a bomb
     
+    if (bomb_in_flight) { return; }
+    if (getprop("orientation/pitch-deg") > 2) { return; }
+    if (math.abs(getprop("orientation/roll-deg")) > 5) { return; }
+    
+    # check speed
+    var myspeed = getprop("velocities/airspeed-kt") * KT2KM;
+    foreach (var s; speeds_m) {
+        if (math.abs(myspeed - s) < 10) {
+            myspeed = s;
+            break;
+        }
+    }
+    if (myspeed != s) { return; }
+    
+    # check height
+    var myheight = getprop("position/altitude-ft") * FT2M;
+    foreach (var h; heights_m) {
+        if (math.abs(myheight - h) < 20) {
+            myheight = h;
+            break;
+        }
+    }
+    if (myheight != h) { return; }
+    
+    # check diveangle
+    var mydive = getprop("orientation/pitch-deg") * -1;
+    foreach (var d; dive_angles) {
+        if (math.abs(mydive - d) < 2) {
+            mydive = d;
+            break;
+        }
+    }
+    if (mydive != d) { return; }
+    
+    # check if we already have the data
+    if (get_db_value(myheight, myspeed, mydive)[0] == -1) { return; }
+    
+    # if we are here, it means we are within params, and we dont have the data. yipee.
+    # trigger the bomb on payloads 1 and 3, and record our pos
+    
+    launch_coord = geo.aircraft_coord();
+    loft_timer = systime();
+    launch_pitch = mydive;
+    payloads.bomb_release(1);
+    payloads.bomb_release(3);
+    bomb_in_flight = 1;
+    
+    # and now, we listen...
+}
+
+var impact_listener = func {
+    var ballistic = props.globals.getNode(input.impact.getValue(), 0);
+    if (ballistic != nil and ballistic.getNode("name") != nil and ballistic.getNode("impact/type") != nil) {
+        var typeNode = ballistic.getNode("impact/type");
+        typeOrdName = ballistic.getNode("name").getValue();
+        if (typeOrdName == "FAB-100" or typeOrdName == "FAB-250" or typeOrdName == "FAB-500") {if (payloads[typeOrdName] != nil and ( payloads[typeOrdName].type == "bomb" or payloads[typeOrdName].type == "heavy" or payloads[typeOrdName].type == "heavyrocket" ))  {
+            if (!bomb_in_flight) { return; }
+            # calculate loft time, loft distance, and pipper angle
+            # bomb coord
+			bomb_coord.set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
+			# need drop height
+			# need drop distance
+			# pipper angle = math.asin(alt/direct_distance_to) + (dive_angle * -1)
+            
+        }
+    }
+}
+setlistener("/ai/models/model-impact", impact_listener, 0, 0);
+    
+    
+    
+var get_db_value = func(height, speed, dive) {
+    return [db[idx].pipper_adj, db[idx].loft_time, db[idx].loft_dist, db[idx].iters];

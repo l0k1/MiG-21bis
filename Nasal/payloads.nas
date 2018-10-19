@@ -688,7 +688,6 @@ var missile_release = func(pylon) {
 	}
 }
 
-var is_boom_boom = FALSE;
 
 var bomb_release = func(pylon,type="bomb") {
 	if (pylon < 7) {
@@ -697,7 +696,6 @@ var bomb_release = func(pylon,type="bomb") {
 		var virtual = "/virtual/";
 	}
     if (type == "heavyrocket" and getprop("/fdm/jsbsim/electric/output/msl-rgm-rkt-lch") < 32) { return; }
-    if (is_boom_boom) {return;}
 	var selected = getprop("payload"~virtual~"weight[" ~ ( pylon ) ~ "]/selected");
 	if ( payloads[selected].type == type ) {
 		#print("dropping bomb: " ~ payloads[selected].brevity ~ ": pylon " ~ pylon);
@@ -708,7 +706,6 @@ var bomb_release = func(pylon,type="bomb") {
         }
         #print("releasing: payload/released/"~selected~"["~pylon~"]");
 		setprop("payload/released/"~selected~"["~pylon~"]",1);
-		is_boom_boom = TRUE;
 		var phrase = payloads[selected].brevity ~ " released.";
 		if (getprop("payload/armament/msg")) {
 			defeatSpamFilter(phrase);
