@@ -152,7 +152,7 @@
 				</menu>
 				<menu n="101">
 					<label>Dev</label>
-					<!--<item>
+					<item>
 						<label>Tune Drag</label>
 						<binding>
 							<command>nasal</command>
@@ -197,16 +197,63 @@
 					<item>
 						<name>a-submenu</name>
 						<enabled>false</enabled>
-					</item>-->
+					</item>
 					<item>
 						<label>Dump Prop Tree</label>
 						<binding>
-							<command>nasal</command><![CDATA[some stuff]]>
+							<command>nasal</command>
 							<script>
 								io.write_properties( path: getprop("/sim/fg-home") ~ "/Export/MiG-21bis/prop_tree_dump.xml", prop: "/" );
 							</script>
 						</binding>
 					</item>
+
+					<item>
+						<label>Start Bomb Data Collection</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+								boomboom.start_collection();
+							</script>
+						</binding>
+					</item>
+					<item>
+						<label>Stop Bomb Data Collection</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+								boomboom.stop_collection();
+							</script>
+						</binding>
+					</item>
+					<item>
+						<label>Import CSV</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+								boomboom.import_csv();
+							</script>
+						</binding>
+					</item>
+					<item>
+						<label>Export CSV</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+								boomboom.export_csv();
+							</script>
+						</binding>
+					</item>
+					<item>
+						<label>Request Needed Info</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+								boomboom.request_info();
+							</script>
+						</binding>
+					</item>
+
 				</menu>			
 			</default>
 		</menubar>
@@ -1547,6 +1594,7 @@
 		<rwr>				<file>Aircraft/MiG-21bis/Nasal/rwr.nas</file>				</rwr>				<!-- rwr -->
 		<iff>				<file>Aircraft/MiG-21bis/Nasal/iff.nas</file>				</iff>				<!-- iff -->
 		<gci>				<file>Aircraft/MiG-21bis/Nasal/gci-listener.nas</file>		</gci>				<!-- gci -->
+		<boomboom>			<file>Aircraft/MiG-21bis/Nasal/boom_boom.nas</file>			</boomboom>			<!-- gci -->
 
 	</nasal>
 

@@ -244,7 +244,7 @@
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.3</cd>
+        <cd>0.4</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -269,7 +269,7 @@
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.3</cd>
+        <cd>0.4</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -293,7 +293,7 @@
         </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
-        <cd>0.3</cd>
+        <cd>0.35</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -317,7 +317,7 @@
         </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
-        <cd>0.3</cd>
+        <cd>0.35</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -341,7 +341,7 @@
         </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
-        <cd>0.3</cd>
+        <cd>0.35</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -364,7 +364,7 @@
         </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
-        <cd>0.3</cd>
+        <cd>0.35</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -403,7 +403,7 @@
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>10</delay>
         <count>-1</count>
         <offsets>
             <x-m> 0.20</x-m>
@@ -427,7 +427,7 @@
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>10</delay>
         <count>-1</count>
        <offsets>
             <x-m> 0.20</x-m>

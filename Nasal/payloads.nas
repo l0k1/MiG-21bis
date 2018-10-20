@@ -712,7 +712,7 @@ var bomb_release = func(pylon,type="bomb") {
 		} else {
 			setprop("/sim/messages/atc", phrase);
 		}
-		settimer(func{return_trigger(selected,pylon);},19)
+		settimer(func{return_trigger(selected,pylon);},5)
 	}
 }
 
