@@ -120,6 +120,11 @@
 				<weight-lb>141</weight-lb>
 			</opt>
 			<opt>
+				<name>S-24</name>
+				<lbs>518</lbs>
+				<weight-lb>518</weight-lb>
+			</opt>
+			<opt>
 				<name>FAB-100</name>
 				<lbs>220</lbs>
 				<weight-lb>220</weight-lb>
@@ -356,14 +361,14 @@
 				<weight-lb>192</weight-lb>
 			</opt>
 			<opt>
-				<name>Kh-66</name>
-				<lbs>633</lbs>
-				<weight-lb>633</weight-lb>
-			</opt>
-			<opt>
 				<name>UB-16</name>
 				<lbs>141</lbs>
 				<weight-lb>141</weight-lb>
+			</opt>
+			<opt>
+				<name>S-24</name>
+				<lbs>518</lbs>
+				<weight-lb>518</weight-lb>
 			</opt>
 			<opt>
 				<name>FAB-100</name>
