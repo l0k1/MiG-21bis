@@ -116,6 +116,11 @@
 				<weight-lb>192</weight-lb>
 			</opt>
 			<opt>
+				<name>Kh-66</name>
+				<lbs>633</lbs>
+				<weight-lb>633</weight-lb>
+			</opt>
+			<opt>
 				<name>UB-16</name>
 				<lbs>141</lbs>
 				<weight-lb>141</weight-lb>
@@ -360,6 +365,11 @@
 				<name>R-60x2</name>
 				<lbs>192</lbs>
 				<weight-lb>192</weight-lb>
+			</opt>
+			<opt>
+				<name>Kh-66</name>
+				<lbs>633</lbs>
+				<weight-lb>633</weight-lb>
 			</opt>
 			<opt>
 				<name>UB-16</name>
