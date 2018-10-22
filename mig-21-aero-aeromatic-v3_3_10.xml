@@ -109,7 +109,7 @@
           <property>aero/qbar-psf</property>
           <property>metrics/Sw-sqft</property>
           <product>
-            <value> 0.0127296 </value>
+            <value> 0.019232 </value>
             <property>tune/drag/minimum</property>
           </product>
        </product>
@@ -769,7 +769,7 @@
            <property>metrics/bw-ft</property>
            <property>aero/beta-rad</property>
            <product>
-             <value> 0.1836 </value>
+             <value> 0.0918 </value>
              <property>tune/yaw/beta</property>
            </product>
        </product>
@@ -807,7 +807,7 @@
            <property>aero/bi2vel</property>
            <property>velocities/r-aero-rad_sec</property>
            <product>
-             <value> -0.6275 </value>
+             <value> -0.95 </value>
              <property>tune/yaw/damp</property>
            </product>
        </product>
@@ -821,7 +821,7 @@
            <property>metrics/bw-ft</property>
            <property>fcs/rudder-pos-rad</property>
            <product>
-             <value> -0.1487 </value>
+             <value> -0.0887 </value>
              <property>tune/yaw/rudder</property>
            </product>
        </product>
