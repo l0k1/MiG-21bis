@@ -287,7 +287,7 @@ var radiation_source = {
 			
 			#print("sig_str for " ~ me.callsign.getValue() ~ " is " ~ me.sig_str);
 		} else {
-			me.sig_str == 0;
+			me.sig_str = 0;
 		}
 	},
 	
