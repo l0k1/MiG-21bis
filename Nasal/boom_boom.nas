@@ -286,3 +286,8 @@ var request_info = func(){
     var info = _get_unused();
     screen.log.write("Speed: " ~ info[0] ~ "kmh, alt: " ~ info[1] ~ "m, angle: " ~ info[2],1.0,0.0,0.0);
 }
+
+var mark_invalid = func() {
+    var info = _get_unused();
+    set_db_value(info[1], info[0], info[2],-2,-2,-2);
+}

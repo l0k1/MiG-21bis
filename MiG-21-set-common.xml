@@ -253,6 +253,15 @@
 							</script>
 						</binding>
 					</item>
+					<item>
+						<label>Mark Requested Info As Invalid</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+								boomboom.mark_invalid();
+							</script>
+						</binding>
+					</item>
 
 				</menu>			
 			</default>
