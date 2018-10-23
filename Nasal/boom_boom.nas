@@ -164,7 +164,7 @@ var trigger_check = func() {
     setprop("aa_alt",myheight);
     setprop("aa_dive",mydive);
     foreach (var s; speeds_m) {
-        if (math.abs(myspeed - s) < 10) {
+        if (math.abs(myspeed - s) < 5) {
             myspeed = s;
             break;
         }
@@ -173,7 +173,7 @@ var trigger_check = func() {
     
     # check height
     foreach (var h; heights_m) {
-        if (math.abs(myheight - h) < 20) {
+        if (math.abs(myheight - h) < 5) {
             myheight = h;
             break;
         }
@@ -182,7 +182,7 @@ var trigger_check = func() {
     
     # check diveangle
     foreach (var d; dive_angles) {
-        if (math.abs(mydive - d) < 2) {
+        if (math.abs(mydive - d) < 1) {
             mydive = d;
             break;
         }
