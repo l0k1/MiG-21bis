@@ -738,6 +738,7 @@ setlistener("/controls/armament/jettison/center_tank",func(){jettison([2]);});
 setlistener("/controls/armament/jettison/outbd_jett",func(){jettison([0,4]);});
 setlistener("/controls/armament/jettison/inbd_jett",func(){jettison([1,3]);});
 
+
 var jettison = func(pylons) {
     var selected = "";
     if (pylons[0] == -1) {
@@ -767,6 +768,7 @@ var jettison = func(pylons) {
             settimer(func{return_trigger("pyro/" ~ selected,2);},5)
         }
     } else {
+        if (getprop("/fdm/jsbsim/electric/output/msl-rgm-emer-lcn-lchr-rkt-bombs-jett") < 110) {return;}
         foreach (var pylon; pylons) {
             selected = getprop("payload/weight[" ~ pylon ~ "]/selected");
             if (selected == nil) { continue; }
