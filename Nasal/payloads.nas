@@ -735,6 +735,8 @@ var bomb_release = func(pylon,type="bomb") {
 
 setlistener("/controls/armament/jettison/tanks_jett",func(){jettison([-1]);});
 setlistener("/controls/armament/jettison/center_tank",func(){jettison([2]);});
+setlistener("/controls/armament/jettison/outbd_jett",func(){jettison([0,4]);});
+setlistener("/controls/armament/jettison/inbd_jett",func(){jettison([1,3]);});
 
 var jettison = func(pylons) {
     var selected = "";
