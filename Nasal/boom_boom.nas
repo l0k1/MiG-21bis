@@ -222,7 +222,7 @@ var impact_listener = func {
 			# need drop height
 			# need drop distance
 			# pipper angle = math.asin(alt/direct_distance_to) + (dive_angle * -1)
-            var drop_ang = release_pitch - (math.asin((launch_coord.alt() - bomb_coord.alt())/launch_coord.direct_distance_to(bomb_coord))*R2D);
+            var drop_ang = (math.asin((launch_coord.alt() - bomb_coord.alt())/launch_coord.direct_distance_to(bomb_coord))*R2D) - release_pitch;
             set_db_value(release_alt, release_speed, release_pitch, drop_ang, systime() - release_time,launch_coord.distance_to(bomb_coord));
             bomb_in_flight = 0;
             screen.log.write("Data collected: time " ~ (int(systime() - release_time)) ~ "s, distance " ~ int(launch_coord.distance_to(bomb_coord)) ~ "m, angle " ~ drop_ang,1.0,0.0,0.0);
