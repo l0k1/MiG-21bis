@@ -718,6 +718,9 @@ var bomb_release = func(pylon,type="bomb") {
 
 setlistener("/controls/armament/jettison/tanks_jett",func(){jettison([-1]);});
 setlistener("/controls/armament/jettison/center_tank",func(){jettison([2]);});
+setlistener("/controls/armament/jettison/outbd_jett",func(){jettison([0,4]);});
+setlistener("/controls/armament/jettison/inbd_jett",func(){jettison([1,3]);});
+
 
 var jettison = func(pylons) {
     var selected = "";
@@ -732,6 +735,7 @@ var jettison = func(pylons) {
                 setprop("payload/weight[" ~ pylon ~ "]/selected","none");
                 setprop("/controls/armament/jettison/boom",1);
                 settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.1);
+                settimer(func{return_trigger("pyro/" ~ selected,pylon);},5)
             }
         }
     } elsif (pylons[0] == 2) {
@@ -744,8 +748,10 @@ var jettison = func(pylons) {
             setprop("payload/weight[2]/selected","none");
             setprop("/controls/armament/jettison/boom",1);
             settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.2);
+            settimer(func{return_trigger("pyro/" ~ selected,2);},5)
         }
     } else {
+        if (getprop("/fdm/jsbsim/electric/output/msl-rgm-emer-lcn-lchr-rkt-bombs-jett") < 110) {return;}
         foreach (var pylon; pylons) {
             selected = getprop("payload/weight[" ~ pylon ~ "]/selected");
             if (selected == nil) { continue; }
@@ -764,6 +770,16 @@ var jettison = func(pylons) {
 					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 					setprop("payload/weight["~pylon~"]/selected", "none");
                 }
+            } elsif (selected == "FAB-100x4") {
+            	var check_array = pylon == 1 ? [32,33,34,35] : [36,37,38,39];
+            	foreach (var p; check_array) {
+            		if (getprop("/ai/submodels/submodel["~p~"]/count") > 0) {
+            			setprop("/payload/jettison/"~selected~"["~p~"]",1);
+                        settimer(func{return_trigger(selected,p);},5)
+            		}
+            	}
+    			setprop("/payload/weight["~pylon~"]/selected", "none");
+			    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
             } else {
             	if ((payloads[selected].type == "ir" or
 	            		payloads[selected].type == "radar" or
@@ -776,6 +792,7 @@ var jettison = func(pylons) {
 	            } else {
 	                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
 	                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+                    settimer(func{return_trigger(selected,pylon);},5)
 	            }
             }
         }
@@ -784,6 +801,7 @@ var jettison = func(pylons) {
 
 var return_trigger = func(selected, pylon) {
 	setprop("payload/released/"~selected~"["~pylon~"]",0);
+	setprop("payload/jettison/"~selected~"["~pylon~"]",0);
 }
 ############ Impact messages #####################
 
