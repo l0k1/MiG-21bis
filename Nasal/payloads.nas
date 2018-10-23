@@ -781,6 +781,15 @@ var jettison = func(pylons) {
 					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 					setprop("payload/weight["~pylon~"]/selected", "none");
                 }
+            } elsif (selected == "FAB-100x4") {
+            	var check_array = pylon == 1 ? [32,33,34,35] : [36,37,38,39];
+            	foreach (var p; check_array) {
+            		if (getprop("/ai/submodels/submodel["~p~"]/count") > 0) {
+            			setprop("/payload/jettison/"~selected~"["~p~"]",1);
+            		}
+            	}
+    			setprop("/payload/weight["~pylon~"]/selected", "none");
+			    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
             } else {
             	if ((payloads[selected].type == "ir" or
 	            		payloads[selected].type == "radar" or
@@ -801,6 +810,7 @@ var jettison = func(pylons) {
 
 var return_trigger = func(selected, pylon) {
 	setprop("payload/released/"~selected~"["~pylon~"]",0);
+	setprop("payload/jettison/"~selected~"["~pylon~"]",0);
 }
 ############ Impact messages #####################
 
