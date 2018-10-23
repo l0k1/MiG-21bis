@@ -9,7 +9,7 @@ debug = 1;
 # database setup
 ################
 
-var heights_m = [400,500,600,800,100,1200,1400,1600,2000,2400,2800,3200,3600,4000,4400,4800,5200]; # in meters
+var heights_m = [400,500,600,800,1000,1200,1400,1600,2000,2400,2800,3200,3600,4000,4400,4800,5200]; # in meters
 var speeds_m = [400,500,600,700,800,900,1000,1100,1200]; # in km/h. irl its TAS, not sure if should do TAS or IAS.
 var dive_angles = [0, 10, 20, 30, 40, 50, 60, 70]; # in angle
 
