@@ -729,7 +729,7 @@ var bomb_release = func(pylon,type="bomb") {
 		} else {
 			setprop("/sim/messages/atc", phrase);
 		}
-		settimer(func{return_trigger(selected,pylon);},19)
+		settimer(func{return_trigger(selected,pylon);},5)
 	}
 }
 
@@ -749,6 +749,7 @@ var jettison = func(pylons) {
                 setprop("payload/weight[" ~ pylon ~ "]/selected","none");
                 setprop("/controls/armament/jettison/boom",1);
                 settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.1);
+                settimer(func{return_trigger("pyro/" ~ selected,pylon);},5)
             }
         }
     } elsif (pylons[0] == 2) {
@@ -761,6 +762,7 @@ var jettison = func(pylons) {
             setprop("payload/weight[2]/selected","none");
             setprop("/controls/armament/jettison/boom",1);
             settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.2);
+            settimer(func{return_trigger("pyro/" ~ selected,2);},5)
         }
     } else {
         foreach (var pylon; pylons) {
@@ -786,6 +788,7 @@ var jettison = func(pylons) {
             	foreach (var p; check_array) {
             		if (getprop("/ai/submodels/submodel["~p~"]/count") > 0) {
             			setprop("/payload/jettison/"~selected~"["~p~"]",1);
+                        settimer(func{return_trigger(selected,p);},5)
             		}
             	}
     			setprop("/payload/weight["~pylon~"]/selected", "none");
@@ -802,6 +805,7 @@ var jettison = func(pylons) {
 	            } else {
 	                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
 	                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+                    settimer(func{return_trigger(selected,pylon);},5)
 	            }
             }
         }
