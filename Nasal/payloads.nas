@@ -468,20 +468,32 @@ var trigger_propogation = func() {
 		if ( knobpos == 0 ) {
 			setprop("/controls/armament/rocket-setting",16);
 			setprop("/controls/armament/rocket-trigger",1);
-			bomb_release(1,"bomb");
-			bomb_release(3,"bomb");
+			if (getprop("/controls/armament/bomb-arm") == 0) {
+				jettison([1,3]);
+			} else {
+				bomb_release(1,"bomb");
+				bomb_release(3,"bomb");
+			}
 		} elsif ( knobpos == 1 ) {
 			setprop("/controls/armament/rocket-setting",8);
 			setprop("/controls/armament/rocket-trigger",1);
-			bomb_release(0,"bomb");
-			bomb_release(4,"bomb");
+			if (getprop("/controls/armament/bomb-arm") == 0) {
+				jettison([0,4]);
+			} else {
+				bomb_release(0,"bomb");
+				bomb_release(4,"bomb");
+			}
 		} elsif ( knobpos == 2 ) {
 			setprop("/controls/armament/rocket-setting",4);
 			setprop("/controls/armament/rocket-trigger",1);
-			bomb_release(0,"bomb");
-			bomb_release(1,"bomb");
-			bomb_release(3,"bomb");
-			bomb_release(4,"bomb");
+			if (getprop("/controls/armament/bomb-arm") == 0) {
+				jettison([0,1,3,4]);
+			} else {
+				bomb_release(0,"bomb");
+				bomb_release(1,"bomb");
+				bomb_release(3,"bomb");
+				bomb_release(4,"bomb");
+			}
 			return [0,3,knobpos];
 		} elsif ( knobpos == 3 ) {
 			if ( getprop("payload/weight[1]/selected") == "Kh-25MP"  and getprop("/fdm/jsbsim/electric/output/pwr-to-pylons[1]") > 32) {
