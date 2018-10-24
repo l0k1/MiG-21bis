@@ -699,7 +699,11 @@ var bomb_release = func(pylon,type="bomb") {
 	if ( payloads[selected].type == type ) {
 		#print("dropping bomb: " ~ payloads[selected].brevity ~ ": pylon " ~ pylon);
 		#print("selected: " ~ selected ~ "| pylon: " ~ pylon);
-
+		
+		if (payloads[selected].type == "bomb" and getprop("/controls/armament/bomb-arm") == 0) {
+			jettison([pylon]);
+			return;
+		}
         if (selected == "FAB-100x4"){
             var act_pylon = pylon;
             selected = "FAB-100";
@@ -797,6 +801,14 @@ var jettison = func(pylons) {
             	}
     			setprop("/payload/weight["~pylon~"]/selected", "none");
 			    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+            } elsif (payloads[selected].type == "bomb") {
+            	if (getprop("/controls/armament/bomb-arm") == 1) {
+            		bomb_release(pylon);
+            	} else {
+	                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
+	                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+                    settimer(func{return_trigger(selected,pylon);},5)
+            	}
             } else {
             	if ((payloads[selected].type == "ir" or
 	            		payloads[selected].type == "radar" or
