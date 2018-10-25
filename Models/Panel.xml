@@ -717,6 +717,18 @@
     </model>
 
     <model>
+        <name>Lower Center Pedestal Panel</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/PanelCenterLower/panel_center_lower.xml</path>
+        <offsets>
+            <heading-deg>0</heading-deg>
+            <pitch-deg>-25</pitch-deg>
+            <x-m>-3.910830</x-m>
+            <y-m> 0.032295</y-m>
+            <z-m> 0.406602</z-m>
+        </offsets>
+    </model>
+
+    <model>
         <name>Fuses</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Fuses/fuses.xml</path>
         <offsets>

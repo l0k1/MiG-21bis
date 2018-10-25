@@ -1641,6 +1641,7 @@
         <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>5</delay>
+        <count>-1</count>
         <offsets>
             <x-m>-0.3584</x-m>
             <y-m>-2.2883</y-m>
@@ -1661,6 +1662,7 @@
         <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>5</delay>
+        <count>-1</count>
         <offsets>
             <x-m>-0.3584</x-m>
             <y-m>-1.9115</y-m>
@@ -1681,6 +1683,7 @@
         <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>5</delay>
+        <count>-1</count>
         <offsets>
             <x-m> 0.6295</x-m>
             <y-m>-2.2883</y-m>
@@ -1701,6 +1704,7 @@
         <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>5</delay>
+        <count>-1</count>
         <offsets>
             <x-m> 0.6295</x-m>
             <y-m>-1.9115</y-m>
@@ -1721,6 +1725,7 @@
         <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>5</delay>
+        <count>-1</count>
         <offsets>
             <x-m>-0.3584</x-m>
             <y-m> 1.9115</y-m>
@@ -1741,6 +1746,7 @@
         <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>5</delay>
+        <count>-1</count>
         <offsets>
             <x-m>-0.3584</x-m>
             <y-m> 2.2883</y-m>
@@ -1761,6 +1767,7 @@
         <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>5</delay>
+        <count>-1</count>
         <offsets>
             <x-m> 0.6295</x-m>
             <y-m> 1.9115</y-m>
@@ -1781,6 +1788,7 @@
         <speed>0.0</speed>
         <repeat>true</repeat>
         <delay>5</delay>
+        <count>-1</count>
         <offsets>
             <x-m> 0.6295</x-m>
             <y-m> 2.2883</y-m>

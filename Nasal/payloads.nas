@@ -804,15 +804,25 @@ var jettison = func(pylons) {
 					setprop("payload/weight["~pylon~"]/selected", "none");
                 }
             } elsif (selected == "FAB-100x4") {
-            	var check_array = pylon == 1 ? [32,33,34,35] : [36,37,38,39];
-            	foreach (var p; check_array) {
-            		if (getprop("/ai/submodels/submodel["~p~"]/count") > 0) {
-            			setprop("/payload/jettison/"~selected~"["~p~"]",1);
-                        settimer(func{return_trigger(selected,p);},5)
-            		}
-            	}
-    			setprop("/payload/weight["~pylon~"]/selected", "none");
-			    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+                var sub_pylon = pylon;
+                var check_array = pylon == 1 ? [32,33,34,35] : [36,37,38,39];
+                foreach (var p; check_array){
+                    if (getprop("/ai/submodels/submodel["~p~"]/count") > 0) {
+                        sub_pylon = p;
+                        break;
+                    }
+                }
+                if (sub_pylon != p) {
+                    setprop("payload/weight[" ~ ( pylon ) ~ "]/selected", "none" );
+                    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+                    continue;
+                } else {
+                    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]") - 220);
+                }
+                print("setting " ~sub_pylon~ " to zero");
+                setprop("/ai/submodels/submodel["~sub_pylon~"]/count",0);
+                setprop("payload/jettison/FAB-100["~sub_pylon~"]",1);
+                settimer(func{return_trigger("FAB-100",sub_pylon);},5)
             } elsif (payloads[selected].type == "bomb") {
             	if (getprop("/controls/armament/bomb-arm") == 1) {
             		bomb_release(pylon);
