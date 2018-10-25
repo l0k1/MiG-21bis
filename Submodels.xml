@@ -1028,7 +1028,6 @@
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
-        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
         <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
     </submodel>
 
@@ -1048,8 +1047,9 @@
         <eda>1.0</eda>
         <weight>180.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1068,8 +1068,9 @@
         <eda>1.0</eda>
         <weight>180.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
     
     <submodel>
@@ -1088,8 +1089,9 @@
         <eda>1.0</eda>
         <weight>180.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
     
     <submodel>
@@ -1108,8 +1110,9 @@
         <eda>1.0</eda>
         <weight>180.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1128,8 +1131,9 @@
         <eda>1.0</eda>
         <weight>180.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1148,8 +1152,9 @@
         <eda>1.0</eda>
         <weight>180.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1168,8 +1173,9 @@
         <eda>1.0</eda>
         <weight>180.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
     
     <submodel>
@@ -1188,8 +1194,9 @@
         <eda>1.0</eda>
         <weight>230.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
     
     <submodel>
@@ -1209,8 +1216,9 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.4</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
 
     </submodel>
 
@@ -1231,8 +1239,9 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.4</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1252,8 +1261,9 @@
         <eda>1.0</eda>
         <weight>551.0</weight>
         <cd>0.35</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1273,8 +1283,9 @@
         <eda>1.0</eda>
         <weight>551.0</weight>
         <cd>0.35</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1294,8 +1305,9 @@
         <eda>1.0</eda>
         <weight>551.0</weight>
         <cd>0.35</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1314,8 +1326,9 @@
         <eda>1.0</eda>
         <weight>551.0</weight>
         <cd>0.35</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1335,8 +1348,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1356,8 +1370,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1377,8 +1392,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1397,8 +1413,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
 
@@ -1421,8 +1438,9 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.47</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1444,8 +1462,9 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.47</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1468,8 +1487,8 @@
         <weight>520.0</weight>
         <cd>0.47</cd>
         <collision>true</collision>
-        <collision>false</collision>
-        <impact>false</impact>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1491,8 +1510,9 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.47</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
     
     <submodel>
@@ -1514,8 +1534,9 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.55</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
     
     <submodel>
@@ -1537,8 +1558,9 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.55</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
     
     <submodel>
@@ -1560,8 +1582,9 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.55</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
     
     <submodel>
@@ -1583,8 +1606,9 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.55</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
     
     <submodel>
@@ -1606,8 +1630,9 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.55</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
     
     <submodel>
@@ -1629,8 +1654,9 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <cd>0.55</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
     
     <submodel>
@@ -1650,8 +1676,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1671,8 +1698,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1692,8 +1720,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1713,8 +1742,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1734,8 +1764,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1755,8 +1786,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1776,8 +1808,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
     <submodel>
@@ -1797,8 +1830,9 @@
         <eda>1.0</eda>
         <weight>220.0</weight>
         <cd>0.3</cd>
-        <collision>false</collision>
-        <impact>false</impact>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
 </PropertyList>
