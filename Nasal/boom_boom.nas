@@ -141,6 +141,7 @@ var release_time = 0;
 var release_speed = 0;
 var release_alt = 0;
 var release_pitch = 0;
+var release_pitch_false = 0;
 var launch_coord = geo.Coord.new();
 var bomb_coord = geo.Coord.new();
 
@@ -198,12 +199,13 @@ var trigger_check = func() {
     
     launch_coord = geo.aircraft_position();
     release_time = systime();
-    release_pitch = mydive;
+    release_pitch = getprop("orientation/pitch-deg") * -1;
+    release_pitch_false = mydive;
     release_speed = myspeed;
     release_alt = myheight;
     payloads.bomb_release(1);
     payloads.bomb_release(3);
-    screen.log.write("Collecting data for: " ~ myspeed ~ "kmh, " ~ myheight ~ "m, " ~ release_pitch,1.0,0.0,0.0);
+    screen.log.write("Collecting data for: " ~ myspeed ~ "kmh, " ~ myheight ~ "m, " ~ mydive,1.0,0.0,0.0);
     bomb_in_flight = 1;
     
     # and now, we listen...
@@ -223,7 +225,7 @@ var impact_listener = func {
 			# need drop distance
 			# pipper angle = math.asin(alt/direct_distance_to) + (dive_angle * -1)
             var drop_ang = (math.asin((launch_coord.alt() - bomb_coord.alt())/launch_coord.direct_distance_to(bomb_coord))*R2D) - release_pitch;
-            set_db_value(release_alt, release_speed, release_pitch, drop_ang, systime() - release_time,launch_coord.distance_to(bomb_coord));
+            set_db_value(release_alt, release_speed, release_pitch_false, drop_ang, systime() - release_time,launch_coord.distance_to(bomb_coord));
             bomb_in_flight = 0;
             screen.log.write("Data collected: time " ~ (int(systime() - release_time)) ~ "s, distance " ~ int(launch_coord.distance_to(bomb_coord)) ~ "m, angle " ~ drop_ang,1.0,0.0,0.0);
         }
