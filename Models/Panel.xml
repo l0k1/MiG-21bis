@@ -47,7 +47,7 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/Radar/Radar.xml</path>
         <offsets>
 			<heading-deg></heading-deg>
-            <pitch-deg>-7</pitch-deg>
+            <pitch-deg>-24</pitch-deg>
             <x-m>-3.98830</x-m>
             <y-m> 0.10467</y-m>
             <z-m> 0.58641</z-m>
