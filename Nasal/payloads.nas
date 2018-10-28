@@ -468,20 +468,32 @@ var trigger_propogation = func() {
 		if ( knobpos == 0 ) {
 			setprop("/controls/armament/rocket-setting",16);
 			setprop("/controls/armament/rocket-trigger",1);
-			bomb_release(1,"bomb");
-			bomb_release(3,"bomb");
+			if (getprop("/controls/armament/bomb-arm") == 0) {
+				jettison([1,3]);
+			} else {
+				bomb_release(1,"bomb");
+				bomb_release(3,"bomb");
+			}
 		} elsif ( knobpos == 1 ) {
 			setprop("/controls/armament/rocket-setting",8);
 			setprop("/controls/armament/rocket-trigger",1);
-			bomb_release(0,"bomb");
-			bomb_release(4,"bomb");
+			if (getprop("/controls/armament/bomb-arm") == 0) {
+				jettison([0,4]);
+			} else {
+				bomb_release(0,"bomb");
+				bomb_release(4,"bomb");
+			}
 		} elsif ( knobpos == 2 ) {
 			setprop("/controls/armament/rocket-setting",4);
 			setprop("/controls/armament/rocket-trigger",1);
-			bomb_release(0,"bomb");
-			bomb_release(1,"bomb");
-			bomb_release(3,"bomb");
-			bomb_release(4,"bomb");
+			if (getprop("/controls/armament/bomb-arm") == 0) {
+				jettison([0,1,3,4]);
+			} else {
+				bomb_release(0,"bomb");
+				bomb_release(1,"bomb");
+				bomb_release(3,"bomb");
+				bomb_release(4,"bomb");
+			}
 			return [0,3,knobpos];
 		} elsif ( knobpos == 3 ) {
 			if ( getprop("payload/weight[1]/selected") == "Kh-25MP"  and getprop("/fdm/jsbsim/electric/output/pwr-to-pylons[1]") > 32) {
@@ -700,7 +712,11 @@ var bomb_release = func(pylon,type="bomb") {
 	if ( payloads[selected].type == type ) {
 		#print("dropping bomb: " ~ payloads[selected].brevity ~ ": pylon " ~ pylon);
 		#print("selected: " ~ selected ~ "| pylon: " ~ pylon);
-
+		
+		if (payloads[selected].type == "bomb" and getprop("/controls/armament/bomb-arm") == 0) {
+			jettison([pylon]);
+			return;
+		}
         if (selected == "FAB-100x4"){
             selected = "FAB-100";
         }
@@ -712,7 +728,7 @@ var bomb_release = func(pylon,type="bomb") {
 		} else {
 			setprop("/sim/messages/atc", phrase);
 		}
-		settimer(func{return_trigger(selected,pylon);},5)
+		return_trigger(selected,pylon);
 	}
 }
 
@@ -735,7 +751,7 @@ var jettison = func(pylons) {
                 setprop("payload/weight[" ~ pylon ~ "]/selected","none");
                 setprop("/controls/armament/jettison/boom",1);
                 settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.1);
-                settimer(func{return_trigger("pyro/" ~ selected,pylon);},5)
+                return_trigger("pyro/" ~ selected,pylon);
             }
         }
     } elsif (pylons[0] == 2) {
@@ -748,7 +764,7 @@ var jettison = func(pylons) {
             setprop("payload/weight[2]/selected","none");
             setprop("/controls/armament/jettison/boom",1);
             settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.2);
-            settimer(func{return_trigger("pyro/" ~ selected,2);},5)
+            return_trigger("pyro/" ~ selected,2);
         }
     } else {
         if (getprop("/fdm/jsbsim/electric/output/msl-rgm-emer-lcn-lchr-rkt-bombs-jett") < 110) {return;}
@@ -771,15 +787,33 @@ var jettison = func(pylons) {
 					setprop("payload/weight["~pylon~"]/selected", "none");
                 }
             } elsif (selected == "FAB-100x4") {
-            	var check_array = pylon == 1 ? [32,33,34,35] : [36,37,38,39];
-            	foreach (var p; check_array) {
-            		if (getprop("/ai/submodels/submodel["~p~"]/count") > 0) {
-            			setprop("/payload/jettison/"~selected~"["~p~"]",1);
-                        settimer(func{return_trigger(selected,p);},5)
-            		}
+                var sub_pylon = pylon;
+                var check_array = pylon == 1 ? [32,33,34,35] : [36,37,38,39];
+                foreach (var p; check_array){
+                    if (getprop("/ai/submodels/submodel["~p~"]/count") > 0) {
+                        sub_pylon = p;
+                        break;
+                    }
+                }
+                if (sub_pylon != p) {
+                    setprop("payload/weight[" ~ ( pylon ) ~ "]/selected", "none" );
+                    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+                    continue;
+                } else {
+                    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]") - 220);
+                }
+                print("setting " ~sub_pylon~ " to zero");
+                setprop("/ai/submodels/submodel["~sub_pylon~"]/count",0);
+                setprop("payload/jettison/FAB-100["~sub_pylon~"]",1);
+                return_trigger("FAB-100",sub_pylon);
+            } elsif (payloads[selected].type == "bomb") {
+            	if (getprop("/controls/armament/bomb-arm") == 1) {
+            		bomb_release(pylon);
+            	} else {
+	                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
+	                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+                    return_trigger(selected,pylon);
             	}
-    			setprop("/payload/weight["~pylon~"]/selected", "none");
-			    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
             } else {
             	if ((payloads[selected].type == "ir" or
 	            		payloads[selected].type == "radar" or
@@ -792,17 +826,40 @@ var jettison = func(pylons) {
 	            } else {
 	                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
 	                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
-                    settimer(func{return_trigger(selected,pylon);},5)
+                    return_trigger(selected,pylon);
 	            }
             }
         }
     }
 }
 
+var _ret_trig_arr = [];
+#return trigger should be passed an array in the format [selected, pylon, systime]
 var return_trigger = func(selected, pylon) {
-	setprop("payload/released/"~selected~"["~pylon~"]",0);
-	setprop("payload/jettison/"~selected~"["~pylon~"]",0);
+    #print("setting up for " ~ selected ~ ":" ~ pylon);
+    append(_ret_trig_arr,[selected,pylon,systime()]);
 }
+
+var return_trigger_loop = func() {
+    var c_time = systime();
+    foreach(var entry; _ret_trig_arr){
+        if (c_time - entry[2] > 4.98) {
+            entry[2] = 0;
+            #print("returning trigger on " ~ entry[0] ~ ":" ~ entry[1]);
+            setprop("payload/released/"~entry[0]~"["~entry[1]~"]",0);
+            setprop("payload/jettison/"~entry[0]~"["~entry[1]~"]",0);
+        }
+    }
+    var _narr = [];
+    for (var i = 0; i < size(_ret_trig_arr); i = i + 1){
+        if (_ret_trig_arr[i][2] != 0) {
+            append(_narr,_ret_trig_arr[i]);
+        }
+    }
+    _ret_trig_arr = _narr;
+    settimer(return_trigger_loop,0);
+}
+return_trigger_loop();
 ############ Impact messages #####################
 
 var hit_count = 0;
@@ -973,6 +1030,16 @@ var paint_the_rainbow = func(timer) {
 	}
 }
 
+
+var find_index = func(arr,val) {
+    # fpia = find pos in array
+    for (var i = 0; i < size(arr); i = i + 1) {
+        if (arr[i] == val) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 ############################# main init ###############
 

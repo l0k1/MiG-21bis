@@ -520,7 +520,9 @@
 				<breakoff-light type="float">0</breakoff-light>
 			</gunsight>
 			<missile-release type="int" alias="/fdm/jsbsim/systems/armament/release">0</missile-release>
-					   <trigger type="bool">false</trigger>
+			<trigger type="bool">false</trigger>
+			<bomb-arm type="bool">false</bomb-arm>
+			<bomb-arm-guard type="bool">false</bomb-arm-guard>
 			<station n="0"> <!-- left outer wing -->
 				<offsets>
 					<x-m type="double">  1.33</x-m>

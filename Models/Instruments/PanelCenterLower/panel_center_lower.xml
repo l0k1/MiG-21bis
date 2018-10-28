@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<path>panel_center_lower.ac</path>
+      <animation>
+          <type>material</type>
+            <object-name>labels</object-name>
+          <emission>
+             <red>0.6</red>
+             <green>0.3</green>
+             <blue>0.3</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+          </emission>
+      </animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>bomb_drop_guard</object-name>
+		<property>/controls/armament/bomb-arm-guard</property>
+		<factor>-100</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m> 0.003958</x-m>
+			<y-m>-0.023764</y-m>
+			<z-m> 0.009665</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>bomb_drop_guard</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<button>5</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/armament/bomb-arm-guard</property>
+			</binding>
+		</action>
+	</animation>
+
+
+	<animation>
+		<type>rotate</type>
+		<object-name>bomb_arm</object-name>
+		<property>/controls/armament/bomb-arm</property>
+		<factor>-60</factor>
+		<offset-deg>30</offset-deg>
+		<center>
+			<x-m>-0.00251</x-m>
+			<y-m>-0.013517</y-m>
+			<z-m> 0.009783</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>bomb_arm</object-name>
+		<condition>
+			<equals>
+				<property>/controls/armament/bomb-arm-guard</property>
+				<value>1</value>
+			</equals>
+		</condition>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<button>5</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/armament/bomb-arm</property>
+			</binding>
+		</action>
+	</animation>
+
+</PropertyList>

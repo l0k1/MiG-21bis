@@ -692,6 +692,30 @@
 			<output>warning-lights/fagp/extend-lg</output>
 		</fcs_function>
 
+		<fcs_function name="trash/warning-lights/armament/bomb-arm">
+			<function>
+				<product>
+					<or>
+						<gt>
+							<property>electric/output/tac-rls-1-2</property>
+							<value>110</value>
+						</gt>
+						<gt>
+							<property>electric/output/tac-rls-3-4</property>
+							<value>110</value>
+						</gt>
+					</or>
+					<property>/controls/armament/bomb-arm</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/armament/bomb-arm</output>
+		</fcs_function>
+
 	</channel>
 
 </system>
