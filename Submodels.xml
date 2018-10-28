@@ -329,7 +329,6 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-250/fab-250-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -353,7 +352,6 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-250/fab-250-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -377,7 +375,6 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-250/fab-250-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -400,7 +397,6 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-250/fab-250-sub.xml</submodel-path>
     </submodel>
 
     <submodel>

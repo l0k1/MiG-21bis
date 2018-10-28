@@ -11,7 +11,7 @@ debug = 1;
 
 var heights_m = [400,500,600,800,1000,1200,1400,1600,2000,2400,2800,3200,3600,4000,4400,4800,5200]; # in meters
 var speeds_m = [400,500,600,700,800,900,1000,1100,1200]; # in km/h. irl its TAS, not sure if should do TAS or IAS.
-var dive_angles = [0, 10, 20, 30, 40, 50, 60, 70]; # in angle
+var dive_angles = [0,10,30,50,70]; # in angle
 
 var data_struct = {
     height: 0,
@@ -153,9 +153,6 @@ var trigger_check = func() {
     # if a bomb is in air, dont launch another
     # if flight parameters match a missing datapoint, launch a bomb
     
-    if (bomb_in_flight) { return; }
-    #if (math.abs(getprop("orientation/yaw-deg")) > 2) { return; }
-    if (math.abs(getprop("orientation/roll-deg")) > 5) { return; }
     
     # check speed
     var myspeed = getprop("velocities/airspeed-kt") * KT2KMH;
@@ -164,6 +161,10 @@ var trigger_check = func() {
     setprop("aa_kmh",myspeed);
     setprop("aa_alt",myheight);
     setprop("aa_dive",mydive);
+
+    if (bomb_in_flight) { return; }
+    #if (math.abs(getprop("orientation/yaw-deg")) > 2) { return; }
+    if (math.abs(getprop("orientation/roll-deg")) > 5) { return; }
     foreach (var s; speeds_m) {
         if (math.abs(myspeed - s) < 5) {
             myspeed = s;
@@ -227,6 +228,7 @@ var impact_listener = func {
             var drop_ang = (math.asin((launch_coord.alt() - bomb_coord.alt())/launch_coord.direct_distance_to(bomb_coord))*R2D) - release_pitch;
             set_db_value(release_alt, release_speed, release_pitch_false, drop_ang, systime() - release_time,launch_coord.distance_to(bomb_coord));
             bomb_in_flight = 0;
+            screen.log.write("Collecting data for: " ~ release_speed ~ "kmh, " ~ release_alt ~ "m, " ~ release_pitch_false,1.0,0.0,0.0);
             screen.log.write("Data collected: time " ~ (int(systime() - release_time)) ~ "s, distance " ~ int(launch_coord.distance_to(bomb_coord)) ~ "m, angle " ~ drop_ang,1.0,0.0,0.0);
         }
     }
