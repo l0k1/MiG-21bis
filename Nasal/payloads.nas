@@ -712,11 +712,6 @@ var bomb_release = func(pylon,type="bomb") {
 	if ( payloads[selected].type == type ) {
 		#print("dropping bomb: " ~ payloads[selected].brevity ~ ": pylon " ~ pylon);
 		#print("selected: " ~ selected ~ "| pylon: " ~ pylon);
-		
-		if (payloads[selected].type == "bomb" and getprop("/controls/armament/bomb-arm") == 0) {
-			jettison([pylon]);
-			return;
-		}
         if (selected == "FAB-100x4"){
             selected = "FAB-100";
         }
@@ -739,6 +734,7 @@ setlistener("/controls/armament/jettison/inbd_jett",func(){jettison([1,3]);});
 
 
 var jettison = func(pylons) {
+    return;
     var selected = "";
     if (pylons[0] == -1) {
         # wing tank jettison button
@@ -843,7 +839,7 @@ var return_trigger = func(selected, pylon) {
 var return_trigger_loop = func() {
     var c_time = systime();
     foreach(var entry; _ret_trig_arr){
-        if (c_time - entry[2] > 4.98) {
+        if (c_time - entry[2] >= 5.0) {
             entry[2] = 0;
             #print("returning trigger on " ~ entry[0] ~ ":" ~ entry[1]);
             setprop("payload/released/"~entry[0]~"["~entry[1]~"]",0);
