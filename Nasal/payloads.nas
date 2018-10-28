@@ -860,7 +860,7 @@ var return_trigger = func(selected, pylon) {
 var return_trigger_loop = func() {
     var c_time = systime();
     foreach(var entry; _ret_trig_arr){
-        if (c_time - entry[2] > 4.98) {
+        if (c_time - entry[2] >= 5.0) {
             entry[2] = 0;
             #print("returning trigger on " ~ entry[0] ~ ":" ~ entry[1]);
             setprop("payload/released/"~entry[0]~"["~entry[1]~"]",0);
