@@ -5,23 +5,13 @@
             <desc>Trigger flare release</desc>
             <binding>
                 <command>property-assign</command>
-                <property>/controls/armament/chaff-trigger</property>
-                <value type="bool">true</value>
-            </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>/controls/armament/flare-trigger</property>
+                <property>/controls/armament/cm-trigger</property>
                 <value type="bool">true</value>
             </binding>
             <mod-up>
                 <binding>
                     <command>property-assign</command>
-                    <property>/controls/armament/chaff-trigger</property>
-                    <value type="bool">false</value>
-                </binding>
-                <binding>
-                    <command>property-assign</command>
-                    <property>/controls/armament/flare-trigger</property>
+                    <property>/controls/armament/cm-trigger</property>
                     <value type="bool">false</value>
                 </binding>
             </mod-up>

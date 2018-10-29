@@ -13,7 +13,7 @@
 		</config>
 	</view>
 	
-	<view n="101">
+	<view n="105">
 		<internal archive="y">true</internal>
 		<name>Radar</name>
 		<type>lookfrom</type>
@@ -25,6 +25,70 @@
 			<x-offset-m archive="y"> 0.0765</x-offset-m>
 			<y-offset-m archive="y"> 0.9245</y-offset-m>
 			<z-offset-m archive="y">-3.5500</z-offset-m>
+			<default-field-of-view-deg type="double">55</default-field-of-view-deg>
+		</config>
+	</view>
+
+	<view n="104">
+		<internal archive="y">true</internal>
+		<name>Bottom Panel</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-33.15</pitch-offset-deg>
+			<heading-offset-deg>26.81</heading-offset-deg>
+			<x-offset-m archive="y"> 0.1699</x-offset-m>
+			<y-offset-m archive="y"> 0.7192</y-offset-m>
+			<z-offset-m archive="y">-3.5500</z-offset-m>
+			<default-field-of-view-deg type="double">70</default-field-of-view-deg>
+		</config>
+	</view>
+
+	<view n="103">
+		<internal archive="y">true</internal>
+		<name>Right Front</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-11.11</pitch-offset-deg>
+			<heading-offset-deg>284</heading-offset-deg>
+			<x-offset-m archive="y"> 0.0279</x-offset-m>
+			<y-offset-m archive="y"> 0.7833</y-offset-m>
+			<z-offset-m archive="y">-3.5500</z-offset-m>
+			<default-field-of-view-deg type="double">70</default-field-of-view-deg>
+		</config>
+	</view>
+
+	<view n="102">
+		<internal archive="y">true</internal>
+		<name>Right Rear</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-7.2</pitch-offset-deg>
+			<heading-offset-deg>268</heading-offset-deg>
+			<x-offset-m archive="y"> 0.0279</x-offset-m>
+			<y-offset-m archive="y"> 0.7833</y-offset-m>
+			<z-offset-m archive="y">-3.2000</z-offset-m>
+			<default-field-of-view-deg type="double">70</default-field-of-view-deg>
+		</config>
+	</view>
+
+	<view n="101">
+		<internal archive="y">true</internal>
+		<name>Left Front</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-7.74</pitch-offset-deg>
+			<heading-offset-deg>70</heading-offset-deg>
+			<x-offset-m archive="y"> 0.0943</x-offset-m>
+			<y-offset-m archive="y"> 0.7783</y-offset-m>
+			<z-offset-m archive="y">-3.4500</z-offset-m>
 			<default-field-of-view-deg type="double">55</default-field-of-view-deg>
 		</config>
 	</view>

@@ -155,7 +155,7 @@
 				<max>
 					<difference>
 						<property>systems/armament/cm/flares-count-0</property>
-						<value>4</value>
+						<value>2</value>
 					</difference>
 					<value>0</value>
 				</max>
@@ -168,7 +168,7 @@
 				<max>
 					<difference>
 						<property>systems/armament/cm/flares-count-1</property>
-						<value>4</value>
+						<value>2</value>
 					</difference>
 					<value>0</value>
 				</max>
@@ -254,7 +254,7 @@
 				<max>
 					<difference>
 						<property>systems/armament/cm/chaff-count-0</property>
-						<value>4</value>
+						<value>1</value>
 					</difference>
 					<value>0</value>
 				</max>
@@ -267,7 +267,7 @@
 				<max>
 					<difference>
 						<property>systems/armament/cm/chaff-count-1</property>
-						<value>4</value>
+						<value>1</value>
 					</difference>
 					<value>0</value>
 				</max>

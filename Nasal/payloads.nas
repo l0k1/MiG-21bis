@@ -63,7 +63,7 @@ var payloads = {
 	#payload format is:
 	#name: pos_arm.new(name, brevity code, weight, type/guidance, hit message max distance (not used for guided missiles), ammo count (optional), guidance function (optional)
 	#bomb names can NOT have spaces in them.
-	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy
+	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy, cm
 	#regarding hit distance, the GSh-23 is coded as 35m seperately in this file
 	"none":					pos_arm.new("none","none",0,"none"),
 	# ir missiles
@@ -98,7 +98,9 @@ var payloads = {
 	"S-24":					pos_arm.new("S-24","S-24",518,"heavyrocket",60),
 	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank","PTB-490 Droptank",180,"tank"),
 	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank","PTB-800 Droptank",230,"tank"),
-	"Smokepod":				pos_arm.new("Smokepod","Smokepod",157,"tank")
+	"Smokepod":				pos_arm.new("Smokepod","Smokepod",157,"tank"),
+    # countermeasures
+    "Conformal CM":         pos_arm.new("Conformal CM","Conformal CM",210,"cm"),
 };
 
 # add in virtual pylons too
@@ -241,7 +243,20 @@ var create_pylon = func(pylon, payload, selected) {
         } elsif (pylon == 4){
             setprop("/ai/submodels/submodel[25]/count",payload.ammo_count);
         }
-    } elsif (selected != "FAB-100x4") {
+    }elsif (selected == "Conformal CM") {
+        #0 ~ flares left
+        #1 ~ flares right
+        #2 ~ chaff left
+        #3 ~ chaff right
+        #18 flares, 9 chaff
+        if (pylon == 5) {
+            setprop("/ai/submodels/submodel[0]/count",20);
+            setprop("/ai/submodels/submodel[2]/count", 9);
+        } elsif (pylon == 6) {
+            setprop("/ai/submodels/submodel[1]/count",20);
+            setprop("/ai/submodels/submodel[3]/count", 9);
+        }
+    } elsif (selected != "FAB-100x4" and selected != "Conformal CM") {
         if (pylon == 0) {
 			setprop("/ai/submodels/submodel[22]/count",0);
 		} elsif (pylon == 1) {
@@ -258,7 +273,13 @@ var create_pylon = func(pylon, payload, selected) {
             setprop("/ai/submodels/submodel[39]/count",0);
 		} elsif (pylon == 4) {
 			setprop("/ai/submodels/submodel[25]/count",0);
-		}
+		} elsif (pylon == 5) {
+            setprop("/ai/submodels/submodel[0]/count",0);
+            setprop("/ai/submodels/submodel[2]/count",0);
+        } elsif (pylon == 6) {
+            setprop("/ai/submodels/submodel[1]/count",0);
+            setprop("/ai/submodels/submodel[3]/count",0);
+        }
     }
 }
 
@@ -299,7 +320,13 @@ var empty_pylon = func(pylon) {
         setprop("/ai/submodels/submodel[39]/count",0);
 	} elsif (pylon == 4) {
 		setprop("/ai/submodels/submodel[25]/count",0);
-	}
+    } elsif (pylon == 5) {
+        setprop("/ai/submodels/submodel[0]/count",0);
+        setprop("/ai/submodels/submodel[2]/count",0);
+    } elsif (pylon == 6) {
+        setprop("/ai/submodels/submodel[1]/count",0);
+        setprop("/ai/submodels/submodel[3]/count",0);
+    }
 }
 
 #missile arming loop
@@ -850,6 +877,22 @@ var jettison = func(pylons) {
     }
 }
 
+var countermeasure_trigger = func() {
+    #print("in func");
+    #print("trig set to: |" ~getprop("/controls/armament/cm-trigger")~"|");
+    if (getprop("/controls/armament/cm-trigger") == 0) { 
+        #print("setting trigs to 0");
+        setprop("/controls/armament/chaff-trigger",0);
+        setprop("/controls/armament/flare-trigger",0);
+        return;
+    }
+    if (getprop("/fdm/jsbsim/electric/output/jato-start") < 20) { return; }
+    if (getprop("/fdm/jsbsim/electric/output/jato-jett") < 20) { return; }
+    #print("setting trigs to 1");
+    setprop("/controls/armament/chaff-trigger",1);
+    setprop("/controls/armament/flare-trigger",1);
+}
+
 var _ret_trig_arr = [];
 #return trigger should be passed an array in the format [selected, pylon, systime]
 var return_trigger = func(selected, pylon) {
@@ -860,7 +903,7 @@ var return_trigger = func(selected, pylon) {
 var return_trigger_loop = func() {
     var c_time = systime();
     foreach(var entry; _ret_trig_arr){
-        if (c_time - entry[2] > 4.98) {
+        if (c_time - entry[2] >= 5.0) {
             entry[2] = 0;
             #print("returning trigger on " ~ entry[0] ~ ":" ~ entry[1]);
             setprop("payload/released/"~entry[0]~"["~entry[1]~"]",0);
@@ -1090,10 +1133,12 @@ var main_init = func {
 	setlistener("/payload/weight[2]/selected",func{update_pylons(2);});
 	setlistener("/payload/weight[3]/selected",func{update_pylons(3);});
 	setlistener("/payload/weight[4]/selected",func{update_pylons(4);});
-	#setlistener("/payload/weight[5]/selected",func{update_pylons(5););
-	#setlistener("/payload/weight[6]/selected",func{update_pylons(6););
+	setlistener("/payload/weight[5]/selected",func{update_pylons(5);});
+	setlistener("/payload/weight[6]/selected",func{update_pylons(6);});
 	setlistener("/payload/virtual/weight[7]/selected",func{update_pylons(7);});
 	setlistener("/payload/virtual/weight[8]/selected",func{update_pylons(8);});
+
+    setlistener("/controls/armament/cm-trigger",func{countermeasure_trigger();});
 
     # setup impact listener
     setlistener("/ai/models/model-impact", impact_listener, 0, 0);
