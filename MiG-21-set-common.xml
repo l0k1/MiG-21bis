@@ -233,7 +233,6 @@
 				<int n="10" alias="/controls/armament/trigger" />
 				<!-- Smokepod -->
 				<int n="19" type="int">0</int>
-				<float n="6" alias="/fdm/jsbsim/systems/chute/deploy" /> <!-- braking chute. -->
 				<float n="8" alias="/engines/engine[0]/augmentation" /> <!-- Reheat  -->
 				<float n="9" alias="/engines/engine[0]/nozzle-pos-norm" /> <!-- Reheat  -->
 				<float n="10" alias="/fdm/jsbsim/propulsion/clr" /> <!-- Reheat  -->
@@ -255,6 +254,7 @@
 				<bool n="0" alias ="/instrumentation/gci/picture"/> <!-- gci request -->
 				<bool n="1" alias ="/instrumentation/gci/bogeydope"/> <!-- gci request -->
 				<bool n="2" alias ="/instrumentation/gci/cutoff"/> <!-- gci request -->
+				<bool n="3" alias ="/fdm/jsbsim/systems/chute/deploy"/>
 			</generic>
 		</multiplay>
 
