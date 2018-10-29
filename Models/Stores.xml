@@ -1162,6 +1162,48 @@
 	</animation>
 
 
+	<model>
+		<name>Conformal CM Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/ConformalCM/conformalcm.xml</path>
+		<offsets>
+			<x-m> 1.583710</x-m>
+			<y-m>-0.435883</y-m>
+			<z-m>-0.199905</z-m>
+			<roll-deg>130</roll-deg>
+		</offsets>
+	</model>
 
+	<animation>
+		<object-name>Conformal CM Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[16]</property>
+                  <value>Conformal CM</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>Conformal CM Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/ConformalCM/conformalcm.xml</path>
+		<offsets>
+			<x-m> 1.583710</x-m>
+			<y-m> 0.435883</y-m>
+			<z-m>-0.199905</z-m>
+			<roll-deg>-130</roll-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>Conformal CM Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/string[17]</property>
+                  <value>Conformal CM</value>
+            </equals>
+		</condition>
+	</animation>
 
 </PropertyList>
