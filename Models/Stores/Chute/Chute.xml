@@ -5,7 +5,7 @@
     <animation>
         <type>scale</type>
         <object-name>chute</object-name>
-        <property>sim/multiplay/generic/float[6]</property>
+        <property>sim/multiplay/generic/bool[3]</property>
         <x-min>1</x-min>
         <y-min>1</y-min>
         <z-min>1</z-min>

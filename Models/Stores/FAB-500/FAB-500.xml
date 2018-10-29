@@ -1,6 +1,10 @@
 <PropertyList>
 
-    <path>Tank.ac</path>
+    <path>FAB-500.ac</path>
+    
+    <animation>
+        <enable-hot type="bool">false</enable-hot>
+    </animation>
 
     <animation>
         <type>range</type>
