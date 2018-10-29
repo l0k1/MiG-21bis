@@ -1,8 +1,11 @@
 <PropertyList>
 
 	<!-- Stores -->
+	
+	<!-- Drag Chute -->
     
 	<model>
+		<name>Drag Chute</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/Chute/Chute.xml</path>
 		<offsets>
 			<x-m>6.44</x-m>
@@ -11,6 +14,23 @@
 			<pitch-deg>0.00</pitch-deg>
 		</offsets>
 	</model>
+	
+	<animation>
+		<object-name>Drag Chute</object-name>
+		<type>select</type>
+        <condition>
+            <and>
+                <equals>
+                    <property>sim/multiplay/generic/bool[3]</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                    <property>controls/flight/chute_jettisoned</property>
+                    <value>0</value>
+                </equals>
+            </and>
+        </condition>
+	</animation>
 
 	<model>
 		<name>Centre Drop Tank</name>
