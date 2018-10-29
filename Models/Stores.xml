@@ -280,8 +280,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[12]</property>
-                  <value>Kh-25MP</value>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>21</value>
             </equals>
 		</condition>
 	</animation>
@@ -302,8 +302,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[14]</property>
-                  <value>Kh-25MP</value>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>21</value>
             </equals>
 		</condition>
 	</animation>
@@ -324,8 +324,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[11]</property>
-                  <value>R-3S</value>
+                  <property>sim/multiplay/generic/short[0]</property>
+                  <value>3</value>
             </equals>
         </condition>
 	</animation>
@@ -346,8 +346,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[12]</property>
-                  <value>R-3S</value>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>3</value>
             </equals>
         </condition>
 	</animation>
@@ -368,8 +368,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[14]</property>
-                  <value>R-3S</value>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>3</value>
             </equals>
         </condition>
 	</animation>
@@ -390,8 +390,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[15]</property>
-                  <value>R-3S</value>
+                  <property>sim/multiplay/generic/short[4]</property>
+                  <value>3</value>
             </equals>
         </condition>
 	</animation>
@@ -412,8 +412,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[11]</property>
-                  <value>R-3R</value>
+                  <property>sim/multiplay/generic/short[0]</property>
+                  <value>8</value>
             </equals>
         </condition>
 	</animation>
@@ -434,8 +434,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[12]</property>
-                  <value>R-3R</value>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>8</value>
             </equals>
         </condition>
 	</animation>
@@ -456,8 +456,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[14]</property>
-                  <value>R-3R</value>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>8</value>
             </equals>
         </condition>
 	</animation>
@@ -478,8 +478,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[15]</property>
-                  <value>R-3R</value>
+                  <property>sim/multiplay/generic/short[4]</property>
+                  <value>8</value>
             </equals>
         </condition>
 	</animation>
@@ -501,12 +501,12 @@
 		<condition>
 			<or>
 				<equals>
-	                  <property>sim/multiplay/generic/string[11]</property>
-	                  <value>R-60</value>
+	                  <property>sim/multiplay/generic/short[0]</property>
+	                  <value>31</value>
 	            </equals>
 	            <equals>
-	                <property>sim/multiplay/generic/string[11]</property>
-	                <value>R-60x2</value>
+	                <property>sim/multiplay/generic/short[0]</property>
+	                <value>32</value>
 	            </equals>
 	        </or>
 		</condition>
@@ -529,7 +529,7 @@
 		<condition>
 			<equals>
                   <property>payload/virtual/weight[7]/selected</property>
-                  <value>R-60</value>
+                  <value>32</value>
             </equals>
 		</condition>
 	</animation>
@@ -550,8 +550,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                <property>sim/multiplay/generic/string[12]</property>
-                <value>R-60</value>
+                <property>sim/multiplay/generic/short[1]</property>
+                <value>31</value>
             </equals>
 		</condition>
 	</animation>
@@ -573,12 +573,12 @@
 		<condition>
 			<or>
 				<equals>
-	                <property>sim/multiplay/generic/string[15]</property>
-	                <value>R-60</value>
+	                <property>sim/multiplay/generic/short[4]</property>
+	                <value>31</value>
 	            </equals>
 	            <equals>
-	                <property>sim/multiplay/generic/string[15]</property>
-	                <value>R-60x2</value>
+	                <property>sim/multiplay/generic/short[4]</property>
+	                <value>32</value>
 	            </equals>
 	        </or>
 		</condition>
@@ -601,7 +601,7 @@
 		<condition>
 			<equals>
                   <property>payload/virtual/weight[8]/selected</property>
-                  <value>R-60</value>
+                  <value>31</value>
             </equals>
 		</condition>
 	</animation>
@@ -622,8 +622,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[14]</property>
-                  <value>R-60</value>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>31</value>
             </equals>
 		</condition>
 	</animation>
@@ -644,8 +644,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[11]</property>
-                  <value>R-27R1</value>
+                  <property>sim/multiplay/generic/short[0]</property>
+                  <value>9</value>
             </equals>
 		</condition>
 	</animation>
@@ -666,8 +666,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[12]</property>
-                  <value>R-27R1</value>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>9</value>
             </equals>
 		</condition>
 	</animation>
@@ -688,8 +688,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[15]</property>
-                  <value>R-27R1</value>
+                  <property>sim/multiplay/generic/short[4]</property>
+                  <value>9</value>
             </equals>
 		</condition>
 	</animation>
@@ -710,8 +710,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[14]</property>
-                  <value>R-27R1</value>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>9</value>
             </equals>
 		</condition>
 	</animation>
@@ -732,8 +732,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[11]</property>
-                  <value>R-27T1</value>
+                  <property>sim/multiplay/generic/short[0]</property>
+                  <value>7</value>
             </equals>
 		</condition>
 	</animation>
@@ -754,8 +754,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[12]</property>
-                  <value>R-27T1</value>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>7</value>
             </equals>
 		</condition>
 	</animation>
@@ -776,8 +776,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[15]</property>
-                  <value>R-27T1</value>
+                  <property>sim/multiplay/generic/short[4]</property>
+                  <value>7</value>
             </equals>
 		</condition>
 	</animation>
@@ -798,8 +798,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[14]</property>
-                  <value>R-27T1</value>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>7</value>
             </equals>
 		</condition>
 	</animation>
@@ -897,8 +897,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[11]</property>
-                  <value>UB-16</value>
+                  <property>sim/multiplay/generic/short[0]</property>
+                  <value>23</value>
             </equals>
 		</condition>
 	</animation>
@@ -919,8 +919,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[12]</property>
-                  <value>UB-16</value>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>23</value>
             </equals>
 		</condition>
 	</animation>
@@ -941,8 +941,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[14]</property>
-                  <value>UB-16</value>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>23</value>
             </equals>
 		</condition>
 	</animation>
@@ -963,8 +963,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[15]</property>
-                  <value>UB-16</value>
+                  <property>sim/multiplay/generic/short[4]</property>
+                  <value>23</value>
             </equals>
 		</condition>
 	</animation>
@@ -993,8 +993,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[11]</property>
-                  <value>UB-32</value>
+                  <property>sim/multiplay/generic/short[0]</property>
+                  <value>24</value>
             </equals>
 		</condition>
 	</animation>
@@ -1015,8 +1015,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[12]</property>
-                  <value>UB-32</value>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>24</value>
             </equals>
 		</condition>
 	</animation>
@@ -1037,8 +1037,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[14]</property>
-                  <value>UB-32</value>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>24</value>
             </equals>
 		</condition>
 	</animation>
@@ -1059,8 +1059,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[15]</property>
-                  <value>UB-32</value>
+                  <property>sim/multiplay/generic/short[4]</property>
+                  <value>24</value>
             </equals>
 		</condition>
 	</animation>
@@ -1089,8 +1089,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[11]</property>
-                  <value>Kh-66</value>
+                  <property>sim/multiplay/generic/short[0]</property>
+                  <value>22</value>
             </equals>
 		</condition>
 	</animation>
@@ -1111,8 +1111,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[12]</property>
-                  <value>Kh-66</value>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>22</value>
             </equals>
 		</condition>
 	</animation>
@@ -1133,8 +1133,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[14]</property>
-                  <value>Kh-66</value>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>22</value>
             </equals>
 		</condition>
 	</animation>
@@ -1155,8 +1155,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[15]</property>
-                  <value>Kh-66</value>
+                  <property>sim/multiplay/generic/short[4]</property>
+                  <value>22</value>
             </equals>
 		</condition>
 	</animation>
@@ -1178,8 +1178,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[16]</property>
-                  <value>Conformal CM</value>
+                  <property>sim/multiplay/generic/short[5]</property>
+                  <value>30</value>
             </equals>
 		</condition>
 	</animation>
@@ -1200,8 +1200,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>sim/multiplay/generic/string[17]</property>
-                  <value>Conformal CM</value>
+                  <property>sim/multiplay/generic/short[6]</property>
+                  <value>30</value>
             </equals>
 		</condition>
 	</animation>

@@ -238,13 +238,20 @@
 				<float n="9" alias="/engines/engine[0]/nozzle-pos-norm" /> <!-- Reheat  -->
 				<float n="10" alias="/fdm/jsbsim/propulsion/clr" /> <!-- Reheat  -->
 				<string n="9" type="string"/>
-				<string n="11" alias="/payload/weight[0]/selected"/>
+				<!--<string n="11" alias="/payload/weight[0]/selected"/>
 				<string n="12" alias="/payload/weight[1]/selected"/>
 				<string n="13" alias="/payload/weight[2]/selected"/>
 				<string n="14" alias="/payload/weight[3]/selected"/>
 				<string n="15" alias="/payload/weight[4]/selected"/>
 				<string n="16" alias="/payload/weight[5]/selected"/>
-				<string n="17" alias="/payload/weight[6]/selected"/>
+				<string n="17" alias="/payload/weight[6]/selected"/>-->
+				<short n="0" alias="/payload/weight[0]/id"/>
+				<short n="1" alias="/payload/weight[1]/id"/>
+				<short n="2" alias="/payload/weight[2]/id"/>
+				<short n="3" alias="/payload/weight[3]/id"/>
+				<short n="4" alias="/payload/weight[4]/id"/>
+				<short n="5" alias="/payload/weight[5]/id"/>
+				<short n="6" alias="/payload/weight[6]/id"/>
 				<bool n="0" alias ="/instrumentation/gci/picture"/> <!-- gci request -->
 				<bool n="1" alias ="/instrumentation/gci/bogeydope"/> <!-- gci request -->
 				<bool n="2" alias ="/instrumentation/gci/cutoff"/> <!-- gci request -->
