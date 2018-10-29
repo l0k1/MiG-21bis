@@ -243,6 +243,8 @@
 				<string n="13" alias="/payload/weight[2]/selected"/>
 				<string n="14" alias="/payload/weight[3]/selected"/>
 				<string n="15" alias="/payload/weight[4]/selected"/>
+				<string n="16" alias="/payload/weight[5]/selected"/>
+				<string n="17" alias="/payload/weight[6]/selected"/>
 				<bool n="0" alias ="/instrumentation/gci/picture"/> <!-- gci request -->
 				<bool n="1" alias ="/instrumentation/gci/bogeydope"/> <!-- gci request -->
 				<bool n="2" alias ="/instrumentation/gci/cutoff"/> <!-- gci request -->
@@ -543,6 +545,7 @@
 			</station>
 			<chaff-trigger type="bool">false</chaff-trigger>
 			<flare-trigger type="bool">false</flare-trigger>
+			<cm-trigger type="bool">false</cm-trigger>
 			<rocket-trigger type="int">0</rocket-trigger> <!-- can be 0, 1, or 2 -->
 			<rocket-setting type="int">4</rocket-setting>
 		</armament>
@@ -823,16 +826,16 @@
 	<ai>
 		<submodels>
 			<submodel n="0">
-				<count type="int">60</count>
+				<count type="int">0</count>
 			</submodel>
 			<submodel n="1">
-				<count type="int">60</count>
+				<count type="int">0</count>
 			</submodel>
 			<submodel n="2">
-				<count type="int">60</count>
+				<count type="int">0</count>
 			</submodel>
 			<submodel n="3">
-				<count type="int">60</count>
+				<count type="int">0</count>
 			</submodel>
 			<submodel n="4">
 				<count type="int">25</count>
