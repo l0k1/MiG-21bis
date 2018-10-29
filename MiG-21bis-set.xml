@@ -396,6 +396,36 @@
 				<weight-lb>180</weight-lb>
 			</opt>
 		</weight>
+		<weight n="5">
+			<name>Left Fuselage Attachment Point</name>
+			<selected>none</selected>
+			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[5]"/>
+			<opt>
+				<name>none</name>
+				<lbs>0</lbs>
+				<weight-lb>0</weight-lb>
+			</opt>
+			<opt>
+				<name>Conformal CM</name>
+				<lbs>210</lbs>
+				<weight-lb>210</weight-lb>
+			</opt>
+		</weight>
+		<weight n="6">
+			<name>Left Fuselage Attachment Point</name>
+			<selected>none</selected>
+			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[6]"/>
+			<opt>
+				<name>none</name>
+				<lbs>0</lbs>
+				<weight-lb>0</weight-lb>
+			</opt>
+			<opt>
+				<name>Conformal CM</name>
+				<lbs>210</lbs>
+				<weight-lb>210</weight-lb>
+			</opt>
+		</weight>
 	</payload>
 
 
