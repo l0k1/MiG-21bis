@@ -74,9 +74,26 @@
 			</table>
 		</function>
 	</fcs_function>
+	
+	<!-- the aileron booster accounts for ~55% to ~60% of aileron travel -->
+    <fcs_function name="aileron-booster">
+        <function>
+            <sum>
+                <product>
+                    <property>fcs/roll-damping</property>
+                    <value>0.45</value>
+                </product>
+                <product>
+                    <property>fcs/roll-damping</property>
+                    <property>hydraulic/aileron-booster-norm</property>
+                    <value>0.55</value>
+                </product>
+            </sum>
+        </function>
+    </fcs_function>
    
    <kinematic name="Aileron Delay">
-     <input>fcs/roll-damping</input>
+     <input>fcs/aileron-booster</input>
 	 <traverse>
 		<setting>
 			<position>-1</position>

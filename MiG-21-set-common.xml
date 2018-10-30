@@ -392,6 +392,7 @@
 				<takeoff type="bool">0</takeoff>
 				<landing type="bool">0</landing>
 			</flap-panel>
+			<aileron-booster type="bool">false</aileron-booster>
 			<elevator-trim>0.00</elevator-trim>
 			<chute_jettisoned type="int">0</chute_jettisoned>
 		</flight>

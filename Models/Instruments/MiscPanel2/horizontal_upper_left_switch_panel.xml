@@ -21,19 +21,16 @@
 		<object-name>secondReheatSwitch</object-name>
 		<action>
 			<button>0</button>
-			<repeatable>false</repeatable>
-  		<binding>
-  			<command>property-toggle</command>
-  			<property>/fdm/jsbsim/propulsion/clr</property>
-  		</binding>
-		</action>
-		<action>
 			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<button>5</button>
 			<repeatable>false</repeatable>
-  		<binding>
-  			<command>property-toggle</command>
-  			<property>/fdm/jsbsim/propulsion/clr</property>
-  		</binding>
+	  		<binding>
+	  			<command>property-toggle</command>
+	  			<property>/fdm/jsbsim/propulsion/clr</property>
+	  		</binding>
 		</action>
 	</animation>
 
@@ -53,6 +50,24 @@
 			<y>1</y>
 			<z>0</z>
 		</axis>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>aileronBoosterSwitch</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<button>5</button>
+			<repeatable>false</repeatable>
+	  		<binding>
+	  			<command>property-toggle</command>
+	  			<property>/controls/flight/aileron-booster</property>
+	  		</binding>
+		</action>
 	</animation>
 
 </PropertyList>

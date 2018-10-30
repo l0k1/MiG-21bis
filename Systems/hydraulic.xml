@@ -6,7 +6,7 @@
 
     <channel name="sources">
 
-		<fcs_function name="trash/hydraulic/source">
+		<fcs_function name="trash/hydraulic/source-pre">
 			<function>
 				<table>
 					<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
@@ -19,10 +19,16 @@
 					</tableData>
 				</table>
 			</function>
-			<output>hydraulic/source/bar[0]</output>
+			<output>hydraulic/source/cmd[0]</output>
 		</fcs_function>
 		
-		<fcs_function name="trash/hydraulic/source1">
+		<lag_filter name="trash/hydraulic/source/bar[0]">
+			<input>hydraulic/source/cmd[0]</input>
+			<c1>0.5</c1>
+			<output>hydraulic/source/bar[0]</output>
+		</lag_filter>
+		
+		<fcs_function name="trash/hydraulic/source1-pre">
 			<function>
 				<table>
 					<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
@@ -35,8 +41,15 @@
 					</tableData>
 				</table>
 			</function>
-			<output>hydraulic/source/bar[1]</output>
+			<output>hydraulic/source/cmd[1]</output>
 		</fcs_function>
+		
+		<lag_filter name="trash/hydraulic/source/bar[0]">
+			<input>hydraulic/source/cmd[1]</input>
+			<c1>0.5</c1>
+			<output>hydraulic/source/bar[1]</output>
+		</lag_filter>
+		
     </channel>
     
     <channel name="crossfeed">
@@ -46,6 +59,39 @@
 	</channel>
 	
 	<channel name="output">
+	
+		<fcs_function name="trash/hydraulic/aileron-booster-cmd">
+			<function>
+				<product>
+					<property>/controls/flight/aileron-booster</property>
+					<property>hydraulic/source/bar[1]</property>
+				</product>
+			</function>
+			<output>hydraulic/aileron-booster-cmd</output>
+		</fcs_function>
+		
+		<lag_filter name="trash/hydraulic/aileron-booster-lag">
+			<input>hydraulic/aileron-booster-cmd</input>
+			<c1>2.0</c1>
+			<output>hydraulic/aileron-booster-lag</output>
+		</lag_filter>	
+	
+		<fcs_function name="trash/hydraulic/aileron-booster-norm">
+			<!-- if hydraulic pressure is greater than 185, normal use, otherwise drop off to 0.4 at 160 and 0 at 80 -->
+			<function>
+				<product>
+					<property>/controls/flight/aileron-booster</property>
+					<interpolate1d>
+						<property>hydraulic/aileron-booster-lag</property>
+						<v>   0.0 </v> <v> 0.0 </v>
+						<v>  80.0 </v> <v> 0.0 </v>
+						<v> 160.0 </v> <v> 0.4 </v>
+						<v> 185.0 </v> <v> 1.0 </v>
+					</interpolate1d>
+				</product>
+			</function>
+			<output>hydraulic/aileron-booster-norm</output>
+		</fcs_function>
 	</channel>
     
 </system>
