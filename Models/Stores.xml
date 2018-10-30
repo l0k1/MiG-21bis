@@ -384,14 +384,10 @@
         <type>select</type>
         <object-name>FAB-100 Left Inner Front Left</object-name>
         <condition>
-            <greater-than-equals>
+            <equals>
                   <property>sim/multiplay/generic/short[1]</property>
                   <value>14</value>
-            </greater-than-equals>
-            <less-than>
-                  <property>sim/multiplay/generic/short[1]</property>
-                  <value>15</value>
-			</less-than>
+            </equals>
         </condition>
     </animation>
 
@@ -410,14 +406,16 @@
         <type>select</type>
         <object-name>FAB-100 Left Inner Front Right</object-name>
         <condition>
-            <greater-than-equals>
-                  <property>sim/multiplay/generic/short[1]</property>
-                  <value>13</value>
-            </greater-than-equals>
-            <less-than>
-                  <property>sim/multiplay/generic/short[1]</property>
-                  <value>15</value>
-			</less-than>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>14</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>13</value>
+	            </equals>
+	        </or>
 		</condition>
     </animation>
 
@@ -436,14 +434,20 @@
         <type>select</type>
         <object-name>FAB-100 Left Inner Rear Left</object-name>
         <condition>
-            <greater-than-equals>
-                  <property>sim/multiplay/generic/short[1]</property>
-                  <value>12</value>
-            </greater-than-equals>
-            <less-than>
-                  <property>sim/multiplay/generic/short[1]</property>
-                  <value>15</value>
-			</less-than>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>14</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>13</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>12</value>
+	            </equals>
+	        </or>
         </condition>
     </animation>
 
@@ -462,14 +466,24 @@
         <type>select</type>
         <object-name>FAB-100 Left Inner Rear Right</object-name>
         <condition>
-            <greater-than-equals>
-                  <property>sim/multiplay/generic/short[1]</property>
-                  <value>11</value>
-            </greater-than-equals>
-            <less-than>
-                  <property>sim/multiplay/generic/short[1]</property>
-                  <value>15</value>
-			</less-than>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>14</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>13</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>12</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>11</value>
+	            </equals>
+	        </or>
         </condition>
     </animation>
 
@@ -488,14 +502,10 @@
         <type>select</type>
         <object-name>FAB-100 Right Inner Front Left</object-name>
         <condition>
-            <greater-than-equals>
+            <equals>
                   <property>sim/multiplay/generic/short[3]</property>
                   <value>14</value>
-            </greater-than-equals>
-            <less-than>
-                  <property>sim/multiplay/generic/short[3]</property>
-                  <value>15</value>
-			</less-than>
+            </equals>
         </condition>
     </animation>
 
@@ -514,14 +524,16 @@
         <type>select</type>
         <object-name>FAB-100 Right Inner Front Right</object-name>
         <condition>
-            <greater-than-equals>
-                  <property>sim/multiplay/generic/short[3]</property>
-                  <value>13</value>
-            </greater-than-equals>
-            <less-than>
-                  <property>sim/multiplay/generic/short[3]</property>
-                  <value>15</value>
-			</less-than>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>14</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>13</value>
+	            </equals>
+	        </or>
         </condition>
     </animation>
 
@@ -540,14 +552,20 @@
         <type>select</type>
         <object-name>FAB-100 Right Inner Rear Left</object-name>
         <condition>
-            <greater-than-equals>
-                  <property>sim/multiplay/generic/short[3]</property>
-                  <value>12</value>
-            </greater-than-equals>
-            <less-than>
-                  <property>sim/multiplay/generic/short[3]</property>
-                  <value>15</value>
-			</less-than>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>14</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>13</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>12</value>
+	            </equals>
+	        </or>
         </condition>
     </animation>
 
@@ -566,14 +584,24 @@
         <type>select</type>
         <object-name>FAB-100 Right Inner Rear Right</object-name>
         <condition>
-            <greater-than-equals>
-                  <property>sim/multiplay/generic/short[3]</property>
-                  <value>11</value>
-            </greater-than-equals>
-            <less-than>
-                  <property>sim/multiplay/generic/short[3]</property>
-                  <value>15</value>
-			</less-than>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>14</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>13</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>12</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>11</value>
+	            </equals>
+	        </or>
         </condition>
     </animation>
     
@@ -849,7 +877,7 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>payload/virtual/weight[7]/selected</property>
+                  <property>sim/multiplay/generic/short[0]</property>
                   <value>32</value>
             </equals>
 		</condition>
@@ -921,8 +949,8 @@
 		<type>select</type>
 		<condition>
 			<equals>
-                  <property>payload/virtual/weight[8]/selected</property>
-                  <value>31</value>
+                  <property>sim/multiplay/generic/short[4]</property>
+                  <value>32</value>
             </equals>
 		</condition>
 	</animation>
@@ -1158,7 +1186,7 @@
 	</animation>
 
 	<model>
-		<name>S-24 Left </name>
+		<name>S-24 Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
 		<offsets>
 			<x-m> 1.00</x-m>

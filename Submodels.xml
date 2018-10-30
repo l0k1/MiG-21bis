@@ -413,7 +413,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[0]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -437,7 +437,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[1]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -461,7 +461,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[3]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -485,7 +485,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[4]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -858,7 +858,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[32]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -881,7 +881,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[33]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -904,7 +904,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[34]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -927,7 +927,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[35]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -950,7 +950,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[36]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -973,7 +973,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[37]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -996,7 +996,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[38]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1019,7 +1019,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[39]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1341,7 +1341,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[0]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1363,7 +1363,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[1]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1385,7 +1385,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[3]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1407,7 +1407,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[4]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1669,7 +1669,7 @@
     
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[32]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1691,7 +1691,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[33]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1713,7 +1713,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[34]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1735,7 +1735,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[35]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1757,7 +1757,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[36]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1779,7 +1779,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[37]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1801,7 +1801,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[38]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
@@ -1823,7 +1823,7 @@
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/jettison/FAB-100[39]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
