@@ -850,7 +850,7 @@ var jettison = func(pylons) {
                         break;
                     }
                 }
-                print(idx);
+                #print(idx);
                 if (sub_pylon != p) {
                     setprop("payload/weight[" ~ ( pylon ) ~ "]/selected", "none" );
                     setprop("/payload/weight["~pylon~"]/id",0);
@@ -861,7 +861,7 @@ var jettison = func(pylons) {
                     if (idx == 4) { idx = payloads["FAB-100x4"].id; }
                     setprop("/payload/weight["~pylon~"]/id",payloads["FAB-100x4"].id - idx);
                 }
-                print("setting " ~sub_pylon~ " to zero");
+                #print("setting " ~sub_pylon~ " to zero");
                 setprop("/ai/submodels/submodel["~sub_pylon~"]/count",0);
                 setprop("payload/jettison/FAB-100["~sub_pylon~"]",1);
                 return_trigger("FAB-100",sub_pylon);
