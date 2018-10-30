@@ -1,6 +1,7 @@
 <PropertyList>
 
     <!--
+    be very careful inserting submodels. it could mess stuff up.
     table of contents
      0 ~ flares left
      1 ~ flares right
@@ -28,9 +29,56 @@
     23 ~ S-5 pylon 1
     24 ~ S-5 pylon 3
     25 ~ S-5 pylon 4
-    26 ~ RN-28
-    27 ~ Braking Chute
-    28 ~ Jettison Fuel Tank
+    26 ~ S-5 backblast pylon 0
+    27 ~ S-5 backblast pylon 1
+    28 ~ S-5 backblast pylon 3
+    29 ~ S-5 backblast pylon 4
+    30 ~ Braking Chute
+    31 ~ Jettison Fuel Tank (legacy, dnu)
+    32 ~ FAB-100 pylon 1 frontleft live
+    33 ~ FAB-100 pylon 1 frontright live
+    34 ~ FAB-100 pylon 1 rearleft live
+    35 ~ FAB-100 pylon 1 rearright live
+    36 ~ FAB-100 pylon 3 frontleft live
+    37 ~ FAB-100 pylon 3 frontright live
+    38 ~ FAB-100 pylon 3 rearleft live
+    39 ~ FAB-100 pylon 3 rearright live
+    40 ~ PTB-490 pylon 0 jettison
+    41 ~ PTB-490 pylon 4 jettison
+    42 ~ PTB-490 pylon 2 jettison
+    43 ~ PTB-800 pylon 2 jettison
+    42 ~ PTB-490 pylon 0 jettison (pyro)
+    43 ~ PTB-490 pylon 2 jettison (pyro)
+    44 ~ PTB-490 pylon 4 jettison (pyro)
+    45 ~ PTB-800 pylon 2 jettison (pyro)
+    46 ~ FAB-500 pylon 1 jettison
+    47 ~ FAB-500 pylon 3 jettison
+    48 ~ FAB-250 pylon 0 jettison
+    49 ~ FAB-250 pylon 1 jettison
+    51 ~ FAB-250 pylon 3 jettison
+    52 ~ FAB-250 pylon 4 jettison
+    53 ~ FAB-100 pylon 0 jettison
+    54 ~ FAB-100 pylon 1 jettison
+    55 ~ FAB-100 pylon 3 jettison
+    56 ~ FAB-100 pylon 4 jettison
+    57 ~ S-24 pylon 0 jettison
+    58 ~ S-24 pylon 1 jettison
+    59 ~ S-24 pylon 3 jettison
+    60 ~ S-24 pylon 4 jettison
+    61 ~ UB-16 pylon 0 jettison
+    62 ~ UB-16 pylon 1 jettison
+    63 ~ UB-16 pylon 3 jettison
+    64 ~ UB-16 pylon 4 jettison
+    65 ~ UB-32 pylon 1 jettison
+    66 ~ UB-32 pylon 3 jettison
+    67 ~ FAB-100 pylon 1 frontleft live
+    68 ~ FAB-100 pylon 1 frontright live
+    69 ~ FAB-100 pylon 1 rearleft live
+    70 ~ FAB-100 pylon 1 rearright live
+    71 ~ FAB-100 pylon 3 frontleft live
+    72 ~ FAB-100 pylon 3 frontright live
+    73 ~ FAB-100 pylon 3 rearleft live
+    74 ~ FAB-100 pylon 3 rearright live
     -->
 
     <submodel>
@@ -40,10 +88,12 @@
         <speed>700.0</speed>        <!-- ft/sec -->
         <repeat>true</repeat>
         <delay>0.25</delay>
-        <count>60</count>        <!-- was 40 -->
-        <x-offset>14.3578</x-offset><!-- in feet -->
-        <y-offset>-2.56</y-offset>
-        <z-offset>-1.619</z-offset>
+        <count>0</count>        <!-- was 40 -->
+        <offsets>
+            <x-m> 1.96226</x-m>
+            <y-m>-0.43588</y-m>
+            <z-m>-0.19990</z-m>
+        </offsets>
         <yaw-offset>-90.0</yaw-offset>
         <pitch-offset>-10.0</pitch-offset>
         <life>5</life>
@@ -62,10 +112,12 @@
         <speed>700.0</speed>        <!-- ft/sec -->
         <repeat>true</repeat>
         <delay>0.25</delay>
-        <count>60</count>        <!-- was 40 -->
-        <x-offset>14.3578</x-offset><!-- in feet -->
-        <y-offset>2.56</y-offset>
-        <z-offset>-1.619</z-offset>
+        <count>0</count>        <!-- was 40 -->
+        <offsets>
+            <x-m> 1.96226</x-m>
+            <y-m> 0.43588</y-m>
+            <z-m>-0.19990</z-m>
+        </offsets>
         <yaw-offset>90.0</yaw-offset>
         <pitch-offset>-10.0</pitch-offset>
         <life>5</life>
@@ -84,10 +136,12 @@
         <speed>0.0</speed>        <!-- ft/sec -->
         <repeat>true</repeat>
         <delay>0.25</delay>
-        <count>60</count>        <!-- was 40 -->
-        <x-offset>14.3578</x-offset><!-- in feet -->
-        <y-offset>-2.56</y-offset>
-        <z-offset>-1.619</z-offset>
+        <count>0</count>        <!-- was 40 -->
+        <offsets>
+            <x-m> 1.58371</x-m>
+            <y-m>-0.43588</y-m>
+            <z-m>-0.19990</z-m>
+        </offsets>
         <yaw-offset>-180.0</yaw-offset>
         <pitch-offset>-50.0</pitch-offset>
         <life>0.2</life>
@@ -107,10 +161,12 @@
         <speed>0.0</speed>        <!-- ft/sec -->
         <repeat>true</repeat>
         <delay>0.25</delay>
-        <count>60</count>        <!-- was 40 -->
-        <x-offset>14.3578</x-offset><!-- in feet -->
-        <y-offset>2.56</y-offset>
-        <z-offset>-1.619</z-offset>
+        <count>0</count>        <!-- was 40 -->
+        <offsets>
+            <x-m> 1.58371</x-m>
+            <y-m> 0.43588</y-m>
+            <z-m>-0.19990</z-m>
+        </offsets>
         <yaw-offset>-180.0</yaw-offset>
         <pitch-offset>-50.0</pitch-offset>
         <life>0.2</life>
@@ -218,7 +274,7 @@
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
         <x-offset>-1.14829</x-offset>
         <y-offset>-6.922572</y-offset>
@@ -227,7 +283,7 @@
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.3</cd>
+        <cd>0.4</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -243,7 +299,7 @@
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
         <x-offset>-1.14829</x-offset>
         <y-offset>6.922572</y-offset>
@@ -252,7 +308,7 @@
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.3</cd>
+        <cd>0.4</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -267,7 +323,7 @@
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
        <offsets>
             <x-m> 1.13</x-m>
@@ -276,12 +332,12 @@
         </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
-        <cd>0.3</cd>
+        <cd>0.35</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-250/fab-250-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -291,7 +347,7 @@
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
         <offsets>
             <x-m> 0.20</x-m>
@@ -300,12 +356,12 @@
         </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
-        <cd>0.3</cd>
+        <cd>0.35</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-250/fab-250-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -315,7 +371,7 @@
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
        <offsets>
             <x-m> 0.20</x-m>
@@ -324,12 +380,12 @@
         </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
-        <cd>0.3</cd>
+        <cd>0.35</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-250/fab-250-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -339,7 +395,7 @@
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <offsets>
             <x-m> 1.13</x-m>
             <y-m> 2.73 </y-m>
@@ -347,22 +403,22 @@
         </offsets>
         <eda>1.0</eda>
         <weight>551.0</weight>
-        <cd>0.3</cd>
+        <cd>0.35</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-250/fab-250-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[0]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
        <offsets>
             <x-m> 1.13</x-m>
@@ -376,17 +432,17 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[1]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
         <offsets>
             <x-m> 0.20</x-m>
@@ -400,17 +456,17 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[3]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
        <offsets>
             <x-m> 0.20</x-m>
@@ -424,17 +480,17 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
         <name>FAB-100</name>
-        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100-sub.xml</model>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
         <trigger>payload/released/FAB-100[4]</trigger>
         <trigger-once>true</trigger-once>
         <speed>0.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <offsets>
             <x-m> 1.13</x-m>
             <y-m> 2.73 </y-m>
@@ -447,7 +503,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
     </submodel>
 
 
@@ -458,7 +514,7 @@
         <trigger-once>true</trigger-once>
         <speed>1200.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
         <offsets>
             <x-m>-0.15</x-m>
@@ -474,7 +530,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-explosion-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -484,7 +540,7 @@
         <trigger-once>true</trigger-once>
         <speed>1200.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
         <offsets>
             <x-m> 0.70</x-m>
@@ -500,7 +556,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-explosion-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -510,7 +566,7 @@
         <trigger-once>true</trigger-once>
         <speed>1200.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
         <offsets>
             <x-m> -0.15</x-m>
@@ -526,7 +582,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-explosion-sub.xml</submodel-path>
     </submodel>
 
     <submodel>
@@ -536,7 +592,7 @@
         <trigger-once>true</trigger-once>
         <speed>1200.0</speed>
         <repeat>true</repeat>
-        <delay>20</delay>
+        <delay>5</delay>
         <count>-1</count>
         <offsets>
             <x-m> 0.70</x-m>
@@ -552,7 +608,7 @@
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/Bomb/Bomb-Submodel.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-explosion-sub.xml</submodel-path>
     </submodel>
 
 
@@ -797,6 +853,994 @@
         <cd>0.3</cd>
         <collision>false</collision>
         <impact>false</impact>
+    </submodel>
+
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/released/FAB-100[32]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>-0.3584</x-m>
+            <y-m>-2.2883</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/released/FAB-100[33]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>-0.3584</x-m>
+            <y-m>-1.9115</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/released/FAB-100[34]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m> 0.6295</x-m>
+            <y-m>-2.2883</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/released/FAB-100[35]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m> 0.6295</x-m>
+            <y-m>-1.9115</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/released/FAB-100[36]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>-0.3584</x-m>
+            <y-m> 1.9115</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/released/FAB-100[37]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>-0.3584</x-m>
+            <y-m> 2.2883</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/released/FAB-100[38]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m> 0.6295</x-m>
+            <y-m> 1.9115</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/released/FAB-100[39]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m> 0.6295</x-m>
+            <y-m> 2.2883</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/FAB-100/fab-100-sub.xml</submodel-path>
+    </submodel>
+
+    <submodel>
+        <name>PTB-490 pylon 0</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490-sub.xml</model>
+        <trigger>payload/jettison/PTB-490[0]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>1.33</x-m>
+            <y-m>-2.73</y-m>
+            <z-m>0.51</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>PTB-490 pylon 4</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490-sub.xml</model>
+        <trigger>payload/jettison/PTB-490[4]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>1.33</x-m>
+            <y-m>2.73</y-m>
+            <z-m>0.51</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>PTB-490 pylon 2</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490-sub.xml</model>
+        <trigger>payload/jettison/PTB-490[2]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.0</y-m>
+            <z-m>0.0</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>PTB-800 pylon 2</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-800/PTB-800-sub.xml</model>
+        <trigger>payload/jettison/PTB-800[2]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>-0.3</x-m>
+            <y-m>0.00</y-m>
+            <z-m>-0.83</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>PTB-490 pylon 0 pyro</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490-sub.xml</model>
+        <trigger>payload/jettison/pyro/PTB-490[0]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>1.33</x-m>
+            <y-m>-2.73</y-m>
+            <z-m>0.51</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>PTB-490 pylon 2 pyro</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490-sub.xml</model>
+        <trigger>payload/jettison/pyro/PTB-490[2]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>PTB-490 pylon 4 pyro</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490-sub.xml</model>
+        <trigger>payload/jettison/pyro/PTB-490[4]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>1.33</x-m>
+            <y-m>2.73</y-m>
+            <z-m>0.51</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>180.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>PTB-800 pylon 2 pyro</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/PTB-800/PTB-800-sub.xml</model>
+        <trigger>payload/jettison/pyro/PTB-800[2]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m>-0.3</x-m>
+            <y-m>0.00</y-m>
+            <z-m>-0.83</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>230.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>FAB-500</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-500/FAB-500-sub.xml</model>
+        <trigger>payload/jettison/FAB-500[1]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <x-offset>-1.14829</x-offset>
+        <y-offset>-6.922572</y-offset>
+        <z-offset>-1.1</z-offset>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.4</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+
+    </submodel>
+
+    <submodel>
+        <name>FAB-500</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-500/FAB-500-sub.xml</model>
+        <trigger>payload/jettison/FAB-500[3]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <x-offset>-1.14829</x-offset>
+        <y-offset>6.922572</y-offset>
+        <z-offset>-1.1</z-offset>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.4</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-250</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250-sub.xml</model>
+        <trigger>payload/jettison/FAB-250[0]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+       <offsets>
+            <x-m> 1.13</x-m>
+            <y-m>-2.73 </y-m>
+            <z-m>-0.28</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>551.0</weight>
+        <cd>0.35</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-250</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250-sub.xml</model>
+        <trigger>payload/jettison/FAB-250[1]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.20</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.25</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>551.0</weight>
+        <cd>0.35</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-250</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250-sub.xml</model>
+        <trigger>payload/jettison/FAB-250[3]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+       <offsets>
+            <x-m> 0.20</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.25</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>551.0</weight>
+        <cd>0.35</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-250</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250-sub.xml</model>
+        <trigger>payload/jettison/FAB-250[4]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m> 2.73 </y-m>
+            <z-m>-0.28</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>551.0</weight>
+        <cd>0.35</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[0]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+       <offsets>
+            <x-m> 1.13</x-m>
+            <y-m>-2.73 </y-m>
+            <z-m>-0.28</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[1]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.20</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.25</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[3]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+       <offsets>
+            <x-m> 0.20</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.25</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[4]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m> 2.73 </y-m>
+            <z-m>-0.28</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+
+    <submodel>
+        <name>S-24</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <trigger>payload/jettison/S-24[0]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m>-0.15</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.73</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.47</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>S-24</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <trigger>payload/jettison/S-24[1]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.70</x-m>
+            <y-m>-2.73 </y-m>
+            <z-m>-0.76</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.47</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>S-24</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <trigger>payload/jettison/S-24[3]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m> -0.15</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.73</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.47</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>S-24</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/S-24/S-24-sub.xml</model>
+        <trigger>payload/jettison/S-24[4]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.70</x-m>
+            <y-m>2.73 </y-m>
+            <z-m>-0.76</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.47</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>UB-16 pylon 0 jettison</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-sub.xml</model>
+        <trigger>payload/jettison/UB-16[0]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+			<x-m>0.91380</x-m>
+			<y-m>-2.73282</y-m>
+			<z-m>-0.34106</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.55</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>UB-16 pylon 1 jettison</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-sub.xml</model>
+        <trigger>payload/jettison/UB-16[1]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+			<x-m>-0.02128</x-m>
+			<y-m>-2.10897</y-m>
+			<z-m>-0.30692</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.55</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>UB-16 pylon 3 jettison</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-sub.xml</model>
+        <trigger>payload/jettison/UB-16[3]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+			<x-m>-0.02128</x-m>
+			<y-m>2.10897</y-m>
+			<z-m>-0.30692</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.55</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>UB-16 pylon 4 jettison</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-sub.xml</model>
+        <trigger>payload/jettison/UB-16[4]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+			<x-m>0.91380</x-m>
+			<y-m>2.73282</y-m>
+			<z-m>-0.34106</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.55</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>UB-32 pylon 1 jettison</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-sub.xml</model>
+        <trigger>payload/jettison/UB-32[1]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+			<x-m> 0.04613</x-m>
+			<y-m>-2.10822</y-m>
+			<z-m>-0.37980</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.55</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>UB-32 pylon 3 jettison</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-sub.xml</model>
+        <trigger>payload/jettison/UB-32[3]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+			<x-m> 0.04613</x-m>
+			<y-m> 2.10822</y-m>
+			<z-m>-0.37980</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.55</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[32]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m>-0.3584</x-m>
+            <y-m>-2.2883</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[33]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m>-0.3584</x-m>
+            <y-m>-1.9115</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[34]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.6295</x-m>
+            <y-m>-2.2883</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[35]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.6295</x-m>
+            <y-m>-1.9115</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[36]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m>-0.3584</x-m>
+            <y-m> 1.9115</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[37]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m>-0.3584</x-m>
+            <y-m> 2.2883</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[38]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.6295</x-m>
+            <y-m> 1.9115</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+
+    <submodel>
+        <name>FAB-100</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</model>
+        <trigger>payload/jettison/FAB-100[39]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.6295</x-m>
+            <y-m> 2.2883</y-m>
+            <z-m>-0.2689</z-m>
+        </offsets>
+        <eda>1.0</eda>
+        <weight>220.0</weight>
+        <cd>0.3</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
     </submodel>
 
 </PropertyList>

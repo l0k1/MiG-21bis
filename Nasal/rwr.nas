@@ -9,7 +9,7 @@ var radiation_sources = {};
 var my_heading = props.globals.getNode("/orientation/heading-deg");
 var my_pitch = props.globals.getNode("/orientation/pitch-deg");
 var my_roll = props.globals.getNode("/orientation/roll-deg");
- 
+
 var rcs_loop = func() {
 	foreach (var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")) {
 		var cs = mp.getNode("callsign").getValue();
@@ -286,6 +286,8 @@ var radiation_source = {
 			}
 			
 			#print("sig_str for " ~ me.callsign.getValue() ~ " is " ~ me.sig_str);
+		} else {
+			me.sig_str = 0;
 		}
 	},
 	

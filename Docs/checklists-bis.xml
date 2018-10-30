@@ -2,20 +2,346 @@
 
 <PropertyList>
     <checklist>
-        <title>Startup</title>  
+        <title>Aircraft readiness check pt.1</title>  
         <item>
-            <name>DC Battery/Ext Power</name>
+            <name>Cabin heat selector</name>
+            <value>AUTO</value>
+        </item>
+        
+        <item>
+            <name>Engine Start-Cold cranking</name>
             <value>ON</value>
         </item>
         
         <item>
-            <name>Engine Start</name>
+            <name>2-PSN Nozzle EMRG. CTL.</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>BLC</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>Preset ALT. switch</name>
+            <value>AS REQUIRED</value>
+        </item>
+        
+        <item>
+            <name>Cone mode of operation</name>
+            <value>AUTO</value>
+        </item>
+        
+        <item>
+            <name>Drag chute JETT.</name>
+            <value>CLOSED</value>
+        </item>
+        
+        <item>
+            <name>Anti skid unit</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>Air relight</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>Full throttle</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>Reheat</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>Engine starting unit</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>FIRE-FTG EQPT</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>Throttle lever</name>
+            <value>SHUT-OFF</value>
+        </item>
+        
+        <item>
+            <name>TAXI/LDG lamp</name>
+            <value>RETR.</value>
+        </item>
+        
+        <item>
+            <name>GYRO/MSL switch</name>
+            <value>MSL</value>
+        </item>
+        
+        <item>
+            <name>NAVIG/LETDOWN./LDG. switch</name>
+            <value>NAVIG</value>
+        </item>
+        
+        <item>
+            <name>OUTER/INNER beacon selector</name>
+            <value>OUTER</value>
+        </item>
+        
+        <item>
+            <name>Nosewheel break</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>Clock</name>
+            <value>CHECK</value>
+        </item>
+        
+        <item>
+            <name>Tactical RLS</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>Gun switch</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>MSL, RGM, RKT LCH circuit breaker</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>P-S Tube</name>
+            <value>MAIN</value>
+        </item>
+        
+        <item>
+            <name>OFF/STANDBY/RUN ON switch</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>FIXED BEAM/OFF switch</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>OFF/H SIGNAL/LOW ALT switch</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>Limit altitude selector switch</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>ANT./COMP. switch</name>
+            <value>COMP.</value>
+        </item>
+    </checklist>
+    
+    <checklist>
+        <title>Aircraft readiness check pt.2</title>  
+        <item>
+            <name>RDR ILL. WARN. SET. switch</name>
+            <value>RDR ILL. WARN. SET. position</value>
+        </item>
+        
+        <item>
+            <name>Distress switch</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>IFF DEST. button</name>
+            <value>OFF</value>
+        </item>
+        
+        <item>
+            <name>Primary communication channel</name>
+            <value>SELECTED</value>
+        </item>
+        
+        <item>
+            <name>R/SET/COMP switch</name>
+            <value>R/SET</value>
+        </item>
+        
+        <item>
+            <name>CONE/OFF</name>
+            <value>CONE</value>
+        </item>
+        
+        <item>
+            <name>N. SUP.</name>
             <value>ON</value>
         </item>
     </checklist>
     
     <checklist>
-        <title>Before Takeoff</title>  
+        <title>Before Engine Start</title>  
+        <item>
+            <name>Altimeter</name>
+            <value>SET TO QFE</value>
+        </item>
+        
+        <item>
+            <name>Fuel gauge (no external stores)</name>
+            <value>SET TO 2750L</value>
+        </item>
+        
+        <item>
+            <name>Fuel gauge (490-L ventral drop tank)</name>
+            <value>SET TO 3250L</value>
+        </item>
+        
+        
+        <item>
+            <name>Fuel gauge (800-L ventral drop tank)</name>
+            <value>SET TO 3500L</value>
+        </item>
+        
+        <item>
+            <name>Fuel gauge (two wing drop tanks)</name>
+            <value>SET TO 3750L</value>
+        </item>
+        
+        <item>
+            <name>Fuel gauge (three 490-L drop tanks)</name>
+            <value>SET TO 4200L</value>
+        </item>
+        
+        <item>
+            <name>BAT, EXT. PWR SUP.</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>VERT. GYRO of FDS, AFCS, RDR, QYRO HOR. SIG. circuit breaker</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>FDS circuit breaker</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>Magnetic declination setting</name>
+            <value>SET LATITUDE</value>
+        </item>
+        
+        <item>
+            <name>FDS button</name>
+            <value>HOLD FOR 5 SECONDS</value>
+        </item>
+        
+        <item>
+            <name>Voltage in aircraft mains</name>
+            <value>CHECK</value>
+        </item>
+        
+        <item>
+            <name>ATC IDENT.</name>
+            <value>HOLD FOR 1 SECOND</value>
+        </item>
+    </checklist>
+    
+    <checklist>
+        <title>Engine start</title>  
+
+        <item>
+            <name>DC GEN</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>Service TK pump</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>Throttle lever</name>
+            <value>IDLE</value>
+        </item>
+        
+        <item>
+            <name>Ground starting button</name>
+            <value>HOLD FOR 3-4 SECONDS</value>
+        </item>
+        
+        <item>
+            <name>AC GEN., EXT. PWR</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>3 TK GP PUMP</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>1 TK GP PUMP</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>RDR ILL. WARN. SET</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>Recorder</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>TRIM.</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>ARC</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>RAD</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>ALT MKR REC</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>FDS</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>GYRO HOR</name>
+            <value>ON</value>
+        </item>
+        
+        <item>
+            <name>CP30 IFF</name>
+            <value>ON</value>
+        </item>
+    </checklist>
+    
+    <checklist>
+        <title>Taxi</title>  
         <item>
             <name>Canopy</name>
             <value>SEALED</value>
@@ -26,5 +352,215 @@
                 </equals>
             </condition>-->
         </item>
+            
+        <item>
+            <name>Nosewheel brake</name>
+            <value>OFF</value>
+        </item>
+            
+        <item>
+            <name>Flaps</name>
+            <value>SET</value>
+        </item>
+            
+        <item>
+            <name>Flight navigational instruments</name>
+            <value>CHECK</value>
+        </item>
     </checklist>
+    
+    <checklist>
+        <title>Takeoff</title>  
+            
+        <item>
+            <name>Takeoff (no external load or two missiles)</name>
+            <value>FULL THROTTLE NON-REHEAT POWER</value>   
+        </item>
+            
+        <item>
+            <name>150-200km/h</name>
+            <value>SHIFT CONTROL STICK 3/4 BACK</value>
+        </item>
+            
+        <item>
+            <name>250-270km/h</name>
+            <value>REDUCE CONTROL STICK BACKWARD DEFLECTION</value>
+        </item>
+            
+        <item>
+            <name>340-360km/h</name>
+            <value>TAKEOFF</value>
+        </item>
+    </checklist>
+    
+    <checklist>
+        <title>Climb</title>  
+            
+        <item>
+            <name>Landing gear pin</name>
+            <value>OPEN</value> 
+        </item>
+            
+        <item>
+            <name>Landing gear lever</name>
+            <value>UP</value>   
+        </item>
+            
+        <item>
+            <name>Landing gear lever</name>
+            <value>NEUTRAL</value>  
+        </item>
+            
+        <item>
+            <name>Landing gear pin</name>
+            <value>CLOSED</value>   
+        </item>
+            
+        <item>
+            <name>Flaps</name>
+            <value>UP</value>   
+        </item>
+            
+        <item>
+            <name></name>
+            <value></value> 
+        </item>
+    </checklist>
+    
+    <checklist>
+        <title>Landing</title>  
+        
+        <item>
+            <name>Flaps</name>
+            <value>SET FOR LANDING</value>  
+        </item>
+        
+        <item>
+            <name>Gear lever</name>
+            <value>DOWN</value> 
+        </item>
+        
+        <item>
+            <name>Gear lever</name>
+            <value>NEUTRAL</value>  
+        </item>
+        
+        <item>
+            <name>Landing chute</name>
+            <value>DEPLOY AFTER TOUCHDOWN</value>   
+        </item>
+    </checklist>
+    
+    <checklist>
+        <title>Air to Air situation</title>  
+        
+        <item>
+            <name>AIR/GND switch</name>
+            <value>AIR</value>  
+        </item> 
+        
+        <item>
+            <name>IR/SAR switch</name>
+            <value>IR (for IR missiles)</value> 
+        </item>
+        
+        <item>
+            <name>IR/SAR switch</name>
+            <value>SAR (for R-27R1 missiles)</value>    
+        </item>
+        
+        <item>
+            <name>Armament selector</name>
+            <value>IR-SAR</value>   
+        </item>
+        
+        <item>
+            <name>Gunsight</name>
+            <value>ON</value>   
+        </item>
+        
+        <item>
+            <name>GYRO/MSL knob</name>
+            <value>GYRO</value> 
+        </item>
+        
+        <item>
+            <name>GUN/LNC switch</name>
+            <value>LNC</value>  
+        </item>
+        
+        <item>
+            <name>Target size</name>
+            <value>SET TO TARGET WINGSPAN</value>   
+        </item>
+        
+        <item>
+            <name>SHOOT/BOMB switch</name>
+            <value>SHOOT</value>    
+        </item>
+        
+        <item>
+            <name>Radar</name>
+            <value>RUN ON</value>   
+        </item>
+        
+        <item>
+            <name></name>
+            <value></value> 
+        </item>
+    </checklist>
+    <checklist>
+        <title>Air to Ground situation</title>  
+        
+        <item>
+            <name>AIR/GND switch</name>
+            <value>GND</value>  
+        </item> 
+        
+        <item>
+            <name>IR/SAR switch</name>
+            <value>NEUTRAL</value>  
+        </item>
+        
+        <item>
+            <name>Armament selector</name>
+            <value>B RKT (for bombs and rocket pods)</value>    
+        </item>
+        
+        <item>
+            <name>Armament selector</name>
+            <value>S-24 RKT (for S-24 rockets)</value>  
+        </item>
+        
+        <item>
+            <name>Gunsight</name>
+            <value>ON</value>   
+        </item>
+        
+        <item>
+            <name>GYRO/MSL knob</name>
+            <value>MSL</value>  
+        </item>
+        
+        <item>
+            <name>Fixed net</name>
+            <value>ON</value>   
+        </item>
+        
+        <item>
+            <name>Target size</name>
+            <value>SET TO TARGET SIZE</value>   
+        </item>
+        
+        <item>
+            <name>SHOOT/BOMB switch</name>
+            <value>BOMB (only when using bombs)</value> 
+        </item>
+        
+        <item>
+            <name></name>
+            <value></value> 
+        </item>
+    </checklist>
+        
 </PropertyList>

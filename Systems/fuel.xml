@@ -106,6 +106,34 @@
 								<value>255</value>
 							</lt>
 							<lt>
+								<property>propulsion/tank[7]/contents-lbs</property>
+								<value>1</value>
+							</lt>
+							<lt>
+								<property>propulsion/tank[8]/contents-lbs</property>
+								<value>1</value>
+							</lt>
+							<lt>
+								<property>propulsion/tank[9]/contents-lbs</property>
+								<value>1</value>
+							</lt>
+							<lt>
+								<property>propulsion/tank[10]/contents-lbs</property>
+								<value>1</value>
+							</lt>
+							<lt>
+								<property>propulsion/tank[11]/contents-lbs</property>
+								<value>1</value>
+							</lt>
+							<lt>
+								<property>propulsion/tank[12]/contents-lbs</property>
+								<value>1</value>
+							</lt>
+							<lt>
+								<property>propulsion/tank[13]/contents-lbs</property>
+								<value>1</value>
+							</lt>
+							<lt>
 								<quotient>
 									<abs><property>attitude/roll-rad</property></abs>
 									<pi/>

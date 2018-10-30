@@ -3,26 +3,9 @@
     <path>Chute.ac</path>
 
     <animation>
-        <type>select</type>
-        <object-name>chute</object-name>
-        <condition>
-            <and>
-                <equals>
-                    <property>sim/multiplay/generic/float[6]</property>
-                    <value>1</value>
-                </equals>
-                <equals>
-                    <property>controls/flight/chute_jettisoned</property>
-                    <value>0</value>
-                </equals>
-            </and>
-        </condition>
-    </animation>
-
-    <animation>
         <type>scale</type>
         <object-name>chute</object-name>
-        <property>sim/multiplay/generic/float[6]</property>
+        <property>sim/multiplay/generic/bool[3]</property>
         <x-min>1</x-min>
         <y-min>1</y-min>
         <z-min>1</z-min>

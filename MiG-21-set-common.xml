@@ -39,6 +39,8 @@
 			</property-rule>
 		</systems>
 
+		<state include="States/test.xml" n="0"/>
+
 		<sound>
 			<path>Aircraft/MiG-21bis/Sounds/Sound.xml</path>
 		</sound>
@@ -79,6 +81,13 @@
 						<binding>
 							<command>nasal</command>
 							<script>aircraft.livery.dialog.toggle()</script>
+						</binding>
+					</item>
+					<item>
+						<label>Select Radio Config File</label>
+						<binding>
+							<command>nasal</command>
+							<script>mig21.get_radio_file_gui();</script>
 						</binding>
 					</item>
 					<item>
@@ -224,19 +233,28 @@
 				<int n="10" alias="/controls/armament/trigger" />
 				<!-- Smokepod -->
 				<int n="19" type="int">0</int>
-				<float n="6" alias="/fdm/jsbsim/systems/chute/deploy" /> <!-- braking chute. -->
 				<float n="8" alias="/engines/engine[0]/augmentation" /> <!-- Reheat  -->
 				<float n="9" alias="/engines/engine[0]/nozzle-pos-norm" /> <!-- Reheat  -->
 				<float n="10" alias="/fdm/jsbsim/propulsion/clr" /> <!-- Reheat  -->
 				<string n="9" type="string"/>
-				<string n="11" alias="/payload/weight[0]/selected"/>
+				<!--<string n="11" alias="/payload/weight[0]/selected"/>
 				<string n="12" alias="/payload/weight[1]/selected"/>
 				<string n="13" alias="/payload/weight[2]/selected"/>
 				<string n="14" alias="/payload/weight[3]/selected"/>
 				<string n="15" alias="/payload/weight[4]/selected"/>
+				<string n="16" alias="/payload/weight[5]/selected"/>
+				<string n="17" alias="/payload/weight[6]/selected"/>-->
+				<short n="0" alias="/payload/weight[0]/id"/>
+				<short n="1" alias="/payload/weight[1]/id"/>
+				<short n="2" alias="/payload/weight[2]/id"/>
+				<short n="3" alias="/payload/weight[3]/id"/>
+				<short n="4" alias="/payload/weight[4]/id"/>
+				<short n="5" alias="/payload/weight[5]/id"/>
+				<short n="6" alias="/payload/weight[6]/id"/>
 				<bool n="0" alias ="/instrumentation/gci/picture"/> <!-- gci request -->
 				<bool n="1" alias ="/instrumentation/gci/bogeydope"/> <!-- gci request -->
 				<bool n="2" alias ="/instrumentation/gci/cutoff"/> <!-- gci request -->
+				<bool n="3" alias ="/fdm/jsbsim/systems/chute/deploy"/>
 			</generic>
 		</multiplay>
 
@@ -404,6 +422,16 @@
 				<!-- lights -->
 				<gun-ready type="bool">1</gun-ready>
 			</panel>
+			<jettison>
+				<tanks_cover type="bool">false</tanks_cover>
+				<tanks_jett type="bool">false</tanks_jett>
+				<inbd_cover type="bool">false</inbd_cover>
+				<inbd_jett type="bool">false</inbd_jett>
+				<outbd_cover type="bool">false</outbd_cover>
+				<outbd_jett type="bool">false</outbd_jett>
+				<center_tank type="bool">false</center_tank>
+				<boom type="bool">false</boom>
+			</jettison>
 			<gunsight>
 				<!--fixed net options-->
 				<ghosting-x type="double">5480</ghosting-x>
@@ -445,7 +473,9 @@
 				<breakoff-light type="float">0</breakoff-light>
 			</gunsight>
 			<missile-release type="int" alias="/fdm/jsbsim/systems/armament/release">0</missile-release>
-					   <trigger type="bool">false</trigger>
+			<trigger type="bool">false</trigger>
+			<bomb-arm type="bool">false</bomb-arm>
+			<bomb-arm-guard type="bool">false</bomb-arm-guard>
 			<station n="0"> <!-- left outer wing -->
 				<offsets>
 					<x-m type="double">  1.33</x-m>
@@ -522,6 +552,7 @@
 			</station>
 			<chaff-trigger type="bool">false</chaff-trigger>
 			<flare-trigger type="bool">false</flare-trigger>
+			<cm-trigger type="bool">false</cm-trigger>
 			<rocket-trigger type="int">0</rocket-trigger> <!-- can be 0, 1, or 2 -->
 			<rocket-setting type="int">4</rocket-setting>
 		</armament>
@@ -592,6 +623,12 @@
 		<adf n="0">
 			<inbound-outbound-switch type="int">0</inbound-outbound-switch>
 		</adf>
+		<armament>
+			<msl-emergency-release>
+				<button-cover type="bool">false</button-cover>
+				<button type="bool">false</button>
+			</msl-emergency-release>
+		</armament>
 		<nav n="0">
 			<radials>
 				<selected-deg>0</selected-deg>
@@ -796,16 +833,16 @@
 	<ai>
 		<submodels>
 			<submodel n="0">
-				<count type="int">60</count>
+				<count type="int">0</count>
 			</submodel>
 			<submodel n="1">
-				<count type="int">60</count>
+				<count type="int">0</count>
 			</submodel>
 			<submodel n="2">
-				<count type="int">60</count>
+				<count type="int">0</count>
 			</submodel>
 			<submodel n="3">
-				<count type="int">60</count>
+				<count type="int">0</count>
 			</submodel>
 			<submodel n="4">
 				<count type="int">25</count>

@@ -270,7 +270,7 @@
         		</axis>
         	</animation>
 
-          <!-- <animation>
+          <animation>
         		<type>pick</type>
         		<object-name>jatoStartSwitch</object-name>
         		<action>
@@ -282,7 +282,7 @@
         				<property>/fdm/jsbsim/electric/switches/rhfsp/jato-start</property>
         			</binding>
         		</action>
-        	</animation> -->
+        	</animation>
 
         	<animation>
         		<object-name>jatoStartSwitch</object-name>
@@ -303,7 +303,7 @@
         	</animation>
 
 
-          <!-- <animation>
+          <animation>
         		<type>pick</type>
         		<object-name>jatoJettSwitch</object-name>
         		<action>
@@ -315,7 +315,7 @@
         				<property>/fdm/jsbsim/electric/switches/rhfsp/jato-jett</property>
         			</binding>
         		</action>
-        	</animation> -->
+        	</animation>
 
         	<animation>
         		<object-name>jatoJettSwitch</object-name>

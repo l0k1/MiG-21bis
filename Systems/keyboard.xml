@@ -5,23 +5,13 @@
             <desc>Trigger flare release</desc>
             <binding>
                 <command>property-assign</command>
-                <property>/controls/armament/chaff-trigger</property>
-                <value type="bool">true</value>
-            </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>/controls/armament/flare-trigger</property>
+                <property>/controls/armament/cm-trigger</property>
                 <value type="bool">true</value>
             </binding>
             <mod-up>
                 <binding>
                     <command>property-assign</command>
-                    <property>/controls/armament/chaff-trigger</property>
-                    <value type="bool">false</value>
-                </binding>
-                <binding>
-                    <command>property-assign</command>
-                    <property>/controls/armament/flare-trigger</property>
+                    <property>/controls/armament/cm-trigger</property>
                     <value type="bool">false</value>
                 </binding>
             </mod-up>
@@ -267,6 +257,24 @@
 			<command>nasal</command>
 			<script>autopilot.panel_button("level");</script>
 		</binding>
+	</key>
+
+	<key n="26">
+		<name>Ctrl+z</name>
+		<desc>center tank jettison</desc>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>property-assign</command>
+			<property>/controls/armament/jettison/center_tank</property>
+			<value>1</value>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/armament/jettison/center_tank</property>
+				<value>0</value>
+			</binding>
+		</mod-up>
 	</key>
 
 	<key n="87">

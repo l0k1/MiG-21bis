@@ -97,6 +97,22 @@
           <z> -0.15 </z>
       </location>
    </pointmass>
+   <pointmass name="station6"><!-- left fuselage attachment point pointmass 5 -->
+      <weight unit="LBS"> 0 </weight>
+      <location name="POINTMASS" unit="M">
+          <x>  1.54 </x>
+          <y> -0.49 </y>
+          <z> -0.15 </z>
+      </location>
+   </pointmass>
+   <pointmass name="station7"><!-- right fuselage attachment point pointmass 6 -->
+      <weight unit="LBS"> 0 </weight>
+      <location name="POINTMASS" unit="M">
+          <x>  1.54 </x>
+          <y>  0.49 </y>
+          <z> -0.15 </z>
+      </location>
+   </pointmass>
  </mass_balance>
 
  <ground_reactions>

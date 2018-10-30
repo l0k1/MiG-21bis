@@ -155,7 +155,7 @@
 				<max>
 					<difference>
 						<property>systems/armament/cm/flares-count-0</property>
-						<value>4</value>
+						<value>2</value>
 					</difference>
 					<value>0</value>
 				</max>
@@ -168,7 +168,7 @@
 				<max>
 					<difference>
 						<property>systems/armament/cm/flares-count-1</property>
-						<value>4</value>
+						<value>2</value>
 					</difference>
 					<value>0</value>
 				</max>
@@ -254,7 +254,7 @@
 				<max>
 					<difference>
 						<property>systems/armament/cm/chaff-count-0</property>
-						<value>4</value>
+						<value>1</value>
 					</difference>
 					<value>0</value>
 				</max>
@@ -267,7 +267,7 @@
 				<max>
 					<difference>
 						<property>systems/armament/cm/chaff-count-1</property>
-						<value>4</value>
+						<value>1</value>
 					</difference>
 					<value>0</value>
 				</max>
@@ -379,6 +379,8 @@
 			<test logic="AND" value="1">
 				systems/armament/rockets/trigger-state gt 0
 				/ai/submodels/submodel[23]/count gt 0
+				electric/output/msl-rgm-rkt-lch gt 32
+				electric/output/pwr-to-pylons[1] gt 32
 				systems/armament/rockets/current-count-left lt systems/armament/rockets/total-count-left
 			</test>
 		</switch>
@@ -389,6 +391,8 @@
 				systems/armament/rockets/trigger-state gt 0
 				/ai/submodels/submodel[23]/count == 0
 				/ai/submodels/submodel[22]/count gt 0
+				electric/output/msl-rgm-rkt-lch gt 32
+				electric/output/pwr-to-pylons[0] gt 32
 				systems/armament/rockets/current-count-left lt systems/armament/rockets/total-count-left
 			</test>
 		</switch>
@@ -427,6 +431,8 @@
 			<test logic="AND" value="1">
 				systems/armament/rockets/trigger-state gt 0
 				/ai/submodels/submodel[24]/count gt 0
+				electric/output/msl-rgm-rkt-lch gt 32
+				electric/output/pwr-to-pylons[3] gt 32
 				systems/armament/rockets/current-count-right lt systems/armament/rockets/total-count-right
 			</test>
 		</switch>
@@ -437,6 +443,8 @@
 				systems/armament/rockets/trigger-state gt 0
 				/ai/submodels/submodel[24]/count == 0
 				/ai/submodels/submodel[25]/count gt 0
+				electric/output/msl-rgm-rkt-lch gt 32
+				electric/output/pwr-to-pylons[4] gt 32
 				systems/armament/rockets/current-count-right lt systems/armament/rockets/total-count-right
 			</test>
 		</switch>

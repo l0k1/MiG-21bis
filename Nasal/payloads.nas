@@ -40,12 +40,13 @@ input = {
 };
 
 var pos_arm = {
-	new: func(name, brevity, weight, type, hit_max_distance = 65, ammo_count = 0,guidance_func = nil) {
+	new: func(name, brevity, weight, type, id, hit_max_distance = 65, ammo_count = 0,guidance_func = nil) {
 		var m = {parents:[pos_arm]};
 		m.name = name;
 		m.brevity = brevity;
 		m.weight = weight;
 		m.type = type;
+		m.id = id;
 		m.type_norm = 1;
 		if ( type == "radar" or type == "beam" ) {
 			m.type_norm = 2;
@@ -61,49 +62,53 @@ var pos_arm = {
 
 var payloads = {
 	#payload format is:
-	#name: pos_arm.new(name, brevity code, weight, type/guidance, hit message max distance (not used for guided missiles), ammo count (optional), guidance function (optional)
+	#name: pos_arm.new(name, brevity code, weight, type/guidance, id for animations, hit message max distance (not used for guided missiles), ammo count (optional), guidance function (optional)
 	#bomb names can NOT have spaces in them.
-	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy
+	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy, cm
 	#regarding hit distance, the GSh-23 is coded as 35m seperately in this file
-	"none":					pos_arm.new("none","none",0,"none"),
+	"none":					pos_arm.new("none","none",0,"none",0),
 	# ir missiles
-	"RS-2US":				pos_arm.new("RS-2US","RS-2US",182,"ir"),
-	"R-55S":				pos_arm.new("R-55S","R-55S",199,"ir"),
-	"R-3S":					pos_arm.new("R-3S","R-3S",165,"ir"),
-	"R-13M":				pos_arm.new("R-13M","R-13M",194,"ir"),
-	"R-60":					pos_arm.new("R-60","R-60",96,"ir"),
-	"R-60x2":				pos_arm.new("R-60","R-60",96,"ir",,2),
-	"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir"),
+	"RS-2US":				pos_arm.new("RS-2US","RS-2US",182,"ir",1),
+	"R-55S":				pos_arm.new("R-55S","R-55S",199,"ir",2),
+	"R-3S":					pos_arm.new("R-3S","R-3S",165,"ir",3),
+	"R-13M":				pos_arm.new("R-13M","R-13M",194,"ir",4),
+	"R-60":					pos_arm.new("R-60","R-60",96,"ir",31),
+	"R-60x2":				pos_arm.new("R-60","R-60",96,"ir",32,,2), # 32 if 2 missiles loaded, 31 if 1
+	"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir",7),
 	# radar missiles
-	"R-3R":					pos_arm.new("R-3R","R-3R",168,"radar"),
-	"R-27R1":				pos_arm.new("R-27R1","R-27R1",560,"radar"),
+	"R-3R":					pos_arm.new("R-3R","R-3R",168,"radar",8),
+	"R-27R1":				pos_arm.new("R-27R1","R-27R1",560,"radar",9),
 	# bombs
-	"FAB-100":				pos_arm.new("FAB-100","FAB-100",220,"bomb",250),
-	"FAB-250":				pos_arm.new("FAB-250","FAB-250",551,"bomb",250),
-	"FAB-500":				pos_arm.new("FAB-500","FAB-500",1146,"bomb",250),
+	"FAB-100":				pos_arm.new("FAB-100","FAB-100",220,"bomb",10,250),
+    "FAB-100x4":            pos_arm.new("FAB-100x4","FAB-100x4",960,"bomb",14,250), # 11,12,13,14 ids for the bombs, reducing as each bomb drops
+	"FAB-250":				pos_arm.new("FAB-250","FAB-250",551,"bomb",15,250),
+	"FAB-500":				pos_arm.new("FAB-500","FAB-500",1146,"bomb",16,250),
 	# heavy
-	"RN-14T":				pos_arm.new("RN-14T","RN-14T",856,"heavy",500),
-	"RN-18T":				pos_arm.new("RN-18T","RN-18T",1150,"heavy",500),
-	"RN-24":				pos_arm.new("RN-24","RN-24",860,"heavy",1000),
-	"RN-28":				pos_arm.new("RN-28","RN-28",1200,"heavy",1000),
+	"RN-14T":				pos_arm.new("RN-14T","RN-14T",856,"heavy",17,500),
+	"RN-18T":				pos_arm.new("RN-18T","RN-18T",1150,"heavy",18,500),
+	"RN-24":				pos_arm.new("RN-24","RN-24",860,"heavy",19,1000),
+	"RN-28":				pos_arm.new("RN-28","RN-28",1200,"heavy",20,1000),
 	# anti-radiation
-	"Kh-25MP":				pos_arm.new("Kh-25MP","Kh-25MP",695,"antirad"),
+	"Kh-25MP":				pos_arm.new("Kh-25MP","Kh-25MP",695,"antirad",21),
 	# beam
-	"Kh-66":				pos_arm.new("Kh-66","Kh-66",632,"beam"),
+	"Kh-66":				pos_arm.new("Kh-66","Kh-66",632,"beam",22),
 	# rockets
-	"UB-16":				pos_arm.new("UB-16","UB-16",141,"rocket",,16),
-	"UB-32":				pos_arm.new("UB-32","UB-32",582,"rocket",,32),
-	"S-21":					pos_arm.new("S-21","S-21",341,"heavyrocket",60), # search for с-21 ракет (cyrillic)
-	"S-24":					pos_arm.new("S-24","S-24",518,"heavyrocket",60),
-	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank","PTB-490 Droptank",180,"tank"),
-	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank","PTB-800 Droptank",230,"tank"),
-	"Smokepod":				pos_arm.new("smokepod","smokepod",157,"tank")
+	"UB-16":				pos_arm.new("UB-16","UB-16",141,"rocket",23,,16),
+	"UB-32":				pos_arm.new("UB-32","UB-32",582,"rocket",24,,32),
+	"S-21":					pos_arm.new("S-21","S-21",341,"heavyrocket",25,60), # google search for с-21 ракет (cyrillic)
+	"S-24":					pos_arm.new("S-24","S-24",518,"heavyrocket",26,60),
+	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank","PTB-490 Droptank",180,"tank",27),
+	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank","PTB-800 Droptank",230,"tank",28),
+	"Smokepod":				pos_arm.new("Smokepod","Smokepod",157,"tank",29),
+    # countermeasures
+    "Conformal CM":         pos_arm.new("Conformal CM","Conformal CM",210,"cm",30),
 };
 
 # add in virtual pylons too
 
 var update_pylons = func(pylon) {
     #set up our function
+    #print("updating pylon " ~ pylon);
     if (pylon < 7) {
         var selected = getprop("/payload/weight["~pylon~"]/selected");
         var pylon_weight = getprop("/payload/weight["~pylon~"]/weight-lb");
@@ -112,20 +117,27 @@ var update_pylons = func(pylon) {
         var pylon_weight = getprop("/payload/virtual/weight["~pylon~"]/weight-lb");
     }
     if ( selected == nil ) {
-        print("error in pylon updating: "~pylon~" selection was nil.");
+        #print("error in pylon updating: "~pylon~" selection was nil.");
         return;
     }
     var payload = payloads[selected];
 
+    #print("payload: " ~ payload.name);
+    #print("weight: " ~ pylon_weight);
+
     if (payload.name != "none" and pylon_weight == 0 and pylon < 7) {
-    	#print('create pylon ' ~ pylon ~ ' with ' ~ payload.name);
+        #print('create pylon ' ~ pylon ~ ' with ' ~ payload.name);
     	create_pylon(pylon,payload,selected);
-    } elsif (payload.name != "none" and pylon_weight != payload.weight) {
-    	#print('reset pylon ' ~ pylon ~ ' with ' ~ payload.name);
+    } elsif (payload.name != "none" and pylon_weight != payload.weight and payload.name != "FAB-100x4") {
+        #print('reset pylon ' ~ pylon ~ ' with ' ~ payload.name);
     	empty_pylon(pylon);
     	create_pylon(pylon,payload,selected);
+    } elsif (payload.name == "FAB-100x4" and pylon_weight != 300 and pylon_weight != 520 and pylon_weight != 740 and pylon_weight != 960) {
+        #print("fab-100x4 special handling on pylon " ~ pylon);
+        empty_pylon(pylon);
+        create_pylon(pylon,payload,selected);
     } elsif (payload.name == "none") {
-    	#print('empty pylon ' ~ pylon);
+        #print('empty pylon ' ~ pylon);
     	empty_pylon(pylon);
     }
     
@@ -161,6 +173,7 @@ var update_pylons = func(pylon) {
 
 var create_pylon = func(pylon, payload, selected) {
     # if its a missile, set it up as a missile
+    setprop("/payload/weight["~pylon~"]/id",payload.id);
     if (    payload.type == "ir" or
             payload.type == "radar" or
             payload.type == "antirad" or
@@ -199,8 +212,30 @@ var create_pylon = func(pylon, payload, selected) {
     if (payload.type == "bomb") {
         setprop("/payload/released/"~payload.name~"["~pylon~"]",FALSE);
     }
+    if (selected == "FAB-100x4") {
+        if (pylon == 1) {
+            setprop("/ai/submodels/submodel[32]/count",1);
+            setprop("/ai/submodels/submodel[33]/count",1);
+            setprop("/ai/submodels/submodel[34]/count",1);
+            setprop("/ai/submodels/submodel[35]/count",1);
+            setprop("/payload/released/FAB-100[5]",0);
+            setprop("/payload/released/FAB-100[6]",0);
+            setprop("/payload/released/FAB-100[7]",0);
+            setprop("/payload/released/FAB-100[8]",0);
+        } elsif (pylon == 3) {
+            setprop("/ai/submodels/submodel[36]/count",1);
+            setprop("/ai/submodels/submodel[37]/count",1);
+            setprop("/ai/submodels/submodel[38]/count",1);
+            setprop("/ai/submodels/submodel[39]/count",1);
+            setprop("/payload/released/FAB-100[9]",0);
+            setprop("/payload/released/FAB-100[10]",0);
+            setprop("/payload/released/FAB-100[11]",0);
+            setprop("/payload/released/FAB-100[12]",0);
+        }
+    }
+
     if (payload.type == "rocket") {
-        print('adding ammo for pylon ' ~ pylon);
+        #print('adding ammo for pylon ' ~ pylon);
         if (pylon == 0) {
             setprop("/ai/submodels/submodel[22]/count",payload.ammo_count);
         } elsif (pylon == 1){
@@ -210,20 +245,48 @@ var create_pylon = func(pylon, payload, selected) {
         } elsif (pylon == 4){
             setprop("/ai/submodels/submodel[25]/count",payload.ammo_count);
         }
-    } else {
+    }elsif (selected == "Conformal CM") {
+        #0 ~ flares left
+        #1 ~ flares right
+        #2 ~ chaff left
+        #3 ~ chaff right
+        #18 flares, 9 chaff
+        if (pylon == 5) {
+            setprop("/ai/submodels/submodel[0]/count",20);
+            setprop("/ai/submodels/submodel[2]/count", 9);
+        } elsif (pylon == 6) {
+            setprop("/ai/submodels/submodel[1]/count",20);
+            setprop("/ai/submodels/submodel[3]/count", 9);
+        }
+    } elsif (selected != "FAB-100x4" and selected != "Conformal CM") {
         if (pylon == 0) {
 			setprop("/ai/submodels/submodel[22]/count",0);
 		} elsif (pylon == 1) {
 			setprop("/ai/submodels/submodel[23]/count",0);
+            setprop("/ai/submodels/submodel[32]/count",0);
+            setprop("/ai/submodels/submodel[33]/count",0);
+            setprop("/ai/submodels/submodel[34]/count",0);
+            setprop("/ai/submodels/submodel[35]/count",0);
 		} elsif (pylon == 3) {
 			setprop("/ai/submodels/submodel[24]/count",0);
+            setprop("/ai/submodels/submodel[36]/count",0);
+            setprop("/ai/submodels/submodel[37]/count",0);
+            setprop("/ai/submodels/submodel[38]/count",0);
+            setprop("/ai/submodels/submodel[39]/count",0);
 		} elsif (pylon == 4) {
 			setprop("/ai/submodels/submodel[25]/count",0);
-		}
+		} elsif (pylon == 5) {
+            setprop("/ai/submodels/submodel[0]/count",0);
+            setprop("/ai/submodels/submodel[2]/count",0);
+        } elsif (pylon == 6) {
+            setprop("/ai/submodels/submodel[1]/count",0);
+            setprop("/ai/submodels/submodel[3]/count",0);
+        }
     }
 }
 
 var empty_pylon = func(pylon) {
+    setprop("/payload/weight["~pylon~"]/id",0);
     if (armament.AIM.active[pylon] != nil) {
         armament.AIM.active[pylon].del();
         if (pylon == 0) {
@@ -248,11 +311,25 @@ var empty_pylon = func(pylon) {
 		setprop("/ai/submodels/submodel[22]/count",0);
 	} elsif (pylon == 1) {
 		setprop("/ai/submodels/submodel[23]/count",0);
+        setprop("/ai/submodels/submodel[32]/count",0);
+        setprop("/ai/submodels/submodel[33]/count",0);
+        setprop("/ai/submodels/submodel[34]/count",0);
+        setprop("/ai/submodels/submodel[35]/count",0);
 	} elsif (pylon == 3) {
 		setprop("/ai/submodels/submodel[24]/count",0);
+        setprop("/ai/submodels/submodel[36]/count",0);
+        setprop("/ai/submodels/submodel[37]/count",0);
+        setprop("/ai/submodels/submodel[38]/count",0);
+        setprop("/ai/submodels/submodel[39]/count",0);
 	} elsif (pylon == 4) {
 		setprop("/ai/submodels/submodel[25]/count",0);
-	}
+    } elsif (pylon == 5) {
+        setprop("/ai/submodels/submodel[0]/count",0);
+        setprop("/ai/submodels/submodel[2]/count",0);
+    } elsif (pylon == 6) {
+        setprop("/ai/submodels/submodel[1]/count",0);
+        setprop("/ai/submodels/submodel[3]/count",0);
+    }
 }
 
 #missile arming loop
@@ -421,26 +498,37 @@ var trigger_propogation = func() {
 		if ( knobpos == 0 ) {
 			setprop("/controls/armament/rocket-setting",16);
 			setprop("/controls/armament/rocket-trigger",1);
-			bomb_release(1,"bomb");
-			bomb_release(3,"bomb");
+			if (getprop("/controls/armament/bomb-arm") == 0) {
+				jettison([1,3]);
+			} else {
+				bomb_release(1,"bomb");
+				bomb_release(3,"bomb");
+			}
 		} elsif ( knobpos == 1 ) {
 			setprop("/controls/armament/rocket-setting",8);
 			setprop("/controls/armament/rocket-trigger",1);
-			bomb_release(0,"bomb");
-			bomb_release(4,"bomb");
+			if (getprop("/controls/armament/bomb-arm") == 0) {
+				jettison([0,4]);
+			} else {
+				bomb_release(0,"bomb");
+				bomb_release(4,"bomb");
+			}
 		} elsif ( knobpos == 2 ) {
 			setprop("/controls/armament/rocket-setting",4);
 			setprop("/controls/armament/rocket-trigger",1);
-			bomb_release(0,"bomb");
-			bomb_release(1,"bomb");
-			bomb_release(2,"bomb");
-			bomb_release(3,"bomb");
+			if (getprop("/controls/armament/bomb-arm") == 0) {
+				jettison([0,1,3,4]);
+			} else {
+				bomb_release(0,"bomb");
+				bomb_release(1,"bomb");
+				bomb_release(3,"bomb");
+				bomb_release(4,"bomb");
+			}
 			return [0,3,knobpos];
 		} elsif ( knobpos == 3 ) {
-			
-			if ( getprop("payload/weight[1]/selected") == "Kh-25MP" ) {
+			if ( getprop("payload/weight[1]/selected") == "Kh-25MP"  and getprop("/fdm/jsbsim/electric/output/pwr-to-pylons[1]") > 32) {
 				missile_release(1);
-			} elsif ( getprop("payload/weight[3]/selected") == "Kh-25MP" and getprop("payload/weight[1]/selected") != "Kh-25MP" ) {
+			} elsif ( getprop("payload/weight[3]/selected") == "Kh-25MP" and getprop("payload/weight[1]/selected") != "Kh-25MP" and getprop("/fdm/jsbsim/electric/output/pwr-to-pylons[3]") > 32) {
 				missile_release(3);
 			} else {
 				bomb_release(1,"heavyrocket");
@@ -512,6 +600,7 @@ var heavy_release_listener = func {
 var missile_release = func(pylon) {
 
 	#print("in release");
+    if ( getprop("/fdm/jsbsim/electric/output/msl-rgm-rkt-lch") < 32) { return; }
 
 	var knobpos = getprop("controls/armament/panel/pylon-knob");
 
@@ -520,7 +609,7 @@ var missile_release = func(pylon) {
 	} else {
 		var virtual = "/virtual/";
 	}
-	var t_p = pylon;		
+	var t_p = pylon;
 	if (pylon == 7) {
 		t_p = 0;
 	} elsif ( pylon == 8 ) {
@@ -647,26 +736,205 @@ var bomb_release = func(pylon,type="bomb") {
 	} else {
 		var virtual = "/virtual/";
 	}
+    if (type == "heavyrocket" and getprop("/fdm/jsbsim/electric/output/msl-rgm-rkt-lch") < 32) { return; }
 	var selected = getprop("payload"~virtual~"weight[" ~ ( pylon ) ~ "]/selected");
 	if ( payloads[selected].type == type ) {
 		#print("dropping bomb: " ~ payloads[selected].brevity ~ ": pylon " ~ pylon);
 		#print("selected: " ~ selected ~ "| pylon: " ~ pylon);
+		
+		if (payloads[selected].type == "bomb" and getprop("/controls/armament/bomb-arm") == 0) {
+			jettison([pylon]);
+			return;
+		}
+        if (selected == "FAB-100x4"){
+            var act_pylon = pylon;
+            selected = "FAB-100";
+            var check_array = pylon == 1 ? [32,33,34,35] : [36,37,38,39];
+            var idx = 0;
+            foreach (var p; check_array){
+                idx = idx + 1;
+                if (getprop("/ai/submodels/submodel["~p~"]/count") > 0) {
+                    pylon = p;
+                    break;
+                }
+            }
+            if (pylon != p) {
+                setprop("payload/weight[" ~ ( act_pylon ) ~ "]/selected", "none" );
+    			setprop("/payload/weight["~pylon~"]/id",0);
+                setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~act_pylon~"]",0);
+                return;
+            } else {
+                setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~act_pylon~"]",getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~act_pylon~"]") - 220);
+                if (idx == 4) { idx = payload.id; }
+    			setprop("/payload/weight["~pylon~"]/id",payload.id - idx);
+            }
+        } else {
+            setprop("payload"~virtual~"weight[" ~ ( pylon ) ~ "]/selected", "none" );
+    		setprop("/payload/weight["~pylon~"]/id",0);
+            setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+        }
+        #print("releasing: payload/released/"~selected~"["~pylon~"]");
 		setprop("payload/released/"~selected~"["~pylon~"]",1);
-		setprop("payload"~virtual~"weight[" ~ ( pylon ) ~ "]/selected", "none" );
-		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 		var phrase = payloads[selected].brevity ~ " released.";
 		if (getprop("payload/armament/msg")) {
 			defeatSpamFilter(phrase);
 		} else {
 			setprop("/sim/messages/atc", phrase);
 		}
-		settimer(func{return_trigger(selected,pylon);},19)
+		return_trigger(selected,pylon);
 	}
 }
 
-var return_trigger = func(selected, pylon) {
-	setprop("payload/released/"~selected~"["~pylon~"]",0);
+setlistener("/controls/armament/jettison/tanks_jett",func(){jettison([-1]);});
+setlistener("/controls/armament/jettison/center_tank",func(){jettison([2]);});
+setlistener("/controls/armament/jettison/outbd_jett",func(){jettison([0,4]);});
+setlistener("/controls/armament/jettison/inbd_jett",func(){jettison([1,3]);});
+
+
+var jettison = func(pylons) {
+    var selected = "";
+    if (pylons[0] == -1) {
+        # wing tank jettison button
+        if (getprop("/fdm/jsbsim/electric/output/drop-tanks-jett") < 110) {return;}
+        foreach (var pylon; [0,4]) {
+            selected = getprop("payload/weight[" ~ pylon ~ "]/selected");
+            if (payloads[selected].type == "tank") {
+                selected = selected == "PTB-490 Droptank" ? "PTB-490" : "PTB-800";
+                setprop("payload/jettison/pyro/"~selected~"["~pylon~"]",1);
+                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+                setprop("/controls/armament/jettison/boom",1);
+                settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.1);
+                return_trigger("pyro/" ~ selected,pylon);
+            }
+        }
+    } elsif (pylons[0] == 2) {
+        # center tank jettison button
+        if (getprop("/fdm/jsbsim/electric/output/drop-tanks-jett") < 110) {return;}
+        selected = getprop("payload/weight[2]/selected");
+        if (payloads[selected].type == "tank") {
+            selected = selected == "PTB-490 Droptank" ? "PTB-490" : "PTB-800";
+            setprop("payload/jettison/pyro/"~selected~"[2]",1);
+            setprop("payload/weight[2]/selected","none");
+            setprop("/controls/armament/jettison/boom",1);
+            settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.2);
+            return_trigger("pyro/" ~ selected,2);
+        }
+    } else {
+        if (getprop("/fdm/jsbsim/electric/output/msl-rgm-emer-lcn-lchr-rkt-bombs-jett") < 110) {return;}
+        foreach (var pylon; pylons) {
+            selected = getprop("payload/weight[" ~ pylon ~ "]/selected");
+            if (selected == nil) { continue; }
+            if (selected == "none") { continue; }
+            if (payloads[selected].type == "tank") { continue; }
+            if (selected == "R-60x2") {
+            	var v_p = pylon == 0 ? 7 : 8;
+                var virt = getprop("payload/virtual/weight["~v_p~"]/selected");
+                if (virt != nil and armament.AIM.active[v_p] != nil) {
+                	armament.AIM.active[v_p].eject();
+					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~v_p~"]",0);
+					setprop("payload/virtual/weight["~v_p~"]/selected", "none");
+                }
+                if (armament.AIM.active[pylon] != nil) {
+                	armament.AIM.active[pylon].eject();
+					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+					setprop("payload/weight["~pylon~"]/selected", "none");
+                }
+            } elsif (selected == "FAB-100x4") {
+                var sub_pylon = pylon;
+                var check_array = pylon == 1 ? [32,33,34,35] : [36,37,38,39];
+                var idx = 0;
+                foreach (var p; check_array){
+                    idx = idx + 1;
+                    if (getprop("/ai/submodels/submodel["~p~"]/count") > 0) {
+                        sub_pylon = p;
+                        break;
+                    }
+                }
+                #print(idx);
+                if (sub_pylon != p) {
+                    setprop("payload/weight[" ~ ( pylon ) ~ "]/selected", "none" );
+                    setprop("/payload/weight["~pylon~"]/id",0);
+                    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+                    continue;
+                } else {
+                    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]") - 220);
+                    if (idx == 4) { idx = payloads["FAB-100x4"].id; }
+                    setprop("/payload/weight["~pylon~"]/id",payloads["FAB-100x4"].id - idx);
+                }
+                #print("setting " ~sub_pylon~ " to zero");
+                setprop("/ai/submodels/submodel["~sub_pylon~"]/count",0);
+                setprop("payload/jettison/FAB-100["~sub_pylon~"]",1);
+                return_trigger("FAB-100",sub_pylon);
+            } elsif (payloads[selected].type == "bomb") {
+            	if (getprop("/controls/armament/bomb-arm") == 1) {
+            		bomb_release(pylon);
+            	} else {
+	                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
+	                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+                    return_trigger(selected,pylon);
+            	}
+            } else {
+            	if ((payloads[selected].type == "ir" or
+	            		payloads[selected].type == "radar" or
+	            		payloads[selected].type == "antirad" or
+	            		payloads[selected].type == "beam") and
+	            		armament.AIM.active[pylon] != nil) {
+                	armament.AIM.active[pylon].eject();
+					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
+					setprop("payload/weight["~pylon~"]/selected", "none");
+	            } else {
+	                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
+	                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+                    return_trigger(selected,pylon);
+	            }
+            }
+        }
+    }
 }
+
+var countermeasure_trigger = func() {
+    #print("in func");
+    #print("trig set to: |" ~getprop("/controls/armament/cm-trigger")~"|");
+    if (getprop("/controls/armament/cm-trigger") == 0) { 
+        #print("setting trigs to 0");
+        setprop("/controls/armament/chaff-trigger",0);
+        setprop("/controls/armament/flare-trigger",0);
+        return;
+    }
+    if (getprop("/fdm/jsbsim/electric/output/jato-start") < 20) { return; }
+    if (getprop("/fdm/jsbsim/electric/output/jato-jett") < 20) { return; }
+    #print("setting trigs to 1");
+    setprop("/controls/armament/chaff-trigger",1);
+    setprop("/controls/armament/flare-trigger",1);
+}
+
+var _ret_trig_arr = [];
+#return trigger should be passed an array in the format [selected, pylon, systime]
+var return_trigger = func(selected, pylon) {
+    #print("setting up for " ~ selected ~ ":" ~ pylon);
+    append(_ret_trig_arr,[selected,pylon,systime()]);
+}
+
+var return_trigger_loop = func() {
+    var c_time = systime();
+    foreach(var entry; _ret_trig_arr){
+        if (c_time - entry[2] >= 5.0) {
+            entry[2] = 0;
+            #print("returning trigger on " ~ entry[0] ~ ":" ~ entry[1]);
+            setprop("payload/released/"~entry[0]~"["~entry[1]~"]",0);
+            setprop("payload/jettison/"~entry[0]~"["~entry[1]~"]",0);
+        }
+    }
+    var _narr = [];
+    for (var i = 0; i < size(_ret_trig_arr); i = i + 1){
+        if (_ret_trig_arr[i][2] != 0) {
+            append(_narr,_ret_trig_arr[i]);
+        }
+    }
+    _ret_trig_arr = _narr;
+    settimer(return_trigger_loop,0);
+}
+return_trigger_loop();
 ############ Impact messages #####################
 
 var hit_count = 0;
@@ -838,6 +1106,16 @@ var paint_the_rainbow = func(timer) {
 }
 
 
+var find_index = func(arr,val) {
+    # fpia = find pos in array
+    for (var i = 0; i < size(arr); i = i + 1) {
+        if (arr[i] == val) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 ############################# main init ###############
 
 var main_init = func {
@@ -870,13 +1148,57 @@ var main_init = func {
 	setlistener("/payload/weight[2]/selected",func{update_pylons(2);});
 	setlistener("/payload/weight[3]/selected",func{update_pylons(3);});
 	setlistener("/payload/weight[4]/selected",func{update_pylons(4);});
-	#setlistener("/payload/weight[5]/selected",func{update_pylons(5););
-	#setlistener("/payload/weight[6]/selected",func{update_pylons(6););
+	setlistener("/payload/weight[5]/selected",func{update_pylons(5);});
+	setlistener("/payload/weight[6]/selected",func{update_pylons(6);});
 	setlistener("/payload/virtual/weight[7]/selected",func{update_pylons(7);});
 	setlistener("/payload/virtual/weight[8]/selected",func{update_pylons(8);});
 
-  # setup impact listener
-  setlistener("/ai/models/model-impact", impact_listener, 0, 0);
+    setlistener("/controls/armament/cm-trigger",func{countermeasure_trigger();});
+
+    # setup impact listener
+    setlistener("/ai/models/model-impact", impact_listener, 0, 0);
+
+    # listener for missile emergency launch
+    setlistener("/instrumentation/armament/msl-emergency-release/button", func() {
+        if (getprop("/instrumentation/armament/msl-emergency-release/button") == 0 ) { return; }
+        for (var i = 0; i <= 5; i = i + 1) {
+            if (i == 2) { continue; } # missiles can't be on the center pylon afaik
+            var selected = getprop("/payload/weight["~i~"]/selected");
+            if (selected == nil ){ continue; }
+            if (getprop("/fdm/jsbsim/electric/output/pwr-to-pylons["~i~"]") < 32) { continue; }
+            if (payloads[selected].type != "ir" and
+                    payloads[selected].type != "radar" and
+                    payloads[selected].type != "beam" and
+                    payloads[selected].type != "antirad") {
+                continue;
+            }
+
+            if( i == 0 and getprop("payload/virtual/weight[7]/selected") == "R-60" ) {
+                if (armament.AIM.active[7].status == MISSILE_LOCK) {
+                    missile_release(7);
+                } elsif (armament.AIM.active[7].status != MISSILE_FLYING) {
+                    armament.AIM.active[7].releaseAtNothing();
+                    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[7]",0);
+                    setprop("payload/virtual/weight[7]/selected", "none");
+                }
+            } elsif ( i == 4 and getprop("payload/virtual/weight[8]/selected") == "R-60" ) {
+                if (armament.AIM.active[8].status == MISSILE_LOCK) {
+                    missile_release(8);
+                } elsif (armament.AIM.active[8].status != MISSILE_FLYING) {
+                    armament.AIM.active[8].releaseAtNothing();
+                    setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[8]",0);
+                    setprop("payload/virtual/weight[8]/selected", "none");
+                }
+            }
+            if (armament.AIM.active[i].status == MISSILE_LOCK) {
+                missile_release(i);
+            } elsif (armament.AIM.active[i].status != MISSILE_FLYING) {
+                armament.AIM.active[i].releaseAtNothing();
+                setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~i~"]",0);
+                setprop("payload/weight["~i~"]/selected", "none");
+            }
+        }
+    });
 
   # start the main loop
   armament_loop();

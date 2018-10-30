@@ -49,5 +49,288 @@
 			<z>0</z>
 		</axis>
 	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>jettAACover</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/armament/msl-emergency-release/button-cover</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>jettAACover</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/armament/msl-emergency-release/button-cover</property>
+		<factor>120</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m> 0.056786</x-m>
+			<y-m>-0.051063</y-m>
+			<z-m>-0.122403</z-m>
+		</center>
+		<axis>
+			<x> 0.5</x>
+			<y> 1.0</y>
+			<z>-1.0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>jettAAButton</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/armament/msl-emergency-release/button</property>
+				<value>1</value>
+			</binding>
+        	<mod-up>
+				<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/armament/msl-emergency-release/button</property>
+				<value>0</value>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>jettAAButton</object-name>
+		<type>translate</type>
+		<property>/instrumentation/armament/msl-emergency-release/button</property>
+		<factor>0.002</factor>
+		<axis>
+			<x>-1.0</x>
+			<y> 0.0</y>
+			<z>-0.2</z>
+		</axis>
+	</animation>
+
+
+	<animation>
+		<type>pick</type>
+		<object-name>jettWingTanksCover</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/armament/jettison/tanks_cover</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>jettWingTanksCover</object-name>
+		<type>rotate</type>
+		<property>/controls/armament/jettison/tanks_cover</property>
+		<factor>120</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m> 0.011338</x-m>
+			<y-m>-0.064155</y-m>
+			<z-m> 0.224916</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>jettWingTanksButton</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/armament/jettison/tanks_jett</property>
+			</binding>
+        	<mod-up>
+				<binding>
+					<command>property-toggle</command>
+					<property>/controls/armament/jettison/tanks_jett</property>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>jettWingTanksButton</object-name>
+		<type>translate</type>
+		<property>/controls/armament/jettison/tanks_jett</property>
+		<factor>0.003</factor>
+		<axis>
+			<x>-1.0</x>
+			<y>0</y>
+			<z>-0.1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>jettInnerStoresCover</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/armament/jettison/inbd_cover</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>jettInnerStoresCover</object-name>
+		<type>rotate</type>
+		<property>/controls/armament/jettison/inbd_cover</property>
+		<factor>120</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m> 0.049129</x-m>
+			<y-m> 0.155895</y-m>
+			<z-m>-0.082864</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>jettInnerStoresButton</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/armament/jettison/inbd_jett</property>
+			</binding>
+        	<mod-up>
+				<binding>
+					<command>property-toggle</command>
+					<property>/controls/armament/jettison/inbd_jett</property>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>jettInnerStoresButton</object-name>
+		<type>translate</type>
+		<property>/controls/armament/jettison/inbd_jett</property>
+		<factor>0.003</factor>
+		<axis>
+			<x>-1.0</x>
+			<y>0</y>
+			<z>-0.1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>jettOuterStoresCover</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/armament/jettison/outbd_cover</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>jettOuterStoresCover</object-name>
+		<type>rotate</type>
+		<property>/controls/armament/jettison/outbd_cover</property>
+		<factor>120</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m> 0.049129</x-m>
+			<y-m> 0.100635</y-m>
+			<z-m>-0.082864</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>jettOuterStoresButton</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/armament/jettison/outbd_jett</property>
+			</binding>
+        	<mod-up>
+				<binding>
+					<command>property-toggle</command>
+					<property>/controls/armament/jettison/outbd_jett</property>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>jettOuterStoresButton</object-name>
+		<type>translate</type>
+		<property>/controls/armament/jettison/outbd_jett</property>
+		<factor>0.003</factor>
+		<axis>
+			<x>-1.0</x>
+			<y>0</y>
+			<z>-0.1</z>
+		</axis>
+	</animation>
 	
 </PropertyList>

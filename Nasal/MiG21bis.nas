@@ -1,9 +1,16 @@
+#This file is for mostly random one-off stuff that doesn't really need it's own file
+
 #GLOBAL VARS
 UPDATE_TIME = 0.15;
 
+var a = 0;
 var main_loop = func (){
 	performance();
   logTime();
+  a = getprop("/orientation/alpha-deg");
+  a = a > 170 ? a - 180 : a;
+  a = math.abs(a) > 20 ? 20 * math.sgn(a) * -1 : a * -1;
+  setprop("/instrumentation/magnetic-compass/pitch-offset-deg",a);
 	settimer(func{main_loop();},UPDATE_TIME);
 }
 
@@ -16,7 +23,6 @@ var performance = func () {
 setprop("/mig21/advanced-radar",0);
 
 var test_support = func {
-
   var versionString = getprop("sim/version/flightgear");
   var version = split(".", versionString);
   var major = num(version[0]);
@@ -179,6 +185,7 @@ var engine_startup = func() {
 
 setlistener("/controls/engines/engine[0]/start-button",engine_startup);
 setlistener("/controls/engines/engine[0]/starting-switch",func(){
+  if (eng_running.getValue()) { return; }
 	if (start_mode.getValue() == 0){
 		starter.setValue(0);
 		cutoff.setValue(1);
@@ -209,7 +216,9 @@ var autostart = func() {
     setprop("/fdm/jsbsim/electric/switches/lvfsp/fire-ftg-eqpt",1);
     setprop("/fdm/jsbsim/electric/switches/lvfsp/engine-starting-unit",1);
     setprop("/controls/engines/engine[0]/starting-switch",1);
-
+    screen.log.write("Warning! Autostart only starts the engines!", 1.0, 0.2, 0);
+    screen.log.write("It is up to the you to set the gauges", 1.0, 0.2, 0);
+    screen.log.write("and switches according to your needs.", 1.0, 0.2, 0);
     autostart_state = 1;
     settimer(func(){autostart();},0.5);
   } elsif (autostart_state == 1) {
@@ -233,10 +242,69 @@ var autostart = func() {
   }
 }
 
-  #/controls/engines/engine[~n~]/starter set to true
-  #/controls/engines/engine[~n~]/cutoff toggled with 0.1 sec delay
-  #after n1 stabs
-  #/controls/engines/engine[~n~]/starter set to false
+var load_radios = func(path) {
+  path = path.getValue();
+  if (io.stat(path) == nil){
+    print("nil");
+    return;
+  }
+  var mode = -1;
+  var index = 0;
+  var vi = io.open(path,'r');
+  var data = split("\n",string.replace(io.readfile(path),"\r",""));
+  foreach (var datum; data){
+    if (left(datum,1) == "#") { continue; }
+    if (datum == "nav") { 
+      mode = 0;
+      index = 0;
+      continue;
+    } elsif (datum == "adf") { 
+      mode = 1;
+      index = 0;
+      continue;
+    } elsif (datum == "comm") { 
+      mode = 2;
+      index = 0;
+      continue;
+    } elsif (datum == "ils") {
+      mode = 3;
+      index = 0;
+      continue;
+    }
+    if (mode == -1) { continue; }
+    if ( ((mode == 0 or mode == 2 or mode == 3) and index > 19) or (mode == 1 and index > 8) ) {continue;}
 
-test_support();
-main_loop();
+    if (mode == 0) {
+      setprop("/instrumentation/vor-radio/preset["~index~"]",datum);
+    } elsif (mode == 1) {
+      setprop("/instrumentation/adf-radio/preset["~index~"]",datum);
+    } elsif (mode == 2) {
+      setprop("/instrumentation/comm-radio/preset["~index~"]",datum);
+    } elsif (mode == 3) {
+      setprop("/instrumentation/ils-radio/preset["~index~"]",datum);
+    }
+    index = index + 1;
+
+  }
+  #debug.dump(data);
+}
+
+var get_radio_file_gui = func() {
+  var file_selector = gui.FileSelector.new(callback: load_radios, title: "Select Radio Config File", button: "Load");
+  file_selector.open();
+  file_selector.close();
+}
+
+var init = setlistener("/sim/signals/fdm-initialized", func() {
+    test_support();
+    main_loop();
+    # randomize startup values for DME, radial setting, compass, and fuel
+    setprop("/instrumentation/fuel/knob-level",int((rand() * 1600) + 169)); # fuel
+    setprop("/instrumentation/gyro-compass/mag-offset",int((rand() * 50) - 25)); # gyro compass heading
+    setprop("/instrumentation/dead-reckoner/distance-adjust",int(rand() * 30)); # dme
+    setprop("/instrumentation/dead-reckoner/azimuth-adjust",math.periodic(0, 360, int(rand() * 360))); #ins azimuth
+    setprop("/instrumentation/nav/radials/selected-deg",math.periodic(0, 360, int(rand() * 360)))
+});
+
+
+

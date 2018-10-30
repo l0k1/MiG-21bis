@@ -685,7 +685,7 @@ var Contact = {
       } elsif (me.rdrAct.getValue() < 0 or me.rdrAct.getValue() > 1) {
         return TRUE;
       }
-      return me.rdrAct.getValue();
+      return -me.rdrAct.getValue();
     },
 
     isPainted: func () {
@@ -730,7 +730,7 @@ var Contact = {
       
       # check if radar is on
 
-      #print("well now");
+      #print("for " ~ me.callsign.getValue());
       
       if (me.isRadarActive() == 0) {
         #print("its false");

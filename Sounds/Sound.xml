@@ -770,6 +770,25 @@
             </volume>
         </aircraft-creaking>
 
+        <!-- fuel tanks explosively jettisoning -->
+
+        <tank_pyro>
+        	<name>tank-pyro</name>
+        	<path>Aircraft/MiG-21bis/Sounds/Samples/tank_pyro.wav</path>
+        	<mode>once</mode>
+        	<condition>
+        		<property>/controls/armament/jettison/boom</property>
+        	</condition>
+        	<position>
+        		<x>0</x>
+        		<y>0</y>
+        		<z>0</z>
+        	</position>
+        	<volume>
+        		<value>1</value>
+        	</volume>
+        </tank_pyro>
+
 
 	</fx>
 

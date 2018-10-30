@@ -25,7 +25,7 @@
    <y>320</y>
    <width>75</width>
    <height>25</height>
-   <label>00</label>
+   <label>01</label>
    <property>/instrumentation/vor-radio/preset[0]</property>
   </input>
   <input>
@@ -33,7 +33,7 @@
    <y>320</y>
    <width>75</width>
    <height>25</height>
-   <label>01</label>
+   <label>02</label>
    <property>/instrumentation/vor-radio/preset[1]</property>
   </input>
   
@@ -42,7 +42,7 @@
    <y>290</y>
    <width>75</width>
    <height>25</height>
-   <label>02</label>
+   <label>03</label>
    <property>/instrumentation/vor-radio/preset[2]</property>
   </input>
   <input>
@@ -50,7 +50,7 @@
    <y>290</y>
    <width>75</width>
    <height>25</height>
-   <label>03</label>
+   <label>04</label>
    <property>/instrumentation/vor-radio/preset[3]</property>
   </input>
   
@@ -59,7 +59,7 @@
    <y>260</y>
    <width>75</width>
    <height>25</height>
-   <label>04</label>
+   <label>05</label>
    <property>/instrumentation/vor-radio/preset[4]</property>
   </input>
   <input>
@@ -67,7 +67,7 @@
    <y>260</y>
    <width>75</width>
    <height>25</height>
-   <label>05</label>
+   <label>06</label>
    <property>/instrumentation/vor-radio/preset[5]</property>
   </input>
   
@@ -76,7 +76,7 @@
    <y>230</y>
    <width>75</width>
    <height>25</height>
-   <label>06</label>
+   <label>07</label>
    <property>/instrumentation/vor-radio/preset[6]</property>
   </input>
   <input>
@@ -84,7 +84,7 @@
    <y>230</y>
    <width>75</width>
    <height>25</height>
-   <label>07</label>
+   <label>08</label>
    <property>/instrumentation/vor-radio/preset[7]</property>
   </input>
   
@@ -93,7 +93,7 @@
    <y>200</y>
    <width>75</width>
    <height>25</height>
-   <label>08</label>
+   <label>09</label>
    <property>/instrumentation/vor-radio/preset[8]</property>
   </input>
   <input>
@@ -101,7 +101,7 @@
    <y>200</y>
    <width>75</width>
    <height>25</height>
-   <label>09</label>
+   <label>10</label>
    <property>/instrumentation/vor-radio/preset[9]</property>
   </input>
   
@@ -110,7 +110,7 @@
    <y>170</y>
    <width>75</width>
    <height>25</height>
-   <label>10</label>
+   <label>11</label>
    <property>/instrumentation/vor-radio/preset[10]</property>
   </input>
   <input>
@@ -118,7 +118,7 @@
    <y>170</y>
    <width>75</width>
    <height>25</height>
-   <label>11</label>
+   <label>12</label>
    <property>/instrumentation/vor-radio/preset[11]</property>
   </input>
   
@@ -127,7 +127,7 @@
    <y>140</y>
    <width>75</width>
    <height>25</height>
-   <label>12</label>
+   <label>13</label>
    <property>/instrumentation/vor-radio/preset[12]</property>
   </input>
   <input>
@@ -135,7 +135,7 @@
    <y>140</y>
    <width>75</width>
    <height>25</height>
-   <label>13</label>
+   <label>14</label>
    <property>/instrumentation/vor-radio/preset[13]</property>
   </input>
   
@@ -144,7 +144,7 @@
    <y>110</y>
    <width>75</width>
    <height>25</height>
-   <label>14</label>
+   <label>15</label>
    <property>/instrumentation/vor-radio/preset[14]</property>
   </input>
   <input>
@@ -152,7 +152,7 @@
    <y>110</y>
    <width>75</width>
    <height>25</height>
-   <label>15</label>
+   <label>16</label>
    <property>/instrumentation/vor-radio/preset[15]</property>
   </input>
   
@@ -161,7 +161,7 @@
    <y>80</y>
    <width>75</width>
    <height>25</height>
-   <label>16</label>
+   <label>17</label>
    <property>/instrumentation/vor-radio/preset[16]</property>
   </input>
   <input>
@@ -169,7 +169,7 @@
    <y>80</y>
    <width>75</width>
    <height>25</height>
-   <label>17</label>
+   <label>18</label>
    <property>/instrumentation/vor-radio/preset[17]</property>
   </input>
   
@@ -178,7 +178,7 @@
    <y>50</y>
    <width>75</width>
    <height>25</height>
-   <label>18</label>
+   <label>19</label>
    <property>/instrumentation/vor-radio/preset[18]</property>
   </input>
   <input>
@@ -186,7 +186,7 @@
    <y>50</y>
    <width>75</width>
    <height>25</height>
-   <label>19</label>
+   <label>20</label>
    <property>/instrumentation/vor-radio/preset[19]</property>
   </input>
   
@@ -203,7 +203,7 @@
    <y>320</y>
    <width>75</width>
    <height>25</height>
-   <label>00</label>
+   <label>01</label>
    <property>/instrumentation/ils-radio/preset[0]</property>
   </input>
   <input>
@@ -211,7 +211,7 @@
    <y>320</y>
    <width>75</width>
    <height>25</height>
-   <label>01</label>
+   <label>02</label>
    <property>/instrumentation/ils-radio/preset[1]</property>
   </input>
   
@@ -220,7 +220,7 @@
    <y>290</y>
    <width>75</width>
    <height>25</height>
-   <label>02</label>
+   <label>03</label>
    <property>/instrumentation/ils-radio/preset[2]</property>
   </input>
   <input>
@@ -228,7 +228,7 @@
    <y>290</y>
    <width>75</width>
    <height>25</height>
-   <label>03</label>
+   <label>04</label>
    <property>/instrumentation/ils-radio/preset[3]</property>
   </input>
   
@@ -237,7 +237,7 @@
    <y>260</y>
    <width>75</width>
    <height>25</height>
-   <label>04</label>
+   <label>05</label>
    <property>/instrumentation/ils-radio/preset[4]</property>
   </input>
   <input>
@@ -245,7 +245,7 @@
    <y>260</y>
    <width>75</width>
    <height>25</height>
-   <label>05</label>
+   <label>06</label>
    <property>/instrumentation/ils-radio/preset[5]</property>
   </input>
   
@@ -254,7 +254,7 @@
    <y>230</y>
    <width>75</width>
    <height>25</height>
-   <label>06</label>
+   <label>07</label>
    <property>/instrumentation/ils-radio/preset[6]</property>
   </input>
   <input>
@@ -262,7 +262,7 @@
    <y>230</y>
    <width>75</width>
    <height>25</height>
-   <label>07</label>
+   <label>08</label>
    <property>/instrumentation/ils-radio/preset[7]</property>
   </input>
   
@@ -271,7 +271,7 @@
    <y>200</y>
    <width>75</width>
    <height>25</height>
-   <label>08</label>
+   <label>09</label>
    <property>/instrumentation/ils-radio/preset[8]</property>
   </input>
   <input>
@@ -279,7 +279,7 @@
    <y>200</y>
    <width>75</width>
    <height>25</height>
-   <label>09</label>
+   <label>10</label>
    <property>/instrumentation/ils-radio/preset[9]</property>
   </input>
   
@@ -288,7 +288,7 @@
    <y>170</y>
    <width>75</width>
    <height>25</height>
-   <label>10</label>
+   <label>11</label>
    <property>/instrumentation/ils-radio/preset[10]</property>
   </input>
   <input>
@@ -296,7 +296,7 @@
    <y>170</y>
    <width>75</width>
    <height>25</height>
-   <label>11</label>
+   <label>12</label>
    <property>/instrumentation/ils-radio/preset[11]</property>
   </input>
   
@@ -305,7 +305,7 @@
    <y>140</y>
    <width>75</width>
    <height>25</height>
-   <label>12</label>
+   <label>13</label>
    <property>/instrumentation/ils-radio/preset[12]</property>
   </input>
   <input>
@@ -313,7 +313,7 @@
    <y>140</y>
    <width>75</width>
    <height>25</height>
-   <label>13</label>
+   <label>14</label>
    <property>/instrumentation/ils-radio/preset[13]</property>
   </input>
   
@@ -322,7 +322,7 @@
    <y>110</y>
    <width>75</width>
    <height>25</height>
-   <label>14</label>
+   <label>15</label>
    <property>/instrumentation/ils-radio/preset[14]</property>
   </input>
   <input>
@@ -330,7 +330,7 @@
    <y>110</y>
    <width>75</width>
    <height>25</height>
-   <label>15</label>
+   <label>16</label>
    <property>/instrumentation/ils-radio/preset[15]</property>
   </input>
   
@@ -339,7 +339,7 @@
    <y>80</y>
    <width>75</width>
    <height>25</height>
-   <label>16</label>
+   <label>17</label>
    <property>/instrumentation/ils-radio/preset[16]</property>
   </input>
   <input>
@@ -347,7 +347,7 @@
    <y>80</y>
    <width>75</width>
    <height>25</height>
-   <label>17</label>
+   <label>18</label>
    <property>/instrumentation/ils-radio/preset[17]</property>
   </input>
   
@@ -356,7 +356,7 @@
    <y>50</y>
    <width>75</width>
    <height>25</height>
-   <label>18</label>
+   <label>19</label>
    <property>/instrumentation/ils-radio/preset[18]</property>
   </input>
   <input>
@@ -364,7 +364,7 @@
    <y>50</y>
    <width>75</width>
    <height>25</height>
-   <label>19</label>
+   <label>20</label>
    <property>/instrumentation/ils-radio/preset[19]</property>
   </input>
   

@@ -3,20 +3,6 @@
     <path>PTB-800.ac</path>
 
     <animation>
-        <type>select</type>
-        <object-name>ptb-800</object-name>
-        <condition>
-            <!--not>
-                <property>fdm/jsbsim/systems/armament/station3/released</property>
-            </not-->
-            <equals>
-                  <property>sim/multiplay/generic/string[13]</property>
-                  <value>PTB-800 Droptank</value>
-            </equals>
-        </condition>
-    </animation>
-
-    <animation>
         <type>range</type>
         <min-m>0</min-m>
         <max-m>12000</max-m>
