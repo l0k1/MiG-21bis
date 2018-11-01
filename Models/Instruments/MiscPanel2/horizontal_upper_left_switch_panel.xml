@@ -70,4 +70,22 @@
 		</action>
 	</animation>
 
+	<animation>
+		<object-name>aileronBoosterSwitch</object-name>
+		<type>rotate</type>
+		<property>/controls/flight/aileron-booster</property>
+		<factor>-60</factor>
+		<offset-deg>30</offset-deg>
+		<center>
+			<x-m> 0.005982</x-m>
+			<y-m>-0.018547</y-m>
+			<z-m>-0.008889</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
 </PropertyList>
