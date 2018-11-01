@@ -3,52 +3,118 @@
 <!-- pressure is in bars -->
 
 <system name="hydraulic">
+	<property value="0">hydraulic/internal/rising[0]</property>
+	<property value="0">hydraulic/internal/rising[1]</property>
 
     <channel name="sources">
 
-		<fcs_function name="trash/hydraulic/source-pre">
+    	<!-- pump is on:
+    	if (pressure < 170 or (pump_is_on and pressure < 195))
+    	-->
+
+		<fcs_function name="trash/hydraulic/source/pump[0]">
 			<function>
-				<table>
-					<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
-					<tableData>
-						0.00	0.00
-						6.00	140.0
-						30.0	181.0
-						90.0    213.0
-						110.0   216.0
-					</tableData>
-				</table>
+				<ifthen>
+					<and>
+						<gt>
+							<property>electric/output/pump-unit</property>
+							<value>30</value>
+						</gt>
+						<or>
+							<lt>
+								<property>hydraulic/source/bar[0]</property>
+								<value>170</value>
+							</lt>
+							<and>
+								<gt>
+									<property>hydraulic/source/pump[0]</property>
+									<value>0</value>
+								</gt>
+								<lt>
+									<property>hydraulic/source/bar[0]</property>
+									<value>195</value>
+								</lt>
+							</and>
+						</or>
+					</and>
+					<quotient>
+						<difference>
+							<value>250</value>
+							<property>hydraulic/source/bar[0]</property>
+						</difference>
+						<value>1500</value>
+					</quotient>
+					<value>0.0</value>
+				</ifthen>
 			</function>
-			<output>hydraulic/source/cmd[0]</output>
+			<output>hydraulic/source/pump[0]</output>
 		</fcs_function>
-		
-		<lag_filter name="trash/hydraulic/source/bar[0]">
-			<input>hydraulic/source/cmd[0]</input>
-			<c1>0.5</c1>
+
+		<fcs_function name="trash/hydraulic/source/bar[0]">
+			<function>
+				<ifthen>
+					<property>hydraulic/source/pump[0]</property>
+					<sum>
+						<property>hydraulic/source/bar[0]</property>
+						<property>hydraulic/source/pump[0]</property>
+					</sum>
+					<property>hydraulic/source/bar[0]</property>
+				</ifthen>
+			</function>
 			<output>hydraulic/source/bar[0]</output>
-		</lag_filter>
-		
-		<fcs_function name="trash/hydraulic/source1-pre">
-			<function>
-				<table>
-					<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
-					<tableData>
-						0.00	0.00
-						6.00	140.0
-						30.0	181.0
-						90.0    213.0
-						110.0   216.0
-					</tableData>
-				</table>
-			</function>
-			<output>hydraulic/source/cmd[1]</output>
 		</fcs_function>
 		
-		<lag_filter name="trash/hydraulic/source/bar[0]">
-			<input>hydraulic/source/cmd[1]</input>
-			<c1>0.5</c1>
+		<fcs_function name="trash/hydraulic/source/pump[1]">
+			<function>
+				<ifthen>
+					<and>
+						<gt>
+							<property>electric/output/aileron-booster</property>
+							<value>30</value>
+						</gt>
+						<or>
+							<lt>
+								<property>hydraulic/source/bar[1]</property>
+								<value>170</value>
+							</lt>
+							<and>
+								<gt>
+									<property>hydraulic/source/pump[1]</property>
+									<value>0</value>
+								</gt>
+								<lt>
+									<property>hydraulic/source/bar[1]</property>
+									<value>195</value>
+								</lt>
+							</and>
+						</or>
+					</and>
+					<quotient>
+						<difference>
+							<value>250</value>
+							<property>hydraulic/source/bar[1]</property>
+						</difference>
+						<value>1500</value>
+					</quotient>
+					<value>0.0</value>
+				</ifthen>
+			</function>
+			<output>hydraulic/source/pump[1]</output>
+		</fcs_function>
+
+		<fcs_function name="trash/hydraulic/source/bar[1]">
+			<function>
+				<ifthen>
+					<property>hydraulic/source/pump[1]</property>
+					<sum>
+						<property>hydraulic/source/bar[1]</property>
+						<property>hydraulic/source/pump[1]</property>
+					</sum>
+					<property>hydraulic/source/bar[1]</property>
+				</ifthen>
+			</function>
 			<output>hydraulic/source/bar[1]</output>
-		</lag_filter>
+		</fcs_function>
 		
     </channel>
     
@@ -59,19 +125,9 @@
 	</channel>
 	
 	<channel name="output">
-	
-		<fcs_function name="trash/hydraulic/aileron-booster-cmd">
-			<function>
-				<product>
-					<property>/controls/flight/aileron-booster</property>
-					<property>hydraulic/source/bar[1]</property>
-				</product>
-			</function>
-			<output>hydraulic/aileron-booster-cmd</output>
-		</fcs_function>
 		
 		<lag_filter name="trash/hydraulic/aileron-booster-lag">
-			<input>hydraulic/aileron-booster-cmd</input>
+			<input>hydraulic/source/bar[1]</input>
 			<c1>2.0</c1>
 			<output>hydraulic/aileron-booster-lag</output>
 		</lag_filter>	
@@ -79,16 +135,13 @@
 		<fcs_function name="trash/hydraulic/aileron-booster-norm">
 			<!-- if hydraulic pressure is greater than 185, normal use, otherwise drop off to 0.4 at 160 and 0 at 80 -->
 			<function>
-				<product>
-					<property>/controls/flight/aileron-booster</property>
-					<interpolate1d>
-						<property>hydraulic/aileron-booster-lag</property>
-						<v>   0.0 </v> <v> 0.0 </v>
-						<v>  80.0 </v> <v> 0.0 </v>
-						<v> 160.0 </v> <v> 0.4 </v>
-						<v> 185.0 </v> <v> 1.0 </v>
-					</interpolate1d>
-				</product>
+				<interpolate1d>
+					<property>hydraulic/aileron-booster-lag</property>
+					<v>   0.0 </v> <v> 0.0 </v>
+					<v>  80.0 </v> <v> 0.0 </v>
+					<v> 160.0 </v> <v> 0.4 </v>
+					<v> 185.0 </v> <v> 1.0 </v>
+				</interpolate1d>
 			</function>
 			<output>hydraulic/aileron-booster-norm</output>
 		</fcs_function>

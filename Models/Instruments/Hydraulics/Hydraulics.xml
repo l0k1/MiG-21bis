@@ -16,22 +16,41 @@
         </emission> 
     </animation>
     
-	<!--<animation>
+	<animation>
+		<object-name>hydraulicNeedle.001</object-name>
 		<type>rotate</type>
-		<object-name>hydraulicNeedle</object-name>
-		<property>/engines/engine/fuel-flow_pph</property>
-		<factor>0.0457</factor>
-        <center>
-            <x-m>-0.0029</x-m>
-            <y-m> 0.0002</y-m>
-            <z-m>-0.0166</z-m>
-        </center>
+		<property>/fdm/jsbsim/hydraulic/source/bar[0]</property>
+		<factor>0.398</factor> <!-- 200 is 79.6 degrees -->
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>-0.000995</x-m>
+			<y-m>-0.017270</y-m>
+			<z-m> 0.017380</z-m>
+		</center>
 		<axis>
-			<x>-1</x>
+			<x>1</x>
 			<y>0</y>
 			<z>0</z>
 		</axis>
-	</animation>-->
+	</animation>
+
+	<animation>
+		<object-name>hydraulicNeedle</object-name>
+		<type>rotate</type>
+		<property>/fdm/jsbsim/hydraulic/source/bar[1]</property>
+		<factor>-0.398</factor> <!-- 200 is 79.6 degrees -->
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>-0.00100</x-m>
+			<y-m> 0.01732</y-m>
+			<z-m>-0.01741</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
 	
 <!-- Label text -->
 

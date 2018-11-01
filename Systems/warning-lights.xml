@@ -575,6 +575,54 @@
 			<output>warning-lights/jet-nozzle-open</output>
 		</fcs_function>
 
+		<fcs_function name="trash/warning-lights/watch-bkup-syst-pres">
+			<function>
+				<product>
+					<or>
+						<lt>
+							<property>hydraulic/source/bar[1]</property>
+							<value>170</value>
+						</lt>
+						<gt>
+							<property>hydraulic/source/pump[1]</property>
+							<value>0</value>
+						</gt>
+					</or>
+					<property>/instrumentation/warning-lights/dimmer[5]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/watch-bkup-syst-pres</output>
+		</fcs_function>
+
+		<fcs_function name="trash/warning-lights/watch-main-syst-pres">
+			<function>
+				<product>
+					<or>
+						<lt>
+							<property>hydraulic/source/bar[0]</property>
+							<value>170</value>
+						</lt>
+						<gt>
+							<property>hydraulic/source/pump[0]</property>
+							<value>0</value>
+						</gt>
+					</or>
+					<property>/instrumentation/warning-lights/dimmer[5]</property>
+					<property>warning-lights/lights-dc</property>
+				</product>
+			</function>
+			<clipto>
+				<min>0</min>
+				<max>1</max>
+			</clipto>
+			<output>warning-lights/watch-main-syst-pres</output>
+		</fcs_function>
+
 	</channel>
 
 	<channel name="lights_other">

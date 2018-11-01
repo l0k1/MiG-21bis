@@ -111,6 +111,13 @@
 	<property value="0">electric/switches/lvmsp/apu-ctlr-hi-spd-low</property>
 	<property value="0">electric/switches/lvmsp/lockon-hi-lo</property>
 
+	<!--
+	left horizontal front switch panel
+			or
+	lhfsp for short
+	-->
+	<property value="0">electric/switches/lhfsp/aileron-booster</property>
+
 	<channel name="sources">
 
 		<!--
@@ -995,6 +1002,15 @@
 			</clipto>
 			<output>warning-lights/lights-dc</output>
 		</fcs_function>
+
+		<!-- misc small stuff -->
+
+		<switch name="electric/output/aileron-booster">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/lhfsp/aileron-booster == 1
+			</test>
+		</switch>
 
 
 	</channel>

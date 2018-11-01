@@ -65,7 +65,7 @@
 			<repeatable>false</repeatable>
 	  		<binding>
 	  			<command>property-toggle</command>
-	  			<property>/controls/flight/aileron-booster</property>
+	  			<property>/fdm/jsbsim/electric/switches/lhfsp/aileron-booster</property>
 	  		</binding>
 		</action>
 	</animation>
@@ -73,7 +73,7 @@
 	<animation>
 		<object-name>aileronBoosterSwitch</object-name>
 		<type>rotate</type>
-		<property>/controls/flight/aileron-booster</property>
+		<property>/fdm/jsbsim/electric/switches/lhfsp/aileron-booster</property>
 		<factor>-60</factor>
 		<offset-deg>30</offset-deg>
 		<center>
