@@ -303,7 +303,7 @@ var r27t1_guidance = func(input) {
 	return {};
 }
 
-# master contact list, for IR/LOAL/Kh-66 multihit messaging
+# master contact list, for IR/LOAL/Kh-66 multihit messaging and rwr
 
 var cx_master_list = [];
 var matching = 0;

@@ -1,15 +1,4 @@
 
-# i should rewrite this, no need to use an object here. *shrug*
-var rwr_datum = {
-	new: func(bearing, pitch, distance) {
-		var m = {parents:[rwr_datum]};
-		m.bearing = bearing;
-		m.pitch = pitch;
-		m.distance = distance;
-		return m;
-	}
-};
-
 var rwr_database = {
     "default":                  rwr_datum.new(360,90,50 * NM2M),
     "F-14B":					rwr_datum.new(65,65,200 * NM2M),
@@ -69,12 +58,12 @@ var rwr_sensor = {
     max_pitch: 0,
     strength: 0,
     missile: 0,
+    count:0,
     prop: "",
 };
 
 # min bearing is least wrt going clockwise
 # max bearing is greatest wrt going clockwise
-var sensors = [];
 append(sensors,{parents:[rwr_sensor], min_bearing: -112.5, max_bearing: 22.5,  max_pitch: 20, prop: "/instrumentation/rwr/forward-left/light-enable"});
 append(sensors,{parents:[rwr_sensor], min_bearing: -22.5,  max_bearing: 112.5, max_pitch: 20, prop: "/instrumentation/rwr/forward-right/light-enable"});
 append(sensors,{parents:[rwr_sensor], min_bearing:  157.5, max_bearing: -67.5, max_pitch: 20, prop: "/instrumentation/rwr/rear-left/light-enable"});
@@ -86,20 +75,18 @@ var sensor_update = func() {
     }
 	var myCoord = geo.aircraft_position();
 	
-    foreach (var cx; arm_locking.cx_master_list) {
+    foreach (var cx; armament_locking.cx_master_list) {
         # first the easy stuff
-        #print("for " ~ cx.get_Callsign());
+        
         #check if hidden by terrain
-        if (!radar_logic.RadarLogic.isNotBehindTerrain(cx.get_Coord())) {
+        if (!radar_logic.isNotBehindTerrain(cx.get_Coord())) {
             continue;
         }
-        #print("terrain passed");
         
         # check if the contacts radar is active
         if (!cx.isRadarActive()) {
             continue;
         }
-        #print('radar activee passed');
         
 		# set up some needed variables
 		var vectorToEcho    = vector.Math.eulerToCartesian2(myCoord.course_to(cx.get_Coord()), vector.Math.getPitch(myCoord,cx.get_Coord()));
@@ -112,24 +99,19 @@ var sensor_update = func() {
         
         # get which sensors this would potentially be affecting.
         # we are checking both pitch, and bearing
-        #print('bearing ' ~ bearing);
-        #print('rel_pitch ' ~ rel_pitch);
         for (var i = 0; i < size(sensors); i = i + 1) {
-            if (sensors[i].max_pitch < rel_pitch) {
+            if (sensors[i].max_pitch > rel_pitch) {
                 continue;
             }
             if (sensors[i].min_bearing < sensors[i].max_bearing and bearing > sensors[i].min_bearing and bearing < sensors[i].max_bearing) {
                 append(sensor_id,i);
-                #print('appendo 1');
             } elsif (sensors[i].min_bearing > sensors[i].max_bearing and (bearing > sensors[i].min_bearing or bearing < sensors[i].max_bearing)) {
                 append(sensor_id,i);
-                #print('appendo 2');
             }
         }
         if (size(sensor_id) == 0) {
             continue;
         }
-        #print('valid sensors');
         
         # get the tgt radar information
         if (contains(rwr_database,cx.get_model())) {
@@ -145,14 +127,10 @@ var sensor_update = func() {
             continue;
         }
         
-        #print('in radar cone bearing');
-
         bearing = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vectorEchoTop, vectorToEcho))-90); #pitch
         if (bearing > emit.pitch) {
             continue;
         }
-
-        #print('in radar cone pitch');
         
         # and finally, compute actual received signal strength from distance
         var distance = myCoord.direct_distance_to(cx.get_Coord());
@@ -166,9 +144,9 @@ var sensor_update = func() {
                 sig_str = 1;
             }
         }
-        #print('sig_str ' ~ sig_str);
-        foreach (var id; sensor_id){
-            sensors[id].strength = sig_str;
+        
+        for (var i = 0; i < size(sensor_id); i = i + 1){
+            sensors[i].strength = sig_str;
         }
     }
 }
@@ -187,11 +165,13 @@ var sensor_readout = func() {
         faststate = (faststate - 1) * -1;
     }
     foreach (var sensor; sensors) {
-        if (sensor.missile > 0) {
-            if (systime() - sensor.missile > 5) { # the '5' is how long in seconds it should blink for
+        if (sensor.missile == 1) {
+            if (sensor.count > 10) {
                 sensor.missile = 0;
+                sensor.count = 0;
             } else {
                 setprop(sensor.prop,faststate);
+                sensor.count = sensor.count + 1;
             }
         }
         if (sensor.missile == 0) {
@@ -251,22 +231,23 @@ var incoming_listener = func {
 						#print("Incoming!");
 						#print("author: |" ~ author ~ "|");
 						if ( author != nil ) {
-							foreach ( var cx; arm_locking.cx_master_list) {
+							foreach ( var cx; armament_locking.cx_master_list) {
 								if ( cx.get_Callsign() == author ) {
-									var myCoord 		= geo.aircraft_position();
 						    		var vectorToEcho    = vector.Math.eulerToCartesian2(myCoord.course_to(cx.get_Coord()), vector.Math.getPitch(myCoord,cx.get_Coord()));
                                     var vectorSide      = vector.Math.eulerToCartesian3Y(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue());
                                     var rel_pitch       = math.abs(vector.Math.angleBetweenVectors(vectorToEcho, vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),vectorToEcho)));
-								    var bearing 		= get_bearing(vectorToEcho, vectorToSide);
+								    var bearing = get_bearing(vectorToEcho, vectorToSide);
 								    
 								    for (var i = 0; i < size(sensors); i = i + 1) {
-                                        if (sensors[i].max_pitch < rel_pitch) {
+                                        if (sensors[i].max_pitch > rel_pitch) {
                                             continue;
                                         }
                                         if (sensors[i].min_bearing < sensors[i].max_bearing and bearing > sensors[i].min_bearing and bearing < sensors[i].max_bearing) {
-                                            sensors[i].missile = systime();
+                                            sensors[i].missile = 1;
+                                            sensors[i].count = 0;
                                         } elsif (sensors[i].min_bearing > sensors[i].max_bearing and (bearing > sensors[i].min_bearing or bearing < sensors[i].max_bearing)) {
-                                            sensors[i].missile = systime();
+                                            sensors[i].missile = 1;
+                                            sensors[i].count = 0;
                                         }
                                     }
 								}
