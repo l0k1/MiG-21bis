@@ -224,7 +224,7 @@
 				<!-- Beacon on -->
 				<int n="1" alias="/controls/lighting/beacon-switch" />
 				<!-- radar -->
-				<int n="2" alias="/controls/radar/power-panel/run" />
+				<int n="2"/>
 				<!-- Taxi light on -->
 				<int n="3" alias="/controls/lighting/taxi-light-switch" />
 				<!-- Crashed -->

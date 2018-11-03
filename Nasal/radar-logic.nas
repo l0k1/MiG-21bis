@@ -685,7 +685,7 @@ var Contact = {
       } elsif (me.rdrAct.getValue() < 0 or me.rdrAct.getValue() > 1) {
         return TRUE;
       }
-      return -me.rdrAct.getValue();
+      return (me.rdrAct.getValue() - 1) * -1;
     },
 
     isPainted: func () {
@@ -840,6 +840,20 @@ var Contact = {
             return n;
         }
         return me.get_Callsign();
+    },
+
+    get_model2: func() {
+      me.mname = split(".", split("/", me.node.getNode('sim/model/path').getValue())[-1])[0];
+      me.mname = me.remove_suffix(me.mname, "-model");
+      me.mname = me.remove_suffix(me.mname, "-anim");
+      return me.mname;
+    },
+
+    remove_suffix: func(s, x) {
+      me.len = size(x);
+      if (substr(s, -me.len) == x)
+        return substr(s, 0, size(s) - me.len);
+      return s;
     },
 
     get_Speed: func(){
@@ -1578,6 +1592,11 @@ var deviation_normdeg = func(our_heading, target_bearing) {
   var dev_norm = geo.normdeg180(our_heading - target_bearing);
   return dev_norm;
 }
+
+setlistener('/controls/radar/power-panel/run',func() {
+  var status = getprop('/controls/radar/power-panel/run');
+  setprop('/sim/multiplay/generic/int[2]', (status - 1) * -1);
+});
 
 var radarLogic = nil;
 radarLogic = RadarLogic.new();

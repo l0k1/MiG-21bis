@@ -99,7 +99,7 @@ var sensor_update = func() {
         if (!cx.isRadarActive()) {
             continue;
         }
-        #print('radar activee passed');
+        #print('radar activee passed with ' ~ cx.isRadarActive());
         
 		# set up some needed variables
 		var vectorToEcho    = vector.Math.eulerToCartesian2(myCoord.course_to(cx.get_Coord()), vector.Math.getPitch(myCoord,cx.get_Coord()));
@@ -132,10 +132,12 @@ var sensor_update = func() {
         #print('valid sensors');
         
         # get the tgt radar information
-        if (contains(rwr_database,cx.get_model())) {
-            var emit = rwr_database[cx.get_model()];
+        #print(cx.get_model2());
+        if (contains(rwr_database,cx.get_model2())) {
+            var emit = rwr_database[cx.get_model2()];
         } else {
             var emit = rwr_database["default"];
+            #print('shoocing default');
         }
         
         # check that we are in the tgt radar cone
@@ -174,7 +176,7 @@ var sensor_update = func() {
 }
 
 var blinktime = systime();
-var fasttime = systime();
+#var fasttime = systime();
 var faststate = 0;
 var blinkstate = 0;
 var sensor_readout = func() {
@@ -182,13 +184,12 @@ var sensor_readout = func() {
         blinktime = systime();
         blinkstate = (blinkstate - 1) * -1;
     }
-    if (systime() - fasttime > 0.2) {
-        fasttime = systime();
-        faststate = (faststate - 1) * -1;
-    }
+    faststate = (faststate - 1) * -1;
     foreach (var sensor; sensors) {
         if (sensor.missile > 0) {
-            if (systime() - sensor.missile > 5) { # the '5' is how long in seconds it should blink for
+        	#print("missile launched in sensor_readout");
+            if (systime() - sensor.missile > 8) { # the '8' is how long in seconds it should blink for
+        		#print("resetting missile launch");
                 sensor.missile = 0;
             } else {
                 setprop(sensor.prop,faststate);
@@ -257,7 +258,7 @@ var incoming_listener = func {
 						    		var vectorToEcho    = vector.Math.eulerToCartesian2(myCoord.course_to(cx.get_Coord()), vector.Math.getPitch(myCoord,cx.get_Coord()));
                                     var vectorSide      = vector.Math.eulerToCartesian3Y(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue());
                                     var rel_pitch       = math.abs(vector.Math.angleBetweenVectors(vectorToEcho, vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),vectorToEcho)));
-								    var bearing 		= get_bearing(vectorToEcho, vectorToSide);
+								    var bearing 		= get_bearing(vectorToEcho, vectorSide);
 								    
 								    for (var i = 0; i < size(sensors); i = i + 1) {
                                         if (sensors[i].max_pitch < rel_pitch) {
@@ -265,8 +266,10 @@ var incoming_listener = func {
                                         }
                                         if (sensors[i].min_bearing < sensors[i].max_bearing and bearing > sensors[i].min_bearing and bearing < sensors[i].max_bearing) {
                                             sensors[i].missile = systime();
+                                            #print('set sensor ' ~ i);
                                         } elsif (sensors[i].min_bearing > sensors[i].max_bearing and (bearing > sensors[i].min_bearing or bearing < sensors[i].max_bearing)) {
                                             sensors[i].missile = systime();
+                                            #print('set sensor ' ~ i);
                                         }
                                     }
 								}
@@ -279,8 +282,8 @@ var incoming_listener = func {
 	}
 }
 
-var readout_timer = maketimer(0.5,func(){sensor_readout();});
-var update_timer = maketimer(0.1,func(){sensor_update();});
+var readout_timer = maketimer(0.1,func(){sensor_readout();});
+var update_timer = maketimer(0.5,func(){sensor_update();});
 
 var init = setlistener("/sim/signals/fdm-initialized", func() {
     readout_timer.start();
