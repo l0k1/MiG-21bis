@@ -116,7 +116,7 @@
 			or
 	lhfsp for short
 	-->
-	<property value="0">electric/switches/lhfsp/aileron-booster</property>
+	<property value="1">electric/switches/lhfsp/aileron-booster</property>
 
 	<channel name="sources">
 
