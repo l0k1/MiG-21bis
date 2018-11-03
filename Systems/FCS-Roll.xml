@@ -91,8 +91,31 @@
             </sum>
         </function>
     </fcs_function>
+
+    <fcs_function name="roll gain">
+      <!-- old rate limit was 2u per .5 seconds, so 4u per 1 second -->
+      <!-- booster off = 2u per 4 seconds, or .5u per 1 second -->
+      <!-- algo is .5 = 0, 4 = 1; so:
+      .5 + (3.5 * booster)
+    -->
+      <function>
+          <sum>
+            <value>0.1</value>
+            <product>
+              <value>3.9</value>
+              <property>hydraulic/aileron-booster-norm</property>
+            </product>
+          </sum>
+      </function>
+    </fcs_function>
+
+    <actuator name="Aileron Delay ACT">
+      <input>fcs/aileron-booster</input>
+      <rate_limit>fcs/roll-gain</rate_limit>
+      <output>fcs/aileron-delay</output>
+    </actuator>
    
-   <kinematic name="Aileron Delay">
+   <!--<kinematic name="Aileron Delay">
      <input>fcs/aileron-booster</input>
 	 <traverse>
 		<setting>
@@ -104,7 +127,7 @@
 			<time>0.55</time>
 		</setting>
 	  </traverse>
-	</kinematic>
+	</kinematic>-->
 
    <aerosurface_scale name="Left Aileron Control">
       <input>fcs/aileron-delay</input>
