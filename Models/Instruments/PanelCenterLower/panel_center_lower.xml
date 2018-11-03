@@ -2,6 +2,14 @@
 
 <PropertyList>
 	<path>panel_center_lower.ac</path>
+
+		<path>namako.ac</path>
+
+	<effect>
+		<inherits-from>Aircraft/MiG-21bis/Models/Effects/cockpit/mig21-cockpit</inherits-from>
+		<object-name>panelBottomExtrusionTop</object-name>
+	</effect>
+
       <animation>
           <type>material</type>
             <object-name>labels</object-name>
