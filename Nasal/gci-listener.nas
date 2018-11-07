@@ -119,6 +119,7 @@ var check_messages = func() {
             append(msgdata,aew_cx.getNode("callsign").getValue());
             append(ids,msgdata[1]);
             parse_msg(msgdata);
+            counter = 0;
             break;
         }
     }
@@ -127,7 +128,7 @@ var check_messages = func() {
     } else {
         counter = 0;
     }
-    if (counter == 7) {
+    if (counter == max_listen_time) {
         screen.log.write("No contact from GCI.", 1.0, 0.2, 0.2);
         picture_prop.setValue(0);
         bogeydope_prop.setValue(0);
@@ -151,11 +152,7 @@ var parse_msg = func(msg) {
         return; # message is invalid
     }
     
-    if (msg[0] == "awacsgci") {
-        output = "Priority traffic from " ~ msg[7] ~ ": ";
-    } else {
-        var output = msg[0] ~ ", " ~ msg[7] ~ ", ";
-    }
+    var output = msg[0] ~ ", " ~ msg[7] ~ ", ";
     
     #debug.dump(msg);
 
