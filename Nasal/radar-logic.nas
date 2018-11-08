@@ -676,6 +676,10 @@ var Contact = {
       return valid;
     },
 
+    isVirtual: func {
+      return 0;
+    },
+
     isRadarActive: func {
       if (me.rdrAct == nil) {
         return TRUE;
@@ -1375,6 +1379,10 @@ var ContactGhost = {
 
   remove: func(){
       
+  },
+
+  isVirtual: func() {
+    return 0;
   },
 
   get_Coord: func(){
