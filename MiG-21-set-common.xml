@@ -1048,7 +1048,7 @@
 				<!--navigation, guiding and seekerhead-->
 				<seeker-field-deg type="int">80</seeker-field-deg> <!-- missiles own seekers total FOV diameter. -->
 				<guidance type="string">heat</guidance> <!-- heat/radar/semi-radar/laser/gps/vision/unguided/pitch/gyro-pitch/radiation/inertial -->
-				<navigation type="string">APN</navigation> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
+				<navigation type="string">PN</navigation> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
 				<all-aspect type="bool">true</all-aspect> <!-- bool. set to false if missile only locks on reliably to rear of target aircraft -->
 				<seeker-angular-speed-dps type="double">27</seeker-angular-speed-dps> <!-- only for heat/vision seeking missiles. Max angular speed that the target can move as seen from seeker, before seeker loses lock. -->
 				<lock-on-sun-deg type="double">10.0</lock-on-sun-deg> <!-- only for heat seeking missiles. If it looks at sun within this angle, it will lose lock on target. -->
@@ -1104,7 +1104,7 @@
 				<!--navigation, guiding and seekerhead-->
 				<seeker-field-deg type="int">80</seeker-field-deg> <!-- missiles own seekers total FOV diameter. -->
 				<guidance type="string">semi-radar</guidance> <!-- heat/radar/semi-radar/laser/gps/vision/unguided/pitch/gyro-pitch/radiation/inertial -->
-				<navigation type="string">APN</navigation> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
+				<navigation type="string">PN</navigation> <!-- guidance-law: direct/PN/APN/PNxxyy/APNxxyy (use direct for gravity bombs, use PN for very old missiles, use APN for modern missiles, use PNxxyy/APNxxyy for surface to air where xx is degrees to aim above target, yy is seconds it will do that) -->
 				<all-aspect type="bool">true</all-aspect> <!-- bool. set to false if missile only locks on reliably to rear of target aircraft -->
 				<seeker-angular-speed-dps type="double">27</seeker-angular-speed-dps> <!-- only for heat/vision seeking missiles. Max angular speed that the target can move as seen from seeker, before seeker loses lock. -->
 				<lock-on-sun-deg type="double">10.0</lock-on-sun-deg> <!-- only for heat seeking missiles. If it looks at sun within this angle, it will lose lock on target. -->
