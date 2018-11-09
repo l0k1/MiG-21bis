@@ -281,9 +281,9 @@
         <z-offset>-1.1</z-offset>
         <yaw-offset>0.0</yaw-offset>
         <pitch-offset>-3.0</pitch-offset>
-        <eda>1.0</eda>
-        <weight>520.0</weight>
-        <cd>0.4</cd>
+        <eda>1.62</eda>
+        <weight>1040.0</weight>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -306,9 +306,9 @@
         <z-offset>-1.1</z-offset>
         <yaw-offset>0.0</yaw-offset>
         <pitch-offset>-3.0</pitch-offset>
-        <eda>1.0</eda>
-        <weight>520.0</weight>
-        <cd>0.4</cd>
+        <eda>1.62</eda>
+        <weight>1040.0</weight>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -330,9 +330,9 @@
             <y-m>-2.73 </y-m>
             <z-m>-0.28</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.807</eda>
         <weight>551.0</weight>
-        <cd>0.35</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -354,9 +354,9 @@
             <y-m>-2.11 </y-m>
             <z-m>-0.25</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.807</eda>
         <weight>551.0</weight>
-        <cd>0.35</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -378,9 +378,9 @@
             <y-m> 2.11 </y-m>
             <z-m>-0.25</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.807</eda>
         <weight>551.0</weight>
-        <cd>0.35</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -401,9 +401,9 @@
             <y-m> 2.73 </y-m>
             <z-m>-0.28</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.807</eda>
         <weight>551.0</weight>
-        <cd>0.35</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -425,9 +425,9 @@
             <y-m>-2.73 </y-m>
             <z-m>-0.28</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -449,9 +449,9 @@
             <y-m>-2.11 </y-m>
             <z-m>-0.25</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -473,9 +473,9 @@
             <y-m> 2.11 </y-m>
             <z-m>-0.25</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -496,9 +496,9 @@
             <y-m> 2.73 </y-m>
             <z-m>-0.28</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -869,9 +869,9 @@
             <y-m>-2.2883</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -892,9 +892,9 @@
             <y-m>-1.9115</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -915,9 +915,9 @@
             <y-m>-2.2883</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -938,9 +938,9 @@
             <y-m>-1.9115</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -961,9 +961,9 @@
             <y-m> 1.9115</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -984,9 +984,9 @@
             <y-m> 2.2883</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -1007,9 +1007,9 @@
             <y-m> 1.9115</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -1030,9 +1030,9 @@
             <y-m> 2.2883</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -1221,9 +1221,9 @@
         <z-offset>-1.1</z-offset>
         <yaw-offset>0.0</yaw-offset>
         <pitch-offset>-3.0</pitch-offset>
-        <eda>1.0</eda>
-        <weight>520.0</weight>
-        <cd>0.4</cd>
+        <eda>1.62</eda>
+        <weight>1040.0</weight>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1244,9 +1244,9 @@
         <z-offset>-1.1</z-offset>
         <yaw-offset>0.0</yaw-offset>
         <pitch-offset>-3.0</pitch-offset>
-        <eda>1.0</eda>
-        <weight>520.0</weight>
-        <cd>0.4</cd>
+        <eda>1.62</eda>
+        <weight>1040.0</weight>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1266,9 +1266,9 @@
             <y-m>-2.73 </y-m>
             <z-m>-0.28</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.807</eda>
         <weight>551.0</weight>
-        <cd>0.35</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1288,9 +1288,9 @@
             <y-m>-2.11 </y-m>
             <z-m>-0.25</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.807</eda>
         <weight>551.0</weight>
-        <cd>0.35</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1310,9 +1310,9 @@
             <y-m> 2.11 </y-m>
             <z-m>-0.25</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.807</eda>
         <weight>551.0</weight>
-        <cd>0.35</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1331,9 +1331,9 @@
             <y-m> 2.73 </y-m>
             <z-m>-0.28</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.807</eda>
         <weight>551.0</weight>
-        <cd>0.35</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1353,9 +1353,9 @@
             <y-m>-2.73 </y-m>
             <z-m>-0.28</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1375,9 +1375,9 @@
             <y-m>-2.11 </y-m>
             <z-m>-0.25</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1397,9 +1397,9 @@
             <y-m> 2.11 </y-m>
             <z-m>-0.25</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1418,9 +1418,9 @@
             <y-m> 2.73 </y-m>
             <z-m>-0.28</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1681,9 +1681,9 @@
             <y-m>-2.2883</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1703,9 +1703,9 @@
             <y-m>-1.9115</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1725,9 +1725,9 @@
             <y-m>-2.2883</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1747,9 +1747,9 @@
             <y-m>-1.9115</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1769,9 +1769,9 @@
             <y-m> 1.9115</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1791,9 +1791,9 @@
             <y-m> 2.2883</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1813,9 +1813,9 @@
             <y-m> 1.9115</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
@@ -1835,9 +1835,9 @@
             <y-m> 2.2883</y-m>
             <z-m>-0.2689</z-m>
         </offsets>
-        <eda>1.0</eda>
+        <eda>0.667</eda>
         <weight>220.0</weight>
-        <cd>0.3</cd>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>
