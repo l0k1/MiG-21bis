@@ -40,13 +40,14 @@ input = {
 };
 
 var pos_arm = {
-	new: func(name, brevity, weight, type, id, hit_max_distance = 65, ammo_count = 0,guidance_func = nil) {
+	new: func(name, brevity, weight, type, id, rail_id, hit_max_distance = 65, ammo_count = 0,guidance_func = nil) {
 		var m = {parents:[pos_arm]};
 		m.name = name;
 		m.brevity = brevity;
 		m.weight = weight;
 		m.type = type;
 		m.id = id;
+        m.rail_id = rail_id;
 		m.type_norm = 1;
 		if ( type == "radar" or type == "beam" ) {
 			m.type_norm = 2;
@@ -62,46 +63,46 @@ var pos_arm = {
 
 var payloads = {
 	#payload format is:
-	#name: pos_arm.new(name, brevity code, weight, type/guidance, id for animations, hit message max distance (not used for guided missiles), ammo count (optional), guidance function (optional)
+	#name: pos_arm.new(name, brevity code, weight, type/guidance, id for animations, rail id, hit message max distance (not used for guided missiles), ammo count (optional), guidance function (optional)
 	#bomb names can NOT have spaces in them.
 	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy, cm
 	#regarding hit distance, the GSh-23 is coded as 35m seperately in this file
-	"none":					pos_arm.new("none","none",0,"none",0),
+	"none":					pos_arm.new("none","none",0,"none",0,0),
 	# ir missiles
-	"RS-2US":				pos_arm.new("RS-2US","RS-2US",182,"ir",1),
-	"R-55S":				pos_arm.new("R-55S","R-55S",199,"ir",2),
-	"R-3S":					pos_arm.new("R-3S","R-3S",165,"ir",3),
-	"R-13M":				pos_arm.new("R-13M","R-13M",194,"ir",4),
-	"R-60":					pos_arm.new("R-60","R-60",96,"ir",31),
-	"R-60x2":				pos_arm.new("R-60","R-60",96,"ir",32,,2), # 32 if 2 missiles loaded, 31 if 1
-	"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir",7),
+	"RS-2US":				pos_arm.new("RS-2US","RS-2US",182,"ir",1,0),
+	"R-55S":				pos_arm.new("R-55S","R-55S",199,"ir",2,0),
+	"R-3S":					pos_arm.new("R-3S","R-3S",165,"ir",3,0),
+	"R-13M":				pos_arm.new("R-13M","R-13M",194,"ir",4,0),
+	"R-60":					pos_arm.new("R-60","R-60",96,"ir",31,0),
+	"R-60x2":				pos_arm.new("R-60","R-60",96,"ir",32,,2,0), # 32 if 2 missiles loaded, 31 if 1
+	"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir",7,0),
 	# radar missiles
-	"R-3R":					pos_arm.new("R-3R","R-3R",168,"radar",8),
-	"R-27R1":				pos_arm.new("R-27R1","R-27R1",560,"radar",9),
+	"R-3R":					pos_arm.new("R-3R","R-3R",168,"radar",8,0),
+	"R-27R1":				pos_arm.new("R-27R1","R-27R1",560,"radar",9,0),
 	# bombs
-	"FAB-100":				pos_arm.new("FAB-100","FAB-100",220,"bomb",10,250),
-    "FAB-100x4":            pos_arm.new("FAB-100x4","FAB-100x4",960,"bomb",14,250), # 11,12,13,14 ids for the bombs, reducing as each bomb drops
-	"FAB-250":				pos_arm.new("FAB-250","FAB-250",551,"bomb",15,250),
-	"FAB-500":				pos_arm.new("FAB-500","FAB-500",1146,"bomb",16,250),
+	"FAB-100":				pos_arm.new("FAB-100","FAB-100",220,"bomb",10,0,250),
+    "FAB-100x4":            pos_arm.new("FAB-100x4","FAB-100x4",960,"bomb",14,1,250), # 11,12,13,14 ids for the bombs, reducing as each bomb drops
+	"FAB-250":				pos_arm.new("FAB-250","FAB-250",551,"bomb",15,0,250),
+	"FAB-500":				pos_arm.new("FAB-500","FAB-500",1146,"bomb",16,0,250),
 	# heavy
-	"RN-14T":				pos_arm.new("RN-14T","RN-14T",856,"heavy",17,500),
-	"RN-18T":				pos_arm.new("RN-18T","RN-18T",1150,"heavy",18,500),
-	"RN-24":				pos_arm.new("RN-24","RN-24",860,"heavy",19,1000),
-	"RN-28":				pos_arm.new("RN-28","RN-28",1200,"heavy",20,1000),
+	"RN-14T":				pos_arm.new("RN-14T","RN-14T",856,"heavy",17,0,500),
+	"RN-18T":				pos_arm.new("RN-18T","RN-18T",1150,"heavy",18,0,500),
+	"RN-24":				pos_arm.new("RN-24","RN-24",860,"heavy",19,0,1000),
+	"RN-28":				pos_arm.new("RN-28","RN-28",1200,"heavy",20,0,1000),
 	# anti-radiation
-	"Kh-25MP":				pos_arm.new("Kh-25MP","Kh-25MP",695,"antirad",21),
+	"Kh-25MP":				pos_arm.new("Kh-25MP","Kh-25MP",695,"antirad",21,0),
 	# beam
-	"Kh-66":				pos_arm.new("Kh-66","Kh-66",632,"beam",22),
+	"Kh-66":				pos_arm.new("Kh-66","Kh-66",632,"beam",22,0),
 	# rockets
-	"UB-16":				pos_arm.new("UB-16","UB-16",141,"rocket",23,,16),
-	"UB-32":				pos_arm.new("UB-32","UB-32",582,"rocket",24,,32),
-	"S-21":					pos_arm.new("S-21","S-21",341,"heavyrocket",25,60), # google search for с-21 ракет (cyrillic)
-	"S-24":					pos_arm.new("S-24","S-24",518,"heavyrocket",26,60),
-	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank","PTB-490 Droptank",180,"tank",27),
-	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank","PTB-800 Droptank",230,"tank",28),
-	"Smokepod":				pos_arm.new("Smokepod","Smokepod",157,"tank",29),
+	"UB-16":				pos_arm.new("UB-16","UB-16",141,"rocket",23,0,,16),
+	"UB-32":				pos_arm.new("UB-32","UB-32",582,"rocket",24,0,,32),
+	"S-21":					pos_arm.new("S-21","S-21",341,"heavyrocket",25,0,60), # google search for с-21 ракет (cyrillic)
+	"S-24":					pos_arm.new("S-24","S-24",518,"heavyrocket",26,0,60),
+	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank","PTB-490 Droptank",180,"tank",27,0),
+	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank","PTB-800 Droptank",230,"tank",28,0),
+	"Smokepod":				pos_arm.new("Smokepod","Smokepod",157,"tank",29,0),
     # countermeasures
-    "Conformal CM":         pos_arm.new("Conformal CM","Conformal CM",210,"cm",30),
+    "Conformal CM":         pos_arm.new("Conformal CM","Conformal CM",210,"cm",30,0),
 };
 
 # add in virtual pylons too
@@ -173,7 +174,12 @@ var update_pylons = func(pylon) {
 
 var create_pylon = func(pylon, payload, selected) {
     # if its a missile, set it up as a missile
-    setprop("/payload/weight["~pylon~"]/id",payload.id);
+    if(pylon != 7 and pylon != 8) {
+        setprop("/payload/weight["~pylon~"]/id",payload.id);
+    }
+    if ( selected != "none" and pylon != 7 and pylon != 8 ) {
+        setprop("/payload/rail["~pylon~"]/id", payload.rail_id);
+    }
     if (    payload.type == "ir" or
             payload.type == "radar" or
             payload.type == "antirad" or

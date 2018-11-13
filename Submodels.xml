@@ -865,9 +865,11 @@
         <repeat>true</repeat>
         <delay>5</delay>
         <offsets>
-            <x-m>-0.3584</x-m>
-            <y-m>-2.2883</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m>-0.236927</x-m>
+            <y-m>-2.25938</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -888,9 +890,11 @@
         <repeat>true</repeat>
         <delay>5</delay>
         <offsets>
-            <x-m>-0.3584</x-m>
-            <y-m>-1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m>-0.236927</x-m>
+            <y-m>-1.95774</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -911,9 +915,11 @@
         <repeat>true</repeat>
         <delay>5</delay>
         <offsets>
-            <x-m> 0.6295</x-m>
-            <y-m>-2.2883</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m>-2.259380</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -934,9 +940,11 @@
         <repeat>true</repeat>
         <delay>5</delay>
         <offsets>
-            <x-m> 0.6295</x-m>
-            <y-m>-1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m>-1.957740</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -957,9 +965,11 @@
         <repeat>true</repeat>
         <delay>5</delay>
         <offsets>
-            <x-m>-0.3584</x-m>
-            <y-m> 1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m>-0.236927</x-m>
+            <y-m> 2.25938</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -980,9 +990,11 @@
         <repeat>true</repeat>
         <delay>5</delay>
         <offsets>
-            <x-m>-0.3584</x-m>
-            <y-m> 2.2883</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m>-0.236927</x-m>
+            <y-m> 1.95774</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -1003,9 +1015,11 @@
         <repeat>true</repeat>
         <delay>5</delay>
         <offsets>
-            <x-m> 0.6295</x-m>
-            <y-m> 1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m> 2.259380</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -1026,9 +1040,11 @@
         <repeat>true</repeat>
         <delay>5</delay>
         <offsets>
-            <x-m> 0.6295</x-m>
-            <y-m> 2.2883</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m> 1.957740</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -1677,9 +1693,11 @@
         <delay>5</delay>
         <count>-1</count>
         <offsets>
-            <x-m>-0.3584</x-m>
-            <y-m>-2.2883</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m>-0.236927</x-m>
+            <y-m>-2.25938</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -1699,9 +1717,11 @@
         <delay>5</delay>
         <count>-1</count>
         <offsets>
-            <x-m>-0.3584</x-m>
-            <y-m>-1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m>-0.236927</x-m>
+            <y-m>-1.95774</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -1721,9 +1741,11 @@
         <delay>5</delay>
         <count>-1</count>
         <offsets>
-            <x-m> 0.6295</x-m>
-            <y-m>-2.2883</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m>-2.259380</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -1743,9 +1765,11 @@
         <delay>5</delay>
         <count>-1</count>
         <offsets>
-            <x-m> 0.6295</x-m>
-            <y-m>-1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m>-1.957740</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -1765,9 +1789,11 @@
         <delay>5</delay>
         <count>-1</count>
         <offsets>
-            <x-m>-0.3584</x-m>
-            <y-m> 1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m>-0.236927</x-m>
+            <y-m> 2.25938</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -1787,9 +1813,11 @@
         <delay>5</delay>
         <count>-1</count>
         <offsets>
-            <x-m>-0.3584</x-m>
-            <y-m> 2.2883</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m>-0.236927</x-m>
+            <y-m> 1.95774</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -1809,9 +1837,11 @@
         <delay>5</delay>
         <count>-1</count>
         <offsets>
-            <x-m> 0.6295</x-m>
-            <y-m> 1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m> 2.259380</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>
@@ -1831,9 +1861,11 @@
         <delay>5</delay>
         <count>-1</count>
         <offsets>
-            <x-m> 0.6295</x-m>
-            <y-m> 2.2883</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m> 1.957740</y-m>
+            <z-m>-0.344914</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
         </offsets>
         <eda>0.667</eda>
         <weight>220.0</weight>

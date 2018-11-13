@@ -244,6 +244,7 @@
 				<string n="15" alias="/payload/weight[4]/selected"/>
 				<string n="16" alias="/payload/weight[5]/selected"/>
 				<string n="17" alias="/payload/weight[6]/selected"/>-->
+				<!--payloads-->
 				<short n="0" alias="/payload/weight[0]/id"/>
 				<short n="1" alias="/payload/weight[1]/id"/>
 				<short n="2" alias="/payload/weight[2]/id"/>
@@ -251,6 +252,12 @@
 				<short n="4" alias="/payload/weight[4]/id"/>
 				<short n="5" alias="/payload/weight[5]/id"/>
 				<short n="6" alias="/payload/weight[6]/id"/>
+				<!--payload rails-->
+				<short n="7" alias="/payload/rail[0]/id"/>
+				<short n="8" alias="/payload/rail[1]/id"/>
+				<short n="9" alias="/payload/rail[2]/id"/>
+				<short n="10" alias="/payload/rail[3]/id"/>
+				<short n="11" alias="/payload/rail[4]/id"/>
 				<bool n="0" alias ="/instrumentation/gci/picture"/> <!-- gci request -->
 				<bool n="1" alias ="/instrumentation/gci/bogeydope"/> <!-- gci request -->
 				<bool n="2" alias ="/instrumentation/gci/cutoff"/> <!-- gci request -->

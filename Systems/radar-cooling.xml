@@ -39,7 +39,7 @@
                             <product>
                                 <property>radar/coolant-temp-c-delta</property>
                                 <value>-1</value>
-                            <product>
+                            </product>
                             <value>0</value>
                         </ifthen>
                         <!-- radar is in standby mode -->
@@ -99,7 +99,7 @@
                         <property>electric/sources/ac-volts</property>
                         <value>110</value>
                     </gt>
-                    <property>controls/radar/power-panel/run</property>
+                    <property>/controls/radar/power-panel/run</property>
                 </product>
             </function>
             <output>radar/mode</output>

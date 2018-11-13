@@ -373,10 +373,11 @@
 		<name>FAB-100 Left Inner Front Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
 		<offsets>
-			<x-m>-0.3584</x-m>
-            <y-m>-2.2883</y-m>
-            <z-m>-0.2689</z-m>
+			<x-m>-0.236927</x-m>
+            <y-m>-2.25938</y-m>
+            <z-m>-0.344914</z-m>
 			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>-17.6</roll-deg>
 		</offsets>
 	</model>
 	
@@ -395,10 +396,11 @@
 		<name>FAB-100 Left Inner Front Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
 		<offsets>
-            <x-m>-0.3584</x-m>
-            <y-m>-1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m>-0.236927</x-m>
+            <y-m>-1.95774</y-m>
+            <z-m>-0.344914</z-m>
 			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>17.6</roll-deg>
 		</offsets>
 	</model>
 	
@@ -423,10 +425,11 @@
 		<name>FAB-100 Left Inner Rear Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
 		<offsets>
-            <x-m> 0.6295</x-m>
-            <y-m>-2.2883</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m>-2.259380</y-m>
+            <z-m>-0.344914</z-m>
 			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>-17.6</roll-deg>
 		</offsets>
 	</model>
 	
@@ -455,10 +458,11 @@
 		<name>FAB-100 Left Inner Rear Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
 		<offsets>
-            <x-m> 0.6295</x-m>
-            <y-m>-1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m>-1.957740</y-m>
+            <z-m>-0.344914</z-m>
 			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>17.6</roll-deg>
 		</offsets>
 	</model>
 	
@@ -491,10 +495,11 @@
 		<name>FAB-100 Right Inner Front Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
 		<offsets>
-            <x-m>-0.3584</x-m>
-            <y-m> 1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m>-0.236927</x-m>
+            <y-m> 2.25938</y-m>
+            <z-m>-0.344914</z-m>
 			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>17.6</roll-deg>
 		</offsets>
 	</model>
 	
@@ -513,10 +518,11 @@
 		<name>FAB-100 Right Inner Front Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
 		<offsets>
-            <x-m>-0.3584</x-m>
-            <y-m> 2.2883</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m>-0.236927</x-m>
+            <y-m> 1.95774</y-m>
+            <z-m>-0.344914</z-m>
 			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>-17.6</roll-deg>
 		</offsets>
 	</model>
 	
@@ -541,10 +547,11 @@
 		<name>FAB-100 Right Inner Rear Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
 		<offsets>
-            <x-m> 0.6295</x-m>
-            <y-m> 1.9115</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m> 2.259380</y-m>
+            <z-m>-0.344914</z-m>
 			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>17.6</roll-deg>
 		</offsets>
 	</model>
 	
@@ -573,10 +580,11 @@
 		<name>FAB-100 Right Inner Rear Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
 		<offsets>
-            <x-m> 0.6295</x-m>
-            <y-m> 2.2883</y-m>
-            <z-m>-0.2689</z-m>
+            <x-m> 0.981207</x-m>
+            <y-m> 1.957740</y-m>
+            <z-m>-0.344914</z-m>
 			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>-17.6</roll-deg>
 		</offsets>
 	</model>
 	
@@ -977,7 +985,11 @@
 		</condition>
 	</animation>
 	
-	<!-- R-27 -->
+	<!-- 
+
+	R-27 
+
+	-->
 	
 	<model>
 		<name>R-27R1 Missile Left</name>
@@ -1610,6 +1622,56 @@
 			<equals>
                   <property>sim/multiplay/generic/short[6]</property>
                   <value>30</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<!--
+
+	MBD2-67U
+
+	-->
+
+	<model>
+		<name>MBD2-67U Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Rails/MBD2-67U/MBD2-67U.xml</path>
+		<offsets>
+			<x-m> 0.286156</x-m>
+			<y-m>-2.108560</y-m>
+			<z-m>-0.184571</z-m>
+			<roll-deg>0</roll-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>MBD2-67U Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/short[8]</property>
+                  <value>1</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>MBD2-67U Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Rails/MBD2-67U/MBD2-67U.xml</path>
+		<offsets>
+			<x-m> 0.286156</x-m>
+			<y-m> 2.108560</y-m>
+			<z-m>-0.184571</z-m>
+			<roll-deg>0</roll-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>MBD2-67U Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/short[10]</property>
+                  <value>1</value>
             </equals>
 		</condition>
 	</animation>
