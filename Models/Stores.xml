@@ -619,9 +619,9 @@
 		<name>Kh-25MP Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/KH-25MP/KH-25MP.xml</path>
 		<offsets>
-			<x-m> 0.23552 </x-m>
-			<y-m>-2.10877 </y-m>
-			<z-m>-0.25002 </z-m>
+			<x-m>-0.252185</x-m>
+			<y-m>-2.10873</y-m>
+			<z-m>-0.36781</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -641,9 +641,9 @@
 		<name>Kh-25MP Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/KH-25MP/KH-25MP.xml</path>
 		<offsets>
-			<x-m> 0.23552 </x-m>
-			<y-m> 2.10877 </y-m>
-			<z-m>-0.25002 </z-m>
+			<x-m>-0.252185</x-m>
+			<y-m> 2.10873</y-m>
+			<z-m>-0.36781</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1179,9 +1179,9 @@
 		<name>S-24 Left Inner</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
 		<offsets>
-			<x-m> 0.15</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.23</z-m>
+			<x-m> 0.032842</x-m>
+			<y-m>-2.10885</y-m>
+			<z-m>-0.350445</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1201,9 +1201,9 @@
 		<name>S-24 Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
 		<offsets>
-			<x-m> 1.00</x-m>
-			<y-m>-2.73 </y-m>
-			<z-m>-0.26</z-m>
+			<x-m>0.935301</x-m>
+			<y-m>-2.73253</y-m>
+			<z-m>-0.38351</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1223,9 +1223,9 @@
 		<name>S-24 Right Inner</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
 		<offsets>
-			<x-m> 0.15</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.23</z-m>
+			<x-m> 0.032842</x-m>
+			<y-m> 2.10885</y-m>
+			<z-m>-0.350445</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1245,9 +1245,9 @@
 		<name>S-24 Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
 		<offsets>
-			<x-m> 1.00</x-m>
-			<y-m>2.73 </y-m>
-			<z-m>-0.26</z-m>
+			<x-m>0.935301</x-m>
+			<y-m>2.73253</y-m>
+			<z-m>-0.38351</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1497,10 +1497,10 @@
 		<name>Kh-66 Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
 		<offsets>
-			<x-m> 1.05241</x-m>
-			<y-m>-2.73047</y-m>
-			<z-m>-0.29750</z-m>
-			<pitch-deg>0.9</pitch-deg>
+			<x-m> 0.82769</x-m>
+			<y-m>-2.73252</y-m>
+			<z-m>-0.399052</z-m>
+			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
 
@@ -1519,10 +1519,10 @@
 		<name>Kh-66 Left Inner</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
 		<offsets>
-			<x-m> 0.16698</x-m>
-			<y-m>-2.10773</y-m>
-			<z-m>-0.25644</z-m>
-			<pitch-deg>0.9</pitch-deg>
+			<x-m>-0.091999</x-m>
+			<y-m>-2.10856</y-m>
+			<z-m>-0.367826</z-m>
+			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
 
@@ -1541,10 +1541,10 @@
 		<name>Kh-66 Right Inner</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
 		<offsets>
-			<x-m> 0.16698</x-m>
-			<y-m> 2.10773</y-m>
-			<z-m>-0.25644</z-m>
-			<pitch-deg>0.9</pitch-deg>
+			<x-m>-0.091999</x-m>
+			<y-m> 2.10856</y-m>
+			<z-m>-0.367826</z-m>
+			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
 
@@ -1563,10 +1563,10 @@
 		<name>Kh-66 Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
 		<offsets>
-			<x-m> 1.05241</x-m>
-			<y-m> 2.73047</y-m>
-			<z-m>-0.29750</z-m>
-			<pitch-deg>0.9</pitch-deg>
+			<x-m> 0.82769</x-m>
+			<y-m> 2.73252</y-m>
+			<z-m>-0.399052</z-m>
+			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
 
@@ -1630,6 +1630,8 @@
 
 	MBD2-67U
 
+	FAB-100x4 rack
+
 	-->
 
 	<model>
@@ -1675,5 +1677,106 @@
             </equals>
 		</condition>
 	</animation>
+
+	<!-- 
+
+	APU-68
+
+	used with:
+	kh-25mp
+	kh-66
+	r-55
+	s-24
+
+
+	-->
+
+	<model>
+		<name>APU-68 Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
+		<offsets>
+			<x-m> 0.943511</x-m>
+			<y-m>-2.73252</y-m>
+			<z-m>-0.239961</z-m>
+			<roll-deg>0</roll-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>APU-68 Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/short[7]</property>
+                  <value>2</value>
+            </equals>
+		</condition>
+	</animation>	
+
+	<model>
+		<name>APU-68 Left Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
+		<offsets>
+			<x-m> 0.023726</x-m>
+			<y-m>-2.10879</y-m>
+			<z-m>-0.208664</z-m>
+			<roll-deg>0</roll-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>APU-68 Left Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/short[8]</property>
+                  <value>2</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>APU-68 Right Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
+		<offsets>
+			<x-m> 0.023726</x-m>
+			<y-m> 2.10879</y-m>
+			<z-m>-0.208664</z-m>
+			<roll-deg>0</roll-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>APU-68 Right Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/short[10]</property>
+                  <value>2</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>APU-68 Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
+		<offsets>
+			<x-m> 0.943511</x-m>
+			<y-m> 2.73252</y-m>
+			<z-m>-0.239961</z-m>
+			<roll-deg>0</roll-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>APU-68 Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/short[11]</property>
+                  <value>2</value>
+            </equals>
+		</condition>
+	</animation>	
 
 </PropertyList>

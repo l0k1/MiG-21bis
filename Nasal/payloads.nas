@@ -70,7 +70,7 @@ var payloads = {
 	"none":					pos_arm.new("none","none",0,"none",0,0),
 	# ir missiles
 	"RS-2US":				pos_arm.new("RS-2US","RS-2US",182,"ir",1,0),
-	"R-55S":				pos_arm.new("R-55S","R-55S",199,"ir",2,0),
+	"R-55S":				pos_arm.new("R-55S","R-55S",199,"ir",2,2),
 	"R-3S":					pos_arm.new("R-3S","R-3S",165,"ir",3,0),
 	"R-13M":				pos_arm.new("R-13M","R-13M",194,"ir",4,0),
 	"R-60":					pos_arm.new("R-60","R-60",96,"ir",31,0),
@@ -90,14 +90,14 @@ var payloads = {
 	"RN-24":				pos_arm.new("RN-24","RN-24",860,"heavy",19,0,1000),
 	"RN-28":				pos_arm.new("RN-28","RN-28",1200,"heavy",20,0,1000),
 	# anti-radiation
-	"Kh-25MP":				pos_arm.new("Kh-25MP","Kh-25MP",695,"antirad",21,0),
+	"Kh-25MP":				pos_arm.new("Kh-25MP","Kh-25MP",695,"antirad",21,2),
 	# beam
-	"Kh-66":				pos_arm.new("Kh-66","Kh-66",632,"beam",22,0),
+	"Kh-66":				pos_arm.new("Kh-66","Kh-66",632,"beam",22,2),
 	# rockets
 	"UB-16":				pos_arm.new("UB-16","UB-16",141,"rocket",23,0,,16),
 	"UB-32":				pos_arm.new("UB-32","UB-32",582,"rocket",24,0,,32),
 	"S-21":					pos_arm.new("S-21","S-21",341,"heavyrocket",25,0,60), # google search for с-21 ракет (cyrillic)
-	"S-24":					pos_arm.new("S-24","S-24",518,"heavyrocket",26,0,60),
+	"S-24":					pos_arm.new("S-24","S-24",518,"heavyrocket",26,2,60),
 	"PTB-490 Droptank":		pos_arm.new("PTB-490 Droptank","PTB-490 Droptank",180,"tank",27,0),
 	"PTB-800 Droptank":		pos_arm.new("PTB-800 Droptank","PTB-800 Droptank",230,"tank",28,0),
 	"Smokepod":				pos_arm.new("Smokepod","Smokepod",157,"tank",29,0),
