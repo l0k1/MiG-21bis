@@ -847,10 +847,14 @@ var Contact = {
     },
 
     get_model2: func() {
-      me.mname = split(".", split("/", me.node.getNode('sim/model/path').getValue())[-1])[0];
-      me.mname = me.remove_suffix(me.mname, "-model");
-      me.mname = me.remove_suffix(me.mname, "-anim");
-      return me.mname;
+      if (me.node.getNode('sim/model/path') != nil) {
+        me.mname = split(".", split("/", me.node.getNode('sim/model/path').getValue())[-1])[0];
+        me.mname = me.remove_suffix(me.mname, "-model");
+        me.mname = me.remove_suffix(me.mname, "-anim");
+        return me.mname;
+      } else {
+        return me.get_Callsign();
+      }
     },
 
     remove_suffix: func(s, x) {
