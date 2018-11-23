@@ -665,9 +665,9 @@
 		<name>R-3S Missile Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
 		<offsets>
-			<x-m> 0.852521</x-m>
-			<y-m>-2.732630</y-m>
-			<z-m>-0.208252</z-m>
+			<x-m> 1.03545</x-m>
+			<y-m>-2.73227</y-m>
+			<z-m>-0.405888</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -687,9 +687,9 @@
 		<name>R-3S Missile Inner Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
 		<offsets>
-			<x-m>-0.048893</x-m>
-			<y-m>-2.10896</y-m>
-			<z-m>-0.178084</z-m>
+			<x-m> 0.101503</x-m>
+			<y-m>-2.10897</y-m>
+			<z-m>-0.372696</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -709,9 +709,9 @@
 		<name>R-3S Missile Inner Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
 		<offsets>
-			<x-m>-0.048893</x-m>
-			<y-m> 2.10896</y-m>
-			<z-m>-0.178084</z-m>
+			<x-m> 0.101503</x-m>
+			<y-m>2.10897</y-m>
+			<z-m>-0.372696</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -731,9 +731,9 @@
 		<name>R-3S Missile Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
 		<offsets>
-			<x-m> 0.852521</x-m>
-			<y-m> 2.732630</y-m>
-			<z-m>-0.208252</z-m>
+			<x-m> 1.03545</x-m>
+			<y-m> 2.73227</y-m>
+			<z-m>-0.405888</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -755,9 +755,9 @@
 		<name>R-3R Missile Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
 		<offsets>
-			<x-m> 0.852521</x-m>
-			<y-m>-2.732630</y-m>
-			<z-m>-0.208252</z-m>
+			<x-m> 1.03545</x-m>
+			<y-m>-2.73227</y-m>
+			<z-m>-0.405888</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -777,9 +777,9 @@
 		<name>R-3R Missile Inner Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
 		<offsets>
-			<x-m>-0.048893</x-m>
-			<y-m>-2.10896</y-m>
-			<z-m>-0.178084</z-m>
+			<x-m> 0.101503</x-m>
+			<y-m>-2.10897</y-m>
+			<z-m>-0.372696</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -799,9 +799,9 @@
 		<name>R-3R Missile Inner Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
 		<offsets>
-			<x-m>-0.048893</x-m>
-			<y-m> 2.10896</y-m>
-			<z-m>-0.178084</z-m>
+			<x-m> 0.101503</x-m>
+			<y-m> 2.10897</y-m>
+			<z-m>-0.372696</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -821,9 +821,9 @@
 		<name>R-3R Missile Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
 		<offsets>
-			<x-m> 0.852521</x-m>
-			<y-m> 2.732630</y-m>
-			<z-m>-0.208252</z-m>
+			<x-m> 1.03545</x-m>
+			<y-m> 2.73227</y-m>
+			<z-m>-0.405888</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -995,9 +995,9 @@
 		<name>R-27R1 Missile Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
 		<offsets>
-			<x-m> 0.70</x-m>
-			<y-m>-2.73 </y-m>
-			<z-m>-0.26</z-m>
+			<x-m> 1.17317</x-m>
+			<y-m>-2.72904</y-m>
+			<z-m>-0.445723</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1017,9 +1017,9 @@
 		<name>R-27R1 Missile Left Inner</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
 		<offsets>
-			<x-m> -0.15</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.23</z-m>
+			<x-m> 0.170484</x-m>
+			<y-m>-2.10897</y-m>
+			<z-m>-0.412575</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1039,9 +1039,9 @@
 		<name>R-27R1 Missile Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
 		<offsets>
-			<x-m> 0.70</x-m>
-			<y-m>2.73 </y-m>
-			<z-m>-0.26</z-m>
+			<x-m> 1.17317</x-m>
+			<y-m> 2.72904</y-m>
+			<z-m>-0.445723</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1061,9 +1061,9 @@
 		<name>R-27R1 Missile Right Inner</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
 		<offsets>
-			<x-m> -0.15</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.23</z-m>
+			<x-m> 0.170484</x-m>
+			<y-m> 2.10897</y-m>
+			<z-m>-0.412575</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1083,9 +1083,9 @@
 		<name>R-27T1 Missile Left</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
 		<offsets>
-			<x-m> 0.70</x-m>
-			<y-m>-2.73 </y-m>
-			<z-m>-0.26</z-m>
+			<x-m> 1.17317</x-m>
+			<y-m>-2.72904</y-m>
+			<z-m>-0.445723</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1105,9 +1105,9 @@
 		<name>R-27T1 Missile Left Inner</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
 		<offsets>
-			<x-m> -0.15</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.23</z-m>
+			<x-m> 0.170484</x-m>
+			<y-m>-2.10897</y-m>
+			<z-m>-0.412575</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1127,9 +1127,9 @@
 		<name>R-27T1 Missile Right</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
 		<offsets>
-			<x-m> 0.70</x-m>
-			<y-m>2.73 </y-m>
-			<z-m>-0.26</z-m>
+			<x-m> 1.17317</x-m>
+			<y-m> 2.72904</y-m>
+			<z-m>-0.445723</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1149,9 +1149,9 @@
 		<name>R-27T1 Missile Right Inner</name>
 		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
 		<offsets>
-			<x-m> -0.15</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.23</z-m>
+			<x-m> 0.170484</x-m>
+			<y-m> 2.10897</y-m>
+			<z-m>-0.412575</z-m>
 			<pitch-deg>0.0</pitch-deg>
 		</offsets>
 	</model>
@@ -1777,6 +1777,107 @@
                   <value>2</value>
             </equals>
 		</condition>
-	</animation>	
+	</animation>
+
+	<!--
+
+	APU-13 U2
+
+	used with:
+	R-3R
+	R-3S
+	R-13
+
+	maybe used with the r-27?
+
+	-->
+
+	<model>
+		<name>APU-13U2 Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
+		<offsets>
+			<x-m> 1.32583</x-m>
+			<y-m>-2.73227</y-m>
+			<z-m>-0.244649</z-m>
+			<roll-deg>0</roll-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>APU-13U2 Left</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/short[7]</property>
+                  <value>3</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>APU-13U2 Left Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
+		<offsets>
+			<x-m> 0.390588</x-m>
+			<y-m>-2.10897</y-m>
+			<z-m>-0.211456</z-m>
+			<roll-deg>0</roll-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>APU-13U2 Left Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/short[8]</property>
+                  <value>3</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>APU-13U2 Right Inner</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
+		<offsets>
+			<x-m> 0.390588</x-m>
+			<y-m> 2.10897</y-m>
+			<z-m>-0.211456</z-m>
+			<roll-deg>0</roll-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>APU-13U2 Right Inner</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/short[10]</property>
+                  <value>3</value>
+            </equals>
+		</condition>
+	</animation>
+
+	<model>
+		<name>APU-13U2 Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
+		<offsets>
+			<x-m> 1.32583</x-m>
+			<y-m> 2.73227</y-m>
+			<z-m>-0.244649</z-m>
+			<roll-deg>0</roll-deg>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>APU-13U2 Right</object-name>
+		<type>select</type>
+		<condition>
+			<equals>
+                  <property>sim/multiplay/generic/short[11]</property>
+                  <value>3</value>
+            </equals>
+		</condition>
+	</animation>
 
 </PropertyList>

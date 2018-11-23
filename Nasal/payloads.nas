@@ -67,18 +67,23 @@ var payloads = {
 	#bomb names can NOT have spaces in them.
 	#type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy, cm
 	#regarding hit distance, the GSh-23 is coded as 35m seperately in this file
+    # rail ID's are:
+    # 0 - none
+    # 1 - MBD2-67U
+    # 2 - APU-68
+    # 3 - APU-13U2
 	"none":					pos_arm.new("none","none",0,"none",0,0),
 	# ir missiles
 	"RS-2US":				pos_arm.new("RS-2US","RS-2US",182,"ir",1,0),
 	"R-55S":				pos_arm.new("R-55S","R-55S",199,"ir",2,2),
-	"R-3S":					pos_arm.new("R-3S","R-3S",165,"ir",3,0),
-	"R-13M":				pos_arm.new("R-13M","R-13M",194,"ir",4,0),
+	"R-3S":					pos_arm.new("R-3S","R-3S",165,"ir",3,3),
+	"R-13M":				pos_arm.new("R-13M","R-13M",194,"ir",4,3),
 	"R-60":					pos_arm.new("R-60","R-60",96,"ir",31,0),
 	"R-60x2":				pos_arm.new("R-60","R-60",96,"ir",32,0,,2), # 32 if 2 missiles loaded, 31 if 1
-	"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir",7,0),
+	"R-27T1":				pos_arm.new("R-27T1","R-27T1",550,"ir",7,3),
 	# radar missiles
-	"R-3R":					pos_arm.new("R-3R","R-3R",168,"radar",8,0),
-	"R-27R1":				pos_arm.new("R-27R1","R-27R1",560,"radar",9,0),
+	"R-3R":					pos_arm.new("R-3R","R-3R",168,"radar",8,3),
+	"R-27R1":				pos_arm.new("R-27R1","R-27R1",560,"radar",9,3),
 	# bombs
 	"FAB-100":				pos_arm.new("FAB-100","FAB-100",220,"bomb",10,0,250),
     "FAB-100x4":            pos_arm.new("FAB-100x4","FAB-100x4",960,"bomb",14,1,250), # 11,12,13,14 ids for the bombs, reducing as each bomb drops
