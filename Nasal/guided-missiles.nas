@@ -447,7 +447,7 @@ var AIM = {
 		}
         if (m.pro_constant == nil) {
         	if (find("APN", m.guidanceLaw)!=-1) {
-        		m.pro_constant = 5;
+        		m.pro_constant = 3;
         	} else {
 	        	m.pro_constant = 3;
 	        }
@@ -2130,13 +2130,17 @@ var AIM = {
 		} elsif (mach < 1.2 ) {
 			me.Cd0 = (0.3742 * math.pow(mach, 2) - 0.252 * mach + 0.0021 + 0.2 ) * 5 * (me.Cd_base+me.Cd_delta*me.deploy);
 		} else {
-			me.Cd0 = (0.2965 * math.pow(mach, -1.1506) + 0.2) * 5 * (me.Cd_base+me.Cd_delta*me.deploy);
+			if (!me.advanced) {
+                me.Cd0 = (0.2965 * math.pow(mach, -1.1506) + 0.2) * 5 * (me.Cd_base+me.Cd_delta*me.deploy);
+            } else {
+                me.Cd0 = (0.2965 * math.pow(mach, -2.1506) + 0.073766412) * 8 * (me.Cd_base+me.Cd_delta*me.deploy);
+            }
 		}
 		if (me.advanced) {			
-			if (N==nil) N=1;
-			else N=N+1;
+			if (N==nil) N=0;
+			if (me.vector_thrust and me.thrust_lbf>0) N=N*0.5;
 			if (mach < 1.0) {
-				me.Cdi = me.Cd0*N;# N = normal force in G
+				me.Cdi = (me.Cd_base+me.Cd_delta*me.deploy)*N;# N = normal force in G
 			} else {
 				N = N * me.mass * g_fps;# N = normal force in LBF (me.mass is in slugs)
 				me.CN  = 2*N/(me.rho*me.old_speed_fps*me.old_speed_fps*me.ref_area_sqft);
@@ -2163,6 +2167,7 @@ var AIM = {
 		# extra/inter-polation:
 		# f(x) = y1 + ((x - x1) / (x2 - x1)) * (y2 - y1)
 		# calculate its performance at current air density:
+		if (me.vector_thrust and me.thrust_lbf==0) max_g_sealevel=max_g_sealevel*0.666;
 		return me.clamp(max_g_sealevel+((rho-0.0023769)/(0.00036159-0.0023769))*(max_g_sealevel*0.5909-max_g_sealevel),0.25,100);
 	},
 
@@ -3080,7 +3085,8 @@ var AIM = {
 				me.toBody = math.cos(me.curr_deviation_h*D2R);#convert perpendicular LOS acc. to perpendicular body acc.
 				if (me.toBody==0) me.toBody=0.00001;
 				# acceleration perpendicular to instantaneous line of sight in feet/sec^2:
-				me.acc_lateral_fps2 = me.pro_constant*me.line_of_sight_rate_rps*me.horz_closing_rate_fps/me.toBody+me.pro_constant*me.t_LOS_norm_acc_fps2*0.5;# in some litterature the second pro_constant is replaced by t_go, but that will make the missile overcompensate.
+				me.acc_lateral_fps2 = me.pro_constant*me.line_of_sight_rate_rps*me.horz_closing_rate_fps+me.t_LOS_norm_acc_fps2;# in some litterature the second pro_constant is replaced by t_go, but that will make the missile overcompensate.
+				me.acc_lateral_fps2 /= me.toBody;
 				#printf("vert acc = %.2f + %.2f G", me.pro_constant*me.line_of_sight_rate_up_rps*me.vert_closing_rate_fps/g_fps, (me.apn*me.pro_constant*me.t_LOS_elev_norm_acc/2)/g_fps);
 				me.velocity_vector_length_fps = me.clamp(me.old_speed_horz_fps, 0.0001, 1000000);
 				me.commanded_lateral_vector_length_fps = me.acc_lateral_fps2*me.dt;
@@ -3090,7 +3096,8 @@ var AIM = {
 				# Generalized Proportional navigation.
 				me.toBody = math.cos(me.curr_deviation_h*D2R);#convert perpendicular LOS acc. to perpendicular body acc.
 				if (me.toBody==0) me.toBody=0.00001;
-				me.acc_lateral_fps2     = me.pro_constant*me.line_of_sight_rate_rps*me.horz_closing_rate_fps/me.toBody;
+				me.acc_lateral_fps2     = me.pro_constant*me.line_of_sight_rate_rps*me.horz_closing_rate_fps;
+				me.acc_lateral_fps2 /= me.toBody;
 				me.velocity_vector_length_fps = me.clamp(me.old_speed_horz_fps, 0.0001, 1000000);
 				me.commanded_lateral_vector_length_fps = me.acc_lateral_fps2*me.dt;
 				me.raw_steer_signal_head  = R2D*me.commanded_lateral_vector_length_fps/me.velocity_vector_length_fps;
@@ -3154,7 +3161,8 @@ var AIM = {
 						# Augmented proportional navigation. Takes target acc. into account.
 						me.toBody = math.cos(me.curr_deviation_e*D2R);#convert perpendicular LOS acc. to perpendicular body acc.
 						if (me.toBody==0) me.toBody=0.00001;
-						me.acc_upwards_fps2 = me.pro_constant*me.line_of_sight_rate_up_rps*me.vert_closing_rate_fps/me.toBody+me.pro_constant*me.t_LOS_elev_norm_acc/2;
+						me.acc_upwards_fps2 = me.pro_constant*me.line_of_sight_rate_up_rps*me.vert_closing_rate_fps+me.t_LOS_elev_norm_acc;
+						me.acc_upwards_fps2 /= me.toBody;
 						#printf("vert acc = %.2f + %.2f G", me.pro_constant*me.line_of_sight_rate_up_rps*me.vert_closing_rate_fps/g_fps, (me.apn*me.pro_constant*me.t_LOS_elev_norm_acc/2)/g_fps);
 						me.velocity_vector_length_fps = me.clamp(me.old_speed_fps, 0.0001, 1000000);
 						me.commanded_upwards_vector_length_fps = me.acc_upwards_fps2*me.dt;
@@ -3164,7 +3172,8 @@ var AIM = {
 						# Proportional navigation. Takes target acc. into account.
 						me.toBody = math.cos(me.curr_deviation_e*D2R);#convert perpendicular LOS acc. to perpendicular body acc.
 						if (me.toBody==0) me.toBody=0.00001;
-						me.acc_upwards_fps2 = me.pro_constant*me.line_of_sight_rate_up_rps*me.vert_closing_rate_fps/me.toBody;
+						me.acc_upwards_fps2 = me.pro_constant*me.line_of_sight_rate_up_rps*me.vert_closing_rate_fps;
+						me.acc_upwards_fps2 /= me.toBody;
 						me.velocity_vector_length_fps = me.clamp(me.old_speed_fps, 0.0001, 1000000);
 						me.commanded_upwards_vector_length_fps = me.acc_upwards_fps2*me.dt;
 						me.raw_steer_signal_elev  = R2D*me.commanded_upwards_vector_length_fps/me.velocity_vector_length_fps;
