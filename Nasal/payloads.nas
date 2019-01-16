@@ -1172,11 +1172,11 @@ var main_init = func {
     # listener for missile emergency launch
     setlistener("/instrumentation/armament/msl-emergency-release/button", func() {
         if (getprop("/instrumentation/armament/msl-emergency-release/button") == 0 ) { return; }
-        for (var i = 0; i <= 5; i = i + 1) {
+        for (var i = 0; i < 5; i = i + 1) {
             if (i == 2) { continue; } # missiles can't be on the center pylon afaik
             var selected = getprop("/payload/weight["~i~"]/selected");
             if (selected == nil ){ continue; }
-            if (getprop("/fdm/jsbsim/electric/output/pwr-to-pylons["~i~"]") < 32) { continue; }
+            if (getprop("/fdm/jsbsim/electric/output/pwr-to-pylons["~i~"]") != nil and getprop("/fdm/jsbsim/electric/output/pwr-to-pylons["~i~"]") < 32) { continue; }
             if (payloads[selected].type != "ir" and
                     payloads[selected].type != "radar" and
                     payloads[selected].type != "beam" and
