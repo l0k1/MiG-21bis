@@ -197,15 +197,15 @@ setlistener("/fdm/jsbsim/fcs/aru-override-switch",func(){
 });
 
 var autostart_state = 0;
-var autostart = func() {
-  if (eng_running.getValue()) {
+var autostart = func(v = 1) {
+  if (v == 0 and eng_running.getValue()) {
     #engine is running running, shut it down
     #print("shutting down engine");
     autostart_state = 0;
     cutoff.setValue(1);
     return;
   }
-  if (autostart_state == 0) {
+  if (v == 1 and autostart_state == 0) {
     #print("flipping switches");
     setprop("/fdm/jsbsim/electric/switches/rhfsp/no-3-tk-gp-pump",1);
     setprop("/fdm/jsbsim/electric/switches/rhfsp/no-1-tk-gp-pump",1);
