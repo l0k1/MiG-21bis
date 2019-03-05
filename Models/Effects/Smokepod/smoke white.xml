@@ -9,8 +9,8 @@
 		<value>1</value>
 	</equals>
 	  <equals>
-            <property>sim/multiplay/generic/string[13]</property>
-            <value>Smokepod</value>
+            <property>sim/multiplay/generic/short[2]</property>
+            <value>29</value>
        </equals>
     </condition>
 
