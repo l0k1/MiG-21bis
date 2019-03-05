@@ -617,7 +617,7 @@
        <y>   0.00 </y>
        <z> -30.00 </z>
      </location>
-     <priority>1</priority>
+     <priority>2</priority>
      <density>6.5</density>
      <capacity unit="LBS"> 1400 </capacity>
      <contents unit="LBS"> 0 </contents>

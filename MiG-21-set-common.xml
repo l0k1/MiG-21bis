@@ -73,7 +73,7 @@
 						<label>Autostart/Shutdown</label>
 						<binding>
 							<command>nasal</command>
-							<script>mig21.autostart()</script>
+							<script>mig21.autostart(1)</script>
 						</binding>
 					</item>
 					<item>

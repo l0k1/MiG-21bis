@@ -776,8 +776,8 @@ var bomb_release = func(pylon,type="bomb") {
                 return;
             } else {
                 setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~act_pylon~"]",getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~act_pylon~"]") - 220);
-                if (idx == 4) { idx = payload.id; }
-    			setprop("/payload/weight["~pylon~"]/id",payload.id - idx);
+                if (idx == 4) { idx = payloads[selected]; }
+    			setprop("/payload/weight["~pylon~"]/id",payloads[selected] - idx);
             }
         } else {
             setprop("payload"~virtual~"weight[" ~ ( pylon ) ~ "]/selected", "none" );
