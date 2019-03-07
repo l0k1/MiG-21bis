@@ -138,17 +138,15 @@
 						<property>electric/switches/rhfsp/bat-ext-pwr-sup</property>
 					</and>
 					<value>29.0</value>
-					<product>
-						<table>
-							<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
-							<tableData>
-								0.0	 0.0
-								30.0	25.0
-								100.0   29.0
-							</tableData>
-							<property>electric/switches/rhfsp/dc-gen</property>
-						</table>
-					</product>
+					<table>
+						<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
+						<tableData>
+							0.0	 0.0
+							30.0	25.0
+							100.0   29.0
+						</tableData>
+						<property>electric/switches/rhfsp/dc-gen</property>
+					</table>
 				</ifthen>
 			</function>
 			<output>electric/sources/dc-gen</output>

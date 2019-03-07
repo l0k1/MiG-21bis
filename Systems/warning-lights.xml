@@ -558,12 +558,10 @@
 		<fcs_function name="trash/warning-lights/jet-nozzle-open">
 			<function>
 				<product>
-					<and>
-						<eq>
-							<property>propulsion/engine[0]/nozzle-pos-norm-corrected</property>
-							<value>1</value>
-						</eq>
-					</and>
+					<eq>
+						<property>propulsion/engine[0]/nozzle-pos-norm-corrected</property>
+						<value>1</value>
+					</eq>
 					<property>/instrumentation/warning-lights/dimmer[5]</property>
 					<property>warning-lights/lights-dc</property>
 				</product>
