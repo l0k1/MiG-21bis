@@ -503,37 +503,41 @@ var trigger_propogation = func() {
 	
 	if ( getprop("/fdm/jsbsim/systems/armament/release") != 1 ) {
 		setprop("/controls/armament/rocket-trigger",0);
-	} else {
-	
+	} else {	
 		var knobpos = getprop("controls/armament/panel/pylon-knob");
 		if ( knobpos == 0 ) {
 			setprop("/controls/armament/rocket-setting",16);
 			setprop("/controls/armament/rocket-trigger",1);
 			if (getprop("/controls/armament/bomb-arm") == 0) {
-				jettison([1,3]);
+                if (payloads[getprop("/payload/weight[1]/selected")].type == "bomb") { jettison([1]); }
+                if (payloads[getprop("/payload/weight[3]/selected")].type == "bomb") { jettison([3]); }
 			} else {
-				bomb_release(1,"bomb");
-				bomb_release(3,"bomb");
+                if (payloads[getprop("/payload/weight[1]/selected")].type == "bomb") { bomb_release(1,"bomb"); }
+                if (payloads[getprop("/payload/weight[3]/selected")].type == "bomb") { bomb_release(3,"bomb"); }
 			}
 		} elsif ( knobpos == 1 ) {
 			setprop("/controls/armament/rocket-setting",8);
 			setprop("/controls/armament/rocket-trigger",1);
 			if (getprop("/controls/armament/bomb-arm") == 0) {
-				jettison([0,4]);
+                if (payloads[getprop("/payload/weight[0]/selected")].type == "bomb") { jettison([0]); }
+                if (payloads[getprop("/payload/weight[4]/selected")].type == "bomb") { jettison([4]); }
 			} else {
-				bomb_release(0,"bomb");
-				bomb_release(4,"bomb");
+                if (payloads[getprop("/payload/weight[0]/selected")].type == "bomb") { bomb_release(0,"bomb"); }
+                if (payloads[getprop("/payload/weight[4]/selected")].type == "bomb") { bomb_release(4,"bomb"); }
 			}
 		} elsif ( knobpos == 2 ) {
 			setprop("/controls/armament/rocket-setting",4);
 			setprop("/controls/armament/rocket-trigger",1);
 			if (getprop("/controls/armament/bomb-arm") == 0) {
-				jettison([0,1,3,4]);
+                if (payloads[getprop("/payload/weight[0]/selected")].type == "bomb") { jettison([0]); }
+                if (payloads[getprop("/payload/weight[1]/selected")].type == "bomb") { jettison([1]); }
+                if (payloads[getprop("/payload/weight[3]/selected")].type == "bomb") { jettison([3]); }
+                if (payloads[getprop("/payload/weight[4]/selected")].type == "bomb") { jettison([4]); }
 			} else {
-				bomb_release(0,"bomb");
-				bomb_release(1,"bomb");
-				bomb_release(3,"bomb");
-				bomb_release(4,"bomb");
+                if (payloads[getprop("/payload/weight[0]/selected")].type == "bomb") { bomb_release(0,"bomb"); }
+                if (payloads[getprop("/payload/weight[1]/selected")].type == "bomb") { bomb_release(1,"bomb"); }
+                if (payloads[getprop("/payload/weight[3]/selected")].type == "bomb") { bomb_release(3,"bomb"); }
+                if (payloads[getprop("/payload/weight[4]/selected")].type == "bomb") { bomb_release(4,"bomb"); }
 			}
 			return [0,3,knobpos];
 		} elsif ( knobpos == 3 ) {
