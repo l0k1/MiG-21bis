@@ -762,27 +762,29 @@ var bomb_release = func(pylon,type="bomb") {
 			return;
 		}
         if (selected == "FAB-100x4"){
-            var act_pylon = pylon;
-            selected = "FAB-100";
+            var sub_pylon = pylon;
             var check_array = pylon == 1 ? [32,33,34,35] : [36,37,38,39];
             var idx = 0;
             foreach (var p; check_array){
                 idx = idx + 1;
                 if (getprop("/ai/submodels/submodel["~p~"]/count") > 0) {
-                    pylon = p;
+                    sub_pylon = p;
                     break;
                 }
             }
-            if (pylon != p) {
-                setprop("payload/weight[" ~ ( act_pylon ) ~ "]/selected", "none" );
+            if (sub_pylon != p) {
+                setprop("payload/weight[" ~ ( pylon ) ~ "]/selected", "none" );
     			setprop("/payload/weight["~pylon~"]/id",0);
-                setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~act_pylon~"]",0);
+                setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
                 return;
             } else {
-                setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~act_pylon~"]",getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~act_pylon~"]") - 220);
-                if (idx == 4) { idx = payloads[selected]; }
-    			setprop("/payload/weight["~pylon~"]/id",payloads[selected] - idx);
+                setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",getprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]") - 220);
+                if (idx == 4) { idx = payloads["FAB-100x4"].id; }
+                print("pylon: " ~ pylon ~ "| id: " ~ (payloads["FAB-100x4"].id - idx));
+    			setprop("/payload/weight["~pylon~"]/id",payloads["FAB-100x4"].id - idx);
             }
+            pylon = sub_pylon;
+            selected = "FAB-100";
         } else {
             setprop("payload"~virtual~"weight[" ~ ( pylon ) ~ "]/selected", "none" );
     		setprop("/payload/weight["~pylon~"]/id",0);
