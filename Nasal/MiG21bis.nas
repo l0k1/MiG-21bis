@@ -298,6 +298,12 @@ var get_radio_file_gui = func() {
 var init = setlistener("/sim/signals/fdm-initialized", func() {
     test_support();
     main_loop();
+    # this is a hack. i have no idea why this wont work otherwise.
+    settimer(func() {
+      setprop("/consumables/fuel/tank[1]/capacity-gal_us",32.6346);
+      setprop("/consumables/fuel/tank[1]/capactiy-gal_imp",27.17398895);
+      setprop("/consumables/fuel/tank[1]/level-lbs",212.12);
+    },3);
     # randomize startup values for DME, radial setting, compass, and fuel
     setprop("/instrumentation/fuel/knob-level",int((rand() * 1600) + 169)); # fuel
     setprop("/instrumentation/gyro-compass/mag-offset",int((rand() * 50) - 25)); # gyro compass heading
