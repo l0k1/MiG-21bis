@@ -75,10 +75,10 @@ var rwr_sensor = {
 # min bearing is least wrt going clockwise
 # max bearing is greatest wrt going clockwise
 var sensors = [];
-append(sensors,{parents:[rwr_sensor], min_bearing: -112.5, max_bearing: 22.5,  max_pitch: 20, prop: "/instrumentation/rwr/forward-left/light-enable"});
-append(sensors,{parents:[rwr_sensor], min_bearing: -22.5,  max_bearing: 112.5, max_pitch: 20, prop: "/instrumentation/rwr/forward-right/light-enable"});
-append(sensors,{parents:[rwr_sensor], min_bearing:  157.5, max_bearing: -67.5, max_pitch: 20, prop: "/instrumentation/rwr/rear-left/light-enable"});
-append(sensors,{parents:[rwr_sensor], min_bearing:  67.5, max_bearing: -157.5, max_pitch: 20, prop: "/instrumentation/rwr/rear-right/light-enable"});
+append(sensors,{parents:[rwr_sensor], min_bearing: -112.5, max_bearing: 22.5,  max_pitch: 45, prop: "/instrumentation/rwr/forward-left/light-enable"});
+append(sensors,{parents:[rwr_sensor], min_bearing: -22.5,  max_bearing: 112.5, max_pitch: 45, prop: "/instrumentation/rwr/forward-right/light-enable"});
+append(sensors,{parents:[rwr_sensor], min_bearing:  157.5, max_bearing: -67.5, max_pitch: 45, prop: "/instrumentation/rwr/rear-left/light-enable"});
+append(sensors,{parents:[rwr_sensor], min_bearing:  67.5, max_bearing: -157.5, max_pitch: 45, prop: "/instrumentation/rwr/rear-right/light-enable"});
 
 var sensor_update = func() {
     foreach (var sensor; sensors) {
