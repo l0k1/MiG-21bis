@@ -675,6 +675,7 @@ var missile_release = func(pylon) {
 			}
 
 			armament.AIM.active[pylon].release();
+            sounds.disconnect();
 
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 			setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
@@ -697,6 +698,7 @@ var missile_release = func(pylon) {
 			}
 			var brevity = armament.AIM.active[pylon].brevity;
 			armament.AIM.active[pylon].release(arm_locking.cx_master_list);
+            sounds.disconnect();
 
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 			setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
@@ -714,9 +716,11 @@ var missile_release = func(pylon) {
 			if (radar_logic.selection == nil) {
 				var phrase = brevity ~ " Maddog released";
 				armament.AIM.active[pylon].releaseAtNothing();
+                sounds.disconnect();
 			} else {
 				var phrase = brevity ~ " released:";
 				armament.AIM.active[pylon].release(arm_locking.cx_master_list);
+                sounds.disconnect();
 			}
 			
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
@@ -731,6 +735,7 @@ var missile_release = func(pylon) {
 			var brevity = armament.AIM.active[pylon].brevity;
 
 			armament.AIM.active[pylon].release(arm_locking.cx_master_list);
+            sounds.disconnect();
 
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 			setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
@@ -792,6 +797,7 @@ var bomb_release = func(pylon,type="bomb") {
         }
         #print("releasing: payload/released/"~selected~"["~pylon~"]");
 		setprop("payload/released/"~selected~"["~pylon~"]",1);
+        sounds.disconnect();
 		var phrase = payloads[selected].brevity ~ " released.";
 		if (getprop("payload/armament/msg")) {
 			defeatSpamFilter(phrase);
@@ -834,6 +840,7 @@ var jettison = func(pylons) {
             setprop("payload/weight[2]/selected","none");
             setprop("/controls/armament/jettison/boom",1);
             settimer(func(){setprop("/controls/armament/jettison/boom",0);},0.2);
+            sounds.disconnect();
             return_trigger("pyro/" ~ selected,2);
         }
     } else {
@@ -848,11 +855,13 @@ var jettison = func(pylons) {
                 var virt = getprop("payload/virtual/weight["~v_p~"]/selected");
                 if (virt != nil and armament.AIM.active[v_p] != nil) {
                 	armament.AIM.active[v_p].eject();
+                    sounds.disconnect();
 					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~v_p~"]",0);
 					setprop("payload/virtual/weight["~v_p~"]/selected", "none");
                 }
                 if (armament.AIM.active[pylon] != nil) {
                 	armament.AIM.active[pylon].eject();
+                    sounds.disconnect();
 					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 					setprop("payload/weight["~pylon~"]/selected", "none");
                 }
@@ -881,6 +890,7 @@ var jettison = func(pylons) {
                 #print("setting " ~sub_pylon~ " to zero");
                 setprop("/ai/submodels/submodel["~sub_pylon~"]/count",0);
                 setprop("payload/jettison/FAB-100["~sub_pylon~"]",1);
+                sounds.disconnect();
                 return_trigger("FAB-100",sub_pylon);
             } elsif (payloads[selected].type == "bomb") {
             	if (getprop("/controls/armament/bomb-arm") == 1) {
@@ -888,6 +898,7 @@ var jettison = func(pylons) {
             	} else {
 	                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
 	                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
+                    sounds.disconnect();
                     return_trigger(selected,pylon);
             	}
             } else {
@@ -897,9 +908,11 @@ var jettison = func(pylons) {
 	            		payloads[selected].type == "beam") and
 	            		armament.AIM.active[pylon] != nil) {
                 	armament.AIM.active[pylon].eject();
+                    sounds.disconnect();
 					setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
 					setprop("payload/weight["~pylon~"]/selected", "none");
 	            } else {
+                    sounds.disconnect();
 	                setprop("payload/jettison/"~selected~"["~pylon~"]",1);
 	                setprop("payload/weight[" ~ pylon ~ "]/selected","none");
                     return_trigger(selected,pylon);
@@ -1027,9 +1040,9 @@ var impact_listener = func {
 					settimer(func{hitmessage(typeOrd);},1);
 				}
 			}
-		}elsif (payloads[typeOrdName] != nil and ( payloads[typeOrdName].type == "bomb" or payloads[typeOrdName].type == "heavy" or payloads[typeOrdName].type == "heavyrocket" ))  {
-      #print("a bomb dropped");
-      foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
+		} elsif (payloads[typeOrdName] != nil and ( payloads[typeOrdName].type == "bomb" or payloads[typeOrdName].type == "heavy" or payloads[typeOrdName].type == "heavyrocket" ))  {
+            #print("a bomb dropped");
+            foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
 				#var mlat = mp.getNode("position/latitude-deg").getValue();
 				#var mlon = mp.getNode("position/longitude-deg").getValue();
 				#var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
@@ -1040,6 +1053,8 @@ var impact_listener = func {
 					defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
 				}
 			}
+            distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue()).direct_distance_to(geo.aircraft_position());
+            sounds.boom(distance);
 		}
 	}
 }

@@ -992,6 +992,11 @@
 		</jsbsim>
 	</fdm>
 
+	<sounds>
+		<pylon_disconnect type="int">0</pylon_disconnect>
+		<distant_explosion type="int">0</distant_explosion>
+	</sounds>
+
 	<!-- Keyboard Shortcuts -->
 	<input>
 		<keyboard include="Systems/keyboard.xml" />
@@ -1541,7 +1546,8 @@
 
 		<mig21>				<file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>			</mig21>			<!-- odds and sods -->
 		<MiG-21bis>			<file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>			</MiG-21bis>		<!-- liveries -->
-		<engine>			<file>Aircraft/MiG-21bis/Nasal/engine.nas</file>			</engine>		<!-- liveries -->
+		<engine>			<file>Aircraft/MiG-21bis/Nasal/engine.nas</file>			</engine>			<!-- liveries -->
+		<sounds>			<file>Aircraft/MiG-21bis/Nasal/sounds.nas</file>			</sounds>			<!-- liveries -->
 		<lights>			<file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>			</lights>
 		<Eject>				<file>Aircraft/MiG-21bis/Nasal/eject.nas</file>				</Eject>			<!-- depreciated -->
 		<tyresmoke>			<file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>			</tyresmoke>

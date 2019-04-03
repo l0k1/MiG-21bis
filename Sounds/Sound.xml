@@ -789,6 +789,39 @@
         	</volume>
         </tank_pyro>
 
+        <pylon_disconnect>
+        	<name>disconnect</name>
+        	<path>Aircraft/MiG-21bis/Sounds/Samples/disconnect.wav</path>
+        	<mode>once</mode>
+        	<condition>
+        		<property>/sounds/pylon_disconnect</property>
+        	</condition>
+            <position>
+                <x>0.01</x>
+                <y>0.01</y>
+                <z>0.01</z>
+            </position>
+            <volume>
+                <factor>1</factor>
+            </volume>
+        </pylon_disconnect>
+
+        <distant_explosion>
+        	<name>distant_explosion</name>
+        	<path>Aircraft/MiG-21bis/Sounds/Samples/distantboom.wav</path>
+        	<mode>once</mode>
+        	<condition>
+        		<property>/sounds/distant_explosion</property>
+        	</condition>
+            <position>
+                <x>0.01</x>
+                <y>0.01</y>
+                <z>0.01</z>
+            </position>
+            <volume>
+                <factor>1</factor>
+            </volume>
+        </distant_explosion>
 
 	</fx>
 

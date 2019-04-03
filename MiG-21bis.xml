@@ -488,7 +488,7 @@
      <density>6.5</density>
      <capacity unit="LBS"> 214.64 </capacity>
      <contents unit="LBS"> 214.64 </contents>
-     <standpipe unit="LBS"> 300 </standpipe>
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
 
   <tank type="FUEL" number="2">
@@ -501,7 +501,7 @@
      <density>6.5</density>
      <capacity unit="LBS"> 128.79 </capacity>
      <contents unit="LBS"> 128.79 </contents>
-     <standpipe unit="LBS"> 100 </standpipe>
+     <standpipe unit="LBS"> 0 </standpipe>
   </tank>
 
   <tank type="FUEL" number="3">
