@@ -229,7 +229,6 @@
 			<name>Fuselage pylon (#5)</name>
 			<selected>none</selected>
 			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]"/>
-			<tank>1</tank>
 			<opt>
 				<name>none</name>
 				<lbs>0</lbs>
