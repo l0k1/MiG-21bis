@@ -157,11 +157,13 @@ var RadarLogic = {
 
   processTracks: func (vector, carrier, missile = 0, mp = 0, type = -1) {
     #me.carrierNear = FALSE;
+    me.damagemod = getprop("/fdm/jsbsim/radar/antenna-damage");
+    me.damagemod = me.damagemod == nil ? 0 : 1 - me.damagemod;
     foreach (var track; vector) {
       if(track != nil and track.getChild("valid") != nil and track.getChild("valid").getValue() == TRUE) { #only the tracks that are valid are sent here
         me.trackInfo = nil;
   #debug.benchmark("radar trackitemcalc", func {
-        me.trackInfo = me.trackItemCalc(track, radarRange, carrier, mp, type);
+        me.trackInfo = me.trackItemCalc(track, radarRange * me.damagemod, carrier, mp, type);
   #});
   #debug.benchmark("radar process", func {
         if(me.trackInfo != nil) {

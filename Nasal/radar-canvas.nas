@@ -542,7 +542,7 @@ var radar_screen = {
 			me.lowerBar.setTranslation(506, 950 - lpos);
 			me.upperBar.setTranslation(506, 950 - ( lpos + lscale ));
 			
-			if ( getprop("controls/radar/power-panel/fixed-beam") == 0 ) {
+			if ( getprop("controls/radar/power-panel/fixed-beam") == 0  and getprop("fdm/jsbsim/radar/mode") == 2) {
 				foreach (var mp; radar_logic.tracks) {	
 					#print("found contact");
 					# Node with valid position data (and "distance!=nil").
