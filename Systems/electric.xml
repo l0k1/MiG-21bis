@@ -111,6 +111,21 @@
 	<property value="0">electric/switches/lvmsp/apu-ctlr-hi-spd-low</property>
 	<property value="0">electric/switches/lvmsp/lockon-hi-lo</property>
 
+
+	<property value="0">electric/sources/dc-gen-damage</property>
+	<property value="0">electric/sources/ac-gen-damage</property>
+	<property value="90">electric/sources/batteries-a</property>
+	<property value="24">electric/sources/batteries-v</property>
+	<property value="0">electric/inverters/po-750a-0-damage</property>
+	<property value="0">electric/inverters/po-750a-1-damage</property>
+	<property value="0">electric/inverters/po-1500vt-damage</property>
+	<property value="0">electric/inverters/pt-500ts-damage</property>
+	<property value="0">electric/inverters/pt-125c-damage</property>
+	<property value="0">electric/buses/bus0-damage</property>
+	<property value="0">electric/buses/bus1-damage</property>
+	<property value="0">electric/buses/bus2-damage</property>
+	<property value="0">electric/buses/bus3-damage</property>
+
 	<!--
 	left horizontal front switch panel
 			or
@@ -119,312 +134,319 @@
 	<property value="1">electric/switches/lhfsp/aileron-booster</property>
 
 	<channel name="sources">
-
-		<!--
-			sources of electricity are:
-			an external ground cart provides DC and AC
-			dc generator
-			ac alternator
-			two batteries in either series or parallel
-		-->
-
-		<!-- dc generator -->
-
-		<fcs_function name="trash/electric/sources/dc-gen">
+		
+		<fcs_function name="trash/electric/sources/external-dc">
 			<function>
 				<ifthen>
-					<and>
+					<property>electric/external-connected</property>
+					<value>29</value>
+					<value>0</value>
+				</ifthen>
+			</function>
+			<output>electric/sources/external-dc</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/external-ac">
+			<function>
+				<ifthen>
+					<property>electric/external-connected</property>
+					<value>29</value>
+					<value>0</value>
+				</ifthen>
+			</function>
+			<output>electric/sources/external-ac</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/dc-gen">
+			<function>
+				<product>
+					<difference>
+						<value>1</value>
 						<property>electric/external-connected</property>
-						<property>electric/switches/rhfsp/bat-ext-pwr-sup</property>
-					</and>
-					<value>29.0</value>
+					</difference>
 					<table>
 						<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
 						<tableData>
 							0.0	 0.0
-							30.0	25.0
-							100.0   29.0
+							30.0	24.0
+							100.0   28.0
 						</tableData>
-						<property>electric/switches/rhfsp/dc-gen</property>
 					</table>
-				</ifthen>
+					<table>
+						<independentVar lookup="row">electric/sources/dc-gen-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.8
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
 			</function>
 			<output>electric/sources/dc-gen</output>
 		</fcs_function>
-
-		<!-- ac generator -->
-
+		
 		<fcs_function name="trash/electric/sources/ac-gen">
 			<function>
-				<ifthen>
-					<and>
-						<property>electric/external-connected</property>
-						<property>electric/switches/rhfsp/ac-gen-ext-pwr</property>
-					</and>
-					<value>115.0</value>
-					<product>
-						<table>
-							<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
-							<tableData>
-								0.0	 0.0
-								30.0	112.0
-								100.0   116.0
-							</tableData>
-						</table>
-						<property>electric/switches/rhfsp/ac-gen-ext-pwr</property>
-					</product>
-				</ifthen>
-			</function>
-			<output>electric/sources/ac-volts</output>
-		</fcs_function>
-
-		<!-- battery #1 charge -->
-
-		<!-- charge from dc gen -->
-		<!-- the value of 25000 is the charge rate, bigger number is less charge -->
-		<fcs_function name="trash/electric/sources/battery-dc-charge[0]">
-			<function>
-				<sum>
-					<ifthen>
-						<gt>
-							<!-- ((dcg - bat) / 25000) -->
-							<quotient>
-								<difference>
-									<property>electric/sources/dc-gen</property>
-									<property>electric/sources/battery[0]</property>
-								</difference>
-								<value>25000</value>
-							</quotient>
-							<value>0.0</value>
-						</gt>
-						<quotient>
-							<difference>
-								<property>electric/sources/dc-gen</property>
-								<property>electric/sources/battery[0]</property>
-							</difference>
-							<value>25000</value>
-						</quotient>
-						<value>0.0</value>
-					</ifthen>
-					<property>electric/sources/battery[0]</property>
-				</sum>
-			</function>
-			<output>electric/sources/battery-dc-charge[0]</output>
-		</fcs_function>
-
-		<fcs_function name="trash/electric/sources/battery-dc-charge[1]">
-			<function>
-				<sum>
-					<ifthen>
-						<gt>
-							<!-- ((dcg - bat) / 25000) -->
-							<quotient>
-								<difference>
-									<property>electric/sources/dc-gen</property>
-									<property>electric/sources/battery[1]</property>
-								</difference>
-								<value>25000</value>
-							</quotient>
-							<value>0.0</value>
-						</gt>
-						<quotient>
-							<difference>
-								<property>electric/sources/dc-gen</property>
-								<property>electric/sources/battery[1]</property>
-							</difference>
-							<value>25000</value>
-						</quotient>
-						<value>0.0</value>
-					</ifthen>
-					<property>electric/sources/battery[1]</property>
-				</sum>
-			</function>
-			<output>electric/sources/battery-dc-charge[1]</output>
-		</fcs_function>
-
-		<!-- cross charge from the other battery -->
-		<!-- only if batteries are in parallel -->
-		<fcs_function name="trash/electric/sources/battery[0]">
-			<function>
-				<ifthen>
-					<property>electric/battery-mode</property>
-					<property>electric/sources/battery-dc-charge[0]</property>
-					<sum>
-						<quotient>
-							<difference>
-								<property>electric/sources/battery-dc-charge[1]</property>
-								<property>electric/sources/battery-dc-charge[0]</property>
-							</difference>
-							<value>25000</value>
-						</quotient>
-						<property>electric/sources/battery-dc-charge[0]</property>
-					</sum>
-				</ifthen>
-			</function>
-			<output>electric/sources/battery[0]</output>
-		</fcs_function>
-
-		<fcs_function name="trash/electric/sources/battery[1]">
-			<function>
-				<ifthen>
-					<property>electric/battery-mode</property>
-					<property>electric/sources/battery-dc-charge[1]</property>
-					<sum>
-						<quotient>
-							<difference>
-								<property>electric/sources/battery-dc-charge[0]</property>
-								<property>electric/sources/battery-dc-charge[1]</property>
-							</difference>
-							<value>25000</value>
-						</quotient>
-						<property>electric/sources/battery-dc-charge[1]</property>
-					</sum>
-				</ifthen>
-			</function>
-			<output>electric/sources/battery[1]</output>
-		</fcs_function>
-
-		<!-- battery voltage should be average of both batteries in parallel
-			or combined in serial. -->
-		<fcs_function name="trash/electric/sources/battery-volts">
-			<function>
 				<product>
-					<ifthen>
-						<property>electric/battery-mode</property>
-						<sum>
-							<property>electric/sources/battery[0]</property>
-							<property>electric/sources/battery[1]</property>
-						</sum>
-						<avg>
-							<property>electric/sources/battery[0]</property>
-							<property>electric/sources/battery[1]</property>
-						</avg>
-					</ifthen>
-					<property>electric/switches/rhfsp/bat-ext-pwr-sup</property>
+					<difference>
+						<value>1</value>
+						<property>electric/external-connected</property>
+					</difference>
+					<table>
+						<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
+						<tableData>
+							0.0	 0.0
+							30.0	112.0
+							100.0   116.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/sources/ac-gen-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.8
+							1.0		0.0
+						</tableData>
+					</table>
 				</product>
 			</function>
-			<output>electric/sources/battery-volts</output>
+			<output>electric/sources/ac-gen</output>
 		</fcs_function>
-
-
-		<!-- final dc output -->
-
-		<switch name="electric/sources/dc-volts">
-			<default value="electric/sources/dc-gen"/>
-			<test logic="AND" value="electric/sources/battery-volts">
-				electric/sources/battery-volts gt electric/sources/dc-gen
-			</test>
-		</switch>
-
+		
+		<fcs_function name="trash/electric/sources/batteries-v">
+			<function>
+				<product>
+					<difference>
+						<value>1</value>
+						<property>electric/external-connected</property>
+					</difference>
+					<table>
+						<independentVar lookup="row">electric/sources/batteries-a</independentVar>
+						<tableData>
+							0.0		0.0
+							0.1		13.0
+							1.0		24.0
+							90.0	24.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/sources/batteries-v</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/output-dc">
+			<function>
+				<max>
+					<property>electric/sources/external-dc</property>
+					<property>electric/sources/dc-gen</property>
+					<property>electric/sources/batteries-v</property>
+				</max>
+			</function>
+			<output>electric/sources/output-dc</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/output-ac">
+			<function>
+				<max>
+					<property>electric/sources/external-ac</property>
+					<property>electric/sources/ac-gen</property>
+				</max>
+			</function>
+			<output>electric/sources/output-ac</output>
+		</fcs_function>
 	</channel>
-
-	<channel name="inverters">
-		<!--
-		inverters available
-		PO-750A x 2	 115v
-		PO-1500VT	   115v
-		PT-500Ts		36v
-		PT-125C		 36v
-		-->
-
+	
+	<channel name="intermediates">
 		<fcs_function name="trash/electric/inverters/po-750a[0]">
 			<function>
-				<table>
-					<independentVar lookup="row">electric/sources/dc-volts</independentVar>
-					<tableData>
-						0.0	 0.0
-						22.0	115.0
-					</tableData>
-				</table>
+				<product>
+					<table>
+						<independentVar lookup="row">electric/sources/output-dc</independentVar>
+						<tableData>
+							0.0	 0.0
+							22.0	115.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/inverters/po-750a-0-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.9
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
 			</function>
 			<output>electric/inverters/po-750a[0]</output>
 		</fcs_function>
 
 		<fcs_function name="trash/electric/inverters/po-750a[1]">
 			<function>
-				<table>
-					<independentVar lookup="row">electric/sources/dc-volts</independentVar>
-					<tableData>
-						0.0	 0.0
-						22.0	115.0
-					</tableData>
-				</table>
+				<product>
+					<table>
+						<independentVar lookup="row">electric/sources/output-dc</independentVar>
+						<tableData>
+							0.0	 0.0
+							22.0	115.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/inverters/po-750a-1-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.9
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
 			</function>
 			<output>electric/inverters/po-750a[1]</output>
 		</fcs_function>
 
 		<fcs_function name="trash/electric/inverters/po-1500vt">
 			<function>
-				<table>
-					<independentVar lookup="row">electric/sources/dc-volts</independentVar>
-					<tableData>
-						0.0	 0.0
-						22.0	115.0
-					</tableData>
-				</table>
+				<product>
+					<table>
+						<independentVar lookup="row">electric/sources/output-dc</independentVar>
+						<tableData>
+							0.0	 0.0
+							22.0	115.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/inverters/po-1500vt-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.9
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
 			</function>
 			<output>electric/inverters/po-1500vt</output>
 		</fcs_function>
 
 		<fcs_function name="trash/electric/inverters/pt-500ts">
 			<function>
-				<table>
-					<independentVar lookup="row">electric/sources/dc-volts</independentVar>
-					<tableData>
-						0.0	 0.0
-						22.0	36.0
-					</tableData>
-				</table>
+				<product>
+					<table>
+						<independentVar lookup="row">electric/sources/output-dc</independentVar>
+						<tableData>
+							0.0	 0.0
+							22.0	36.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/inverters/pt-500ts-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.9
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
 			</function>
 			<output>electric/inverters/pt-500ts</output>
 		</fcs_function>
 
 		<fcs_function name="trash/electric/inverters/pt-125c">
 			<function>
-				<table>
-					<independentVar lookup="row">electric/sources/dc-volts</independentVar>
-					<tableData>
-						0.0	 0.0
-						22.0	36.0
-					</tableData>
-				</table>
+				<product>
+					<table>
+						<independentVar lookup="row">electric/sources/output-dc</independentVar>
+						<tableData>
+							0.0	 0.0
+							22.0	36.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/inverters/pt-125c-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.9
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
 			</function>
 			<output>electric/inverters/pt-125c</output>
 		</fcs_function>
-
 	</channel>
-
 	<channel name="buses">
-		<!-- 3 buses -->
-
-		<switch name="electric/buses/bus[0]">
-			<default value="0"/>
-			<test logic="AND" value="electric/inverters/pt-500ts">
-				electric/buses/bus-switch[0] == 1
-			</test>
-		</switch>
-
-		<switch name="electric/buses/bus[1]">
-			<default value="0"/>
-			<test logic="AND" value="electric/inverters/pt-125c">
-				electric/buses/bus-switch[1] == 1
-			</test>
-		</switch>
-
-		<switch name="electric/buses/bus[2]">
-			<default value="0"/>
-			<test logic="AND" value="electric/inverters/po-750a[0]">
-				electric/buses/bus-switch[2] == 1
-			</test>
-		</switch>
-
-		<summer name="trash/electric/buses/bus[3]">
-			<input>electric/sources/dc-volts</input>
+		
+		<!-- all buses are 115v -->
+		<fcs_function name="trash/electric/buses/bus[0]">
+			<function>
+				<product>
+					<property>electric/buses/bus-switch[0]</property>
+					<property>electric/inverters/po-750a[0]</property>
+					<table>
+						<independentVar lookup="row">electric/buses/bus0-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.85	1.0
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/buses/bus[0]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/buses/bus[1]">
+			<function>
+				<product>
+					<property>electric/buses/bus-switch[1]</property>
+					<property>electric/inverters/po-750a[1]</property>
+					<table>
+						<independentVar lookup="row">electric/buses/bus1-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.85	1.0
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/buses/bus[1]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/buses/bus[2]">
+			<function>
+				<product>
+					<property>electric/buses/bus-switch[2]</property>
+					<property>electric/inverters/po-1500vt</property>
+					<table>
+						<independentVar lookup="row">electric/buses/bus2-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.85	1.0
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/buses/bus[2]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/buses/bus[3]">
+			<function>
+				<product>
+					<property>electric/sources/output-ac</property>
+					<table>
+						<independentVar lookup="row">electric/buses/bus3-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.85	1.0
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
 			<output>electric/buses/bus[3]</output>
-		</summer>
-
+		</fcs_function>
 	</channel>
-
+	
 	<channel name="output">
 
 		<!--
@@ -613,35 +635,35 @@
 
 		<switch name="electric/output/full-throttle-reheat">
 			<default value="0"/>
-			<test logic="AND" value="electric/buses/bus[3]">
+			<test logic="AND" value="electric/buses/bus[2]">
 				electric/switches/lvfsp/full-throttle-reheat == 1
 			</test>
 		</switch>
 
 		<switch name="electric/output/anti-skid-unit">
 			<default value="0"/>
-			<test logic="AND" value="electric/buses/bus[3]">
+			<test logic="AND" value="electric/buses/bus[2]">
 				electric/switches/lvfsp/anti-skid-unit == 1
 			</test>
 		</switch>
 
 		<switch name="electric/output/air-relight">
 			<default value="0"/>
-			<test logic="AND" value="electric/buses/bus[3]">
+			<test logic="AND" value="electric/buses/bus[2]">
 				electric/switches/lvfsp/air-relight == 1
 			</test>
 		</switch>
 
 		<switch name="electric/output/engine-starting-unit">
 			<default value="0"/>
-			<test logic="AND" value="electric/buses/bus[3]">
+			<test logic="AND" value="electric/buses/bus[2]">
 				electric/switches/lvfsp/engine-starting-unit == 1
 			</test>
 		</switch>
 
 		<switch name="electric/output/fire-ftg-eqpt">
 			<default value="0"/>
-			<test logic="AND" value="electric/buses/bus[3]">
+			<test logic="AND" value="electric/buses/bus[2]">
 				electric/switches/lvfsp/fire-ftg-eqpt == 1
 			</test>
 		</switch>
@@ -1010,103 +1032,48 @@
 			</test>
 		</switch>
 
-
 	</channel>
+	<channel name="load" execrate="120">
 
-	<channel name="system_load" execrate="3">
-		<!-- the current load on the electrical system, to determine discharge rate -->
-
-		<fcs_function name="trash/electric/discharge/bus_1_load">
-			<!-- the sum of the output voltages divided by the input voltage will give us the amount of systems running -->
+		<fcs_function name="trash/electric/ac-gen-load">
 			<function>
-				<quotient>
-					<sum>
+				<product>
+					<!-- ten amps? sure -->
+					<min>
+						<property>radar/mode</property>
 						<value>1</value>
-						<value>1</value>
-					</sum>
-					<property>electric/buses/bus[0]</property>
-				</quotient>
+					</min>
+					<value>10</value>
+				</product>
 			</function>
-			<output>electric/discharge/bus_1_load</output>
+			<output>electric/ac-gen-load</output>
 		</fcs_function>
 
-		<fcs_function name="trash/electric/discharge/bus_2_load">
-			<!-- the sum of the output voltages divided by the input voltage will give us the amount of systems running -->
+		<!-- no idea what the actual amperage should be here. -->
+		<fcs_function name="trash/electric/sources/ac-gen-damage">
 			<function>
-				<quotient>
-					<sum>
-						<value>1</value>
-						<value>1</value>
-					</sum>
-					<property>electric/buses/bus[1]</property>
-				</quotient>
+				<table>
+					<independentVar lookup="row">electric/ac-gen-load</independentVar>
+					<tableData>
+						0.0		0.0
+						45.0	0.01
+						55.0	0.05
+						65.0	0.10
+						75.0	1.00
+					</tableData>
+				</table>
 			</function>
-			<output>electric/discharge/bus_2_load</output>
+			<clipto>
+				<min>0.0</min>
+				<max>1.0</max>
+			</clipto>
+			<output>electric/ac-gen-damage</output>
 		</fcs_function>
-
-		<fcs_function name="trash/electric/discharge/bus_3_load">
-			<!-- the sum of the output voltages divided by the input voltage will give us the amount of systems running -->
-			<function>
-				<quotient>
-					<sum>
-						<property>electric/output/air-brakes</property>
-						<property>electric/output/lg-wg-flaps</property>
-						<property>electric/output/lg-sig-nav-lts</property>
-						<property>electric/output/cone-and-as-shutters-gtl</property>
-						<property>electric/output/msl-rgm-emer-lcn-lchr-rkt-bombs-jett</property>
-						<property>electric/output/oxy-eq-heat-extn-lamp-wht-lt</property>
-						<property>electric/output/drag-chute</property>
-						<property>electric/output/drop-tanks-jett</property>
-						<property>electric/output/aru-syst-man-ctl</property>
-						<property>electric/output/taxi-ldg-lts-lg-ext-sig</property>
-						<property>electric/output/booster-system-off-hyd-syst-sig</property>
-						<property>electric/output/hydr-pres-gauge-tanks-sig</property>
-						<property>electric/output/anh-pnl-lampst-test-copu-warn-syst</property>
-						<property>electric/output/ext-stores-sig</property>
-						<property>electric/output/blc-syst-shutters-control-1</property>
-						<property>electric/output/blc-syst-shutters-control-2</property>
-						<property>electric/output/tac-rls-1-2</property>
-						<property>electric/output/cabin-air-sup</property>
-						<property>electric/output/firing-button</property>
-						<property>electric/output/cdr-atc-xponder</property>
-						<property>electric/output/aru-syst-auto-ctl</property>
-						<property>electric/output/tac-rls-3-4</property>
-						<property>electric/output/battery-heat</property>
-					</sum>
-					<property>electric/buses/bus[2]</property>
-				</quotient>
-			</function>
-			<output>electric/discharge/bus_3_load</output>
-		</fcs_function>
-
-		<!-- bus 4 is directly fed from DC final -->
-		<fcs_function name="trash/electric/discharge/bus_4_load">
-			<!-- the sum of the output voltages divided by the input voltage will give us the amount of systems running -->
-			<function>
-				<quotient>
-					<sum>
-						<property>electric/output/full-throttle-reheat</property>
-						<property>electric/output/anti-skid-unit</property>
-						<property>electric/output/air-relight</property>
-						<property>electric/output/engine-starting-unit</property>
-						<property>electric/output/fire-ftg-eqpt</property>
-						<property>electric/output/no-3-tk-gp-pump</property>
-						<property>electric/output/no-1-tk-gp-pump</property>
-						<property>electric/output/service-tk-pump</property>
-						<property>electric/output/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig</property>
-						<property>electric/output/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr</property>
-						<property>electric/output/inv-emerg-crsovr</property>
-						<property>electric/output/bat-ext-pwr-sup</property>
-						<property>electric/output/dc-gen</property>
-						<property>electric/output/jato-start</property>
-						<property>electric/output/jato-jett</property>
-						<property>electric/output/ac-gen-ext-pwr</property>
-					</sum>
-					<property>electric/buses/bus[3]</property>
-				</quotient>
-			</function>
-			<output>electric/discharge/bus_4_load</output>
-		</fcs_function>
-
+		
+		<!-- calculate amp load, compare to amp rating, damage if load is greater than rating -->
+		<!-- amp usage rating is gonna be largely bullshit because idk the real values -->
+		<!-- to get amp usage, add up all output voltages, divide by input voltage (+0.0000001 or so), multiply by amp usage rating -->
+	
 	</channel>
+		
 </system>
