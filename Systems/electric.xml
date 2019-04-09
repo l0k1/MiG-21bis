@@ -137,22 +137,28 @@
 		
 		<fcs_function name="trash/electric/sources/external-dc">
 			<function>
-				<ifthen>
-					<property>electric/external-connected</property>
-					<value>29</value>
-					<value>0</value>
-				</ifthen>
+				<product>
+					<ifthen>
+						<property>electric/external-connected</property>
+						<value>29</value>
+						<value>0</value>
+					</ifthen>
+					<property>electric/switches/rhfsp/bat-ext-pwr-sup</property>
+				</product>
 			</function>
 			<output>electric/sources/external-dc</output>
 		</fcs_function>
 		
 		<fcs_function name="trash/electric/sources/external-ac">
 			<function>
-				<ifthen>
-					<property>electric/external-connected</property>
-					<value>29</value>
-					<value>0</value>
-				</ifthen>
+				<product>
+					<ifthen>
+						<property>electric/external-connected</property>
+						<value>29</value>
+						<value>0</value>
+					</ifthen>
+					<property>electric/switches/rhfsp/ac-gen-ext-pwr</property>
+				</product>
 			</function>
 			<output>electric/sources/external-ac</output>
 		</fcs_function>
@@ -192,6 +198,7 @@
 						<value>1</value>
 						<property>electric/external-connected</property>
 					</difference>
+					<property>electric/switches/rhfsp/ac-gen-ext-pwr</property>
 					<table>
 						<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
 						<tableData>
@@ -220,6 +227,7 @@
 						<value>1</value>
 						<property>electric/external-connected</property>
 					</difference>
+					<property>electric/switches/rhfsp/bat-ext-pwr-sup</property>
 					<table>
 						<independentVar lookup="row">electric/sources/batteries-a</independentVar>
 						<tableData>
@@ -962,13 +970,6 @@
 			</test>
 		</switch>
 
-		<switch name="electric/output/bat-ext-pwr-sup">
-			<default value="0"/>
-			<test logic="AND" value="electric/buses/bus[3]">
-				electric/switches/rhfsp/bat-ext-pwr-sup == 1
-			</test>
-		</switch>
-
 		<switch name="electric/output/dc-gen">
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[3]">
@@ -987,13 +988,6 @@
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[3]">
 				electric/switches/rhfsp/jato-jett == 1
-			</test>
-		</switch>
-
-		<switch name="electric/output/ac-gen-ext-pwr">
-			<default value="0"/>
-			<test logic="AND" value="electric/buses/bus[3]">
-				electric/switches/rhfsp/ac-gen-ext-pwr == 1
 			</test>
 		</switch>
 		
