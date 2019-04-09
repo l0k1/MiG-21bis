@@ -4,8 +4,7 @@
 
 <system name="pneumatic">
 
-	<property value="120">pneumatic/sources/main-bottle-kgfcm</property>
-	<property value="120">pneumatic/sources/emer-bottle-kgfcm</property>
+	<property value="120">pneumatic/sources/bottle-kgfcm</property>
 	<property value="0">pneumatic/sources/drain-kgfcm</property>
 	<property value="0">pneumatic/drain/wheel-stop</property>
 
@@ -19,7 +18,7 @@
 								<gt>
 									<property>propulsion/engine[0]/n1</property>
 									<value>20</value>
-								<gt>
+								</gt>
 								<lt>
 									<property>pneumatic/sources/bottle-kgfcm</property>
 									<value>130</value>

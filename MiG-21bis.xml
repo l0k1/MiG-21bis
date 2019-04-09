@@ -678,6 +678,7 @@
  <system file="air_intake"/>
  <system file="payloads"/>
  <system file="hydraulic"/>
+ <system file="pneumatic"/>
  <system file="instrumentation"/>
  <system file="warning-lights"/>
  <system file="radar-cooling"/>
