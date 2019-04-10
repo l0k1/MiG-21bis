@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<!-- this is hacky af, but until FG has better brakes in place, it'll do -->
+
+<system name="brakes">
+
+	<channel name="brake-limiter">
+
+		<fcs_function name="trash/systems/brakes/max-brake">
+			<function>
+				<table>
+					<independentVar lookup="row">pneumatic/sources/bottle-kgfcm</independentVar>
+					<tableData>
+						0.0		0.0
+						10.0	0.0
+						20.0	0.2
+						30.0	0.5
+						40.0	1.0
+					</tableData>
+				</table>
+			</function>
+			<output>systems/brakes/max-brake</output>
+		</fcs_function>
+
+		<fcs_function name="trash/systems/brakes/brake-left">
+			<function>
+				<ifthen>
+					<gt>
+						<property>/controls/gear/brake-left</property>
+						<property>systems/brakes/max-brake</property>
+					</gt>
+					<property>systems/brakes/max-brake</property>
+					<property>/controls/gear/brake-left</property>
+				</ifthen>
+			</function>
+			<output>/controls/gear/brake-left</output>
+		</fcs_function>
+
+		<fcs_function name="trash/systems/brakes/brake-right">
+			<function>
+				<ifthen>
+					<gt>
+						<property>/controls/gear/brake-right</property>
+						<property>systems/brakes/max-brake</property>
+					</gt>
+					<property>systems/brakes/max-brake</property>
+					<property>/controls/gear/brake-right</property>
+				</ifthen>
+			</function>
+			<output>/controls/gear/brake-right</output>
+		</fcs_function>
+
+		<fcs_function name="trash/systems/brakes/brake-parking">
+			<function>
+				<ifthen>
+					<gt>
+						<property>/controls/gear/brake-parking</property>
+						<property>systems/brakes/max-brake</property>
+					</gt>
+					<property>systems/brakes/max-brake</property>
+					<property>/controls/gear/brake-parking</property>
+				</ifthen>
+			</function>
+			<output>/controls/gear/brake-parking</output>
+		</fcs_function>
+	
+	</channel>
+    
+</system>

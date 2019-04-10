@@ -24,7 +24,7 @@
 									<value>130</value>
 								</lt>
 							</and>
-							<value>0.001</value>
+							<value>0.006</value>
 							<value>0.00</value>
 						</ifthen>
 						<property>pneumatic/sources/drain-kgfcm</property>
@@ -46,10 +46,10 @@
 							<property>/controls/gear/requested-setting</property>
 							<value>1</value>
 						</eq>
-						<gt>
+						<lt>
 							<property>gear/gear-pos-norm</property>
 							<value>0.6</value>
-						</gt>
+						</lt>
 					</and>
 					<value>0.05</value>
 					<value>0.00</value>
@@ -57,7 +57,15 @@
 			</function>
 			<output>pneumatic/drain/wheel-stop</output>
 		</fcs_function>
-	
+<!--
+		<summer name="pneumatic/sources/drain-kgfcm">
+			<input>-pneumatic/sources/drain-kgfcm</input>
+		</summer>
+-->
+		<pure_gain name="pneumatic/sources/drain-kgfcm">
+			<input>pneumatic/drain/wheel-stop</input>
+			<gain>-1.0</gain>
+		</pure_gain>	
 	</channel>
     
 </system>
