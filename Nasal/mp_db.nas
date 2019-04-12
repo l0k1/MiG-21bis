@@ -23,7 +23,7 @@ var aircraft_arch = {
     rwr_pattern: "nnnnnnnnnn",    # unique scan pattern for the aircrafts radar n=no sound, s=sound
     rwr_pattern_time: 1.0,  # how long it takes to loop the pattern (1-3 secs recommended)
     class: AIR,             # what type of model it is. 
-}
+};
 
 var aircraft_lookup = {
     "default":          {parents: [aircraft_arch]},
@@ -197,7 +197,7 @@ var Contact = {
       } elsif (me.rdrAct.getValue() < 0 or me.rdrAct.getValue() > 1) {
         return TRUE;
       }
-      return (me.rdrAct.getValue() - 1) * -1;
+      return 1 - me.rdrAct.getValue();
     },
 
     isPainted: func () {
@@ -584,3 +584,74 @@ var Contact = {
       return [distanceRadar, xa_rad, ya_rad, xa_rad_corr];
     },
 };
+
+var matching = 0;
+
+var update_cx_master_list = func() {
+
+  # get a list of all possible contact nodes into a vector
+  temp = [];
+  foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
+    if (mp.getNode("valid").getValue() == 1) {
+      append(temp,mp);
+    }
+  }
+  foreach(var mp; props.globals.getNode("/ai/models").getChildren("aircraft")){
+    if (mp.getNode("valid").getValue() == 1) {
+      append(temp,mp);
+    }
+  }
+
+  foreach(var mp; props.globals.getNode("/ai/models").getChildren("tanker")){
+    if (mp.getNode("valid").getValue() == 1) {
+      append(temp,mp);
+    }
+  }
+
+  foreach(var mp; props.globals.getNode("/ai/models").getChildren("ship")){
+    if (mp.getNode("valid").getValue() == 1) {
+      append(temp,mp);
+    }
+  }
+
+  foreach(var mp; props.globals.getNode("/ai/models").getChildren("groundvehicle")){
+    if (mp.getNode("valid").getValue() == 1) {
+      append(temp,mp);
+    }
+  }
+
+  # clean out cx_master_list
+  foreach(var cx; cx_master_list) {
+    if (cx.isValid == 0) {
+      remove_from_array(cx_master_list, cx);
+    }
+  }
+
+  # loop through master list looking for new nodes
+  foreach(var mp; temp) {
+    matching = 0;
+    foreach(var cx; cx_master_list) {
+      if ( mp.getPath() == cx.getNode().getPath() ) {
+        matching = 1;
+        break;
+      }
+    }
+    if (matching == 0) {
+      append(cx_master_list,Contact.new(mp,0));
+    }
+  }
+
+  settimer(func() {
+    update_cx_master_list();
+  },3);
+}
+update_cx_master_list();
+
+var remove_from_array = func(arr, item) {
+  # get index of item
+  forindex (var index; arr) {
+    if ( arr[index] == item ) {
+      return subvec(arr, 0, index) ~ subvec(arr, index + 1);
+    }
+  }
+}
