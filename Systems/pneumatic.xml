@@ -4,10 +4,6 @@
 
 <system name="pneumatic">
 
-	<property value="120">pneumatic/sources/bottle-kgfcm</property>
-	<property value="0">pneumatic/sources/drain-kgfcm</property>
-	<property value="0">pneumatic/drain/wheel-stop</property>
-
     <channel name="sources" execrate="12">
 		<fcs_function name="trash/pneumatic/sources/bottle-kgfcm">
 			<function>
@@ -57,15 +53,17 @@
 			</function>
 			<output>pneumatic/drain/wheel-stop</output>
 		</fcs_function>
-<!--
+
+
+		<pure_gain name="pneumatic/drain/chute">
+			<input>systems/chute/pneumatic-drain</input>
+			<gain>40.0</gain>
+		</pure_gain>
+
 		<summer name="pneumatic/sources/drain-kgfcm">
-			<input>-pneumatic/sources/drain-kgfcm</input>
+			<input>-pneumatic/drain/wheel-stop</input>
+			<input>-pneumatic/drain/chute</input>
 		</summer>
--->
-		<pure_gain name="pneumatic/sources/drain-kgfcm">
-			<input>pneumatic/drain/wheel-stop</input>
-			<gain>-1.0</gain>
-		</pure_gain>	
 	</channel>
     
 </system>

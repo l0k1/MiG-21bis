@@ -30,7 +30,7 @@
 		<desc>Deploy braking parachute</desc>
 		<binding>
 			<command>property-assign</command>
-			<property>fdm/jsbsim/systems/chute/deploy</property>
+			<property>fdm/jsbsim/systems/chute/deploy-rqst</property>
 			<value type="int">1</value>
 		</binding>
 	</key>

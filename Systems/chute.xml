@@ -21,6 +21,34 @@
 <system name="chute">
 
     <channel name="BrakingChute">
+
+        <pure_gain name="systems/chute/last-status">
+            <input>systems/chute/deploy</input>
+            <gain>1.0</gain>
+        </pure_gain>
+
+        <switch name="systems/chute/deploy">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/chute/deploy-rqst == 1
+                /controls/flight/chute_jettisoned == 0
+                pneumatic/sources/bottle-kgfcm > 40
+            </test>
+        </switch>
+
+        <switch name="systems/chute/pneumatic-drain">
+            <default value="0"/>
+            <test logic="OR" value="1">
+                <test logic="AND">
+                    systems/chute/pneumatic-drain == 1
+                    pneumatic/drain/chute lt 1
+                </test>
+                <test logic="AND">
+                    systems/chute/deploy == 1
+                    systems/chute/last-status == 0
+                </test>
+            </test>
+        </switch>
     
         <!-- if deploy == 1 and ve-kts > 450, auto jettison chute. -->
         <!-- no idea what actual upper limit for chute is. -->

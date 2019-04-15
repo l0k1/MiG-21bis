@@ -886,6 +886,7 @@
 			<systems>
 				<chute>
 					<deploy type="double">0</deploy>
+					<deploy-rqst type="double">0</deploy-rqst>
 				</chute>
 				<dump>
 					<armed type="double">0</armed>
@@ -927,6 +928,15 @@
 					</cm>
 				</armament>
 			</systems>
+			<pneumatic>
+				<sources>
+					<bottle-kgfcm type="double">120.0</bottle-kgfcm>
+					<drain-kgfcm type="double">0.0</drain-kgfcm>
+				</sources>
+				<drain>
+					<wheel-stop type="double">0.0</wheel-stop>
+				</drain>
+			</pneumatic>
 			<propulsion>
 				<clr type="int">0</clr>
 			</propulsion>
@@ -1546,6 +1556,7 @@
 
 		<mig21>				<file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>			</mig21>			<!-- odds and sods -->
 		<MiG-21bis>			<file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>			</MiG-21bis>		<!-- liveries -->
+		<mpdb>				<file>Aircraft/MiG-21bis/Nasal/mp_db.nas</file>				</mpdb>
 		<engine>			<file>Aircraft/MiG-21bis/Nasal/engine.nas</file>			</engine>			<!-- liveries -->
 		<sounds>			<file>Aircraft/MiG-21bis/Nasal/sounds.nas</file>			</sounds>			<!-- liveries -->
 		<lights>			<file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>			</lights>
