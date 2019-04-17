@@ -169,7 +169,9 @@ hydraulic/xfeed
 			<function>
 				<product>
 					<property>hydraulic/output[1]</property>
-					<property>fcs/roll-damping</property>
+					<abs>
+						<property>fcs/roll-damping</property>
+					</abs>
 				</product>
 			</function>
 			<output>hydraulic/load/aileron-booster</output>
