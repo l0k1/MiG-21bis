@@ -1,21 +1,21 @@
 <PropertyList>
 
 	<key n="81">
-            <name>Q</name>
-            <desc>Trigger flare release</desc>
-            <binding>
-                <command>property-assign</command>
-                <property>/controls/armament/cm-trigger</property>
-                <value type="bool">true</value>
-            </binding>
-            <mod-up>
-                <binding>
-                    <command>property-assign</command>
-                    <property>/controls/armament/cm-trigger</property>
-                    <value type="bool">false</value>
-                </binding>
-            </mod-up>
-        </key>
+			<name>Q</name>
+			<desc>Trigger flare release</desc>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/armament/cm-trigger</property>
+				<value type="bool">true</value>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-assign</command>
+					<property>/controls/armament/cm-trigger</property>
+					<value type="bool">false</value>
+				</binding>
+			</mod-up>
+		</key>
 	<key n="99">
 		<name>c</name>
 		<desc>toggle canopy</desc>
@@ -52,12 +52,12 @@
 		</mod-up>
 	</key>
 
-	<key n="7">
-		<name>Ctrl-g</name>
+	<key n="20">
+		<name>Ctrl-t</name>
 		<desc>jettison braking parachute</desc>
 		<binding>
 			<command>property-assign</command>
-			<property>fdm/jsbsim/systems/chute/deploy</property>
+			<property>fdm/jsbsim/systems/chute/deploy-rqst</property>
 			<value type="int">0</value>
 		</binding>
 		<binding>
@@ -339,6 +339,21 @@
 		<binding>
 			<command>nasal</command>
 			<script>mig21.gear_setting(-1);</script>
+		</binding>
+	</key>
+
+	<key n="7">
+		<name>Ctrl-g</name>
+		<desc>Gear handle safety</desc>
+		<binding>
+			<condition>
+				<less-than>
+					<property>/controls/gear/requested-setting</property>
+					<value>1</value>
+				</less-than>
+			</condition>
+			<command>property-toggle</command>
+			<property>/controls/gear/up-pin</property>
 		</binding>
 	</key>
 
