@@ -28,8 +28,22 @@
 					<property>pneumatic/sources/bottle-kgfcm</property>
 				</sum>
 			</function>
+			<clipto>
+				<min>0.0</min>
+				<max>200.0</max>
+			</clipto>
 			<output>pneumatic/sources/bottle-kgfcm</output>
 		</fcs_function>
+
+		<!-- the chute is a singleshot drain, so turn it off after it's been drained from the bottle -->
+		<switch name="trash/pneumatic-chute/drain">
+			<default value="systems/chute/pneumatic-drain"/>
+			<test logic="AND" value="0">
+				pneumatic/drain/chute gt 2
+			</test>
+			<output>systems/chute/pneumatic-drain</output>
+		</switch>
+
     </channel>
 	
 	<channel name="drain">
@@ -53,7 +67,6 @@
 			</function>
 			<output>pneumatic/drain/wheel-stop</output>
 		</fcs_function>
-
 
 		<pure_gain name="pneumatic/drain/chute">
 			<input>systems/chute/pneumatic-drain</input>

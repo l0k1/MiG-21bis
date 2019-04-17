@@ -32,23 +32,35 @@
             <test logic="AND" value="1">
                 systems/chute/deploy-rqst == 1
                 /controls/flight/chute_jettisoned == 0
-                pneumatic/sources/bottle-kgfcm > 40
+                pneumatic/sources/bottle-kgfcm >= 40
             </test>
         </switch>
 
-        <switch name="systems/chute/pneumatic-drain">
-            <default value="0"/>
-            <test logic="OR" value="1">
-                <test logic="AND">
-                    systems/chute/pneumatic-drain == 1
-                    pneumatic/drain/chute lt 1
-                </test>
-                <test logic="AND">
-                    systems/chute/deploy == 1
-                    systems/chute/last-status == 0
-                </test>
-            </test>
-        </switch>
+        <fcs_function name="trash/systems/chute/pneumatic-drain">
+            <function>
+                <ifthen>
+                    <or>
+                        <eq>
+                            <property>systems/chute/pneumatic-drain</property>
+                            <value>1</value>
+                        </eq>
+                        <and>
+                            <eq>
+                                <property>systems/chute/deploy</property>
+                                <value>1</value>
+                            </eq>
+                            <eq>
+                                <property>systems/chute/last-status</property>
+                                <value>0</value>
+                            </eq>
+                        </and>
+                    </or>
+                    <value>1</value>
+                    <value>0</value>
+                </ifthen>
+            </function>
+            <output>systems/chute/pneumatic-drain</output>
+        </fcs_function>
     
         <!-- if deploy == 1 and ve-kts > 450, auto jettison chute. -->
         <!-- no idea what actual upper limit for chute is. -->

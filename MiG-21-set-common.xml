@@ -125,6 +125,11 @@
 							<property>/controls/flight/chute_jettisoned</property>
 							<value>0</value>
 						</binding>
+						<binding>
+							<command>property-assign</command>
+							<property>/fdm/jsbsim/systems/chute/deploy-rqst</property>
+							<value>0</value>
+						</binding>
 					</item>
 					<item>
 						<label>Reload Flares/Chaff</label>
