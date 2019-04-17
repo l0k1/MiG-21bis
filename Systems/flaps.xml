@@ -84,4 +84,39 @@
 
   </channel>
 
+  <channel name="blc">
+    <!-- blown flaps -->
+    <!-- functional if electric/output/blc gt 105 and propulsion/engine/n1 gt 0.75 -->
+    <fcs_function name="blc">
+      <function>
+        <product>
+          <gt>
+            <property>electric/output/blc</property>
+            <value>105</value>
+          </gt>
+          <avg>
+            <gt>
+              <property>electric/output/blc-syst-shutters-control-1</property>
+              <value>105</value>
+            </gt>
+            <gt>
+              <property>electric/output/blc-syst-shutters-control-2</property>
+              <value>105</value>
+            </gt>
+          </avg>
+          <table>
+            <independentVar lookup="row">propulsion/engine/n1</independentVar>
+            <tableData>
+               0.0  0.00
+              70.0  0.00
+              75.0  0.15
+              80.0  0.92
+              83.0  1.00
+            </tableData>
+          </table>
+        </product>
+      </function>
+    </fcs_function>
+
+  </channel>
 </system>

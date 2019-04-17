@@ -78,18 +78,30 @@
 
     <function name="aero/force/Lift_flap">
        <description>Delta Lift due to flaps</description>
+       <!-- 2.8 is for how much extra lift the blc generates.
+            this is a conservative estimate -->
        <product>
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
            <product>
-              <table>
-                <independentVar lookup="row">fcs/flap-pos-deg</independentVar>
-                <tableData>
-                  0.000 0.0
-                  22.50 0.1225
-                  45.00 0.2075
-                </tableData>
-              </table>
+              <quotient>
+                <table>
+                  <independentVar lookup="row">fcs/flap-pos-deg</independentVar>
+                  <tableData>
+                    0.000 0.0
+                    22.50 0.1225
+                    45.00 0.2075
+                  </tableData>
+                </table>
+                <value>2.8</value>
+              </quotient>
+              <sum>
+                <product>
+                  <property>fcs/blc</property>
+                  <value>1.8</value>
+                </product>
+                <value>1</value>
+              </sum>
              <property>tune/lift/flap</property>
            </product>
        </product>
