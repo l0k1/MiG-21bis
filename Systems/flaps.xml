@@ -6,8 +6,52 @@
 <system name="flaps">
 
   <channel name="Flaps">
+
+    <fcs_function name="flap-max-setting-norm">
+      <function>
+        <table>
+          <independentVar lookup="row">velocities/mach</independentVar>
+          <tableData>
+            0.0   1.0
+            0.18  1.0
+            0.24  0.8
+            0.40  0.5
+            0.47  0.0
+          </tableData>
+        </table>
+      </function>
+    </fcs_function>
+
+    <switch name="trash/fcs/flap-cmd-norm-hydr">
+      <default value="fcs/flap-pos-norm"/>
+      <test logic="AND" value="fcs/flap-cmd-norm">
+        hydraulic/output[0] gt 0
+      </test>
+      <output>fcs/flap-cmd-norm-hydr</output>
+    </switch>
+
+    <fcs_function name="trash/fcs/flap-actual-norm">
+      <function>
+        <ifthen>
+          <lt>
+            <property>fcs/flap-max-setting-norm</property>
+            <property>fcs/flap-cmd-norm-hydr</property>
+          </lt>
+          <property>fcs/flap-max-setting-norm</property>
+          <property>fcs/flap-cmd-norm-hydr</property>
+        </ifthen>
+      </function>
+      <output>fcs/flap-cmd-norm-hydr</output>
+    </fcs_function>
+
+    <pure_gain name="trash/fcs/flaps_out_to_fg">
+      <input>fcs/flap-cmd-norm-hydr</input>
+      <gain>1.0</gain>
+      <output>/controls/flight/flaps</output>
+    </pure_gain>
+
    <kinematic name="Flaps Control">
-     <input>fcs/flap-cmd-norm</input>
+     <input>fcs/flap-cmd-norm-hydr</input>
      <traverse>
        <setting>
           <position>  0 </position>

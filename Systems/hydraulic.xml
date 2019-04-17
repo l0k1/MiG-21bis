@@ -177,11 +177,25 @@ hydraulic/xfeed
 			<output>hydraulic/load/aileron-booster</output>
 		</fcs_function>
 		
+		<fcs_function name="trash/hydraulic/load/flaps">
+			<function>
+				<nq>
+					<property>fcs/flap-cmd-norm</property>
+					<property>fcs/flap-pos-norm</property>
+				</nq>
+			</function>
+			<output>hydraulic/load/flaps</output>
+		</fcs_function>
 		
 		
 		<summer name="trash/hydraulic/usage[1]">
 			<input>hydraulic/load/aileron-booster</input>
 			<output>hydraulic/usage[1]</output>
 		</summer>
+		<summer name="trash/hydraulic/usage[0]">
+			<input>hydraulic/load/flaps</input>
+			<output>hydraulic/usage[0]</output>
+		</summer>
+
 	</channel>
 </system>

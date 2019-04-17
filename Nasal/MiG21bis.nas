@@ -68,17 +68,17 @@ var flap_setting = func(button) {
     setprop("/controls/flight/flap-panel/up",0);
     setprop("/controls/flight/flap-panel/takeoff",0);
     setprop("/controls/flight/flap-panel/landing",0);
-  } elsif ( button == 1 ) {
+  } elsif ( button == 1 and getprop("/controls/flight/flap-panel/up") != 1 ) {
     setprop("/controls/flight/flap-panel/up",1);
     setprop("/controls/flight/flap-panel/takeoff",0);
     setprop("/controls/flight/flap-panel/landing",0);
     setprop("/controls/flight/flaps",0);
-  } elsif ( button == 2 ) {
+  } elsif ( button == 2 and getprop("/controls/flight/flap-panel/takeoff") != 1 ) {
     setprop("/controls/flight/flap-panel/up",0);
     setprop("/controls/flight/flap-panel/takeoff",1);
     setprop("/controls/flight/flap-panel/landing",0);
     setprop("/controls/flight/flaps",0.5);
-  } elsif ( button == 3 ) {
+  } elsif ( button == 3 and getprop("/controls/flight/flap-panel/landing") != 1 ) {
     setprop("/controls/flight/flap-panel/up",0);
     setprop("/controls/flight/flap-panel/takeoff",0);
     setprop("/controls/flight/flap-panel/landing",1);
