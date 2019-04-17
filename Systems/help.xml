@@ -1,11 +1,11 @@
 <PropertyList>
 	<key>
 		<name>s</name>
-		<desc>Toggle starter valves</desc>
+		<desc>Press starter button</desc>
 	</key>
 	<key>
 		<name>Shift-q</name>
-		<desc>Fuel cut off</desc>
+		<desc>Flare release</desc>
 	</key>
 	<key>
 		<name>c</name>
@@ -28,8 +28,24 @@
 		<desc>Deploy drag parachute</desc>
 	</key>
 	<key>
-		<name>Ctrl-g</name>
+		<name>Ctrl-t</name>
 		<desc>Jettison drag parachute</desc>
+	</key>
+	<key>
+		<name>Ctrl-g</name>
+		<desc>Toggle gear safety</desc>
+	</key>
+	<key>
+		<name>Ctrl-a</name>
+		<desc>Autoleveller autopilot</desc>
+	</key>
+	<key>
+		<name>Ctrl-z</name>
+		<desc>Center tank jettison</desc>
+	</key>
+	<key>
+		<name>W</name>
+		<desc>Autopilot off</desc>
 	</key>
 	<key>
 		<name>f</name>
@@ -74,6 +90,18 @@
 	<key>
 		<name>R</name>
 		<desc>Select previous pylon</desc>
+	</key>
+	<key>
+		<name>F5</name>
+		<desc>GCI Request Picture</desc>
+	</key>
+	<key>
+		<name>F6</name>
+		<desc>GCI Bogey Dope</desc>
+	</key>
+	<key>
+		<name>F7</name>
+		<desc>GCI Request Cutoff</desc>
 	</key>
 	<text><![CDATA[
 	STARTUP
