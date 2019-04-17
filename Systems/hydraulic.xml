@@ -18,12 +18,6 @@ hydraulic/xfeed
 
 <system name="hydraulics">
 
-	<property value="1">hydraulic/contents-system[0]</property>
-	<property value="1">hydraulic/contents-system[1]</property>
-	<property value="0">hydraulic/xfeed</property>
-	<property value="0">hydraulic/usage[0]</property>
-	<property value="0">hydraulic/usage[1]</property>
-
 	<channel name="output">
 			
 		<fcs_function name="trash/hydraulic/contents-tank[0]">

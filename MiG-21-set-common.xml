@@ -933,6 +933,15 @@
 					</cm>
 				</armament>
 			</systems>
+			<hydraulic>
+				<output n="0" type="double">0.0</output>
+				<output n="1" type="double">0.0</output>
+				<contents-system type="double" n="0">1</contents-system>
+				<contents-system type="double" n="1">1</contents-system>
+				<usage n="0" type="double">1</usage>
+				<usage n="1" type="double">1</usage>
+				<xfeed type="double">1</xfeed>
+			</hydraulic>
 			<pneumatic>
 				<sources>
 					<bottle-kgfcm type="double">120.0</bottle-kgfcm>
@@ -940,6 +949,7 @@
 				</sources>
 				<drain>
 					<wheel-stop type="double">0.0</wheel-stop>
+					<chute type="double">0.0</chute>
 				</drain>
 			</pneumatic>
 			<propulsion>
