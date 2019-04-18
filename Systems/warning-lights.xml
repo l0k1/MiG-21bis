@@ -576,16 +576,10 @@
 		<fcs_function name="trash/warning-lights/watch-bkup-syst-pres">
 			<function>
 				<product>
-					<or>
-						<lt>
-							<property>hydraulic/source/bar[1]</property>
-							<value>170</value>
-						</lt>
-						<gt>
-							<property>hydraulic/source/pump[1]</property>
-							<value>0</value>
-						</gt>
-					</or>
+					<lt>
+						<property>hydraulic/pressure[1]</property>
+						<value>0.6</value>
+					</lt>
 					<property>/instrumentation/warning-lights/dimmer[5]</property>
 					<property>warning-lights/lights-dc</property>
 				</product>
@@ -600,16 +594,10 @@
 		<fcs_function name="trash/warning-lights/watch-main-syst-pres">
 			<function>
 				<product>
-					<or>
-						<lt>
-							<property>hydraulic/source/bar[0]</property>
-							<value>170</value>
-						</lt>
-						<gt>
-							<property>hydraulic/source/pump[0]</property>
-							<value>0</value>
-						</gt>
-					</or>
+					<lt>
+						<property>hydraulic/pressure[0]</property>
+						<value>0.6</value>
+					</lt>
 					<property>/instrumentation/warning-lights/dimmer[5]</property>
 					<property>warning-lights/lights-dc</property>
 				</product>
