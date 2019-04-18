@@ -1607,9 +1607,12 @@ var deviation_normdeg = func(our_heading, target_bearing) {
   return dev_norm;
 }
 
-setlistener('/controls/radar/power-panel/run',func() {
-  var status = getprop('/controls/radar/power-panel/run');
-  setprop('/sim/multiplay/generic/int[2]', (status - 1) * -1);
+setlistener('/fdm/jsbsim/radar/mode',func() {
+  if (getprop("fdm/jsbsim/radar/mode") == 2 and getprop("fdm/jsbsim/radar/antenna-damage") < 0.8) {
+    setprop('/sim/multiplay/generic/int[2]', 0);
+  } else {
+    setprop('/sim/multiplay/generic/int[2]', 1);
+  }
 });
 
 var radarLogic = nil;
