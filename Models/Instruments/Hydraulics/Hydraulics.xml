@@ -8,6 +8,7 @@
         <type>material</type>
         <object-name>hydraulicFace</object-name>
         <object-name>hydraulicNeedle</object-name>
+		<object-name>hydraulicNeedle.001</object-name>
         <emission>
             <red>0.6</red>
             <green>0.3</green>
