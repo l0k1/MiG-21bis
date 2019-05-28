@@ -1146,11 +1146,11 @@ check for Low Altitude Mode
             <property>/fdm/jsbsim/fcs/aileron-ap-cmd-norm</property>
         </output>
         <config>
-            <Kp>0.20</Kp>
-            <Ti>0.45</Ti>
-            <Td>0.001</Td>
-            <u_min>-1.0</u_min>
-            <u_max>1.0</u_max>
+            <Kp><property>autopilot/settings/roll-final/kp</property></Kp>
+            <Ti><property>autopilot/settings/roll-final/ti</property></Ti>
+            <Td><property>autopilot/settings/roll-final/td</property></Td>
+            <u_min><property>autopilot/settings/roll-final/u_min</property></u_min>
+            <u_max><property>autopilot/settings/roll-final/u_max</property></u_max>
         </config>
     </pid-controller>
 

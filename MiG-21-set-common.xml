@@ -883,6 +883,19 @@
 		</submodels>
 	</ai>
 
+	<!-- i'd like to do this with all the pids, but no time right now -->
+	<autopilot>
+		<settings>
+			<roll-final>
+				<kp type="double">0.20</kp>
+				<ti type="double">0.45</ti>
+				<td type="double">0.001</td>
+				<u_min type="double">-1.0</u_min>
+				<u_max type="double">1.0</u_max>
+			</roll-final>
+		</settings>
+	</autopilot>
+
 	<fdm>
 		<jsbsim>
 			<simulation>
