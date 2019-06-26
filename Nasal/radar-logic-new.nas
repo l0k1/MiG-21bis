@@ -17,13 +17,15 @@ var TRUE = 1;
 
 var kts2kmh = 1.852;
 var round0 = func(x) { return math.abs(x) > 0.01 ? x : 0; };
- 
- 
+
+
 # Radar Parameters
 var radarRange = 60000;
 var radarPowerRange = 30000;
 var radarPowerRCS = 4;
 
+# NOTE: you can change these later to scan a smaller window, but the initial settings should be the max limits to
+# properly calculate antenna movement and limit stuffs
 var radar_bottom_limit = -30;
 var radar_top_limit = 30;
 var radar_left_limit = -30;
@@ -32,6 +34,8 @@ var radar_right_limit = 30;
 var radar_gimbal_limit_hori = 70; # if the antenna can't move completely with the plane as the plane rolls/pitches to keep a steady horizon.
 var radar_gimbal_limit_vert = 70;
 
+var full_scan_time = 0.17; # time in seconds the radar takes to go from full left to full right (assume up/down takes same amount of time)
+
 var beam_width = 10;
 var beam_height = 10;
 
@@ -39,10 +43,18 @@ var beam_height = 10;
 # it is up to the person coding it to make sure there are no blind spots.
 # the radar antenna will move ~80% of the above beam variables until it hits the end.
 # multiple scan patterns are allowed, although the mig-21 only uses one.
-var radar_scan_patterns = [[-1,0],[1,0],[1,-1],[-1,-1],[-1,1],[1,1],[1,0],[-1,0],[-1,-1],[1,-1],[1,1],[-1,1]];
+var radar_scan_patterns = [
+                            [-1,0],[1,0],[1,-1],[-1,-1],[-1,1],[1,1],[1,0],[-1,0],[-1,-1],[1,-1],[1,1],[-1,1]
+                          ];
 
 # change the scan pattern by calling RadarLogic.changeScanPattern();
 var default_scan_pattern = 0;
+
+##### NON USER SETTINGS
+# calculate the movement rate of the antenna
+var beam_width_norm = (radar_right_limit - radar_left_limit) / beam_width;
+var beam_height_norm = (radar_top_limit - radar_bottom_limit) / beam_height;
+var movement_rate = full_scan_time / beam_width_norm; # how many seconds per scan
 
 
 var RadarLogic = {
@@ -50,16 +62,16 @@ var RadarLogic = {
     new: func() {
         var radarLogic     = { parents : [RadarLogic]};
         radarLogic.typeHashes = {};
-    radarLogic.
-    radarLogic.bottom_limit = radar_bottom_limit + (beam_height / 2);
-    radarLogic.top_limit = radar_top_limit - (beam_height / 2);
-    radarLogic.left_limit = radar_left_limit + (beam_width / 2);
-    radarLogic.right_limit = radar_right_limit - (beam_width / 2);
-    radarLogic._denormalizeScanPatterns();
-    radarLogic.scan_pattern = radarLogic.scan_patterns[default_scan_pattern];
-    radarLogic.scan_index = 0;
-    radarLogic.scan_location = radarLogic.scan_pattern[0];
-    me.iterator = 0;
+        radarLogic.bottom_limit = radar_bottom_limit + (beam_height / 2);
+        radarLogic.top_limit = radar_top_limit - (beam_height / 2);
+        radarLogic.left_limit = radar_left_limit + (beam_width / 2);
+        radarLogic.right_limit = radar_right_limit - (beam_width / 2);
+        radarLogic._denormalizeScanPatterns();
+        radarLogic.scan_pattern = radarLogic.scan_patterns[default_scan_pattern];
+        radarLogic.scan_index = 0;
+        radarLogic.scan_location = radarLogic.scan_pattern[0];
+        radarLogic.iterator = 0;
+        radarLogic.contact_list = [];
         return radarLogic;
     },
 
@@ -70,28 +82,65 @@ var RadarLogic = {
     }
     me.iterator = me.iterator < 10 ? me.iterator + 1 : 0;
     
-    me.setAntenna();
+    me.setAntennaPos();
     me.processContacts();
     settimer(func{me.loop();}, 0.15);
-    },
+  },
 
   processContacts: func() {
   
   },
   
-  setAntenna: func() {
-    # first get the current yaw/pitch of the antenna
-    # todo: change antenna pos based on pitch/roll/gimble limits
+  processScan: func() {
+    foreach ( var c; me.contact_list ) {
+      
+    }  
+  },
+  
+  setAntennaPos: func() {
+    # move the antenna to the next pos
     
-    if ( math.abs(getprop("orientation/roll-deg")) > radar_gimbal_limit_hori ) {
-      #this.setPosX(((float)Math.cos(angle)*radius ) + center.x);
-#this.setPosY(((float)Math.sin(angle)*radius ) +center.y);
-# sqrt (x^2 + y ^2)
+    # move the antenna in the x/y dir by the normalized beam amount
+    # and make sure it doesnt move past the next point.
+    if (me.x_dir != 0 ) {
+      me.scan_location[0] += (beam_width_norm * me.x_dir);
+      if ( me.scan_location[0] * x_dir > me.scan_location_next[0] * x_dir ) {
+        me.scan_location[0] = me.scan_location_next[0];
+      }
     }
+    if (me.y_dir != 0 ) {
+      me.scan_location[1] += (beam_height_norm * me.y_dir);
+      if ( me.scan_location[1] * y_dir > me.scan_location_next[1] * y_dir ) {
+        me.scan_location[1] = me.scan_location_next[1];
+      }
+    }
+    
+    if ( me.scan_location[0] == me.scan_location_next[0] and me.scan_location[1] == me.scan_location_next[1] ) {
+      me.processNextAntennaPoint();
+    }
+    
+    # get the current yaw/pitch of the antenna
+    me.roll = getprop("orientation/roll-deg");
+    me.pitch = getprop("orientation/pitch-deg");
     me.antenna_yaw = me.scan_location[0];
     me.antenna_pitch = me.scan_location[1];
     
-    # then move the antenna along the current scan pattern
+    
+    # adjust the yaw and pitch of the antenna by the roll and pitch of the aircraft, adjusting for antenna gimbal limits
+    if ( math.abs(me.roll) > radar_gimbal_limit_hori ) {
+      me.roll_rad = me.roll * D2R
+      me.antenna_yaw = me.scan_location[0] * math.cos(me.roll_rad) + me.scan_location[1] * math.sin(me.roll_rad); # x * cos(deg) + y * sin(deg)
+      me.antenna_pitch = -me.scan_location[0] * math.sin(me.roll_rad) + me.scan_location[1] * math.cos(me.roll_rad); # -x * sin(deg) + y * cos(deg)
+    }
+    # denormalize antenna pos
+    me.antenna_yaw = me.antenna_yaw > 0 ? me.antenna_yaw * radar_right_limit : me.antenna_yaw * radar_left_limit;
+    me.antenna_pitch = me.antenna_pitch > 0 ? me.antenna_pitch * radar_top_limit : me.antenna_pitch * radar_bottom_limit;
+    
+    # adjust pitch if over gimbal limit
+    if ( math.abs(me.pitch) > radar_gimbal_limit_vert ) {
+      me.antenna_pitch = me.antenna_pitch + (me.pitch - (radar_gimbal_limit_vert * math.sgn(me.pitch)));
+    }
+    
   },
   
   changeScanPattern: func(v) {
@@ -101,34 +150,53 @@ var RadarLogic = {
     } else {
       me.scan_pattern = radar_scan_patterns[v];
       me.scan_index = 0;
+      me.scan_index_next = 0;
       me.scan_location = me.scan_pattern[0];
+      me.processNextAntennaPoint();
     }
   },
   
-  _denormalizeScanPatterns: func() {
-    me.scan_patterns = [];
-    foreach (var p; radar_scan_patterns) {
-      me.temp = []
-      foreach (var e; p) {
-        if (e[0] == 0) {
-          me.r1 = 0;
-        } elsif (e[0] < 0) {
-          me.r1 = -e[0] * me.left_limit;
-        } else {
-          me.r1 = e[0] * me.right_limit;
-        }
-        if (e[1] == 0 {
-          me.r2 = 0;
-        } elsif (e[1] < 0) {
-          me.r2 = -e[0] * me.bottom_limit;
-        } else {
-          me.r2 = e[0] * me.top_limit;
-        }
-        append(me.temp, [me.r1, me.r2]);
-      }
-      append(me.scan_patterns, me.temp);
+  processNextAntennaPoint: func() {
+    # run after the antenna has reached a waypoint
+    # this will process the waypoints and create directionality for the antenna to move
+    
+    # update index
+    
+    if ( len(me.scan_pattern) == 1 ) {
+      me.x_dir = 0;
+      me.y_dir = 0;
+      return;
     }
+    
+    me.scan_index = me.scan_index_next;
+    if ( me.scan_index + 1 > len(me.scan_pattern) - 1 ) {
+      me.scan_index_next = 0;
+    } else {
+      me.scan_index_next = me.scan_index + 1;
+    }
+    me.scan_location_next = me.scan_pattern[me.scan_index_next];
+    
+    # create x/y directional vectors
+    
+    if ( me.scan_location[0] > me.scan_pattern[me.scan_index_next][0] ) {
+      me.x_dir = -1;
+    } elsif ( me.scan_location[0] < me.scan_pattern[me.scan_index_next][0] ) {
+      me.x_dir = 1;
+    } else {
+      me.x_dir = 0;
+    }
+    
+    if ( me.scan_location[1] > me.scan_pattern[me.scan_index_next][1] ) {
+      me.y_dir = -1;
+    } elsif ( me.scan_location[1] < me.scan_pattern[me.scan_index_next][1] ) {
+      me.y_dir = 1;
+    } else {
+      me.y_dir = 0;
+    }
+    
   },
+  
+
 var containsVector = func (vec, item) {
   foreach(test; vec) {
     if (test == item) {
