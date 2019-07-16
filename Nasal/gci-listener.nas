@@ -7,6 +7,8 @@
 # PICTURE - full tactical picture
 # BOGEY DOPE - BRAA of nearest target
 # CUTOFF - vector to nearest target
+#
+# in addition a POPUP call can come in, without being requested
 # 
 # The requesting plane has 3 boolean mp properties, one for each request.
 # The requestor plane sets 1 property. Setting another property should overwrite
@@ -28,6 +30,9 @@
 # 
 # for CUTOFF
 # requestor-callsign:unique-message-id:4:vector-heading:range:altitude:aspect
+#
+# for POPUP
+# recipient-callsign:unique-message-id:5:bearing:range:altitude:aspect
 # 
 # for no info available to send:
 # requestor-callsign:unique-message-id:1:n:n:n:n
