@@ -221,6 +221,21 @@ var parse_msg = func(msg) {
         picture_prop.setValue(0);
         bogeydope_prop.setValue(0);
         cutoff_prop.setValue(0);
+    } elsif (msg[2] == 5) {
+        # popup call out
+        # recipient-callsign:unique-message-id:5:bearing:range:altitude:aspect
+        output = output ~ "popup contact at " ~ msg[3] ~ " at " ~ int(math.round(int(msg[4]),1000)/1000) ~ "km, ";
+        output = output ~ "altitude " ~ int(math.round(msg[5] * FT2M,100)) ~ "m, ";
+        msg[6] = math.abs(msg[6]);
+        if (msg[6] > 110) {
+            output = output ~ "dragging.";
+        } elsif (msg[6] > 70) {
+            output = output ~ "beaming";
+        } elsif (msg[6] > 30) {
+            output = output ~ "flanking";
+        } else {
+            output = output ~ "hot";
+        }
     } else {
         picture_prop.setValue(0);
         bogeydope_prop.setValue(0);
