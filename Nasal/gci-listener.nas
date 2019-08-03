@@ -216,6 +216,21 @@ var parse_msg = func(msg) {
         picture_prop.setValue(0);
         bogeydope_prop.setValue(0);
         cutoff_prop.setValue(0);
+    } elsif (msg[2] == 5) {
+        # DOPE BOGEY message
+        # 3:bearing, 4:range, 5:altitude, 6:aspect
+        output = output ~ "popup bandit " ~ msg[3] ~ " at " ~ int(math.round(int(msg[4]),1000)/1000) ~ "km, ";
+        output = output ~ "altitude " ~ int(math.round(msg[5] * FT2M,100)) ~ "m, ";
+        msg[6] = math.abs(msg[6]);
+        if (msg[6] > 110) {
+            output = output ~ "dragging.";
+        } elsif (msg[6] > 70) {
+            output = output ~ "beaming";
+        } elsif (msg[6] > 30) {
+            output = output ~ "flanking";
+        } else {
+            output = output ~ "hot";
+        }
     } else {
         picture_prop.setValue(0);
         bogeydope_prop.setValue(0);
