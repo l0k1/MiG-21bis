@@ -664,8 +664,8 @@
                <independentVar lookup="column">aero/Re</independentVar>
                <tableData>
                            15043185 16547504 22564778 30305826
-                   -0.0349  -0.3916  -0.0851  -0.0565  -0.0417
-                    0.3491  -0.9058  -0.2078  -0.0787  -0.0633
+                   -0.0349  -0.3916  -0.0751  -0.0465  -0.0167
+                    0.3491  -0.9058  -0.1678  -0.0587  -0.0313
                </tableData>
              </table>
              <property>tune/roll/beta</property>
@@ -819,7 +819,7 @@
            <property>aero/bi2vel</property>
            <property>velocities/r-aero-rad_sec</property>
            <product>
-             <value> -0.95 </value>
+             <value> -1.15 </value>
              <property>tune/yaw/damp</property>
            </product>
        </product>
@@ -833,7 +833,7 @@
            <property>metrics/bw-ft</property>
            <property>fcs/rudder-pos-rad</property>
            <product>
-             <value> -0.0887 </value>
+             <value> -0.035 </value>
              <property>tune/yaw/rudder</property>
            </product>
        </product>
@@ -847,7 +847,7 @@
            <property>metrics/bw-ft</property>
            <property>fcs/left-aileron-pos-rad</property>
            <product>
-             <value> 0.0000 </value>
+             <value> 0.0020 </value>
              <property>tune/yaw/aileron</property>
            </product>
        </product>
