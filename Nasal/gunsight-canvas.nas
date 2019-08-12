@@ -67,16 +67,22 @@ var gun_sight = {
         # x and z coords of the center of the hud
         m.gsight_x = -4.08292;
         m.gsight_z = 1.07701;
+        m.base_view_x = -3.33;
+        m.base_view_z = 1.2813;
         
         m.gsight_height_m = 0.17; # height of hud in meters
         m.gsight_height_px = 920; # actual height of gunsight in pixels
+        m.px_per_m = m.gsight_height_px / m.gsight_height_m;
+        m.view_offset_x = 0;
+        m.view_offset_y = 0;
         
-        m.mil = m.calcPixelPerDegree(-3.33, 1.2813)[2];
+        m.mil = m.calcPixelPerDegree(m.base_view_x, m.base_view_z)[2];
         
         m.center_offset_px = 288;
 
         # for scaling later
         m.base_distance = input.viewX.getValue() - m.gsight_x;
+        m.px_per_meter = 
         m.old_sca = 0;
         
         ###########
@@ -252,7 +258,65 @@ var gun_sight = {
         }
         m.pipper.setTranslation(512,512);
         m.pipper.hide();
+        
+        ###########
+        # listeners
+        ###########
+        
+        setlistener(input.redpath.getPath(), func{ m.updateColor() } );
+        setlistener(input.bluepath.getPath(), func{ m.updateColor() } );
+        setlistener(input.greenpath.getPath(), func{ m.updateColor() } );
+        setlistener(input.pipperbrightness.getPath(), func{ m.updateColor() } );
+        setlistener(input.fixed_net_alphapath.getPath(), func{ m.updateColor() } );
+        
+        setlistener(linewidthpath,func { m.updateWidth() });
+        
+		setlistener(input.viewX.getPath(),func { m.updateViewOffset(); });
+		setlistener(input.viewY.getPath(),func { m.updateViewOffset(); });
+        
+        m.pipper_status = 0;
+        m.fixed_net_status = 0;
+        
+        m.updateViewOffset();
+        m.last_x = m.view_offset_x;
+        m.last_y = m.view_offset_y;
+        
+        m.update();
         return m;
+    },
+    
+    update: func() {
+        if ( input.gunsight_power.getValue > 33 ) {
+            if ( input.pipperpowerswitch.getValue() == 1 and me.pipper_status == 0) {
+                me.pipper_status = 1;
+                me.pipper.show();
+            } elsif ( input.pipperpowerswitch.getValue() == 0 and me.pipper_status == 1 ) {
+                me.pipper_status = 0;
+                me.pipper.hide();
+            }
+            
+            if ( input.fixednetswitch.getValue() == 1 and me.fixed_net_status == 0 ) {
+                me.fixed_net_status = 1;
+                me.fixed_net.show();
+            } elsif ( input.fixednetswitch.getValue() == 0 and me.fixed_net_status == 1 ) {
+                me.fixed_net_status = 0;
+                me.fixed_net.hide();
+            }
+            
+            if ( me.view_offset_x != me.last_x or me.view_offset_y != me.last_y ) {
+                fixed_net.setTranslation(512 + me.view_offset_x, (512 - center_offset_px) + me.view_offset_y);
+            }
+            
+        } else {
+            if ( me.pipper_status == 1 ) {
+                me.pipper_status = 0;
+                me.pipper.hide();
+            }
+            if (me.fixed_net_status == 1 ) {
+                me.fixed_net_status = 0;
+                me.fixed_net.hide();
+            }
+        }
     },
     
     calcPixelPerDegree: func(view_x = 0, view_z = 0) {
@@ -285,6 +349,27 @@ var gun_sight = {
             me.pipper.setScale(me.sca, me.sca);
         }
         me.old_sca = me.sca;
+    },
+    
+    updateViewOffset: func() {
+        me.view_offset_x = -me.px_per_m * input.viewX.getValue();
+        me.view_offset_y = -me.px_per_m * (input.viewY.getValue() - m.base_view_z);
+    };
+    
+    updateColor: func() {
+        me.dR = me.normColor(input.redpath.getValue());
+        me.dB = me.normColor(input.bluepath.getValue());
+        me.dG = me.normColor(input.greenpath.getValue());
+        me.dA = fixed_net_alphapath.getValue();
+        me.dAp = pipperbrightness.getValue();
+        me.fixed_net.setColor(dR,dG,dB,dA);
+        me.pipper.setColor(dR,dG,dB,dAp);
+    },
+    
+    updateWidth: func() {
+        me.lw = linewidthpath.getValue();
+        fixed_net.setStrokeLineWidth(lW);
+        pipper.setStrokeLineWidth(lW);
     },
     
     normColor: func(val) {
