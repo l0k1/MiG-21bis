@@ -83,6 +83,9 @@ var gun_sight = {
         m.base_distance = input.viewX.getValue() - m.gsight_x;
         m.px_per_meter = 
         m.old_sca = 0;
+
+        # logic
+        m.asp_gunsight = gunsight_logic.asp_pfd.new();
         
         ###########
         # FIXED NET
@@ -309,6 +312,10 @@ var gun_sight = {
                 me.last_y = me.view_offset_y;
             }
             
+            if (me.pipper_status == 1) {
+                me.calcPipperPos();
+            }
+
         } else {
             if ( me.pipper_status == 1 ) {
                 me.pipper_status = 0;
@@ -320,6 +327,28 @@ var gun_sight = {
             }
         }
         settimer(func() { me.update(); },0.01);
+    },
+
+    calcPipperPos: func() {
+        me.center_x = 512;
+        me.center_y = 512 - me.center_offset_px;
+
+        # movement due to gyro
+        me.gyro_x = me.asp_gunsight.getAzimuth() * me.px_per_mil;
+        me.gyro_y = me.asp_gunsight.getElevation() * me.px_per_mil;
+
+        me.pipper_x = me.center_x + me.view_offset_x + me.gyro_x;
+        me.pipper_y = me.center_y + me.view_offset_y + me.gyro_y;
+
+        # translations
+        me.pipper.setTranslation(me.pipper_x, me.pipper_y);
+
+        me.pipper_scale = input.pipperscale.getValue() * me.px_per_mil;
+        forindex( var i ; me.pipper_elems ) {
+            me.angle = ((180 - (45 * i))+5) * D2R;
+            me.pipper_elems[i].setTranslation(me.pipper_scale * math.cos(me.angle), -1 * me.pipper_scale * math.sin(me.angle));
+        }
+
     },
     
     calcPixelPerDegree: func(view_x = 0, view_z = 0) {

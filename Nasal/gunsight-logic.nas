@@ -49,7 +49,7 @@ var AFALCOS = {
         m.GA = 0.1;   # gun angle in radians (pos is up) - should be set in wrapper class
         m.VM = 2350.0;   # muzzle speed in feet per second
         m.DT = 0.05;   # integration step size in seconds (loop update rate)
-        m.GAIN = 1.5; #sight sensitivity parameter - 0.8 nominally
+        m.GAIN = 2.25; #sight sensitivity parameter - 0.8 nominally
         m.HUDY = 0; # sorta educated guess: y distance from gun to hud
         m.HUDZ = 4.69; # sorta educated guess: z distance from gun to hud
 
