@@ -286,9 +286,6 @@ var gun_sight = {
     },
     
     update: func() {
-        print("updating!");
-        print(input.gunsight_power.getValue());
-        print(input.pipperpowerswitch.getValue());
         if ( input.gunsight_power.getValue() > 33 ) {
             if ( input.pipperpowerswitch.getValue() == 1 and me.pipper_status == 0) {
                 me.pipper_status = 1;
