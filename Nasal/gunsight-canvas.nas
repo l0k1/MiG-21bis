@@ -60,8 +60,7 @@ var gun_sight = {
         m.dAf = input.fixed_net_alphapath.getValue();
         m.dAp = input.pipperbrightness.getValue();
         m.fS = input.fontsizepath.getValue();
-        #m.lW = input.linewidthpath.getValue();
-        m.lW = 3;
+        m.lW = input.linewidthpath.getValue();
         
         # calculate pixel per degree
         # x and z coords of the center of the hud
@@ -227,6 +226,7 @@ var gun_sight = {
             .arcSmallCCW(100 * m.mil, 100 * m.mil, 0, 200 * m.mil * math.cos(39 * D2R),0);
 
         m.fixed_net.setTranslation(512,512 - m.center_offset_px);
+        m.fixed_net.hide();
         
         ###########
         # PIPPER
@@ -269,7 +269,7 @@ var gun_sight = {
         setlistener(input.pipperbrightness.getPath(), func{ m.updateColor() } );
         setlistener(input.fixed_net_alphapath.getPath(), func{ m.updateColor() } );
         
-        setlistener(linewidthpath,func { m.updateWidth() });
+        setlistener(input.linewidthpath.getPath(),func { m.updateWidth() });
         
 		setlistener(input.viewX.getPath(),func { m.updateViewOffset(); });
 		setlistener(input.viewY.getPath(),func { m.updateViewOffset(); });
@@ -286,7 +286,10 @@ var gun_sight = {
     },
     
     update: func() {
-        if ( input.gunsight_power.getValue > 33 ) {
+        print("updating!");
+        print(input.gunsight_power.getValue());
+        print(input.pipperpowerswitch.getValue());
+        if ( input.gunsight_power.getValue() > 33 ) {
             if ( input.pipperpowerswitch.getValue() == 1 and me.pipper_status == 0) {
                 me.pipper_status = 1;
                 me.pipper.show();
@@ -303,8 +306,10 @@ var gun_sight = {
                 me.fixed_net.hide();
             }
             
-            if ( me.view_offset_x != me.last_x or me.view_offset_y != me.last_y ) {
-                fixed_net.setTranslation(512 + me.view_offset_x, (512 - center_offset_px) + me.view_offset_y);
+            if ( (me.view_offset_x != me.last_x or me.view_offset_y != me.last_y) and me.fixed_net_status == 1 ) {
+                me.fixed_net.setTranslation(512 + me.view_offset_x, (512 - me.center_offset_px) + me.view_offset_y);
+                me.last_x = me.view_offset_x;
+                me.last_y = me.view_offset_y;
             }
             
         } else {
@@ -317,6 +322,7 @@ var gun_sight = {
                 me.fixed_net.hide();
             }
         }
+        settimer(func() { me.update(); },0.01);
     },
     
     calcPixelPerDegree: func(view_x = 0, view_z = 0) {
@@ -352,9 +358,9 @@ var gun_sight = {
     },
     
     updateViewOffset: func() {
-        me.view_offset_x = -me.px_per_m * input.viewX.getValue();
-        me.view_offset_y = -me.px_per_m * (input.viewY.getValue() - m.base_view_z);
-    };
+        me.view_offset_x = me.px_per_m * input.viewX.getValue();
+        me.view_offset_y = -me.px_per_m * (input.viewY.getValue() - me.base_view_z);
+    },
     
     updateColor: func() {
         me.dR = me.normColor(input.redpath.getValue());
