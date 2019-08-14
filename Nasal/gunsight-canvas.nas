@@ -392,10 +392,10 @@ var gun_sight = {
         me.dR = me.normColor(input.redpath.getValue());
         me.dB = me.normColor(input.bluepath.getValue());
         me.dG = me.normColor(input.greenpath.getValue());
-        me.dA = fixed_net_alphapath.getValue();
-        me.dAp = pipperbrightness.getValue();
-        me.fixed_net.setColor(dR,dG,dB,dA);
-        me.pipper.setColor(dR,dG,dB,dAp);
+        me.dA = input.fixed_net_alphapath.getValue();
+        me.dAp = input.pipperbrightness.getValue();
+        me.fixed_net.setColor(me.dR,me.dG,me.dB,me.dA);
+        me.pipper.setColor(me.dR,me.dG,me.dB,me.dAp);
     },
     
     updateWidth: func() {
