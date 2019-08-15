@@ -61,6 +61,8 @@ var gun_sight = {
         m.dAp = input.pipperbrightness.getValue();
         m.fS = input.fontsizepath.getValue();
         m.lW = input.linewidthpath.getValue();
+
+        m.gunsight.setColorBackground(m.dR,m.dG,m.dB,0);
         
         # calculate pixel per degree
         # x and z coords of the center of the hud
@@ -395,13 +397,24 @@ var gun_sight = {
         me.dA = input.fixed_net_alphapath.getValue();
         me.dAp = input.pipperbrightness.getValue();
         me.fixed_net.setColor(me.dR,me.dG,me.dB,me.dA);
-        me.pipper.setColor(me.dR,me.dG,me.dB,me.dAp);
+        me.pipper_center.setColorFill(me.dR,me.dG,me.dB,me.dAp);
+        me.pipper_center.setColor(me.dR,me.dG,me.dB,me.dAp);
+        foreach(var el ; me.pipper_elems) {
+            el.setColorFill(me.dR,me.dG,me.dB,me.dAp);
+            el.setColor(me.dR,me.dG,me.dB,me.dAp);
+        }
+        me.gunsight.setColorBackground(me.dR,me.dG,me.dB,0);
     },
     
     updateWidth: func() {
-        me.lw = linewidthpath.getValue();
-        fixed_net.setStrokeLineWidth(lW);
-        pipper.setStrokeLineWidth(lW);
+        me.lw = input.linewidthpath.getValue();
+        me.fixed_net_lines.setStrokeLineWidth(me.lW);
+        me.fixed_net_inner_arch.setStrokeLineWidth(me.lW);
+        me.fixed_net_outer_arch.setStrokeLineWidth(me.lW);
+        me.pipper_center.setStrokeLineWidth(me.lW);
+        foreach(var el ; me.pipper_elems) {
+            el.setStrokeLineWidth(me.lW);
+        }
     },
     
     normColor: func(val) {

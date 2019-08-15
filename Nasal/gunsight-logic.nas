@@ -165,6 +165,8 @@ var AFALCOS = {
         me.DALA = me.getGain() * me.AINVW3;
         me.ELA = gyroMslSwitch.getValue() == 1 ? me.ELA / 1.1 : me.ELA + me.DT * me.DELA;
         me.ALA = gyroMslSwitch.getValue() == 1 ? me.ALA / 1.1 : me.ALA + me.DT * me.DALA;
+        print(me.ELA);
+        print(me.ALA);
         # me.ELA = damper.getValue() == 1 ? me.ELA / 1.1 : me.ELA + me.DT * me.DELA;
         # me.ALA = damper.getValue() == 1 ? me.ALA / 1.1 : me.ALA + me.DT * me.DALA;
         #me.ELA = me.ELA + me.DT * me.DELA;  #ELA and ALA are EL and AZ lead angle components w.r.t. gun
