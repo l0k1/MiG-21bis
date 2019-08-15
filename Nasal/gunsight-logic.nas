@@ -164,7 +164,9 @@ var AFALCOS = {
         me.DELA = me.getGain() * me.AINVW2;
         me.DALA = me.getGain() * me.AINVW3;
         me.ELA = gyroMslSwitch.getValue() == 1 ? me.ELA / 1.1 : me.ELA + me.DT * me.DELA;
+        me.ELA = math.clamp(me.ELA,-0.035, 0.12);
         me.ALA = gyroMslSwitch.getValue() == 1 ? me.ALA / 1.1 : me.ALA + me.DT * me.DALA;
+        me.ALA = math.clamp(me.ALA, -0.12, 0.12);
         print(me.ELA);
         print(me.ALA);
         # me.ELA = damper.getValue() == 1 ? me.ELA / 1.1 : me.ELA + me.DT * me.DELA;
