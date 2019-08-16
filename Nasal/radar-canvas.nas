@@ -651,9 +651,12 @@ var radar_screen = {
 						} else {
 							me.blip_text[b_i].hide();
 						}
-						b_i = 1;
 					}
+					b_i = 1;
+				} else {
+					b_i = 0;
 				}
+
 			}
 					
 			#if (lock == FALSE) {

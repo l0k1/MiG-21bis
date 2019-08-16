@@ -1112,6 +1112,10 @@ var ContactGPS = {
       return vector.Math.getPitch(self, me.coord);
   },
 
+  isVirtual: func() {
+    return 1;
+  },
+
   getNode: func () {
     return nil;
   },

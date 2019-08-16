@@ -436,6 +436,7 @@
 		<switch name="trash/fuelrefuel10">
 			<default value="0"/>
 			<test logic="AND" value="-15">
+				propulsion/tank[11]/contents-lbs lt 1
 				propulsion/tank[12]/contents-lbs lt 2
 				propulsion/tank[7]/contents-lbs gt 2
 				propulsion/tank[0]/contents-lbs lt 254
@@ -447,6 +448,7 @@
 		<switch name="trash/fuelrefuel11">
 			<default value="0"/>
 			<test logic="AND" value="-15">
+				propulsion/tank[11]/contents-lbs lt 1
 				propulsion/tank[12]/contents-lbs lt 2
 				propulsion/tank[8]/contents-lbs gt 2
 				propulsion/tank[0]/contents-lbs lt 254
@@ -460,6 +462,7 @@
 		<switch name="trash/fuelrefuel12">
 			<default value="0"/>
 			<test logic="AND" value="-15">
+				propulsion/tank[11]/contents-lbs lt 1
 				propulsion/tank[13]/contents-lbs lt 2
 				propulsion/tank[9]/contents-lbs gt 2
 				propulsion/tank[0]/contents-lbs lt 254
@@ -471,6 +474,7 @@
 		<switch name="trash/fuelrefuel13">
 			<default value="0"/>
 			<test logic="AND" value="-15">
+				propulsion/tank[11]/contents-lbs lt 1
 				propulsion/tank[13]/contents-lbs lt 2
 				propulsion/tank[10]/contents-lbs gt 2
 				propulsion/tank[0]/contents-lbs lt 254

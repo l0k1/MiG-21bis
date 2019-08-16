@@ -55,13 +55,13 @@
 	
 	<!-- Shaders -->
 	
-	<animation>
+	<!--<animation>
 		<type>shader</type>
 		<shader>chrome</shader>
 		<texture>Aircraft/Generic/Effects/glass_shader.png</texture>
 		<object-name>sight</object-name>
 		<object-name>gunsight_glass</object-name>
-	</animation>
+	</animation>-->
 	
 	<animation>
 		<type>noshadow</type>

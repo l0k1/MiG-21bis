@@ -411,7 +411,7 @@
 			</opt>
 		</weight>
 		<weight n="6">
-			<name>Left Fuselage Attachment Point</name>
+			<name>Right Fuselage Attachment Point</name>
 			<selected>none</selected>
 			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[6]"/>
 			<opt>

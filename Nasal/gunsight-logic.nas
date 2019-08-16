@@ -49,7 +49,7 @@ var AFALCOS = {
         m.GA = 0.1;   # gun angle in radians (pos is up) - should be set in wrapper class
         m.VM = 2350.0;   # muzzle speed in feet per second
         m.DT = 0.05;   # integration step size in seconds (loop update rate)
-        m.GAIN = 1.5; #sight sensitivity parameter - 0.8 nominally
+        m.GAIN = 2.25; #sight sensitivity parameter - 0.8 nominally
         m.HUDY = 0; # sorta educated guess: y distance from gun to hud
         m.HUDZ = 4.69; # sorta educated guess: z distance from gun to hud
 
@@ -164,7 +164,9 @@ var AFALCOS = {
         me.DELA = me.getGain() * me.AINVW2;
         me.DALA = me.getGain() * me.AINVW3;
         me.ELA = gyroMslSwitch.getValue() == 1 ? me.ELA / 1.1 : me.ELA + me.DT * me.DELA;
+        me.ELA = math.clamp(me.ELA,-0.035, 0.12);
         me.ALA = gyroMslSwitch.getValue() == 1 ? me.ALA / 1.1 : me.ALA + me.DT * me.DALA;
+        me.ALA = math.clamp(me.ALA, -0.12, 0.12);
         # me.ELA = damper.getValue() == 1 ? me.ELA / 1.1 : me.ELA + me.DT * me.DELA;
         # me.ALA = damper.getValue() == 1 ? me.ALA / 1.1 : me.ALA + me.DT * me.DALA;
         #me.ELA = me.ELA + me.DT * me.DELA;  #ELA and ALA are EL and AZ lead angle components w.r.t. gun

@@ -154,6 +154,13 @@
 							<value>60</value>
 						</binding>
 					</item>
+					<item>
+						<label>Gunsight</label>
+						<binding>
+							<command>nasal</command>
+							<script>dialog.gunsight_dialog.open()</script>
+						</binding>
+					</item>
 				</menu>
 				<menu n="101">
 					<label>Dev</label>
@@ -456,7 +463,7 @@
 				<red type="int">239</red>
 				<green type="int">197</green>
 				<blue type="int">31</blue>
-				<thickness type="int">5</thickness>
+				<thickness type="int">3</thickness>
 				<font-size type="int">60</font-size>
 				<!--gunsight switches and knobbins-->
 				<gun-missile-switch type="int">0</gun-missile-switch>

@@ -8,6 +8,9 @@ var adf_radio_dialog = gui.Dialog.new("dialogs/adf_radio/dialog","Aircraft/MiG-2
 # smokepod
 var smokepod_dialog = gui.Dialog.new("smokepod/dialog","Aircraft/MiG-21bis/Dialogs/smokepod_dialog.xml");
 
+# gunsight settings
+var gunsight_dialog = gui.Dialog.new("dialogs/gunsight/dialog","Aircraft/MiG-21bis/Dialogs/gunsight_settings.xml");
+
 # fdm tuning
 var tuner_drag_dialog = gui.Dialog.new("dialogs/fdm_drag_tuning/dialog","Aircraft/MiG-21bis/Dialogs/fdm_tune_drag.xml");
 var tuner_lift_dialog = gui.Dialog.new("dialogs/fdm_lift_tuning/dialog","Aircraft/MiG-21bis/Dialogs/fdm_tune_lift.xml");
