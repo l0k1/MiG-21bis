@@ -271,21 +271,33 @@ var load_radios = func(path) {
       index = 0;
       continue;
     }
+    if (datum == "") { continue; }
     if (mode == -1) { continue; }
     if ( ((mode == 0 or mode == 2 or mode == 3) and index > 19) or (mode == 1 and index > 8) ) {continue;}
 
+    var ident = "";
+    if ( size(split(" ",datum)) > 1 ) {
+      ident = split(" ",datum)[1];
+      datum = split(" ",datum)[0];
+    }
+
     if (mode == 0) {
       setprop("/instrumentation/vor-radio/preset["~index~"]",datum);
+      setprop("/instrumentation/vor-radio/ident["~index~"]",ident);
     } elsif (mode == 1) {
       setprop("/instrumentation/adf-radio/preset["~index~"]",datum);
+      setprop("/instrumentation/adf-radio/ident["~index~"]",ident);
     } elsif (mode == 2) {
       setprop("/instrumentation/comm-radio/preset["~index~"]",datum);
+      setprop("/instrumentation/comm-radio/ident["~index~"]",ident);
     } elsif (mode == 3) {
       setprop("/instrumentation/ils-radio/preset["~index~"]",datum);
+      setprop("/instrumentation/ils-radio/ident["~index~"]",ident);
     }
     index = index + 1;
 
   }
+  radio_canvas.rp.update_text();
   #debug.dump(data);
 }
 

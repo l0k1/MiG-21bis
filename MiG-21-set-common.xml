@@ -302,6 +302,27 @@
 			<path>/instrumentation/vor-radio/preset[18]</path>
 			<path>/instrumentation/vor-radio/preset[19]</path>
 
+			<path>/instrumentation/vor-radio/ident[0]</path>
+			<path>/instrumentation/vor-radio/ident[1]</path>
+			<path>/instrumentation/vor-radio/ident[2]</path>
+			<path>/instrumentation/vor-radio/ident[3]</path>
+			<path>/instrumentation/vor-radio/ident[4]</path>
+			<path>/instrumentation/vor-radio/ident[5]</path>
+			<path>/instrumentation/vor-radio/ident[6]</path>
+			<path>/instrumentation/vor-radio/ident[7]</path>
+			<path>/instrumentation/vor-radio/ident[8]</path>
+			<path>/instrumentation/vor-radio/ident[9]</path>
+			<path>/instrumentation/vor-radio/ident[10]</path>
+			<path>/instrumentation/vor-radio/ident[11]</path>
+			<path>/instrumentation/vor-radio/ident[12]</path>
+			<path>/instrumentation/vor-radio/ident[13]</path>
+			<path>/instrumentation/vor-radio/ident[14]</path>
+			<path>/instrumentation/vor-radio/ident[15]</path>
+			<path>/instrumentation/vor-radio/ident[16]</path>
+			<path>/instrumentation/vor-radio/ident[17]</path>
+			<path>/instrumentation/vor-radio/ident[18]</path>
+			<path>/instrumentation/vor-radio/ident[19]</path>
+
 			<path>/instrumentation/ils-radio/preset[0]</path>
 			<path>/instrumentation/ils-radio/preset[1]</path>
 			<path>/instrumentation/ils-radio/preset[2]</path>
@@ -322,6 +343,27 @@
 			<path>/instrumentation/ils-radio/preset[17]</path>
 			<path>/instrumentation/ils-radio/preset[18]</path>
 			<path>/instrumentation/ils-radio/preset[19]</path>
+
+			<path>/instrumentation/ils-radio/ident[0]</path>
+			<path>/instrumentation/ils-radio/ident[1]</path>
+			<path>/instrumentation/ils-radio/ident[2]</path>
+			<path>/instrumentation/ils-radio/ident[3]</path>
+			<path>/instrumentation/ils-radio/ident[4]</path>
+			<path>/instrumentation/ils-radio/ident[5]</path>
+			<path>/instrumentation/ils-radio/ident[6]</path>
+			<path>/instrumentation/ils-radio/ident[7]</path>
+			<path>/instrumentation/ils-radio/ident[8]</path>
+			<path>/instrumentation/ils-radio/ident[9]</path>
+			<path>/instrumentation/ils-radio/ident[10]</path>
+			<path>/instrumentation/ils-radio/ident[11]</path>
+			<path>/instrumentation/ils-radio/ident[12]</path>
+			<path>/instrumentation/ils-radio/ident[13]</path>
+			<path>/instrumentation/ils-radio/ident[14]</path>
+			<path>/instrumentation/ils-radio/ident[15]</path>
+			<path>/instrumentation/ils-radio/ident[16]</path>
+			<path>/instrumentation/ils-radio/ident[17]</path>
+			<path>/instrumentation/ils-radio/ident[18]</path>
+			<path>/instrumentation/ils-radio/ident[19]</path>
 
 			<path>/instrumentation/comm-radio/preset[0]</path>
 			<path>/instrumentation/comm-radio/preset[1]</path>
@@ -344,6 +386,27 @@
 			<path>/instrumentation/comm-radio/preset[18]</path>
 			<path>/instrumentation/comm-radio/preset[19]</path>
 
+			<path>/instrumentation/comm-radio/ident[0]</path>
+			<path>/instrumentation/comm-radio/ident[1]</path>
+			<path>/instrumentation/comm-radio/ident[2]</path>
+			<path>/instrumentation/comm-radio/ident[3]</path>
+			<path>/instrumentation/comm-radio/ident[4]</path>
+			<path>/instrumentation/comm-radio/ident[5]</path>
+			<path>/instrumentation/comm-radio/ident[6]</path>
+			<path>/instrumentation/comm-radio/ident[7]</path>
+			<path>/instrumentation/comm-radio/ident[8]</path>
+			<path>/instrumentation/comm-radio/ident[9]</path>
+			<path>/instrumentation/comm-radio/ident[10]</path>
+			<path>/instrumentation/comm-radio/ident[11]</path>
+			<path>/instrumentation/comm-radio/ident[12]</path>
+			<path>/instrumentation/comm-radio/ident[13]</path>
+			<path>/instrumentation/comm-radio/ident[14]</path>
+			<path>/instrumentation/comm-radio/ident[15]</path>
+			<path>/instrumentation/comm-radio/ident[16]</path>
+			<path>/instrumentation/comm-radio/ident[17]</path>
+			<path>/instrumentation/comm-radio/ident[18]</path>
+			<path>/instrumentation/comm-radio/ident[19]</path>
+
 			<path>/instrumentation/adf-radio/preset[0]</path>
 			<path>/instrumentation/adf-radio/preset[1]</path>
 			<path>/instrumentation/adf-radio/preset[2]</path>
@@ -353,6 +416,16 @@
 			<path>/instrumentation/adf-radio/preset[6]</path>
 			<path>/instrumentation/adf-radio/preset[7]</path>
 			<path>/instrumentation/adf-radio/preset[8]</path>
+			
+			<path>/instrumentation/adf-radio/ident[0]</path>
+			<path>/instrumentation/adf-radio/ident[1]</path>
+			<path>/instrumentation/adf-radio/ident[2]</path>
+			<path>/instrumentation/adf-radio/ident[3]</path>
+			<path>/instrumentation/adf-radio/ident[4]</path>
+			<path>/instrumentation/adf-radio/ident[5]</path>
+			<path>/instrumentation/adf-radio/ident[6]</path>
+			<path>/instrumentation/adf-radio/ident[7]</path>
+			<path>/instrumentation/adf-radio/ident[8]</path>
 
 			<path>/instrumentation/gyro-compass/gyro-heading-deg</path>
 
@@ -762,6 +835,26 @@
 			<preset type="double" n="17" userarchive="y">108.00</preset>
 			<preset type="double" n="18" userarchive="y">108.00</preset>
 			<preset type="double" n="19" userarchive="y">108.00</preset>
+			<ident userarchive="y" type="string" n="0"></ident>
+			<ident type="string" n="1" userarchive="y"></ident>
+			<ident type="string" n="2" userarchive="y"></ident>
+			<ident type="string" n="3" userarchive="y"></ident>
+			<ident type="string" n="4" userarchive="y"></ident>
+			<ident type="string" n="5" userarchive="y"></ident>
+			<ident type="string" n="6" userarchive="y"></ident>
+			<ident type="string" n="7" userarchive="y"></ident>
+			<ident type="string" n="8" userarchive="y"></ident>
+			<ident type="string" n="9" userarchive="y"></ident>
+			<ident type="string" n="10" userarchive="y"></ident>
+			<ident type="string" n="11" userarchive="y"></ident>
+			<ident type="string" n="12" userarchive="y"></ident>
+			<ident type="string" n="13" userarchive="y"></ident>
+			<ident type="string" n="14" userarchive="y"></ident>
+			<ident type="string" n="15" userarchive="y"></ident>
+			<ident type="string" n="16" userarchive="y"></ident>
+			<ident type="string" n="17" userarchive="y"></ident>
+			<ident type="string" n="18" userarchive="y"></ident>
+			<ident type="string" n="19" userarchive="y"></ident>
 		</vor-radio>
 		<ils-radio>
 			<selection type="int" userarchive="y">0</selection>
@@ -785,6 +878,26 @@
 			<preset type="double" n="17" userarchive="y">108.00</preset>
 			<preset type="double" n="18" userarchive="y">108.00</preset>
 			<preset type="double" n="19" userarchive="y">108.00</preset>
+			<ident userarchive="y" type="string" n="0"></ident>
+			<ident type="string" n="1" userarchive="y"></ident>
+			<ident type="string" n="2" userarchive="y"></ident>
+			<ident type="string" n="3" userarchive="y"></ident>
+			<ident type="string" n="4" userarchive="y"></ident>
+			<ident type="string" n="5" userarchive="y"></ident>
+			<ident type="string" n="6" userarchive="y"></ident>
+			<ident type="string" n="7" userarchive="y"></ident>
+			<ident type="string" n="8" userarchive="y"></ident>
+			<ident type="string" n="9" userarchive="y"></ident>
+			<ident type="string" n="10" userarchive="y"></ident>
+			<ident type="string" n="11" userarchive="y"></ident>
+			<ident type="string" n="12" userarchive="y"></ident>
+			<ident type="string" n="13" userarchive="y"></ident>
+			<ident type="string" n="14" userarchive="y"></ident>
+			<ident type="string" n="15" userarchive="y"></ident>
+			<ident type="string" n="16" userarchive="y"></ident>
+			<ident type="string" n="17" userarchive="y"></ident>
+			<ident type="string" n="18" userarchive="y"></ident>
+			<ident type="string" n="19" userarchive="y"></ident>
 		</ils-radio>
 		<comm n="1">
 			<volume>0</volume>
@@ -813,6 +926,26 @@
 			<preset type="double" n="17" userarchive="y">118.00</preset>
 			<preset type="double" n="18" userarchive="y">118.00</preset>
 			<preset type="double" n="19" userarchive="y">118.00</preset>
+			<ident userarchive="y" type="string" n="0"></ident>
+			<ident type="string" n="1" userarchive="y"></ident>
+			<ident type="string" n="2" userarchive="y"></ident>
+			<ident type="string" n="3" userarchive="y"></ident>
+			<ident type="string" n="4" userarchive="y"></ident>
+			<ident type="string" n="5" userarchive="y"></ident>
+			<ident type="string" n="6" userarchive="y"></ident>
+			<ident type="string" n="7" userarchive="y"></ident>
+			<ident type="string" n="8" userarchive="y"></ident>
+			<ident type="string" n="9" userarchive="y"></ident>
+			<ident type="string" n="10" userarchive="y"></ident>
+			<ident type="string" n="11" userarchive="y"></ident>
+			<ident type="string" n="12" userarchive="y"></ident>
+			<ident type="string" n="13" userarchive="y"></ident>
+			<ident type="string" n="14" userarchive="y"></ident>
+			<ident type="string" n="15" userarchive="y"></ident>
+			<ident type="string" n="16" userarchive="y"></ident>
+			<ident type="string" n="17" userarchive="y"></ident>
+			<ident type="string" n="18" userarchive="y"></ident>
+			<ident type="string" n="19" userarchive="y"></ident>
 		</comm-radio>
 		<adf-radio>
 			<selection type="int" userarchive="y">0</selection>
@@ -825,6 +958,15 @@
 			<preset type="double" n="6" userarchive="y">350</preset>
 			<preset type="double" n="7" userarchive="y">350</preset>
 			<preset type="double" n="8" userarchive="y">350</preset>
+			<ident userarchive="y" type="string" n="0"></ident>
+			<ident type="string" n="1" userarchive="y"></ident>
+			<ident type="string" n="2" userarchive="y"></ident>
+			<ident type="string" n="3" userarchive="y"></ident>
+			<ident type="string" n="4" userarchive="y"></ident>
+			<ident type="string" n="5" userarchive="y"></ident>
+			<ident type="string" n="6" userarchive="y"></ident>
+			<ident type="string" n="7" userarchive="y"></ident>
+			<ident type="string" n="8" userarchive="y"></ident>
 			<animation>
 				<select n="0" type="bool">true</select>
 				<select n="1" type="bool">false</select>
@@ -1618,6 +1760,7 @@
 		<rwr>				<file>Aircraft/MiG-21bis/Nasal/rwr.nas</file>				</rwr>				<!-- rwr -->
 		<iff>				<file>Aircraft/MiG-21bis/Nasal/iff.nas</file>				</iff>				<!-- iff -->
 		<gci>				<file>Aircraft/MiG-21bis/Nasal/gci-listener.nas</file>		</gci>				<!-- gci -->
+		<radio_canvas>		<file>Aircraft/MiG-21bis/Nasal/radio_canvas.nas</file>		</radio_canvas>		<!-- canvas for the paper note on the gunsight -->
 
 	</nasal>
 
