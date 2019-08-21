@@ -19,7 +19,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>alphaNeedle</object-name>
-		<property>orientation/alpha-deg</property>
+		<property>fdm/jsbsim/aero/alpha-corrected-deg</property>
 		<interpolation>
 			<entry><ind>-10  </ind>	<dep> -210 </dep></entry>
 			<entry><ind>  0  </ind>	<dep> -155 </dep></entry>

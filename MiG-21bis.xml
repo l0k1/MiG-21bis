@@ -683,6 +683,7 @@
  <system file="instrumentation"/>
  <system file="warning-lights"/>
  <system file="radar-cooling"/>
+ <system file="external-animation"/>
 
  <flight_control name="none"/>
 

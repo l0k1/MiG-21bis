@@ -1,5 +1,29 @@
  <aerodynamics>
 
+  <!-- bad fix for alpha at low speeds -->
+  <!-- not used in aero functions, but is used in animations -->
+
+  <function name="aero/alpha-corrected-deg">
+    <ifthen>
+      <lt>
+        <property>velocities/mach</property>
+        <value>0.012</value>
+      </lt>
+      <value>0.0</value>
+      <property>aero/alpha-deg</property>
+    </ifthen>
+  </function>
+  <function name="aero/beta-corrected-deg">
+    <ifthen>
+      <lt>
+        <property>velocities/mach</property>
+        <value>0.012</value>
+      </lt>
+      <value>0.0</value>
+      <property>aero/beta-deg</property>
+    </ifthen>
+  </function>
+
   <axis name="LIFT">
 
     <!-- Lift above 0.85 and below -0.85 is generalised -->

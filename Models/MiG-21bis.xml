@@ -673,6 +673,7 @@
 		<object-name>nose_wheel</object-name>
 		<object-name>left_wheel</object-name>
 		<object-name>right_wheel</object-name>
+        <object-name>pitotMast</object-name>
 	</effect>
 
 	<animation>
@@ -716,6 +717,8 @@
 		<object-name>nose_wheel</object-name>
 		<object-name>left_wheel</object-name>
 		<object-name>right_wheel</object-name>
+        <object-name>pitotMast</object-name>
+        <object-name>pitotMastBase</object-name>
 		<property-base>sim/model/livery</property-base>
 		<texture-prop>texture</texture-prop>
 		<texture>Aircraft/MiG-21bis/Models/Liveries/Default.png</texture>
@@ -1738,5 +1741,88 @@
                         <z>0.0</z>
                 </axis>
         </animation>
+
+
+    <animation>
+        <type>rotate</type>
+        <object-name>pitotMast</object-name>
+        <object-name>pitotTube</object-name>
+        <object-name>pitotVertFinTop</object-name>
+        <object-name>pitotVertFinBottom</object-name>
+        <object-name>pitotHorizFinRight</object-name>
+        <object-name>pitotHorizFinLeft</object-name>
+        <property>/fdm/jsbsim/systems/animations/pitot/vertical-movement-deg</property>
+        <factor>1.0</factor>
+        <offset-deg>0</offset-deg>
+        <center>
+            <x-m>-5.98494</x-m>
+            <y-m> 0.23130</y-m>
+            <z-m> 0.70097</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>pitotMast</object-name>
+        <object-name>pitotTube</object-name>
+        <object-name>pitotVertFinTop</object-name>
+        <object-name>pitotVertFinBottom</object-name>
+        <object-name>pitotHorizFinRight</object-name>
+        <object-name>pitotHorizFinLeft</object-name>
+        <property>/fdm/jsbsim/systems/animations/pitot/horizontal-movement-deg</property>
+        <factor>1.0</factor>
+        <offset-deg>0</offset-deg>
+        <center>
+            <x-m>-5.98494</x-m>
+            <y-m> 0.23130</y-m>
+            <z-m> 0.70097</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>pitotVertFinTop</object-name>
+        <object-name>pitotVertFinBottom</object-name>
+        <property>/fdm/jsbsim/aero/beta-corrected-deg</property>
+        <factor>1.0</factor>
+        <offset-deg>0</offset-deg>
+        <center>
+            <x-m>-8.19634</x-m>
+            <y-m> 0.28019</y-m>
+            <z-m> 0.73757</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>pitotHorizFinRight</object-name>
+        <object-name>pitotHorizFinLeft</object-name>
+        <property>/fdm/jsbsim/aero/alpha-corrected-deg</property>
+        <factor>1.0</factor>
+        <offset-deg>0</offset-deg>
+        <center>
+            <x-m>-8.32989</x-m>
+            <y-m> 0.33769</y-m>
+            <z-m> 0.68099</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
 
 </PropertyList>
