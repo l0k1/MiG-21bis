@@ -1432,8 +1432,8 @@
 				<reaquire type="bool">true</reaquire> <!-- bool. If weapon will try to reaquire lock after losing it. [optional] -->
 				<!--engine-->
 				<thrust-lbf-stage-1 type="double">8500</thrust-lbf-stage-1> <!-- stage 1 thrust [optional] -->
-				<thrust-lbf-stage-2 type="double">1000</thrust-lbf-stage-2> <!-- stage 2 thrust [optional] -->
-				<stage-1-duration-sec type="double">9.2</stage-1-duration-sec> <!-- stage 1 duration [optional] -->
+				<thrust-lbf-stage-2 type="double">700</thrust-lbf-stage-2> <!-- stage 2 thrust [optional] -->
+				<stage-1-duration-sec type="double">6.1</stage-1-duration-sec> <!-- stage 1 duration [optional] -->
 				<stage-2-duration-sec type="double">14.0</stage-2-duration-sec> <!-- stage 2 duration [optional] -->
 				<weight-fuel-lbm type="double">300</weight-fuel-lbm> <!-- fuel weight [optional]. If this property is not present, it won't lose weight as the fuel is used. -->
 				<vector-thrust type="bool">false</vector-thrust> <!-- Boolean. [optional] -->
@@ -1447,7 +1447,7 @@
 				<!--detonation-->
 				<weight-warhead-lbs type="double">85.98</weight-warhead-lbs> <!-- warhead weight -->
 				<arming-time-sec type="double">1.6</arming-time-sec> <!-- time for weapon to arm -->
-				<self-destruct-time-sec type="double">60</self-destruct-time-sec> <!-- time before selfdestruct -->
+				<self-destruct-time-sec type="double">90</self-destruct-time-sec> <!-- time before selfdestruct -->
 				<self-destruct-at-lock-lost type="double">25</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
 				<max-report-distance type="double">65</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
 				<!--avionics sounds-->
@@ -1493,8 +1493,8 @@
 				<reaquire type="bool">true</reaquire> <!-- bool. If weapon will try to reaquire lock after losing it. [optional] -->
 				<!--engine-->
 				<thrust-lbf-stage-1 type="double">8500</thrust-lbf-stage-1> <!-- stage 1 thrust [optional] -->
-				<thrust-lbf-stage-2 type="double">1000</thrust-lbf-stage-2> <!-- stage 2 thrust [optional] -->
-				<stage-1-duration-sec type="double">9.2</stage-1-duration-sec> <!-- stage 1 duration [optional] -->
+				<thrust-lbf-stage-2 type="double">700</thrust-lbf-stage-2> <!-- stage 2 thrust [optional] -->
+				<stage-1-duration-sec type="double">6.1</stage-1-duration-sec> <!-- stage 1 duration [optional] -->
 				<stage-2-duration-sec type="double">14.0</stage-2-duration-sec> <!-- stage 2 duration [optional] -->
 				<weight-fuel-lbm type="double">300</weight-fuel-lbm> <!-- fuel weight [optional]. If this property is not present, it won't lose weight as the fuel is used. -->
 				<vector-thrust type="bool">false</vector-thrust> <!-- Boolean. [optional] -->
@@ -1508,7 +1508,7 @@
 				<!--detonation-->
 				<weight-warhead-lbs type="double">85.98</weight-warhead-lbs> <!-- warhead weight -->
 				<arming-time-sec type="double">1.6</arming-time-sec> <!-- time for weapon to arm -->
-				<self-destruct-time-sec type="double">60</self-destruct-time-sec> <!-- time before selfdestruct -->
+				<self-destruct-time-sec type="double">90</self-destruct-time-sec> <!-- time before selfdestruct -->
 				<self-destruct-at-lock-lost type="double">25</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
 				<max-report-distance type="double">65</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
 				<!--avionics sounds-->
