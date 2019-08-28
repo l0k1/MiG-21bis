@@ -680,7 +680,7 @@
  <system file="hydraulic"/>
  <system file="pneumatic"/>
  <system file="brakes"/>
- <system file="instrumentation"/>
+ <system file="jsb-instrumentation"/>
  <system file="warning-lights"/>
  <system file="radar-cooling"/>
  <system file="external-animation"/>
