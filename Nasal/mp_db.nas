@@ -20,9 +20,10 @@ var aircraft_arch = {
     rwr_strength: 0.0,      # distance at which the rwr will start to pick it up (nautical miles)
     rwr_bearing: 0.0,       # how many degrees left/right the radar scans
     rwr_pitch: 0.0,         # how many degrees up/down the radar scans
-    rwr_pattern: "nnnnnnnnnn",    # unique scan pattern for the aircrafts radar n=no sound, s=sound
+    rwr_pattern: "nnnnnnnnnn",    # unique scan pattern for the aircrafts radar n=no sound, s=sound. 10 per second, received pattern at 15 nm
     rwr_pattern_time: 1.0,  # how long it takes to loop the pattern (1-3 secs recommended)
     class: AIR,             # what type of model it is. 
+    _rwr_index: 0,          # used in rwr code
 };
 
 var aircraft_lookup = {
@@ -155,6 +156,12 @@ var Contact = {
 
         obj.polar           = [0,0,0];
         obj.cartesian       = [0,0];
+        
+        if (contains(aircraft_lookup,obj.get_model2())) {
+            obj.info = aircraft_lookup[obj.get_model2()];
+        } else {
+            obj.info = aircraft_lookup["default"];
+        }
         
         return obj;
     },

@@ -257,4 +257,11 @@ clock
         </fcs_function>
     </channel>
 
+    <channel name="externalsensors">
+        
+        <!-- includes fins on the pitot mast, the fin on the starboard side of the hull near the cockpit,
+            pitot tube, standby pitot tube, and anything else im forgetting -->
+            
+    </channel>
+    
 </system>
