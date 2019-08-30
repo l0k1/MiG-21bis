@@ -1761,6 +1761,7 @@
 		<iff>				<file>Aircraft/MiG-21bis/Nasal/iff.nas</file>				</iff>				<!-- iff -->
 		<gci>				<file>Aircraft/MiG-21bis/Nasal/gci-listener.nas</file>		</gci>				<!-- gci -->
 		<radio_canvas>		<file>Aircraft/MiG-21bis/Nasal/radio_canvas.nas</file>		</radio_canvas>		<!-- canvas for the paper note on the gunsight -->
+		<headshake>         <file>Aircraft/MiG-21bis/Nasal/headmove.nas</file>          </headshake>        <!-- shaking the head around -->
 
 	</nasal>
 

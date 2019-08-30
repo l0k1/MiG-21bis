@@ -30,7 +30,7 @@ var sensor_update = func() {
     }
     var myCoord = geo.aircraft_position();
     
-    foreach (var cx; mp_db.cx_master_list) {
+    foreach (var cx; mpdb.cx_master_list) {
         # first the easy stuff
         #print("for " ~ cx.get_Callsign());
         # check if the contacts radar is active
@@ -39,13 +39,13 @@ var sensor_update = func() {
         }
         # check if we should be lit up
         var distance = myCoord.direct_distance_to(cx.get_Coord());
-        var expanded = expand_string(cx.rwr_pattern, distance / 15);
-        if (cx._rwr_index >= size(expanded)) {
-            cx._rwr_index = 0;
+        var expanded = expand_string(cx.info.rwr_pattern, distance / 15);
+        if (cx.info._rwr_index >= size(expanded)) {
+            cx.info._rwr_index = 0;
         } else {
-            cx._rwr_index = cx._rwr_index + 1;
+            cx.info._rwr_index = cx._rwr_index + 1;
         }
-        if (substr(expanded, cx._rwr_index, 1) == "n") {
+        if (substr(expanded, cx.info._rwr_index, 1) == "n") {
             continue;
         }
         #check if hidden by terrain
@@ -65,6 +65,19 @@ var sensor_update = func() {
         
         var sensor_id = [];
         
+        # check that we are in the tgt radar cone
+        bearing = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vector.Math.eulerToCartesian3X(cx.get_heading(), cx.get_Pitch(), cx.get_Roll()), vector.Math.projVectorOnPlane(vectorEchoTop,vectorToEcho))+180));
+        
+        if (bearing > cx.info.rwr_bearing) {
+            continue;
+        }
+
+        bearing = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vectorEchoTop, vectorToEcho))-90); #pitch
+        if (bearing > cx.info.rwr_pitch) {
+            continue;
+        }
+
+                
         # get which sensors this would potentially be affecting.
         # we are checking both pitch, and bearing
         #print('bearing ' ~ bearing);
@@ -85,20 +98,6 @@ var sensor_update = func() {
             continue;
         }
         #print('valid sensors');
-        
-        # check that we are in the tgt radar cone
-        bearing = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vector.Math.eulerToCartesian3X(cx.get_heading(), cx.get_Pitch(), cx.get_Roll()), vector.Math.projVectorOnPlane(vectorEchoTop,vectorToEcho))+180));
-        
-        if (bearing > cx.info.rwr_bearing) {
-            continue;
-        }
-
-        bearing = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vectorEchoTop, vectorToEcho))-90); #pitch
-        if (bearing > cx.info.rwr_pitch) {
-            continue;
-        }
-
-        #print('in radar cone pitch');
         
         # and finally, compute actual received signal strength from distance
         var sig_str = 0;

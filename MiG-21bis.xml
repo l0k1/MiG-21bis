@@ -684,6 +684,7 @@
  <system file="warning-lights"/>
  <system file="radar-cooling"/>
  <system file="external-animation"/>
+ <system file="headmove"/>
 
  <flight_control name="none"/>
 
