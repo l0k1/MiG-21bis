@@ -80,6 +80,13 @@ the nasal file does the actual movement.
             <output>systems/headshake/gun</output>
         </fcs_function>
 
+        <!-- shaking due to engine surge -->
+        <pure_gain name="trash/systems/headshake/surge">
+            <input>systems/air-intake/surging</input>
+            <gain>4.0</gain>
+            <output>systems/headshake/surge</output>
+        </pure_gain>
+
         <!-- shaking due to damage -->
 
         <!-- final sum -->
@@ -89,6 +96,7 @@ the nasal file does the actual movement.
                     <property>systems/headshake/gear</property>
                     <property>systems/headshake/alpha</property>
                     <property>systems/headshake/gun</property>
+                    <property>systems/headshake/surge</property>
                 </max>
             </function>
             <output>systems/headshake/severity</output>
