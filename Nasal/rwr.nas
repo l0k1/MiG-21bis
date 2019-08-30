@@ -37,17 +37,34 @@ var sensor_update = func() {
         if (!cx.isRadarActive()) {
             continue;
         }
-        # check if we should be lit up
-        var distance = myCoord.direct_distance_to(cx.get_Coord());
-        var expanded = expand_string(cx.info.rwr_pattern, distance / 15);
-        if (cx.info._rwr_index >= size(expanded)) {
-            cx.info._rwr_index = 0;
-        } else {
-            cx.info._rwr_index = cx._rwr_index + 1;
-        }
-        if (substr(expanded, cx.info._rwr_index, 1) == "n") {
+        if (cx.info.rwr_strength == 0) {
             continue;
         }
+        # check if we should be lit up
+        var distance = myCoord.direct_distance_to(cx.get_Coord());
+        # adjust for distance
+        # below 5% is constant on, above 85% we start to get iffy.
+        
+        if (distance > cx.info.rwr_strength) {
+            continue;
+        }
+        
+        if (distance > cx.info.rwr_strength * 0.05) {
+            # check if we are in the scan pattern
+            var expanded = expand_string(cx.info.rwr_pattern, distance / 15);
+            # get where our signal is at in the pattern.
+            cx.info._rwr_index = math.periodic(0, size(expanded) - 1, cx.info._rwr_index + math.round((systime() - cx.info._rwr_last_update) / (size(cx.info.rwr_pattern) / cx.info.rwr_pattern_time)) );
+            }
+            if (substr(expanded, cx.info._rwr_index, 1) == "n") {
+                continue;
+            }
+            
+            # chance of not receiving radio signal between 85% and max distance
+            if ( distance > cx.info.rwr_strength * 0.85 and rand() < math.clamp((distance - (cx.info.rwr_strength * 0.85))/(cx.info.rwr_strength-(cx.info.rwr_strength * 0.85)),0,1) ) {
+                continue;
+            }
+        }
+        
         #check if hidden by terrain
         if (!radar_logic.RadarLogic.isNotBehindTerrain(cx.get_Coord())) {
             continue;
@@ -99,70 +116,31 @@ var sensor_update = func() {
         }
         #print('valid sensors');
         
-        # and finally, compute actual received signal strength from distance
-        var sig_str = 0;
-        if (distance > emit.distance) {
-            continue;
-        } else {
-            if (distance < emit.distance / 4) {
-                sig_str = 2;
-            } else {
-                sig_str = 1;
-            }
-        }
-        #print('sig_str ' ~ sig_str);
+        # and finally, let the sensor know we have a signal
+
         foreach (var id; sensor_id){
-            sensors[id].strength = sig_str;
+            sensors[id].strength = 1;
         }
     }
 }
 
-var blinktime = systime();
-#var fasttime = systime();
-var faststate = 0;
-var blinkstate = 0;
 var sensor_readout = func() {
-    if (systime() - blinktime > 1) {
-        blinktime = systime();
-        blinkstate = (blinkstate - 1) * -1;
-    }
-    faststate = (faststate - 1) * -1;
     foreach (var sensor; sensors) {
         if (sensor.missile > 0) {
             #print("missile launched in sensor_readout");
             if (systime() - sensor.missile > 8) { # the '8' is how long in seconds it should blink for
                 #print("resetting missile launch");
                 sensor.missile = 0;
-            } else {
-                setprop(sensor.prop,faststate);
             }
         }
-        if (sensor.missile == 0) {
+        if (sensor.missile > 0 or sensor.strength > 0) {
             if (sensor.strength == 2) {
                 setprop(sensor.prop,1);
-            } elsif (sensor.strength == 1) {
-                setprop(sensor.prop,blinkstate);
             } else {
                 setprop(sensor.prop,0);
             }
         }
     }
-}
-
-var get_bearing = func(vectorToEcho, vectorSide) {
-    #roll adjusted bearing
-    
-    var view2D = vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),vectorToEcho);
-    bearing = vector.Math.angleBetweenVectors(vector.Math.eulerToCartesian3X(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()), view2D);
-
-    #find left/right
-    var leftright = vector.Math.angleBetweenVectors(vectorSide, view2D);
-
-    if (leftright > 90 ){
-        bearing = bearing * -1;
-    }
-    
-    return bearing;
 }
 
 var incoming_listener = func {
@@ -222,6 +200,22 @@ var incoming_listener = func {
             }
         }
     }
+}
+
+var get_bearing = func(vectorToEcho, vectorSide) {
+    #roll adjusted bearing
+    
+    var view2D = vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),vectorToEcho);
+    bearing = vector.Math.angleBetweenVectors(vector.Math.eulerToCartesian3X(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()), view2D);
+
+    #find left/right
+    var leftright = vector.Math.angleBetweenVectors(vectorSide, view2D);
+
+    if (leftright > 90 ){
+        bearing = bearing * -1;
+    }
+    
+    return bearing;
 }
 
 var expand_string = func(str, amt) {
