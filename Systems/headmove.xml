@@ -62,6 +62,23 @@ the nasal file does the actual movement.
             <output>systems/headshake/alpha</output>
         </fcs_function>
 
+        <!-- shaking due to gun firing -->
+
+        <fcs_function name="trash/systems/headshake/gun">
+            <function>
+                <product>
+                    <and>
+                        <property>systems/armament/GSh-23-trigger</property>
+                        <gt>
+                            <property>/ai/submodels/submodel[5]/count</property>
+                            <value>0</value>
+                        </gt>
+                    </and>
+                    <value>2.0</value>
+                </product>
+            </function>
+            <output>systems/headshake/gun</output>
+        </fcs_function>
 
         <!-- shaking due to damage -->
 
@@ -71,6 +88,7 @@ the nasal file does the actual movement.
                 <max>
                     <property>systems/headshake/gear</property>
                     <property>systems/headshake/alpha</property>
+                    <property>systems/headshake/gun</property>
                 </max>
             </function>
             <output>systems/headshake/severity</output>
