@@ -18,178 +18,190 @@ hydraulic/xfeed
 
 <system name="hydraulics">
 
-	<channel name="output">
-			
-		<fcs_function name="trash/hydraulic/contents-tank[0]">
-			<function>
-				<!-- tank level = contents-system - (pressure / 10) - (usage / 10) -->
-				<difference>
-					<property>hydraulic/contents-system[0]</property>
-					<quotient>
-						<sum>
-							<property>hydraulic/pressure[0]</property>
-							<product>
-								<property>hydraulic/pressure[1]</property>
-								<property>hydraulic/xfeed</property>
-							</product>
-						</sum>
-						<value>10</value>
-					</quotient>
-					<quotient>
-						<sum>
-							<property>hydraulic/usage[0]</property>
-							<product>
-								<property>hydraulic/usage[1]</property>
-								<property>hydraulic/xfeed</property>
-							</product>
-						</sum>
-						<value>10</value>
-					</quotient>
-				</difference>
-			</function>
-			<min>0.0</min>
-			<max>1.0</max>
-			<output>hydraulic/contents-tank[0]</output>
-		</fcs_function>
-		
-		<fcs_function name="trash/hydraulic/contents-tank[1]">
-			<function>
-				<!-- tank level = contents-system - (pressure / 10) - (usage / 10) -->
-				<difference>
-					<property>hydraulic/contents-system[1]</property>
-					<quotient>
-						<product>
-							<property>hydraulic/pressure[1]</property>
-							<difference>
-								<value>1</value>
-								<property>hydraulic/xfeed</property>
-							</difference>
-						</product>
-						<value>10</value>
-					</quotient>
-					<quotient>
-						<product>
-							<property>hydraulic/usage[1]</property>
-							<difference>
-								<value>1</value>
-								<property>hydraulic/xfeed</property>
-							</difference>
-						</product>
-						<value>10</value>
-					</quotient>
-				</difference>
-			</function>
-			<min>0.0</min>
-			<max>1.0</max>
-			<output>hydraulic/contents-tank[1]</output>
-		</fcs_function>
-		
-		<fcs_function name="trash/hydraulic/pressure[0]">
-			<function>
-				<product>
-					<gt>
-						<property>electric/output/pump-unit</property>
-						<value>108</value>
-					</gt>
-					<table>
-						<independentVar lookup="row">hydraulic/contents-tank[0]</independentVar>
-						<tableData>
-							0.0		0.0
-							0.2 	1.0
-						</tableData>
-					</table>
-				</product>
-			</function>
-			<clipto>
-				<min>0.0</min>
-				<max>1.0</max>
-			</clipto>
-			<output>hydraulic/pressure[0]</output>
-		</fcs_function>
-		
-		<fcs_function name="trash/hydraulic/pressure[1]">
-			<function>
-				<product>
-					<gt>
-						<property>electric/output/aileron-booster</property>
-						<value>108</value>
-					</gt>
-					<table>
-						<independentVar lookup="row">hydraulic/contents-tank[1]</independentVar>
-						<tableData>
-							0.0		0.0
-							0.2 	1.0
-						</tableData>
-					</table>
-				</product>
-			</function>
-			<clipto>
-				<min>0.0</min>
-				<max>1.0</max>
-			</clipto>
-			<output>hydraulic/pressure[1]</output>
-		</fcs_function>
-		
-		<fcs_function name="trash/hydraulic/output[0]">
-			<function>
-				<property>hydraulic/pressure[0]</property>
-			</function>
-			<clipto>
-				<min>0.0</min>
-				<max>1.0</max>
-			</clipto>
-			<output>hydraulic/output[0]</output>
-		</fcs_function>
-		
-		<fcs_function name="trash/hydraulic/output[1]">
-			<function>
-				<ifthen>
-					<property>hydraulic/xfeed</property>
-					<property>hydraulic/pressure[0]</property>
-					<property>hydraulic/pressure[1]</property>
-				</ifthen>
-			</function>
-			<clipto>
-				<min>0.0</min>
-				<max>1.0</max>
-			</clipto>
-			<output>hydraulic/output[1]</output>
-		</fcs_function>
-		
-	</channel>
-	<channel name="load">
-		<!-- monitor surfaces and systems to calculate hydraulic/usage amounts -->
-		<fcs_function name="trash/hydraulic/load/aileron-booster">
-			<function>
-				<product>
-					<property>hydraulic/output[1]</property>
-					<abs>
-						<property>fcs/roll-damping</property>
-					</abs>
-				</product>
-			</function>
-			<output>hydraulic/load/aileron-booster</output>
-		</fcs_function>
-		
-		<fcs_function name="trash/hydraulic/load/flaps">
-			<function>
-				<nq>
-					<property>fcs/flap-cmd-norm</property>
-					<property>fcs/flap-pos-norm</property>
-				</nq>
-			</function>
-			<output>hydraulic/load/flaps</output>
-		</fcs_function>
-		
-		
-		<summer name="trash/hydraulic/usage[1]">
-			<input>hydraulic/load/aileron-booster</input>
-			<output>hydraulic/usage[1]</output>
-		</summer>
-		<summer name="trash/hydraulic/usage[0]">
-			<input>hydraulic/load/flaps</input>
-			<output>hydraulic/usage[0]</output>
-		</summer>
+    <channel name="output">
+            
+        <fcs_function name="trash/hydraulic/contents-tank[0]">
+            <function>
+                <!-- tank level = contents-system - (pressure / 10) - (usage / 10) -->
+                <difference>
+                    <property>hydraulic/contents-system[0]</property>
+                    <quotient>
+                        <sum>
+                            <property>hydraulic/pressure[0]</property>
+                            <product>
+                                <property>hydraulic/pressure[1]</property>
+                                <property>hydraulic/xfeed</property>
+                            </product>
+                        </sum>
+                        <value>10</value>
+                    </quotient>
+                    <quotient>
+                        <sum>
+                            <property>hydraulic/usage[0]</property>
+                            <product>
+                                <property>hydraulic/usage[1]</property>
+                                <property>hydraulic/xfeed</property>
+                            </product>
+                        </sum>
+                        <value>10</value>
+                    </quotient>
+                </difference>
+            </function>
+            <min>0.0</min>
+            <max>1.0</max>
+            <output>hydraulic/contents-tank[0]</output>
+        </fcs_function>
+        
+        <fcs_function name="trash/hydraulic/contents-tank[1]">
+            <function>
+                <!-- tank level = contents-system - (pressure / 10) - (usage / 10) -->
+                <difference>
+                    <property>hydraulic/contents-system[1]</property>
+                    <quotient>
+                        <product>
+                            <property>hydraulic/pressure[1]</property>
+                            <difference>
+                                <value>1</value>
+                                <property>hydraulic/xfeed</property>
+                            </difference>
+                        </product>
+                        <value>10</value>
+                    </quotient>
+                    <quotient>
+                        <product>
+                            <property>hydraulic/usage[1]</property>
+                            <difference>
+                                <value>1</value>
+                                <property>hydraulic/xfeed</property>
+                            </difference>
+                        </product>
+                        <value>10</value>
+                    </quotient>
+                </difference>
+            </function>
+            <min>0.0</min>
+            <max>1.0</max>
+            <output>hydraulic/contents-tank[1]</output>
+        </fcs_function>
+        
+        <fcs_function name="trash/hydraulic/ideal-pressure[0]">
+            <function>
+                <product>
+                    <gt>
+                        <property>electric/output/pump-unit</property>
+                        <value>108</value>
+                    </gt>
+                    <table>
+                        <independentVar lookup="row">hydraulic/contents-tank[0]</independentVar>
+                        <tableData>
+                            0.0        0.0
+                            0.2     1.0
+                        </tableData>
+                    </table>
+                </product>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+            <output>hydraulic/ideal-pressure[0]</output>
+        </fcs_function>
+        
+        <lag_filter name="trash/hydraulic/pressure[0]">
+            <input>hydraulic/ideal-pressure[0]</input>
+            <c1>0.15</c1>
+            <output>hydraulic/pressure[0]</output>
+        </lag_filter>
+        
+        <fcs_function name="trash/hydraulic/ideal-pressure[1]">
+            <function>
+                <product>
+                    <gt>
+                        <property>electric/output/aileron-booster</property>
+                        <value>108</value>
+                    </gt>
+                    <table>
+                        <independentVar lookup="row">hydraulic/contents-tank[1]</independentVar>
+                        <tableData>
+                            0.0        0.0
+                            0.2     1.0
+                        </tableData>
+                    </table>
+                </product>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+            <output>hydraulic/ideal-pressure[1]</output>
+        </fcs_function>
+        
+        <lag_filter name="trash/hydraulic/pressure[1]">
+            <input>hydraulic/ideal-pressure[1]</input>
+            <c1>0.15</c1>
+            <output>hydraulic/pressure[1]</output>
+        </lag_filter>
+        
+        <fcs_function name="trash/hydraulic/output[0]">
+            <function>
+                <property>hydraulic/pressure[0]</property>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+            <output>hydraulic/output[0]</output>
+        </fcs_function>
+        
+        <fcs_function name="trash/hydraulic/output[1]">
+            <function>
+                <ifthen>
+                    <property>hydraulic/xfeed</property>
+                    <property>hydraulic/pressure[0]</property>
+                    <property>hydraulic/pressure[1]</property>
+                </ifthen>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+            <output>hydraulic/output[1]</output>
+        </fcs_function>
+        
+    </channel>
+    <channel name="load">
+        <!-- monitor surfaces and systems to calculate hydraulic/usage amounts -->
+        <fcs_function name="trash/hydraulic/load/aileron-booster">
+            <function>
+                <product>
+                    <property>hydraulic/output[1]</property>
+                    <abs>
+                        <property>fcs/roll-damping</property>
+                    </abs>
+                </product>
+            </function>
+            <output>hydraulic/load/aileron-booster</output>
+        </fcs_function>
+        
+        <fcs_function name="trash/hydraulic/load/flaps">
+            <function>
+                <nq>
+                    <property>fcs/flap-cmd-norm</property>
+                    <property>fcs/flap-pos-norm</property>
+                </nq>
+            </function>
+            <output>hydraulic/load/flaps</output>
+        </fcs_function>
+        
+        
+        <summer name="trash/hydraulic/usage[1]">
+            <input>hydraulic/load/aileron-booster</input>
+            <output>hydraulic/usage[1]</output>
+        </summer>
+        <summer name="trash/hydraulic/usage[0]">
+            <input>hydraulic/load/flaps</input>
+            <output>hydraulic/usage[0]</output>
+        </summer>
 
-	</channel>
+    </channel>
 </system>

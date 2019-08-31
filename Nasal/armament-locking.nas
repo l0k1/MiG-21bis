@@ -235,7 +235,7 @@ var kh25_guidance = func(input) {
 		#print("guidance is radiation");
 		return {};
 	}
-	foreach (track; cx_master_list) {
+	foreach (track; mpdb.cx_master_list) {
 		#print("track distance: " ~ track.coord.distance_to(input.weapon_position) ~ " | seeker range:   " ~ detect_range);
 		#print("checking track " ~ track.get_Callsign());
 		if (track.coord.distance_to(input.weapon_position) > detect_range) {
@@ -277,7 +277,7 @@ var r27t1_guidance = func(input) {
 	if (input.guidance == "ir") {
 		return {};
 	}
-	foreach (track; cx_master_list) {
+	foreach (track; mpdb.cx_master_list) {
 		#print("track distance: " ~ track.coord.distance_to(input.weapon_position) ~ " | seeker range:   " ~ detect_range);
 		if (track.coord.distance_to(input.weapon_position) > detect_range) {
 			continue;
@@ -305,67 +305,6 @@ var r27t1_guidance = func(input) {
 
 # master contact list, for IR/LOAL/Kh-66 multihit messaging and rwr
 
-var cx_master_list = [];
-var matching = 0;
-var gather = [];
-
-var gather_contacts = func() {
-	foreach(var mp; impact_listener_array) {
-		matching = 0;
-		foreach(var cx; cx_master_list) {
-			if ( mp.getPath() == cx.getNode().getPath() ) {
-				matching = 1;
-				break;
-			}
-		}
-		if (matching == 0) {
-			append(cx_master_list,radar_logic.Contact.new(mp,0));
-		}
-	}
-	settimer(func(){
-		gather_contacts();
-		},1);
-}
-
-var impact_listener_array = [];
-var update_impact_listener_array = func() {
-	impact_listener_array = [];
-	foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
-		if (mp.getNode("valid").getValue() == 1) {
-			append(impact_listener_array,mp);
-		}
-	}
-	foreach(var mp; props.globals.getNode("/ai/models").getChildren("aircraft")){
-		if (mp.getNode("valid").getValue() == 1) {
-			append(impact_listener_array,mp);
-		}
-	}
-
-	foreach(var mp; props.globals.getNode("/ai/models").getChildren("tanker")){
-		if (mp.getNode("valid").getValue() == 1) {
-			append(impact_listener_array,mp);
-		}
-	}
-
-	foreach(var mp; props.globals.getNode("/ai/models").getChildren("ship")){
-		if (mp.getNode("valid").getValue() == 1) {
-			append(impact_listener_array,mp);
-		}
-	}
-
-	foreach(var mp; props.globals.getNode("/ai/models").getChildren("groundvehicle")){
-		if (mp.getNode("valid").getValue() == 1) {
-			append(impact_listener_array,mp);
-		}
-	}
-	settimer(func() {
-		update_impact_listener_array();
-	},1);
-	#print("working? " ~ size(impact_listener_array));
-}
-update_impact_listener_array();
-
-gather_contacts();
 
 setlistener("controls/radar/power-panel/fixed-beam", func() {
 	if (getprop("controls/radar/power-panel/fixed-beam") == 1) {
