@@ -109,7 +109,7 @@ hydraulic/xfeed
         
         <lag_filter name="trash/hydraulic/pressure[0]">
             <input>hydraulic/ideal-pressure[0]</input>
-            <c1>0.3</c1>
+            <c1>0.15</c1>
             <output>hydraulic/pressure[0]</output>
         </lag_filter>
         
@@ -138,7 +138,7 @@ hydraulic/xfeed
         
         <lag_filter name="trash/hydraulic/pressure[1]">
             <input>hydraulic/ideal-pressure[1]</input>
-            <c1>0.3</c1>
+            <c1>0.15</c1>
             <output>hydraulic/pressure[1]</output>
         </lag_filter>
         
