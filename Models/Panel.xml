@@ -438,7 +438,7 @@
         <name>RWR</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/RWR/rwr.xml</path>
         <offsets>
-            <heading-deg>0</heading-deg>
+            <heading-deg>-5</heading-deg>
             <pitch-deg>-7</pitch-deg>
             <x-m>-3.94524</x-m>
             <y-m> 0.301</y-m>

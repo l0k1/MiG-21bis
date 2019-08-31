@@ -780,6 +780,7 @@
         </radar2>
         <rwr>
             <red-yellow type="int">0</red-yellow>
+            <volume>0.5</volume>
             <forward-left>
                 <light-enable type="bool">false</light-enable>
                 <signal-strength type="int">0</signal-strength>
