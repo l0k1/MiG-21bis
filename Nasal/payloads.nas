@@ -369,8 +369,8 @@ var missile_arming_loop = func() {
 			}
 			if (payloads[payloadName].type == "ir" or payloads[payloadName].type == "antirad") {
 				#print('passing cx list');
-				#print(size(arm_locking.cx_master_list));
-				armament.AIM.active[i].setContacts(arm_locking.cx_master_list);
+				#print(size(mpdb.cx_master_list));
+				armament.AIM.active[i].setContacts(mpdb.cx_master_list);
 			}
 		}
     }
@@ -697,7 +697,7 @@ var missile_release = func(pylon) {
 				armament.AIM.active[pylon].drop_time = math.clamp(interp(prs_inhg,25,1.5,5,2),0,4);
 			}
 			var brevity = armament.AIM.active[pylon].brevity;
-			armament.AIM.active[pylon].release(arm_locking.cx_master_list);
+			armament.AIM.active[pylon].release(mpdb.cx_master_list);
             sounds.disconnect();
 
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
@@ -719,7 +719,7 @@ var missile_release = func(pylon) {
                 sounds.disconnect();
 			} else {
 				var phrase = brevity ~ " released:";
-				armament.AIM.active[pylon].release(arm_locking.cx_master_list);
+				armament.AIM.active[pylon].release(mpdb.cx_master_list);
                 sounds.disconnect();
 			}
 			
@@ -734,7 +734,7 @@ var missile_release = func(pylon) {
 
 			var brevity = armament.AIM.active[pylon].brevity;
 
-			armament.AIM.active[pylon].release(arm_locking.cx_master_list);
+			armament.AIM.active[pylon].release(mpdb.cx_master_list);
             sounds.disconnect();
 
 			setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
@@ -1011,18 +1011,18 @@ var impact_listener = func {
       var typeOrd = cr_typeord[typeOrdName];
 			typeOrd.closest_distance = 35;
 			
-			foreach(var mp; arm_locking.impact_listener_array){
+			foreach(var mp; mpdb.cx_master_list){
 				#print("Submodel impact - hit: " ~ typeNode.getValue());
 				#var mlat = mp.getNode("position/latitude-deg").getValue();
 				#var mlon = mp.getNode("position/longitude-deg").getValue();
 				#var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
 				#var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
 				# distance from ballistic impact point to mp point
-				distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
+				distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.get_Latitude(), mp.get_Longitude(), mp.get_altitude() * FT2M));
 				#print("callsign " ~ mp.getNode("callsign").getValue() ~ " distance = " ~ distance);
 				if (distance < typeOrd.closest_distance) {
 					typeOrd.closest_distance = distance;
-					inside_callsign = mp.getNode("callsign").getValue();
+					inside_callsign = mp.get_Callsign();
 				}
 			}
 
