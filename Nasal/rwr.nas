@@ -54,7 +54,7 @@ var sensor_update = func() {
             var expanded = expand_string(cx.info.rwr_pattern, distance / 15);
             # get where our signal is at in the pattern.
             cx.info._rwr_index = math.periodic(0, size(expanded) - 1, cx.info._rwr_index + math.round((systime() - cx.info._rwr_last_update) / (size(cx.info.rwr_pattern) / cx.info.rwr_pattern_time)) );
-            }
+            
             if (substr(expanded, cx.info._rwr_index, 1) == "n") {
                 continue;
             }
