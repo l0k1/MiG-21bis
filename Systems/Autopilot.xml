@@ -1007,8 +1007,8 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-pitch</property>
         </output>
         <config>
-            <Kp>0.01</Kp>
-            <Ti>2.5</Ti>
+            <Kp>0.055</Kp>
+            <Ti>2.0</Ti>
             <Td>0.0001</Td>
             <u_min>-15</u_min>
             <u_max>45</u_max>
