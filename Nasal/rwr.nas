@@ -34,35 +34,41 @@ var sensor_update = func() {
         # first the easy stuff
         #print("for " ~ cx.get_Callsign());
         # check if the contacts radar is active
+        #print("checking " ~ cx.get_Callsign());
         if (!cx.isRadarActive()) {
             continue;
         }
         if (cx.info.rwr_strength == 0) {
             continue;
         }
+        #print("radar active and strength good");
         # check if we should be lit up
-        var distance = myCoord.direct_distance_to(cx.get_Coord());
+        var distance = myCoord.direct_distance_to(cx.get_Coord()) * M2NM;
         # adjust for distance
         # below 5% is constant on, above 85% we start to get iffy.
-        
+        #print(distance);
         if (distance > cx.info.rwr_strength) {
             continue;
         }
-        
+        #print("distance good");
         if (distance > cx.info.rwr_strength * 0.05) {
             # check if we are in the scan pattern
             var expanded = expand_string(cx.info.rwr_pattern, distance / 15);
+            #print(expanded);
+            var interval = math.round((systime() - cx.info._rwr_last_update) / (size(cx.info.rwr_pattern) / cx.info.rwr_pattern_time));
             # get where our signal is at in the pattern.
-            cx.info._rwr_index = math.periodic(0, size(expanded) - 1, cx.info._rwr_index + math.round((systime() - cx.info._rwr_last_update) / (size(cx.info.rwr_pattern) / cx.info.rwr_pattern_time)) );
-            
+            cx.info._rwr_index = math.periodic(0, size(expanded), cx.info._rwr_index + (interval == 0 ? 1 : interval) );
+            cx.info._rwr_last_update = systime();
+            #print(cx.info._rwr_index);
             if (substr(expanded, cx.info._rwr_index, 1) == "n") {
                 continue;
             }
-            
+            #print("past the substr n");
             # chance of not receiving radio signal between 85% and max distance
             if ( distance > cx.info.rwr_strength * 0.85 and rand() < math.clamp((distance - (cx.info.rwr_strength * 0.85))/(cx.info.rwr_strength-(cx.info.rwr_strength * 0.85)),0,1) ) {
                 continue;
             }
+            #print("past the far future");
         }
         
         #check if hidden by terrain
@@ -78,12 +84,11 @@ var sensor_update = func() {
         var vectorSide      = vector.Math.eulerToCartesian3Y(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue());
         var vectorEchoTop   = vector.Math.eulerToCartesian3Z(cx.get_heading(), cx.get_Pitch(), cx.get_Roll());
         var rel_pitch       = math.abs(vector.Math.angleBetweenVectors(vectorToEcho, vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),vectorToEcho)));
-        var bearing         = get_bearing(vectorToEcho,vectorSide);
         
         var sensor_id = [];
         
         # check that we are in the tgt radar cone
-        bearing = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vector.Math.eulerToCartesian3X(cx.get_heading(), cx.get_Pitch(), cx.get_Roll()), vector.Math.projVectorOnPlane(vectorEchoTop,vectorToEcho))+180));
+        var bearing = math.abs(geo.normdeg180(vector.Math.angleBetweenVectors(vector.Math.eulerToCartesian3X(cx.get_heading(), cx.get_Pitch(), cx.get_Roll()), vector.Math.projVectorOnPlane(vectorEchoTop,vectorToEcho))+180));
         
         if (bearing > cx.info.rwr_bearing) {
             continue;
@@ -93,12 +98,13 @@ var sensor_update = func() {
         if (bearing > cx.info.rwr_pitch) {
             continue;
         }
-
+        #print("pitch good");
                 
         # get which sensors this would potentially be affecting.
         # we are checking both pitch, and bearing
         #print('bearing ' ~ bearing);
         #print('rel_pitch ' ~ rel_pitch);
+        bearing = get_bearing(vectorToEcho,vectorSide);
         for (var i = 0; i < size(sensors); i = i + 1) {
             if (sensors[i].max_pitch < rel_pitch) {
                 continue;
@@ -119,6 +125,7 @@ var sensor_update = func() {
         # and finally, let the sensor know we have a signal
 
         foreach (var id; sensor_id){
+            #print("setting sensor " ~ id);
             sensors[id].strength = 1;
         }
     }
@@ -132,9 +139,8 @@ var sensor_readout = func() {
                 #print("resetting missile launch");
                 sensor.missile = 0;
             }
-        }
-        if (sensor.missile > 0 or sensor.strength > 0) {
-            if (sensor.strength == 2) {
+        } else {
+            if (sensor.strength == 1) {
                 setprop(sensor.prop,1);
             } else {
                 setprop(sensor.prop,0);
@@ -221,7 +227,7 @@ var get_bearing = func(vectorToEcho, vectorSide) {
 var expand_string = func(str, amt) {
     var metadata = [];
     var count = 0;
-    var cc = str_arr[0];
+    var cc = substr(str, 0, 1);
     var new_str = "";
     for (var i = 0; i < size(str); i = i + 1) {
         if ( cc == substr(str, i, 1) ) {
@@ -234,7 +240,7 @@ var expand_string = func(str, amt) {
     }
     append(metadata, [cc, count]);
     foreach(var md; metadata) {
-        count = int(md[1] * amt);
+        count = int(md[1] * amt) == 0 ? 1 : int(md[1] * amt);
         for(var i = 0; i < count; i = i + 1) {
             new_str = new_str ~ md[0];
         }

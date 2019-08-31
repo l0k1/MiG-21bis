@@ -13,6 +13,9 @@ var MARINE = 1;
 var SURFACE = 2;
 var ORDNANCE = 3;
 
+var TRUE = 1;
+var FALSE = 0;
+
 var aircraft_arch = {
     name: "",               # only required part
     rcs: 200.0,             # frontal rcs
@@ -630,8 +633,9 @@ var update_cx_master_list = func() {
 
   # clean out cx_master_list
   foreach(var cx; cx_master_list) {
-    if (cx.isValid == 0) {
-      remove_from_array(cx_master_list, cx);
+    if (cx.isValid() == 0) {
+      print("removing");
+      cx_master_list = remove_from_array(cx_master_list, cx);
     }
   }
 

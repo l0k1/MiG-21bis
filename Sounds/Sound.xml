@@ -823,27 +823,31 @@
             </volume>
         </distant_explosion>
 
-        <distant_explosion>
+        <rwr>
             <name>rwr_beep</name>
             <path>Aircraft/MiG-21bis/Sounds/Samples/rwr.wav</path>
-            <mode>once</mode>
+            <mode>looped</mode>
             <condition>
-            	<pr>
-                	<property>/instrumentation/rwr/forward-left/light-enable</property>
-                	<property>/instrumentation/rwr/forward-right/light-enable</property>
-                	<property>/instrumentation/rwr/rear-left/light-enable</property>
-                	<property>/instrumentation/rwr/rear-right/light-enable</property>
-                </pr>
+                <and>
+                    <or>
+                        <property>/instrumentation/rwr/forward-left/light-enable</property>
+                        <property>/instrumentation/rwr/forward-right/light-enable</property>
+                        <property>/instrumentation/rwr/rear-left/light-enable</property>
+                        <property>/instrumentation/rwr/rear-right/light-enable</property>
+                        <property>/instrumentation/rwr/self-test</property>
+                    </or>
+                    <property>/sim/current-view/internal</property>
+                </and>
             </condition>
-            <position>
-                <x>0.01</x>
-                <y>0.01</y>
-                <z>0.01</z>
-            </position>
+                <position>
+                    <x>0.01</x>
+                    <y>0.01</y>
+                    <z>0.01</z>
+                </position>
             <volume>
                 <factor>1</factor>
             </volume>
-        </distant_explosion>
+        </rwr>
 
     </fx>
 
