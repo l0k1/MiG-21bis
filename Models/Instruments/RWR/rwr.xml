@@ -343,7 +343,7 @@
             <binding>
                 <command>property-adjust</command>
                 <property>/instrumentation/rwr/volume</property>
-                <step>0.05</step>
+                <factor>0.05</factor>
                 <min>0</min>
                 <max>1</max>
                 <wrap>false</wrap>

@@ -840,12 +840,12 @@
                 </and>
             </condition>
                 <position>
-                    <x>0.01</x>
-                    <y>0.01</y>
-                    <z>0.01</z>
+                    <x>-3.94524</x>
+                    <y> -0.301</y>
+                    <z> 0.75779</z>
                 </position>
             <volume>
-                <factor>1</factor>
+                <property>/instrumentation/rwr/volume</property>
             </volume>
         </rwr>
 
