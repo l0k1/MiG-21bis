@@ -15,7 +15,7 @@ name "AIadjustKnob"
 data 12
 Cylinder.011
 crease 85.0
-texture "accessories.png"
+texture "../accessories.png"
 texrep 1 1
 numvert 48
 -0.00239 -0.04564 -0.06447
@@ -316,7 +316,7 @@ name "AIadjustKnobHousing"
 data 10
 Circle.003
 crease 35.0
-texture "bevel.png"
+texture "../bevel.png"
 texrep 1 1
 numvert 18
 -0.00025 -0.04829 -0.06832
@@ -816,7 +816,7 @@ name "AIbevel"
 data 14
 panel.mesh.003
 crease 45.0
-texture "bevel.png"
+texture "../bevel.png"
 texrep 1 1
 numvert 234
 0.0013 0.06252 -0.04399
@@ -2345,7 +2345,7 @@ name "AIindicatorlight"
 data 10
 Sphere.000
 crease 35.0
-texture "accessories.png"
+texture "../accessories.png"
 texrep 1 1
 numvert 37
 0.00046 -0.04416 0.03809
@@ -2632,7 +2632,7 @@ name "AIlight1"
 data 12
 Cylinder.013
 crease 85.0
-texture "accessories.png"
+texture "../accessories.png"
 texrep 1 1
 numvert 36
 -0.00195 0.05968 0.02611
@@ -2861,7 +2861,7 @@ name "AIlight2"
 data 12
 Cylinder.014
 crease 85.0
-texture "accessories.png"
+texture "../accessories.png"
 texrep 1 1
 numvert 36
 -0.00195 0.06686 0.00742
@@ -3090,7 +3090,7 @@ name "AIlight3"
 data 12
 Cylinder.015
 crease 85.0
-texture "accessories.png"
+texture "../accessories.png"
 texrep 1 1
 numvert 36
 -0.00195 0.06686 -0.0198
@@ -3319,7 +3319,7 @@ name "AIlight4"
 data 12
 Cylinder.016
 crease 85.0
-texture "accessories.png"
+texture "../accessories.png"
 texrep 1 1
 numvert 36
 -0.00195 0.05968 -0.03819

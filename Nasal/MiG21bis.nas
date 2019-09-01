@@ -252,6 +252,20 @@ var load_radios = func(path) {
   var index = 0;
   var vi = io.open(path,'r');
   var data = split("\n",string.replace(io.readfile(path),"\r",""));
+
+  # clear out old settings
+
+  for (var i = 0; i < 20; i = i + 1) {
+    setprop("/instrumentation/vor-radio/preset["~i~"]","");
+    setprop("/instrumentation/vor-radio/ident["~i~"]",0);
+    setprop("/instrumentation/adf-radio/preset["~i~"]","");
+    setprop("/instrumentation/adf-radio/ident["~i~"]",0);
+    setprop("/instrumentation/comm-radio/preset["~i~"]","");
+    setprop("/instrumentation/comm-radio/ident["~i~"]",0);
+    setprop("/instrumentation/ils-radio/preset["~i~"]","");
+    setprop("/instrumentation/ils-radio/ident["~i~"]",0);
+  }
+
   foreach (var datum; data){
     if (left(datum,1) == "#") { continue; }
     if (datum == "nav") { 
@@ -298,6 +312,7 @@ var load_radios = func(path) {
 
   }
   radio_canvas.rp.update_text();
+  update_nav_radio();
   #debug.dump(data);
 }
 
