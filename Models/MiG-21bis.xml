@@ -789,12 +789,16 @@
 		<object-name>abhydro</object-name>
 		<property>surface-positions/speedbrake-pos-norm</property>
 		<condition>
-			<equals>
-				<!--property>fdm/jsbsim/systems/armament/station3/released</property>
-				<value>1</value-->
-				<property>sim/multiplay/generic/string[13]</property>
-				<value>none</value>
-			</equals>
+            <or>
+                <equals>
+                    <property>sim/multiplay/generic/short[2]</property>
+                    <value>0</value>
+                </equals>
+                <equals>
+                    <property>sim/multiplay/generic/short[2]</property>
+                    <value></value>
+                </equals>
+            </or>
 		</condition>
 		<factor>35.00</factor>
 		<axis>
