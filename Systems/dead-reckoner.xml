@@ -467,6 +467,23 @@
         <output>/instrumentation/dead-reckoner/distance-adjust</output>
     </filter>
 
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <equals>
+                    <property>/instrumentation/dead-reckoner/reset</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/distance</output>
+    </filter>
+
     <!-- final output -->
 
     <filter>
