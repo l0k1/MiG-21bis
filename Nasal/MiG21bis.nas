@@ -256,14 +256,14 @@ var load_radios = func(path) {
   # clear out old settings
 
   for (var i = 0; i < 20; i = i + 1) {
-    setprop("/instrumentation/vor-radio/preset["~i~"]","");
-    setprop("/instrumentation/vor-radio/ident["~i~"]",0);
-    setprop("/instrumentation/adf-radio/preset["~i~"]","");
-    setprop("/instrumentation/adf-radio/ident["~i~"]",0);
-    setprop("/instrumentation/comm-radio/preset["~i~"]","");
-    setprop("/instrumentation/comm-radio/ident["~i~"]",0);
-    setprop("/instrumentation/ils-radio/preset["~i~"]","");
-    setprop("/instrumentation/ils-radio/ident["~i~"]",0);
+    setprop("/instrumentation/vor-radio/preset["~i~"]",0);
+    setprop("/instrumentation/vor-radio/ident["~i~"]","");
+    setprop("/instrumentation/adf-radio/preset["~i~"]",0);
+    setprop("/instrumentation/adf-radio/ident["~i~"]","");
+    setprop("/instrumentation/comm-radio/preset["~i~"]",0);
+    setprop("/instrumentation/comm-radio/ident["~i~"]","");
+    setprop("/instrumentation/ils-radio/preset["~i~"]",0);
+    setprop("/instrumentation/ils-radio/ident["~i~"]","");
   }
 
   foreach (var datum; data){
@@ -312,7 +312,7 @@ var load_radios = func(path) {
 
   }
   radio_canvas.rp.update_text();
-  update_nav_radio();
+  radio.update_nav_radio();
   #debug.dump(data);
 }
 
