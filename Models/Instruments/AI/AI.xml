@@ -24,7 +24,7 @@
 		<object-name>AIaircraftMarker</object-name>
 		<object-name>AIazimuthNeedle</object-name>
 		<object-name>AIgsNeedle</object-name>
-		<object-name>AIrollNeedles</object-name>
+		<object-name>pitchNeedles</object-name>
         <emission>
             <red>0.7</red>
             <green>0.3</green>
@@ -35,7 +35,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>AIrollNeedles</object-name>
+        <object-name>pitchNeedles</object-name>
         <property>/autopilot/internal/ai-target-pitch</property>
         <factor>0.00125</factor>
         <axis>
@@ -47,7 +47,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>AIrollNeedles</object-name>
+        <object-name>pitchNeedles</object-name>
         <property>/autopilot/internal/ai-target-pitch-abs</property>
         <factor>-0.00012</factor>
         <axis>

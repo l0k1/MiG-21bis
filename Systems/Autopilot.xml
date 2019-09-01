@@ -1269,6 +1269,22 @@ check for Low Altitude Mode
             <u_max>2000.0</u_max>
         </config>
     </pid-controller>
+
+    <filter>
+        <name>Letdown Mode VS Calc</name>
+        <debug>false</debug>
+        <enable>
+            <property>/instrumentation/nav[0]/nav-mode-switch</property>
+            <value>0</value>
+        </enable>
+        <type>gain</type>
+        <input>/instrumentation/altimeter/indicated-altitude-ft</input>
+        <reference>/autopilot/internal/letdown-mode-height</reference>
+        <gain>-0.5</gain> <!-- 1000ft offset gives 500fpm roc -->
+        <output>/autopilot/internal/target-vs-letdown</output>
+        <min>-2000</min>
+        <max>2000</max>
+    </filter>
     
     <pid-controller>
         <name>Low Altitude Recovery Stage 2</name>
@@ -1284,12 +1300,12 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-vs-letdown</property>
         </reference>
         <output>
-            <property>/autopilot/internal/ai-target-pitch</property>
+            <property>/autopilot/internal/ai-target-pitch-pre</property>
         </output>
         <config>
             <Kp>0.05</Kp>
-            <Ti>7</Ti>
-            <Td>0.0003</Td>
+            <Ti>5</Ti>
+            <Td>0.0001</Td>
             <u_min>-20</u_min>
             <u_max>20</u_max>
         </config>
