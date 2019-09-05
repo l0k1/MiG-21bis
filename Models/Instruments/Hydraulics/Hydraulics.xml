@@ -20,8 +20,8 @@
 	<animation>
 		<object-name>hydraulicNeedle.001</object-name>
 		<type>rotate</type>
-		<property>/fdm/jsbsim/hydraulic/pressure[0]</property>
-		<factor>79.6</factor> <!-- 200 is 79.6 degrees -->
+		<property>/fdm/jsbsim/systems/hydraulic[0]/pressure</property>
+		<factor>0.398</factor> <!-- 200 is 79.6 degrees -->
 		<offset-deg>0</offset-deg>
 		<center>
 			<x-m>-0.000995</x-m>
@@ -38,8 +38,8 @@
 	<animation>
 		<object-name>hydraulicNeedle</object-name>
 		<type>rotate</type>
-		<property>/fdm/jsbsim/hydraulic/pressure[1]</property>
-		<factor>-79.6</factor> <!-- 200 is 79.6 degrees -->
+		<property>/fdm/jsbsim/systems/hydraulic[1]/pressure</property>
+		<factor>-0.398</factor> <!-- 200 is 79.6 degrees -->
 		<offset-deg>0</offset-deg>
 		<center>
 			<x-m>-0.00100</x-m>

@@ -577,8 +577,8 @@
 			<function>
 				<product>
 					<lt>
-						<property>hydraulic/pressure[1]</property>
-						<value>0.6</value>
+						<property>systems/hydraulic[1]/pressure</property>
+						<value>165</value>
 					</lt>
 					<property>/instrumentation/warning-lights/dimmer[5]</property>
 					<property>warning-lights/lights-dc</property>
@@ -595,8 +595,8 @@
 			<function>
 				<product>
 					<lt>
-						<property>hydraulic/pressure[0]</property>
-						<value>0.6</value>
+						<property>systems/hydraulic[0]/pressure</property>
+						<value>165</value>
 					</lt>
 					<property>/instrumentation/warning-lights/dimmer[5]</property>
 					<property>warning-lights/lights-dc</property>

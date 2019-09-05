@@ -75,42 +75,24 @@
     </function>
   </fcs_function>
   
-  <!-- the aileron booster accounts for ~55% to ~60% of aileron travel -->
-    <fcs_function name="aileron-booster">
-        <function>
-            <sum>
-                <product>
-                    <property>fcs/roll-damping</property>
-                    <value>0.45</value>
-                </product>
-                <product>
-                    <property>fcs/roll-damping</property>
-                    <property>hydraulic/output[1]</property>
-                    <value>0.55</value>
-                </product>
-            </sum>
-        </function>
-    </fcs_function>
 
-    <fcs_function name="roll gain">
-      <!-- old rate limit was 2u per .5 seconds, so 4u per 1 second -->
-      <!-- booster off = 2u per 4 seconds, or .5u per 1 second -->
-      <!-- algo is .5 = 0, 4 = 1; so:
-      .5 + (3.5 * booster)
-    -->
+    <fcs_function name="roll-gain">
       <function>
-          <sum>
-            <value>0.1</value>
-            <product>
-              <value>3.9</value>
-              <property>hydraulic/output[1]</property>
-            </product>
-          </sum>
+      <table>
+        <independentVar lookup="column">velocities/mach</independentVar>
+        <independentVar lookup="row">systems/hydraulic[1]/pressure</independentVar>
+         <tableData breakPoint="0">
+                0.0   0.2   0.5   0.8   1.2   2.0
+          0.0   1.0   0.6   0.2   0.05  0.0   0.0
+         50.0   2.0   1.8   1.2   0.8   0.1   0.0
+        150.0   4.0   4.0   4.0   4.0   4.0   4.0
+        </tableData>
+      </table>
       </function>
     </fcs_function>
 
     <actuator name="Aileron Delay ACT">
-      <input>fcs/aileron-booster</input>
+      <input>fcs/roll-damping</input>
       <rate_limit>fcs/roll-gain</rate_limit>
       <output>fcs/aileron-delay</output>
     </actuator>

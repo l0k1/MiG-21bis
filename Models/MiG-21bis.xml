@@ -787,19 +787,7 @@
 		<type>rotate</type>
 		<object-name>central_air_brake</object-name>
 		<object-name>abhydro</object-name>
-		<property>surface-positions/speedbrake-pos-norm</property>
-		<condition>
-            <or>
-                <equals>
-                    <property>sim/multiplay/generic/short[2]</property>
-                    <value>0</value>
-                </equals>
-                <equals>
-                    <property>sim/multiplay/generic/short[2]</property>
-                    <value></value>
-                </equals>
-            </or>
-		</condition>
+		<property>fdm/jsbsim/fcs/speedbrake-rear-pos-norm</property>
 		<factor>35.00</factor>
 		<axis>
 			<x1-m> 0.88</x1-m>
@@ -815,7 +803,7 @@
 		<type>rotate</type>
 		<object-name>right_ventral_air_brake</object-name>
 		<object-name>right-abhydro</object-name>
-		<property>surface-positions/speedbrake-pos-norm</property>
+		<property>fdm/jsbsim/fcs/speedbrake-front-right-pos-norm</property>
 		<factor>-35.00</factor>
 		<axis>
 			<x1-m>-2.77</x1-m>
@@ -831,7 +819,7 @@
 		<type>rotate</type>
 		<object-name>left_ventral_air_brake</object-name>
 		<object-name>left-abhydro</object-name>
-		<property>surface-positions/speedbrake-pos-norm</property>
+		<property>fdm/jsbsim/fcs/speedbrake-front-left-pos-norm</property>
 		<factor>35.00</factor>
 		<axis>
 			<x1-m>-2.77</x1-m>
