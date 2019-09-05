@@ -25,7 +25,7 @@
     <switch name="trash/fcs/flap-cmd-norm-hydr">
       <default value="fcs/flap-pos-norm"/>
       <test logic="AND" value="fcs/flap-cmd-norm">
-        hydraulic/output[0] gt 0
+        systems/hydraulic[0]/pressure gt 0
       </test>
       <output>fcs/flap-cmd-norm-hydr</output>
     </switch>

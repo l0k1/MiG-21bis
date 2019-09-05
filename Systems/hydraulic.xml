@@ -4,11 +4,9 @@
 
     <channel name="hydr0">
 
-        <!-- hydro system 0 is powered by "pump-unit", and powers these things:
+        <!-- hydro system 0 is powered by "pump-unit"
+        todo:
         landing gear
-        wing flaps
-        fcs/flap-pos-norm
-        air brakes,
         jet nozzles
         one chamber of the stabilizer
         automatic braking of wheels during landing gear retraction
