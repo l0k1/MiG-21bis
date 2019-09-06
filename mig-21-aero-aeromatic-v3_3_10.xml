@@ -272,15 +272,40 @@
          </product>
     </function>
 
-
-    <function name="aero/force/Drag_speedbrake">
+    <function name="aero/force/Drag_speedbrake_fl">
        <description>Drag due to speedbrakes</description>
          <product>
            <property>aero/qbar-psf</property>
            <property>metrics/Sw-sqft</property>
-           <property>fcs/speedbrake-pos-norm</property>
+           <property>fcs/speedbrake-front-left-pos-norm</property>
            <product>
-            <value> 0.0600 </value>
+            <value> 0.018500 </value>
+            <property>tune/drag/speedbrake</property>
+           </product>
+         </product>
+    </function>
+
+    <function name="aero/force/Drag_speedbrake_fr">
+       <description>Drag due to speedbrakes</description>
+         <product>
+           <property>aero/qbar-psf</property>
+           <property>metrics/Sw-sqft</property>
+           <property>fcs/speedbrake-front-right-pos-norm</property>
+           <product>
+            <value> 0.018500 </value>
+            <property>tune/drag/speedbrake</property>
+           </product>
+         </product>
+    </function>
+
+    <function name="aero/force/Drag_speedbrake_rear">
+       <description>Drag due to speedbrakes</description>
+         <product>
+           <property>aero/qbar-psf</property>
+           <property>metrics/Sw-sqft</property>
+           <property>fcs/speedbrake-rear-pos-norm</property>
+           <product>
+            <value> 0.02300 </value>
             <property>tune/drag/speedbrake</property>
            </product>
          </product>
@@ -671,6 +696,20 @@
        </product>
     </function>
 
+    <function name="aero/moment/Pitch_speedbrake">
+       <description>Pitch due to speedbrakes</description>
+         <product>
+           <property>aero/qbar-psf</property>
+           <property>metrics/Sw-sqft</property>
+           <avg>
+             <property>fcs/speedbrake-front-left-pos-norm</property>
+             <property>fcs/speedbrake-front-right-pos-norm</property>
+             <property>fcs/speedbrake-rear-pos-norm</property>
+           </avg>
+            <value> -0.008 </value>
+         </product>
+    </function>
+
   </axis>
 
   <axis name="ROLL">
@@ -875,6 +914,22 @@
              <property>tune/yaw/aileron</property>
            </product>
        </product>
+    </function>
+    
+    <function name="aero/moment/Yaw_speedbrake_differential">
+       <description>Drag due to speedbrakes</description>
+         <product>
+           <property>aero/qbar-psf</property>
+           <property>metrics/Sw-sqft</property>
+           <sum>
+             <product>
+               <property>fcs/speedbrake-front-right-pos-norm</property>
+               <value>-1</value>
+             </product>
+             <property>fcs/speedbrake-front-left-pos-norm</property>
+            </sum>
+            <value> -0.0100 </value>
+         </product>
     </function>
 
   </axis>
