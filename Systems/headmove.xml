@@ -87,6 +87,26 @@ the nasal file does the actual movement.
             <output>systems/headshake/surge</output>
         </pure_gain>
 
+        <!-- shaking due to speedbrakes -->
+        <fcs_function name="trash/systems/headshake/speedbrakes">
+            <function>
+                <product>
+                    <avg>
+                        <property>fcs/speedbrake-front-left-pos-norm</property>
+                        <property>fcs/speedbrake-front-right-pos-norm</property>
+                        <property>fcs/speedbrake-rear-pos-norm</property>
+                    </avg>
+                    <interpolate1d>
+                        <property>aero/qbar-psf</property>
+                        <value> 40.0 </value> <value> 0.0 </value>
+                        <value> 200.0 </value> <value> 1.0 </value>
+                        <value> 1000.0 </value> <value> 1.5 </value>
+                    </interpolate1d>
+                </product>
+            </function>
+            <output>systems/headshake/speedbrakes</output>
+        </fcs_function>
+
         <!-- shaking due to damage -->
 
         <!-- final sum -->
@@ -97,6 +117,7 @@ the nasal file does the actual movement.
                     <property>systems/headshake/alpha</property>
                     <property>systems/headshake/gun</property>
                     <property>systems/headshake/surge</property>
+                    <property>systems/headshake/speedbrakes</property>
                 </max>
             </function>
             <output>systems/headshake/severity</output>
