@@ -167,6 +167,29 @@
                             <script>dialog.gunsight_dialog.open()</script>
                         </binding>
                     </item>
+										<item>
+											<label>Fuel to full</label>
+											<binding>
+												<command>nasal</command>
+												<script>
+													setprop("/consumables/fuel/tank/level-norm", 1);
+													setprop("/consumables/fuel/tank[1]/level-norm", 1);
+													setprop("/consumables/fuel/tank[2]/level-norm", 1);
+													setprop("/consumables/fuel/tank[3]/level-norm", 1);
+													setprop("/consumables/fuel/tank[4]/level-norm", 1);
+													setprop("/consumables/fuel/tank[5]/level-norm", 1);
+													setprop("/consumables/fuel/tank[6]/level-norm", 1);
+													setprop("/consumables/fuel/tank[7]/level-norm", 1);
+													setprop("/consumables/fuel/tank[8]/level-norm", 1);
+													setprop("/consumables/fuel/tank[9]/level-norm", 1);
+													setprop("/consumables/fuel/tank[10]/level-norm", 1);
+													setprop("/consumables/fuel/tank[11]/level-norm", 1);
+													setprop("/consumables/fuel/tank[12]/level-norm", 1);
+													setprop("/consumables/fuel/tank[13]/level-norm", 1);
+													setprop("/consumables/fuel/tank[14]/level-norm", 1);
+												</script>
+											</binding>
+										</item>
                 </menu>
                 <menu n="101">
                     <label>Dev</label>
