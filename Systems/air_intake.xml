@@ -110,12 +110,37 @@ i'm assuming that the wind isn't a significant factor here.
             </function>
             <output>systems/air-intake/overspeed</output>
         </fcs_function>
-                    
+
+        <fcs_function name="systems/air-intake/rpm-surge-random">
+            <function>
+                <abs>
+                    <urandom/>
+                </abs>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="trash/systems/air-intake/rpm-surge-probability">
+            <function>
+                <interpolate1d>
+                    <difference>
+                        <property>propulsion/engine/n1</property>
+                        <property>propulsion/engine/n2</property>
+                    </difference>
+                    <value> -100 </value> <value> 0 </value>
+                    <value> 20 </value>   <value> 0 </value>
+                    <value> 35 </value>   <value> 1 </value>
+                    <value> 100 </value>  <value> 1 </value>
+                </interpolate1d>
+            </function>
+            <output>systems/air-intake/rpm-surge-probability</output>
+        </fcs_function>
+
         
         <switch name="trash/systems/air-intake/surge-set">
             <default value="0"/>
             <test logic="OR" value="1">
                 velocities/vc-kts gt systems/air-intake/overspeed
+                systems/air-intake/rpm-surge-probability gt systems/air-intake/rpm-surge-random
                 systems/air-intake/intake-norm lt 0.9
                 systems/air-intake/intake-norm gt 1.1
                 systems/air-intake/surging eq 1

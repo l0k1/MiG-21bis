@@ -29,15 +29,17 @@
   <injected>          0 </injected>
   <injection-time> 0.0 </injection-time>
 
+  <!-- returned value is % per second -->
+
   <function name="N1SpoolUp">
     <table>
       <independentVar lookup="row">/engines/engine[0]/n1</independentVar>
       <tableData>
-        30  12
-        50  18
-        70  22
-        90  26
-        105 30
+        30  18
+        50  26
+        70  35
+        90  40
+        105 50
       </tableData>
     </table>
   </function>
@@ -46,11 +48,11 @@
     <table>
       <independentVar lookup="row">/engines/engine[0]/n1</independentVar>
       <tableData>
-        30  12
-        50  18
-        70  22
-        90  26
-        105 30
+        30  18
+        50  24
+        70  30
+        90  35
+        105 45
       </tableData>
     </table>
   </function>
