@@ -385,7 +385,7 @@
         <!-- if low-pres-contents > 0.05 then start putting fluid into the tank -->
 
         <!-- usage functions -->
-        <fcs_function name="trash/systems/hydraulic[1]/usage/booster[0]">
+        <fcs_function name="trash/systems/hydraulic[1]/usage/aileron-booster[0]">
             <function>
                 <product>
                     <abs>
@@ -400,7 +400,7 @@
             <output>systems/hydraulic[1]/usage/aileron-booster[0]</output>
         </fcs_function>
 
-        <fcs_function name="trash/systems/hydraulic[1]/usage/booster[1]">
+        <fcs_function name="trash/systems/hydraulic[1]/usage/aileron-booster[1]">
             <function>
                 <product>
                     <abs>
@@ -415,10 +415,31 @@
             <output>systems/hydraulic[1]/usage/aileron-booster[1]</output>
         </fcs_function>
 
+        <fcs_function name="trash/systems/hydraulic[1]/usage/stabilizer-booster[1]">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>fcs/elevator-delay</property>
+                            <property>systems/hydraulic[1]/internal/elevator-pos-norm</property>
+                        </difference>
+                    </abs>
+                    <value>0.001</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[1]/usage/elevator-booster[1]</output>
+        </fcs_function>
+
         <pure_gain name="trash/systems/hydraulic[1]/internal/aileron-pos-norm">
             <input>fcs/aileron-delay</input>
             <gain>1</gain>
             <output>systems/hydraulic[1]/internal/aileron-pos-norm</output>
+        </pure_gain>
+
+        <pure_gain name="trash/systems/hydraulic[1]/internal/aileron-pos-norm">
+            <input>fcs/elevator-delay</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[1]/internal/elevator-pos-norm</output>
         </pure_gain>
 
     </channel>

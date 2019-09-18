@@ -659,11 +659,16 @@
  <system file="electric"/>
  <system file="fuel"/>
  <system file="propulsion"/>
- <system file="air_intake.xml"/>
+ <system file="air_intake"/>
  <system file="payloads"/>
  <system file="hydraulic"/>
- <system file="instrumentation"/>
+ <system file="pneumatic"/>
+ <system file="brakes"/>
+ <system file="jsb-instrumentation"/>
  <system file="warning-lights"/>
+ <system file="radar-cooling"/>
+ <system file="external-animation"/>
+ <system file="headmove"/>
 
  <flight_control name="none"/>
 
