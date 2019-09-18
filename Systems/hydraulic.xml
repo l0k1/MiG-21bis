@@ -8,7 +8,6 @@
         todo:
         landing gear
         jet nozzles
-        one chamber of the stabilizer
         automatic braking of wheels during landing gear retraction
         retraction and extension of the intake cone
         control of the derumble doors
@@ -71,6 +70,7 @@
                             <property>systems/hydraulic[0]/usage/speedbrake-front-right</property>
                             <property>systems/hydraulic[0]/usage/speedbrake-front-left</property>
                             <property>systems/hydraulic[0]/usage/speedbrake-rear</property>
+                            <property>systems/hydraulic[0]/usage/rudder-booster</property>
                         </sum>
                         <value>-1</value>
                     </product>
@@ -121,6 +121,7 @@
                         <property>systems/hydraulic[0]/usage/speedbrake-front-right</property>
                         <property>systems/hydraulic[0]/usage/speedbrake-front-left</property>
                         <property>systems/hydraulic[0]/usage/speedbrake-rear</property>
+                        <property>systems/hydraulic[0]/usage/rudder-booster</property>
                     </sum>
                     <difference>
                         <property>systems/hydraulic[0]/low-pres-contents</property>
@@ -238,22 +239,37 @@
             <output>systems/hydraulic[0]/internal/speedbrake-front-right-last-pos</output>
         </pure_gain>
 
+        <!-- stabilizer booster -->
+
+        <!-- stabilizer booster -->
+        <fcs_function name="trash/systems/hydraulic[0]/usage/stabilizer-booster">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>fcs/rudder-delay</property>
+                            <property>systems/hydraulic[0]/internal/rudder-pos-norm</property>
+                        </difference>
+                    </abs>
+                    <value>0.0005</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[0]/usage/rudder-booster</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/hydraulic[0]/internal/rudder-pos-norm">
+            <input>fcs/rudder-delay</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[0]/internal/rudder-pos-norm</output>
+        </pure_gain>
+
     </channel>
     <channel name="hydr1">
 
         <!-- hydro system 1 is powered by "aileron-booster", and powers these things:
-        landing gear
-        wing flaps
-        fcs/flap-pos-norm
-        air brakes,
-        jet nozzles
-        one chamber of the stabilizer
-        automatic braking of wheels during landing gear retraction
-        retraction and extension of the intake cone
-        control of the derumble doors
-        control of the electronic equipment bay cooling system
 
-        in addition, they back up the ailerons if the booster system fails
+        one chamber of the stabilizer
+        aileron boosters
         fcs/left-aileron-pos-norm
         fcs/right-aileron-pos-norm
          -->
@@ -308,6 +324,7 @@
                             <!-- user properties go here -->
                             <property>systems/hydraulic[1]/usage/aileron-booster[0]</property>
                             <property>systems/hydraulic[1]/usage/aileron-booster[1]</property>
+                            <property>systems/hydraulic[1]/usage/rudder-booster</property>
                         </sum>
                         <value>-1</value>
                     </product>
@@ -356,6 +373,7 @@
                         <!-- user properties go here -->
                         <property>systems/hydraulic[1]/usage/aileron-booster[0]</property>
                         <property>systems/hydraulic[1]/usage/aileron-booster[1]</property>
+                        <property>systems/hydraulic[1]/usage/rudder-booster</property>
                     </sum>
                     <difference>
                         <property>systems/hydraulic[1]/low-pres-contents</property>
@@ -385,6 +403,8 @@
         <!-- if low-pres-contents > 0.05 then start putting fluid into the tank -->
 
         <!-- usage functions -->
+
+        <!-- the two aileron boosters -->
         <fcs_function name="trash/systems/hydraulic[1]/usage/aileron-booster[0]">
             <function>
                 <product>
@@ -415,31 +435,33 @@
             <output>systems/hydraulic[1]/usage/aileron-booster[1]</output>
         </fcs_function>
 
-        <fcs_function name="trash/systems/hydraulic[1]/usage/stabilizer-booster[1]">
+        <!-- stabilizer booster -->
+        <fcs_function name="trash/systems/hydraulic[1]/usage/stabilizer-booster">
             <function>
                 <product>
                     <abs>
                         <difference>
-                            <property>fcs/elevator-delay</property>
-                            <property>systems/hydraulic[1]/internal/elevator-pos-norm</property>
+                            <property>fcs/rudder-delay</property>
+                            <property>systems/hydraulic[1]/internal/rudder-pos-norm</property>
                         </difference>
                     </abs>
-                    <value>0.001</value>
+                    <value>0.0005</value>
                 </product>
             </function>
-            <output>systems/hydraulic[1]/usage/elevator-booster[1]</output>
+            <output>systems/hydraulic[1]/usage/rudder-booster</output>
         </fcs_function>
 
+        <!-- capturing property values to calculate usage next go around -->
         <pure_gain name="trash/systems/hydraulic[1]/internal/aileron-pos-norm">
             <input>fcs/aileron-delay</input>
             <gain>1</gain>
             <output>systems/hydraulic[1]/internal/aileron-pos-norm</output>
         </pure_gain>
 
-        <pure_gain name="trash/systems/hydraulic[1]/internal/aileron-pos-norm">
-            <input>fcs/elevator-delay</input>
+        <pure_gain name="trash/systems/hydraulic[1]/internal/rudder-pos-norm">
+            <input>fcs/rudder-delay</input>
             <gain>1</gain>
-            <output>systems/hydraulic[1]/internal/elevator-pos-norm</output>
+            <output>systems/hydraulic[1]/internal/rudder-pos-norm</output>
         </pure_gain>
 
     </channel>

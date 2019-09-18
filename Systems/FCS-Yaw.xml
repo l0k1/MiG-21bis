@@ -11,68 +11,90 @@
                                 fully disabling the autopilot.
     -->
 
+    <!-- logic flow
+    take input from fcs/rudder-cmd-norm
+    add in fcs/yaw-trim-cmd-norm
+    clip it to -1/1
+    damp movement based on hydro pressure
+        (sum up output from 1 and 2 boosters)
+    output
+    --> 
+
     <property>fcs/rudder-ap-override</property>
 
 
   <channel name="Yaw">
   
-  	<switch name="rudder-ap-override">
-		<default value="0"/>
-		<test logic="AND" value="1">
-			/autopilot/locks/mode gt 0
-			fcs/rudder-manual-override == 0
-		</test>
-	</switch>
-  
-	<fcs_function name="trash/aadf3a423">
-		<function>
-			<sum>
-				<product>
-					<property>fcs/rudder-cmd-norm</property>
-					<sum>
-						<product>
-							<property>fcs/rudder-ap-override</property>
-							<value>-1</value>
-						</product>
-						<value>1</value>
-					</sum>
+    <switch name="rudder-ap-override">
+        <default value="0"/>
+        <test logic="AND" value="1">
+            /autopilot/locks/mode gt 0
+            fcs/rudder-manual-override == 0
+        </test>
+    </switch>
+
+    <!-- if AP not overriding, combine sum of yaw cmd and yaw trim cmd, else use AP value -->
+    <fcs_function name="trash/fcs/yaw-trim-sum">
+        <function>
+            <sum>
+                <product>
+                    <property>fcs/rudder-cmd-norm</property>
+                    <sum>
+                        <product>
+                            <property>fcs/rudder-ap-override</property>
+                            <value>-1</value>
+                        </product>
+                        <value>1</value>
+                    </sum>
                 </product>
-				<product>
-					<property>fcs/rudder-ap-cmd-norm</property>
-					<property>fcs/rudder-ap-override</property>
-				</product>
-				<property>fcs/yaw-trim-cmd-norm</property>
-			</sum>
-		</function>
-		<clipto>
-			<min> -1 </min>
-			<max>  1 </max>
-		</clipto>
-		<output>fcs/yaw-trim-sum</output>
-	</fcs_function>
-  
-   <!--<summer name="Rudder Command Sum">
-      <input>fcs/rudder-cmd-norm</input>
-      <input>fcs/yaw-trim-cmd-norm</input>
-      <limit>
-        <min> -1.0 </min>
-        <max>  1.0 </max>
-      </limit>
-   </summer>-->
+                <product>
+                    <property>fcs/rudder-ap-cmd-norm</property>
+                    <property>fcs/rudder-ap-override</property>
+                </product>
+                <property>fcs/yaw-trim-cmd-norm</property>
+            </sum>
+        </function>
+        <clipto>
+            <min> -1 </min>
+            <max>  1 </max>
+        </clipto>
+        <output>fcs/yaw-trim-sum</output>
+    </fcs_function>
    
-   <kinematic name="Rudder Delay">
-     <input>fcs/yaw-trim-sum</input>
-	 <traverse>
-		<setting>
-			<position>-1</position>
-			<time>0.0</time>
-		</setting>
-		<setting>
-			<position>1</position>
-			<time>0.7</time>
-		</setting>
-	  </traverse>
-	</kinematic>
+
+
+    <fcs_function name="rudder-gain">
+        <function>
+            <avg>
+                <table>
+                    <independentVar lookup="column">velocities/mach</independentVar>
+                    <independentVar lookup="row">systems/hydraulic[0]/pressure</independentVar>
+                    <tableData breakPoint="0">
+                        0.0   0.2   0.5   0.8   1.2   2.0
+                        0.0   1.0   0.6   0.2   0.05  0.0   0.0
+                        50.0   2.0   1.8   1.2   0.8   0.1   0.0
+                        150.0   4.0   4.0   4.0   4.0   4.0   4.0
+                    </tableData>
+                </table>
+                <table>
+                    <independentVar lookup="column">velocities/mach</independentVar>
+                    <independentVar lookup="row">systems/hydraulic[1]/pressure</independentVar>
+                    <tableData breakPoint="0">
+                        0.0   0.2   0.5   0.8   1.2   2.0
+                        0.0   1.0   0.6   0.2   0.05  0.0   0.0
+                        50.0   2.0   1.8   1.2   0.8   0.1   0.0
+                        150.0   4.0   4.0   4.0   4.0   4.0   4.0
+                    </tableData>
+                </table>
+            </avg>
+        </function>
+    </fcs_function>
+
+    <actuator name="yaw-delay-act">
+        <input>fcs/yaw-trim-sum</input>
+        <rate_limit>fcs/rudder-gain</rate_limit>
+        <output>fcs/rudder-delay</output>
+    </actuator>
 
    <aerosurface_scale name="Rudder Control">
       <input>fcs/rudder-delay</input>
