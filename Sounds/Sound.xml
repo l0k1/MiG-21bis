@@ -849,6 +849,23 @@
             </volume>
         </rwr>
 
+        <enginesurge>
+          <name>enginesurge_boom</name>
+          <path>Aircraft/MiG-21bis/Sounds/Samples/enginesurge.wav</path>
+          <mode>once</mode>
+          <condition>
+            <property>/fdm/jsbsim/systems/air-intake/surging</property>
+          </condition>
+          <position>
+            <x>0.01</x>
+            <y>0.01</y>
+            <z>0.01</z>
+          </position>
+          <volume>
+            <factor>1</factor>
+          </volume>
+        </enginesurge>
+
     </fx>
 
 </PropertyList>
