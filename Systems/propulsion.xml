@@ -11,39 +11,39 @@ ignition, a delay of up to 9 seconds was experienced.
 <system name="propulsion">
     <property value="0">systems/air-intake/surging</property>
 
-	<channel name="Throttle">
+    <channel name="Throttle">
 
-		<!-- throttle distributions, split milthrust, augthrust and clrthrust -->
+        <!-- throttle distributions, split milthrust, augthrust and clrthrust -->
 
-		<fcs_function name="trash/asdf1234">
-			<function>
-				<table>
-					<independentVar lookup="row">fcs/throttle-cmd-norm</independentVar>
-					<tableData>
-						0.00	0.00
-						0.75	1.00
-						1.00	1.00
-					</tableData>
-				</table>
-			</function>
-			<output>fcs/throttle-redist-mil</output>
-		</fcs_function>
+        <fcs_function name="trash/asdf1234">
+            <function>
+                <table>
+                    <independentVar lookup="row">fcs/throttle-cmd-norm</independentVar>
+                    <tableData>
+                        0.00    0.00
+                        0.75    1.00
+                        1.00    1.00
+                    </tableData>
+                </table>
+            </function>
+            <output>fcs/throttle-redist-mil</output>
+        </fcs_function>
 
-		<fcs_function name="trash/asdeeefsd">
-			<function>
-				<table>
-					<independentVar lookup="row">fcs/throttle-cmd-norm</independentVar>
-					<tableData>
-						0.00	0.00
-						0.80	0.00
-						1.00	1.00
-					</tableData>
-				</table>
-			</function>
-			<output>fcs/throttle-redist-aug-predelay</output>
-		</fcs_function>
+        <fcs_function name="trash/asdeeefsd">
+            <function>
+                <table>
+                    <independentVar lookup="row">fcs/throttle-cmd-norm</independentVar>
+                    <tableData>
+                        0.00    0.00
+                        0.80    0.00
+                        1.00    1.00
+                    </tableData>
+                </table>
+            </function>
+            <output>fcs/throttle-redist-aug-predelay</output>
+        </fcs_function>
 
-		<kinematic name="throttle-redist-aug">
+        <kinematic name="throttle-redist-aug">
             <input>fcs/throttle-redist-aug-predelay</input>
             <traverse>
                 <setting>
@@ -58,108 +58,148 @@ ignition, a delay of up to 9 seconds was experienced.
         </kinematic>
 
 
-		<switch name="aug-delay-switch">
-			<default value="0"/>
-			<test logic="AND" value="1">
-				propulsion/engine[0]/n2 ge 100
-			</test>
-		</switch>
+        <switch name="aug-delay-switch">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                propulsion/engine[0]/n2 ge 100
+            </test>
+        </switch>
 
-		<kinematic name="aug-delay">
-			<input>fcs/aug-delay-switch</input>
-			<noscale/>
-			<traverse>
-				<setting>
-					<position>0.0000</position>
-					<time>0.0000</time>
-				</setting>
-				<setting>
-					<position>1.0000</position>
-					<time>9.0000</time>
-				</setting>
-			</traverse>
-		</kinematic>
+        <kinematic name="aug-delay">
+            <input>fcs/aug-delay-switch</input>
+            <noscale/>
+            <traverse>
+                <setting>
+                    <position>0.0000</position>
+                    <time>0.0000</time>
+                </setting>
+                <setting>
+                    <position>1.0000</position>
+                    <time>9.0000</time>
+                </setting>
+            </traverse>
+        </kinematic>
 
-		<fcs_function name="trash/asdfp3df32">
-			<function>
-				<table>
-					<independentVar>fcs/throttle-redist-aug</independentVar>
-					<tableData>
-						0.001  1.000
-						1.000  0.333
-					</tableData>
-				</table>
-			</function>
-			<clipto>
-				<min>0.0</min>
-				<max>1.0</max>
-			</clipto>
-			<output>fcs/throttle-aug-compare</output>
-		</fcs_function>
+        <fcs_function name="trash/asdfp3df32">
+            <function>
+                <table>
+                    <independentVar>fcs/throttle-redist-aug</independentVar>
+                    <tableData>
+                        0.001  1.000
+                        1.000  0.333
+                    </tableData>
+                </table>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+            <output>fcs/throttle-aug-compare</output>
+        </fcs_function>
 
-		<switch name="aug-active">
-			<default value="0"/>
-			<test logic="AND" value="1">
-				propulsion/engine[0]/n2 ge 100
-				fcs/aug-delay ge fcs/throttle-aug-compare
-			</test>
-		</switch>
+        <switch name="aug-active">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                propulsion/engine[0]/n2 ge 100
+                fcs/aug-delay ge fcs/throttle-aug-compare
+            </test>
+        </switch>
 
-		<fcs_function name="trash/asdfp32">
-			<function>
-				<ifthen>
-					<property>systems/air-intake/surging</property>
-					<value>0</value>
-					<sum>
-						<property>fcs/throttle-redist-mil</property>
-						<product>
-							<property>fcs/throttle-redist-aug</property>
-							<property>fcs/aug-active</property>
-							<gt>
-								<property>electric/output/full-throttle-reheat</property>
-								<value>25</value>
-							</gt>
-						</product>
-					</sum>
-				</ifthen>
-			</function>
-			<clipto>
-				<min>0.0</min>
-				<max>2.0</max>
-			</clipto>
-			<output>fcs/throttle-pos-norm</output>
-		</fcs_function>
+        <fcs_function name="trash/asdfp32">
+            <function>
+                <ifthen>
+                    <property>systems/air-intake/surging</property>
+                    <value>0</value>
+                    <sum>
+                        <property>fcs/throttle-redist-mil</property>
+                        <product>
+                            <property>fcs/throttle-redist-aug</property>
+                            <property>fcs/aug-active</property>
+                            <gt>
+                                <property>electric/output/full-throttle-reheat</property>
+                                <value>25</value>
+                            </gt>
+                        </product>
+                    </sum>
+                </ifthen>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>2.0</max>
+            </clipto>
+            <output>fcs/throttle-pos-norm</output>
+        </fcs_function>
 
-	</channel>
+    </channel>
 
 
-	<channel name="nozzle">
+    <channel name="nozzle">
 
-	<!--
-	flow thoughts
-	if fcs/throttle-redist-aug-predelay is less than or equal to 0, use /engines/engine[0]/nozzle-pos-norm
-	if fcs/throttle-redist-aug-predelay is greater than 0, nozzle = 1
-	this gets us away from the nozzle only being open when the afterburner is ignited
-	-->
+    <!--
+    flow thoughts
+    if fcs/throttle-redist-aug-predelay is less than or equal to 0, use /engines/engine[0]/nozzle-pos-norm
+    if fcs/throttle-redist-aug-predelay is greater than 0, nozzle = 1
+    this gets us away from the nozzle only being open when the afterburner is ignited
+    -->
 
-		<fcs_function name="trash/propulsion/engine[0]/nozzle-pos-norm-corrected">
-			<function>
-				<ifthen>
-					<gt>
-						<property>fcs/throttle-redist-aug-predelay</property>
-						<value>0</value>
-					</gt>
-					<value>1</value>
-					<property>/engines/engine[0]/nozzle-pos-norm</property>
-				</ifthen>
-			</function>
-			<clipto>
-				<min>0.0</min>
-				<max>1.0</max>
-			</clipto>
-			<output>propulsion/engine[0]/nozzle-pos-norm-corrected</output>
-		</fcs_function>
+        <fcs_function name="trash/propulsion/engine[0]/nozzle-pos-norm-corrected">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>fcs/throttle-redist-aug-predelay</property>
+                        <value>0</value>
+                    </gt>
+                    <value>1</value>
+                    <property>/engines/engine[0]/nozzle-pos-norm</property>
+                </ifthen>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+            <output>propulsion/engine[0]/nozzle-pos-norm-corrected</output>
+        </fcs_function>
 
-	</channel>
+    </channel>
 
+    <channel name="maxn1n2">
+
+        <!-- increase max n1/n2 based on airspeed and air pressure -->
+        <fcs_function name="trash/propulsion/engine[0]/nmod">
+            <!-- 
+            speed/qnh relationship taken from air_intake.xml
+            mostly pulling this from my ass. :thumbs_up:
+            -->
+            <function>
+                <table>
+                    <independentVar lookup="row">/environment/pressure-inhg</independentVar>
+                    <independentVar lookup="column">velocities/vc-kts</independentVar>
+                    <tableData>
+                                0.00    675     702     770     837     864     877
+                        0.00    0.95    0.95    0.95    0.95    0.95    0.95    0.95
+                        3.27    0.95    0.96    0.97    0.98    0.99    1.00    1.01
+                        5.52    0.95    0.97    0.98    0.99    1.00    1.01    1.02
+                        8.89    0.95    0.98    0.99    1.00    1.01    1.02    1.03
+                        20.6    0.95    0.99    1.00    1.01    1.02    1.03    1.04
+                        29.9    0.95    1.00    1.01    1.02    1.03    1.04    1.05
+                        32.1    0.95    1.01    1.02    1.03    1.04    1.05    1.06
+                    </tableData>
+                </table>
+            </function>
+            <output>propulsion/engine[0]/nmod</output>
+        </fcs_function>
+
+        <pure_gain name="trash/propulsion/engine[0]/MaxN1">
+            <input>propulsion/engine[0]/nmod</input>
+            <gain>103.5</gain>
+            <output>propulsion/engine[0]/MaxN1</output>
+        </pure_gain>
+
+        <pure_gain name="trash/propulsion/engine[0]/MaxN2">
+            <input>propulsion/engine[0]/nmod</input>
+            <gain>107.5</gain>
+            <output>propulsion/engine[0]/MaxN2</output>
+        </pure_gain>
+
+    </channel>
 </system>
