@@ -131,7 +131,26 @@
        </product>
     </function>
 
-
+    <function name="aero/force/Lift_groundeffect">
+      <description>Lift due to ground effect</description>
+        <product>
+          <property>aero/qbar-psf</property>
+          <property>metrics/Sw-sqft</property>
+          <cos>
+            <property>attitude/roll-rad</property>
+          </cos>
+          <table>
+            <independentVar lookup="row">position/h-agl-ft</independentVar>
+            <tableData>
+              0.0   1.0
+              10.0  0.7
+              23.5  0.2
+              30.0  0.0
+            </tableData>
+          </table>
+          <value>0.2</value>
+        </product>
+      </function>
   </axis>
 
   <axis name="DRAG">
@@ -324,7 +343,7 @@
          </product>
     </function>
 
-    <function name="aero/coefficient/CAMissile0">
+    <function name="aero/force/Drag_CAMissile0">
       <description>
       Left wing pylon axial Coefficient
       </description>
@@ -367,7 +386,7 @@
       </product>
     </function>
 
-    <function name="aero/coefficient/CAMissile1">
+    <function name="aero/force/Drag_CAMissile1">
       <description>
       Left wing pylon axial Coefficient
       </description>
@@ -410,7 +429,7 @@
       </product>
     </function>
 
-    <function name="aero/coefficient/CAMissile2">
+    <function name="aero/force/Drag_CAMissile2">
       <description>
       Left wing pylon axial Coefficient
       </description>
@@ -453,7 +472,7 @@
       </product>
     </function>
 
-    <function name="aero/coefficient/CAMissile3">
+    <function name="aero/force/Drag_CAMissile3">
       <description>
       Left wing pylon axial Coefficient
       </description>
@@ -496,7 +515,7 @@
       </product>
     </function>
 
-    <function name="aero/coefficient/CAMissile4">
+    <function name="aero/force/Drag_CAMissile4">
       <description>
       Left wing pylon axial Coefficient
       </description>
@@ -538,6 +557,24 @@
         </table>
       </product>
     </function>
+
+    <function name="aero/force/Drag_groundeffect">
+      <description>Lift due to ground effect</description>
+        <product>
+          <property>aero/qbar-psf</property>
+          <property>metrics/Sw-sqft</property>
+          <table>
+            <independentVar lookup="row">position/h-agl-ft</independentVar>
+            <tableData>
+              0.0   -1.0
+              10.0  -0.7
+              23.5  -0.2
+              30.0  -0.0
+            </tableData>
+          </table>
+          <value>0.08</value>
+        </product>
+      </function>
 
   </axis>
 
