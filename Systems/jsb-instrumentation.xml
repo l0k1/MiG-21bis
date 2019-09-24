@@ -135,6 +135,25 @@ clock
             <input>instrumentation/aru/aru-display-prefilter</input>
             <c1>9.0</c1>
         </lag_filter>
+        
+        <fcs_function name="trash/instrumentation/cone/cone-prefilter">
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>electric/buses/bus[3]</property>
+                        <value>27</value>
+                    </gt>
+                    <property>systems/air-intake/cone-pos-norm</property>
+                    <value>0</value>
+                </ifthen>
+            </function>
+            <output>instrumentation/cone/cone-prefilter</output>
+        </fcs_function>
+
+        <lag_filter name="instrumentation/cone/cone-display">
+            <input>instrumentation/cone/cone-prefilter</input>
+            <c1>9.0</c1>
+        </lag_filter>
     
     </channel>
     
