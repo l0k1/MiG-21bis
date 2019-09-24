@@ -4,23 +4,29 @@
 <!-- GPLv2+ -->
 
 <system name="gear">
-<property value="1">gear/gear-rqst-norm</property>
+    <property value="1">gear/gear-rqst-norm</property>
 
-  <channel name="Landing Gear">
-   <kinematic name="Gear Control">
-     <input>gear/gear-rqst-norm</input>
-     <traverse>
-       <setting>
-          <position> 0 </position>
-          <time>     0 </time>
-       </setting>
-       <setting>
-          <position> 1 </position>
-          <time>     5 </time>
-       </setting>
-     </traverse>
-     <output>gear/gear-pos-norm</output>
-   </kinematic>
+    <channel name="Landing Gear">
+    
+        <fcs_function name="trash/gear/gear-rate">
+            <function>
+                <table>
+                    <independentVar lookup="row">systems/hydraulic[0]/pressure</independentVar>
+                    <tableData>
+                        0.0     0.0
+                        50.0    0.1
+                        150.0   0.2
+                    </tableData>
+                </table>
+            </function>
+            <output>gear/gear-rate</output>
+        </fcs_function>
+        
+        <actuator name="trash/propulsion/nozzle-pos-norm">
+            <input>gear/gear-rqst-norm</input>
+            <rate_limit>gear/gear-rate</rate_limit>
+            <output>gear/gear-pos-norm</output>
+        </actuator>
 
-  </channel>
+    </channel>
 </system>
