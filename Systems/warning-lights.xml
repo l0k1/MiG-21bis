@@ -559,7 +559,7 @@
 			<function>
 				<product>
 					<eq>
-						<property>propulsion/engine[0]/nozzle-pos-norm-corrected</property>
+						<property>propulsion/engine[0]/nozzle-pos-norm</property>
 						<value>1</value>
 					</eq>
 					<property>/instrumentation/warning-lights/dimmer[5]</property>

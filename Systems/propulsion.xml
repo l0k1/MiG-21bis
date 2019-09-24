@@ -160,6 +160,71 @@ ignition, a delay of up to 9 seconds was experienced.
             <output>propulsion/engine[0]/nozzle-pos-norm-corrected</output>
         </fcs_function>
 
+        <fcs_function name="trash/propulsion/engine[0]/ideal-nozzle-pos">
+            <function>
+            <!-- N1 - IdleN1 / MaxN1 - IdleN1 -->
+                <ifthen>
+                    <property>/engines/engine[0]/augmentation</property>
+                    <value>1</value>
+                    <difference>
+                        <value>1</value>
+                        <quotient>
+                            <difference>
+                                <property>propulsion/engine/n1</property>
+                                <value>35</value>
+                            </difference>
+                            <difference>
+                                <property>propulsion/engine/MaxN1</property>
+                                <value>35</value>
+                            </difference>
+                        </quotient>
+                    </difference>
+                </ifthen>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+            <output>propulsion/engine[0]/ideal-nozzle-pos</output>
+        </fcs_function>
+
+        <!-- if fcs/throttle-cmd-norm = 0, jet nozzle = 1, scale to 0 at 0.75, then at and above 0.8, go back to 1 -->
+        <fcs_function name="trash/propulsion/engine[0]/nozzle-cmd-norm">
+            <function>
+                <table>
+                    <independentVar lookup="row">fcs/throttle-cmd-norm</independentVar>
+                    <tableData>
+                        0.0     1.0
+                        0.75    0.0
+                        0.7999  0.0
+                        0.80    1.0
+                        1.0     1.0
+                    </tableData>
+                </table>
+            </function>
+            <output>propulsion/engine[0]/nozzle-cmd-norm</output>
+        </fcs_function>
+
+        <fcs_function name="trash/propulsion/engine[0]/nozzle-rate">
+            <function>
+                <table>
+                    <independentVar lookup="row">systems/hydraulic[0]/pressure</independentVar>
+                    <tableData>
+                        0.0     0.0
+                        50.0    0.5
+                        150.0   1.0
+                    </tableData>
+                </table>
+            </function>
+            <output>propulsion/engine[0]/nozzle-rate</output>
+        </fcs_function>
+
+        <actuator name="trash/propulsion/nozzle-pos-norm">
+            <input>propulsion/engine[0]/nozzle-cmd-norm</input>
+            <rate_limit>propulsion/engine[0]/nozzle-rate</rate_limit>
+            <output>propulsion/engine[0]/nozzle-pos-norm</output>
+        </actuator>
+
     </channel>
 
     <channel name="maxn1n2">

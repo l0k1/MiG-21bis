@@ -118,8 +118,23 @@
         </tableData>
        </table>
 
+       <!-- hamper thrust if the nozzle position is off. -->
+       <max>
+         <difference>
+            <value>1</value>
+            <abs>
+              <difference>
+                <property>propulsion/engine[0]/nozzle-pos-norm</property>
+                <property>propulsion/engine[0]/ideal-nozzle-pos</property>
+              </difference>
+            </abs>
+          </difference>
+          <value>0.1</value>
+        </max>
+
        <!-- if not /engines/engine[0]/augmentation and nozzle position is open, severely hamper the mil thrust -->
-       <ifthen>
+       <!-- this was used prior to full engine nozzle simulation. keeping for posterity.
+          <ifthen>
             <and>
                 <eq>
                     <property>/engines/engine[0]/augmentation</property>
@@ -136,7 +151,7 @@
             </and>
             <value>0.1</value>
             <value>1</value>
-        </ifthen>
+        </ifthen>-->
     </product>
   </function>
 
@@ -179,6 +194,19 @@
 					1.0		1.54		1.46		1.33		1.04		1.0
 				</tableData>
 			</table>
+       <!-- hamper thrust if the nozzle position is off. -->
+       <max>
+         <difference>
+            <value>1</value>
+            <abs>
+              <difference>
+                <property>propulsion/engine[0]/nozzle-pos-norm</property>
+                <property>propulsion/engine[0]/ideal-nozzle-pos</property>
+              </difference>
+            </abs>
+          </difference>
+          <value>0.1</value>
+        </max>
 		</product>
 	</function>
 

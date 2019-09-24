@@ -71,6 +71,7 @@
                             <property>systems/hydraulic[0]/usage/speedbrake-front-left</property>
                             <property>systems/hydraulic[0]/usage/speedbrake-rear</property>
                             <property>systems/hydraulic[0]/usage/rudder-booster</property>
+                            <property>systems/hydraulic[0]/usage/nozzle</property>
                         </sum>
                         <value>-1</value>
                     </product>
@@ -122,6 +123,7 @@
                         <property>systems/hydraulic[0]/usage/speedbrake-front-left</property>
                         <property>systems/hydraulic[0]/usage/speedbrake-rear</property>
                         <property>systems/hydraulic[0]/usage/rudder-booster</property>
+                        <property>systems/hydraulic[0]/usage/nozzle</property>
                     </sum>
                     <difference>
                         <property>systems/hydraulic[0]/low-pres-contents</property>
@@ -261,6 +263,28 @@
             <input>fcs/rudder-delay</input>
             <gain>1</gain>
             <output>systems/hydraulic[0]/internal/rudder-pos-norm</output>
+        </pure_gain>
+
+        <!-- jet nozzle -->
+        <fcs_function name="trash/systems/hydraulic[0]/usage/nozzle">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>propulsion/engine[0]/nozzle-pos-norm</property>
+                            <property>systems/hydraulic[0]/internal/nozzle</property>
+                        </difference>
+                    </abs>
+                    <value>0.0005</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[0]/usage/nozzle</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/hydraulic[0]/internal/nozzle">
+            <input>propulsion/engine[0]/nozzle-pos-norm</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[0]/internal/nozzle</output>
         </pure_gain>
 
     </channel>
