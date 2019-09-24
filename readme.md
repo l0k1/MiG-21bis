@@ -10,6 +10,8 @@ The MiG-21bis is a point-defence fighter aircraft developed by Mikoyan-Gurevich 
 
 The MiG-21 is one of the most prolific fighters in the world, with production beginning in 1959 and later variants still being fielded to this day. Originally intended as a high altiude interceptor to defend against high-flying bombers, later variants equipped with more powerful engines fully rounded out this fighter which is still included in modern air forces.
 
+Additional documentation can be found at http://wiki.flightgear.org/Mikoyan-Gurevich_MiG-21 as well as https://github.com/l0k1/MiG-21bis/wiki
+
 ## For FlightGear
 
 The FlightGear MiG-21bis is currently undergoing substantial work, with a redone 3D cockpit, more weapons systems, accurate guidance and radar, FDM work, and much more. We are focused on quality work - everything should be done with an eye to realism and not taking shortcuts (if we can).
