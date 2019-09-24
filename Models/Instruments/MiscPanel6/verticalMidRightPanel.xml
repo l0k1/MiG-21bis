@@ -16,6 +16,32 @@
 
   <animation>
     <type>knob</type>
+    <object-name>conePowerSwitch</object-name>
+    <property>/fdm/jsbsim/electric/switches/rvmsp/cone</property>
+    <factor>-50</factor>
+    <offset-deg>25</offset-deg>
+    <center>
+        <!-- fix me -->
+      <x-m>-0.007692</x-m>
+      <y-m> 0.011645</y-m>
+      <z-m> 0.089658</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+
+    <action>
+      <binding>
+        <command>property-toggle</command>
+        <property>/fdm/jsbsim/electric/switches/rvmsp/cone</property>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>knob</type>
     <object-name>pumpUnitSwitch</object-name>
     <property>/fdm/jsbsim/electric/switches/rvmsp/pump-unit</property>
     <factor>-50</factor>

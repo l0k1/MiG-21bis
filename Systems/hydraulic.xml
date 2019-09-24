@@ -308,6 +308,28 @@
             <gain>1</gain>
             <output>systems/hydraulic[0]/internal/gear</output>
         </pure_gain>
+        
+        <!-- landing gear -->
+        <fcs_function name="trash/systems/hydraulic[0]/usage/gear">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>gear/gear-pos-norm</property>
+                            <property>systems/hydraulic[0]/internal/gear</property>
+                        </difference>
+                    </abs>
+                    <value>0.0005</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[0]/usage/gear</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/hydraulic[0]/internal/gear">
+            <input>gear/gear-pos-norm</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[0]/internal/gear</output>
+        </pure_gain>
 
     </channel>
     <channel name="hydr1">

@@ -141,7 +141,7 @@
 		</axis>
 	</animation>
 
-	<!-- <animation>
+	<animation>
 		<type>pick</type>
 		<object-name>miscPanel1NozzleSwitch</object-name>
 		<action>
@@ -149,7 +149,7 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>/instrumentation/misc-panel-1/cone-auto-man</property>
+				<property>/fdm/jsbsim/systems/air-intake/cone-auto-man</property>
 			</binding>
 		</action>
 		<action>
@@ -157,10 +157,10 @@
 			<repeatable>false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>/instrumentation/misc-panel-1/cone-auto-man</property>
+				<property>/fdm/jsbsim/systems/air-intake/cone-auto-man</property>
 			</binding>
 		</action>
-	</animation> -->
+	</animation>
 
 	<animation>
 		<object-name>miscPanel1NozzleSwitch</object-name>

@@ -59,7 +59,7 @@ i'm assuming that the wind isn't a significant factor here.
 		            <independentVar lookup="row">systems/air-intake/shockwave-angle</independentVar>
 		            <independentVar lookup="column">systems/air-intake/cone-pos-norm</independentVar>
 		            <tableData>
-                        	    0.0     10.0    20.0    30.0    40.0    100.0
+                        	    0.0     0.10    0.20    0.30    0.40    1.00
                         0.0     13.6	12.73	11.29	9.26	6.37	2.44
                         2.0     12.5	11.7	10.37	8.51	5.85	2.23
                         4.0     11.45	10.72	9.5	    7.8	    5.36	2.03
@@ -153,32 +153,39 @@ i'm assuming that the wind isn't a significant factor here.
     
     
     <channel name="cone_fcs">
+    
+        <!-- there are two switches and one knob to control cone movement.
+            electric/output/cone (bus 1) controls on or off
+            systems/air-intake/cone-auto-man controls automatic (1) or manual (0) control
+            systems/air-intake/cone-man-setting controls the manual setting
+        -->
+    
         <fcs_function name="trash/systems/air-intake/cone-auto-logic">
             <function>
                 <table>
                     <independentVar lookup="row">systems/air-intake/shockwave-angle</independentVar>
                     <tableData>
-                        0.00	100.00
-                        2.00	100.00
-                        4.00	100.00
-                        6.00	100.00
-                        8.00	100.00
-                        10.00	100.00
-                        12.00	100.00
-                        14.00	100.00
-                        16.00	100.00
-                        18.00	96.75
-                        20.00	91.49
-                        22.00	85.34
-                        24.00	78.09
-                        26.00	69.70
-                        28.00	59.77
-                        30.00	47.89
-                        32.00	38.57
-                        34.00	34.44
-                        36.00	29.52
-                        38.00	22.11
-                        40.00	12.50
+                        0.00	1.0
+                        2.00	1.0
+                        4.00	1.0
+                        6.00	1.0
+                        8.00	1.0
+                        10.00	1.0
+                        12.00	1.0
+                        14.00	1.0
+                        16.00	1.0
+                        18.00	0.9675
+                        20.00	0.9149
+                        22.00	0.8534
+                        24.00	0.7809
+                        26.00	0.6970
+                        28.00	0.5977
+                        30.00	0.4789
+                        32.00	0.3857
+                        34.00	0.3444
+                        36.00	0.2952
+                        38.00	0.2211
+                        40.00	0.1250
                         42.00	0.00
                         75.00	0.00
                     </tableData>
@@ -186,17 +193,44 @@ i'm assuming that the wind isn't a significant factor here.
             </function>
             <output>systems/air-intake/cone-auto-logic</output>
         </fcs_function>
-
-        <kinematic name="trash/systems/air-intake/cone-pos-norm">
-            <input>systems/air-intake/cone-auto-logic</input>
-            <traverse>
-                <setting> <position>   0.0 </position> <time> 0.00 </time> </setting>
-                <setting> <position> 100.0 </position> <time> 0.75 </time> </setting>
-            </traverse>
-            <noscale/>
+        
+        <fcs_function name="trash/systems/air-intake/cone-cmd-norm">
+            <function>
+                <ifthen>
+                    <property>systems/air-intake/cone-auto-man</property>
+                    <property>systems/air-intake/cone-auto-logic</property>
+                    <property>systems/air-intake/cone-man-setting</property>
+                </ifthen>
+            </function>
+            <output>systems/air-intake/cone-cmd-norm</output>
+        </fcs_function>
+        
+        <fcs_function name="trash/systems/air-intake/cone-rate">
+            <function>
+                <product>
+                    <table>
+                        <independentVar lookup="row">systems/hydraulic[0]/pressure</independentVar>
+                        <tableData>
+                            0.0     0.0
+                            50.0    20.0
+                            150.0   100.0
+                        </tableData>
+                    </table>
+                    <gt>
+                        <property>electric/output/cone</property>
+                        <value>105</value>
+                    </gt>
+                </product>
+            </function>
+            <output>systems/air-intake/cone-rate</output>
+        </fcs_function>
+        
+        <actuator name="trash/systems/air-intake/cone-pos-norm">
+            <input>systems/air-intake/cone-cmd-norm</input>
+            <rate_limit>systems/air-intake/cone-rate</rate_limit>
             <output>systems/air-intake/cone-pos-norm</output>
-        </kinematic>
-
+        </actuator>
+        
     </channel>
         
 </system>
