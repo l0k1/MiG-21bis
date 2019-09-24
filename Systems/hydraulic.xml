@@ -70,7 +70,7 @@
                             <property>systems/hydraulic[0]/usage/speedbrake-front-right</property>
                             <property>systems/hydraulic[0]/usage/speedbrake-front-left</property>
                             <property>systems/hydraulic[0]/usage/speedbrake-rear</property>
-                            <property>systems/hydraulic[0]/usage/rudder-booster</property>
+                            <property>systems/hydraulic[0]/usage/elevator-booster</property>
                             <property>systems/hydraulic[0]/usage/nozzle</property>
                             <property>systems/hydraulic[0]/usage/gear</property>
                         </sum>
@@ -123,7 +123,7 @@
                         <property>systems/hydraulic[0]/usage/speedbrake-front-right</property>
                         <property>systems/hydraulic[0]/usage/speedbrake-front-left</property>
                         <property>systems/hydraulic[0]/usage/speedbrake-rear</property>
-                        <property>systems/hydraulic[0]/usage/rudder-booster</property>
+                        <property>systems/hydraulic[0]/usage/elevator-booster</property>
                         <property>systems/hydraulic[0]/usage/nozzle</property>
                         <property>systems/hydraulic[0]/usage/gear</property>
                     </sum>
@@ -249,20 +249,20 @@
                 <product>
                     <abs>
                         <difference>
-                            <property>fcs/rudder-delay</property>
-                            <property>systems/hydraulic[0]/internal/rudder-pos-norm</property>
+                            <property>fcs/elevator-delay</property>
+                            <property>systems/hydraulic[0]/internal/elevator-pos-norm</property>
                         </difference>
                     </abs>
                     <value>0.0005</value>
                 </product>
             </function>
-            <output>systems/hydraulic[0]/usage/rudder-booster</output>
+            <output>systems/hydraulic[0]/usage/elevator-booster</output>
         </fcs_function>
 
-        <pure_gain name="trash/systems/hydraulic[0]/internal/rudder-pos-norm">
-            <input>fcs/rudder-delay</input>
+        <pure_gain name="trash/systems/hydraulic[0]/internal/elevator-pos-norm">
+            <input>fcs/elevator-delay</input>
             <gain>1</gain>
-            <output>systems/hydraulic[0]/internal/rudder-pos-norm</output>
+            <output>systems/hydraulic[0]/internal/elevator-pos-norm</output>
         </pure_gain>
 
         <!-- jet nozzle -->
@@ -370,7 +370,7 @@
                             <!-- user properties go here -->
                             <property>systems/hydraulic[1]/usage/aileron-booster[0]</property>
                             <property>systems/hydraulic[1]/usage/aileron-booster[1]</property>
-                            <property>systems/hydraulic[1]/usage/rudder-booster</property>
+                            <property>systems/hydraulic[1]/usage/elevator-booster</property>
                         </sum>
                         <value>-1</value>
                     </product>
@@ -419,7 +419,7 @@
                         <!-- user properties go here -->
                         <property>systems/hydraulic[1]/usage/aileron-booster[0]</property>
                         <property>systems/hydraulic[1]/usage/aileron-booster[1]</property>
-                        <property>systems/hydraulic[1]/usage/rudder-booster</property>
+                        <property>systems/hydraulic[1]/usage/elevator-booster</property>
                     </sum>
                     <difference>
                         <property>systems/hydraulic[1]/low-pres-contents</property>
@@ -487,14 +487,14 @@
                 <product>
                     <abs>
                         <difference>
-                            <property>fcs/rudder-delay</property>
-                            <property>systems/hydraulic[1]/internal/rudder-pos-norm</property>
+                            <property>fcs/elevator-delay</property>
+                            <property>systems/hydraulic[1]/internal/elevator-pos-norm</property>
                         </difference>
                     </abs>
                     <value>0.0005</value>
                 </product>
             </function>
-            <output>systems/hydraulic[1]/usage/rudder-booster</output>
+            <output>systems/hydraulic[1]/usage/elevator-booster</output>
         </fcs_function>
 
         <!-- capturing property values to calculate usage next go around -->
@@ -504,10 +504,10 @@
             <output>systems/hydraulic[1]/internal/aileron-pos-norm</output>
         </pure_gain>
 
-        <pure_gain name="trash/systems/hydraulic[1]/internal/rudder-pos-norm">
-            <input>fcs/rudder-delay</input>
+        <pure_gain name="trash/systems/hydraulic[1]/internal/elevator-pos-norm">
+            <input>fcs/elevator-delay</input>
             <gain>1</gain>
-            <output>systems/hydraulic[1]/internal/rudder-pos-norm</output>
+            <output>systems/hydraulic[1]/internal/elevator-pos-norm</output>
         </pure_gain>
 
     </channel>

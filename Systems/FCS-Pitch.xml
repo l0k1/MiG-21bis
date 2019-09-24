@@ -147,20 +147,39 @@
 			</product>
 		</function>
 	</fcs_function>
+    
+    <fcs_function name="elevator-gain">
+        <function>
+            <avg>
+                <table>
+                    <independentVar lookup="column">velocities/mach</independentVar>
+                    <independentVar lookup="row">systems/hydraulic[0]/pressure</independentVar>
+                    <tableData breakPoint="0">
+                        0.0   0.2   0.5   0.8   1.2   2.0
+                        0.0   1.0   0.6   0.2   0.05  0.0   0.0
+                        50.0   2.0   1.8   1.2   0.8   0.1   0.0
+                        150.0   4.0   4.0   4.0   4.0   4.0   4.0
+                    </tableData>
+                </table>
+                <table>
+                    <independentVar lookup="column">velocities/mach</independentVar>
+                    <independentVar lookup="row">systems/hydraulic[1]/pressure</independentVar>
+                    <tableData breakPoint="0">
+                        0.0   0.2   0.5   0.8   1.2   2.0
+                        0.0   1.0   0.6   0.2   0.05  0.0   0.0
+                        50.0   2.0   1.8   1.2   0.8   0.1   0.0
+                        150.0   4.0   4.0   4.0   4.0   4.0   4.0
+                    </tableData>
+                </table>
+            </avg>
+        </function>
+    </fcs_function>
 	
-	<kinematic name="Elevator Delay">
-     <input>fcs/elevator-post-aru</input>
-	 <traverse>
-		<setting>
-			<position>-1</position>
-			<time>0.0</time>
-		</setting>
-		<setting>
-			<position>1</position>
-			<time>0.55</time>
-		</setting>
-	  </traverse>
-	</kinematic>
+    <actuator name="elevator-delay-act">
+        <input>fcs/elevator-trim-sum</input>
+        <rate_limit>fcs/elevator-gain</rate_limit>
+        <output>fcs/elevator-delay</output>
+    </actuator>
 
 	<!--The tailplanes deflected from +7* (.122 rads) to -16.5*(-.287 rads) - Mikoyan-Gurevish MiG-21 by Alexander Mladenov, page 17-->
 	
