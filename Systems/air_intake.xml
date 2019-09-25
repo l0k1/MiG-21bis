@@ -24,6 +24,7 @@ i'm assuming that the wind isn't a significant factor here.
     <property value="1">systems/air-intake/intake-norm</property>
     <property value="90">systems/air-intake/shockwave-angle</property>
     <property value="0">systems/air-intake/cone-pos-norm</property>
+    <property value="0">systems/air-intake/cone-auto-man</property>
 
     <channel name="air_calcs">
     

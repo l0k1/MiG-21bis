@@ -165,7 +165,7 @@
 	<animation>
 		<object-name>miscPanel1NozzleSwitch</object-name>
 		<type>rotate</type>
-		<property>/instrumentation/misc-panel-1/cone-auto-man</property>
+		<property>/fdm/jsbsim/systems/air-intake/cone-auto-man</property>
 		<factor>30</factor>
 		<offset-deg>-15</offset-deg>
 		<center>

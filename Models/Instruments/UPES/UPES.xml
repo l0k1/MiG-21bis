@@ -23,15 +23,14 @@
         <factor>-50</factor>
         <offset-deg>25</offset-deg>
         <center>
-            <!-- fix me -->
-            <x-m>-0.007692</x-m>
-            <y-m> 0.011645</y-m>
-            <z-m> 0.089658</z-m>
+            <x-m> 0.008836</x-m>
+            <y-m>-0.017904</y-m>
+            <z-m>-0.018036</z-m>
         </center>
         <axis>
-            <x>0</x>
+            <x>1</x>
             <y>0</y>
-            <z>1</z>
+            <z>0</z>
         </axis>
 
         <action>
@@ -49,7 +48,7 @@
     <!-- fix me -->
     <animation>
         <type>rotate</type>
-        <object-name>UPESneedle</object-name>
+        <object-name>conePosAct</object-name>
         <property>/fdm/jsbsim/instrumentation/cone/cone-display</property>
         <interpolation>
             <entry>
@@ -58,13 +57,39 @@
             </entry>
             <entry>
                 <ind>1.0</ind>
-                <dep>-330.0</dep>
+                <dep>-300.0</dep>
             </entry>
         </interpolation>
         <center>
-            <x-m>-0.00136</x-m>
-            <y-m> 0.00581</y-m>
-            <z-m> 0.00591</z-m>
+            <x-m>-0.002064</x-m>
+            <y-m> 0.00644</y-m>
+            <z-m> 0.00652</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>conePosSet</object-name>
+        <property>/fdm/jsbsim/systems/air-intake/cone-man-setting</property>
+        <interpolation>
+            <entry>
+                <ind>0.0</ind>
+                <dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>1.0</ind>
+                <dep>-300.0</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m>-0.002064</x-m>
+            <y-m> 0.00644</y-m>
+            <z-m> 0.00652</z-m>
         </center>
         <axis>
             <x>1</x>

@@ -176,7 +176,7 @@
     </fcs_function>
 	
     <actuator name="elevator-delay-act">
-        <input>fcs/elevator-trim-sum</input>
+        <input>fcs/elevator-post-aru</input>
         <rate_limit>fcs/elevator-gain</rate_limit>
         <output>fcs/elevator-delay</output>
     </actuator>

@@ -21,9 +21,8 @@
     <factor>-50</factor>
     <offset-deg>25</offset-deg>
     <center>
-        <!-- fix me -->
       <x-m>-0.007692</x-m>
-      <y-m> 0.011645</y-m>
+      <y-m>-0.064599</y-m>
       <z-m> 0.089658</z-m>
     </center>
     <axis>
