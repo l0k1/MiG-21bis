@@ -103,7 +103,7 @@
 <text>
 	<name>LabelText</name>
 	<type type="string">literal</type>
-		<text type="string">UPES-3 Conus Indicator NOT WORKING</text>
+		<text type="string">UPES-3 Conus Indicator</text>
 	<draw-text type="bool">true</draw-text>
 	<font>Helvetica.txf</font>
 		<character-size type="double">0.012</character-size>

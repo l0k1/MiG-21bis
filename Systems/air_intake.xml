@@ -157,7 +157,7 @@ i'm assuming that the wind isn't a significant factor here.
     
         <!-- there are two switches and one knob to control cone movement.
             electric/output/cone (bus 1) controls on or off
-            systems/air-intake/cone-auto-man controls automatic (1) or manual (0) control
+            systems/air-intake/cone-auto-man controls automatic (0) or manual (1) control
             systems/air-intake/cone-man-setting controls the manual setting
         -->
     
@@ -199,8 +199,8 @@ i'm assuming that the wind isn't a significant factor here.
             <function>
                 <ifthen>
                     <property>systems/air-intake/cone-auto-man</property>
-                    <property>systems/air-intake/cone-auto-logic</property>
                     <property>systems/air-intake/cone-man-setting</property>
+                    <property>systems/air-intake/cone-auto-logic</property>
                 </ifthen>
             </function>
             <output>systems/air-intake/cone-cmd-norm</output>
@@ -213,8 +213,8 @@ i'm assuming that the wind isn't a significant factor here.
                         <independentVar lookup="row">systems/hydraulic[0]/pressure</independentVar>
                         <tableData>
                             0.0     0.0
-                            50.0    20.0
-                            150.0   100.0
+                            50.0    0.1
+                            150.0   0.6
                         </tableData>
                     </table>
                     <gt>
