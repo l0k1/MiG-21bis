@@ -19,43 +19,18 @@
         </emission> 
     </animation> 
 	
-	    <animation>
+	<animation>
         <type>material</type>
 		<object-name>AIaircraftMarker</object-name>
         <object-name>AIazimuthNeedle</object-name>
         <object-name>AIpitchNeedle</object-name>
 		<object-name>AIgsNeedle</object-name>
-		<object-name>pitchNeedles</object-name>
         <emission>
             <red>0.7</red>
             <green>0.3</green>
             <blue>0.3</blue>
             <factor-prop>controls/lighting/instruments-norm</factor-prop>
         </emission> 
-    </animation> 
-
-    <animation>
-        <type>translate</type>
-        <object-name>pitchNeedles</object-name>
-        <property>/autopilot/internal/ai-target-pitch</property>
-        <factor>0.00125</factor>
-        <axis>
-            <x>0.00</x>
-            <y>0.00</y>
-            <z>1.00</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>pitchNeedles</object-name>
-        <property>/autopilot/internal/ai-target-pitch-abs</property>
-        <factor>-0.00012</factor>
-        <axis>
-            <x>1.00</x>
-            <y>0.00</y>
-            <z>0.00</z>
-        </axis>
     </animation> 
 
 	<animation>
@@ -113,6 +88,7 @@
             <x-m>-0.001838</x-m>
             <y-m>-0.00139</y-m>
             <z-m>0.005023</z-m>
+        </center>
         <axis>
             <x>1</x>
             <y>0</y>
