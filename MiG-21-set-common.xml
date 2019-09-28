@@ -25,6 +25,9 @@
             <autopilot>
                 <path>Aircraft/MiG-21bis/Systems/Autopilot.xml</path>
             </autopilot>
+            <autopilot>
+                <path>Aircraft/MiG-21bis/Systems/flightdirector.xml</path>
+            </autopilot>
             <property-rule n="101">
                 <name>radar-altimeter</name>
                 <path>Aircraft/MiG-21bis/Systems/radar-altimeter.xml</path>
