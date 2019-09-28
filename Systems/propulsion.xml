@@ -9,8 +9,6 @@ ignition, a delay of up to 9 seconds was experienced.
 -->
 
 <system name="propulsion">
-    <property value="0">systems/air-intake/surging</property>
-
     <channel name="Throttle">
 
         <!-- throttle distributions, split milthrust, augthrust and clrthrust -->
@@ -219,7 +217,7 @@ ignition, a delay of up to 9 seconds was experienced.
             <output>propulsion/engine[0]/nozzle-rate</output>
         </fcs_function>
 
-        <actuator name="trash/propulsion/nozzle-pos-norm">
+        <actuator name="trash/propulsion/engine[0]/nozzle-pos-norm">
             <input>propulsion/engine[0]/nozzle-cmd-norm</input>
             <rate_limit>propulsion/engine[0]/nozzle-rate</rate_limit>
             <output>propulsion/engine[0]/nozzle-pos-norm</output>

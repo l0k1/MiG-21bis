@@ -59,7 +59,7 @@
             <output>fcs/speedbrake-front-left-rate</output>
         </fcs_function>
 
-        <actuator name="trash/fcs/speedbrake-rear-pos-norm">
+        <actuator name="trash/fcs/speedbrake-front-left-pos-norm">
             <input>fcs/speedbrake-cmd-norm</input>
             <rate_limit>fcs/speedbrake-front-left-rate</rate_limit>
             <output>fcs/speedbrake-front-left-pos-norm</output>
@@ -80,7 +80,7 @@
             <output>fcs/speedbrake-front-right-rate</output>
         </fcs_function>
 
-        <actuator name="trash/fcs/speedbrake-rear-pos-norm">
+        <actuator name="trash/fcs/speedbrake-front-right-pos-norm">
             <input>fcs/speedbrake-cmd-norm</input>
             <rate_limit>fcs/speedbrake-front-right-rate</rate_limit>
             <output>fcs/speedbrake-front-right-pos-norm</output>
