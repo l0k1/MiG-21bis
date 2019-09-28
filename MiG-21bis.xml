@@ -675,6 +675,7 @@
  <system file="electric"/>
  <system file="fuel"/>
  <system file="propulsion"/>
+ <system file="gyros"/>
  <system file="air_intake"/>
  <system file="payloads"/>
  <system file="hydraulic"/>
