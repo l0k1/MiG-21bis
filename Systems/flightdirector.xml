@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+
+<!-- the flight director is the two bars on the artificial horizon
+when in LANDING/CMD mode, they display roll/pitch to get to the ILS
+when in NAVIG mode, they display roll to intercept radial
+when in PROCEED mode, they display roll to intercept radial and pitch to descend.
+else they are centered.-->
+    <!-- ai pids -->
+    
+    <!-- pitch should show:
+        switch set to landing: glideslope
+        switch set to navig: 0
+        switch set to letdown: descent target -->
+    <!-- roll should show:
+        switch set to landing: roll to loc
+        switch set navig: roll to radial
+        switch set to letdown: roll to radial -->
+        
+    <!--/instrumentation/nav[0]/nav-mode-switch:
+            0 = letdown mode
+            1 = navig mode
+            2 = landing mode -->
+            
+<PropertyList>
+    
+    <!-- letdown mode -->
+    
+    <!-- numbers from MiG-21bis manual (english) page 144, converted from metric -->
+    <filter>
+        <name>Letdown Mode Height</name>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <table>
+                    <property>/instrumentation/dead-reckoner/distance</property>
+                    <entry><ind>70.1944</ind><dep>32808.4</dep></entry>
+                    <entry><ind>53.9957</ind><dep>26246.72</dep></entry>
+                    <entry><ind>43.1965</ind><dep>19685.04</dep></entry>
+                    <entry><ind>32.3974</ind><dep>14763.78</dep></entry>
+                    <entry><ind>21.5983</ind><dep>9842.52</dep></entry>
+                    <entry><ind>10.7991</ind><dep>1968.5</dep></entry>
+                </table>
+            </expression>
+        </input>
+        <output>/autopilot/internal/letdown-mode-height</output>
+    </filter>
+    
+    <pid-controller>
+        <name>Letdown Mode Stage 1</name>
+        <debug>false</debug>
+        <input>
+            <property>/instrumentation/altimeter/indicated-altitude-ft</property>
+        </input>
+        <reference>
+            <property>/autopilot/internal/letdown-mode-height</property>
+        </reference>
+        <output>
+            <property>/autopilot/internal/target-vs-letdown</property>
+        </output>
+        <config>
+            <Kp>0.21</Kp>
+            <Ti>11</Ti>
+            <Td>0.001</Td>
+            <u_min>-2000.0</u_min>
+            <u_max>2000.0</u_max>
+        </config>
+    </pid-controller>
+
+    <filter>
+        <name>Letdown Mode VS Calc</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>/instrumentation/altimeter/indicated-altitude-ft</input>
+        <reference>/autopilot/internal/letdown-mode-height</reference>
+        <gain>-0.5</gain> <!-- 1000ft offset gives 500fpm roc -->
+        <output>/autopilot/internal/target-vs-letdown</output>
+        <min>-2000</min>
+        <max>2000</max>
+    </filter>
+    
+    <pid-controller>
+        <name>Letdown Mode Stage 2</name>
+        <debug>false</debug>
+        <input>
+            <property>/velocities/vertical-speed-fps</property>
+        </input>
+        <reference>
+            <property>/autopilot/internal/target-vs-letdown</property>
+        </reference>
+        <output>
+            <property>/autopilot/internal/ai-target-pitch-pre</property>
+        </output>
+        <config>
+            <Kp>0.05</Kp>
+            <Ti>5</Ti>
+            <Td>0.0001</Td>
+            <u_min>-20</u_min>
+            <u_max>20</u_max>
+        </config>
+    </pid-controller>
+    
+    <!-- navig mode -->
+    
+    <filter>
+        <name>Navig Mode</name>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <value>0</value>
+        </input>
+        <output>/autopilot/internal/ai-target-pitch</output>
+    </filter>
+    
+    <!-- landing mode -->
+
+    <pid-controller>
+        <name>Glideslope FPS</name>
+        <debug>false</debug>
+        <enable>
+            <property>/instrumentation/nav[0]/nav-mode-switch</property>
+            <value>2</value>
+        </enable>
+        <input>
+            <property>/velocities/vertical-speed-fps</property>
+        </input>
+        <reference>
+            <property>/autopilot/internal/nav1-rate-of-climb</property>
+        </reference>
+        <output>
+            <property>/autopilot/internal/ai-target-pitch-pre</property>
+        </output>
+        <config>
+            <Kp>0.01</Kp>
+            <Ti>2.5</Ti>
+            <Td>0.0001</Td>
+            <u_min>-20</u_min>
+            <u_max>20</u_max>
+        </config>
+    </pid-controller>
+    
+    <!-- ai roll pids -->
+    
+    <!-- all modes use same properties internally-->
+    
+    <pi-simple-controller>
+        <name>AI Roll</name>
+        <debug>false</debug>
+        <input>
+            <property>/autopilot/internal/nav1-heading-error-deg</property>
+        </input>
+        <reference>
+            <value>0.0</value>
+        </reference>
+        <output>
+            <property>/autopilot/internal/ai-target-roll-pre</property>
+        </output>
+        <config>
+            <Kp>-1.1</Kp>
+            <Ki>-0.00001</Ki>
+            <min>-20</min>
+            <max>20</max>
+        </config>
+    </pi-simple-controller>
+
+    <!--finally, combine with pitch/roll to get final values-->
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <property>/autopilot/internal/ai-target-pitch-pre</property>
+                    <property>/orientation/pitch-deg</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/autopilot/internal/ai-target-pitch</output>
+        <min>-20</min>
+        <max>20</max>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <abs>
+                    <property>/autopilot/internal/ai-target-pitch</property>
+                </abs>
+            </expression>
+        </input>
+        <output>/autopilot/internal/ai-target-pitch-abs</output>
+        <min>-20</min>
+        <max>20</max>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <property>/autopilot/internal/target-roll</property>
+                    <product>
+                        <property>/orientation/roll-deg</property>
+                        <value>-1</value>
+                    </product>
+                </difference>
+            </expression>
+        </input>
+        <output>/autopilot/internal/ai-target-roll</output>
+        <min>-20</min>
+        <max>20</max>
+    </filter>
+</PropertyList>
