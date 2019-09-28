@@ -110,7 +110,7 @@
             </axis>
           </animation>
 
-          <!-- <animation>
+          <animation>
             <type>pick</type>
             <object-name>vertGyroSwitch</object-name>
             <action>
@@ -122,7 +122,7 @@
                 <property>/fdm/jsbsim/electric/switches/rhfsp/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig</property>
               </binding>
             </action>
-          </animation> -->
+          </animation>
 
           <animation>
             <object-name>vertGyroSwitch</object-name>
@@ -142,7 +142,7 @@
             </axis>
           </animation>
 
-          <!-- <animation>
+          <animation>
             <type>pick</type>
             <object-name>da200Switch</object-name>
             <action>
@@ -154,7 +154,7 @@
                 <property>/fdm/jsbsim/electric/switches/rhfsp/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr</property>
               </binding>
             </action>
-          </animation> -->
+          </animation>
 
           <animation>
             <object-name>da200Switch</object-name>

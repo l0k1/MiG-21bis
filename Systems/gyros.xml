@@ -12,11 +12,13 @@ spin rate of gyro is normalized to 1
 
     <channel name="normvolts">
     
+        <!-- vert gyro -->
+
         <fcs_function name="trash/systems/gyro/vert-gyro-volts-norm">
             <function>
                 <quotient>
                     <property>electric/output/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig</property>
-                    <value>22</value>
+                    <value>105</value>
                 </quotient>
             </function>
             <clipto>
@@ -25,12 +27,21 @@ spin rate of gyro is normalized to 1
             </clipto>
             <output>systems/gyro/vert-gyro-volts-norm</output>
         </fcs_function>
+
+
+        <actuator name="trash/systems/gyro/vert-gyro-norm">
+            <input>systems/gyro/vert-gyro-volts-norm</input>
+            <lag>1</lag>
+            <rate_limit sense="incr">0.12</rate_limit>
+            <rate_limit sense="decr">0.04</rate_limit>
+            <output>systems/gyro/vert-gyro-norm</output>
+        </actuator>
         
         <fcs_function name="trash/systems/gyro/da-200-gyro-volts-norm">
             <function>
                 <quotient>
                     <property>electric/output/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr</property>
-                    <value>22</value>
+                    <value>105</value>
                 </quotient>
             </function>
             <clipto>
@@ -39,34 +50,15 @@ spin rate of gyro is normalized to 1
             </clipto>
             <output>systems/gyro/da-200-gyro-volts-norm</output>
         </fcs_function>
-    </channel>
-        
-    <channel name="vert-gyro">
-        
-        <kinematic name="trash/systems/gyro/vert-gyro-spinrate">
-            <input>systems/gyro/vert-gyro-volts-norm</input>
-            <traverse>
-                <setting> <position> 0 </position> <time>  0 </time> </setting>
-                <setting> <position> 1 </position> <time> 10 </time> </setting>
-            </traverse>
-            <gain>100</gain>
-            <output>systems/gyro/vert-gyro-spinrate</output>
-        </kinematic>
-        
-    </channel>
-    
-    <channel name="da-200-gyro">
-    
-        <kinematic name="trash/systems/gyro/da-200-gyro-spinrate">
+
+        <actuator name="trash/systems/gyro/da-200-gyro-norm">
             <input>systems/gyro/da-200-gyro-volts-norm</input>
-            <traverse>
-                <setting> <position> 0 </position> <time>  0 </time> </setting>
-                <setting> <position> 1 </position> <time> 10 </time> </setting>
-            </traverse>
-            <gain>100</gain>
-            <output>systems/gyro/da-200-gyro-spinrate</output>
-        </kinematic>
-        
+            <lag>1</lag>
+            <rate_limit sense="incr">0.12</rate_limit>
+            <rate_limit sense="decr">0.04</rate_limit>
+            <output>systems/gyro/da-200-gyro-norm</output>
+        </actuator>
+
     </channel>
 
 </system>
