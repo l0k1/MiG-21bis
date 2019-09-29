@@ -72,16 +72,20 @@
                 <flaps-last-pos>0</flaps-last-pos>
             </internal>
         </hydraulic>
+        <gyro-compass>
+            <earth-drift type="double">0.0</earth-drift>
+            <compensation-drift type="double">0.0</compensation-drift>
+            <transport-drift type="double">0.0</transport-drift>
+            <real-drift type="double">0.0</real-drift>
+            <total-drift type="double">0.0</total-drift>
+            <compensation-setting alias="/instrumentation/gyro-compass/latitude-setting"/>
+            <fds-button alias="/instrumentation/gyro-compass/fds-button"/>
+            <fds-offset type="double">0.0</fds-offset>
+            <heading-change type="double">0.0</heading-change>
+            <heading-deg-prev type="double">0.0</heading-deg-prev>
+            <heading-deg type="double">0.0</heading-deg>
+        </gyro-compass>
     </systems>
-    <hydraulic>
-        <output n="0" type="double">0.0</output>
-        <output n="1" type="double">0.0</output>
-        <contents-system type="double" n="0">1</contents-system>
-        <contents-system type="double" n="1">1</contents-system>
-        <usage n="0" type="double">1</usage>
-        <usage n="1" type="double">1</usage>
-        <xfeed type="double">1</xfeed>
-    </hydraulic>
     <pneumatic>
         <sources>
             <bottle-kgfcm type="double">120.0</bottle-kgfcm>
