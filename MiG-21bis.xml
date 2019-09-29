@@ -686,7 +686,7 @@
  <system file="radar-cooling"/>
  <system file="external-animation"/>
  <system file="headmove"/>
- <system file="gyro-compass-jsb"/>
+ <system file="gyro-compass"/>
 
  <flight_control name="none"/>
 

@@ -13,13 +13,13 @@
 			<interval-sec>0.2</interval-sec>
 			<binding>
 				<command>property-assign</command>
-				<property>/instrumentation/gyro-compass/fds-button</property>
+				<property>/fdm/jsbsim/systems/gyro-compass/fds-button</property>
 				<value>1</value>
 			</binding>
 			<mod-up>
 			<binding>
 				<command>property-assign</command>
-				<property>/instrumentation/gyro-compass/fds-button</property>
+				<property>/fdm/jsbsim/systems/gyro-compass/fds-button</property>
 				<value>0</value>
 			</binding>
 			</mod-up>
@@ -29,7 +29,7 @@
 	<animation>
 		<type>translate</type>
 		<object-name>fdsButton</object-name>
-		<property>/instrumentation/gyro-compass/fds-button</property>
+		<property>/fdm/jsbsim/systems/gyro-compass/fds-button</property>
 		<factor>0.001</factor>
 		<offset-m>0</offset-m>
 		<axis>

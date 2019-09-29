@@ -30,7 +30,7 @@
         <object-name>HIcompass</object-name>
 		<!--<object-name>courseFwd</object-name>
 		<object-name>courseBack</object-name>-->
-        <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+        <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
         <factor>1</factor>
         <axis>
             <x>1</x>
@@ -64,7 +64,7 @@
     <animation>
         <type>rotate</type>
         <object-name>bearingNeedle</object-name>
-        <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+        <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
         <factor>1</factor>
         <axis>
             <x>1</x>
@@ -98,7 +98,7 @@
     <animation>
         <type>rotate</type>
         <object-name>radialNeedle</object-name>
-        <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+        <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
         <factor>1</factor>
         <axis>
             <x>1</x>

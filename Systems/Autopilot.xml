@@ -497,7 +497,7 @@ check for Low Altitude Mode
             <enter>
                 <command>property-assign</command>
                 <property>/autopilot/internal/target-heading</property>
-                <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+                <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
             </enter>
             <enter>
                 <command>property-assign</command>
@@ -745,7 +745,7 @@ check for Low Altitude Mode
         <input>
             <property>/autopilot/internal/target-heading</property>
             <offset>
-                <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+                <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
                 <scale>-1.0</scale>
             </offset>
         </input>

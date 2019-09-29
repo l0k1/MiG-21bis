@@ -78,8 +78,8 @@
             <transport-drift type="double">0.0</transport-drift>
             <real-drift type="double">0.0</real-drift>
             <total-drift type="double">0.0</total-drift>
-            <compensation-setting alias="/instrumentation/gyro-compass/latitude-setting"/>
-            <fds-button alias="/instrumentation/gyro-compass/fds-button"/>
+            <compensation-setting type="double">0.0</compensation-setting>
+            <fds-button type="double">0.0</fds-button>
             <fds-offset type="double">0.0</fds-offset>
             <heading-change type="double">0.0</heading-change>
             <heading-deg-prev type="double">0.0</heading-deg-prev>

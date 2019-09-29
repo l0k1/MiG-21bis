@@ -125,7 +125,7 @@
                 <sum>
                     <difference>
                         <property>/instrumentation/dead-reckoner/internal/azimuth</property>
-                        <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+                        <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
                     </difference>
                     <property>/instrumentation/dead-reckoner/internal/azimuth-change</property>
                 </sum>
@@ -291,7 +291,7 @@
         <input>
             <expression>
                 <sum>
-                    <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+                    <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
                     <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
                 </sum>
             </expression>
@@ -325,7 +325,7 @@
             <expression>
                 <sum>
                     <property>/instrumentation/nav/bearing-to-beacon-deg</property>
-                    <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+                    <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
                 </sum>
             </expression>
             <period>
@@ -355,7 +355,7 @@
             <expression>
                 <sum>
                     <property>/instrumentation/adf/indicated-bearing-deg</property>
-                    <property>/instrumentation/gyro-compass/gyro-heading-deg</property>
+                    <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
                 </sum>
             </expression>
             <period>

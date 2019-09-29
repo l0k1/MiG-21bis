@@ -3,8 +3,8 @@
 
 var l_s = 0;
 
-setlistener("/instrumentation/gyro-compass/latitude-setting",func{
-  l_s = getprop("/instrumentation/gyro-compass/latitude-setting");
+setlistener("/fdm/jsbsim/systems/gyro-compass/compensation-setting",func{
+  l_s = getprop("/fdm/jsbsim/systems/gyro-compass/compensation-setting");
   if ( l_s < 0 ) {
     setprop("/instrumentation/gyro-compass/display_sign",1);
   } else {

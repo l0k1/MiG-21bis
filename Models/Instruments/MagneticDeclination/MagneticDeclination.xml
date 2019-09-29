@@ -3,7 +3,7 @@
 <PropertyList>
 
     <path>magnetic_declination.ac</path>
-
+    <!-- display_num and display_sign are handled in nasal -->
     <animation>
         <type>material</type>
         <object-name>lat1</object-name>
@@ -69,7 +69,7 @@
 			<interval-sec>0.2</interval-sec>
 			<binding>
 				<command>property-adjust</command>
-				<property>/instrumentation/gyro-compass/latitude-setting</property>
+				<property>/fdm/jsbsim/systems/gyro-compass/compensation-setting</property>
 				<step>1</step>
 				<min>-90</min>
 				<max>91</max>
@@ -83,7 +83,7 @@
 			<interval-sec>0.2</interval-sec>
 			<binding>
 				<command>property-adjust</command>
-				<property>/instrumentation/gyro-compass/latitude-setting</property>
+				<property>/fdm/jsbsim/systems/gyro-compass/compensation-setting</property>
 				<step>-1</step>
 				<min>-90</min>
 				<max>91</max>
@@ -95,7 +95,7 @@
 	<animation>
 		<object-name>knob</object-name>
 		<type>rotate</type>
-		<property>/instrumentation/gyro-compass/latitude-setting</property>
+		<property>/fdm/jsbsim/systems/gyro-compass/compensation-setting</property>
 		<factor>20</factor>
 		<offset-deg>0</offset-deg>
 		<center>
