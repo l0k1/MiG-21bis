@@ -36,6 +36,8 @@ spin rate of gyro is normalized to 1
             <rate_limit sense="decr">0.04</rate_limit>
             <output>systems/gyro/vert-gyro-norm</output>
         </actuator>
+
+        <!-- da-200 -->
         
         <fcs_function name="trash/systems/gyro/da-200-gyro-volts-norm">
             <function>
@@ -57,6 +59,30 @@ spin rate of gyro is normalized to 1
             <rate_limit sense="incr">0.12</rate_limit>
             <rate_limit sense="decr">0.04</rate_limit>
             <output>systems/gyro/da-200-gyro-norm</output>
+        </actuator>
+
+        <!-- fds -->
+        
+        <fcs_function name="trash/systems/gyro/fds-gyro-volts-norm">
+            <function>
+                <quotient>
+                    <property>electric/output/fds</property>
+                    <value>105</value>
+                </quotient>
+            </function>
+            <clipto>
+                <min>0</min>
+                <max>1</max>
+            </clipto>
+            <output>systems/gyro/fds-gyro-volts-norm</output>
+        </fcs_function>
+
+        <actuator name="trash/systems/gyro/fds-gyro-norm">
+            <input>systems/gyro/fds-gyro-volts-norm</input>
+            <lag>1</lag>
+            <rate_limit sense="incr">0.12</rate_limit>
+            <rate_limit sense="decr">0.04</rate_limit>
+            <output>systems/gyro/fds-gyro-norm</output>
         </actuator>
 
     </channel>

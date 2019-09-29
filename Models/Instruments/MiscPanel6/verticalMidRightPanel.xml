@@ -37,6 +37,31 @@
         <property>/fdm/jsbsim/electric/switches/rvmsp/cone</property>
       </binding>
     </action>
+  </animation>  
+
+  <animation>
+    <type>knob</type>
+    <object-name>fdsSwitch</object-name>
+    <property>/fdm/jsbsim/electric/switches/rvmsp/fds</property>
+    <factor>-50</factor>
+    <offset-deg>25</offset-deg>
+    <center>
+      <x-m>-0.007692</x-m>
+      <y-m> 0.037756 </y-m>
+      <z-m> 0.042136</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+
+    <action>
+      <binding>
+        <command>property-toggle</command>
+        <property>/fdm/jsbsim/electric/switches/rvmsp/fds</property>
+      </binding>
+    </action>
   </animation>
 
   <animation>
