@@ -38,13 +38,16 @@
             <function>
                 <sum>
                     <product>
+                        <property>systems/gyro/fds-gyro-norm</property>
                         <product>
-                            <value>15</value>
-                            <sin>
-                                <property>position/lat-geod-rad</property>
-                            </sin>
+                            <product>
+                                <value>15</value>
+                                <sin>
+                                    <property>position/lat-geod-rad</property>
+                                </sin>
+                            </product>
+                            <property>systems/delta-hour-4</property>
                         </product>
-                        <property>systems/delta-hour-4</property>
                     </product>
                     <property>systems/gyro-compass/earth-drift</property>
                 </sum>
@@ -59,13 +62,16 @@
             <function>
                 <sum>
                     <product>
+                        <property>systems/gyro/fds-gyro-norm</property>
                         <product>
-                            <value>-15</value>
-                            <sin>
-                                <toradians><property>systems/gyro-compass/compensation-setting</property></toradians>
-                            </sin>
+                            <product>
+                                <value>-15</value>
+                                <sin>
+                                    <toradians><property>systems/gyro-compass/compensation-setting</property></toradians>
+                                </sin>
+                            </product>
+                            <property>systems/delta-hour-4</property>
                         </product>
-                        <property>systems/delta-hour-4</property>
                     </product>
                     <property>systems/gyro-compass/compensation-drift</property>
                 </sum>
@@ -80,22 +86,25 @@
             <function>
                 <sum>
                     <product>
+                        <property>systems/gyro/fds-gyro-norm</property>
                         <product>
-                            <quotient>
-                                <product>
+                            <product>
+                                <quotient>
                                     <product>
-                                        <property>velocities/v-east-fps</property>
-                                        <value>-1</value>
+                                        <product>
+                                            <property>velocities/v-east-fps</property>
+                                            <value>-1</value>
+                                        </product>
+                                        <value>0.592484</value> <!-- fps to knots -->
                                     </product>
-                                    <value>0.592484</value> <!-- fps to knots -->
-                                </product>
-                                <value>60</value>
-                            </quotient>
-                            <tan>
-                                <property>position/lat-geod-rad</property>
-                            </tan>
+                                    <value>60</value>
+                                </quotient>
+                                <tan>
+                                    <property>position/lat-geod-rad</property>
+                                </tan>
+                            </product>
+                            <property>systems/delta-hour-4</property>
                         </product>
-                        <property>systems/delta-hour-4</property>
                     </product>
                     <property>systems/gyro-compass/transport-drift</property>
                 </sum>
@@ -110,13 +119,16 @@
             <function>
                 <sum>
                     <product>
+                        <property>systems/gyro/fds-gyro-norm</property>
                         <product>
-                            <value>0.47</value>
-                            <sin>
-                                <property>position/lat-geod-rad</property>
-                            </sin>
+                            <product>
+                                <value>0.47</value>
+                                <sin>
+                                    <property>position/lat-geod-rad</property>
+                                </sin>
+                            </product>
+                            <property>systems/delta-hour-4</property>
                         </product>
-                        <property>systems/delta-hour-4</property>
                     </product>
                     <property>systems/gyro-compass/real-drift</property>
                 </sum>
@@ -140,25 +152,28 @@
             <function>
                 <sum>
                     <product>
-                        <property>systems/gyro-compass/fds-button</property>
-                        <max>
-                            <min>
-                                <difference>
-                                    <!-- adding 1000 so dont have to norm to 360 -->
-                                    <!-- programmers hate him! -->
-                                    <sum>
-                                        <property>/instrumentation/magnetic-compass/indicated-heading-deg</property>
-                                        <value>1000</value>
-                                    </sum>
-                                    <sum>
-                                        <property>systems/gyro-compass/heading-deg</property>
-                                        <value>1000</value>
-                                    </sum>
-                                </difference>
-                                <value>0.3</value>
-                            </min>
-                            <value>-0.3</value>
-                        </max>
+                        <property>systems/gyro/fds-gyro-norm</property>
+                        <product>
+                            <property>systems/gyro-compass/fds-button</property>
+                            <max>
+                                <min>
+                                    <difference>
+                                        <!-- adding 1000 so dont have to norm to 360 -->
+                                        <!-- programmers hate him! -->
+                                        <sum>
+                                            <property>/instrumentation/magnetic-compass/indicated-heading-deg</property>
+                                            <value>1000</value>
+                                        </sum>
+                                        <sum>
+                                            <property>systems/gyro-compass/heading-deg</property>
+                                            <value>1000</value>
+                                        </sum>
+                                    </difference>
+                                    <value>0.3</value>
+                                </min>
+                                <value>-0.3</value>
+                            </max>
+                        </product>
                     </product>
                     <property>systems/gyro-compass/fds-offset</property>
                 </sum>
@@ -171,10 +186,13 @@
         <fcs_function name="trash/systems/gyro-compass/heading-change">
             <function>
                 <sum>
-                    <difference>
-                        <property>/orientation/heading-deg</property>
-                        <property>systems/gyro-compass/heading-deg-prev</property>
-                    </difference>
+                    <product>
+                        <property>systems/gyro/fds-gyro-norm</property>
+                        <difference>
+                            <property>/orientation/heading-deg</property>
+                            <property>systems/gyro-compass/heading-deg-prev</property>
+                        </difference>
+                    </product>
                     <property>systems/gyro-compass/heading-change</property>
                 </sum>
             </function>
