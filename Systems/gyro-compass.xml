@@ -144,12 +144,20 @@
                         <max>
                             <min>
                                 <difference>
-                                    <property>/instrumentation/magnetic-compass/indicated-heading-deg</property>
-                                    <property>systems/gyro-compass/heading-deg</property>
+                                    <!-- adding 1000 so dont have to norm to 360 -->
+                                    <!-- programmers hate him! -->
+                                    <sum>
+                                        <property>/instrumentation/magnetic-compass/indicated-heading-deg</property>
+                                        <value>1000</value>
+                                    </sum>
+                                    <sum>
+                                        <property>systems/gyro-compass/heading-deg</property>
+                                        <value>1000</value>
+                                    </sum>
                                 </difference>
-                                <value>0.2</value>
+                                <value>0.3</value>
                             </min>
-                            <value>-0.2</value>
+                            <value>-0.3</value>
                         </max>
                     </product>
                     <property>systems/gyro-compass/fds-offset</property>
