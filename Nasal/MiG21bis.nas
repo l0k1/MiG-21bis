@@ -327,7 +327,7 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
     main_loop();
     # randomize startup values for DME, radial setting, compass, and fuel
     setprop("/instrumentation/fuel/knob-level",int((rand() * 1600) + 169)); # fuel
-    setprop("/instrumentation/gyro-compass/mag-offset",int((rand() * 50) - 25)); # gyro compass heading
+    setprop("/fdm/jsbsim/systems/gyro-compass/heading-change",getprop("/orientation/heading-deg") + int((rand() * 100) - 50)); # gyro compass heading
     setprop("/instrumentation/dead-reckoner/distance-adjust",int(rand() * 30)); # dme
     setprop("/instrumentation/dead-reckoner/azimuth-adjust",math.periodic(0, 360, int(rand() * 360))); #ins azimuth
     setprop("/instrumentation/nav/radials/selected-deg",math.periodic(0, 360, int(rand() * 360)))
