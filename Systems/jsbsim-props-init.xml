@@ -86,6 +86,9 @@
             <heading-deg type="double">0.0</heading-deg>
         </gyro-compass>
     </systems>
+    <instrumentation>
+        <pitot-setting type="double">1</pitot-setting>
+    </instrumentation>
     <pneumatic>
         <sources>
             <bottle-kgfcm type="double">120.0</bottle-kgfcm>
@@ -99,6 +102,12 @@
     <propulsion>
         <clr type="int">0</clr>
     </propulsion>
+    <random>
+        <rand-0 type="double">0.0</rand-0>
+        <rand-1 type="double">0.0</rand-1>
+        <rand-2 type="double">0.0</rand-2>
+        <rand-3 type="double">0.0</rand-3>
+    </random>
     <fcs>
         <pitch-gearing-enable>1</pitch-gearing-enable>
         <roll-damping-enable>1</roll-damping-enable>

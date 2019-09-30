@@ -40,6 +40,165 @@ clock
 
 <system name="instrumentation">
 
+    <channel name="flightinfo">
+        <!-- for all our sensors, etc -->
+        
+        <!-- directionality for instrumentation -->
+        <fcs_function name="trash/instrumentation/rates/da-200">
+            <function>
+                <product>
+                    <property>systems/gyro/da-200-gyro-norm</property>
+                    <value>1.0</value>
+                </product>
+            </function>
+            <output>instrumentation/rates/da-200</output>
+        </fcs_function>
+
+        <actuator name="trash/instrumentation/input/roll">
+            <input>/orientation/roll-deg</input>
+            <rate_limit>instrumentation/rates/da-200</rate_limit>
+            <output>instrumentation/input/roll</output>
+        </actuator>
+
+        <actuator name="trash/instrumentation/input/pitch">
+            <input>/orientation/pitch-deg</input>
+            <rate_limit>instrumentation/rates/da-200</rate_limit>
+            <output>instrumentation/input/pitch</output>
+        </actuator>
+
+        <!-- directionality for AFCS -->
+        <fcs_function name="trash/instrumentation/rates/vert-gyro">
+            <function>
+                <product>
+                    <property>systems/gyro/vert-gyro-norm</property>
+                    <value>1.0</value>
+                </product>
+            </function>
+            <output>instrumentation/rates/vert-gyro</output>
+        </fcs_function>
+
+        <actuator name="trash/instrumentation/input/ap-roll">
+            <input>/orientation/roll-deg</input>
+            <rate_limit>instrumentation/rates/vert-gyro</rate_limit>
+            <output>instrumentation/input/ap-roll</output>
+        </actuator>
+
+        <actuator name="trash/instrumentation/input/ap-pitch">
+            <input>/orientation/pitch-deg</input>
+            <rate_limit>instrumentation/rates/vert-gyro</rate_limit>
+            <output>instrumentation/input/ap-pitch</output>
+        </actuator>
+
+        <!-- airspeed from main and standby pitots -->
+        <!-- we need atmosphere/density-altitude and velocities/vc-kts -->
+
+        <fcs_function name="trash/instrumentation/pitot/mach-buffering">
+            <!-- airspeed imbalance due to mach buffering -->
+            <function>
+                <product>
+                    <table>
+                        <independentVar lookup="row">velocities/mach</independentVar>
+                        <tableData>
+                            0.90    0.0
+                            0.95    0.05
+                            0.97    0.3
+                            1.00    1.0
+                            1.03    0.3
+                            1.05    0.05
+                            1.10    0.0
+                        </tableData>
+                    </table>
+                    <difference>
+                        <product>
+                            <property>random/rand-0</property>
+                            <value>2</value>
+                        </product>
+                        <value>1</value>
+                    </difference>
+                    <value>30</value>
+                </product>
+            </function>
+            <output>instrumentation/pitot/mach-buffering</output>
+        </fcs_function>
+
+        <fcs_function name="trash/instrumentation/pitot/standby-mach-reduction">
+            <function>
+                <!-- reduce speed due to turbulent post-shockwave flow -->
+                <ifthen>
+                    <property>instrumentation/pitot-setting</property> <!-- 1 is main, 0 is standby -->
+                    <value>1</value>
+                    <table>
+                        <independentVar lookup="row">velocities/mach</independentVar>
+                        <tableData>
+                            0.90    1.0
+                            1.10    0.8
+                            1.30    0.6
+                            1.80    0.5
+                            2.20    0.4
+                        </tableData>
+                    </table>
+                </ifthen>
+            </function>
+            <output>instrumentation/pitot/standby-mach-reduction</output>
+        </fcs_function>
+
+        <fcs_function name="trash/instrumentation/pitot/standby-mach-buffering">
+            <function>
+                <ifthen>
+                    <property>instrumentation/pitot-setting</property> <!-- 1 is main, 0 is standby -->
+                    <value>0</value>
+                    <product>
+                        <gt>
+                            <property>velocities/mach</property>
+                            <value>1.05</value>
+                        </gt>
+                        <difference>
+                            <product>
+                                <property>random/rand-0</property>
+                                <value>2</value>
+                            </product>
+                            <value>1</value>
+                        </difference>
+                        <value>12</value>
+                    </product>
+                </ifthen>
+            </function>
+            <output>instrumentation/pitot/standby-mach-buffering</output>
+        </fcs_function>
+
+
+        <fcs_function name="trash/instrumentation/pitot/airspeed-kts-pre">
+            <function>
+                <product>
+                    <sum>
+                        <product>
+                            <property>velocities/vc-kts</property>
+                            <property>instrumentation/pitot/standby-mach-reduction</property>
+                        </product>
+                        <property>instrumentation/pitot/mach-buffering</property>
+                        <property>instrumentation/pitot/standby-mach-buffering</property>
+                    </sum>
+                    <!-- low speed unable to read speed -->
+                    <table>
+                        <independentVar lookup="row">velocities/vc-kts</independentVar>
+                        <tableData>
+                            17.0    0.0
+                            26.0    1.0
+                        </tableData>
+                    </table>
+                </product>
+            </function>
+            <output>instrumentation/pitot/airspeed-kts-pre</output>
+        </fcs_function>
+
+        <!-- this is to filter out spikes in the reading. lag filter might be better here, but im on an actuator kick. -->
+        <actuator name="trash/instrumentation/pitot/airspeed-kts">
+            <input>instrumentation/pitot/airspeed-kts-pre</input>
+            <rate_limit>30</rate_limit>
+            <output>instrumentation/pitot/airspeed-kts</output>
+        </actuator>
+
+    </channel>
     <channel name="guages" execrate="4">
     
         <!-- AC -->

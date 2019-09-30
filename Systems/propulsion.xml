@@ -12,6 +12,12 @@ ignition, a delay of up to 9 seconds was experienced.
     <channel name="Throttle">
 
         <!-- throttle distributions, split milthrust, augthrust and clrthrust -->
+        <fcs_function name="trash/asdf1234000_90">
+            <function>
+                <random/>
+            </function>
+            <output>rando</output>
+        </fcs_function>
 
         <fcs_function name="trash/asdf1234">
             <function>
