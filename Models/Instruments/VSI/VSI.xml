@@ -42,7 +42,7 @@
 	<animation>
         <type>rotate</type>
         <object-name>turnneedle</object-name>
-        <property>orientation/roll-deg</property>
+        <property>/fdm/jsbsim/instrumentation/input/roll</property>
         <interpolation>
             <entry><ind>45.0</ind><dep>-30.0</dep></entry>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>

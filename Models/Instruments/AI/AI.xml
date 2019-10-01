@@ -53,7 +53,7 @@
     <animation>
         <type>textranslate</type>
         <object-name>AIpitchTape</object-name>
-        <property>orientation/pitch-deg</property>
+        <property>/fdm/jsbsim/instrumentation/input/pitch</property>
         <bias>0.0001</bias>
         <factor>0.0051</factor>
         <step>.1</step>
@@ -82,7 +82,7 @@
     <animation>
         <type>rotate</type>
         <object-name>AIaircraftMarker</object-name>
-        <property>orientation/roll-deg</property>
+        <property>/fdm/jsbsim/instrumentation/input/roll</property>
         <factor>1</factor>
         <center>
             <x-m>-0.001838</x-m>

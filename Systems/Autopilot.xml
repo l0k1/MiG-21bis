@@ -483,7 +483,7 @@ check for Low Altitude Mode
             <enter>
                 <command>property-assign</command>
                 <property>/autopilot/internal/target-roll</property>
-                <property>/orientation/roll-deg</property>
+                <property>/fdm/jsbsim/instrumentation/input/ap-roll</property>
             </enter>
             <enter>
                 <command>property-assign</command>
@@ -530,11 +530,11 @@ check for Low Altitude Mode
                     <value>3</value>
                 </equals>
                 <less-than>
-                    <property>/orientation/roll-deg</property>
+                    <property>/fdm/jsbsim/instrumentation/input/ap-roll</property>
                     <value>6</value>
                 </less-than>
                 <greater-than>
-                    <property>/orientation/roll-deg</property>
+                    <property>/fdm/jsbsim/instrumentation/input/ap-roll</property>
                     <value>-6</value>
                 </greater-than>
             </condition>
@@ -551,11 +551,11 @@ check for Low Altitude Mode
                 </equals>
                 <or>
                     <less-than>
-                        <property>/orientation/roll-deg</property>
+                        <property>/fdm/jsbsim/instrumentation/input/ap-roll</property>
                         <value>-6</value>
                     </less-than>
                     <greater-than>
-                        <property>/orientation/roll-deg</property>
+                        <property>/fdm/jsbsim/instrumentation/input/ap-roll</property>
                         <value>6</value>
                     </greater-than>
                 </or>
@@ -588,11 +588,11 @@ check for Low Altitude Mode
             <condition>
                 <or>
                     <less-than>
-                        <property>/orientation/roll-deg</property>
+                        <property>/fdm/jsbsim/instrumentation/input/ap-roll</property>
                         <value>-6</value>
                     </less-than>
                     <greater-than>
-                        <property>/orientation/roll-deg</property>
+                        <property>/fdm/jsbsim/instrumentation/input/ap-roll</property>
                         <value>6</value>
                     </greater-than>
                 </or>
@@ -613,11 +613,11 @@ check for Low Altitude Mode
             <target>active-heading</target>
             <condition>
                 <less-than>
-                    <property>/orientation/roll-deg</property>
+                    <property>/fdm/jsbsim/instrumentation/input/ap-roll</property>
                     <value>6</value>
                 </less-than>
                 <greater-than>
-                    <property>/orientation/roll-deg</property>
+                    <property>/fdm/jsbsim/instrumentation/input/ap-roll</property>
                     <value>-6</value>
                 </greater-than>
                 <greater-than>
@@ -659,7 +659,7 @@ check for Low Altitude Mode
             <enter>
                 <command>property-assign</command>
                 <property>/autopilot/internal/target-pitch</property>
-                <property>/orientation/pitch-deg</property>
+                <property>/fdm/jsbsim/instrumentation/input/ap-pitch</property>
             </enter>
         </state>
 
@@ -1075,7 +1075,7 @@ check for Low Altitude Mode
             </condition>
         </enable>
         <input>
-            <prop>/orientation/roll-deg</prop>
+            <prop>/fdm/jsbsim/instrumentation/input/ap-roll</prop>
         </input>
         <reference>
             <property>/autopilot/internal/target-roll</property>
@@ -1107,7 +1107,7 @@ check for Low Altitude Mode
             </condition>
         </enable>
         <input>
-            <property>/orientation/pitch-deg</property>
+            <property>/fdm/jsbsim/instrumentation/input/ap-pitch</property>
         </input>
         <reference>
             <property>/autopilot/internal/target-pitch</property>
