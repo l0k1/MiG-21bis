@@ -48,7 +48,7 @@ clock
             <function>
                 <product>
                     <property>systems/gyro/da-200-gyro-norm</property>
-                    <value>1.0</value>
+                    <value>60.0</value>
                 </product>
             </function>
             <output>instrumentation/rates/da-200</output>
@@ -71,7 +71,7 @@ clock
             <function>
                 <product>
                     <property>systems/gyro/vert-gyro-norm</property>
-                    <value>1.0</value>
+                    <value>60.0</value>
                 </product>
             </function>
             <output>instrumentation/rates/vert-gyro</output>
