@@ -43,7 +43,7 @@
                 <product>
                     <property>/velocities/tas-kt</property>
                     <cos>
-                        <deg2rad><property>/orientation/pitch-deg</property></deg2rad>
+                        <deg2rad><property>/fdm/jsbsim/instrumentation/input/pitch</property></deg2rad>
                     </cos>
                 </product>
             </expression>
@@ -59,7 +59,7 @@
             <expression>
                 <product>
                     <property>/velocities/horizontal-tas-kt</property>
-                    <property>/sim/time/delta-hour</property> <!-- calculated in gyro-compass.xml -->
+                    <property>/fdm/jsbsim/systems/delta-hour-4</property> <!-- calculated in gyro-compass.xml -->
                 </product>
             </expression>
         </input>
