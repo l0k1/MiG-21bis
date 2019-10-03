@@ -924,6 +924,11 @@ check for Low Altitude Mode
 
         <state>
             <name>active</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/instrumentation/nav/gs-rate-of-climb</property>
+                <value>0</value>
+            </enter>
         </state>
 
         <transition>
