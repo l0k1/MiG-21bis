@@ -19,199 +19,215 @@ else they are centered.-->
     <!--/instrumentation/nav[0]/nav-mode-switch:
             0 = letdown mode
             1 = navig mode
-            2 = landing mode -->
+            2 = landing mode 
+
+        /instrumentation/altimeter/indicated-altitude-ft
+        /velocities/vertical-speed-fps
+        /autopilot/internal/nav1-heading-error-deg
+        /orientation/roll-deg
+        /autopilot/locks/mode
+            0 is off
+            1 is low-alt
+            2 is leveler
+            3 is stabilizer
+            4 is ils
+    -->
             
-<PropertyList>
-    
-    <!-- letdown mode -->
-    
-    <!-- numbers from MiG-21bis manual (english) page 144, converted from metric -->
-    <filter>
-        <name>Letdown Mode Height</name>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
+<system name="flightdirector">
+    <channel name="fd_pitch">
+
+        <fcs_function name="trash/instrumentation/fd/letdown-mode-height">
+            <function>
                 <table>
-                    <property>/instrumentation/dead-reckoner/distance</property>
-                    <entry><ind>70.1944</ind><dep>32808.4</dep></entry>
-                    <entry><ind>53.9957</ind><dep>26246.72</dep></entry>
-                    <entry><ind>43.1965</ind><dep>19685.04</dep></entry>
-                    <entry><ind>32.3974</ind><dep>14763.78</dep></entry>
-                    <entry><ind>21.5983</ind><dep>9842.52</dep></entry>
-                    <entry><ind>10.7991</ind><dep>1968.5</dep></entry>
+                    <independentVar lookup="row">/instrumentation/dead-reckoner/distance</independentVar>
+                    <tableData>
+                        10.7991 1968.5
+                        21.5983 9842.52
+                        32.3974 14763.78
+                        43.1965 19685.04
+                        53.9957 26246.72
+                        70.1944 32808.4
+                    </tableData>
                 </table>
-            </expression>
-        </input>
-        <output>/autopilot/internal/letdown-mode-height</output>
-    </filter>
-    
-    <pid-controller>
-        <name>Letdown Mode Stage 1</name>
-        <debug>false</debug>
-        <input>
-            <property>/instrumentation/altimeter/indicated-altitude-ft</property>
-        </input>
-        <reference>
-            <property>/autopilot/internal/letdown-mode-height</property>
-        </reference>
-        <output>
-            <property>/autopilot/internal/target-vs-letdown</property>
-        </output>
-        <config>
-            <Kp>0.21</Kp>
-            <Ti>11</Ti>
-            <Td>0.001</Td>
-            <u_min>-2000.0</u_min>
-            <u_max>2000.0</u_max>
-        </config>
-    </pid-controller>
+            </function>
+            <output>instrumentation/fd/letdown-mode-height</output>
+        </fcs_function>
 
-    <filter>
-        <name>Letdown Mode VS Calc</name>
-        <debug>false</debug>
-        <type>gain</type>
-        <input>/instrumentation/altimeter/indicated-altitude-ft</input>
-        <reference>/autopilot/internal/letdown-mode-height</reference>
-        <gain>-0.5</gain> <!-- 1000ft offset gives 500fpm roc -->
-        <output>/autopilot/internal/target-vs-letdown</output>
-        <min>-2000</min>
-        <max>2000</max>
-    </filter>
-    
-    <pid-controller>
-        <name>Letdown Mode Stage 2</name>
-        <debug>false</debug>
-        <input>
-            <property>/velocities/vertical-speed-fps</property>
-        </input>
-        <reference>
-            <property>/autopilot/internal/target-vs-letdown</property>
-        </reference>
-        <output>
-            <property>/autopilot/internal/ai-target-pitch-pre</property>
-        </output>
-        <config>
-            <Kp>0.05</Kp>
-            <Ti>5</Ti>
-            <Td>0.0001</Td>
-            <u_min>-20</u_min>
-            <u_max>20</u_max>
-        </config>
-    </pid-controller>
-    
-    <!-- navig mode -->
-    
-    <filter>
-        <name>Navig Mode</name>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <value>0</value>
-        </input>
-        <output>/autopilot/internal/ai-target-pitch</output>
-    </filter>
-    
-    <!-- landing mode -->
+        <fcs_function name="trash/instrumentation/fd/letdown-mode-vs-fps">
+            <function>
+                <ifthen>
+                    <gt>
+                        <product>
+                            <property>instrumentation/fd/iterator</property>
+                            <property>simulation/channel-dt</property>
+                        </product>
+                        <property>instrumentation/fd/letdown-mode-vs-rate</property>
+                    </gt>
+                    <quotient>
+                        <difference>
+                            <property>instrumentation/fd/letdown-mode-height</property>
+                            <property>instrumentation/fd/letdown-mode-height-capture</property>
+                        </difference>
+                        <property>instrumentation/fd/letdown-mode-vs-rate</property>
+                    </quotient>
+                    <property>instrumentation/fd/letdown-mode-vs-fps</property>
+                </ifthen>
+            </function>
+            <output>instrumentation/fd/letdown-mode-vs-fps</output>
+        </fcs_function>
 
-    <pid-controller>
-        <name>Glideslope FPS</name>
-        <debug>false</debug>
-        <enable>
-            <property>/instrumentation/nav[0]/nav-mode-switch</property>
-            <value>2</value>
-        </enable>
-        <input>
-            <property>/velocities/vertical-speed-fps</property>
-        </input>
-        <reference>
-            <property>/autopilot/internal/nav1-rate-of-climb</property>
-        </reference>
-        <output>
-            <property>/autopilot/internal/ai-target-pitch-pre</property>
-        </output>
-        <config>
-            <Kp>0.01</Kp>
-            <Ti>2.5</Ti>
-            <Td>0.0001</Td>
-            <u_min>-20</u_min>
-            <u_max>20</u_max>
-        </config>
-    </pid-controller>
-    
-    <!-- ai roll pids -->
-    
-    <!-- all modes use same properties internally-->
-    
-    <pi-simple-controller>
-        <name>AI Roll</name>
-        <debug>false</debug>
-        <input>
-            <property>/autopilot/internal/nav1-heading-error-deg</property>
-        </input>
-        <reference>
-            <value>0.0</value>
-        </reference>
-        <output>
-            <property>/autopilot/internal/ai-target-roll-pre</property>
-        </output>
-        <config>
-            <Kp>-1.1</Kp>
-            <Ki>-0.00001</Ki>
-            <min>-20</min>
-            <max>20</max>
-        </config>
-    </pi-simple-controller>
+        <fcs_function name="trash/instrumentation/fd/letdown-mode-height-capture">
+            <function>
+                <ifthen>
+                    <gt>
+                        <product>
+                            <property>instrumentation/fd/iterator</property>
+                            <property>simulation/channel-dt</property>
+                        </product>
+                        <property>instrumentation/fd/letdown-mode-vs-rate</property>
+                    </gt>
+                    <property>instrumentation/fd/letdown-mode-height</property>
+                    <property>instrumentation/fd/letdown-mode-height-capture</property>
+                </ifthen>
+            </function>
+            <output>instrumentation/fd/letdown-mode-height-capture</output>
+        </fcs_function>
 
-    <!--finally, combine with pitch/roll to get final values-->
+        <fcs_function name="trash/instrumentation/fd/iterator">
+            <function>
+                <ifthen>
+                    <gt>
+                        <product>
+                            <property>instrumentation/fd/iterator</property>
+                            <property>simulation/channel-dt</property>
+                        </product>
+                        <property>instrumentation/fd/letdown-mode-vs-rate</property>
+                    </gt>
+                    <value>0</value>
+                    <sum>
+                        <property>instrumentation/fd/iterator</property>
+                        <value>1</value>
+                    </sum>
+                </ifthen>
+            </function>
+            <output>instrumentation/fd/iterator</output>
+        </fcs_function>
 
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
-                <difference>
-                    <property>/autopilot/internal/ai-target-pitch-pre</property>
-                    <property>/orientation/pitch-deg</property>
-                </difference>
-            </expression>
-        </input>
-        <output>/autopilot/internal/ai-target-pitch</output>
-        <min>-20</min>
-        <max>20</max>
-    </filter>
+        <!-- based on height above/below letdown mode height, add some more vs -->
+        <fcs_function name="trash/instrumentation/fd/letdown-mode-correction-vs-fps">
+            <function>
+                <quotient>
+                    <min>
+                        <value>2000</value>
+                        <max>
+                            <value>-2000</value>
+                            <difference>
+                                <property>instrumentation/fd/letdown-mode-height</property>
+                                <property>/instrumentation/altimeter/indicated-altitude-ft</property>
+                            </difference>
+                        </max>
+                    </min>
+                    <value>10</value>
+                </quotient>
+            </function>
+            <clipto>
+                <min>-200</min>
+                <max>200</max>
+            </clipto>
+            <output>instrumentation/fd/letdown-mode-correction-vs-fps</output>
+        </fcs_function>
 
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
-                <abs>
-                    <property>/autopilot/internal/ai-target-pitch</property>
-                </abs>
-            </expression>
-        </input>
-        <output>/autopilot/internal/ai-target-pitch-abs</output>
-        <min>-20</min>
-        <max>20</max>
-    </filter>
+        <summer name="trash/instrumentation/fd/letdown-mode-combined-vs-fps">
+            <input>instrumentation/fd/letdown-mode-vs-fps</input>
+            <input>instrumentation/fd/letdown-mode-correction-vs-fps</input>
+            <clipto>
+                <min>-400</min>
+                <max>0</max>
+            </clipto>
+            <output>instrumentation/fd/letdown-mode-combined-vs-fps</output>
+        </summer>
 
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
-                <difference>
-                    <property>/autopilot/internal/target-roll</property>
+
+        <fcs_function name="trash/instrumentation/fd/letdown-mode-tgt-pitch-prefilter">
+            <function>
+                <sum>
                     <product>
-                        <property>/orientation/roll-deg</property>
-                        <value>-1</value>
+                        <property>/orientation/alpha-deg</property>
+                        <cos>
+                            <toradians>
+                                <property>/orientation/roll-deg</property>
+                            </toradians>
+                        </cos>
                     </product>
-                </difference>
-            </expression>
-        </input>
-        <output>/autopilot/internal/ai-target-roll</output>
-        <min>-20</min>
-        <max>20</max>
-    </filter>
-</PropertyList>
+                    <product>
+                        <asin>
+                            <quotient>
+                                <product>
+                                    <property>instrumentation/fd/letdown-mode-combined-vs-fps</property>
+                                    <value>60</value>
+                                </product>
+                                <ifthen>
+                                    <lt>
+                                        <min>
+                                            <max>
+                                                <property>/velocities/tas-kt</property>
+                                                <value>0</value>
+                                            </max>
+                                            <value>2500</value>
+                                        </min>
+                                        <value>0.01</value>
+                                    </lt>
+                                    <value>0.01</value>
+                                    <product>
+                                        <min>
+                                            <max>
+                                                <property>/velocities/tas-kt</property>
+                                                <value>0</value>
+                                            </max>
+                                            <value>2500</value>
+                                        </min>
+                                        <value>101.0696354508</value>
+                                    </product>
+                                </ifthen>
+                            </quotient>
+                        </asin>
+                        <value>57.2957795131</value>
+                    </product>
+                </sum>
+            </function>
+            <output>instrumentation/fd/letdown-mode-tgt-pitch-prefilter</output>
+        </fcs_function>
+
+
+        <actuator name="instrumentation/fd/letdown-mode-tgt-pitch">
+            <input>instrumentation/fd/letdown-mode-tgt-pitch-prefilter</input>
+            <rate_limit>5</rate_limit>
+            <output>instrumentation/fd/letdown-mode-tgt-pitch</output>
+            <clipto>
+                <min>-60</min>
+                <max>0</max>
+            </clipto>
+        </actuator>
+
+        <fcs_function name="trash/instrumentation/fd/pitch">
+            <!-- normed to -1/1 -->
+            <function>
+                <quotient>
+                    <difference>
+                        <property>instrumentation/fd/letdown-mode-tgt-pitch</property>
+                        <property>instrumentation/input/ap-pitch</property> 
+                        <!--<difference>
+                            <property>/orientation/alpha-deg</property>
+                        </difference>-->
+                    </difference>
+                    <value>20</value> <!-- maximum pitch movement of the needle -->
+                </quotient>
+            </function>
+            <clipto>
+                <min>-1.0</min>
+                <max>1.0</max>
+            </clipto>
+            <output>instrumentation/fd/pitch</output>
+        </fcs_function>
+    </channel>
+</system>

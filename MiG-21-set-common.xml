@@ -25,9 +25,6 @@
             <autopilot>
                 <path>Aircraft/MiG-21bis/Systems/Autopilot.xml</path>
             </autopilot>
-            <autopilot n="101">
-                <path>Aircraft/MiG-21bis/Systems/flightdirector.xml</path>
-            </autopilot>
             <property-rule n="101">
                 <name>radar-altimeter</name>
                 <path>Aircraft/MiG-21bis/Systems/radar-altimeter.xml</path>
@@ -1112,6 +1109,11 @@
         </gear>
     </gear>
 
+    <velocities>
+        <tas-kt type="double">0.0001</tas-kt>
+        <test type="double">0</test>
+    </velocities>
+
     <payload>
         <armament>
             <modelsUseCase type="bool">true</modelsUseCase>
@@ -1776,6 +1778,52 @@
                 <enabled>true</enabled>
                 <title>time</title>
                 <property>sim/time/time-log</property>
+            </entry>
+        </log>
+        <log>
+            <filename>C:/Users/ice_o/AppData/Roaming/flightgear.org/Export/missile_flightlog.csv</filename>
+            <enabled>false</enabled>
+            <interval-ms>1</interval-ms>
+            <delimiter>,</delimiter>
+            <entry>
+                <enabled>true</enabled>
+                <title>pitch</title>
+                <property>/fdm/jsbsim/instrumentation/fd/pitch</property>
+            </entry>
+            <entry>
+                <enabled>true</enabled>
+                <title>tgt-pitch</title>
+                <property>/fdm/jsbsim/instrumentation/fd/letdown-mode-tgt-pitch</property>
+            </entry>
+            <entry>
+                <enabled>true</enabled>
+                <title>ap-pitch</title>
+                <property>/fdm/jsbsim/instrumentation/input/ap-pitch</property>
+            </entry>
+            <entry>
+                <enabled>true</enabled>
+                <title>prefilter</title>
+                <property>/fdm/jsbsim/instrumentation/fd/letdown-mode-tgt-pitch-prefilter</property>
+            </entry>
+            <entry>
+                <enabled>true</enabled>
+                <title>combinedvs</title>
+                <property>/fdm/jsbsim/instrumentation/fd/letdown-mode-combined-vs-fps</property>
+            </entry>
+            <entry>
+                <enabled>true</enabled>
+                <title>tas</title>
+                <property>/velocities/tas-kt</property>
+            </entry>
+            <entry>
+                <enabled>true</enabled>
+                <title>alpha</title>
+                <property>/orientation/alpha-deg</property>
+            </entry>
+            <entry>
+                <enabled>true</enabled>
+                <title>roll</title>
+                <property>/orientation/roll-deg</property>
             </entry>
         </log>
         <time-log type="string">0:0:0</time-log>

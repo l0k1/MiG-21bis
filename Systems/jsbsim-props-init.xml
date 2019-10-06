@@ -88,6 +88,19 @@
     </systems>
     <instrumentation>
         <pitot-setting type="double">1</pitot-setting>
+        <fd>
+            <iterator type="double">0</iterator>
+            <letdown-mode-height-capture type="double">0</letdown-mode-height-capture>
+            <letdown-mode-vs-fps type="double">0</letdown-mode-vs-fps>
+            <letdown-mode-vs-rate type="double">0.5</letdown-mode-vs-rate>
+            <letdown-mode-combined-vs-fps type="double">0</letdown-mode-combined-vs-fps>
+            <letdown-mode-tgt-pitch-prefilter type="double">0</letdown-mode-tgt-pitch-prefilter>
+            <letdown-mode-tgt-pitch type="double">0</letdown-mode-tgt-pitch>
+            <pitch type="double">0</pitch>
+        </fd>
+        <input>
+            <ap-pitch type="double">0</ap-pitch>
+        </input>
     </instrumentation>
     <pneumatic>
         <sources>
