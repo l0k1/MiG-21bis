@@ -1219,8 +1219,8 @@
 		<object-name>nose_wheel</object-name>
 		<object-name>front_strut</object-name>
 		<object-name>frontd_strut</object-name>
-		<property>surface-positions/rudder-pos-norm</property>
-		<factor>-25</factor>
+		<property>/fdm/jsbsim/gear/unit/steering-angle-deg</property>
+		<factor>-1</factor>
 		<center>
 			<x-m>-4.43</x-m>
 			<y-m> 0.00</y-m>

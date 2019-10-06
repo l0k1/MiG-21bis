@@ -11,6 +11,9 @@
         <dump>
             <armed type="double">0</armed>
         </dump>
+        <brakes>
+            <nose-wheel-brake-toggle type="double">0</nose-wheel-brake-toggle>
+        </brakes>
         <NWS>
             <engaged type="double">0</engaged>
         </NWS>
