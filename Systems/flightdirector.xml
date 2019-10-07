@@ -209,12 +209,42 @@ else they are centered.-->
             </clipto>
         </actuator>
 
+        <fcs_function name="trash/instrumentation/fd/tgt-pitch">
+            <function>
+                <!--
+                switch set to letdown: descent target
+                switch set to navig: 0 
+                switch set to landing: glideslope
+                -->
+                <switch>
+                    <property>/instrumentation/nav[0]/nav-mode-switch</property>
+                    <property>instrumentation/fd/letdown-mode-tgt-pitch</property>
+                    <value>0</value>
+                    <ifthen>
+                        <or>
+                            <eq>
+                                <property>/autopilot/locks/mode</property>
+                                <value>4</value>
+                            </eq>
+                            <eq>
+                                <property>/autopilot/locks/mode</property>
+                                <value>5</value>
+                            </eq>
+                        </or>
+                        <property>/autopilot/internal/target-pitch</property>
+                        <value>0</value>
+                    </ifthen>
+                </switch>
+            </function>
+            <output>instrumentation/fd/tgt-pitch</output>
+        </fcs_function>
+
         <fcs_function name="trash/instrumentation/fd/pitch">
             <!-- normed to -1/1 -->
             <function>
                 <quotient>
                     <difference>
-                        <property>instrumentation/fd/letdown-mode-tgt-pitch</property>
+                        <property>instrumentation/fd/tgt-pitch</property>
                         <property>instrumentation/input/ap-pitch</property> 
                         <!--<difference>
                             <property>/orientation/alpha-deg</property>
@@ -228,6 +258,51 @@ else they are centered.-->
                 <max>1.0</max>
             </clipto>
             <output>instrumentation/fd/pitch</output>
+        </fcs_function>
+    </channel>
+
+    <channel name="fd_roll">
+
+        <fcs_function name="trash/instrumentation/fd/tgt-roll">
+            <function>
+                <!--
+                switch set to letdown: 0
+                switch set to navig: 0 
+                switch set to landing: loc
+                -->
+                <ifthen>
+                    <or>
+                        <eq>
+                            <property>/autopilot/locks/mode</property>
+                            <value>4</value>
+                        </eq>
+                        <eq>
+                            <property>/autopilot/locks/mode</property>
+                            <value>5</value>
+                        </eq>
+                    </or>
+                    <property>/autopilot/internal/target-roll</property>
+                    <value>0</value>
+                </ifthen>
+            </function>
+            <output>instrumentation/fd/tgt-roll</output>
+        </fcs_function>
+        <fcs_function name="trash/instrumentation/fd/roll">
+            <!-- normed to -1/1 -->
+            <function>
+                <quotient>
+                    <difference>
+                        <property>instrumentation/fd/tgt-roll</property>
+                        <property>instrumentation/input/ap-roll</property> 
+                    </difference>
+                    <value>20</value> <!-- maximum roll movement of the needle -->
+                </quotient>
+            </function>
+            <clipto>
+                <min>-1.0</min>
+                <max>1.0</max>
+            </clipto>
+            <output>instrumentation/fd/roll</output>
         </fcs_function>
     </channel>
 </system>

@@ -2,7 +2,7 @@
 
 var modes = {
 	"off": 0,
-	"cmd": 0,
+	"cmd": 5,
 	"auto": 4,
 	"stab": 3,
 	"level": 2,

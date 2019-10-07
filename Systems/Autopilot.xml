@@ -1135,6 +1135,10 @@ check for Low Altitude Mode
                     <property>/autopilot/locks/mode</property>
                     <value>0</value>
                 </greater-than>
+                <less-than>
+                    <property>/autopilot/locks/mode</property>
+                    <value>5</value>
+                </less-than>
                 <equals>
                     <property>/fdm/jsbsim/fcs/aileron-manual-override</property>
                     <value>0</value>
@@ -1185,6 +1189,10 @@ check for Low Altitude Mode
                     <property>/autopilot/locks/mode</property>
                     <value>0</value>
                 </greater-than>
+                <less-than>
+                    <property>/autopilot/locks/mode</property>
+                    <value>5</value>
+                </less-than>
                 <equals>
                     <property>/fdm/jsbsim/fcs/elevator-manual-override</property>
                     <value>0</value>

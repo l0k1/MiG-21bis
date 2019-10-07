@@ -34,18 +34,13 @@
     </animation>
 
     <animation>
-        <type>rotate</type>
+        <type>translate</type>
         <object-name>AIazimuthNeedle</object-name>
-        <property>/autopilot/internal/ai-target-roll</property>
-        <factor>2</factor>
-        <center>
-            <x-m>0.00061</x-m>
-            <y-m>-0.00002</y-m>
-            <z-m>-0.04319</z-m>
-        </center>
+        <property>/fdm/jsbsim/instrumentation/fd/roll</property>
+        <factor>0.032</factor>
         <axis>
-            <x>1</x>
-            <y>0</y>
+            <x>0</x>
+            <y>1</y>
             <z>0</z>
         </axis>
     </animation>      
