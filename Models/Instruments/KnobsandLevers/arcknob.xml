@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>arcknob.ac</path>
+
+    <!--<animation>
+        <type>knob</type>
+        <object-name>pitotKnob</object-name>
+        <property>/fdm/jsbsim/instrumentation/pitot-setting</property>
+        <factor>-40</factor>
+        <offset-deg>35</offset-deg>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/instrumentation/pitot-setting</property>
+            </binding>
+        </action>
+    </animation>-->
+	
+</PropertyList>

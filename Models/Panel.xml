@@ -749,6 +749,16 @@
             <z-m> 0.42818</z-m>
         </offsets>
     </model>
+    <model>
+        <name>ARC Knob</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/KnobsandLevers/arcknob.xml</path>
+        <offsets>
+            <heading-deg>-90</heading-deg>
+            <x-m>-3.41485</x-m>
+            <y-m> 0.43678</y-m>
+            <z-m> 0.62395</z-m>
+        </offsets>
+    </model>
 
     <model>
         <name>Freq Paper</name>
