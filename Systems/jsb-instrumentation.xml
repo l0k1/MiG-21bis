@@ -204,7 +204,7 @@ clock
         <!-- AC -->
         
         <!-- radar altimeter -->
-		
+        
         <fcs_function name="trash/instrumentation/radar-alt/radar-altimeter-ft">
             <function>
                 <ifthen>
@@ -237,15 +237,15 @@ clock
             <function>
                 <product>
                     <gt>
-        				<property>/instrumentation/altimeter/altitude-limit-select-ft</property>
-                		<property>instrumentation/radar-alt/radar-altimeter-ft</property>
-                	</gt>
-                	<quotient>
-                    	<difference>
-                    	    <property>electric/output/rad-alt</property>
-                    	    <value>30</value>
-                    	</difference>
-                    	<value>6</value>
+                        <property>/instrumentation/altimeter/altitude-limit-select-ft</property>
+                        <property>instrumentation/radar-alt/radar-altimeter-ft</property>
+                    </gt>
+                    <quotient>
+                        <difference>
+                            <property>electric/output/rad-alt</property>
+                            <value>30</value>
+                        </difference>
+                        <value>6</value>
                     </quotient>
                 </product>
             </function>
@@ -433,6 +433,28 @@ clock
             </clipto>
             <output>fcs/aru-setting-pos</output>
         </fcs_function>
+    </channel>
+    
+    <channel name="radios" execrate="10">
+        <!-- propogate electric/output to /instrumentation/[adf|nav|comm]/power-btn -->
+        <switch name="/instrumentation/comm/power-btn">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                electric/output/rset gt 107
+            </test>
+        </switch>
+        <switch name="/instrumentation/adf/power-btn">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                electric/output/arc gt 107
+            </test>
+        </switch>
+        <switch name="/instrumentation/nav/power-btn">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                electric/output/rsbn gt 107
+            </test>
+        </switch>
     </channel>
 
 </system>
