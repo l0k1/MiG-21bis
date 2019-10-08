@@ -3,12 +3,12 @@
 
     <path>arcknob.ac</path>
 
-    <!--<animation>
+    <animation>
         <type>knob</type>
-        <object-name>pitotKnob</object-name>
-        <property>/fdm/jsbsim/instrumentation/pitot-setting</property>
-        <factor>-40</factor>
-        <offset-deg>35</offset-deg>
+        <object-name>arcKnob</object-name>
+        <property>/instrumentation/adf/arc-sel</property>
+        <factor>-30</factor>
+        <offset-deg>105</offset-deg>
         <center>
             <x-m>0</x-m>
             <y-m>0</y-m>
@@ -22,10 +22,14 @@
 
         <action>
             <binding>
-                <command>property-toggle</command>
-                <property>/fdm/jsbsim/instrumentation/pitot-setting</property>
+                <command>property-adjust</command>
+                <property>/instrumentation/adf/arc-sel</property>
+                <factor>1</factor>
+                <min>0</min>
+                <max>7</max>
+                <wrap>false</wrap>
             </binding>
         </action>
-    </animation>-->
+    </animation>
 	
 </PropertyList>

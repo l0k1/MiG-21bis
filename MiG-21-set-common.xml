@@ -740,6 +740,7 @@
             </lights>
         </autopilot>
         <adf n="0">
+            <arc-sel type="int">0</arc-sel>
             <inbound-outbound-switch type="int">0</inbound-outbound-switch>
         </adf>
         <armament>
