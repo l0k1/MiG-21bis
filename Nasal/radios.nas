@@ -86,30 +86,29 @@ var last_bearing = 0;
 var hold_freq = 0;
 var change_freq = 0;
 
-var arc_sel_map = [2,2,4,4,6,6,8,8];
+var arc_sel_map = [1,1,3,3,5,5,7,7];
 
 var inner_outer_adf_finder = func() {
+    if (getprop("/fdm/jsbsim/electric/output/arc") < 105) {
+        return;
+    }
     switch_state = getprop("/instrumentation/adf/inbound-outbound-switch");
     freq = getprop("/instrumentation/adf-radio/preset[" ~ getprop("/instrumentation/adf-radio/selection") ~ "]");
     gear_pos = getprop("/fdm/jsbsim/gear/gear-pos-norm");
     arc_sel = getprop("/instrumentation/adf/arc-sel");
-    in_out_state = getprop("/instrumentation/adf/in-out-state");
     var chel = getprop("/instrumentation/adf-radio/selection");
+    bearing = math.periodic(-180,180,getprop("/instrumentation/adf/indicated-bearing-deg"));
     #/instrumentation/adf/indicated-bearing-deg
     #/fdm/jsbsim/gear/gear-pos-norm == 1
     #/instrumentation/adf/arc-sel
-
     if (gear_pos != 1) {
-        print("blahhhhh 1");
         # if gear isn't up, do nothing. make sure adf freq is operationg normally.
         if (freq != last_freq) {
             setprop("/instrumentation/adf[0]/frequencies/selected-khz",freq);
         }
         in_out_state = 0;
         last_freq = freq;
-        return;
     } elsif (gear_pos == 1 and switch_state == 1){
-        print("blahhhhh 2");
         freq = getprop("/instrumentation/adf-radio/preset[" ~ arc_sel_map[arc_sel] ~ "]");
         if (freq != last_freq) {
             setprop("/instrumentation/adf[0]/frequencies/selected-khz",freq);
@@ -118,27 +117,27 @@ var inner_outer_adf_finder = func() {
         last_freq = freq;
     } elsif (gear_pos == 1 and switch_state == 0 and in_out_state == 0 and math.mod(chel,2) == 0 and chel != 8) {
         #determine rate at which the adf is passing
-        bearing = math.periodic(getprop("/instrumentation/adf/indicated-bearing-deg"),-180,180);
-        print(math.abs(bearing - last_bearing));
 
         if (math.abs(bearing - last_bearing) > 10 and getprop("/fdm/jsbsim/instrumentation/pitot/airspeed-kts") > 75) {
             # wild guess here. means if change is more than 5 degrees in one secone.
             in_out_state = 1;
-            print("hmm");
             change_freq = getprop("/instrumentation/adf-radio/preset[" ~ arc_sel_map[arc_sel] ~ "]");
             hold_freq = freq;
             settimer(func(){
                 print("yeeeeeeeeeeessssssssss");
+                if (getprop("/fdm/jsbsim/electric/output/arc") < 105) {
+                    settimer(func(){inner_outer_adf_finder();},1);
+                    return;
+                }
                 if (getprop("/instrumentation/adf[0]/frequencies/selected-khz") == hold_freq) {
                     setprop("/instrumentation/adf[0]/frequencies/selected-khz",change_freq);
                 }
             },(math.mod(arc_sel,2) * 4) + 4);
                 
         }
-        last_bearing = bearing;
     }
-
-    settimer(func(){inner_outer_adf_finder();},1);
+    last_bearing = bearing;
 }
 
-inner_outer_adf_finder();
+var adf_loop = maketimer(1,inner_outer_adf_finder);
+adf_loop.start();

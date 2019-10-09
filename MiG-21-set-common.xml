@@ -742,6 +742,7 @@
         <adf n="0">
             <arc-sel type="int">0</arc-sel>
             <inbound-outbound-switch type="int">0</inbound-outbound-switch>
+            <in-out-state type="int">0</in-out-state>
         </adf>
         <armament>
             <msl-emergency-release>

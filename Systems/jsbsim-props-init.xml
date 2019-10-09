@@ -91,6 +91,9 @@
     </systems>
     <instrumentation>
         <pitot-setting type="double">1</pitot-setting>
+        <pitot>
+            <airspeed-kts type="double">0</airspeed-kts>
+        </pitot>
         <fd>
             <iterator type="double">0</iterator>
             <letdown-mode-height-capture type="double">0</letdown-mode-height-capture>
