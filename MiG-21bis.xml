@@ -691,6 +691,6 @@
 
  <flight_control name="none"/>
 
- <aerodynamics file="mig-21-aero-aeromatic-v3_3_10.xml"/>
+<aerodynamics file="mig-21-aero-aeromatic-v3_3_10.xml"/>
 
 </fdm_config>
