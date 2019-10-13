@@ -135,6 +135,11 @@
 				<weight-lb>220</weight-lb>
 			</opt>
 			<opt>
+				<name>P-100</name>
+				<lbs>221</lbs>
+				<weight-lb>221</weight-lb>
+			</opt>
+			<opt>
 				<name>FAB-250</name>
 				<lbs>551</lbs>
 				<weight-lb>551</weight-lb>
@@ -210,9 +215,19 @@
 				<weight-lb>220</weight-lb>
 			</opt>
 			<opt>
+				<name>P-100</name>
+				<lbs>221</lbs>
+				<weight-lb>221</weight-lb>
+			</opt>
+			<opt>
 				<name>FAB-100x4</name>
 				<lbs>960</lbs>
 				<weight-lb>960</weight-lb>
+			</opt>
+			<opt>
+				<name>P-100x4</name>
+				<lbs>961</lbs>
+				<weight-lb>961</weight-lb>
 			</opt>
 			<opt>
 				<name>FAB-250</name>
@@ -320,9 +335,19 @@
 				<weight-lb>220</weight-lb>
 			</opt>
 			<opt>
+				<name>P-100</name>
+				<lbs>221</lbs>
+				<weight-lb>221</weight-lb>
+			</opt>
+			<opt>
 				<name>FAB-100x4</name>
 				<lbs>960</lbs>
 				<weight-lb>960</weight-lb>
+			</opt>
+			<opt>
+				<name>P-100x4</name>
+				<lbs>961</lbs>
+				<weight-lb>961</weight-lb>
 			</opt>
 			<opt>
 				<name>FAB-250</name>
@@ -383,6 +408,11 @@
 				<name>FAB-100</name>
 				<lbs>220</lbs>
 				<weight-lb>220</weight-lb>
+			</opt>
+			<opt>
+				<name>P-100</name>
+				<lbs>221</lbs>
+				<weight-lb>221</weight-lb>
 			</opt>
 			<opt>
 				<name>FAB-250</name>

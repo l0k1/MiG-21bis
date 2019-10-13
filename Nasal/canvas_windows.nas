@@ -30,7 +30,8 @@ var stores = {
                                 ["none"]],
                     ["Bomb",     
                                 ["FAB-100",
-                                "FAB-250",]],
+                                "FAB-250",
+                                "P-100"]],
                     ["A/A Missile", 
                                 ["R-3S",
                                 "R-3R",
@@ -51,7 +52,9 @@ var stores = {
                                 ["FAB-100",
                                 "FAB-100x4",
                                 "FAB-250",
-                                "FAB-500",]],
+                                "FAB-500",
+                                "P-100",
+                                "P-100x4"]],
                     ["A/A Missile", 
                                 ["R-3S",
                                 "R-3R",
@@ -109,6 +112,21 @@ var stores = {
             "FAB-100x4" : [
                         #12345678901234567890
                         "Four FAB-100's on a",
+                        "specially designed",
+                        "launcher rail.",
+                        ],
+            "P-100"     : [
+                        #12345678901234567890
+                        "A practice bomb",
+                        "which emits a white",
+                        "smoke upon impact.",
+                        "Has the same",
+                        "characteristics as",
+                        "a FAB-100.",
+                        ],
+            "P-100x4" : [
+                        #12345678901234567890
+                        "Four P-100's on a",
                         "specially designed",
                         "launcher rail.",
                         ],

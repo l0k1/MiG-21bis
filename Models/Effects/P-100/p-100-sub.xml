@@ -1,0 +1,23 @@
+<PropertyList>
+
+  <submodel>
+    <name>boom3</name>
+    <model>Aircraft/MiG-21bis/Models/Effects/P-100/p-100-smoke-linger.xml</model>
+    <speed>0</speed>
+    <repeat>false</repeat>
+    <delay>0</delay>
+    <count>1</count>
+    <x-offset>0</x-offset>
+    <y-offset>0</y-offset>
+    <z-offset>0</z-offset>
+    <yaw-offset>0</yaw-offset>
+    <pitch-offset>0</pitch-offset>
+    <eda>100</eda>
+    <wind>false</wind>
+    <buoyancy>32.1</buoyancy>
+                <aero-stabilised>false</aero-stabilised>
+                <fuse-range>0</fuse-range>
+    <life>60</life>
+  </submodel> 
+
+</PropertyList>

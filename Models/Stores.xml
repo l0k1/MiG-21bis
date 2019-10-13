@@ -1880,4 +1880,336 @@
 		</condition>
 	</animation>
 
+	<model>
+		<name>P-100 Left Outer</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+			<x-m> 1.13</x-m>
+			<y-m>-2.73 </y-m>
+			<z-m>-0.28</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Left Outer</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[0]</property>
+                  <value>33</value>
+            </equals>
+        </condition>
+    </animation>
+
+	<model>
+		<name>P-100 Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+			<x-m> 0.20</x-m>
+			<y-m>-2.11 </y-m>
+			<z-m>-0.25</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Left</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>33</value>
+            </equals>
+        </condition>
+    </animation>
+
+	<model>
+		<name>P-100 Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+			<x-m> 0.20</x-m>
+			<y-m> 2.11 </y-m>
+			<z-m>-0.25</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Right</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>33</value>
+            </equals>
+        </condition>
+    </animation>
+	
+	<model>
+		<name>P-100 Right Outer</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+			<x-m> 1.13</x-m>
+			<y-m> 2.73 </y-m>
+			<z-m>-0.28</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Right Outer</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[4]</property>
+                  <value>33</value>
+            </equals>
+        </condition>
+    </animation>
+
+	<model>
+		<name>P-100 Left Inner Front Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+			<x-m>-0.236927</x-m>
+            <y-m>-2.25938</y-m>
+            <z-m>-0.344914</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>-17.6</roll-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Left Inner Front Left</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>37</value>
+            </equals>
+        </condition>
+    </animation>
+
+	<model>
+		<name>P-100 Left Inner Front Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+            <x-m>-0.236927</x-m>
+            <y-m>-1.95774</y-m>
+            <z-m>-0.344914</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>17.6</roll-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Left Inner Front Right</object-name>
+        <condition>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>37</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>36</value>
+	            </equals>
+	        </or>
+		</condition>
+    </animation>
+
+	<model>
+		<name>P-100 Left Inner Rear Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+            <x-m> 0.981207</x-m>
+            <y-m>-2.259380</y-m>
+            <z-m>-0.344914</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>-17.6</roll-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Left Inner Rear Left</object-name>
+        <condition>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>37</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>36</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>35</value>
+	            </equals>
+	        </or>
+        </condition>
+    </animation>
+
+	<model>
+		<name>P-100 Left Inner Rear Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+            <x-m> 0.981207</x-m>
+            <y-m>-1.957740</y-m>
+            <z-m>-0.344914</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>17.6</roll-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Left Inner Rear Right</object-name>
+        <condition>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>37</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>36</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>35</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[1]</property>
+	                  <value>34</value>
+	            </equals>
+	        </or>
+        </condition>
+    </animation>
+
+	<model>
+		<name>P-100 Right Inner Front Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+            <x-m>-0.236927</x-m>
+            <y-m> 2.25938</y-m>
+            <z-m>-0.344914</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>17.6</roll-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Right Inner Front Left</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>37</value>
+            </equals>
+        </condition>
+    </animation>
+
+	<model>
+		<name>P-100 Right Inner Front Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+            <x-m>-0.236927</x-m>
+            <y-m> 1.95774</y-m>
+            <z-m>-0.344914</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>-17.6</roll-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Right Inner Front Right</object-name>
+        <condition>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>37</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>36</value>
+	            </equals>
+	        </or>
+        </condition>
+    </animation>
+
+	<model>
+		<name>P-100 Right Inner Rear Left</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+            <x-m> 0.981207</x-m>
+            <y-m> 2.259380</y-m>
+            <z-m>-0.344914</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>17.6</roll-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Right Inner Rear Left</object-name>
+        <condition>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>37</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>36</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>35</value>
+	            </equals>
+	        </or>
+        </condition>
+    </animation>
+
+	<model>
+		<name>P-100 Right Inner Rear Right</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+		<offsets>
+            <x-m> 0.981207</x-m>
+            <y-m> 1.957740</y-m>
+            <z-m>-0.344914</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>-17.6</roll-deg>
+		</offsets>
+	</model>
+	
+	<animation>
+        <type>select</type>
+        <object-name>P-100 Right Inner Rear Right</object-name>
+        <condition>
+        	<or>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>37</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>36</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>35</value>
+	            </equals>
+	            <equals>
+	                  <property>sim/multiplay/generic/short[3]</property>
+	                  <value>34</value>
+	            </equals>
+	        </or>
+        </condition>
+    </animation>
+
 </PropertyList>
