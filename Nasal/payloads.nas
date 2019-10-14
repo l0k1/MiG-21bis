@@ -1159,6 +1159,9 @@ var impact_listener = func {
             distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue()).direct_distance_to(geo.aircraft_position());
             sounds.boom(distance);
         }
+        if (typeOrdName == "BETAB-500ShP" and ballistic.getNode("impact/type").getValue() == "terrain") {
+            geo.put_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue());
+        }
     }
 }
 

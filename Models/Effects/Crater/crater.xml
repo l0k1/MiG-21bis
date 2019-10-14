@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<!-- 500 lb. Bomb MC crater wrapper, by Vivin Meazza -->
+
+<PropertyList>
+
+	<path>crater.ac</path>
+
+	<!--<animation>
+  <enable-hot type="bool">false</enable-hot>
+ </animation>-->
+
+	<!--<model>
+		<path>smoke.xml</path>
+		<name>Smoke</name>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<animation>
+		<type>select</type>>
+		<object-name>Smoke</object-name>
+		<condition>
+			<less-than>
+				<property>sim/time/elapsed-sec</property>
+				<property>sim/time/impact-time-sec</property>
+			</less-than>
+		</condition>
+	</animation>-->
+
+
+	<!-- *** LoD *** -->
+	<animation>
+		<type>range</type>
+		<min-m>0</min-m>
+		<max-m>10000</max-m>
+	</animation>
+
+
+</PropertyList>
