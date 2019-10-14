@@ -1,23 +1,23 @@
 <PropertyList>
 
-	<!-- Stores -->
-	
-	<!-- Drag Chute -->
+    <!-- Stores -->
     
-	<model>
-		<name>Drag Chute</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Chute/Chute.xml</path>
-		<offsets>
-			<x-m>6.44</x-m>
-			<y-m>0.00</y-m>
-			<z-m>0.70</z-m>
-			<pitch-deg>0.00</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>Drag Chute</object-name>
-		<type>select</type>
+    <!-- Drag Chute -->
+    
+    <model>
+        <name>Drag Chute</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Chute/Chute.xml</path>
+        <offsets>
+            <x-m>6.44</x-m>
+            <y-m>0.00</y-m>
+            <z-m>0.70</z-m>
+            <pitch-deg>0.00</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>Drag Chute</object-name>
+        <type>select</type>
         <condition>
             <and>
                 <equals>
@@ -30,16 +30,16 @@
                 </equals>
             </and>
         </condition>
-	</animation>
-	
-	<!-- Drop Tanks -->
+    </animation>
+    
+    <!-- Drop Tanks -->
 
-	<model>
-		<name>PTB-490 Center</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490.xml</path>
-	</model>
-	
-	<animation>
+    <model>
+        <name>PTB-490 Center</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490.xml</path>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>PTB-490 Center</object-name>
         <condition>
@@ -50,18 +50,18 @@
         </condition>
     </animation>
 
-	<model>
-		<name>PTB-800 Center</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/PTB-800/PTB-800.xml</path>
+    <model>
+        <name>PTB-800 Center</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/PTB-800/PTB-800.xml</path>
         <offsets>
                 <x-m>-0.3</x-m>
                 <y-m>0.00</y-m>
                 <z-m>-0.83</z-m>
                 <pitch-deg>0.00</pitch-deg>
         </offsets>
-	</model>
-	
-	<animation>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>PTB-800 Center</object-name>
         <condition>
@@ -72,18 +72,18 @@
         </condition>
     </animation>
 
-	<model>
-		<name>PTB-490 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490.xml</path>
+    <model>
+        <name>PTB-490 Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490.xml</path>
         <offsets>
                 <x-m>1.33</x-m>
                 <y-m>-2.73</y-m>
                 <z-m>0.51</z-m>
                 <pitch-deg>0.00</pitch-deg>
         </offsets>
-	</model>
-	
-	<animation>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>PTB-490 Left</object-name>
         <condition>
@@ -94,18 +94,18 @@
         </condition>
     </animation>
 
-	<model>
-		<name>PTB-490 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490.xml</path>
+    <model>
+        <name>PTB-490 Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/PTB-490/PTB-490.xml</path>
         <offsets>
                 <x-m>1.33</x-m>
                 <y-m>2.73</y-m>
                 <z-m>0.51</z-m>
                 <pitch-deg>0.00</pitch-deg>
         </offsets>
-	</model>
-	
-	<animation>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>PTB-490 Right</object-name>
         <condition>
@@ -118,18 +118,18 @@
     
     <!-- Smokepod -->
 
-	<model>
-		<name>Center Smokepod</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Smokepod/smokepod.xml</path>
+    <model>
+        <name>Center Smokepod</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Smokepod/smokepod.xml</path>
         <offsets>
                 <x-m>-0.1</x-m>
                 <y-m>0.00</y-m>
                 <z-m>-0.68</z-m>
                 <pitch-deg>0.00</pitch-deg>
         </offsets>
-	</model>
-	
-	<animation>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>Center Smokepod</object-name>
         <condition>
@@ -142,25 +142,25 @@
     
     <!-- GSh-23 -->
 
-	<model>
-		<name>GSh-23 Gun</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/GSh-23/GSh-23.xml</path>
-	</model>
-	
-	<!-- FABs -->
+    <model>
+        <name>GSh-23 Gun</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/GSh-23/GSh-23.xml</path>
+    </model>
     
-	<model>
-		<name>FAB-500 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-500/FAB-500.xml</path>
-		<offsets>
-			<x-m> 0.35</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.32</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    <!-- FABs -->
+    
+    <model>
+        <name>FAB-500 Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-500/FAB-500.xml</path>
+        <offsets>
+            <x-m> 0.35</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.32</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-500 Left</object-name>
         <condition>
@@ -171,18 +171,18 @@
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-500 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-500/FAB-500.xml</path>
-		<offsets>
-			<x-m> 0.35</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.32</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    <model>
+        <name>FAB-500 Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-500/FAB-500.xml</path>
+        <offsets>
+            <x-m> 0.35</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.32</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-500 Right</object-name>
         <condition>
@@ -192,19 +192,19 @@
             </equals>
         </condition>
     </animation>
-	
-	<model>
-		<name>FAB-250 Left Outer</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250.xml</path>
-		<offsets>
-			<x-m> 1.13</x-m>
-			<y-m>-2.73 </y-m>
-			<z-m>-0.28</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    
+    <model>
+        <name>FAB-250 Left Outer</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250.xml</path>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m>-2.73 </y-m>
+            <z-m>-0.28</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-250 Left Outer</object-name>
         <condition>
@@ -215,18 +215,18 @@
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-250 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250.xml</path>
-		<offsets>
-			<x-m> 0.20</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.25</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    <model>
+        <name>FAB-250 Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250.xml</path>
+        <offsets>
+            <x-m> 0.20</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.25</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-250 Left</object-name>
         <condition>
@@ -237,18 +237,18 @@
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-250 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250.xml</path>
-		<offsets>
-			<x-m> 0.20</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.25</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    <model>
+        <name>FAB-250 Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250.xml</path>
+        <offsets>
+            <x-m> 0.20</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.25</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-250 Right</object-name>
         <condition>
@@ -258,19 +258,19 @@
             </equals>
         </condition>
     </animation>
-	
-	<model>
-		<name>FAB-250 Right Outer</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250.xml</path>
-		<offsets>
-			<x-m> 1.13</x-m>
-			<y-m> 2.73 </y-m>
-			<z-m>-0.28</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    
+    <model>
+        <name>FAB-250 Right Outer</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-250/FAB-250.xml</path>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m> 2.73 </y-m>
+            <z-m>-0.28</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-250 Right Outer</object-name>
         <condition>
@@ -280,19 +280,19 @@
             </equals>
         </condition>
     </animation>
-	
-	<model>
-		<name>FAB-100 Left Outer</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
-			<x-m> 1.13</x-m>
-			<y-m>-2.73 </y-m>
-			<z-m>-0.28</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    
+    <model>
+        <name>FAB-100 Left Outer</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m>-2.73 </y-m>
+            <z-m>-0.28</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Left Outer</object-name>
         <condition>
@@ -303,18 +303,18 @@
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-100 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
-			<x-m> 0.20</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.25</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    <model>
+        <name>FAB-100 Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
+            <x-m> 0.20</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.25</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Left</object-name>
         <condition>
@@ -325,18 +325,18 @@
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-100 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
-			<x-m> 0.20</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.25</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    <model>
+        <name>FAB-100 Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
+            <x-m> 0.20</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.25</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Right</object-name>
         <condition>
@@ -346,19 +346,19 @@
             </equals>
         </condition>
     </animation>
-	
-	<model>
-		<name>FAB-100 Right Outer</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
-			<x-m> 1.13</x-m>
-			<y-m> 2.73 </y-m>
-			<z-m>-0.28</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    
+    <model>
+        <name>FAB-100 Right Outer</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m> 2.73 </y-m>
+            <z-m>-0.28</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Right Outer</object-name>
         <condition>
@@ -369,19 +369,19 @@
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-100 Left Inner Front Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
-			<x-m>-0.236927</x-m>
+    <model>
+        <name>FAB-100 Left Inner Front Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
+            <x-m>-0.236927</x-m>
             <y-m>-2.25938</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>-17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Left Inner Front Left</object-name>
         <condition>
@@ -392,118 +392,118 @@
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-100 Left Inner Front Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
+    <model>
+        <name>FAB-100 Left Inner Front Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
             <x-m>-0.236927</x-m>
             <y-m>-1.95774</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Left Inner Front Right</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>14</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>13</value>
-	            </equals>
-	        </or>
-		</condition>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>14</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>13</value>
+                </equals>
+            </or>
+        </condition>
     </animation>
 
-	<model>
-		<name>FAB-100 Left Inner Rear Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
+    <model>
+        <name>FAB-100 Left Inner Rear Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
             <x-m> 0.981207</x-m>
             <y-m>-2.259380</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>-17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Left Inner Rear Left</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>14</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>13</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>12</value>
-	            </equals>
-	        </or>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>14</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>13</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>12</value>
+                </equals>
+            </or>
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-100 Left Inner Rear Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
+    <model>
+        <name>FAB-100 Left Inner Rear Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
             <x-m> 0.981207</x-m>
             <y-m>-1.957740</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Left Inner Rear Right</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>14</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>13</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>12</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>11</value>
-	            </equals>
-	        </or>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>14</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>13</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>12</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>11</value>
+                </equals>
+            </or>
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-100 Right Inner Front Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
+    <model>
+        <name>FAB-100 Right Inner Front Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
             <x-m>-0.236927</x-m>
             <y-m> 2.25938</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Right Inner Front Left</object-name>
         <condition>
@@ -514,1384 +514,1384 @@
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-100 Right Inner Front Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
+    <model>
+        <name>FAB-100 Right Inner Front Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
             <x-m>-0.236927</x-m>
             <y-m> 1.95774</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>-17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Right Inner Front Right</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>14</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>13</value>
-	            </equals>
-	        </or>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>14</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>13</value>
+                </equals>
+            </or>
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-100 Right Inner Rear Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
+    <model>
+        <name>FAB-100 Right Inner Rear Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
             <x-m> 0.981207</x-m>
             <y-m> 2.259380</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Right Inner Rear Left</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>14</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>13</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>12</value>
-	            </equals>
-	        </or>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>14</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>13</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>12</value>
+                </equals>
+            </or>
         </condition>
     </animation>
 
-	<model>
-		<name>FAB-100 Right Inner Rear Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
-		<offsets>
+    <model>
+        <name>FAB-100 Right Inner Rear Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/FAB-100/FAB-100.xml</path>
+        <offsets>
             <x-m> 0.981207</x-m>
             <y-m> 1.957740</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>-17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>FAB-100 Right Inner Rear Right</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>14</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>13</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>12</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>11</value>
-	            </equals>
-	        </or>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>14</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>13</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>12</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>11</value>
+                </equals>
+            </or>
         </condition>
     </animation>
     
     <!-- KH-25MP -->
-	
-	<model>
-		<name>Kh-25MP Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/KH-25MP/KH-25MP.xml</path>
-		<offsets>
-			<x-m>-0.252185</x-m>
-			<y-m>-2.10873</y-m>
-			<z-m>-0.36781</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>Kh-25MP Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    
+    <model>
+        <name>Kh-25MP Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/KH-25MP/KH-25MP.xml</path>
+        <offsets>
+            <x-m>-0.252185</x-m>
+            <y-m>-2.10873</y-m>
+            <z-m>-0.36781</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>Kh-25MP Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[1]</property>
                   <value>21</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>Kh-25MP Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/KH-25MP/KH-25MP.xml</path>
-		<offsets>
-			<x-m>-0.252185</x-m>
-			<y-m> 2.10873</y-m>
-			<z-m>-0.36781</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>Kh-25MP Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/KH-25MP/KH-25MP.xml</path>
+        <offsets>
+            <x-m>-0.252185</x-m>
+            <y-m> 2.10873</y-m>
+            <z-m>-0.36781</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>Kh-25MP Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>Kh-25MP Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[3]</property>
                   <value>21</value>
             </equals>
-		</condition>
-	</animation>
-	
-	<!-- R-3S -->
+        </condition>
+    </animation>
+    
+    <!-- R-3S -->
 
-	<model>
-		<name>R-3S Missile Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
-		<offsets>
-			<x-m> 1.03545</x-m>
-			<y-m>-2.73227</y-m>
-			<z-m>-0.405888</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-3S Missile Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-3S Missile Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
+        <offsets>
+            <x-m> 1.03545</x-m>
+            <y-m>-2.73227</y-m>
+            <z-m>-0.405888</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3S Missile Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[0]</property>
                   <value>3</value>
             </equals>
         </condition>
-	</animation>
+    </animation>
 
-	<model>
-		<name>R-3S Missile Inner Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
-		<offsets>
-			<x-m> 0.101503</x-m>
-			<y-m>-2.10897</y-m>
-			<z-m>-0.372696</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-3S Missile Inner Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-3S Missile Inner Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
+        <offsets>
+            <x-m> 0.101503</x-m>
+            <y-m>-2.10897</y-m>
+            <z-m>-0.372696</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3S Missile Inner Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[1]</property>
                   <value>3</value>
             </equals>
         </condition>
-	</animation>
+    </animation>
 
-	<model>
-		<name>R-3S Missile Inner Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
-		<offsets>
-			<x-m> 0.101503</x-m>
-			<y-m>2.10897</y-m>
-			<z-m>-0.372696</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-3S Missile Inner Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-3S Missile Inner Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
+        <offsets>
+            <x-m> 0.101503</x-m>
+            <y-m>2.10897</y-m>
+            <z-m>-0.372696</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3S Missile Inner Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[3]</property>
                   <value>3</value>
             </equals>
         </condition>
-	</animation>
+    </animation>
 
-	<model>
-		<name>R-3S Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
-		<offsets>
-			<x-m> 1.03545</x-m>
-			<y-m> 2.73227</y-m>
-			<z-m>-0.405888</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-3S Missile Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-3S Missile Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3S/R-3S.xml</path>
+        <offsets>
+            <x-m> 1.03545</x-m>
+            <y-m> 2.73227</y-m>
+            <z-m>-0.405888</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3S Missile Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[4]</property>
                   <value>3</value>
             </equals>
         </condition>
-	</animation>
-	
-	<!-- R-3R -->
+    </animation>
+    
+    <!-- R-3R -->
 
-	<model>
-		<name>R-3R Missile Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
-		<offsets>
-			<x-m> 1.03545</x-m>
-			<y-m>-2.73227</y-m>
-			<z-m>-0.405888</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-3R Missile Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-3R Missile Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
+        <offsets>
+            <x-m> 1.03545</x-m>
+            <y-m>-2.73227</y-m>
+            <z-m>-0.405888</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3R Missile Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[0]</property>
                   <value>8</value>
             </equals>
         </condition>
-	</animation>
+    </animation>
 
-	<model>
-		<name>R-3R Missile Inner Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
-		<offsets>
-			<x-m> 0.101503</x-m>
-			<y-m>-2.10897</y-m>
-			<z-m>-0.372696</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-3R Missile Inner Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-3R Missile Inner Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
+        <offsets>
+            <x-m> 0.101503</x-m>
+            <y-m>-2.10897</y-m>
+            <z-m>-0.372696</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3R Missile Inner Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[1]</property>
                   <value>8</value>
             </equals>
         </condition>
-	</animation>
+    </animation>
 
-	<model>
-		<name>R-3R Missile Inner Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
-		<offsets>
-			<x-m> 0.101503</x-m>
-			<y-m> 2.10897</y-m>
-			<z-m>-0.372696</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-3R Missile Inner Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-3R Missile Inner Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
+        <offsets>
+            <x-m> 0.101503</x-m>
+            <y-m> 2.10897</y-m>
+            <z-m>-0.372696</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3R Missile Inner Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[3]</property>
                   <value>8</value>
             </equals>
         </condition>
-	</animation>
+    </animation>
 
-	<model>
-		<name>R-3R Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
-		<offsets>
-			<x-m> 1.03545</x-m>
-			<y-m> 2.73227</y-m>
-			<z-m>-0.405888</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-3R Missile Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-3R Missile Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3R/R-3R.xml</path>
+        <offsets>
+            <x-m> 1.03545</x-m>
+            <y-m> 2.73227</y-m>
+            <z-m>-0.405888</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3R Missile Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[4]</property>
                   <value>8</value>
             </equals>
         </condition>
-	</animation>
-	
-	<!-- R-60 -->
+    </animation>
+    
+    <!-- R-60 -->
 
-	<model>
-		<name>R-60 Missile Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
-		<offsets>
-			<x-m> 1.13</x-m>
-			<y-m>-2.73 </y-m>
-			<z-m>-0.22</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-60 Missile Left</object-name>
-		<type>select</type>
-		<condition>
-			<or>
-				<equals>
-	                  <property>sim/multiplay/generic/short[0]</property>
-	                  <value>31</value>
-	            </equals>
-	            <equals>
-	                <property>sim/multiplay/generic/short[0]</property>
-	                <value>32</value>
-	            </equals>
-	        </or>
-		</condition>
-	</animation>
+    <model>
+        <name>R-60 Missile Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m>-2.73 </y-m>
+            <z-m>-0.22</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-60 Missile Left</object-name>
+        <type>select</type>
+        <condition>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[0]</property>
+                      <value>31</value>
+                </equals>
+                <equals>
+                    <property>sim/multiplay/generic/short[0]</property>
+                    <value>32</value>
+                </equals>
+            </or>
+        </condition>
+    </animation>
 
-	<model>
-		<name>R-60 Missile Left 2</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
-		<offsets>
-			<x-m> 1.13</x-m>
-			<y-m>-2.88 </y-m>
-			<z-m>-0.10</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-60 Missile Left 2</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-60 Missile Left 2</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m>-2.88 </y-m>
+            <z-m>-0.10</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-60 Missile Left 2</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[0]</property>
                   <value>32</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>R-60 Missile Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
-		<offsets>
-			<x-m> 0.20</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.20</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-60 Missile Left Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-60 Missile Left Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
+        <offsets>
+            <x-m> 0.20</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.20</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-60 Missile Left Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                 <property>sim/multiplay/generic/short[1]</property>
                 <value>31</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>R-60 Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
-		<offsets>
-			<x-m> 1.13</x-m>
-			<y-m> 2.73 </y-m>
-			<z-m>-0.22</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-60 Missile Right</object-name>
-		<type>select</type>
-		<condition>
-			<or>
-				<equals>
-	                <property>sim/multiplay/generic/short[4]</property>
-	                <value>31</value>
-	            </equals>
-	            <equals>
-	                <property>sim/multiplay/generic/short[4]</property>
-	                <value>32</value>
-	            </equals>
-	        </or>
-		</condition>
-	</animation>
+    <model>
+        <name>R-60 Missile Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m> 2.73 </y-m>
+            <z-m>-0.22</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-60 Missile Right</object-name>
+        <type>select</type>
+        <condition>
+            <or>
+                <equals>
+                    <property>sim/multiplay/generic/short[4]</property>
+                    <value>31</value>
+                </equals>
+                <equals>
+                    <property>sim/multiplay/generic/short[4]</property>
+                    <value>32</value>
+                </equals>
+            </or>
+        </condition>
+    </animation>
 
-	<model>
-		<name>R-60 Missile Right 2</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
-		<offsets>
-			<x-m> 1.13</x-m>
-			<y-m> 2.88 </y-m>
-			<z-m>-0.10</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-60 Missile Right 2</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-60 Missile Right 2</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m> 2.88 </y-m>
+            <z-m>-0.10</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-60 Missile Right 2</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[4]</property>
                   <value>32</value>
             </equals>
-		</condition>
-	</animation>
-	
-	<model>
-		<name>R-60 Missile Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
-		<offsets>
-			<x-m> 0.20</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.20</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-60 Missile Right Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+        </condition>
+    </animation>
+    
+    <model>
+        <name>R-60 Missile Right Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-60/R-60.xml</path>
+        <offsets>
+            <x-m> 0.20</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.20</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-60 Missile Right Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[3]</property>
                   <value>31</value>
             </equals>
-		</condition>
-	</animation>
-	
-	<!-- 
+        </condition>
+    </animation>
+    
+    <!-- 
 
-	R-27 
+    R-27 
 
-	-->
-	
-	<model>
-		<name>R-27R1 Missile Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
-		<offsets>
-			<x-m> 1.17317</x-m>
-			<y-m>-2.72904</y-m>
-			<z-m>-0.445723</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-27R1 Missile Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    -->
+    
+    <model>
+        <name>R-27R1 Missile Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
+        <offsets>
+            <x-m> 1.17317</x-m>
+            <y-m>-2.72904</y-m>
+            <z-m>-0.445723</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-27R1 Missile Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[0]</property>
                   <value>9</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>R-27R1 Missile Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
-		<offsets>
-			<x-m> 0.170484</x-m>
-			<y-m>-2.10897</y-m>
-			<z-m>-0.412575</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-27R1 Missile Left Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-27R1 Missile Left Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
+        <offsets>
+            <x-m> 0.170484</x-m>
+            <y-m>-2.10897</y-m>
+            <z-m>-0.412575</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-27R1 Missile Left Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[1]</property>
                   <value>9</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>R-27R1 Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
-		<offsets>
-			<x-m> 1.17317</x-m>
-			<y-m> 2.72904</y-m>
-			<z-m>-0.445723</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-27R1 Missile Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-27R1 Missile Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
+        <offsets>
+            <x-m> 1.17317</x-m>
+            <y-m> 2.72904</y-m>
+            <z-m>-0.445723</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-27R1 Missile Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[4]</property>
                   <value>9</value>
             </equals>
-		</condition>
-	</animation>
-	
-	<model>
-		<name>R-27R1 Missile Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
-		<offsets>
-			<x-m> 0.170484</x-m>
-			<y-m> 2.10897</y-m>
-			<z-m>-0.412575</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-27R1 Missile Right Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+        </condition>
+    </animation>
+    
+    <model>
+        <name>R-27R1 Missile Right Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-27R1/R-27R1.xml</path>
+        <offsets>
+            <x-m> 0.170484</x-m>
+            <y-m> 2.10897</y-m>
+            <z-m>-0.412575</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-27R1 Missile Right Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[3]</property>
                   <value>9</value>
             </equals>
-		</condition>
-	</animation>
-	
-		<model>
-		<name>R-27T1 Missile Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
-		<offsets>
-			<x-m> 1.17317</x-m>
-			<y-m>-2.72904</y-m>
-			<z-m>-0.445723</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-27T1 Missile Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+        </condition>
+    </animation>
+    
+        <model>
+        <name>R-27T1 Missile Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
+        <offsets>
+            <x-m> 1.17317</x-m>
+            <y-m>-2.72904</y-m>
+            <z-m>-0.445723</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-27T1 Missile Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[0]</property>
                   <value>7</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>R-27T1 Missile Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
-		<offsets>
-			<x-m> 0.170484</x-m>
-			<y-m>-2.10897</y-m>
-			<z-m>-0.412575</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-27T1 Missile Left Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-27T1 Missile Left Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
+        <offsets>
+            <x-m> 0.170484</x-m>
+            <y-m>-2.10897</y-m>
+            <z-m>-0.412575</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-27T1 Missile Left Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[1]</property>
                   <value>7</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>R-27T1 Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
-		<offsets>
-			<x-m> 1.17317</x-m>
-			<y-m> 2.72904</y-m>
-			<z-m>-0.445723</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-27T1 Missile Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>R-27T1 Missile Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
+        <offsets>
+            <x-m> 1.17317</x-m>
+            <y-m> 2.72904</y-m>
+            <z-m>-0.445723</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-27T1 Missile Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[4]</property>
                   <value>7</value>
             </equals>
-		</condition>
-	</animation>
-	
-	<model>
-		<name>R-27T1 Missile Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
-		<offsets>
-			<x-m> 0.170484</x-m>
-			<y-m> 2.10897</y-m>
-			<z-m>-0.412575</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>R-27T1 Missile Right Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+        </condition>
+    </animation>
+    
+    <model>
+        <name>R-27T1 Missile Right Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-27T1/R-27T1.xml</path>
+        <offsets>
+            <x-m> 0.170484</x-m>
+            <y-m> 2.10897</y-m>
+            <z-m>-0.412575</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-27T1 Missile Right Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[3]</property>
                   <value>7</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<!--
-
-
-	S-24
+    <!--
 
 
-	-->
+    S-24
 
-	<model>
-		<name>S-24 Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
-		<offsets>
-			<x-m> 0.032842</x-m>
-			<y-m>-2.10885</y-m>
-			<z-m>-0.350445</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>S-24 Left Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+
+    -->
+
+    <model>
+        <name>S-24 Left Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
+        <offsets>
+            <x-m> 0.032842</x-m>
+            <y-m>-2.10885</y-m>
+            <z-m>-0.350445</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>S-24 Left Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[1]</property>
                   <value>26</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>S-24 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
-		<offsets>
-			<x-m>0.935301</x-m>
-			<y-m>-2.73253</y-m>
-			<z-m>-0.38351</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>S-24 Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>S-24 Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
+        <offsets>
+            <x-m>0.935301</x-m>
+            <y-m>-2.73253</y-m>
+            <z-m>-0.38351</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>S-24 Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[0]</property>
                   <value>26</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>S-24 Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
-		<offsets>
-			<x-m> 0.032842</x-m>
-			<y-m> 2.10885</y-m>
-			<z-m>-0.350445</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>S-24 Right Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>S-24 Right Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
+        <offsets>
+            <x-m> 0.032842</x-m>
+            <y-m> 2.10885</y-m>
+            <z-m>-0.350445</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>S-24 Right Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[3]</property>
                   <value>26</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>S-24 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
-		<offsets>
-			<x-m>0.935301</x-m>
-			<y-m>2.73253</y-m>
-			<z-m>-0.38351</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
-		<object-name>S-24 Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <model>
+        <name>S-24 Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/S-24/S-24.xml</path>
+        <offsets>
+            <x-m>0.935301</x-m>
+            <y-m>2.73253</y-m>
+            <z-m>-0.38351</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>S-24 Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[4]</property>
                   <value>26</value>
             </equals>
-		</condition>
-	</animation>
-	
-	<!--
+        </condition>
+    </animation>
+    
+    <!--
 
 
-	RN-28
+    RN-28
 
 
-	-->
+    -->
 
-	<model>
-		<name>RN-28</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/RN-28/RN-28.xml</path>
+    <model>
+        <name>RN-28</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/RN-28/RN-28.xml</path>
         <offsets>
                 <x-m> 0.13</x-m>
                 <y-m>0.00</y-m>
                 <z-m>-0.83</z-m>
                 <pitch-deg>0.00</pitch-deg>
         </offsets>
-	</model>
-	
-	<animation>
-		<object-name>RN-28</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    </model>
+    
+    <animation>
+        <object-name>RN-28</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[2]</property>
                   <value>20</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<!--
-
-
-	UB-16
+    <!--
 
 
-	-->
-	
-	<model>
-		<name>UB-16 Missile Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-0.xml</path>
-		<offsets>
-			<x-m>0.91380</x-m>
-			<y-m>-2.73282</y-m>
-			<z-m>-0.34106</z-m>
-			<pitch-deg>0.9</pitch-deg>
-		</offsets>
-	</model>
+    UB-16
 
-	<animation>
-		<object-name>UB-16 Missile Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+
+    -->
+    
+    <model>
+        <name>UB-16 Missile Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-0.xml</path>
+        <offsets>
+            <x-m>0.91380</x-m>
+            <y-m>-2.73282</y-m>
+            <z-m>-0.34106</z-m>
+            <pitch-deg>0.9</pitch-deg>
+        </offsets>
+    </model>
+
+    <animation>
+        <object-name>UB-16 Missile Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[0]</property>
                   <value>23</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>UB-16 Missile Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-1.xml</path>
-		<offsets>
-			<x-m>-0.02128</x-m>
-			<y-m>-2.10897</y-m>
-			<z-m>-0.30692</z-m>
-			<pitch-deg>0.9</pitch-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>UB-16 Missile Left Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-1.xml</path>
+        <offsets>
+            <x-m>-0.02128</x-m>
+            <y-m>-2.10897</y-m>
+            <z-m>-0.30692</z-m>
+            <pitch-deg>0.9</pitch-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>UB-16 Missile Left Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>UB-16 Missile Left Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[1]</property>
                   <value>23</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>UB-16 Missile Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-3.xml</path>
-		<offsets>
-			<x-m>-0.02128</x-m>
-			<y-m>2.10897</y-m>
-			<z-m>-0.30692</z-m>
-			<pitch-deg>0.9</pitch-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>UB-16 Missile Right Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-3.xml</path>
+        <offsets>
+            <x-m>-0.02128</x-m>
+            <y-m>2.10897</y-m>
+            <z-m>-0.30692</z-m>
+            <pitch-deg>0.9</pitch-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>UB-16 Missile Right Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>UB-16 Missile Right Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[3]</property>
                   <value>23</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>UB-16 Missile Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-4.xml</path>
-		<offsets>
-			<x-m>0.91380</x-m>
-			<y-m>2.73282</y-m>
-			<z-m>-0.34106</z-m>
-			<pitch-deg>0.9</pitch-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>UB-16 Missile Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UB-16/UB-16-4.xml</path>
+        <offsets>
+            <x-m>0.91380</x-m>
+            <y-m>2.73282</y-m>
+            <z-m>-0.34106</z-m>
+            <pitch-deg>0.9</pitch-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>UB-16 Missile Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>UB-16 Missile Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[4]</property>
                   <value>23</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<!--
-
-
-	UB-32
+    <!--
 
 
-	-->
+    UB-32
 
-	<model>
-		<name>UB-32 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-0.xml</path>
-		<offsets>
-			<x-m> 0.97528</x-m>
-			<y-m>-2.73238</y-m>
-			<z-m>-0.41322</z-m>
-			<pitch-deg>0.9</pitch-deg>
-		</offsets>
-	</model>
 
-	<animation>
-		<object-name>UB-32 Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    -->
+
+    <model>
+        <name>UB-32 Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-0.xml</path>
+        <offsets>
+            <x-m> 0.97528</x-m>
+            <y-m>-2.73238</y-m>
+            <z-m>-0.41322</z-m>
+            <pitch-deg>0.9</pitch-deg>
+        </offsets>
+    </model>
+
+    <animation>
+        <object-name>UB-32 Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[0]</property>
                   <value>24</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>UB-32 Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-1.xml</path>
-		<offsets>
-			<x-m> 0.04613</x-m>
-			<y-m>-2.10822</y-m>
-			<z-m>-0.37980</z-m>
-			<pitch-deg>0.9</pitch-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>UB-32 Left Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-1.xml</path>
+        <offsets>
+            <x-m> 0.04613</x-m>
+            <y-m>-2.10822</y-m>
+            <z-m>-0.37980</z-m>
+            <pitch-deg>0.9</pitch-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>UB-32 Left Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>UB-32 Left Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[1]</property>
                   <value>24</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>UB-32 Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-3.xml</path>
-		<offsets>
-			<x-m> 0.04613</x-m>
-			<y-m> 2.10822</y-m>
-			<z-m>-0.37980</z-m>
-			<pitch-deg>0.9</pitch-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>UB-32 Right Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-3.xml</path>
+        <offsets>
+            <x-m> 0.04613</x-m>
+            <y-m> 2.10822</y-m>
+            <z-m>-0.37980</z-m>
+            <pitch-deg>0.9</pitch-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>UB-32 Right Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>UB-32 Right Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[3]</property>
                   <value>24</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>UB-32 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-4.xml</path>
-		<offsets>
-			<x-m> 0.97528</x-m>
-			<y-m> 2.73238</y-m>
-			<z-m>-0.41322</z-m>
-			<pitch-deg>0.9</pitch-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>UB-32 Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-4.xml</path>
+        <offsets>
+            <x-m> 0.97528</x-m>
+            <y-m> 2.73238</y-m>
+            <z-m>-0.41322</z-m>
+            <pitch-deg>0.9</pitch-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>UB-32 Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>UB-32 Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[4]</property>
                   <value>24</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<!--
-
-
-	Kh-66
+    <!--
 
 
-	-->
+    Kh-66
 
-	<model>
-		<name>Kh-66 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
-		<offsets>
-			<x-m> 0.82769</x-m>
-			<y-m>-2.73252</y-m>
-			<z-m>-0.399052</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
 
-	<animation>
-		<object-name>Kh-66 Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    -->
+
+    <model>
+        <name>Kh-66 Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
+        <offsets>
+            <x-m> 0.82769</x-m>
+            <y-m>-2.73252</y-m>
+            <z-m>-0.399052</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+
+    <animation>
+        <object-name>Kh-66 Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[0]</property>
                   <value>22</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>Kh-66 Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
-		<offsets>
-			<x-m>-0.091999</x-m>
-			<y-m>-2.10856</y-m>
-			<z-m>-0.367826</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>Kh-66 Left Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
+        <offsets>
+            <x-m>-0.091999</x-m>
+            <y-m>-2.10856</y-m>
+            <z-m>-0.367826</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>Kh-66 Left Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>Kh-66 Left Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[1]</property>
                   <value>22</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>Kh-66 Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
-		<offsets>
-			<x-m>-0.091999</x-m>
-			<y-m> 2.10856</y-m>
-			<z-m>-0.367826</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>Kh-66 Right Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
+        <offsets>
+            <x-m>-0.091999</x-m>
+            <y-m> 2.10856</y-m>
+            <z-m>-0.367826</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>Kh-66 Right Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>Kh-66 Right Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[3]</property>
                   <value>22</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>Kh-66 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
-		<offsets>
-			<x-m> 0.82769</x-m>
-			<y-m> 2.73252</y-m>
-			<z-m>-0.399052</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>Kh-66 Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/KH-66/Kh-66.xml</path>
+        <offsets>
+            <x-m> 0.82769</x-m>
+            <y-m> 2.73252</y-m>
+            <z-m>-0.399052</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>Kh-66 Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>Kh-66 Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[4]</property>
                   <value>22</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
 
-	<model>
-		<name>Conformal CM Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/ConformalCM/conformalcm.xml</path>
-		<offsets>
-			<x-m> 1.583710</x-m>
-			<y-m>-0.435883</y-m>
-			<z-m>-0.199905</z-m>
-			<roll-deg>130</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>Conformal CM Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/ConformalCM/conformalcm.xml</path>
+        <offsets>
+            <x-m> 1.583710</x-m>
+            <y-m>-0.435883</y-m>
+            <z-m>-0.199905</z-m>
+            <roll-deg>130</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>Conformal CM Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>Conformal CM Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[5]</property>
                   <value>30</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>Conformal CM Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/ConformalCM/conformalcm.xml</path>
-		<offsets>
-			<x-m> 1.583710</x-m>
-			<y-m> 0.435883</y-m>
-			<z-m>-0.199905</z-m>
-			<roll-deg>-130</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>Conformal CM Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/ConformalCM/conformalcm.xml</path>
+        <offsets>
+            <x-m> 1.583710</x-m>
+            <y-m> 0.435883</y-m>
+            <z-m>-0.199905</z-m>
+            <roll-deg>-130</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>Conformal CM Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>Conformal CM Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[6]</property>
                   <value>30</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<!--
+    <!--
 
-	MBD2-67U
+    MBD2-67U
 
-	FAB-100x4 rack
+    FAB-100x4 rack
 
-	-->
+    -->
 
-	<model>
-		<name>MBD2-67U Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Rails/MBD2-67U/MBD2-67U.xml</path>
-		<offsets>
-			<x-m> 0.286156</x-m>
-			<y-m>-2.108560</y-m>
-			<z-m>-0.184571</z-m>
-			<roll-deg>0</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>MBD2-67U Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Rails/MBD2-67U/MBD2-67U.xml</path>
+        <offsets>
+            <x-m> 0.286156</x-m>
+            <y-m>-2.108560</y-m>
+            <z-m>-0.184571</z-m>
+            <roll-deg>0</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>MBD2-67U Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>MBD2-67U Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[8]</property>
                   <value>1</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>MBD2-67U Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Rails/MBD2-67U/MBD2-67U.xml</path>
-		<offsets>
-			<x-m> 0.286156</x-m>
-			<y-m> 2.108560</y-m>
-			<z-m>-0.184571</z-m>
-			<roll-deg>0</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>MBD2-67U Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Rails/MBD2-67U/MBD2-67U.xml</path>
+        <offsets>
+            <x-m> 0.286156</x-m>
+            <y-m> 2.108560</y-m>
+            <z-m>-0.184571</z-m>
+            <roll-deg>0</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>MBD2-67U Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>MBD2-67U Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[10]</property>
                   <value>1</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<!-- 
+    <!-- 
 
-	APU-68
+    APU-68
 
-	used with:
-	kh-25mp
-	kh-66
-	r-55
-	s-24
+    used with:
+    kh-25mp
+    kh-66
+    r-55
+    s-24
 
 
-	-->
+    -->
 
-	<model>
-		<name>APU-68 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
-		<offsets>
-			<x-m> 0.943511</x-m>
-			<y-m>-2.73252</y-m>
-			<z-m>-0.239961</z-m>
-			<roll-deg>0</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>APU-68 Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
+        <offsets>
+            <x-m> 0.943511</x-m>
+            <y-m>-2.73252</y-m>
+            <z-m>-0.239961</z-m>
+            <roll-deg>0</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>APU-68 Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>APU-68 Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[7]</property>
                   <value>2</value>
             </equals>
-		</condition>
-	</animation>	
+        </condition>
+    </animation>    
 
-	<model>
-		<name>APU-68 Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
-		<offsets>
-			<x-m> 0.023726</x-m>
-			<y-m>-2.10879</y-m>
-			<z-m>-0.208664</z-m>
-			<roll-deg>0</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>APU-68 Left Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
+        <offsets>
+            <x-m> 0.023726</x-m>
+            <y-m>-2.10879</y-m>
+            <z-m>-0.208664</z-m>
+            <roll-deg>0</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>APU-68 Left Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>APU-68 Left Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[8]</property>
                   <value>2</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>APU-68 Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
-		<offsets>
-			<x-m> 0.023726</x-m>
-			<y-m> 2.10879</y-m>
-			<z-m>-0.208664</z-m>
-			<roll-deg>0</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>APU-68 Right Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
+        <offsets>
+            <x-m> 0.023726</x-m>
+            <y-m> 2.10879</y-m>
+            <z-m>-0.208664</z-m>
+            <roll-deg>0</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>APU-68 Right Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>APU-68 Right Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[10]</property>
                   <value>2</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>APU-68 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
-		<offsets>
-			<x-m> 0.943511</x-m>
-			<y-m> 2.73252</y-m>
-			<z-m>-0.239961</z-m>
-			<roll-deg>0</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>APU-68 Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-68/APU-68.xml</path>
+        <offsets>
+            <x-m> 0.943511</x-m>
+            <y-m> 2.73252</y-m>
+            <z-m>-0.239961</z-m>
+            <roll-deg>0</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>APU-68 Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>APU-68 Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[11]</property>
                   <value>2</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<!--
+    <!--
 
-	APU-13 U2
+    APU-13 U2
 
-	used with:
-	R-3R
-	R-3S
-	R-13
+    used with:
+    R-3R
+    R-3S
+    R-13
 
-	maybe used with the r-27?
+    maybe used with the r-27?
 
-	-->
+    -->
 
-	<model>
-		<name>APU-13U2 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
-		<offsets>
-			<x-m> 1.32583</x-m>
-			<y-m>-2.73227</y-m>
-			<z-m>-0.244649</z-m>
-			<roll-deg>0</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>APU-13U2 Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
+        <offsets>
+            <x-m> 1.32583</x-m>
+            <y-m>-2.73227</y-m>
+            <z-m>-0.244649</z-m>
+            <roll-deg>0</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>APU-13U2 Left</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>APU-13U2 Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[7]</property>
                   <value>3</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>APU-13U2 Left Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
-		<offsets>
-			<x-m> 0.390588</x-m>
-			<y-m>-2.10897</y-m>
-			<z-m>-0.211456</z-m>
-			<roll-deg>0</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>APU-13U2 Left Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
+        <offsets>
+            <x-m> 0.390588</x-m>
+            <y-m>-2.10897</y-m>
+            <z-m>-0.211456</z-m>
+            <roll-deg>0</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>APU-13U2 Left Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>APU-13U2 Left Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[8]</property>
                   <value>3</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>APU-13U2 Right Inner</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
-		<offsets>
-			<x-m> 0.390588</x-m>
-			<y-m> 2.10897</y-m>
-			<z-m>-0.211456</z-m>
-			<roll-deg>0</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>APU-13U2 Right Inner</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
+        <offsets>
+            <x-m> 0.390588</x-m>
+            <y-m> 2.10897</y-m>
+            <z-m>-0.211456</z-m>
+            <roll-deg>0</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>APU-13U2 Right Inner</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>APU-13U2 Right Inner</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[10]</property>
                   <value>3</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>APU-13U2 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
-		<offsets>
-			<x-m> 1.32583</x-m>
-			<y-m> 2.73227</y-m>
-			<z-m>-0.244649</z-m>
-			<roll-deg>0</roll-deg>
-		</offsets>
-	</model>
+    <model>
+        <name>APU-13U2 Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/Rails/APU-13U2/APU-13U2.xml</path>
+        <offsets>
+            <x-m> 1.32583</x-m>
+            <y-m> 2.73227</y-m>
+            <z-m>-0.244649</z-m>
+            <roll-deg>0</roll-deg>
+        </offsets>
+    </model>
 
-	<animation>
-		<object-name>APU-13U2 Right</object-name>
-		<type>select</type>
-		<condition>
-			<equals>
+    <animation>
+        <object-name>APU-13U2 Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
                   <property>sim/multiplay/generic/short[11]</property>
                   <value>3</value>
             </equals>
-		</condition>
-	</animation>
+        </condition>
+    </animation>
 
-	<model>
-		<name>P-100 Left Outer</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
-			<x-m> 1.13</x-m>
-			<y-m>-2.73 </y-m>
-			<z-m>-0.28</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    <model>
+        <name>P-100 Left Outer</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m>-2.73 </y-m>
+            <z-m>-0.28</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Left Outer</object-name>
         <condition>
@@ -1902,18 +1902,18 @@
         </condition>
     </animation>
 
-	<model>
-		<name>P-100 Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
-			<x-m> 0.20</x-m>
-			<y-m>-2.11 </y-m>
-			<z-m>-0.25</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    <model>
+        <name>P-100 Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
+            <x-m> 0.20</x-m>
+            <y-m>-2.11 </y-m>
+            <z-m>-0.25</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Left</object-name>
         <condition>
@@ -1924,18 +1924,18 @@
         </condition>
     </animation>
 
-	<model>
-		<name>P-100 Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
-			<x-m> 0.20</x-m>
-			<y-m> 2.11 </y-m>
-			<z-m>-0.25</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    <model>
+        <name>P-100 Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
+            <x-m> 0.20</x-m>
+            <y-m> 2.11 </y-m>
+            <z-m>-0.25</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Right</object-name>
         <condition>
@@ -1945,19 +1945,19 @@
             </equals>
         </condition>
     </animation>
-	
-	<model>
-		<name>P-100 Right Outer</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
-			<x-m> 1.13</x-m>
-			<y-m> 2.73 </y-m>
-			<z-m>-0.28</z-m>
-			<pitch-deg>0.0</pitch-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+    
+    <model>
+        <name>P-100 Right Outer</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
+            <x-m> 1.13</x-m>
+            <y-m> 2.73 </y-m>
+            <z-m>-0.28</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Right Outer</object-name>
         <condition>
@@ -1968,19 +1968,19 @@
         </condition>
     </animation>
 
-	<model>
-		<name>P-100 Left Inner Front Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
-			<x-m>-0.236927</x-m>
+    <model>
+        <name>P-100 Left Inner Front Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
+            <x-m>-0.236927</x-m>
             <y-m>-2.25938</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>-17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Left Inner Front Left</object-name>
         <condition>
@@ -1991,118 +1991,118 @@
         </condition>
     </animation>
 
-	<model>
-		<name>P-100 Left Inner Front Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
+    <model>
+        <name>P-100 Left Inner Front Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
             <x-m>-0.236927</x-m>
             <y-m>-1.95774</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Left Inner Front Right</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>37</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>36</value>
-	            </equals>
-	        </or>
-		</condition>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>37</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>36</value>
+                </equals>
+            </or>
+        </condition>
     </animation>
 
-	<model>
-		<name>P-100 Left Inner Rear Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
+    <model>
+        <name>P-100 Left Inner Rear Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
             <x-m> 0.981207</x-m>
             <y-m>-2.259380</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>-17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Left Inner Rear Left</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>37</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>36</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>35</value>
-	            </equals>
-	        </or>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>37</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>36</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>35</value>
+                </equals>
+            </or>
         </condition>
     </animation>
 
-	<model>
-		<name>P-100 Left Inner Rear Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
+    <model>
+        <name>P-100 Left Inner Rear Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
             <x-m> 0.981207</x-m>
             <y-m>-1.957740</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Left Inner Rear Right</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>37</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>36</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>35</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[1]</property>
-	                  <value>34</value>
-	            </equals>
-	        </or>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>37</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>36</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>35</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[1]</property>
+                      <value>34</value>
+                </equals>
+            </or>
         </condition>
     </animation>
 
-	<model>
-		<name>P-100 Right Inner Front Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
+    <model>
+        <name>P-100 Right Inner Front Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
             <x-m>-0.236927</x-m>
             <y-m> 2.25938</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Right Inner Front Left</object-name>
         <condition>
@@ -2113,102 +2113,148 @@
         </condition>
     </animation>
 
-	<model>
-		<name>P-100 Right Inner Front Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
+    <model>
+        <name>P-100 Right Inner Front Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
             <x-m>-0.236927</x-m>
             <y-m> 1.95774</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>-17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Right Inner Front Right</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>37</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>36</value>
-	            </equals>
-	        </or>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>37</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>36</value>
+                </equals>
+            </or>
         </condition>
     </animation>
 
-	<model>
-		<name>P-100 Right Inner Rear Left</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
+    <model>
+        <name>P-100 Right Inner Rear Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
             <x-m> 0.981207</x-m>
             <y-m> 2.259380</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Right Inner Rear Left</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>37</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>36</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>35</value>
-	            </equals>
-	        </or>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>37</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>36</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>35</value>
+                </equals>
+            </or>
         </condition>
     </animation>
 
-	<model>
-		<name>P-100 Right Inner Rear Right</name>
-		<path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
-		<offsets>
+    <model>
+        <name>P-100 Right Inner Rear Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
+        <offsets>
             <x-m> 0.981207</x-m>
             <y-m> 1.957740</y-m>
             <z-m>-0.344914</z-m>
-			<pitch-deg>0.0</pitch-deg>
-			<roll-deg>-17.6</roll-deg>
-		</offsets>
-	</model>
-	
-	<animation>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>-17.6</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
         <type>select</type>
         <object-name>P-100 Right Inner Rear Right</object-name>
         <condition>
-        	<or>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>37</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>36</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>35</value>
-	            </equals>
-	            <equals>
-	                  <property>sim/multiplay/generic/short[3]</property>
-	                  <value>34</value>
-	            </equals>
-	        </or>
+            <or>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>37</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>36</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>35</value>
+                </equals>
+                <equals>
+                      <property>sim/multiplay/generic/short[3]</property>
+                      <value>34</value>
+                </equals>
+            </or>
+        </condition>
+    </animation>
+
+    <model>
+        <name>BETAB-500ShP Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/BETAB-500ShP/BETAB-500ShP.xml</path>
+        <offsets>
+            <x-m>0.689786</x-m>
+            <y-m>-2.1046</y-m>
+            <z-m>-0.305351</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>0.0</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <type>select</type>
+        <object-name>BETAB-500ShP Left</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>38</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <model>
+        <name>BETAB-500ShP Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/BETAB-500ShP/BETAB-500ShP.xml</path>
+        <offsets>
+            <x-m>0.689786</x-m>
+            <y-m>2.1046</y-m>
+            <z-m>-0.305351</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>0.0</roll-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <type>select</type>
+        <object-name>BETAB-500ShP Right</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>38</value>
+            </equals>
         </condition>
     </animation>
 

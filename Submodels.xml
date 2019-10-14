@@ -103,6 +103,10 @@
     97 ~ P-100 pylon 3 frontright jettison
     98 ~ P-100 pylon 3 rearleft jettison
     99 ~ P-100 pylon 3 rearright jettison
+    100 ~ BETAB-500ShP 1 live
+    101 ~ BETAB-500ShP 3 live
+    102 ~ BETAB-500ShP 1 jettison
+    103 ~ BETAB-500ShP 3 jettison
 
     -->
     <!-- 0 -->
@@ -2469,6 +2473,102 @@
         <eda>0.667</eda>
         <weight>220.0</weight>
         <cd>0.55</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>    
+
+    <!-- 100 -->
+    <submodel>
+        <name>BETAB-500ShP</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/BETAB-500ShP/BETAB-500ShP-sub.xml</model>
+        <trigger>payload/released/BETAB-500ShP[1]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <x-offset>-1.14829</x-offset>
+        <y-offset>-6.922572</y-offset>
+        <z-offset>-1.1</z-offset>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>6</eda>
+        <weight>1040.0</weight>
+        <cd>1.75</cd>
+        <fuse-range>15</fuse-range>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/BETAB-500ShP/betab-500-sub.xml</submodel-path>
+    </submodel>
+    <!-- 101 -->
+    <submodel>
+        <name>BETAB-500ShP</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/BETAB-500ShP/BETAB-500ShP-sub.xml</model>
+        <trigger>payload/released/BETAB-500ShP[3]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <x-offset>-1.14829</x-offset>
+        <y-offset>6.922572</y-offset>
+        <z-offset>-1.1</z-offset>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>6</eda>
+        <weight>1040.0</weight>
+        <cd>1.75</cd>
+        <fuse-range>15</fuse-range>
+        <collision>true</collision>
+        <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
+        <impact>true</impact>
+        <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/BETAB-500ShP/betab-500-sub.xml</submodel-path>
+    </submodel>
+    <!-- 102 -->
+    <submodel>
+        <name>BETAB-500ShP</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/BETAB-500ShP/BETAB-500ShP-sub.xml</model>
+        <trigger>payload/jettison/BETAB-500ShP[1]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <x-offset>-1.14829</x-offset>
+        <y-offset>-6.922572</y-offset>
+        <z-offset>-1.1</z-offset>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>6</eda>
+        <weight>1040.0</weight>
+        <cd>1.75</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+
+    </submodel>
+    <!-- 103 -->
+    <submodel>
+        <name>BETAB-500ShP</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/BETAB-500ShP/BETAB-500ShP-sub.xml</model>
+        <trigger>payload/jettison/BETAB-500ShP[3]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <x-offset>-1.14829</x-offset>
+        <y-offset>6.922572</y-offset>
+        <z-offset>-1.1</z-offset>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>6</eda>
+        <weight>1040.0</weight>
+        <cd>1.75</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>

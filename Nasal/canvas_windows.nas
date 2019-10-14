@@ -53,6 +53,7 @@ var stores = {
                                 "FAB-100x4",
                                 "FAB-250",
                                 "FAB-500",
+                                "BETAB-500ShP",
                                 "P-100",
                                 "P-100x4"]],
                     ["A/A Missile", 
@@ -139,6 +140,15 @@ var stores = {
                         #12345678901234567890
                         "A 500 kilogram free-",
                         "fall bomb.",
+                        ],
+            "BETAB-500ShP" : [
+                        #12345678901234567890
+                        "A 500 kilogram high",
+                        "drag bunker buster",
+                        "designed for runway",
+                        "denial and",
+                        "destroying hardened",
+                        "targets.",
                         ],
             "R-3S"   : [
                         #12345678901234567890

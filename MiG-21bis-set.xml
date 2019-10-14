@@ -239,6 +239,11 @@
 				<lbs>1146</lbs>
 				<weight-lb>1146</weight-lb>
 			</opt>
+			<opt>
+				<name>BETAB-500ShP</name>
+				<lbs>1160</lbs>
+				<weight-lb>1160</weight-lb>
+			</opt>
 		</weight>
 		<weight n="2">
 			<name>Fuselage pylon (#5)</name>
@@ -358,6 +363,11 @@
 				<name>FAB-500</name>
 				<lbs>1146</lbs>
 				<weight-lb>1146</weight-lb>
+			</opt>
+			<opt>
+				<name>BETAB-500ShP</name>
+				<lbs>1160</lbs>
+				<weight-lb>1160</weight-lb>
 			</opt>
 		</weight>
 		<weight n="4">

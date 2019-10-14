@@ -91,6 +91,7 @@ var payloads = {
     "P-100x4":              pos_arm.new("P-100x4","P-100x4",961,"bomb",37,1,250), # 34,35,36,37 ids for the bombs, reducing as each bomb drops
     "FAB-250":                pos_arm.new("FAB-250","FAB-250",551,"bomb",15,0,250),
     "FAB-500":                pos_arm.new("FAB-500","FAB-500",1146,"bomb",16,0,250),
+    "BETAB-500ShP":            pos_arm.new("BETAB-500ShP","BETAB-500ShP",1160,"bomb",38,0,125),
     # heavy
     "RN-14T":                pos_arm.new("RN-14T","RN-14T",856,"heavy",17,0,500),
     "RN-18T":                pos_arm.new("RN-18T","RN-18T",1150,"heavy",18,0,500),
