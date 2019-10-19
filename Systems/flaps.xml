@@ -26,6 +26,7 @@
       <default value="fcs/flap-pos-norm"/>
       <test logic="AND" value="fcs/flap-cmd-norm">
         systems/hydraulic[0]/pressure gt 0
+        electric/output/lg-wg-flaps gt 105
       </test>
       <output>fcs/flap-cmd-norm-hydr</output>
     </switch>

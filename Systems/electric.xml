@@ -17,10 +17,10 @@
 			or
 	rvrsp for short
 	-->
-	<property value="1">electric/switches/rvrsp/air-brake</property>
-	<property value="1">electric/switches/rvrsp/lg-wg-flaps</property>
+	<property value="1">electric/switches/rvrsp/air-brake</property> <!-- output implemented -->
+	<property value="1">electric/switches/rvrsp/lg-wg-flaps</property> <!-- output implemented -->
 	<property value="1">electric/switches/rvrsp/lg-sig-nav-lts</property>
-	<property value="1">electric/switches/rvrsp/cone-and-as-shutters-gtl</property>
+	<property value="1">electric/switches/rvrsp/cone-and-as-shutters-gtl</property> <!-- output implemented -->
 	<property value="1">electric/switches/rvrsp/msl-rgm-emer-lcn-lchr-rkt-bombs-jett</property>
 	<property value="1">electric/switches/rvrsp/oxy-eq-heat-extn-lamp-wht-lt</property>
 	<property value="1">electric/switches/rvrsp/drag-chute</property>
@@ -31,8 +31,8 @@
 	<property value="1">electric/switches/rvrsp/hydr-pres-gauge-tanks-sig</property>
 	<property value="1">electric/switches/rvrsp/anh-pnl-lampst-test-copu-warn-syst</property>
 	<property value="1">electric/switches/rvrsp/ext-stores-sig</property>
-	<property value="1">electric/switches/rvrsp/blc-syst-shutters-control-1</property>
-	<property value="1">electric/switches/rvrsp/blc-syst-shutters-control-2</property>
+	<property value="1">electric/switches/rvrsp/blc-syst-shutters-control-1</property> <!-- output implemented -->
+	<property value="1">electric/switches/rvrsp/blc-syst-shutters-control-2</property> <!-- output implemented -->
 	<property value="1">electric/switches/rvrsp/tac-rls-1-2</property>
 	<property value="1">electric/switches/rvrsp/cabin-air-sup</property>
 	<property value="1">electric/switches/rvrsp/firing-button</property>

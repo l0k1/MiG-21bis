@@ -32,6 +32,10 @@
                             150.0   1.0
                         </tableData>
                     </table>
+                    <gt>
+                        <property>electric/output/air-brake</property>
+                        <value>105</value>
+                    </gt>
                     <property>fcs/speedbrake-rear-enable</property>
                 </product>
             </function>

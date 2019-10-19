@@ -221,6 +221,10 @@ i'm assuming that the wind isn't a significant factor here.
                         <property>electric/output/cone</property>
                         <value>105</value>
                     </gt>
+                    <gt>
+                        <property>electric/output/cone-and-as-shutters-gtl</property>
+                        <value>105</value>
+                    </gt>
                 </product>
             </function>
             <output>systems/air-intake/cone-rate</output>
