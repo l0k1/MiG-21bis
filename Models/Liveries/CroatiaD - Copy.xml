@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">Croatian test</name>
+                <texture>Liveries/CroatiaDtest.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/CroatiaDtest.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>

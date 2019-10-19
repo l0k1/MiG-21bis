@@ -33,7 +33,7 @@
                         </tableData>
                     </table>
                     <gt>
-                        <property>electric/output/air-brake</property>
+                        <property>electric/output/air-brakes</property>
                         <value>105</value>
                     </gt>
                     <property>fcs/speedbrake-rear-enable</property>

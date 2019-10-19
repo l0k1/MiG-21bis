@@ -1160,7 +1160,8 @@ var impact_listener = func {
             sounds.boom(distance);
         }
         if (typeOrdName == "BETAB-500ShP" and ballistic.getNode("impact/type").getValue() == "terrain") {
-            geo.put_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue());
+            #var x = geo.put_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue());
+            place_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue() * M2FT);
         }
     }
 }
@@ -1496,6 +1497,45 @@ var pylon_select_2 = func() {
         }
     }
 }
+
+var place_model = func(path, lat, lon, ele) {
+    print(path);
+    print(lat);
+    print(lon);
+    print(ele);
+    var n = props.globals.getNode("models",1);
+    var i = 0;
+    for (i = 0; 1==1; i += 1) {
+        if (n.getChild("model",i,0) == nil) {
+            break;
+        }
+    }
+
+    var objModel = n.getChild("model",i,1);
+
+    objModel.getNode("elevation",1).setDoubleValue(-999);
+    objModel.getNode("latitude",1).setDoubleValue(0);
+    objModel.getNode("longitude",1).setDoubleValue(0);
+    objModel.getNode("elevation-ft-prop",1).setValue(objModel.getPath()~"/elevation");
+    objModel.getNode("latitude-deg-prop",1).setValue(objModel.getPath()~"/latitude");
+    objModel.getNode("longitude-deg-prop",1).setValue(objModel.getPath()~"/longitude");
+    objModel.getNode("heading",1).setDoubleValue(0);
+    objModel.getNode("pitch",1).setDoubleValue(0);
+    objModel.getNode("roll",1).setDoubleValue(0);
+    objModel.getNode("heading-deg-prop",1).setValue(objModel.getPath()~"/heading");
+    objModel.getNode("pitch-deg-prop",1).setValue(objModel.getPath()~"/pitch");
+    objModel.getNode("roll-deg-prop",1).setValue(objModel.getPath()~"/roll");
+
+    objModel.getNode("path",1).setValue(path); # this is the model to be loaded.
+
+    var loadNode = objModel.getNode("load", 1);
+    loadNode.setBoolValue(1);
+    loadNode.remove();
+    objModel.getNode("latitude").setDoubleValue(lat);
+    objModel.getNode("longitude").setDoubleValue(lon);
+    objModel.getNode("elevation").setDoubleValue(ele);
+}
+
 
 var spamLoop = func {
   var spam = pop(spamList);

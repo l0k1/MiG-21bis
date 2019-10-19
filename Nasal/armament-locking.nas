@@ -184,7 +184,7 @@ for (i = 0; 1==1; i += 1) {
 
 var objModel = n.getChild("model",i,1);
 
-objModel.getNode("elevation",1).setDoubleValue(0);
+objModel.getNode("elevation",1).setDoubleValue(-999);
 objModel.getNode("latitude",1).setDoubleValue(0);
 objModel.getNode("longitude",1).setDoubleValue(0);
 objModel.getNode("elevation-ft-prop",1).setValue(objModel.getPath()~"/elevation");
