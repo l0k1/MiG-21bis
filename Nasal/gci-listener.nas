@@ -106,7 +106,15 @@ var find_aew_cx = func() {
 var counter = 0;
 var check_messages = func() {
     #debug.dump(ids);
-    if (aew_cx == nil) { return; }
+    if (aew_cx == nil) {
+        if (picture_prop.getValue() or bogeydope_prop.getValue() or cutoff_prop.getValue()) {
+            screen.log.write("No GCI in area.", 1.0, 0.2, 0.2);
+            picture_prop.setValue(0);
+            bogeydope_prop.setValue(0);
+            cutoff_prop.setValue(0);
+        }
+        return; 
+    }
     #print('checking messages');
     msgdata = [];
     for (var i = 0; i <= 10; i = i + 1) {
