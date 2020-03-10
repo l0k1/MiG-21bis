@@ -1,755 +1,1008 @@
 <system name="warning-lights">
 
-	<property value="1">/instrumentation/warning-lights/dimmer[0]</property>
-	<property value="1">/instrumentation/warning-lights/dimmer[1]</property>
-	<property value="1">/instrumentation/warning-lights/dimmer[2]</property>
-	<property value="1">/instrumentation/warning-lights/dimmer[3]</property>
-	<property value="1">/instrumentation/warning-lights/dimmer[4]</property>
-	<property value="1">/instrumentation/warning-lights/dimmer[5]</property>
-	<property value="0">/consumables/fuel/tank[11]/selected</property>
+   <property value="1">/instrumentation/warning-lights/dimmer[0]</property>
+   <property value="1">/instrumentation/warning-lights/dimmer[1]</property>
+   <property value="1">/instrumentation/warning-lights/dimmer[2]</property>
+   <property value="1">/instrumentation/warning-lights/dimmer[3]</property>
+   <property value="1">/instrumentation/warning-lights/dimmer[4]</property>
+   <property value="1">/instrumentation/warning-lights/dimmer[5]</property>
+   <property value="0">/consumables/fuel/tank[11]/selected</property>
+   
+   <channel name="masterwarn" execrate="3">
+      <!-- until i can find an actual list, im going to use these warnings for master warning:
+         NO 1 TK GP EMPTY: If the wing tanks (tanks 7,8,9,10) are empty
+         450L FUEL REMAIN: If there is 450L of fuel
+         NO 3 TK GP EMPTY: Tanks 3,4,5,6 are empty
+         SERVICE TANK: Service tank switch is off
+         DC GEN OFF: DC generator is off/malfunctioning
+         AC GEN OFF: AC generator is off/malfunctioning
+         FIRE: the engine is on fire
+         WTCH MAIN SYST PRES: Main hydraulic system pressure is low
+         WTCH BKUP SYST PRES: Second hydraulic system pressure is low
+      -->
+      
+      <!-- pressing the masterwarn button should set warning-lights/masterwarn-state to 0 -->
+      
+      <puregain name="trash/warning-lights/masterwarn-last">
+         <input>warning-lights/masterwarn-input</input>
+         <gain>1.0</gain>
+         <output>warning-lights/masterwarn-last</output>
+      </puregain>
+      
+      <fcs_function name="trash/warning-lights/masterwarn-input">
+         <function>
+            <sum>
+               <property>warning-lights/no-1-gp-empty</property>
+               <property>warning-lights/L450</property>
+               <property>warning-lights/no-3-gp-empty</property>
+               <property>warning-lights/service-tank</property>
+               <property>warning-lights/dc-gen-off</property>
+               <property>warning-lights/ac-gen-off</property>
+               <property>warning-lights/fire</property>
+               <property>warning-lights/watch-main-syst-pres</property>
+               <property>warning-lights/watch-bkup-syst-pres</property>
+            </sum>
+         </function>
+         <output>warning-lights/masterwarn-input</output>
+      </fcs_function>
+      
+      <!-- if masterwarn-input is greater than masterwarn-last or the light is on, then the light should be beeping. -->
+      
+      <switch name="trash/warning-lights/masterwarn-state">
+         <default value="0"/>
+         <test logic="OR" value="1">
+            warning-lights/masterwarn-state == 1
+            warning-lights/masterwarn-input gt warning-lights/masterwarn-last
+         </test>
+         <output>warning-lights/masterwarn-state</output>
+      </switch>
+      
+      <fcs_function name="trash/warning-lights/masterwarn-cycle">
+         <function>
+            <!-- if state == 1 then increment cycle, else set cycle = 0 -->
+            <ifthen>
+               <eq>
+                  <property>warning-lights/masterwarn-state</property>
+                  <value>1</value>
+               </eq>
+               <!-- if cycle = 40 then cycle = 0 else cycle = cycle + 1-->
+               <ifthen>
+                  <ge>
+                     <property>warning-lights/masterwarn-cycle</property>
+                     <value>40</value>
+                  </ge>
+                  <value>0</value>
+                  <sum>
+                     <property>warning-lights/masterwarn-cycle</property>
+                     <value>1</value>
+                  </sum>
+               </ifthen>
+               <value>0</value>
+            </ifthen>
+         </function>
+         <output>warning-lights/masterwarn-cycle</output>
+      </fcs_function>
+      
+      <fcs_function name="trash/warning-lights/masterwarn">
+         <function>
+            <product>
+               <lt>
+                  <property>warning-lights/masterwarn-cycle</property>
+                  <value>20</value>
+               </lt>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/masterwarn</output>
+      </fcs_function>
+      
+   </channel>
+   <channel name="lights1" execrate="3">
 
-	<channel name="lights1" execrate="3">
+      <!--
+         There are 4 lights on this panel:
+         MARKER: the plane is passing over an NDB marker beacon
+         CONE EXTENDED: the nosecone is extended
+         STAB FOR LDG: If the flaps and BLC are set for landing
+         TRIM NEUTRAL: if the trim is in a neutral position
+      -->
+      
+      <fcs_function name="trash/warning-lights/marker">
+         <function>
+            <product>
+               <property>/instrumentation/adf-radio/overhead</property>
+               <gt>
+                  <property>electric/output/arc<property>
+                  <value>20</value>
+               </gt>
+               <property>/instrumentation/warning-lights/dimmer[6]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/marker</output>
+      </fcs_function>
+      
+      <fcs_function name="trash/warning-lights/cone-extended">
+         <function>
+            <product>
+               <lt>
+                  <property>systems/air-intake/cone-pos-norm</property>
+                  <value>0.3</value>
+               </lt>
+               <gt>
+                  <property>electric/output/cone<property>
+                  <value>20</value>
+               </gt>
+               <property>/instrumentation/warning-lights/dimmer[6]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/cone-extended</output>
+      </fcs_function>
+      
+      <fcs_function name="trash/warning-lights/stab-for-ldg">
+         <function>
+            <product>
+               <gt>
+                  <property>fcs/flap-pos-deg</property>
+                  <value>35</value>
+               </gt>
+               <gt>
+                  <property>blc<property>
+                  <value>0.7</value>
+               </gt>
+               <property>/instrumentation/warning-lights/dimmer[6]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/stab-for-ldg</output>
+      </fcs_function>
+      
+      <fcs_function name="trash/warning-lights/trim-neutral">
+         <function>
+            <product>
+               <lt>
+                  <sum>
+                     <abs><property>fcs/pitch-trim-cmd-norm</property></abs>
+                     <abs><property>fcs/roll-trim-cmd-norm</property></abs>
+                     <abs><property>fcs/yaw-trim-cmd-norm</property></abs>
+                  </sum>
+                  <value>0.05</value>
+               </lt>
+               <gt>
+                  <property>electric/output/trim<property>
+                  <value>20</value>
+               </gt>
+               <property>/instrumentation/warning-lights/dimmer[6]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/trim-neutral</output>
+      </fcs_function>
+      
+   </channel>
 
-		<!--
-			There are 4 lights on this panel:
-			MARKER: the plane is passing over an NDB marker beacon
-			CONE EXTENDED: the nosecone is extended
-			STAB FOR LDG: If the flaps and BLC are set for landing
-			TRIM NEUTRAL: if the trim is in a neutral position
-		-->
+   <channel name="lights2" execrate="3">
 
-	</channel>
-
-	<channel name="lights2" execrate="3">
-
-		<!--
-			There are 4 lights on this panel:
-			NO 1 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
-			NO 2 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
-			NO 3 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
-			NO 4 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
-
-
-    22 ~ S-5 pylon 0
-    23 ~ S-5 pylon 1
-    24 ~ S-5 pylon 3
-    25 ~ S-5 pylon 4
-
-		-->
-
-		<!-- NO 1 RKT ZERO PSN -->
-
-		<fcs_function name="trash/warning-lights/no-1-rkt-zero-psn">
-			<function>
-				<product>
-					<or>
-						<and>
-							<eq>
-								<property>/payload/weight[1]/weight-lb</property>
-								<value>141</value>
-							</eq>
-							<eq>
-								<property>/ai/submodels/submodel[23]/count</property>
-								<value>0</value>
-							</eq>
-						</and>
-						<and>
-							<or>
-								<eq>
-									<property>/ai/submodels/submodel[23]/count</property>
-									<value>0</value>
-								</eq>
-								<eq>
-									<property>/ai/submodels/submodel[23]/count</property>
-									<value>16</value>
-								</eq>
-							</or>
-							<eq>
-								<property>/payload/weight[1]/weight-lb</property>
-								<value>582</value>
-							</eq>
-						</and>
-						<eq>
-							<property>/payload/weight[1]/weight-lb</property>
-							<value>0</value>
-						</eq>
-					</or>
-					<property>/instrumentation/warning-lights/dimmer[2]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/no-1-rkt-zero-psn</output>
-		</fcs_function>
-
-		<!-- NO 2 RKT ZERO PSN -->
-
-		<fcs_function name="trash/warning-lights/no-2-rkt-zero-psn">
-			<function>
-				<product>
-					<or>
-						<and>
-							<eq>
-								<property>/payload/weight[3]/weight-lb</property>
-								<value>141</value>
-							</eq>
-							<eq>
-								<property>/ai/submodels/submodel[24]/count</property>
-								<value>0</value>
-							</eq>
-						</and>
-						<and>
-							<or>
-								<eq>
-									<property>/ai/submodels/submodel[24]/count</property>
-									<value>0</value>
-								</eq>
-								<eq>
-									<property>/ai/submodels/submodel[24]/count</property>
-									<value>16</value>
-								</eq>
-							</or>
-							<eq>
-								<property>/payload/weight[3]/weight-lb</property>
-								<value>582</value>
-							</eq>
-						</and>
-						<eq>
-							<property>/payload/weight[3]/weight-lb</property>
-							<value>0</value>
-						</eq>
-					</or>
-					<property>/instrumentation/warning-lights/dimmer[2]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/no-2-rkt-zero-psn</output>
-		</fcs_function>
-
-		<!-- NO 3 RKT ZERO PSN -->
-
-		<fcs_function name="trash/warning-lights/no-3-rkt-zero-psn">
-			<function>
-				<product>
-					<or>
-						<and>
-							<eq>
-								<property>/payload/weight[0]/weight-lb</property>
-								<value>141</value>
-							</eq>
-							<eq>
-								<property>/ai/submodels/submodel[22]/count</property>
-								<value>0</value>
-							</eq>
-						</and>
-						<and>
-							<or>
-								<eq>
-									<property>/ai/submodels/submodel[22]/count</property>
-									<value>0</value>
-								</eq>
-								<eq>
-									<property>/ai/submodels/submodel[22]/count</property>
-									<value>16</value>
-								</eq>
-							</or>
-							<eq>
-								<property>/payload/weight[0]/weight-lb</property>
-								<value>582</value>
-							</eq>
-						</and>
-						<eq>
-							<property>/payload/weight[0]/weight-lb</property>
-							<value>0</value>
-						</eq>
-					</or>
-					<property>/instrumentation/warning-lights/dimmer[2]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/no-3-rkt-zero-psn</output>
-		</fcs_function>
-
-		<!-- NO 4 RKT ZERO PSN -->
-
-		<fcs_function name="trash/warning-lights/no-4-rkt-zero-psn">
-			<function>
-				<product>
-					<or>
-						<and>
-							<eq>
-								<property>/payload/weight[4]/weight-lb</property>
-								<value>141</value>
-							</eq>
-							<eq>
-								<property>/ai/submodels/submodel[25]/count</property>
-								<value>0</value>
-							</eq>
-						</and>
-						<and>
-							<or>
-								<eq>
-									<property>/ai/submodels/submodel[25]/count</property>
-									<value>0</value>
-								</eq>
-								<eq>
-									<property>/ai/submodels/submodel[25]/count</property>
-									<value>16</value>
-								</eq>
-							</or>
-							<eq>
-								<property>/payload/weight[4]/weight-lb</property>
-								<value>582</value>
-							</eq>
-						</and>
-						<eq>
-							<property>/payload/weight[4]/weight-lb</property>
-							<value>0</value>
-						</eq>
-					</or>
-					<property>/instrumentation/warning-lights/dimmer[2]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/no-4-rkt-zero-psn</output>
-		</fcs_function>
-
-	</channel>
-
-	<channel name="lights3" execrate="3">
-
-		<!--
-			There are 8 lights on this panel:
-			WG DROP TKS EMPTY: Wing drop tanks are empty (tanks 12 and 13)
-			VENT DROP TK ATTACHD: ventral drop tank is attached
-			INBOARD STATION 1: something attached on this pylon
-			INBOARD STATION 2: something attached on this pylon
-			OUTBOARD STATION 3: something attached on this pylon
-			OUTBOARD STATION 4: something attached on this pylon
-			PORT JATO: jato/cm attached on port side
-			STBD JATO: jato/cm attached on starboard side
-		-->
-
-		<fcs_function name="trash/warning-lights/wg-drop-tks-empty">
-			<function>
-				<product>
-					<and>
-						<le>
-							<property>propulsion/tank[12]/contents-lbs</property>
-							<value>1.5</value>
-						</le>
-						<le>
-							<property>propulsion/tank[13]/contents-lbs</property>
-							<value>1.5</value>
-						</le>
-					</and>
-					<property>/instrumentation/warning-lights/dimmer[3]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/wg-drop-tks-empty</output>
-		</fcs_function>
-
-		<fcs_function name="trash/warning-lights/vent-droptk-attchd">
-			<function>
-				<product>
-					<eq>
-						<property>/consumables/fuel/tank[11]/selected</property>
-						<value>1</value>
-					</eq>
-					<property>/instrumentation/warning-lights/dimmer[3]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/vent-drop-tk-attchd</output>
-		</fcs_function>
+      <!--
+         There are 4 lights on this panel:
+         NO 1 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
+         NO 2 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
+         NO 3 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
+         NO 4 RKT ZERO PSN: rocket pod ammo = 0 (or 16 when UB-32 is used)
 
 
+         22 ~ S-5 pylon 0
+         23 ~ S-5 pylon 1
+         24 ~ S-5 pylon 3
+         25 ~ S-5 pylon 4
 
-		<fcs_function name="trash/warning-lights/inboard-station-1">
-			<function>
-				<product>
-					<gt>
-						<property>/payload/weight[1]/weight-lb</property>
-						<value>0</value>
-					</gt>
-					<property>/instrumentation/warning-lights/dimmer[3]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/inboard-station-1</output>
-		</fcs_function>
+      -->
 
-		<fcs_function name="trash/warning-lights/inboard-station-2">
-			<function>
-				<product>
-					<gt>
-						<property>/payload/weight[3]/weight-lb</property>
-						<value>0</value>
-					</gt>
-					<property>/instrumentation/warning-lights/dimmer[3]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/inboard-station-2</output>
-		</fcs_function>
+      <!-- NO 1 RKT ZERO PSN -->
 
-		<fcs_function name="trash/warning-lights/outboard-station-3">
-			<function>
-				<product>
-					<gt>
-						<property>/payload/weight[0]/weight-lb</property>
-						<value>0</value>
-					</gt>
-					<property>/instrumentation/warning-lights/dimmer[3]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/outboard-station-3</output>
-		</fcs_function>
+      <fcs_function name="trash/warning-lights/no-1-rkt-zero-psn">
+         <function>
+            <product>
+               <or>
+                  <and>
+                     <eq>
+                        <property>/payload/weight[1]/weight-lb</property>
+                        <value>141</value>
+                     </eq>
+                     <eq>
+                        <property>/ai/submodels/submodel[23]/count</property>
+                        <value>0</value>
+                     </eq>
+                  </and>
+                  <and>
+                     <or>
+                        <eq>
+                           <property>/ai/submodels/submodel[23]/count</property>
+                           <value>0</value>
+                        </eq>
+                        <eq>
+                           <property>/ai/submodels/submodel[23]/count</property>
+                           <value>16</value>
+                        </eq>
+                     </or>
+                     <eq>
+                        <property>/payload/weight[1]/weight-lb</property>
+                        <value>582</value>
+                     </eq>
+                  </and>
+                  <eq>
+                     <property>/payload/weight[1]/weight-lb</property>
+                     <value>0</value>
+                  </eq>
+               </or>
+               <property>/instrumentation/warning-lights/dimmer[2]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/no-1-rkt-zero-psn</output>
+      </fcs_function>
 
-		<fcs_function name="trash/warning-lights/outboard-station-4">
-			<function>
-				<product>
-					<gt>
-						<property>/payload/weight[4]/weight-lb</property>
-						<value>0</value>
-					</gt>
-					<property>/instrumentation/warning-lights/dimmer[3]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/outboard-station-4</output>
-		</fcs_function>
+      <!-- NO 2 RKT ZERO PSN -->
 
-	</channel>
+      <fcs_function name="trash/warning-lights/no-2-rkt-zero-psn">
+         <function>
+            <product>
+               <or>
+                  <and>
+                     <eq>
+                        <property>/payload/weight[3]/weight-lb</property>
+                        <value>141</value>
+                     </eq>
+                     <eq>
+                        <property>/ai/submodels/submodel[24]/count</property>
+                        <value>0</value>
+                     </eq>
+                  </and>
+                  <and>
+                     <or>
+                        <eq>
+                           <property>/ai/submodels/submodel[24]/count</property>
+                           <value>0</value>
+                        </eq>
+                        <eq>
+                           <property>/ai/submodels/submodel[24]/count</property>
+                           <value>16</value>
+                        </eq>
+                     </or>
+                     <eq>
+                        <property>/payload/weight[3]/weight-lb</property>
+                        <value>582</value>
+                     </eq>
+                  </and>
+                  <eq>
+                     <property>/payload/weight[3]/weight-lb</property>
+                     <value>0</value>
+                  </eq>
+               </or>
+               <property>/instrumentation/warning-lights/dimmer[2]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/no-2-rkt-zero-psn</output>
+      </fcs_function>
 
-	<channel name="lights4" execrate="3">
+      <!-- NO 3 RKT ZERO PSN -->
 
-		<!--
-			There are 4 lights on this panel:
-			VENT DROP TK EMPTY: If the ventral drop tank (tank 11) is empty
-			NO 1 TK GP EMPTY: If the wing tanks (tanks 7,8,9,10) are empty
-			450L FUEL REMAIN: If there is 450L of fuel
-			NO 3 TK GP EMPTY: Tanks 3,4,5,6 are empty
-		-->
+      <fcs_function name="trash/warning-lights/no-3-rkt-zero-psn">
+         <function>
+            <product>
+               <or>
+                  <and>
+                     <eq>
+                        <property>/payload/weight[0]/weight-lb</property>
+                        <value>141</value>
+                     </eq>
+                     <eq>
+                        <property>/ai/submodels/submodel[22]/count</property>
+                        <value>0</value>
+                     </eq>
+                  </and>
+                  <and>
+                     <or>
+                        <eq>
+                           <property>/ai/submodels/submodel[22]/count</property>
+                           <value>0</value>
+                        </eq>
+                        <eq>
+                           <property>/ai/submodels/submodel[22]/count</property>
+                           <value>16</value>
+                        </eq>
+                     </or>
+                     <eq>
+                        <property>/payload/weight[0]/weight-lb</property>
+                        <value>582</value>
+                     </eq>
+                  </and>
+                  <eq>
+                     <property>/payload/weight[0]/weight-lb</property>
+                     <value>0</value>
+                  </eq>
+               </or>
+               <property>/instrumentation/warning-lights/dimmer[2]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/no-3-rkt-zero-psn</output>
+      </fcs_function>
 
-		<!-- VENT DROP TK EMPTY -->
+      <!-- NO 4 RKT ZERO PSN -->
 
-		<fcs_function name="trash/warning-lights/vent-drop-tk-empty">
-			<function>
-				<product>
-					<le>
-						<property>propulsion/tank[11]/contents-lbs</property>
-						<value>1.5</value>
-					</le>
-					<property>/instrumentation/warning-lights/dimmer[4]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/vent-drop-tk-empty</output>
-		</fcs_function>
+      <fcs_function name="trash/warning-lights/no-4-rkt-zero-psn">
+         <function>
+            <product>
+               <or>
+                  <and>
+                     <eq>
+                        <property>/payload/weight[4]/weight-lb</property>
+                        <value>141</value>
+                     </eq>
+                     <eq>
+                        <property>/ai/submodels/submodel[25]/count</property>
+                        <value>0</value>
+                     </eq>
+                  </and>
+                  <and>
+                     <or>
+                        <eq>
+                           <property>/ai/submodels/submodel[25]/count</property>
+                           <value>0</value>
+                        </eq>
+                        <eq>
+                           <property>/ai/submodels/submodel[25]/count</property>
+                           <value>16</value>
+                        </eq>
+                     </or>
+                     <eq>
+                        <property>/payload/weight[4]/weight-lb</property>
+                        <value>582</value>
+                     </eq>
+                  </and>
+                  <eq>
+                     <property>/payload/weight[4]/weight-lb</property>
+                     <value>0</value>
+                  </eq>
+               </or>
+               <property>/instrumentation/warning-lights/dimmer[2]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/no-4-rkt-zero-psn</output>
+      </fcs_function>
 
-		<!-- NO 1 TK GP EMPTY -->
+   </channel>
 
-		<fcs_function name="trash/warning-lights/no-1-gp-empty">
-			<function>
-				<product>
-					<le>
-						<property>propulsion/tank[7]/contents-lbs</property>
-						<value>2.5</value>
-					</le>
-					<le>
-						<property>propulsion/tank[8]/contents-lbs</property>
-						<value>2.5</value>
-					</le>
-					<le>
-						<property>propulsion/tank[9]/contents-lbs</property>
-						<value>2.5</value>
-					</le>
-					<le>
-						<property>propulsion/tank[10]/contents-lbs</property>
-						<value>2.5</value>
-					</le>
-					<property>/instrumentation/warning-lights/dimmer[4]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/no-1-gp-empty</output>
-		</fcs_function>
+   <channel name="lights3" execrate="3">
 
-		<!-- 450L FUEL REMAIN -->
+      <!--
+         There are 8 lights on this panel:
+         WG DROP TKS EMPTY: Wing drop tanks are empty (tanks 12 and 13)
+         VENT DROP TK ATTACHD: ventral drop tank is attached
+         INBOARD STATION 1: something attached on this pylon
+         INBOARD STATION 2: something attached on this pylon
+         OUTBOARD STATION 3: something attached on this pylon
+         OUTBOARD STATION 4: something attached on this pylon
+         PORT JATO: jato/cm attached on port side
+         STBD JATO: jato/cm attached on starboard side
+      -->
 
-		<fcs_function name="trash/warning-lights/L450">
-			<function>
-				<product>
-					<le>
-						<property>propulsion/total-fuel-lbs</property>
-						<value>772.0</value>
-					</le>
-					<property>/instrumentation/warning-lights/dimmer[4]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/L450</output>
-		</fcs_function>
+      <fcs_function name="trash/warning-lights/wg-drop-tks-empty">
+         <function>
+            <product>
+               <and>
+                  <le>
+                     <property>propulsion/tank[12]/contents-lbs</property>
+                     <value>1.5</value>
+                  </le>
+                  <le>
+                     <property>propulsion/tank[13]/contents-lbs</property>
+                     <value>1.5</value>
+                  </le>
+               </and>
+               <property>/instrumentation/warning-lights/dimmer[3]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/wg-drop-tks-empty</output>
+      </fcs_function>
 
-		<!-- NO 3 TK GP EMPTY -->
+      <fcs_function name="trash/warning-lights/vent-droptk-attchd">
+         <function>
+            <product>
+               <eq>
+                  <property>/consumables/fuel/tank[11]/selected</property>
+                  <value>1</value>
+               </eq>
+               <property>/instrumentation/warning-lights/dimmer[3]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/vent-drop-tk-attchd</output>
+      </fcs_function>
 
-		<fcs_function name="trash/warning-lights/no-3-gp-empty">
-			<function>
-				<product>
-					<le>
-						<property>propulsion/tank[3]/contents-lbs</property>
-						<value>2.5</value>
-					</le>
-					<le>
-						<property>propulsion/tank[4]/contents-lbs</property>
-						<value>2.5</value>
-					</le>
-					<le>
-						<property>propulsion/tank[5]/contents-lbs</property>
-						<value>2.5</value>
-					</le>
-					<le>
-						<property>propulsion/tank[6]/contents-lbs</property>
-						<value>2.5</value>
-					</le>
-					<property>/instrumentation/warning-lights/dimmer[4]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/no-3-gp-empty</output>
-		</fcs_function>
+      <fcs_function name="trash/warning-lights/inboard-station-1">
+         <function>
+            <product>
+               <gt>
+                  <property>/payload/weight[1]/weight-lb</property>
+                  <value>0</value>
+               </gt>
+               <property>/instrumentation/warning-lights/dimmer[3]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/inboard-station-1</output>
+      </fcs_function>
 
-	</channel>
+      <fcs_function name="trash/warning-lights/inboard-station-2">
+         <function>
+            <product>
+               <gt>
+                  <property>/payload/weight[3]/weight-lb</property>
+                  <value>0</value>
+               </gt>
+               <property>/instrumentation/warning-lights/dimmer[3]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/inboard-station-2</output>
+      </fcs_function>
 
-	<channel name="lights5" execrate="3">
+      <fcs_function name="trash/warning-lights/outboard-station-3">
+         <function>
+            <product>
+               <gt>
+                  <property>/payload/weight[0]/weight-lb</property>
+                  <value>0</value>
+               </gt>
+               <property>/instrumentation/warning-lights/dimmer[3]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/outboard-station-3</output>
+      </fcs_function>
 
-		<!--
-			There are 10 lights on this panel:
-			SWITCH OFF IGNITION: controls/engines/engine[0]/start-ignition-signal
-			SERVICE TANK: ?
-			FIRST REHEAT: Regular A/B is on
-			SECOND REHEAT: Second A/B is on
-			DC GEN OFF: DC generator is off/malfunctioning
-			AC GEN OFF: AC generator is off/malfunctioning
-			FIRE: the engine is on fire
-			JET NOZZLE OPEN: ?
-			WTCH MAIN SYST PRES: Main hydraulic system pressure is low
-			WTCH BKUP SYST PRES: Second hydraulic system pressure is low
-		-->
+      <fcs_function name="trash/warning-lights/outboard-station-4">
+         <function>
+            <product>
+               <gt>
+                  <property>/payload/weight[4]/weight-lb</property>
+                  <value>0</value>
+               </gt>
+               <property>/instrumentation/warning-lights/dimmer[3]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/outboard-station-4</output>
+      </fcs_function>
 
-		<fcs_function name="trash/warning-lights/switch-off-ignition">
-			<function>
-				<product>
-					<eq>
-						<property>/controls/engines/engine[0]/start-ignition-signal</property>
-						<value>1</value>
-					</eq>
-					<property>/instrumentation/warning-lights/dimmer[5]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/switch-off-ignition</output>
-		</fcs_function>
+   </channel>
 
-		<fcs_function name="trash/warning-lights/first-reheat">
-			<function>
-				<product>
-					<eq>
-						<property>/engines/engine[0]/augmentation</property>
-						<value>1</value>
-					</eq>
-					<property>/instrumentation/warning-lights/dimmer[5]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/first-reheat</output>
-		</fcs_function>
+   <channel name="lights4" execrate="3">
 
-		<fcs_function name="trash/warning-lights/second-reheat">
-			<function>
-				<product>
-					<and>
-						<eq>
-							<property>/engines/engine[0]/augmentation</property>
-							<value>1</value>
-						</eq>
-						<eq>
-							<property>propulsion/clr</property>
-							<value>1</value>
-						</eq>
-					</and>
-					<property>/instrumentation/warning-lights/dimmer[5]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/second-reheat</output>
-		</fcs_function>
+      <!--
+         There are 4 lights on this panel:
+         VENT DROP TK EMPTY: If the ventral drop tank (tank 11) is empty
+         NO 1 TK GP EMPTY: If the wing tanks (tanks 7,8,9,10) are empty
+         450L FUEL REMAIN: If there is 450L of fuel
+         NO 3 TK GP EMPTY: Tanks 3,4,5,6 are empty
+      -->
 
-		<fcs_function name="trash/warning-lights/jet-nozzle-open">
-			<function>
-				<product>
-					<eq>
-						<property>propulsion/engine[0]/nozzle-pos-norm</property>
-						<value>1</value>
-					</eq>
-					<property>/instrumentation/warning-lights/dimmer[5]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/jet-nozzle-open</output>
-		</fcs_function>
+      <!-- VENT DROP TK EMPTY -->
 
-		<fcs_function name="trash/warning-lights/watch-bkup-syst-pres">
-			<function>
-				<product>
-					<lt>
-						<property>systems/hydraulic[1]/pressure</property>
-						<value>165</value>
-					</lt>
-					<property>/instrumentation/warning-lights/dimmer[5]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/watch-bkup-syst-pres</output>
-		</fcs_function>
+      <fcs_function name="trash/warning-lights/vent-drop-tk-empty">
+         <function>
+            <product>
+               <le>
+                  <property>propulsion/tank[11]/contents-lbs</property>
+                  <value>1.5</value>
+               </le>
+               <property>/instrumentation/warning-lights/dimmer[4]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/vent-drop-tk-empty</output>
+      </fcs_function>
 
-		<fcs_function name="trash/warning-lights/watch-main-syst-pres">
-			<function>
-				<product>
-					<lt>
-						<property>systems/hydraulic[0]/pressure</property>
-						<value>165</value>
-					</lt>
-					<property>/instrumentation/warning-lights/dimmer[5]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/watch-main-syst-pres</output>
-		</fcs_function>
+      <!-- NO 1 TK GP EMPTY -->
 
-	</channel>
+      <fcs_function name="trash/warning-lights/no-1-gp-empty">
+         <function>
+            <product>
+               <le>
+                  <property>propulsion/tank[7]/contents-lbs</property>
+                  <value>2.5</value>
+               </le>
+               <le>
+                  <property>propulsion/tank[8]/contents-lbs</property>
+                  <value>2.5</value>
+               </le>
+               <le>
+                  <property>propulsion/tank[9]/contents-lbs</property>
+                  <value>2.5</value>
+               </le>
+               <le>
+                  <property>propulsion/tank[10]/contents-lbs</property>
+                  <value>2.5</value>
+               </le>
+               <property>/instrumentation/warning-lights/dimmer[4]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/no-1-gp-empty</output>
+      </fcs_function>
 
-	<channel name="lights_other">
+      <!-- 450L FUEL REMAIN -->
 
-		<fcs_function name="trash/warning-lights/gunsight-scale-illumination">
-			<function>
-				<product>
-					<property>/controls/armament/gunsight/scale-dial-brightness-knob</property>
-					<quotient>
-						<property>electric/output/gunsight</property>
-						<value>32</value>
-					</quotient>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>/controls/armament/gunsight/scale-dial-brightness</output>
-		</fcs_function>
+      <fcs_function name="trash/warning-lights/L450">
+         <function>
+            <product>
+               <le>
+                  <property>propulsion/total-fuel-lbs</property>
+                  <value>772.0</value>
+               </le>
+               <property>/instrumentation/warning-lights/dimmer[4]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/L450</output>
+      </fcs_function>
 
-		<fcs_function name="trash/warning-lights/fagp/gear-down">
-			<function>
-				<product>
-					<eq>
-						<property>gear/gear-pos-norm</property>
-						<value>1</value>
-					</eq>
-					<property>/instrumentation/warning-lights/dimmer[0]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/fagp/gear-down</output>
-		</fcs_function>
+      <!-- NO 3 TK GP EMPTY -->
 
-		<fcs_function name="trash/warning-lights/fagp/gear-up">
-			<function>
-				<product>
-					<eq>
-						<property>gear/gear-pos-norm</property>
-						<value>0</value>
-					</eq>
-					<property>/instrumentation/warning-lights/dimmer[0]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/fagp/gear-up</output>
-		</fcs_function>
+      <fcs_function name="trash/warning-lights/no-3-gp-empty">
+         <function>
+            <product>
+               <le>
+                  <property>propulsion/tank[3]/contents-lbs</property>
+                  <value>2.5</value>
+               </le>
+               <le>
+                  <property>propulsion/tank[4]/contents-lbs</property>
+                  <value>2.5</value>
+               </le>
+               <le>
+                  <property>propulsion/tank[5]/contents-lbs</property>
+                  <value>2.5</value>
+               </le>
+               <le>
+                  <property>propulsion/tank[6]/contents-lbs</property>
+                  <value>2.5</value>
+               </le>
+               <property>/instrumentation/warning-lights/dimmer[4]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/no-3-gp-empty</output>
+      </fcs_function>
 
-		<fcs_function name="trash/warning-lights/fagp/flaps-down">
-			<function>
-				<product>
-					<gt>
-						<property>fcs/flap-pos-norm</property>
-						<value>0.49</value>
-					</gt>
-					<property>/instrumentation/warning-lights/dimmer[0]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/fagp/flaps-down</output>
-		</fcs_function>
+   </channel>
 
-		<fcs_function name="trash/warning-lights/fagp/airbrake-extd">
-			<function>
-				<product>
-					<gt>
-						<property>fcs/speedbrake-pos-norm</property>
-						<value>0.1</value>
-					</gt>
-					<property>/instrumentation/warning-lights/dimmer[0]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/fagp/airbrake-extd</output>
-		</fcs_function>
+   <channel name="lights5" execrate="3">
 
-		<fcs_function name="trash/warning-lights/fagp/extend-lg">
-			<function>
-				<product>
-					<and>
-						<gt>
-							<property>fcs/flap-pos-norm</property>
-							<value>0.49</value>
-						</gt>
-						<lt>
-							<property>gear/gear-pos-norm</property>
-							<value>1</value>
-						</lt>
-					</and>
-					<property>/instrumentation/warning-lights/dimmer[0]</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/fagp/extend-lg</output>
-		</fcs_function>
+      <!--
+         There are 10 lights on this panel:
+         SWITCH OFF IGNITION: controls/engines/engine[0]/start-ignition-signal
+         SERVICE TANK: ?
+         FIRST REHEAT: Regular A/B is on
+         SECOND REHEAT: Second A/B is on
+         DC GEN OFF: DC generator is off/malfunctioning
+         AC GEN OFF: AC generator is off/malfunctioning
+         FIRE: the engine is on fire
+         JET NOZZLE OPEN: the jet nozzle is in the open position
+         WTCH MAIN SYST PRES: Main hydraulic system pressure is low
+         WTCH BKUP SYST PRES: Second hydraulic system pressure is low
+      -->
 
-		<fcs_function name="trash/warning-lights/armament/bomb-arm">
-			<function>
-				<product>
-					<or>
-						<gt>
-							<property>electric/output/tac-rls-1-2</property>
-							<value>110</value>
-						</gt>
-						<gt>
-							<property>electric/output/tac-rls-3-4</property>
-							<value>110</value>
-						</gt>
-					</or>
-					<property>/controls/armament/bomb-arm</property>
-					<property>warning-lights/lights-dc</property>
-				</product>
-			</function>
-			<clipto>
-				<min>0</min>
-				<max>1</max>
-			</clipto>
-			<output>warning-lights/armament/bomb-arm</output>
-		</fcs_function>
+      <fcs_function name="trash/warning-lights/switch-off-ignition">
+         <function>
+            <product>
+               <eq>
+                  <property>/controls/engines/engine[0]/start-ignition-signal</property>
+                  <value>1</value>
+               </eq>
+               <property>/instrumentation/warning-lights/dimmer[5]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/switch-off-ignition</output>
+      </fcs_function>
+      
+      <fcs_function name="trash/warning-lights/service-tank">
+         <function>
+            <product>
+               <lt>
+                  <property>electric/output/service-tk-pump</property>
+                  <value>23</value>
+               </lt>
+               <property>/instrumentation/warning-lights/dimmer[5]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/service-tank</output>
+      </fcs_function>
 
-	</channel>
+      <fcs_function name="trash/warning-lights/first-reheat">
+         <function>
+            <product>
+               <eq>
+                  <property>/engines/engine[0]/augmentation</property>
+                  <value>1</value>
+               </eq>
+               <property>/instrumentation/warning-lights/dimmer[5]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/first-reheat</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/second-reheat">
+         <function>
+            <product>
+               <and>
+                  <eq>
+                     <property>/engines/engine[0]/augmentation</property>
+                     <value>1</value>
+                  </eq>
+                  <eq>
+                     <property>propulsion/clr</property>
+                     <value>1</value>
+                  </eq>
+               </and>
+               <property>/instrumentation/warning-lights/dimmer[5]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/second-reheat</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/dc-gen-off">
+         <function>
+            <product>
+               <and>
+                  <gt>
+                     <property>electric/sources/dc-gen</property>
+                     <value>20</value>
+                  </gt>
+               </and>
+               <property>/instrumentation/warning-lights/dimmer[5]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/dc-gen-off</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/ac-gen-off">
+         <function>
+            <product>
+               <and>
+                  <gt>
+                     <property>electric/sources/ac-gen</property>
+                     <value>100</value>
+                  </gt>
+               </and>
+               <property>/instrumentation/warning-lights/dimmer[5]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/ac-gen-off</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/fire">
+         <!-- disabled until engine fire is implemented -->
+         <function>
+            <product>
+               <value>0</value>
+               <value>0</value>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/fire</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/jet-nozzle-open">
+         <function>
+            <product>
+               <eq>
+                  <property>propulsion/engine[0]/nozzle-pos-norm</property>
+                  <value>1</value>
+               </eq>
+               <property>/instrumentation/warning-lights/dimmer[5]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/jet-nozzle-open</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/watch-bkup-syst-pres">
+         <function>
+            <product>
+               <lt>
+                  <property>systems/hydraulic[1]/pressure</property>
+                  <value>165</value>
+               </lt>
+               <property>/instrumentation/warning-lights/dimmer[5]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/watch-bkup-syst-pres</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/watch-main-syst-pres">
+         <function>
+            <product>
+               <lt>
+                  <property>systems/hydraulic[0]/pressure</property>
+                  <value>165</value>
+               </lt>
+               <property>/instrumentation/warning-lights/dimmer[5]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/watch-main-syst-pres</output>
+      </fcs_function>
+
+   </channel>
+
+   <channel name="lights_other">
+
+      <fcs_function name="trash/warning-lights/gunsight-scale-illumination">
+         <function>
+            <product>
+               <property>/controls/armament/gunsight/scale-dial-brightness-knob</property>
+               <quotient>
+                  <property>electric/output/gunsight</property>
+                  <value>32</value>
+               </quotient>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>/controls/armament/gunsight/scale-dial-brightness</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/fagp/gear-down">
+         <function>
+            <product>
+               <eq>
+                  <property>gear/gear-pos-norm</property>
+                  <value>1</value>
+               </eq>
+               <property>/instrumentation/warning-lights/dimmer[0]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/fagp/gear-down</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/fagp/gear-up">
+         <function>
+            <product>
+               <eq>
+                  <property>gear/gear-pos-norm</property>
+                  <value>0</value>
+               </eq>
+               <property>/instrumentation/warning-lights/dimmer[0]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/fagp/gear-up</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/fagp/flaps-down">
+         <function>
+            <product>
+               <gt>
+                  <property>fcs/flap-pos-norm</property>
+                  <value>0.49</value>
+               </gt>
+               <property>/instrumentation/warning-lights/dimmer[0]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/fagp/flaps-down</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/fagp/airbrake-extd">
+         <function>
+            <product>
+               <gt>
+                  <property>fcs/speedbrake-pos-norm</property>
+                  <value>0.1</value>
+               </gt>
+               <property>/instrumentation/warning-lights/dimmer[0]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/fagp/airbrake-extd</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/fagp/extend-lg">
+         <function>
+            <product>
+               <and>
+                  <gt>
+                     <property>fcs/flap-pos-norm</property>
+                     <value>0.49</value>
+                  </gt>
+                  <lt>
+                     <property>gear/gear-pos-norm</property>
+                     <value>1</value>
+                  </lt>
+               </and>
+               <property>/instrumentation/warning-lights/dimmer[0]</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/fagp/extend-lg</output>
+      </fcs_function>
+
+      <fcs_function name="trash/warning-lights/armament/bomb-arm">
+         <function>
+            <product>
+               <or>
+                  <gt>
+                     <property>electric/output/tac-rls-1-2</property>
+                     <value>110</value>
+                  </gt>
+                  <gt>
+                     <property>electric/output/tac-rls-3-4</property>
+                     <value>110</value>
+                  </gt>
+               </or>
+               <property>/controls/armament/bomb-arm</property>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/armament/bomb-arm</output>
+      </fcs_function>
+
+   </channel>
 
 </system>

@@ -1,8 +1,39 @@
 <?xml version="1.0"?>
 <PropertyList>
 
-    <path>masterWarningLightButton.ac</path>
+   <path>masterWarningLightButton.ac</path>
 
-	<!--lights-->
-	
+   <animation>
+      <type>pick</type>
+      <object-name>masterWarningLights</object-name>
+      <object-name>masterWarningLightButton</object-name>
+      <action>
+         <button>0</button>
+         <button>1</button>
+         <button>2</button>
+         <button>3</button>
+         <button>4</button>
+         <repeatable>false</repeatable>
+         <interval-sec>0.2</interval-sec>
+         <binding>
+            <command>property-assign</command>
+            <property>/fdm/jsbsim/warning-lights/masterwarn-state</property>
+            <value>0</value>
+         </binding>
+      </action>
+   </animation>
+
+   <!--lights-->
+
+   <animation>
+      <type>material</type>
+      <object-name>masterWarningLights</object-name>
+      <emission>
+         <red>1.0</red>
+         <green>0.0</green>
+         <blue>0.0</blue>
+         <factor-prop>/fdm/jsbsim/warning-lights/masterwarn</factor-prop>
+      </emission>
+   </animation>
+
 </PropertyList>

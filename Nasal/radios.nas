@@ -120,6 +120,7 @@ var inner_outer_adf_finder = func() {
 
         if (math.abs(bearing - last_bearing) > 10 and getprop("/fdm/jsbsim/instrumentation/pitot/airspeed-kts") > 75) {
             # wild guess here. means if change is more than 5 degrees in one secone.
+            setprop("/instrumentation/adf-radio/overhead",1);
             in_out_state = 1;
             change_freq = getprop("/instrumentation/adf-radio/preset[" ~ arc_sel_map[arc_sel] ~ "]");
             hold_freq = freq;
@@ -134,6 +135,8 @@ var inner_outer_adf_finder = func() {
                 }
             },(math.mod(arc_sel,2) * 4) + 4);
                 
+        } else {
+            setprop("/instrumentation/adf-radio/overhead",0);
         }
     }
     last_bearing = bearing;
