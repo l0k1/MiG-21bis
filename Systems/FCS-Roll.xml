@@ -23,6 +23,19 @@
       fcs/aileron-manual-override == 0
     </test>
   </switch>
+
+   <fcs_function name="trash/fcs/roll-trim-pos-norm">
+      <function>
+         <product>
+            <gt>
+               <property>electric/output/trim</property>
+               <value>100</value>
+            </gt>
+            <property>fcs/roll-trim-cmd-norm</property>
+         </product>
+      </function>
+      <output>fcs/roll-trim-pos-norm</output>
+   </fcs_function>
   
   <fcs_function name="trash/aadf3d423">
     <function>
@@ -41,7 +54,7 @@
           <property>fcs/aileron-ap-cmd-norm</property>
           <property>fcs/aileron-ap-override</property>
         </product>
-        <property>fcs/roll-trim-cmd-norm</property>
+        <property>fcs/roll-trim-pos-norm</property>
       </sum>
     </function>
     <clipto>

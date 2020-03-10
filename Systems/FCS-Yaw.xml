@@ -33,6 +33,19 @@
         </test>
     </switch>
 
+   <fcs_function name="trash/fcs/yaw-trim-pos-norm">
+      <function>
+         <product>
+            <gt>
+               <property>electric/output/trim</property>
+               <value>100</value>
+            </gt>
+            <property>fcs/yaw-trim-cmd-norm</property>
+         </product>
+      </function>
+      <output>fcs/yaw-trim-pos-norm</output>
+   </fcs_function>
+
     <!-- if AP not overriding, combine sum of yaw cmd and yaw trim cmd, else use AP value -->
     <fcs_function name="trash/fcs/yaw-trim-sum">
         <function>
@@ -51,7 +64,7 @@
                     <property>fcs/rudder-ap-cmd-norm</property>
                     <property>fcs/rudder-ap-override</property>
                 </product>
-                <property>fcs/yaw-trim-cmd-norm</property>
+                <property>fcs/yaw-trim-pos-norm</property>
             </sum>
         </function>
         <clipto>

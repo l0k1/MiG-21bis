@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <PropertyList>
+    <blc type="double">0</blc>
 	<simulation>
         <sim-time-sec>0</sim-time-sec>
     </simulation>
@@ -136,7 +137,7 @@
         <aileron-manual-override type="bool">false</aileron-manual-override>
         <elevator-manual-override type="bool">false</elevator-manual-override>
         <rudder-manual-override type="bool">false</rudder-manual-override>
-        <speedbrake-rear-rate>0</speedbrake-rear-rate>
+        <speedbrake-rear-rate type="double">0</speedbrake-rear-rate>
     </fcs>
     <!-- for in-flight FDM tuning -->
     <tune>
@@ -187,4 +188,7 @@
             <aileron type="double">1</aileron>
         </yaw>
     </tune>
+    <warning-lights>
+        <masterwarn-last type="double">0</masterwarn-last>
+    </warning-lights>
 </PropertyList>
