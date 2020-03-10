@@ -2,7 +2,7 @@
 
 <system name="FCS-pitch">
 
-	<!-- 
+   <!-- 
     the FCS defines two properties for autopilot:
     [channel]-ap-override - to be used by the autopilot to override the joystick inputs
     [channel]-manual-override - to be used by the autopilot to override it's override.
@@ -11,142 +11,158 @@
                                 fully disabling the autopilot.
     -->
 
-	<property>				/instrumentation/altimeter/indicated-altitude-ft		</property>
-	<property>				/instrumentation/airspeed-indicator/indicated-speed-kt	</property>
-	<property>				/autopilot/locks/mode									</property>
-	<property>				fcs/elevator-ap-override								</property>
-	<property value="0.68">	fcs/aru-min												</property> <!-- minimum value the ARU can be at, normalized 0 to 1 -->
-	<property value="0.0">	fcs/aru-override-switch									</property> <!-- if 1, ARU always returns fcs/aru-setting -->
-	<property value="0.0">	fcs/aru-spd-switch										</property>
-	<property value="1.0">	fcs/aru-setting-pos										</property> <!-- if overriding default settings, ARU gets set to this -->	
-	<property value="1.0">	fcs/aru-setting-rqst									</property> <!-- if overriding default settings, ARU gets set to this -->
-	<property value="1.0">	fcs/aru-prefilter										</property>
-	<property value="1.0">	fcs/aru													</property>
+   <property>               /instrumentation/altimeter/indicated-altitude-ft      </property>
+   <property>               /instrumentation/airspeed-indicator/indicated-speed-kt   </property>
+   <property>               /autopilot/locks/mode                           </property>
+   <property>               fcs/elevator-ap-override                        </property>
+   <property value="0.68">  fcs/aru-min                                    </property> <!-- minimum value the ARU can be at, normalized 0 to 1 -->
+   <property value="0.0">   fcs/aru-override-switch                           </property> <!-- if 1, ARU always returns fcs/aru-setting -->
+   <property value="0.0">   fcs/aru-spd-switch                              </property>
+   <property value="1.0">   fcs/aru-setting-pos                              </property> <!-- if overriding default settings, ARU gets set to this -->   
+   <property value="1.0">   fcs/aru-setting-rqst                           </property> <!-- if overriding default settings, ARU gets set to this -->
+   <property value="1.0">   fcs/aru-prefilter                              </property>
+   <property value="1.0">   fcs/aru                                       </property>
 
   <channel name="Pitch">
   
-	<switch name="elevator-ap-override">
-		<default value="0"/>
-		<test logic="AND" value="1">
-			/autopilot/locks/mode gt 0
-			fcs/elevator-manual-override == 0
-		</test>
-	</switch>
+   <switch name="elevator-ap-override">
+      <default value="0"/>
+      <test logic="AND" value="1">
+         /autopilot/locks/mode gt 0
+         fcs/elevator-manual-override == 0
+      </test>
+   </switch>
+
+   <!-- fcs/pitch-trim-cmd-norm shouldn't change unless the trim system is powered -->
+
+   <fcs_function name="trash/fcs/pitch-trim-pos-norm">
+      <function>
+         <product>
+            <gt>
+               <property>electric/output/trim</property>
+               <value>100</value>
+            </gt>
+            <property>fcs/pitch-trim-cmd-norm</property>
+         </ifthen>
+      </function>
+      <output>fcs/pitch-trim-pos-norm</output>
+   </fcs_function>
+
   
-	<fcs_function name="trash/aadf3423">
-		<function>
-			<sum>
-				<product>
-					<property>fcs/elevator-cmd-norm</property>
-					<sum>
-						<product>
-							<property>fcs/elevator-ap-override</property>
-							<value>-1</value>
-						</product>
-						<value>1</value>
-					</sum>
-				</product>
-				<product>
-					<property>fcs/elevator-ap-cmd-norm</property>
-					<property>fcs/elevator-ap-override</property>
-				</product>
-				<property>fcs/pitch-trim-cmd-norm</property>
-			</sum>
-		</function>
-		<clipto>
-			<min> -1 </min>
-			<max>  1 </max>
-		</clipto>
-		<output>fcs/pitch-trim-sum</output>
-	</fcs_function>
+   <fcs_function name="trash/aadf3423">
+      <function>
+         <sum>
+            <product>
+               <property>fcs/elevator-cmd-norm</property>
+               <sum>
+                  <product>
+                     <property>fcs/elevator-ap-override</property>
+                     <value>-1</value>
+                  </product>
+                  <value>1</value>
+               </sum>
+            </product>
+            <product>
+               <property>fcs/elevator-ap-cmd-norm</property>
+               <property>fcs/elevator-ap-override</property>
+            </product>
+            <property>fcs/pitch-trim-pos-norm</property>
+         </sum>
+      </function>
+      <clipto>
+         <min> -1 </min>
+         <max>  1 </max>
+      </clipto>
+      <output>fcs/pitch-trim-sum</output>
+   </fcs_function>
 
    
-	<!--There is a q-feel system called ARU, that changes the pitch control gearing ratio proportionally with speed and altitude. 
-	At low altitudes and high IAS the stabilizer moves less. At low IAS and high altitude it moves more with the total stick movement being the same. 
-	This prevents overcontrolling at high IAS and still gives you enough elevator power at high altitudes and slow airspeeds.
-	https://ww2aircraft.net/forum/threads/mig-21-evaluation-in-the-usa.42979/ Some excerpts from the book "MiG-21 in Finnish Air Force" (bilingual Finnish/English)
-	by Jyrki Laukkanen-->
-	<!-- 
-	ARU ratio data taken from "Samolet 75b - Rukovodstvo po Ekciluatachii i Tekhnicheskomu Obclushivanio, No Gk-381, Kniga 1 - Samolet i Ego Sistemi"
-	Max gear is 100% for most control, to 68% for least control
-	Below 3.8km, the gearing goes from 455km/h (max) to 850km/h (min)
-	Between 3.8km and 7km, the gearing is averaged between 455km/h (min) and 850km/h (max), and 3.8km (min) and 7km(max)
-	Above 7km, it is always max.
-	-->
+   <!--There is a q-feel system called ARU, that changes the pitch control gearing ratio proportionally with speed and altitude. 
+   At low altitudes and high IAS the stabilizer moves less. At low IAS and high altitude it moves more with the total stick movement being the same. 
+   This prevents overcontrolling at high IAS and still gives you enough elevator power at high altitudes and slow airspeeds.
+   https://ww2aircraft.net/forum/threads/mig-21-evaluation-in-the-usa.42979/ Some excerpts from the book "MiG-21 in Finnish Air Force" (bilingual Finnish/English)
+   by Jyrki Laukkanen-->
+   <!-- 
+   ARU ratio data taken from "Samolet 75b - Rukovodstvo po Ekciluatachii i Tekhnicheskomu Obclushivanio, No Gk-381, Kniga 1 - Samolet i Ego Sistemi"
+   Max gear is 100% for most control, to 68% for least control
+   Below 3.8km, the gearing goes from 455km/h (max) to 850km/h (min)
+   Between 3.8km and 7km, the gearing is averaged between 455km/h (min) and 850km/h (max), and 3.8km (min) and 7km(max)
+   Above 7km, it is always max.
+   -->
 
-	<fcs_function name="aru-prefilter">
-		<function>
-			<ifthen>
-				<property>fcs/aru-override-switch</property>
-				<property>fcs/aru-setting-pos</property>
-				<ifthen>
-					<gt>
-						<property>electric/output/aru-syst-auto-ctl</property>
-						<value>107</value>
-					</gt>
-					<ifthen>
-						<lt>
-							<property>/instrumentation/altimeter/indicated-altitude-ft</property>
-							<value>12467.2</value>
-						</lt>
-						<interpolate1d>
-							<property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
-							<value> 245.68 </value> <value> 1.0 </value>
-							<value> 458.96 </value> <property> fcs/aru-min </property>
-						</interpolate1d>
-						<ifthen>
-							<lt>
-								<property>/instrumentation/altimeter/indicated-altitude-ft</property>
-								<value>22965.9</value>
-							</lt>
-							<avg>
-								<interpolate1d>
-									<property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
-									<value> 245.68 </value> <value> 1.0 </value>
-									<value> 458.96 </value> <property> fcs/aru-min </property>
-								</interpolate1d>
-								<interpolate1d>
-									<property>/instrumentation/altimeter/indicated-altitude-ft</property>
-									<value>12467.2</value> <property> fcs/aru-min </property>
-									<value>22965.9</value> <value> 1.0</value>
-								</interpolate1d>
-							</avg>
-							<value>1</value>
-						</ifthen>
-					</ifthen>
-					<property>fcs/aru-prefilter</property>
-				</ifthen>
-			</ifthen>
-		</function>
-		<clipto>
-			<min>fcs/aru-min</min>
-			<max>1</max>
-		</clipto>
-	</fcs_function>
+   <fcs_function name="aru-prefilter">
+      <function>
+         <ifthen>
+            <property>fcs/aru-override-switch</property>
+            <property>fcs/aru-setting-pos</property>
+            <ifthen>
+               <gt>
+                  <property>electric/output/aru-syst-auto-ctl</property>
+                  <value>107</value>
+               </gt>
+               <ifthen>
+                  <lt>
+                     <property>/instrumentation/altimeter/indicated-altitude-ft</property>
+                     <value>12467.2</value>
+                  </lt>
+                  <interpolate1d>
+                     <property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+                     <value> 245.68 </value> <value> 1.0 </value>
+                     <value> 458.96 </value> <property> fcs/aru-min </property>
+                  </interpolate1d>
+                  <ifthen>
+                     <lt>
+                        <property>/instrumentation/altimeter/indicated-altitude-ft</property>
+                        <value>22965.9</value>
+                     </lt>
+                     <avg>
+                        <interpolate1d>
+                           <property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+                           <value> 245.68 </value> <value> 1.0 </value>
+                           <value> 458.96 </value> <property> fcs/aru-min </property>
+                        </interpolate1d>
+                        <interpolate1d>
+                           <property>/instrumentation/altimeter/indicated-altitude-ft</property>
+                           <value>12467.2</value> <property> fcs/aru-min </property>
+                           <value>22965.9</value> <value> 1.0</value>
+                        </interpolate1d>
+                     </avg>
+                     <value>1</value>
+                  </ifthen>
+               </ifthen>
+               <property>fcs/aru-prefilter</property>
+            </ifthen>
+         </ifthen>
+      </function>
+      <clipto>
+         <min>fcs/aru-min</min>
+         <max>1</max>
+      </clipto>
+   </fcs_function>
 
-	<kinematic name="aru">
-		<input>fcs/aru-prefilter</input>
-		<traverse>
-			<setting>
-				<position>0.68</position>
-				<time>0.0</time>
-			</setting>
-			<setting>
-				<position>1.0</position>
-				<time>2.5</time>
-			</setting>
-		</traverse>
-		<noscale/>
-	</kinematic>
+   <kinematic name="aru">
+      <input>fcs/aru-prefilter</input>
+      <traverse>
+         <setting>
+            <position>0.68</position>
+            <time>0.0</time>
+         </setting>
+         <setting>
+            <position>1.0</position>
+            <time>2.5</time>
+         </setting>
+      </traverse>
+      <noscale/>
+   </kinematic>
 
-	<fcs_function name="elevator-post-aru">
-		<function>
-			<product>
-				<property>fcs/pitch-trim-sum</property>
-				<property>fcs/aru</property>
-			</product>
-		</function>
-	</fcs_function>
+   <fcs_function name="elevator-post-aru">
+      <function>
+         <product>
+            <property>fcs/pitch-trim-sum</property>
+            <property>fcs/aru</property>
+         </product>
+      </function>
+   </fcs_function>
     
     <fcs_function name="elevator-gain">
         <function>
@@ -174,15 +190,15 @@
             </avg>
         </function>
     </fcs_function>
-	
+   
     <actuator name="elevator-delay-act">
         <input>fcs/elevator-post-aru</input>
         <rate_limit>fcs/elevator-gain</rate_limit>
         <output>fcs/elevator-delay</output>
     </actuator>
 
-	<!--The tailplanes deflected from +7* (.122 rads) to -16.5*(-.287 rads) - Mikoyan-Gurevish MiG-21 by Alexander Mladenov, page 17-->
-	
+   <!--The tailplanes deflected from +7* (.122 rads) to -16.5*(-.287 rads) - Mikoyan-Gurevish MiG-21 by Alexander Mladenov, page 17-->
+   
    <aerosurface_scale name="Elevator Control">
       <input>fcs/elevator-delay</input>
       <range>

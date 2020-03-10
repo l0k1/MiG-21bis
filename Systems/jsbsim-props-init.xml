@@ -137,7 +137,7 @@
         <aileron-manual-override type="bool">false</aileron-manual-override>
         <elevator-manual-override type="bool">false</elevator-manual-override>
         <rudder-manual-override type="bool">false</rudder-manual-override>
-        <speedbrake-rear-rate>0</speedbrake-rear-rate>
+        <speedbrake-rear-rate type="double">0</speedbrake-rear-rate>
     </fcs>
     <!-- for in-flight FDM tuning -->
     <tune>
