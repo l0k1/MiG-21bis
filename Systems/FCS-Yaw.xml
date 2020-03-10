@@ -41,7 +41,7 @@
                <value>100</value>
             </gt>
             <property>fcs/yaw-trim-cmd-norm</property>
-         </ifthen>
+         </product>
       </function>
       <output>fcs/yaw-trim-pos-norm</output>
    </fcs_function>

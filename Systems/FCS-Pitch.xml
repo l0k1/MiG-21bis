@@ -43,7 +43,7 @@
                <value>100</value>
             </gt>
             <property>fcs/pitch-trim-cmd-norm</property>
-         </ifthen>
+         </product>
       </function>
       <output>fcs/pitch-trim-pos-norm</output>
    </fcs_function>

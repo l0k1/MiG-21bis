@@ -6,6 +6,7 @@
    <property value="1">/instrumentation/warning-lights/dimmer[3]</property>
    <property value="1">/instrumentation/warning-lights/dimmer[4]</property>
    <property value="1">/instrumentation/warning-lights/dimmer[5]</property>
+   <property value="1">/instrumentation/warning-lights/dimmer[6]</property>
    <property value="0">/consumables/fuel/tank[11]/selected</property>
    
    <channel name="masterwarn" execrate="3">
@@ -160,8 +161,12 @@
                   <value>35</value>
                </gt>
                <gt>
-                  <property>blc</property>
+                  <property>fcs/blc</property>
                   <value>0.7</value>
+               </gt>
+               <gt>
+                  <property>fcs/aru</property>
+                  <value>0.85</value>
                </gt>
                <property>/instrumentation/warning-lights/dimmer[6]</property>
                <property>warning-lights/lights-dc</property>
@@ -183,7 +188,7 @@
                      <abs><property>fcs/roll-trim-cmd-norm</property></abs>
                      <abs><property>fcs/yaw-trim-cmd-norm</property></abs>
                   </sum>
-                  <value>0.05</value>
+                  <value>0.0075</value>
                </lt>
                <gt>
                   <property>electric/output/trim</property>
