@@ -842,6 +842,10 @@
             <power_prop type="string">/instrumentation/iff/power</power_prop>
             <power type="double">1</power>
             <channel-selection type="int">1</channel-selection>
+            <!--mig-21bis specific stuff -->
+            <resp-light type="bool">false</resp-light>
+            <imtr-light type="bool">false</imtr-light>
+            <decod-light type="bool">false</decod-light>
         </iff>
         <gunsight>
             <min-launch-range type="float">0</min-launch-range>

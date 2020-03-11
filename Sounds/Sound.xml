@@ -866,6 +866,23 @@
           </volume>
         </enginesurge>
 
+        <masterwarn>
+          <name>masterwarn_buzz</name>
+          <path>Aircraft/MiG-21bis/Sounds/Samples/mwarn.wav</path>
+          <mode>once</mode>
+          <condition>
+            <property>/fdm/jsbsim/warning-lights/masterwarn</property>
+          </condition>
+          <position>
+            <x>0.01</x>
+            <y>0.01</y>
+            <z>0.01</z>
+          </position>
+          <volume>
+            <factor>0.8</factor>
+          </volume>
+        </masterwarn>
+
     </fx>
 
 </PropertyList>
