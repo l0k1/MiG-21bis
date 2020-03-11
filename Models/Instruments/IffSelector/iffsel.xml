@@ -38,7 +38,7 @@
 	</animation>
 
 	<animation>
-		<object-name>commChannelKnob</object-name>
+		<object-name>iffKnob</object-name>
 		<type>rotate</type>
 		<property>/instrumentation/iff/channel-selection</property>
 		<factor>-15</factor>

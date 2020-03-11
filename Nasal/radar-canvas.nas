@@ -445,7 +445,7 @@ var radar_screen = {
 			
 			#friendly addition
 			var f_addon = m.blips.createChild("path", "f_add" ~ i)
-			.move(-30,-10)
+			.move(-30,-15)
 			.line(60,0)
 			.setStrokeLineWidth(lW)
 			.setColor(dR, dG, dB);
@@ -589,24 +589,11 @@ var radar_screen = {
 							me.below_blip[b_i].hide();
 							me.above_blip[b_i].hide();
 						}
-						if ( getprop(show_callsigns) == 1 ) {
-							#print("pixelX = " ~ pixelX);
-							if ( pixelX <= 506 ) {
-								me.blip_text[b_i].setTranslation(pixelX - 50, pixelY);
-								me.blip_text[b_i].setText(mp.get_Callsign());
-								me.blip_text[b_i].setAlignment("right-center");
-								me.blip_text[b_i].show();
-							} else {
-							me.blip_text[b_i].setTranslation(pixelX + 50, pixelY);
-								me.blip_text[b_i].setText(mp.get_Callsign());
-								me.blip_text[b_i].setAlignment("left-center");
-								me.blip_text[b_i].show();
-							}
-							if (iff.interrogate(mp.getNode())) {
-								 me.f_addon_blip[b_i].show();
-							}
+						if (getprop(show_callsigns) == 1 and rwr.iff_power_node.getValue() > 110 and iff.interrogate(mp.getNode())) {
+							me.f_addon_blip[b_i].setTranslation(pixelX, pixelY);
+							me.f_addon_blip[b_i].show();
+							rwr.decod_node.setValue(1);
 						} else {
-							me.blip_text[b_i].hide();
 							me.f_addon_blip[b_i].hide();
 						}
 						#if (locked == TRUE) {
@@ -615,6 +602,9 @@ var radar_screen = {
 						#}
 					}
 					b_i += 1;
+				}
+				if (b_i == 0 or rwr.iff_power_node.getValue() < 110 or getprop(show_callsigns) == 0) {
+					rwr.decod_node.setValue(0);
 				}
 			} else {
 				if (radar_logic.selection != nil) {

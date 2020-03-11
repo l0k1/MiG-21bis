@@ -111,9 +111,19 @@ var sensor_update = func() {
             }
             if (sensors[i].min_bearing < sensors[i].max_bearing and bearing > sensors[i].min_bearing and bearing < sensors[i].max_bearing) {
                 append(sensor_id,i);
+                if (cx.node.getNode("multiplay/generic/string[4]") != nil) {
+                    if (size(cx.node.getNode("multiplay/generic/string[4]")) == 3 and iff_power_node.getValue() > 110) {
+                        resp_node.setValue(1);
+                    }
+                }
                 #print('appendo 1');
             } elsif (sensors[i].min_bearing > sensors[i].max_bearing and (bearing > sensors[i].min_bearing or bearing < sensors[i].max_bearing)) {
                 append(sensor_id,i);
+                if (cx.node.getNode("multiplay/generic/string[4]") != nil) {
+                    if (size(cx.node.getNode("multiplay/generic/string[4]")) == 3 and iff_power_node.getValue() > 110) {
+                        resp_node.setValue(1);
+                    }
+                }
                 #print('appendo 2');
             }
         }
@@ -248,11 +258,26 @@ var expand_string = func(str, amt) {
     return new_str;
 }
 
+# IFF IMTR light - placing here for some reason
+iff_power_node = props.globals.getNode("/fdm/jsbsim/electric/output/srzo-iff");
+imtr_node = props.globals.getNode("/instrumentation/iff/imtr-light");
+resp_node = props.globals.getNode("/instrumentation/iff/resp-light");
+decod_node = props.globals.getNode("/instrumentation/iff/decod-light");
+var iff_imtr_light = func() {
+    if (iff_power_node.getValue() > 110) {
+        imtr_node.setValue(1);
+    } else {
+        imtr_node.setValue(0);
+    }
+}
+
 var readout_timer = maketimer(0.1,func(){sensor_readout();});
 var update_timer = maketimer(0.1,func(){sensor_update();});
+var iff_timer = maketimer(0.5,func(){iff_imtr_light();});
 
 var init = setlistener("/sim/signals/fdm-initialized", func() {
     readout_timer.start();
     update_timer.start();
+    iff_timer.start();
     setlistener("/sim/multiplay/chat-history", incoming_listener, 0, 0);
 });

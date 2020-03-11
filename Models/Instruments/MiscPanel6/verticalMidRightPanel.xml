@@ -412,6 +412,54 @@
                 <property>/fdm/jsbsim/electric/switches/rvmsp/rsbn</property>
             </binding>
         </action>
+    </animation>    
+
+    <animation>
+        <type>material</type>
+        <object-name>respLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/instrumentation/iff/resp-light</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>imtrLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/instrumentation/iff/imtr-light</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>decodLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/instrumentation/iff/decod-light</factor-prop>
+        </emission>
     </animation>
 
 </PropertyList>
