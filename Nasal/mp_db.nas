@@ -161,7 +161,10 @@ var Contact = {
         obj.polar           = [0,0,0];
         obj.cartesian       = [0,0];
         
-        if (contains(aircraft_lookup,obj.get_model2())) {
+        if (c.getNode("type").getValue() == "Mig-28" or c.getNode("type").getValue() == "F-16" ) {
+            obj.info = aircraft_lookup["F-16"];
+            obj.name = "trainer";
+        } else if (contains(aircraft_lookup,obj.get_model2())) {
             obj.info = aircraft_lookup[obj.get_model2()];
         } else {
             obj.info = aircraft_lookup["default"];
@@ -603,8 +606,10 @@ var update_cx_master_list = func() {
   # get a list of all possible contact nodes into a vector
   temp = [];
   foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
-    if (mp.getNode("valid").getValue() == 1) {
-      append(temp,mp);
+    if (mp.getNode("valid") != nil) {
+      if (mp.getNode("valid").getValue() == 1) {
+        append(temp,mp);
+      }
     }
   }
   foreach(var mp; props.globals.getNode("/ai/models").getChildren("aircraft")){
@@ -626,6 +631,12 @@ var update_cx_master_list = func() {
   }
 
   foreach(var mp; props.globals.getNode("/ai/models").getChildren("groundvehicle")){
+    if (mp.getNode("valid").getValue() == 1) {
+      append(temp,mp);
+    }
+  }
+
+  foreach(var mp; props.globals.getNode("/ai/models").getChildren("Mig-28")){
     if (mp.getNode("valid").getValue() == 1) {
       append(temp,mp);
     }

@@ -117,6 +117,7 @@ var RadarLogic = {
         me.tankers = input.ai_models.getChildren("tanker");
         me.ships = input.ai_models.getChildren("ship");
         me.vehicles = input.ai_models.getChildren("groundvehicle");
+        me.trainers = input.ai_models.getChildren("Mig-28");
         if(selection != nil and selection.isValid() == FALSE) {
           #print("not valid");
           me.paint(selection.getNode(), FALSE);
@@ -131,6 +132,7 @@ var RadarLogic = {
         me.processTracks(me.AIplanes, FALSE, FALSE, FALSE, AIR);
   #});
         me.processTracks(me.vehicles, FALSE, FALSE, FALSE, SURFACE);
+        me.processTracks(me.trainers, FALSE, FALSE, FALSE, SURFACE);
         me.processCallsigns(me.players);
 
       } else {
@@ -289,10 +291,17 @@ var RadarLogic = {
 
   trackItemCalc: func (track, range, carrier, mp, type) {
     me.pos = track.getNode("position");
-    me.x = me.pos.getNode("global-x").getValue();
-    me.y = me.pos.getNode("global-y").getValue();
-    me.z = me.pos.getNode("global-z").getValue();
-    if(me.x == nil or me.y == nil or me.z == nil) {
+    if ( me.pos.getNode("global-x") != nil) {
+      me.x = me.pos.getNode("global-x").getValue();
+      me.y = me.pos.getNode("global-y").getValue();
+      me.z = me.pos.getNode("global-z").getValue();
+    } else if ( me.pos.getNode("altitude-ft").getValue() != nil) {
+      me.temp = geo.Coord.new().set_latlon(me.pos.getNode("latitude-deg").getValue(), me.pos.getNode("longitude-deg").getValue(), me.pos.getNode("altitude-ft").getValue() * FT2M);
+      me.x = me.temp.x();
+      me.y = me.temp.y();
+      me.z = me.temp.z();
+      me.temp = nil;
+    } else {
       return nil;
     }
     me.aircraftPos = geo.Coord.new().set_xyz(me.x, me.y, me.z);

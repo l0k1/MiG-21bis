@@ -1684,6 +1684,7 @@
         <radio_canvas>      <file>Aircraft/MiG-21bis/Nasal/radio_canvas.nas</file>      </radio_canvas>        <!-- canvas for the paper note on the gunsight -->
         <headshake>         <file>Aircraft/MiG-21bis/Nasal/headmove.nas</file>          </headshake>        <!-- shaking the head around -->
         <canvas_window>     <file>Aircraft/MiG-21bis/Nasal/canvas_windows.nas</file>    </canvas_window>
+        <mig28>             <file>Aircraft/MiG-21bis/Nasal/mig28.nas</file>             </mig28>
 
     </nasal>
 

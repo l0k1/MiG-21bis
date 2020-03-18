@@ -32,7 +32,6 @@ var sensor_update = func() {
     
     foreach (var cx; mpdb.cx_master_list) {
         # first the easy stuff
-        #print("for " ~ cx.get_Callsign());
         # check if the contacts radar is active
         #print("checking " ~ cx.get_Callsign());
         if (!cx.isRadarActive()) {
@@ -107,8 +106,10 @@ var sensor_update = func() {
         bearing = get_bearing(vectorToEcho,vectorSide);
         for (var i = 0; i < size(sensors); i = i + 1) {
             if (sensors[i].max_pitch < rel_pitch) {
+                #print(rel_pitch);
                 continue;
             }
+            #print(bearing);
             if (sensors[i].min_bearing < sensors[i].max_bearing and bearing > sensors[i].min_bearing and bearing < sensors[i].max_bearing) {
                 append(sensor_id,i);
                 if (cx.node.getNode("multiplay/generic/string[4]") != nil) {
