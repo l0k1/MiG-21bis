@@ -535,8 +535,6 @@
 			<input>-propulsion/tank[3]/pumping-flow-to-0</input>
 			<input>-propulsion/tank[4]/pumping-flow-to-0</input>
 			<input>-propulsion/tank[6]/levelling-flow-to-0</input>
-			<input>-propulsion/tank[6]/levelling-flow-to-4</input>
-			<input>-propulsion/tank[6]/levelling-flow-to-5</input>
 			<input>-propulsion/tank[7]/pumping-flow-to-0</input>
 			<input>-propulsion/tank[8]/pumping-flow-to-0</input>
 			<input>-propulsion/tank[9]/pumping-flow-to-0</input>
