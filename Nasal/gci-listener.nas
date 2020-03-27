@@ -81,23 +81,25 @@ var find_aew_cx = func() {
     dist = 99999999; # twice the diameter of earth
     foreach (var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")) {
         #print('checking ' ~ mp.getNode("callsign").getValue());
-        model = remove_suffix(remove_suffix(split(".", split("/", mp.getNode("sim/model/path").getValue())[-1])[0], "-model"), "-anim");
-        #print("is it " ~ model);
-        if (find_match(model,gci_models) == 0) { continue; }
-        dist_to = geo.aircraft_position().distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(),mp.getNode("position/longitude-deg").getValue()));
-        if (dist_to < dist) {
-            dist = dist_to;
-            aew_cx = mp;
-            for (var i = 0; i <= 10; i = i + 1) {
-                var msg = getprop(aew_cx.getPath() ~ "/sim/multiplay/generic/string["~i~"]");
-                if (msg == "") { continue; }
-                if (msg == nil) { continue; }
-                msgdata = split(":",msg);
-                if (msgdata[0] == cs_node.getValue()) {
-                    append(ids,msgdata[1]);
+        if (mp.getNode("sim/model/path") != nil) {
+            model = remove_suffix(remove_suffix(split(".", split("/", mp.getNode("sim/model/path").getValue())[-1])[0], "-model"), "-anim");
+            #print("is it " ~ model);
+            if (find_match(model,gci_models) == 0) { continue; }
+            dist_to = geo.aircraft_position().distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(),mp.getNode("position/longitude-deg").getValue()));
+            if (dist_to < dist) {
+                dist = dist_to;
+                aew_cx = mp;
+                for (var i = 0; i <= 10; i = i + 1) {
+                    var msg = getprop(aew_cx.getPath() ~ "/sim/multiplay/generic/string["~i~"]");
+                    if (msg == "") { continue; }
+                    if (msg == nil) { continue; }
+                    msgdata = split(":",msg);
+                    if (msgdata[0] == cs_node.getValue()) {
+                        append(ids,msgdata[1]);
+                    }
                 }
+                #print('aew_cx found');
             }
-            #print('aew_cx found');
         }
     }
 }
