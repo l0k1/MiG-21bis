@@ -631,12 +631,12 @@ var radar_screen = {
 								me.blip_text[b_i].setTranslation(pixelX - 50, pixelY);
 								me.blip_text[b_i].setText(radar_logic.selection.get_Callsign());
 								me.blip_text[b_i].setAlignment("right-center");
-								me.blip_text[b_i].show();
+								#me.blip_text[b_i].show();
 							} else {
 							me.blip_text[b_i].setTranslation(pixelX + 50, pixelY);
 								me.blip_text[b_i].setText(radar_logic.selection.get_Callsign());
 								me.blip_text[b_i].setAlignment("left-center");
-								me.blip_text[b_i].show();
+								#me.blip_text[b_i].show();
 							}
 						} else {
 							me.blip_text[b_i].hide();
@@ -719,12 +719,12 @@ var radar_screen = {
 							me.blip_text[1].setTranslation(pixelX - 50, pixelY);
 							me.blip_text[1].setText(locked_target.get_Callsign());
 							me.blip_text[1].setAlignment("right-center");
-							me.blip_text[1].show();
+							#me.blip_text[1].show();
 						} else {
 							me.blip_text[1].setTranslation(pixelX + 50, pixelY);
 							me.blip_text[1].setText(locked_target.get_Callsign());
 							me.blip_text[1].setAlignment("left-center");
-							me.blip_text[1].show();
+							#me.blip_text[1].show();
 						}
 					} else {
 						me.blip_text[1].hide();
