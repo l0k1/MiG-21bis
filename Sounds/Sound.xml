@@ -100,7 +100,7 @@
 
         <jet>
             <name>jet</name>
-            <path>Sounds/jet.wav</path>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/f16-engine-int.wav</path>
             <mode>looped</mode>
             <condition>
             <equals>
@@ -169,7 +169,7 @@
         <engine>
             <name>engine</name>
             <mode>looped</mode>
-            <path>Sounds/turbine_loop.wav</path>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/f16-engine-int.wav</path>
             <condition>
             <property>/engines/engine[0]/running</property>
             <not>
@@ -255,7 +255,7 @@
         <engine>
             <name>burner-from-cockpit</name>
             <mode>looped</mode>
-            <path>Sounds/turbojet_fan.wav</path>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/turbojet_fan.wav</path>
             <condition>
             <property>/engines/engine[0]/augmentation</property>
             <property>/sim/current-view/internal</property>
@@ -276,7 +276,7 @@
 
         <engine>
             <name>compressor whine</name>
-            <path>Sounds/turbojet_fan.wav</path>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/turbojet_fan.wav</path>
             <mode>looped</mode>
             <condition>
             <not>
@@ -354,7 +354,7 @@
         <air-brakes>
           <name>air-brakes</name>
           <mode>in-transit</mode>
-          <path>Sounds/flaps.wav</path>
+          <path>Aircraft/MiG-21bis/Sounds/Samples/flaps.wav</path>
           <property>surface-positions/speedbrake-pos-norm</property>
           <volume>
             <factor>0.25</factor>
@@ -376,7 +376,7 @@
          <flap>
           <name>flaps</name>
           <mode>in-transit</mode>
-          <path>Sounds/flaps.wav</path>
+          <path>Aircraft/MiG-21bis/Sounds/Samples/flaps.wav</path>
           <property>/surface-positions/flap-pos-norm</property>
           <volume>
           <offset>0.25</offset>
