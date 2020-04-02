@@ -330,7 +330,21 @@ var jsbsim_random = func() {
     settimer(jsbsim_random,0);
 }
 
+var load_interior = func{
+    setprop("/sim/current-view/view-number", 0);
+    #print("..Done!");
+}
+
 var init = setlistener("/sim/signals/fdm-initialized", func() {
+    # Load exterior at startup to avoid stale sim at first external view selection. ( taken from TU-154B )
+    # print("Loading exterior, wait...");
+    # return to cabin to next cycle
+    settimer( load_interior, 0 );
+    setprop("/sim/current-view/view-number", 1);
+    setprop("/sim/gui/tooltips-enabled", TRUE);
+
+    screen.log.write("Welcome to MiG-21bis!", 1.0, 0.2, 0.2);
+    
     test_support();
     main_loop();
     jsbsim_random();
