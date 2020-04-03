@@ -436,5 +436,23 @@
 			<script>return;</script>
 		</binding>
 	</key>
+	
+	<key n="97">
+		<name>a</name>
+		<desc>Increase speed-up</desc>
+		<binding>
+			<command>nasal</command>
+			<script>return;</script>
+		</binding>
+	</key>
+
+	<key n="65">
+		<name>A</name>
+		<desc>Decrease speed-up</desc>
+		<binding>
+			<command>nasal</command>
+			<script>return;</script>
+		</binding>
+	</key>
 
 </PropertyList>
