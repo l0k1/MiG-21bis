@@ -3,6 +3,9 @@
 #GLOBAL VARS
 UPDATE_TIME = 0.15;
 
+var TRUE = 1;
+var FALSE = 0;
+
 var a = 0;
 var main_loop = func (){
     #performance();
