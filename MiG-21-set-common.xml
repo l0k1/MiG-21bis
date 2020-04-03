@@ -204,6 +204,15 @@
                             </script>
                         </binding>
                     </item>
+                    <item>
+                        <label>Toggle Damage</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                mig21.toggle_damage();
+                            </script>
+                        </binding>
+                    </item>
                 </menu>
                 <menu n="101">
                     <label>Dev</label>

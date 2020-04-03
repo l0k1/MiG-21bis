@@ -19,3 +19,10 @@ var tuner_roll_dialog = gui.Dialog.new("dialogs/fdm_roll_tuning/dialog","Aircraf
 var tuner_side_dialog = gui.Dialog.new("dialogs/fdm_side_tuning/dialog","Aircraft/MiG-21bis/Dialogs/fdm_tune_side.xml");
 var tuner_yaw_dialog = gui.Dialog.new("dialogs/fdm_yaw_tuning/dialog","Aircraft/MiG-21bis/Dialogs/fdm_tune_yaw.xml");
 var mig28_dialog = gui.Dialog.new("dialogs/mig28/dialog","Aircraft/MiG-21bis/Dialogs/scenario28.xml");
+
+# disable menu items we dont want
+
+setlistener("/sim/signals/fdm-initialized", func() {
+	setprop("sim/menubar/default/menu[3]/enabled",0);
+	setprop("sim/menubar/default/menu[5]/item[5]/enabled",0);
+});

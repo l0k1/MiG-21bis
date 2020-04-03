@@ -390,4 +390,51 @@
 		</binding>
 	</key>
 
+
+	<key n="21">
+		<name>Ctrl-U</name>
+		<desc>[Cheat] Add 1000ft of emergency altitude</desc>
+		<binding>
+			<command>nasal</command>
+			<script>return;</script>
+		</binding>
+	</key> 
+
+	<key n="10"> <!-- OSG -->
+		<name>Enter</name>
+		<desc>Move rudder right</desc>
+		<repeatable type="bool">true</repeatable>
+		<binding>
+		<command>property-adjust</command>
+		<property>/controls/flight/rudder</property>
+		<step type="double">0.05</step>
+		</binding>
+
+	<!-- Ctrl-M generates Enter, but we want to show the map in that case -->
+		<mod-ctrl>
+			<binding>
+				<command>nasal</command>
+				<script>return;</script>
+			</binding>
+		</mod-ctrl>
+	</key>
+
+	<key n="267">
+		<name>F11</name>
+		<desc>Pop up autopilot dialog</desc>
+		<binding>
+			<command>nasal</command>
+			<script>return;</script>
+		</binding>
+	</key>
+
+	<key n="268">
+		<name>F12</name>
+		<desc>Pop up radio settings dialog</desc>
+		<binding>
+			<command>nasal</command>
+			<script>return;</script>
+		</binding>
+	</key>
+
 </PropertyList>

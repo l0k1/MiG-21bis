@@ -333,6 +333,72 @@ var load_interior = func{
     #print("..Done!");
 }
 
+var dmg = 0;
+
+var toggle_damage = func{
+    dmg = !getprop("payload/armament/msg");
+    setprop("payload/armament/msg",dmg);
+    if (dmg) {
+        screen.log.write("Damage enabled!", 1.0, 0.2, 0.2);
+        setprop("sim/menubar/default/menu[2]/item[0]/enabled",0);
+        setprop("sim/menubar/default/menu[5]/item[0]/enabled",0);
+        setprop("sim/menubar/default/menu[5]/item[1]/enabled",0);
+        setprop("sim/menubar/default/menu[5]/item[2]/enabled",0);
+        setprop("sim/menubar/default/menu[7]/item[4]/enabled",0);
+        wow_menu_change();
+    } else {
+        screen.log.write("Damage disabled!", 1.0, 0.2, 0.2);
+        setprop("sim/menubar/default/menu[2]/item[0]/enabled",1);
+        setprop("sim/menubar/default/menu[5]/item[0]/enabled",1);
+        setprop("sim/menubar/default/menu[5]/item[1]/enabled",1);
+        setprop("sim/menubar/default/menu[5]/item[2]/enabled",1);
+        setprop("sim/menubar/default/menu[7]/item[4]/enabled",1);
+    }
+}
+
+var wow_menu_change = func{
+    var wowstatus = getprop("fdm/jsbsim/gear/unit/WOW") and getprop("fdm/jsbsim/gear/unit[1]/WOW") and getprop("fdm/jsbsim/gear/unit[2]/WOW");
+    print(wowstatus);
+    if (dmg) {
+        if (wowstatus) {
+            setprop("sim/menubar/default/menu[2]/item[1]/enabled",1);
+            setprop("sim/menubar/default/menu[5]/item[4]/enabled",1);
+            setprop("sim/menubar/default/menu[5]/item[9]/enabled",1);
+            setprop("sim/menubar/default/menu[5]/item[10]/enabled",1);
+            setprop("sim/menubar/default/menu[5]/item[11]/enabled",1);
+            setprop("sim/menubar/default/menu[100]/item[0]/enabled",1);
+            setprop("sim/menubar/default/menu[100]/item[2]/enabled",1);
+            setprop("sim/menubar/default/menu[100]/item[3]/enabled",1);
+            setprop("sim/menubar/default/menu[100]/item[4]/enabled",1);
+            setprop("sim/menubar/default/menu[100]/item[5]/enabled",1);
+            setprop("sim/menubar/default/menu[100]/item[6]/enabled",1);
+            setprop("sim/menubar/default/menu[100]/item[8]/enabled",1);
+            setprop("sim/menubar/default/menu[100]/item[9]/enabled",1);
+            setprop("sim/menubar/default/menu[100]/item[12]/enabled",1);
+        } else {
+            setprop("sim/menubar/default/menu[2]/item[1]/enabled",0);
+            setprop("sim/menubar/default/menu[5]/item[4]/enabled",0);
+            setprop("sim/menubar/default/menu[5]/item[9]/enabled",0);
+            setprop("sim/menubar/default/menu[5]/item[10]/enabled",0);
+            setprop("sim/menubar/default/menu[5]/item[11]/enabled",0);
+            setprop("sim/menubar/default/menu[100]/item[0]/enabled",0);
+            setprop("sim/menubar/default/menu[100]/item[2]/enabled",0);
+            setprop("sim/menubar/default/menu[100]/item[3]/enabled",0);
+            setprop("sim/menubar/default/menu[100]/item[4]/enabled",0);
+            setprop("sim/menubar/default/menu[100]/item[5]/enabled",0);
+            setprop("sim/menubar/default/menu[100]/item[6]/enabled",0);
+            setprop("sim/menubar/default/menu[100]/item[8]/enabled",0);
+            setprop("sim/menubar/default/menu[100]/item[9]/enabled",0);
+            setprop("sim/menubar/default/menu[100]/item[12]/enabled",0);
+        }
+    }
+    if (!wowstatus) {
+        setprop("sim/menubar/default/menu[100]/item[13]/enabled",0);
+    } else {
+        setprop("sim/menubar/default/menu[100]/item[13]/enabled",1);
+    }
+}
+
 var init = setlistener("/sim/signals/fdm-initialized", func() {
     # Load exterior at startup to avoid stale sim at first external view selection. ( taken from TU-154B )
     # print("Loading exterior, wait...");
@@ -342,10 +408,28 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
     setprop("/sim/gui/tooltips-enabled", TRUE);
 
     screen.log.write("Welcome to MiG-21bis!", 1.0, 0.2, 0.2);
+    dmg = getprop("payload/armament/msg");
+    if (dmg) {
+        screen.log.write("Damage enabled!", 1.0, 0.2, 0.2);
+        setprop("sim/menubar/default/menu[2]/item[0]/enabled",0);
+        setprop("sim/menubar/default/menu[5]/item[0]/enabled",0);
+        setprop("sim/menubar/default/menu[5]/item[1]/enabled",0);
+        setprop("sim/menubar/default/menu[5]/item[2]/enabled",0);
+        setprop("sim/menubar/default/menu[7]/item[4]/enabled",0);
+    }
     
     test_support();
     main_loop();
     jsbsim_random();
+    #
+    setlistener("gear/gear[0]/wow",func(){wow_menu_change()},nil,0);
+    setlistener("gear/gear[1]/wow",func(){wow_menu_change()},nil,0);
+    setlistener("gear/gear[2]/wow",func(){wow_menu_change()},nil,0);
+    setlistener("sim/menubar/default/menu[7]/item[4]/enabled", func() {
+        if (dmg) {
+            setprop("sim/menubar/default/menu[7]/item[4]/enabled",0);
+        }
+        });
     # randomize startup values for DME, radial setting, compass, and fuel
     setprop("/instrumentation/fuel/knob-level",int((rand() * 1600) + 169)); # fuel
     setprop("/fdm/jsbsim/systems/gyro-compass/heading-change",getprop("/orientation/heading-deg") + int((rand() * 100) - 50)); # gyro compass heading
