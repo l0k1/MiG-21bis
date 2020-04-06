@@ -1097,22 +1097,19 @@ var distance = 0;
 var typeOrdName = "";
 
 var impact_listener = func {
-  var ballistic = props.globals.getNode(getprop("/ai/models/model-impact"), 0);
+    var ballistic = props.globals.getNode(getprop("/ai/models/model-impact"), 0);
     inside_callsign = "";
     #print("inside listener");
-  if (ballistic != nil and ballistic.getNode("name") != nil and ballistic.getNode("impact/type") != nil) {
-      #print("woo");
+    if (ballistic != nil and ballistic.getNode("name") != nil and ballistic.getNode("impact/type") != nil) {
+        #print("woo");
         var typeNode = ballistic.getNode("impact/type");
         typeOrdName = ballistic.getNode("name").getValue();
-        #var lat = ballistic.getNode("impact/latitude-deg").getValue();
-        #var lon = ballistic.getNode("impact/longitude-deg").getValue();
-        #var impactPos = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue());
-        #if (typeOrd == "GSh-23" and typeNode.getValue() != "terrain") {
         if ( cr_typeord[typeOrdName] != nil and (cr_typeord[typeOrdName].inc_terrain == TRUE or ballistic.getNode("impact/type").getValue() != "terrain") ) {
-      #print("its a gun hit");
-      var typeOrd = cr_typeord[typeOrdName];
+            #print("its a gun hit");
+            var typeOrd = cr_typeord[typeOrdName];
             typeOrd.closest_distance = 35;
             
+            var dropgeo = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue());
             foreach(var mp; mpdb.cx_master_list){
                 #print("Submodel impact - hit: " ~ typeNode.getValue());
                 #var mlat = mp.getNode("position/latitude-deg").getValue();
@@ -1120,7 +1117,7 @@ var impact_listener = func {
                 #var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
                 #var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
                 # distance from ballistic impact point to mp point
-                distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.get_Latitude(), mp.get_Longitude(), mp.get_altitude() * FT2M));
+                distance = dropgeo.direct_distance_to(geo.Coord.new().set_latlon(mp.get_Latitude(), mp.get_Longitude(), mp.get_altitude() * FT2M));
                 #print("callsign " ~ mp.getNode("callsign").getValue() ~ " distance = " ~ distance);
                 if (distance < typeOrd.closest_distance) {
                     typeOrd.closest_distance = distance;
@@ -1144,18 +1141,18 @@ var impact_listener = func {
             }
         } elsif (payloads[typeOrdName] != nil and ( payloads[typeOrdName].type == "bomb" or payloads[typeOrdName].type == "heavy" or payloads[typeOrdName].type == "heavyrocket" ))  {
             #print("a bomb dropped");
+            var dropgeo = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue());
             foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
-                #var mlat = mp.getNode("position/latitude-deg").getValue();
-                #var mlon = mp.getNode("position/longitude-deg").getValue();
-                #var malt = mp.getNode("position/altitude-ft").getValue() * FT2M;
-                #var selectionPos = geo.Coord.new().set_latlon(mlat, mlon, malt);
-                # distance from ballistic impact point to mp point
-                distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue()).direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
+                distance = dropgeo.direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
                 if (distance < payloads[typeOrdName].hit_max_distance) {
                     defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
                 }
             }
-            distance = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue()).direct_distance_to(geo.aircraft_position());
+            distance = dropgeo.direct_distance_to(geo.aircraft_position()) * 0.8; # blasts should be more lethal going up, right?
+            if (distance < payloads[typeOrdName].hit_max_distance * 2) {
+                var myc = getprop("sim/multiplay/callsign");
+                defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ myc);
+            }
             sounds.boom(distance);
         }
         if (typeOrdName == "BETAB-500ShP" and ballistic.getNode("impact/type").getValue() == "terrain") {
