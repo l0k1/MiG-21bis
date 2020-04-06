@@ -204,7 +204,7 @@ loadNode.setBoolValue(1);
 loadNode.remove();
 
 var beam_target_lock = func() {
-	if ( getprop(fixed_beam_switch) == 1 ) {
+	if ( radar_canvas.radarscreen.cur_state == radar_canvas.radar_beamed ) {
 		var my_geo = geo.aircraft_position();
 		beam_search(my_geo);
 		gps_contact.coord = gps_lock_geo;
@@ -302,14 +302,3 @@ var r27t1_guidance = func(input) {
 	}
 	return {};
 }
-
-# master contact list, for IR/LOAL/Kh-66 multihit messaging and rwr
-
-
-setlistener("controls/radar/power-panel/fixed-beam", func() {
-	if (getprop("controls/radar/power-panel/fixed-beam") == 1) {
-		beam_target_lock();
-	} else {
-		unlockTarget();
-	}
-});
