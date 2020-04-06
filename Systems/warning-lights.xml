@@ -40,8 +40,8 @@
                <property>warning-lights/dc-gen-off</property>
                <property>warning-lights/ac-gen-off</property>
                <property>warning-lights/fire</property>
-               <property>warning-lights/watch-main-syst-pres</property>
-               <property>warning-lights/watch-bkup-syst-pres</property>
+               <property>warning-lights/watch-main-syst-pres-mw</property>
+               <property>warning-lights/watch-bkup-syst-pres-mw</property>
             </sum>
          </function>
          <output>warning-lights/masterwarn-input</output>
@@ -844,7 +844,41 @@
          </clipto>
          <output>warning-lights/watch-bkup-syst-pres</output>
       </fcs_function>
+      
+      <fcs_function name="trash/warning-lights/watch-bkup-syst-pres-mw-pre">
+         <function>
+            <!-- if state == 1 then increment cycle, else set cycle = 0 -->
+            <ifthen>
+               <eq>
+                  <property>warning-lights/watch-bkup-syst-pres</property>
+                  <value>1</value>
+               </eq>
+               <!-- if cycle = 40 then cycle = 0 else cycle = cycle + 1-->
+               <ifthen>
+                  <lt>
+                     <property>warning-lights/watch-bkup-syst-pres-mw-pre</property>
+                     <value>40</value>
+                  </lt>
+                  <sum>
+                     <property>warning-lights/watch-bkup-syst-pres-mw-pre</property>
+                     <value>1</value>
+                  </sum>
+                  <property>warning-lights/watch-bkup-syst-pres-mw-pre</property>
+               </ifthen>
+               <value>0</value>
+            </ifthen>
+         </function>
+         <output>warning-lights/watch-bkup-syst-pres-mw-pre</output>
+      </fcs_function>
 
+      <switch name="trash/warning-lights/watch-bkup-syst-pres-mw">
+         <default value="0"/>
+         <test logic="OR" value="1">
+            warning-lights/watch-bkup-syst-pres-mw-pre ge 40
+         </test>
+         <output>warning-lights/watch-bkup-syst-pres-mw</output>
+      </switch>
+      
       <fcs_function name="trash/warning-lights/watch-main-syst-pres">
          <function>
             <product>
@@ -862,6 +896,40 @@
          </clipto>
          <output>warning-lights/watch-main-syst-pres</output>
       </fcs_function>
+      
+      <fcs_function name="trash/warning-lights/watch-main-syst-pres-mw-pre">
+         <function>
+            <!-- if state == 1 then increment cycle, else set cycle = 0 -->
+            <ifthen>
+               <eq>
+                  <property>warning-lights/watch-main-syst-pres</property>
+                  <value>1</value>
+               </eq>
+               <!-- if cycle = 40 then cycle = 0 else cycle = cycle + 1-->
+               <ifthen>
+                  <lt>
+                     <property>warning-lights/watch-main-syst-pres-mw-pre</property>
+                     <value>40</value>
+                  </lt>
+                  <sum>
+                     <property>warning-lights/watch-main-syst-pres-mw-pre</property>
+                     <value>1</value>
+                  </sum>
+                  <property>warning-lights/watch-main-syst-pres-mw-pre</property>
+               </ifthen>
+               <value>0</value>
+            </ifthen>
+         </function>
+         <output>warning-lights/watch-main-syst-pres-mw-pre</output>
+      </fcs_function>
+
+      <switch name="trash/warning-lights/watch-main-syst-pres-mw">
+         <default value="0"/>
+         <test logic="OR" value="1">
+            warning-lights/watch-main-syst-pres-mw-pre ge 40
+         </test>
+         <output>warning-lights/watch-main-syst-pres-mw</output>
+      </switch>
 
    </channel>
 
