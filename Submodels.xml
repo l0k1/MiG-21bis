@@ -554,12 +554,12 @@
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.47</cd>
+        <cd>0.2</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-explosion-sub.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-sub.xml</submodel-path>
     </submodel>
     <!-- 19 -->
     <submodel>
@@ -580,12 +580,12 @@
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.47</cd>
+        <cd>0.2</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-explosion-sub.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-sub.xml</submodel-path>
     </submodel>
     <!-- 20 -->
     <submodel>
@@ -606,12 +606,12 @@
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.47</cd>
+        <cd>0.2</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-explosion-sub.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-sub.xml</submodel-path>
     </submodel>
     <!-- 21 -->
     <submodel>
@@ -632,12 +632,12 @@
         <pitch-offset>-3.0</pitch-offset>
         <eda>1.0</eda>
         <weight>520.0</weight>
-        <cd>0.47</cd>
+        <cd>0.2</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bomb</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-explosion-sub.xml</submodel-path>
+        <submodel-path>Aircraft/MiG-21bis/Models/Effects/S-24/s-24-sub.xml</submodel-path>
     </submodel>
 
     <!-- 22 -->
@@ -660,7 +660,7 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <bouyancy>24</bouyancy>
-        <cd>0.47</cd>
+        <cd>0.1</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -687,7 +687,7 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <bouyancy>24</bouyancy>
-        <cd>0.47</cd>
+        <cd>0.1</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -714,7 +714,7 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <bouyancy>24</bouyancy>
-        <cd>0.47</cd>
+        <cd>0.1</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
@@ -741,7 +741,7 @@
         <eda>1.0</eda>
         <weight>520.0</weight>
         <bouyancy>24</bouyancy>
-        <cd>0.47</cd>
+        <cd>0.1</cd>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/cannon</collision-report>
         <impact>true</impact>
