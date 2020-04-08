@@ -1,28 +1,28 @@
 <?xml version="1.0"?>
 
 <PropertyList include="MiG-21-set-common.xml">
-	<sim include="Systems/views.xml">
+    <sim include="Systems/views.xml">
 
-		<!-- Info -->
+        <!-- Info -->
 
-		<description>Mikoyan-Gurevich MiG-21MF-75</description>
-		<author>Petar Jedvaj, David Culp, Raptor, Stuart Cassie, Gary Brown, Brendan Black, bugman, Tomaskom, and pinto</author>
-		<status>1.4.4 beta 3</status>
+        <description>Mikoyan-Gurevich MiG-21MF-75</description>
+        <author>Petar Jedvaj, David Culp, Raptor, Stuart Cassie, Gary Brown, Brendan Black, bugman, Tomaskom, and pinto</author>
+        <status>1.4.4 beta 3</status>
 
-		<long-description>The Mikoyan-Gurevich MiG-21MF-75 Fishbed J is a 3rd generation supersonic jet interceptor/fighter aircraft. Made by the Mikoyan-Gurevich Design Bureau, Soviet Union. Nicknamed "balalaika". This export variant has Tumanskiy R13-300 engines and was introduced in 1970.</long-description>
-		<variant-of>MiG-21bis</variant-of>
+        <long-description>The Mikoyan-Gurevich MiG-21MF-75 Fishbed J is a 3rd generation supersonic jet interceptor/fighter aircraft. Made by the Mikoyan-Gurevich Design Bureau, Soviet Union. Nicknamed "balalaika". This export variant has Tumanskiy R13-300 engines and was introduced in 1970.</long-description>
+        <variant-of>MiG-21bis</variant-of>
 
-		<rating>
-			<FDM type="int">3</FDM>
-			<systems type="int">2</systems>
-			<cockpit type="int">2</cockpit>
-			<model type="int">2</model>
-		</rating>
+        <rating>
+            <FDM type="int">3</FDM>
+            <systems type="int">2</systems>
+            <cockpit type="int">2</cockpit>
+            <model type="int">2</model>
+        </rating>
 
-		<flight-model>jsb</flight-model>
-		<aero>MiG-21MF-75</aero>
+        <flight-model>jsb</flight-model>
+        <aero>MiG-21MF-75</aero>
 
-		<gui>
+        <gui>
             <style>
                 <colors>
                     <splash-font>
@@ -40,328 +40,50 @@
         </gui>
 
         <previews>
-			<preview>
-				<type>exterior</type>
-				<splash type="bool">true</splash>
-				<path>Splash.png</path>
-			</preview>
-			<preview>
-				<type>exterior</type>
-				<splash type="bool">true</splash>
-				<path>Splash2.png</path>
-			</preview>
-			<preview>
-				<type>exterior</type>
-				<splash type="bool">true</splash>
-				<path>Splash3.png</path>
-			</preview>
-			<preview>
-				<type>exterior</type>
-				<splash type="bool">true</splash>
-				<path>Splash4.png</path>
-			</preview>
-			<preview>
-				<type>exterior</type>
-				<splash type="bool">true</splash>
-				<path>Splash5.png</path>
-			</preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Splash.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Splash2.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Splash3.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Splash4.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Splash5.png</path>
+            </preview>
         </previews>
 
 
-		<startup>
-			<splash-title>МиГ-21МФ-75</splash-title>
-			<splash-texture>Aircraft/MiG-21bis/Splash.png</splash-texture>
-			<splash-texture>Aircraft/MiG-21bis/Splash2.png</splash-texture>
-			<splash-texture>Aircraft/MiG-21bis/Splash3.png</splash-texture>
-			<splash-texture>Aircraft/MiG-21bis/Splash4.png</splash-texture>
-			<splash-texture>Aircraft/MiG-21bis/Splash5.png</splash-texture>
-		</startup>
+        <startup>
+            <splash-title>МиГ-21МФ-75</splash-title>
+            <splash-texture>Aircraft/MiG-21bis/Splash.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash2.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash3.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash4.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash5.png</splash-texture>
+        </startup>
 
-		<!-- Models -->
+        <!-- Models -->
 
-		<model>
-			<path>Aircraft/MiG-21bis/Models/MiG-21MF-75.xml</path>
-		</model>
-	</sim>
-        <!-- Payload -->
+        <model>
+            <path>Aircraft/MiG-21bis/Models/MiG-21MF-75.xml</path>
+        </model>
+    </sim>
 
-	<payload>
-		<weight n="0">
-			<name>Left wing outboard pylon (#3)</name>
-			<selected>none</selected>
-			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]"/>
-			<opt>
-				<name>none</name>
-				<lbs>0</lbs>
-				<weight-lb>0</weight-lb>
-			</opt>
-			<opt>
-				<name>R-3S</name>
-				<lbs>165</lbs>
-				<weight-lb>165</weight-lb>
-			</opt>
-			<opt>
-				<name>R-3R</name>
-				<lbs>168</lbs>
-				<weight-lb>168</weight-lb>
-			</opt>
-			<opt>
-				<name>R-60</name>
-				<lbs>96</lbs>
-				<weight-lb>96</weight-lb>
-			</opt>
-			<opt>
-				<name>R-60x2</name>
-				<lbs>192</lbs>
-				<weight-lb>192</weight-lb>
-			</opt>
-			<opt>
-				<name>Kh-66</name>
-				<lbs>633</lbs>
-				<weight-lb>633</weight-lb>
-			</opt>
-			<opt>
-				<name>UB-16</name>
-				<lbs>141</lbs>
-				<weight-lb>141</weight-lb>
-			</opt>
-			<opt>
-				<name>S-24</name>
-				<lbs>518</lbs>
-				<weight-lb>518</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-100</name>
-				<lbs>220</lbs>
-				<weight-lb>220</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-250</name>
-				<lbs>551</lbs>
-				<weight-lb>551</weight-lb>
-			</opt>
-			<opt>
-				<name>PTB-490 Droptank</name>
-				<lbs>180</lbs>
-				<weight-lb>180</weight-lb>
-			</opt>
-		</weight>
-		<weight n="1">
-			<name>Left wing inboard pylon (#1)</name>
-			<selected>none</selected>
-			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]"/>
-			<opt>
-				<name>none</name>
-				<lbs>0</lbs>
-				<weight-lb>0</weight-lb>
-			</opt>
-			<opt>
-				<name>R-3S</name>
-				<lbs>165</lbs>
-				<weight-lb>165</weight-lb>
-			</opt>
-			<opt>
-				<name>R-3R</name>
-				<lbs>168</lbs>
-				<weight-lb>168</weight-lb>
-			</opt>
-			<opt>
-				<name>R-60</name>
-				<lbs>96</lbs>
-				<weight-lb>96</weight-lb>
-			</opt>
-			<opt>
-				<name>Kh-66</name>
-				<lbs>633</lbs>
-				<weight-lb>633</weight-lb>
-			</opt>
-			<opt>
-				<name>UB-16</name>
-				<lbs>141</lbs>
-				<weight-lb>141</weight-lb>
-			</opt>
-			<opt>
-				<name>UB-32</name>
-				<lbs>582</lbs>
-				<weight-lb>582</weight-lb>
-			</opt>
-			<opt>
-				<name>S-24</name>
-				<lbs>518</lbs>
-				<weight-lb>518</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-100</name>
-				<lbs>220</lbs>
-				<weight-lb>220</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-100x4</name>
-				<lbs>960</lbs>
-				<weight-lb>960</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-250</name>
-				<lbs>551</lbs>
-				<weight-lb>551</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-500</name>
-				<lbs>1146</lbs>
-				<weight-lb>1146</weight-lb>
-			</opt>
-		</weight>
-		<weight n="2">
-			<name>Fuselage pylon (#5)</name>
-			<selected>none</selected>
-			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]"/>
-			<tank>1</tank>
-			<opt>
-				<name>none</name>
-				<lbs>0</lbs>
-				<weight-lb>0</weight-lb>
-			</opt>
-			<opt>
-				<name>PTB-490 Droptank</name>
-				<lbs>180</lbs>
-				<weight-lb>180</weight-lb>
-			</opt>
-			<opt>
-				<name>PTB-800 Droptank</name>
-				<lbs>230</lbs>
-				<weight-lb>230</weight-lb>
-			</opt>
-			<opt>
-				<name>Smokepod</name>
-				<lbs>157</lbs>
-				<weight-lb>157</weight-lb>
-			</opt>
-		</weight>
-		<weight n="3">
-			<name>Right wing inboard pylon (#2)</name>
-			<selected>none</selected>
-			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[3]"/>
-			<opt>
-				<name>none</name>
-				<lbs>0</lbs>
-				<weight-lb>0</weight-lb>
-			</opt>
-			<opt>
-				<name>R-3S</name>
-				<lbs>165</lbs>
-				<weight-lb>165</weight-lb>
-			</opt>
-			<opt>
-				<name>R-3R</name>
-				<lbs>168</lbs>
-				<weight-lb>168</weight-lb>
-			</opt>
-			<opt>
-				<name>R-60</name>
-				<lbs>96</lbs>
-				<weight-lb>96</weight-lb>
-			</opt>
-			<opt>
-				<name>Kh-66</name>
-				<lbs>633</lbs>
-				<weight-lb>633</weight-lb>
-			</opt>
-			<opt>
-				<name>UB-16</name>
-				<lbs>141</lbs>
-				<weight-lb>141</weight-lb>
-			</opt>
-			<opt>
-				<name>UB-32</name>
-				<lbs>582</lbs>
-				<weight-lb>582</weight-lb>
-			</opt>
-			<opt>
-				<name>S-24</name>
-				<lbs>518</lbs>
-				<weight-lb>518</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-100</name>
-				<lbs>220</lbs>
-				<weight-lb>220</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-100x4</name>
-				<lbs>960</lbs>
-				<weight-lb>960</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-250</name>
-				<lbs>551</lbs>
-				<weight-lb>551</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-500</name>
-				<lbs>1146</lbs>
-				<weight-lb>1146</weight-lb>
-			</opt>
-		</weight>
-		<weight n="4">
-			<name>Right wing outboard pylon (#4)</name>
-			<selected>none</selected>
-			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[4]"/>
-			<opt>
-				<name>none</name>
-				<lbs>0</lbs>
-				<weight-lb>0</weight-lb>
-			</opt>
-			<opt>
-				<name>R-3S</name>
-				<lbs>165</lbs>
-				<weight-lb>165</weight-lb>
-			</opt>
-			<opt>
-				<name>R-3R</name>
-				<lbs>168</lbs>
-				<weight-lb>168</weight-lb>
-			</opt>
-			<opt>
-				<name>R-60</name>
-				<lbs>96</lbs>
-				<weight-lb>96</weight-lb>
-			</opt>
-			<opt>
-				<name>R-60x2</name>
-				<lbs>192</lbs>
-				<weight-lb>192</weight-lb>
-			</opt>
-			<opt>
-				<name>Kh-66</name>
-				<lbs>633</lbs>
-				<weight-lb>633</weight-lb>
-			</opt>
-			<opt>
-				<name>UB-16</name>
-				<lbs>141</lbs>
-				<weight-lb>141</weight-lb>
-			</opt>
-			<opt>
-				<name>S-24</name>
-				<lbs>518</lbs>
-				<weight-lb>518</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-100</name>
-				<lbs>220</lbs>
-				<weight-lb>220</weight-lb>
-			</opt>
-			<opt>
-				<name>FAB-250</name>
-				<lbs>551</lbs>
-				<weight-lb>551</weight-lb>
-			</opt>
-			<opt>
-				<name>PTB-490 Droptank</name>
-				<lbs>180</lbs>
-				<weight-lb>180</weight-lb>
-			</opt>
-		</weight>
-	</payload>
+    <payload include="Systems/weaponset-bis.xml">
 
 </PropertyList>

@@ -107,6 +107,8 @@
     101 ~ BETAB-500ShP 3 live
     102 ~ BETAB-500ShP 1 jettison
     103 ~ BETAB-500ShP 3 jettison
+    104 ~ UB-32 pylon 0 jettison
+    105 ~ UB-32 pylon 4 jettison
 
     -->
     <!-- 0 -->
@@ -2569,6 +2571,55 @@
         <eda>6</eda>
         <weight>1040.0</weight>
         <cd>1.75</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    
+    <submodel>
+        <name>UB-32 pylon 0 jettison</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-sub.xml</model>
+        <trigger>payload/jettison/UB-32[0]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.97528</x-m>
+            <y-m>-2.73238</y-m>
+            <z-m>-0.41322</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.55</cd>
+        <collision>true</collision>
+        <impact>true</impact>
+        <impact-reports>/ai/models/jettison-impact</impact-reports>
+    </submodel>
+    
+    <submodel>
+        <name>UB-32 pylon 4 jettison</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/UB-32/UB-32-sub.xml</model>
+        <trigger>payload/jettison/UB-32[4]</trigger>
+        <trigger-once>true</trigger-once>
+        <speed>0.0</speed>
+        <repeat>true</repeat>
+        <delay>5</delay>
+        <count>-1</count>
+        <offsets>
+            <x-m> 0.97528</x-m>
+            <y-m> 2.73238</y-m>
+            <z-m>-0.41322</z-m>
+        </offsets>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>-3.0</pitch-offset>
+        <eda>1.0</eda>
+        <weight>520.0</weight>
+        <cd>0.55</cd>
         <collision>true</collision>
         <impact>true</impact>
         <impact-reports>/ai/models/jettison-impact</impact-reports>

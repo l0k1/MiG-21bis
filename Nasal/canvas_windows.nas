@@ -41,6 +41,7 @@ var stores = {
                                 ["Kh-66",]],
                     ["Rocket", 
                                 ["UB-16",
+                                "UB-32",
                                 "S-24",]],
                     ["Droptank",
                                 ["PTB-490 Droptank",]],
