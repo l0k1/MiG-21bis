@@ -229,7 +229,7 @@ var beam_target_lock = func() {
 var kh25_guidance = func(input) {
 	#print("weapon pitch:" ~ input.weapon_pitch);
 	#print("guiding");
-	print("guidance: " ~ input.guidance);
+	#print("guidance: " ~ input.guidance);
 	detect_range = input.seeker_detect_range * NM2M;
 	if (input.guidance == "radiation") {
 		#print("guidance is radiation");

@@ -645,7 +645,7 @@ var update_cx_master_list = func() {
   # clean out cx_master_list
   foreach(var cx; cx_master_list) {
     if (cx.isValid() == 0) {
-      print("removing");
+      #print("removing");
       cx_master_list = remove_from_array(cx_master_list, cx);
     }
   }

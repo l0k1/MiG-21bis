@@ -84,6 +84,6 @@
         </model>
     </sim>
 
-    <payload include="Systems/weaponset-bis.xml">
+    <payload include="Systems/weaponset-bis.xml"/>
 
 </PropertyList>

@@ -125,7 +125,7 @@ var inner_outer_adf_finder = func() {
             change_freq = getprop("/instrumentation/adf-radio/preset[" ~ arc_sel_map[arc_sel] ~ "]");
             hold_freq = freq;
             settimer(func(){
-                print("yeeeeeeeeeeessssssssss");
+                #print("yeeeeeeeeeeessssssssss");
                 if (getprop("/fdm/jsbsim/electric/output/arc") < 105) {
                     settimer(func(){inner_outer_adf_finder();},1);
                     return;

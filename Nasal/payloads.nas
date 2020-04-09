@@ -1272,10 +1272,10 @@ var spamLoop = func {
 }
 
 var place_model = func(path, lat, lon, ele) {
-    print(path);
-    print(lat);
-    print(lon);
-    print(ele);
+    #print(path);
+    #print(lat);
+    #print(lon);
+    #print(ele);
     var n = props.globals.getNode("models",1);
     var i = 0;
     for (i = 0; 1==1; i += 1) {

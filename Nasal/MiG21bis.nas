@@ -358,7 +358,7 @@ var toggle_damage = func{
 
 var wow_menu_change = func{
     var wowstatus = getprop("fdm/jsbsim/gear/unit/WOW") and getprop("fdm/jsbsim/gear/unit[1]/WOW") and getprop("fdm/jsbsim/gear/unit[2]/WOW");
-    print(wowstatus);
+    #print(wowstatus);
     if (dmg) {
         if (wowstatus) {
             setprop("sim/menubar/default/menu[2]/item[1]/enabled",1);
