@@ -216,7 +216,7 @@
                 </menu>
                 <menu n="101">
                     <label>Dev</label>
-                    <!--<item>
+                    <item>
                         <label>Tune Drag</label>
                         <binding>
                             <command>nasal</command>
@@ -261,7 +261,7 @@
                     <item>
                         <name>a-submenu</name>
                         <enabled>false</enabled>
-                    </item>-->
+                    </item>
                     <item>
                         <label>Dump Prop Tree</label>
                         <binding>
