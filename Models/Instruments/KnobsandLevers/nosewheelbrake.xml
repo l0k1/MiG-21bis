@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>nosewheelbrake.ac</path>
+
+	<animation>
+        <type>knob</type>
+        <object-name>nosewheelBrakeKnob</object-name>
+        <property>/fdm/jsbsim/systems/brakes/nose-wheel-brake-toggle</property>
+        <factor>90</factor>
+        <offset-deg>0</offset-deg>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/systems/brakes/nose-wheel-brake-toggle</property>
+            </binding>
+        </action>
+    </animation>
+	
+</PropertyList>

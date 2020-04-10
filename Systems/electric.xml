@@ -1,0 +1,1073 @@
+<?xml version="1.0"?>
+
+<!-- gauges are handled in instrumentation.xml -->
+
+<system name="electric">
+
+	<property value="0">electric/external-connected</property>  <!-- if the external ground cart is connected -->
+	<property value="0">electric/battery-mode</property>		<!-- 0 = batteries in parallel, 1 = batteries in series -->
+	<property value="1">electric/buses/bus-switch[0]</property>
+	<property value="1">electric/buses/bus-switch[1]</property>
+	<property value="1">electric/buses/bus-switch[2]</property>
+	<property value="29">electric/sources/battery[0]</property>
+	<property value="29">electric/sources/battery[1]</property>
+
+	<!--
+	right vertical rear switch panel
+			or
+	rvrsp for short
+	-->
+	<property value="1">electric/switches/rvrsp/air-brake</property> <!-- output implemented -->
+	<property value="1">electric/switches/rvrsp/lg-wg-flaps</property> <!-- output implemented -->
+	<property value="1">electric/switches/rvrsp/lg-sig-nav-lts</property>
+	<property value="1">electric/switches/rvrsp/cone-and-as-shutters-gtl</property> <!-- output implemented -->
+	<property value="1">electric/switches/rvrsp/msl-rgm-emer-lcn-lchr-rkt-bombs-jett</property>
+	<property value="1">electric/switches/rvrsp/oxy-eq-heat-extn-lamp-wht-lt</property>
+	<property value="1">electric/switches/rvrsp/drag-chute</property>
+	<property value="1">electric/switches/rvrsp/drop-tanks-jett</property>
+	<property value="1">electric/switches/rvrsp/aru-syst-man-ctl</property>
+	<property value="1">electric/switches/rvrsp/taxi-ldg-lts-lg-ext-sig</property>
+	<property value="1">electric/switches/rvrsp/booster-system-off-hyd-syst-sig</property>
+	<property value="1">electric/switches/rvrsp/hydr-pres-gauge-tanks-sig</property>
+	<property value="1">electric/switches/rvrsp/anh-pnl-lampst-test-copu-warn-syst</property>
+	<property value="1">electric/switches/rvrsp/ext-stores-sig</property>
+	<property value="1">electric/switches/rvrsp/blc-syst-shutters-control-1</property> <!-- output implemented -->
+	<property value="1">electric/switches/rvrsp/blc-syst-shutters-control-2</property> <!-- output implemented -->
+	<property value="1">electric/switches/rvrsp/tac-rls-1-2</property>
+	<property value="1">electric/switches/rvrsp/cabin-air-sup</property>
+	<property value="1">electric/switches/rvrsp/firing-button</property>
+	<property value="1">electric/switches/rvrsp/cdr-atc-xponder</property>
+	<property value="1">electric/switches/rvrsp/aru-syst-auto-ctl</property>
+	<property value="1">electric/switches/rvrsp/tac-rls-3-4</property>
+	<property value="1">electric/switches/rvrsp/battery-heat</property>
+
+	<!--
+	right horizontal front switch panel
+			or
+	rhfsp for short
+	-->
+	<property value="0">electric/switches/rhfsp/no-3-tk-gp-pump</property>
+	<property value="0">electric/switches/rhfsp/no-1-tk-gp-pump</property>
+	<property value="0">electric/switches/rhfsp/service-tk-pump</property>
+	<property value="0">electric/switches/rhfsp/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig</property>
+	<property value="0">electric/switches/rhfsp/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr</property>
+	<property value="0">electric/switches/rhfsp/inv-emerg-crsovr</property>
+	<property value="0">electric/switches/rhfsp/bat-ext-pwr-sup</property>
+	<property value="0">electric/switches/rhfsp/dc-gen</property>
+	<property value="0">electric/switches/rhfsp/jato-start</property>
+	<property value="0">electric/switches/rhfsp/jato-jett</property>
+	<property value="0">electric/switches/rhfsp/ac-gen-ext-pwr</property>
+
+	<!--
+	rght vertical mid switch panel
+			or
+	rvmsp for short
+	-->
+	<property value="0">electric/switches/rvmsp/cone</property>
+	<property value="0">electric/switches/rvmsp/pump-unit</property>
+	<property value="0">electric/switches/rvmsp/trim</property>
+	<property value="0">electric/switches/rvmsp/rset</property>
+	<property value="0">electric/switches/rvmsp/arc</property>
+	<property value="0">electric/switches/rvmsp/rad-alt</property> <!-- check me? -->
+	<property value="0">electric/switches/rvmsp/rsbn</property>
+	<property value="0">electric/switches/rvmsp/gyro</property>
+	<property value="0">electric/switches/rvmsp/fds</property>
+	<property value="0">electric/switches/rvmsp/afcs</property>
+	<property value="0">electric/switches/rvmsp/afcs-pitch</property>
+	<property value="0">electric/switches/rvmsp/msl-rgm-gr-heat</property>
+	<property value="0">electric/switches/rvmsp/msl-rgm-rkt-lch</property>
+	<property value="0">electric/switches/rvmsp/pwr-to-pylons-1-2</property>
+	<property value="0">electric/switches/rvmsp/pwr-to-pylons-3-4</property>
+	<property value="0">electric/switches/rvmsp/gun</property>
+	<property value="0">electric/switches/rvmsp/gunsight</property>
+	<property value="0">electric/switches/rvmsp/guncam</property>
+	<property value="0">electric/switches/rvmsp/srzo-iff</property>
+	<property value="0">electric/switches/rvmsp/formation-lights</property>
+	<property value="0">electric/switches/rvmsp/recorder</property>
+
+	<!--
+	left vertical front switch panel
+			or
+	lvfsp for short
+	-->
+	<property value="0">electric/switches/lvfsp/ad-check</property>
+	<property value="1">electric/switches/lvfsp/anti-skid-unit</property>
+	<property value="1">electric/switches/lvfsp/full-throttle-reheat</property>
+	<property value="1">electric/switches/lvfsp/air-relight</property>
+	<property value="0">electric/switches/lvfsp/engine-starting-unit</property>
+	<property value="0">electric/switches/lvfsp/fire-ftg-eqpt</property>
+
+	<!--
+	left vertical mid switch panel
+	        or
+	lvmsp for short
+	-->
+	<property value="0">electric/switches/lvmsp/seat-height</property>
+	<property value="0">electric/switches/lvmsp/psn-nozzle-emerg-ctl</property>
+	<property value="0">electric/switches/lvmsp/air-temp</property>
+	<property value="0">electric/switches/lvmsp/blc</property>
+	<property value="0">electric/switches/lvmsp/ident</property>
+	<property value="0">electric/switches/lvmsp/apu-ctlr-auto-man</property>
+	<property value="0">electric/switches/lvmsp/apu-ctlr-hi-spd-low</property>
+	<property value="0">electric/switches/lvmsp/lockon-hi-lo</property>
+
+
+	<property value="0">electric/sources/dc-gen-damage</property>
+	<property value="0">electric/sources/ac-gen-damage</property>
+	<property value="90">electric/sources/batteries-a</property>
+	<property value="24">electric/sources/batteries-v</property>
+	<property value="0">electric/inverters/po-750a-0-damage</property>
+	<property value="0">electric/inverters/po-750a-1-damage</property>
+	<property value="0">electric/inverters/po-1500vt-damage</property>
+	<property value="0">electric/inverters/pt-500ts-damage</property>
+	<property value="0">electric/inverters/pt-125c-damage</property>
+	<property value="0">electric/buses/bus0-damage</property>
+	<property value="0">electric/buses/bus1-damage</property>
+	<property value="0">electric/buses/bus2-damage</property>
+	<property value="0">electric/buses/bus3-damage</property>
+
+	<!--
+	left horizontal front switch panel
+			or
+	lhfsp for short
+	-->
+	<property value="1">electric/switches/lhfsp/aileron-booster</property>
+
+	<channel name="sources">
+		
+		<fcs_function name="trash/electric/sources/external-dc">
+			<function>
+				<product>
+					<ifthen>
+						<property>electric/external-connected</property>
+						<value>29</value>
+						<value>0</value>
+					</ifthen>
+					<property>electric/switches/rhfsp/bat-ext-pwr-sup</property>
+				</product>
+			</function>
+			<output>electric/sources/external-dc</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/external-ac">
+			<function>
+				<product>
+					<ifthen>
+						<property>electric/external-connected</property>
+						<value>29</value>
+						<value>0</value>
+					</ifthen>
+					<property>electric/switches/rhfsp/ac-gen-ext-pwr</property>
+				</product>
+			</function>
+			<output>electric/sources/external-ac</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/dc-gen">
+			<function>
+				<product>
+					<difference>
+						<value>1</value>
+						<property>electric/external-connected</property>
+					</difference>
+					<table>
+						<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
+						<tableData>
+							0.0	 0.0
+							30.0	24.0
+							100.0   28.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/sources/dc-gen-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.8
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/sources/dc-gen</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/ac-gen">
+			<function>
+				<product>
+					<difference>
+						<value>1</value>
+						<property>electric/external-connected</property>
+					</difference>
+					<property>electric/switches/rhfsp/ac-gen-ext-pwr</property>
+					<table>
+						<independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
+						<tableData>
+							0.0	 0.0
+							30.0	112.0
+							100.0   116.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/sources/ac-gen-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.8
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/sources/ac-gen</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/batteries-v">
+			<function>
+				<product>
+					<difference>
+						<value>1</value>
+						<property>electric/external-connected</property>
+					</difference>
+					<property>electric/switches/rhfsp/bat-ext-pwr-sup</property>
+					<table>
+						<independentVar lookup="row">electric/sources/batteries-a</independentVar>
+						<tableData>
+							0.0		0.0
+							0.1		13.0
+							1.0		24.0
+							90.0	24.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/sources/batteries-v</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/output-dc">
+			<function>
+				<max>
+					<property>electric/sources/external-dc</property>
+					<property>electric/sources/dc-gen</property>
+					<property>electric/sources/batteries-v</property>
+				</max>
+			</function>
+			<output>electric/sources/output-dc</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/sources/output-ac">
+			<function>
+				<max>
+					<property>electric/sources/external-ac</property>
+					<property>electric/sources/ac-gen</property>
+				</max>
+			</function>
+			<output>electric/sources/output-ac</output>
+		</fcs_function>
+	</channel>
+	
+	<channel name="intermediates">
+		<fcs_function name="trash/electric/inverters/po-750a[0]">
+			<function>
+				<product>
+					<table>
+						<independentVar lookup="row">electric/sources/output-dc</independentVar>
+						<tableData>
+							0.0	 0.0
+							22.0	115.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/inverters/po-750a-0-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.9
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/inverters/po-750a[0]</output>
+		</fcs_function>
+
+		<fcs_function name="trash/electric/inverters/po-750a[1]">
+			<function>
+				<product>
+					<table>
+						<independentVar lookup="row">electric/sources/output-dc</independentVar>
+						<tableData>
+							0.0	 0.0
+							22.0	115.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/inverters/po-750a-1-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.9
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/inverters/po-750a[1]</output>
+		</fcs_function>
+
+		<fcs_function name="trash/electric/inverters/po-1500vt">
+			<function>
+				<product>
+					<table>
+						<independentVar lookup="row">electric/sources/output-dc</independentVar>
+						<tableData>
+							0.0	 0.0
+							22.0	115.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/inverters/po-1500vt-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.9
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/inverters/po-1500vt</output>
+		</fcs_function>
+
+		<fcs_function name="trash/electric/inverters/pt-500ts">
+			<function>
+				<product>
+					<table>
+						<independentVar lookup="row">electric/sources/output-dc</independentVar>
+						<tableData>
+							0.0	 0.0
+							22.0	36.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/inverters/pt-500ts-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.9
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/inverters/pt-500ts</output>
+		</fcs_function>
+
+		<fcs_function name="trash/electric/inverters/pt-125c">
+			<function>
+				<product>
+					<table>
+						<independentVar lookup="row">electric/sources/output-dc</independentVar>
+						<tableData>
+							0.0	 0.0
+							22.0	36.0
+						</tableData>
+					</table>
+					<table>
+						<independentVar lookup="row">electric/inverters/pt-125c-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.35	0.9
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/inverters/pt-125c</output>
+		</fcs_function>
+	</channel>
+	<channel name="buses">
+		
+		<!-- all buses are 115v -->
+		<fcs_function name="trash/electric/buses/bus[0]">
+			<function>
+				<product>
+					<property>electric/buses/bus-switch[0]</property>
+					<property>electric/inverters/po-750a[0]</property>
+					<table>
+						<independentVar lookup="row">electric/buses/bus0-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.85	1.0
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/buses/bus[0]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/buses/bus[1]">
+			<function>
+				<product>
+					<property>electric/buses/bus-switch[1]</property>
+					<property>electric/inverters/po-750a[1]</property>
+					<table>
+						<independentVar lookup="row">electric/buses/bus1-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.85	1.0
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/buses/bus[1]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/buses/bus[2]">
+			<function>
+				<product>
+					<property>electric/buses/bus-switch[2]</property>
+					<property>electric/inverters/po-1500vt</property>
+					<table>
+						<independentVar lookup="row">electric/buses/bus2-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.85	1.0
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/buses/bus[2]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/electric/buses/bus[3]">
+			<function>
+				<product>
+					<property>electric/sources/output-ac</property>
+					<table>
+						<independentVar lookup="row">electric/buses/bus3-damage</independentVar>
+						<tableData>
+							0.0		1.0
+							0.85	1.0
+							1.0		0.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>electric/buses/bus[3]</output>
+		</fcs_function>
+	</channel>
+	
+	<channel name="output">
+
+		<!--
+
+		switches
+
+		power source delineated by cockpit proximity until an authoritative source can be found
+
+		-->
+
+		<!-- rear right panel -->
+
+		<switch name="electric/output/air-brakes">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/air-brake == 1
+			</test>
+		</switch>
+
+		<!-- landing gear and flaps-->
+		<switch name="electric/output/lg-wg-flaps">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/lg-wg-flaps == 1
+			</test>
+		</switch>
+
+		<!-- nav lights -->
+		<switch name="electric/output/lg-sig-nav-lts">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/lg-sig-nav-lts == 1
+			</test>
+		</switch>
+
+		<!-- nosecone shutters -->
+		<switch name="electric/output/cone-and-as-shutters-gtl">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/cone-and-as-shutters-gtl == 1
+			</test>
+		</switch>
+
+		<!-- weapon jettison -->
+		<switch name="electric/output/msl-rgm-emer-lcn-lchr-rkt-bombs-jett">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/msl-rgm-emer-lcn-lchr-rkt-bombs-jett == 1
+			</test>
+		</switch>
+
+		<!-- heat lights -->
+		<switch name="electric/output/oxy-eq-heat-extn-lamp-wht-lt">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/oxy-eq-heat-extn-lamp-wht-lt == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/drag-chute">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/drag-chute == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/drop-tanks-jett">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/drop-tanks-jett == 1
+			</test>
+		</switch>
+
+		<!-- stabilizer -->
+		<switch name="electric/output/aru-syst-man-ctl">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/aru-syst-man-ctl == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/taxi-ldg-lts-lg-ext-sig">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/taxi-ldg-lts-lg-ext-sig == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/booster-system-off-hyd-syst-sig">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/booster-system-off-hyd-syst-sig == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/hydr-pres-gauge-tanks-sig">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/booster-system-off-hyd-syst-sig == 1
+			</test>
+		</switch>
+
+		<!--tbh no idea lol-->
+		<switch name="electric/output/anh-pnl-lampst-test-copu-warn-syst">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/anh-pnl-lampst-test-copu-warn-syst == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/ext-stores-sig">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/ext-stores-sig == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/blc-syst-shutters-control-1">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/blc-syst-shutters-control-1 == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/blc-syst-shutters-control-2">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/blc-syst-shutters-control-2 == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/tac-rls-1-2">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/tac-rls-1-2 == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/cabin-air-sup">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/cabin-air-sup == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/firing-button">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/firing-button == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/cdr-atc-xponder">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/cdr-atc-xponder == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/aru-syst-auto-ctl">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/aru-syst-auto-ctl == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/tac-rls-3-4">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/tac-rls-3-4 == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/battery-heat">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/rvrsp/battery-heat == 1
+			</test>
+		</switch>
+
+		<!--
+
+		left vertical front switch panel
+
+		-->
+
+		<switch name="electric/output/full-throttle-reheat">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/lvfsp/full-throttle-reheat == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/anti-skid-unit">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/lvfsp/anti-skid-unit == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/air-relight">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/lvfsp/air-relight == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/engine-starting-unit">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/lvfsp/engine-starting-unit == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/fire-ftg-eqpt">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[2]">
+				electric/switches/lvfsp/fire-ftg-eqpt == 1
+			</test>
+		</switch>
+
+
+		<!--
+
+		right vertical mid switch panel
+
+		-->
+
+		<switch name="electric/output/cone">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/cone == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/pump-unit">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/pump-unit == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/trim">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/trim == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/rset">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/rset == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/arc">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/arc == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/rad-alt">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/rad-alt == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/rsbn">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/rsbn == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/gyro">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/gyro == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/fds">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/fds == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/afcs">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/afcs == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/afcs-pitch">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/afcs-pitch == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/msl-rgm-gr-heat">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/msl-rgm-gr-heat == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/msl-rgm-rkt-lch">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/msl-rgm-rkt-lch == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/pwr-to-pylons[1]">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/pwr-to-pylons-1-2 == 1
+			</test>
+		</switch>
+		
+		<switch name="electric/output/pwr-to-pylons[3]">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/pwr-to-pylons-1-2 == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/pwr-to-pylons[0]">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/pwr-to-pylons-3-4 == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/pwr-to-pylons[4]">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/pwr-to-pylons-3-4 == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/gun">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/gun == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/gunsight">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/gunsight == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/guncam">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/guncam == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/srzo-iff">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/srzo-iff == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/formation-lights">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/formation-lights == 1
+			</test>
+		</switch>
+
+		<fcs_function name="trash/electric/output/formation-lights">
+			<function>
+				<product>
+					<switch>
+						<property>electric/switches/rvmsp/formation-lights</property>
+						<value>0.00</value>
+						<value>0.33</value>
+						<value>0.66</value>
+						<value>1.00</value>
+					</switch>
+					<property>electric/buses/bus[1]</property>
+				</product>
+			</function>
+			<output>electric/output/formation-lights</output>
+		</fcs_function>
+
+		<switch name="electric/output/recorder">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvmsp/recorder == 1
+			</test>
+		</switch>
+
+		<!--
+
+		left vertical mid switch panel
+
+		-->
+
+		<switch name="electric/output/seat-height">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/seat-height == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/psn-nozzle-emerg-ctl">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/psn-nozzle-emerg-ctl == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/air-temp">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/air-temp == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/blc">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/blc == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/ident">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/ident == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/apu-ctlr-auto-man">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/apu-ctlr-auto-man == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/apu-ctlr-hi-spd-low">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/apu-ctlr-hi-spd-low == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/lockon-hi-lo">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[0]">
+				electric/switches/lvmsp/lockon-hi-lo == 1
+			</test>
+		</switch>
+
+		<!--
+		right horizontal front switch panel
+				or
+		rhfsp for short
+		-->
+
+		<switch name="electric/output/no-3-tk-gp-pump">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/no-3-tk-gp-pump == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/no-1-tk-gp-pump">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/no-1-tk-gp-pump == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/service-tk-pump">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/service-tk-pump == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/inv-emerg-crsovr">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/inv-emerg-crsovr == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/dc-gen">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/dc-gen == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/jato-start">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/jato-start == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/jato-jett">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/rhfsp/jato-jett == 1
+			</test>
+		</switch>
+		
+		<!--
+
+		lights
+
+		-->
+
+		<!-- warning lights - do we need to split out over every panel? -->
+		<fcs_function name="trash/warning-lights/lights-dc">
+			<function>
+				<interpolate1d>
+					<property>electric/inverters/pt-125c</property>
+					<value> 0.00 </value> <value> 0.00 </value>
+					<value> 10.0 </value> <value> 0.00 </value>
+					<value> 14.0 </value> <value> 0.20 </value>
+					<value> 23.0 </value> <value> 0.50 </value>
+					<value> 26.0 </value> <value> 1.00 </value>
+					<value> 40.0 </value> <value> 1.00 </value>
+				</interpolate1d>
+			</function>
+			<clipto>
+				<min>0.0</min>
+				<max>1.0</max>
+			</clipto>
+			<output>warning-lights/lights-dc</output>
+		</fcs_function>
+
+		<!-- misc small stuff -->
+
+		<switch name="electric/output/aileron-booster">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/lhfsp/aileron-booster == 1
+			</test>
+		</switch>
+
+	</channel>
+	<channel name="load" execrate="120">
+
+		<fcs_function name="trash/electric/ac-gen-load">
+			<function>
+				<product>
+					<!-- ten amps? sure -->
+					<min>
+						<property>radar/mode</property>
+						<value>1</value>
+					</min>
+					<value>10</value>
+				</product>
+			</function>
+			<output>electric/ac-gen-load</output>
+		</fcs_function>
+
+		<!-- no idea what the actual amperage should be here. -->
+		<fcs_function name="trash/electric/sources/ac-gen-damage">
+			<function>
+				<table>
+					<independentVar lookup="row">electric/ac-gen-load</independentVar>
+					<tableData>
+						0.0		0.0
+						45.0	0.01
+						55.0	0.05
+						65.0	0.10
+						75.0	1.00
+					</tableData>
+				</table>
+			</function>
+			<clipto>
+				<min>0.0</min>
+				<max>1.0</max>
+			</clipto>
+			<output>electric/ac-gen-damage</output>
+		</fcs_function>
+		
+		<!-- calculate amp load, compare to amp rating, damage if load is greater than rating -->
+		<!-- amp usage rating is gonna be largely bullshit because idk the real values -->
+		<!-- to get amp usage, add up all output voltages, divide by input voltage (+0.0000001 or so), multiply by amp usage rating -->
+	
+	</channel>
+		
+</system>

@@ -1,0 +1,515 @@
+<?xml version="1.0"?>
+
+<system name="hydraulics">
+
+    <channel name="hydr0">
+
+        <!-- hydro system 0 is powered by "pump-unit"
+        todo:
+        landing gear
+        jet nozzles
+        automatic braking of wheels during landing gear retraction
+        retraction and extension of the intake cone
+        control of the derumble doors
+        control of the electronic equipment bay cooling system
+
+        in addition, they back up the ailerons if the booster system fails
+        fcs/left-aileron-pos-norm
+        fcs/right-aileron-pos-norm
+         -->
+
+        <!-- if hydraulic pressure < 165 kgf/cm2, turn on pump until pressure > 195 kgf/cm2 -->
+
+        <fcs_function name="trash/systems/hydraulic[0]/pump-on">
+            <function>
+                <and>
+                    <!-- if pressure < 165 or pump is on and pressure < 195 -->
+                    <or>
+                        <lt>
+                            <property>systems/hydraulic[0]/pressure</property>
+                            <value>165</value>
+                        </lt>
+                        <and>
+                            <lt>
+                                <property>systems/hydraulic[0]/pressure</property>
+                                <value>195</value>
+                            </lt>
+                            <eq>
+                                <property>systems/hydraulic[0]/pump-on</property>
+                                <value>1</value>
+                            </eq>
+                        </and>
+                    </or>
+                    <gt>
+                        <property>electric/output/pump-unit</property>
+                        <value>108</value>
+                    </gt>
+                    <gt>
+                        <property>systems/hydraulic[0]/tank-contents</property>
+                        <value>0.1</value>
+                    </gt>
+                </and>
+            </function>
+            <output>systems/hydraulic[0]/pump-on</output>
+        </fcs_function>
+
+        <!-- if the pump is on, empty the tank contents into the high pressure contents -->
+        <!-- use this func to also remove from high pres to low pres -->
+
+        <fcs_function name="trash/systems/hydraulic[0]/high-pres-contents">
+            <function>
+                <sum>
+                    <product>
+                        <property>systems/hydraulic[0]/pump-on</property>
+                        <value>0.0001</value>
+                    </product>
+                    <product>
+                        <sum>
+                            <!-- user properties go here -->
+                            <property>systems/hydraulic[0]/usage/flaps</property>
+                            <property>systems/hydraulic[0]/usage/speedbrake-front-right</property>
+                            <property>systems/hydraulic[0]/usage/speedbrake-front-left</property>
+                            <property>systems/hydraulic[0]/usage/speedbrake-rear</property>
+                            <property>systems/hydraulic[0]/usage/elevator-booster</property>
+                            <property>systems/hydraulic[0]/usage/nozzle</property>
+                            <property>systems/hydraulic[0]/usage/gear</property>
+                        </sum>
+                        <value>-1</value>
+                    </product>
+                    <property>systems/hydraulic[0]/high-pres-contents</property>
+                </sum>
+            </function>
+            <output>systems/hydraulic[0]/high-pres-contents</output>
+        </fcs_function>
+
+        <fcs_function name="trash/systems/hydraulic[0]/pressure">
+            <function>
+                <table>
+                    <independentVar lookup="row">systems/hydraulic[0]/high-pres-contents</independentVar>
+                    <tableData>
+                        0.0     0.0
+                        0.1     15.0
+                        0.125   45.0
+                        0.15    105.0
+                        0.175   165.0
+                        0.2     195.0
+                    </tableData>
+                </table>
+            </function>
+            <output>systems/hydraulic[0]/pressure</output>
+        </fcs_function>
+
+        <!-- add in low pressure stuff here too -->
+
+        <fcs_function name="trash/systems/hydraulic[0]/low-pres-drain">
+            <function>
+                <max>
+                    <value>0</value>
+                    <difference>
+                        <property>systems/hydraulic[0]/low-pres-contents</property>
+                        <value>0.05</value>
+                    </difference>
+                </max>
+            </function>
+            <output>systems/hydraulic[0]/low-pres-drain</output>
+        </fcs_function>
+
+        <fcs_function name="trash/systems/hydraulic[0]/low-pres-contents">
+            <function>
+                <sum>
+                    <sum>
+                        <!-- user properties go here -->
+                        <property>systems/hydraulic[0]/usage/flaps</property>
+                        <property>systems/hydraulic[0]/usage/speedbrake-front-right</property>
+                        <property>systems/hydraulic[0]/usage/speedbrake-front-left</property>
+                        <property>systems/hydraulic[0]/usage/speedbrake-rear</property>
+                        <property>systems/hydraulic[0]/usage/elevator-booster</property>
+                        <property>systems/hydraulic[0]/usage/nozzle</property>
+                        <property>systems/hydraulic[0]/usage/gear</property>
+                    </sum>
+                    <difference>
+                        <property>systems/hydraulic[0]/low-pres-contents</property>
+                        <property>systems/hydraulic[0]/low-pres-drain</property>
+                    </difference>
+                </sum>
+            </function>
+            <output>systems/hydraulic[0]/low-pres-contents</output>
+        </fcs_function>
+
+
+        <fcs_function name="trash/systems/hydraulic[0]/tank-contents">
+            <function>
+                <sum>
+                    <product>
+                        <property>systems/hydraulic[0]/pump-on</property>
+                        <value>-0.0001</value>
+                    </product>
+                    <property>systems/hydraulic[0]/low-pres-drain</property>
+                    <property>systems/hydraulic[0]/tank-contents</property>
+                </sum>
+            </function>
+            <output>systems/hydraulic[0]/tank-contents</output>
+        </fcs_function>
+
+        <!-- low pressure calc -->
+        <!-- if low-pres-contents > 0.05 then start putting fluid into the tank -->
+
+        <!-- usage functions -->
+
+        <!-- flaps -->
+        <fcs_function name="trash/systems/hydraulic[0]/usage/flaps">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>fcs/flap-pos-norm</property>
+                            <property>systems/hydraulic[0]/internal/flaps-last-pos</property>
+                        </difference>
+                    </abs>
+                    <value>0.01</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[0]/usage/flaps</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/hydraulic[0]/internal/flaps-last-pos">
+            <input>fcs/flap-pos-norm</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[0]/internal/flaps-last-pos</output>
+        </pure_gain>
+
+        <!-- speedbrakes -->
+
+        <fcs_function name="trash/systems/hydraulic[0]/usage/rear-speedbrake">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>fcs/speedbrake-rear-pos-norm</property>
+                            <property>systems/hydraulic[0]/internal/speedbrake-rear-last-pos</property>
+                        </difference>
+                    </abs>
+                    <value>0.0025</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[0]/usage/speedbrake-rear</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/hydraulic[0]/internal/speedbrake-rear-last-pos">
+            <input>fcs/speedbrake-rear-pos-norm</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[0]/internal/speedbrake-rear-last-pos</output>
+        </pure_gain>
+
+        <fcs_function name="trash/systems/hydraulic[0]/usage/front-left-speedbrake">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>fcs/speedbrake-front-left-pos-norm</property>
+                            <property>systems/hydraulic[0]/internal/speedbrake-front-left-last-pos</property>
+                        </difference>
+                    </abs>
+                    <value>0.0025</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[0]/usage/speedbrake-front-left</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/hydraulic[0]/internal/speedbrake-front-left-last-pos">
+            <input>fcs/speedbrake-front-left-pos-norm</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[0]/internal/speedbrake-front-left-last-pos</output>
+        </pure_gain>
+
+        <fcs_function name="trash/systems/hydraulic[0]/usage/front-right-speedbrake">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>fcs/speedbrake-front-right-pos-norm</property>
+                            <property>systems/hydraulic[0]/internal/speedbrake-front-right-last-pos</property>
+                        </difference>
+                    </abs>
+                    <value>0.0025</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[0]/usage/speedbrake-front-right</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/hydraulic[0]/internal/speedbrake-front-right-last-pos">
+            <input>fcs/speedbrake-front-right-pos-norm</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[0]/internal/speedbrake-front-right-last-pos</output>
+        </pure_gain>
+
+        <!-- stabilizer booster -->
+        <fcs_function name="trash/systems/hydraulic[0]/usage/stabilizer-booster">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>fcs/elevator-delay</property>
+                            <property>systems/hydraulic[0]/internal/elevator-pos-norm</property>
+                        </difference>
+                    </abs>
+                    <value>0.0005</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[0]/usage/elevator-booster</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/hydraulic[0]/internal/elevator-pos-norm">
+            <input>fcs/elevator-delay</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[0]/internal/elevator-pos-norm</output>
+        </pure_gain>
+
+        <!-- jet nozzle -->
+        <fcs_function name="trash/systems/hydraulic[0]/usage/nozzle">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>propulsion/engine[0]/nozzle-pos-norm</property>
+                            <property>systems/hydraulic[0]/internal/nozzle</property>
+                        </difference>
+                    </abs>
+                    <value>0.0005</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[0]/usage/nozzle</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/hydraulic[0]/internal/nozzle">
+            <input>propulsion/engine[0]/nozzle-pos-norm</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[0]/internal/nozzle</output>
+        </pure_gain>
+
+        <!-- landing gear -->
+        <fcs_function name="trash/systems/hydraulic[0]/usage/gear">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>gear/gear-pos-norm</property>
+                            <property>systems/hydraulic[0]/internal/gear</property>
+                        </difference>
+                    </abs>
+                    <value>0.0005</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[0]/usage/gear</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/hydraulic[0]/internal/gear">
+            <input>gear/gear-pos-norm</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[0]/internal/gear</output>
+        </pure_gain>
+
+    </channel>
+    <channel name="hydr1">
+
+        <!-- hydro system 1 is powered by "aileron-booster", and powers these things:
+
+        one chamber of the stabilizer
+        aileron boosters
+        fcs/left-aileron-pos-norm
+        fcs/right-aileron-pos-norm
+         -->
+
+        <!-- if hydraulic pressure < 165 kgf/cm2, turn on pump until pressure > 195 kgf/cm2 -->
+
+        <fcs_function name="trash/systems/hydraulic[1]/pump-on">
+            <function>
+                <and>
+                    <!-- if pressure < 165 or pump is on and pressure < 195 -->
+                    <or>
+                        <lt>
+                            <property>systems/hydraulic[1]/pressure</property>
+                            <value>165</value>
+                        </lt>
+                        <and>
+                            <lt>
+                                <property>systems/hydraulic[1]/pressure</property>
+                                <value>195</value>
+                            </lt>
+                            <eq>
+                                <property>systems/hydraulic[1]/pump-on</property>
+                                <value>1</value>
+                            </eq>
+                        </and>
+                    </or>
+                    <gt>
+                        <property>electric/output/aileron-booster</property>
+                        <value>108</value>
+                    </gt>
+                    <gt>
+                        <property>systems/hydraulic[1]/tank-contents</property>
+                        <value>0.1</value>
+                    </gt>
+                </and>
+            </function>
+            <output>systems/hydraulic[1]/pump-on</output>
+        </fcs_function>
+
+        <!-- if the pump is on, empty the tank contents into the high pressure contents -->
+        <!-- use this func to also remove from high pres to low pres -->
+
+        <fcs_function name="trash/systems/hydraulic[1]/high-pres-contents">
+            <function>
+                <sum>
+                    <product>
+                        <property>systems/hydraulic[1]/pump-on</property>
+                        <value>0.0001</value>
+                    </product>
+                    <product>
+                        <sum>
+                            <!-- user properties go here -->
+                            <property>systems/hydraulic[1]/usage/aileron-booster[0]</property>
+                            <property>systems/hydraulic[1]/usage/aileron-booster[1]</property>
+                            <property>systems/hydraulic[1]/usage/elevator-booster</property>
+                        </sum>
+                        <value>-1</value>
+                    </product>
+                    <property>systems/hydraulic[1]/high-pres-contents</property>
+                </sum>
+            </function>
+            <output>systems/hydraulic[1]/high-pres-contents</output>
+        </fcs_function>
+
+        <fcs_function name="trash/systems/hydraulic[1]/pressure">
+            <function>
+                <table>
+                    <independentVar lookup="row">systems/hydraulic[1]/high-pres-contents</independentVar>
+                    <tableData>
+                        0.0     0.0
+                        0.1     15.0
+                        0.125   45.0
+                        0.15    105.0
+                        0.175   165.0
+                        0.2     195.0
+                    </tableData>
+                </table>
+            </function>
+            <output>systems/hydraulic[1]/pressure</output>
+        </fcs_function>
+
+        <!-- add in low pressure stuff here too -->
+
+        <fcs_function name="trash/systems/hydraulic[1]/low-pres-drain">
+            <function>
+                <max>
+                    <value>0</value>
+                    <difference>
+                        <property>systems/hydraulic[1]/low-pres-contents</property>
+                        <value>0.05</value>
+                    </difference>
+                </max>
+            </function>
+            <output>systems/hydraulic[1]/low-pres-drain</output>
+        </fcs_function>
+
+        <fcs_function name="trash/systems/hydraulic[1]/low-pres-contents">
+            <function>
+                <sum>
+                    <sum>
+                        <!-- user properties go here -->
+                        <property>systems/hydraulic[1]/usage/aileron-booster[0]</property>
+                        <property>systems/hydraulic[1]/usage/aileron-booster[1]</property>
+                        <property>systems/hydraulic[1]/usage/elevator-booster</property>
+                    </sum>
+                    <difference>
+                        <property>systems/hydraulic[1]/low-pres-contents</property>
+                        <property>systems/hydraulic[1]/low-pres-drain</property>
+                    </difference>
+                </sum>
+            </function>
+            <output>systems/hydraulic[1]/low-pres-contents</output>
+        </fcs_function>
+
+
+        <fcs_function name="trash/systems/hydraulic[1]/tank-contents">
+            <function>
+                <sum>
+                    <product>
+                        <property>systems/hydraulic[1]/pump-on</property>
+                        <value>-0.0001</value>
+                    </product>
+                    <property>systems/hydraulic[1]/low-pres-drain</property>
+                    <property>systems/hydraulic[1]/tank-contents</property>
+                </sum>
+            </function>
+            <output>systems/hydraulic[1]/tank-contents</output>
+        </fcs_function>
+
+        <!-- low pressure calc -->
+        <!-- if low-pres-contents > 0.05 then start putting fluid into the tank -->
+
+        <!-- usage functions -->
+
+        <!-- the two aileron boosters -->
+        <fcs_function name="trash/systems/hydraulic[1]/usage/aileron-booster[0]">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>fcs/aileron-delay</property>
+                            <property>systems/hydraulic[1]/internal/aileron-pos-norm</property>
+                        </difference>
+                    </abs>
+                    <value>0.001</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[1]/usage/aileron-booster[0]</output>
+        </fcs_function>
+
+        <fcs_function name="trash/systems/hydraulic[1]/usage/aileron-booster[1]">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>fcs/aileron-delay</property>
+                            <property>systems/hydraulic[1]/internal/aileron-pos-norm</property>
+                        </difference>
+                    </abs>
+                    <value>0.001</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[1]/usage/aileron-booster[1]</output>
+        </fcs_function>
+
+        <!-- stabilizer booster -->
+        <fcs_function name="trash/systems/hydraulic[1]/usage/stabilizer-booster">
+            <function>
+                <product>
+                    <abs>
+                        <difference>
+                            <property>fcs/elevator-delay</property>
+                            <property>systems/hydraulic[1]/internal/elevator-pos-norm</property>
+                        </difference>
+                    </abs>
+                    <value>0.0005</value>
+                </product>
+            </function>
+            <output>systems/hydraulic[1]/usage/elevator-booster</output>
+        </fcs_function>
+
+        <!-- capturing property values to calculate usage next go around -->
+        <pure_gain name="trash/systems/hydraulic[1]/internal/aileron-pos-norm">
+            <input>fcs/aileron-delay</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[1]/internal/aileron-pos-norm</output>
+        </pure_gain>
+
+        <pure_gain name="trash/systems/hydraulic[1]/internal/elevator-pos-norm">
+            <input>fcs/elevator-delay</input>
+            <gain>1</gain>
+            <output>systems/hydraulic[1]/internal/elevator-pos-norm</output>
+        </pure_gain>
+
+    </channel>
+</system>
+

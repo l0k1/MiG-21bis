@@ -1,0 +1,677 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="http://jsbsim.sourceforge.net/JSBSim.xsl"?>
+
+<fdm_config name="MiG-21bis" version="2.0" release="ALPHA"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSim.xsd">
+
+ <fileheader>
+  <author> David Culp, Petar Jedvaj, Justin Nicholson </author>
+  <filecreationdate> 26-08-2012 </filecreationdate>
+  <version>1.10.0</version>
+  <description> MiG-21bis </description>
+ </fileheader>
+
+ <metrics>
+   <wingarea  unit="FT2">  247.50 </wingarea>
+   <wingspan  unit="FT" >   23.50 </wingspan>
+   <wing_incidence>         0.0 </wing_incidence>
+   <chord     unit="FT" >   10.53 </chord>
+   <htailarea unit="FT2">   49.50 </htailarea>
+   <htailarm  unit="FT" >   20.68 </htailarm>
+   <vtailarea unit="FT2">   29.70 </vtailarea>
+   <vtailarm  unit="FT" >   20.68 </vtailarm>
+   <location name="AERORP" unit="IN">
+     <x> 10.00 </x>
+     <y>   0.00 </y>
+     <z>  -3.00 </z>
+   </location>
+   <location name="EYEPOINT" unit="M">
+     <x>-3.28217 </x>
+     <y>   0.00 </y>
+     <z>  0.9944 </z>
+   </location>
+   <location name="VRP" unit="M">
+     <x>0</x>
+     <y>0</y>
+     <z>0</z>
+   </location>
+ </metrics>
+
+ <mass_balance>
+   <ixx unit="SLUG*FT2">      8500 </ixx>
+   <iyy unit="SLUG*FT2">     42000 </iyy>
+   <izz unit="SLUG*FT2">     35000 </izz>
+   <ixy unit="SLUG*FT2">         0 </ixy>
+   <ixz unit="SLUG*FT2">         0 </ixz>
+   <iyz unit="SLUG*FT2">         0 </iyz>
+   <emptywt unit="LBS" >     12545 </emptywt> <!-- source: http://www.mig-21.de/english/technicaldata.htm -->
+   
+   <location name="CG" unit="IN">
+     <x>  15.64 </x>
+     <y>   0.00 </y>
+     <z>  -4.00 </z>
+   </location>
+   
+   <pointmass name="station1"><!-- left wing outboard pylon pointmass 0 -->
+      <weight unit="LBS"> 0 </weight>
+      <location name="POINTMASS" unit="IN">
+          <x>   11 </x>
+          <y> -120 </y>
+          <z>  -10 </z>
+      </location>
+   </pointmass>
+   
+   <pointmass name="station2"><!-- left wing inboard pylon pointmass 1 -->
+      <weight unit="LBS"> 0 </weight>
+      <location name="POINTMASS" unit="IN">
+          <x>    3 </x>
+          <y> -100 </y>
+          <z>  -10 </z>
+      </location>
+   </pointmass>
+   
+   <pointmass name="station3"><!-- empty centerline fuel tank pointmass 2 -->
+      <weight unit="LBS"> 0 </weight>
+      <location name="POINTMASS" unit="IN">
+          <x>   -7 </x>
+          <y>    0 </y>
+          <z>  -30 </z>
+      </location>
+   </pointmass>
+   
+   <pointmass name="station4"><!-- right wing inboard pylon pointmass 3 -->
+      <weight unit="LBS"> 0 </weight>
+      <location name="POINTMASS" unit="IN">
+          <x>    3 </x>
+          <y>  100 </y>
+          <z>  -10 </z>
+      </location>
+   </pointmass>
+   
+   <pointmass name="station5"><!-- right wing outboard pylon pointmass 4 -->
+      <weight unit="LBS"> 0 </weight>
+      <location name="POINTMASS" unit="IN">
+          <x>   11 </x>
+          <y>  120 </y>
+          <z>  -10 </z>
+      </location>
+   </pointmass>
+ </mass_balance>
+
+ <ground_reactions>
+
+<contact type="BOGEY" name="NOSE">
+   <location unit="M">
+     <x> -4.21 </x>
+     <y>  -0.000 </y>
+     <z> -1.27543 </z>
+   </location>
+   <static_friction>  0.80 </static_friction>
+   <dynamic_friction> 0.50 </dynamic_friction>
+   <rolling_friction> 0.02 </rolling_friction>
+   <spring_coeff unit="LBS/FT">       20000.00 </spring_coeff>
+   <damping_coeff unit="LBS/FT/SEC">  10000.00 </damping_coeff>
+   <max_steer unit="DEG"> 15.00 </max_steer>
+   <brake_group>NONE</brake_group>
+   <retractable>1</retractable>
+ </contact>
+
+  <contact type="BOGEY" name="LEFT_MAIN">
+   <location unit="M">
+     <x>   0.61490 </x>
+     <y>  -1.47895 </y>
+     <z>  -1.53586 </z>
+   </location>
+   <static_friction>  0.80 </static_friction>
+   <dynamic_friction> 0.50 </dynamic_friction>
+   <rolling_friction> 0.026 </rolling_friction>
+   <spring_coeff unit="LBS/FT">      20000.00 </spring_coeff>
+   <damping_coeff unit="LBS/FT/SEC">  10000.00 </damping_coeff>
+   <brake_group>LEFT</brake_group>
+   <retractable>1</retractable>
+ </contact>
+
+  <contact type="BOGEY" name="RIGHT_MAIN">
+   <location unit="M">
+     <x>  0.61490 </x>
+     <y> 1.47895 </y>
+     <z> -1.53586 </z>
+   </location>
+   <static_friction>  0.80 </static_friction>
+   <dynamic_friction> 0.50 </dynamic_friction>
+   <rolling_friction> 0.026 </rolling_friction>
+   <spring_coeff unit="LBS/FT">      20000.00 </spring_coeff>
+   <damping_coeff unit="LBS/FT/SEC">  10000.00 </damping_coeff>
+   <brake_group>RIGHT</brake_group>
+   <retractable>1</retractable>
+ </contact>
+
+  <contact type="STRUCTURE" name="LEFT_WING">
+    <location unit="M">
+     <x> 2.210388 </x>
+     <y> -3.72501 </y>
+     <z> 0.03630 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+  <contact type="STRUCTURE" name="RIGHT_WING">
+    <location unit="M">
+     <x> 2.21038 </x>
+     <y> 3.72501 </y>
+     <z> -0.03631 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+  <contact type="STRUCTURE" name="NOSE_CONE">
+    <location unit="M">
+     <x> -7.87703 </x>
+     <y> -0.00040 </y>
+     <z> 0.15073 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+  <contact type="STRUCTURE" name="BOT_INTAKE">
+    <location unit="M">
+     <x> -6.79990 </x>
+     <y> -0.00028 </y>
+     <z> -0.24743 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+  <contact type="STRUCTURE" name="LEFT_INTAKE">
+    <location unit="M">
+     <x> -6.81026 </x>
+     <y> -0.42279 </y>
+     <z> 0.17436 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+  <contact type="STRUCTURE" name="UPPER_INTAKE">
+    <location unit="M">
+     <x> -6.62056 </x>
+     <y> -0.00028 </y>
+     <z> 0.56914 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+  <contact type="STRUCTURE" name="RIGHT_INTAKE">
+    <location unit="M">
+     <x> -6.81026 </x>
+     <y> 0.42164 </y>
+     <z> 0.17436 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+ <contact type="STRUCTURE" name="CANOPY">
+    <location unit="M">
+     <x> -3.60229 </x>
+     <y> -0.00040 </y>
+     <z> 1.40279 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+ <contact type="STRUCTURE" name="FVSTAB">
+    <location unit="M">
+     <x> 5.47382 </x>
+     <y>-0.00028 </y>
+     <z> 2.71926 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+ <contact type="STRUCTURE" name="RVSTAB">
+    <location unit="M">
+     <x> 7.57439 </x>
+     <y> -0.00028 </y>
+     <z> 2.70694 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+ <contact type="STRUCTURE" name="CHUTE">
+    <location unit="M">
+     <x> 6.67427 </x>
+     <y> -0.00028 </y>
+     <z> 0.87715 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+ <contact type="STRUCTURE" name="EXHUAST">
+    <location unit="M">
+     <x> 6.01530 </x>
+     <y> -0.00040 </y>
+     <z> -0.26876 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+ <contact type="STRUCTURE" name="LHSTAB">
+    <location unit="M">
+     <x> 7.03807 </x>
+     <y> -1.93076 </y>
+     <z> 0.26072 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+ <contact type="STRUCTURE" name="RHSTAB">
+    <location unit="M">
+     <x> 7.03807 </x>
+     <y> 1.9.015 </y>
+     <z> 0.26672 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+ <contact type="STRUCTURE" name="FLOWERSTAB">
+    <location unit="M">
+     <x> 2.91317 </x>
+     <y> -0.00028 </y>
+     <z> -0.83579 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+ <contact type="STRUCTURE" name="RLOWERSTAB">
+    <location unit="M">
+     <x> 5.52340 </x>
+     <y> -0.00028 </y>
+     <z> -0.47535 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+ <contact type="STRUCTURE" name="PITOT">
+    <location unit="M">
+     <x> -8.41349 </x>
+     <y> 0.21825 </y>
+     <z> 0.68078 </z>
+    </location>
+      <static_friction> 5.0 </static_friction>
+      <dynamic_friction> 4.0 </dynamic_friction>
+      <spring_coeff unit="LBS/FT"> 10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+      <damping_coeff_rebound unit="LBS/FT/SEC"> 25000 </damping_coeff_rebound>
+ </contact>
+
+ </ground_reactions>
+
+ <propulsion>
+   <engine file="Tumansky-R13-300">
+    <location unit="IN">
+      <x> 263.40 </x>
+      <y>   0.00 </y>
+      <z>   0.00 </z>
+    </location>
+    <feed>14</feed>
+    <thruster file="direct">
+     <location unit="IN">
+       <x> 263.40 </x>
+       <y>   0.00 </y>
+       <z>   0.00 </z>
+     </location>
+     <orient unit="DEG">
+       <pitch> 0.00 </pitch>
+       <roll>  0.00 </roll>
+       <yaw>   0.00 </yaw>
+     </orient>
+    </thruster>
+  </engine>
+
+  <!--
+  from http://www.topedge.com/panels/aircraft/sites/kraft/fuel.htm
+  cutaway to locate tanks: https://s-media-cache-ak0.pinimg.com/originals/d8/41/4a/d8414a7cafc3e42dc42b2f390e1ea563.jpg
+  more source: mig-21 civil air worthiness doc, item 281.
+  #1 - cutaway of fuel tanks
+  #142 - port external fuel tank
+  #150 - port wing integral fuel tank
+  #59 - forward fuselage tank
+  #63 - gravity filler
+  #72 - starbord wing aft fuel tank
+  #74 - starbord wing leading edge fuel tank
+  #57 - external fuel tank
+  #170 - port leading edge fuel tank
+  #70 - dorsal tank
+  #88 - rear fuselage tanks
+  6 internal tanks ("group 2" is fuel tanks #1-3, "group 3" is fuel tanks #4-6)
+  4 wing tanks
+  3 drop tanks
+  
+  - flow -
+  
+  all the time:
+  level the fuel between 1 and 2 and 7
+  level the fuel between 4, 5, and 6
+  fuel in 2 pumps into 3
+  fuel in 3 goes straight to engine
+  
+  ventral drop tank flows into 2
+  wing tanks flow into 2
+  wing drop tanks flow into wing tanks as wing tanks are emptied
+  #4,5,6 flow into #1
+  #1,2 emptied
+  #3 emptied
+  -->
+  
+  	<!-- Tanks:
+	0 - internal
+	1 - internal
+	2 - internal (Main)
+	3 - internal
+	4 - internal
+	5 - internal
+	6 - saddle (bis only)
+	7 - wing 1 left front
+	8 - wing 2 left rear
+	9 - wing 3 right front
+	10 - wing 4 right rear
+	11 - ventral drop tank
+	12 - left drop tank
+	13 - right drop tank
+	14 - accumulator (inside Main tank)
+	
+	***** FUEL AMOUNTS PER TANK ARE FICTIONAL ******* but the total fuel matches
+	***** LOCATIONS ARE ESTIMATES ***** i didn't have a map of tank 1 is here, tank 2 is there. just a cutaway.
+	-->
+  
+  <!-- internal fuel 1 -->
+  <tank type="FUEL" number="0">
+     <location unit="M">
+       <x> -2.50 </x>
+       <y>   0.00 </y>
+       <z> 0.50 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 413.6 </capacity>
+     <contents unit="LBS"> 400 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+  
+  <tank type="FUEL" number="1">
+     <location unit="M">
+       <x> -1.75 </x>
+       <y>   0.00 </y>
+       <z> 0.50 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 1267.2 </capacity>
+     <contents unit="LBS"> 1200 </contents>
+     <standpipe unit="LBS"> 400 </standpipe> 
+  </tank>
+  
+  <tank type="FUEL" number="2">
+     <location unit="M">
+       <x> -0.50 </x>
+       <y>   0.00 </y>
+       <z>  0.50 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 410.4 </capacity>
+     <contents unit="LBS"> 384 </contents>
+     <standpipe unit="LBS"> 100 </standpipe> 
+  </tank>
+  
+  <tank type="FUEL" number="3">
+     <location unit="M">
+       <x> 0.55 </x>
+       <y>   0.00 </y>
+       <z>   0.45 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 352 </capacity>
+     <contents unit="LBS"> 330 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+  
+  <tank type="FUEL" number="4">
+     <location unit="M">
+       <x> 1.50 </x>
+       <y>   0.00 </y>
+       <z>   0.45 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 422.4 </capacity>
+     <contents unit="LBS"> 400 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+  
+  <tank type="FUEL" number="5">
+     <location unit="M">
+       <x> 2.55 </x>
+       <y>   0.00 </y>
+       <z> 0.45 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 422.4 </capacity>
+     <contents unit="LBS"> 400 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+  
+  <tank type="FUEL" number="6">
+     <location unit="M">
+       <x> -1.25 </x>
+       <y>   0.00 </y>
+       <z> 1.12 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 1003.2 </capacity>
+     <contents unit="LBS"> 950 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+  
+  <!-- wing tanks -->
+  
+  <tank type="FUEL" number="7">
+     <location unit="M">
+       <x> -0.29435 </x>
+       <y>   -1.75428</y>
+       <z>   0.1971 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 308 </capacity>
+     <contents unit="LBS"> 225 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+  
+  <tank type="FUEL" number="8">
+     <location unit="M">
+       <x> 1.09838 </x>
+       <y>   -1.27481 </y>
+       <z>   0.1971 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 193.6 </capacity>
+     <contents unit="LBS"> 100 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+  
+  <tank type="FUEL" number="9">
+     <location unit="M">
+       <x> -0.29435 </x>
+       <y>   1.75428</y>
+       <z>   0.1971 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 308 </capacity>
+     <contents unit="LBS"> 225 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+  
+  <tank type="FUEL" number="10">
+     <location unit="M">
+       <x> 1.09838 </x>
+       <y>   1.27481 </y>
+       <z>   0.1971 </z>
+     </location>
+     <priority>2</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 193.6 </capacity>
+     <contents unit="LBS"> 100 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+
+  <!-- drop tanks -->
+  <tank type="FUEL" number="11">
+     <location unit="IN">
+       <x>   3.00 </x>
+       <y>   0.00 </y>
+       <z> -30.00 </z>
+     </location>
+     <priority>1</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 1400 </capacity>
+     <contents unit="LBS"> 0 </contents>
+  </tank>
+
+  <tank type="FUEL" number="12">
+     <location unit="IN">
+       <x>  21.00 </x>
+       <y>-120.00 </y>
+       <z> -10.00 </z>
+     </location>
+     <density>6.5</density>
+     <capacity unit="LBS"> 850 </capacity>
+     <contents unit="LBS"> 0 </contents>
+  </tank>
+
+  <tank type="FUEL" number="13">
+     <location unit="IN">
+       <x>  21.00 </x>
+       <y> 120.00 </y>
+       <z> -10.00 </z>
+     </location>
+     <density>6.5</density>
+     <capacity unit="LBS"> 850 </capacity>
+     <contents unit="LBS"> 0 </contents>
+  </tank>
+
+<!-- accumulator - inside tank 3 -->
+
+  <tank type="FUEL" number="14">
+     <location unit="M">
+       <x>  -0.50 </x>
+       <y>   0.00 </y>
+       <z>   0.50 </z>
+     </location>
+     <priority>1</priority>
+     <density>6.5</density>
+     <capacity unit="LBS"> 56 </capacity>
+     <contents unit="LBS"> 56 </contents>
+     <standpipe unit="LBS"> 0 </standpipe> 
+  </tank>
+  
+
+  <dump-rate unit="LBS/MIN"> 1500 </dump-rate>
+ </propulsion>
+
+ <system file="gear"/>
+ <system file="flaps"/>
+ <system file="speedbrakes"/>
+ <system file="FCS-Pitch"/>
+ <system file="FCS-Roll"/>
+ <system file="FCS-Yaw"/>
+ <system file="chute"/>
+ <system file="canopy"/>
+ <system file="electric"/>
+ <system file="fuel"/>
+ <system file="propulsion"/>
+ <system file="air_intake"/>
+ <system file="payloads"/>
+ <system file="hydraulic"/>
+ <system file="pneumatic"/>
+ <system file="brakes"/>
+ <system file="jsb-instrumentation"/>
+ <system file="warning-lights"/>
+ <system file="radar-cooling"/>
+ <system file="external-animation"/>
+ <system file="headmove"/>
+
+ <flight_control name="none"/>
+
+ <aerodynamics file="mig-21-aero-aeromatic-v3_3_10.xml"/>
+
+</fdm_config>

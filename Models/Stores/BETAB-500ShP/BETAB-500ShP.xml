@@ -1,0 +1,9 @@
+<PropertyList>
+
+    <path>betab-500shp.ac</path>
+    
+    <animation>
+        <enable-hot type="bool">false</enable-hot>
+    </animation>
+
+</PropertyList>

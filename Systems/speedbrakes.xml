@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+
+<!-- aeromatic v 0.96 http://jsbsim.sourceforge.net/aeromatic2.html generated 2 June 2017 by pinto -->
+<!-- GPLv2+ -->
+
+<!-- speedbrake-cmd-norm
+    0 = closed, 1 = open
+    rate as a function of pressure
+-->
+
+<system name="speedbrakes">
+
+    <channel name="Speedbrakes">
+
+        <switch name="trash/fcs/speedbrake-rear-enable">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                /sim/multiplay/generic/short[2] eq 0
+            </test>
+            <output>fcs/speedbrake-rear-enable</output>
+        </switch>
+
+        <fcs_function name="trash/fcs/speedbrake-rear-rate">
+            <function>
+                <product>
+                    <table>
+                        <independentVar lookup="row">systems/hydraulic[0]/pressure</independentVar>
+                        <tableData>
+                            0.0     0.0
+                            20.0    0.0
+                            100.0   0.5
+                            150.0   1.0
+                        </tableData>
+                    </table>
+                    <gt>
+                        <property>electric/output/air-brakes</property>
+                        <value>105</value>
+                    </gt>
+                    <property>fcs/speedbrake-rear-enable</property>
+                </product>
+            </function>
+            <output>fcs/speedbrake-rear-rate</output>
+        </fcs_function>
+
+        <actuator name="trash/fcs/speedbrake-rear-pos-norm">
+            <input>fcs/speedbrake-cmd-norm</input>
+            <rate_limit>fcs/speedbrake-rear-rate</rate_limit>
+            <output>fcs/speedbrake-rear-pos-norm</output>
+        </actuator>
+
+        <fcs_function name="trash/fcs/speedbrake-front-left-rate">
+            <function>
+                <table>
+                    <independentVar lookup="row">systems/hydraulic[0]/pressure</independentVar>
+                    <tableData>
+                        0.0     0.0
+                        20.0    0.0
+                        100.0   0.5
+                        150.0   1.0
+                    </tableData>
+                </table>
+            </function>
+            <output>fcs/speedbrake-front-left-rate</output>
+        </fcs_function>
+
+        <actuator name="trash/fcs/speedbrake-front-left-pos-norm">
+            <input>fcs/speedbrake-cmd-norm</input>
+            <rate_limit>fcs/speedbrake-front-left-rate</rate_limit>
+            <output>fcs/speedbrake-front-left-pos-norm</output>
+        </actuator>
+
+        <fcs_function name="trash/fcs/speedbrake-front-right-rate">
+            <function>
+                <table>
+                    <independentVar lookup="row">systems/hydraulic[0]/pressure</independentVar>
+                    <tableData>
+                        0.0     0.0
+                        20.0    0.0
+                        100.0   0.5
+                        150.0   1.0
+                    </tableData>
+                </table>
+            </function>
+            <output>fcs/speedbrake-front-right-rate</output>
+        </fcs_function>
+
+        <actuator name="trash/fcs/speedbrake-front-right-pos-norm">
+            <input>fcs/speedbrake-cmd-norm</input>
+            <rate_limit>fcs/speedbrake-front-right-rate</rate_limit>
+            <output>fcs/speedbrake-front-right-pos-norm</output>
+        </actuator>
+
+<!--
+        <kinematic name="Speedbrake Control">
+            <input>fcs/speedbrake-cmd-norm</input>
+            <traverse>
+                <setting>
+                    <position> 0 </position>
+                    <time>     0 </time>
+                </setting>
+                <setting>
+                    <position> 1 </position>
+                    <time>     1 </time>
+                </setting>
+            </traverse>
+            <output>fcs/speedbrake-pos-norm</output>
+        </kinematic>
+-->
+    </channel>
+
+</system>

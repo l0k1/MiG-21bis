@@ -1,0 +1,1806 @@
+<PropertyList>
+
+	<!-- Model -->
+
+	<path>MiG-21bis.ac</path>
+	<offsets>
+		<!--pitch-deg>-3</pitch-deg-->
+		<heading-deg>0</heading-deg>
+		<roll-deg>0</roll-deg>
+		<x-m>0</x-m>
+		<y-m>0</y-m>
+		<z-m>0.15</z-m>
+	</offsets>
+
+	<!--model>
+		<usage>interior</usage>
+		<path>Aircraft/MiG-21bis/Models/Cockpit.xml</path>
+	</model-->
+
+    <!-- Rembrandt auto switching for glass -->
+
+    <!--effect>
+        <inherits-from>Effects/model-transparent</inherits-from>
+        <condition>
+        	<property>sim/rendering/rembrandt/enabled</property>
+       	</condition>
+	<object-name>glass</object-name>
+	<object-name>canopy_glass</object-name>
+    </effect-->
+
+	<!-- Lights -->
+
+	<!--model>
+		<path>Aircraft/MiG-21bis/Models/Lights/LightPack.xml</path>
+	</model-->
+
+    <nasal>
+      <load>
+        var livery_update = aircraft.livery_update.new("Aircraft/MiG-21bis/Models/Liveries");
+
+  	var root = cmdarg();
+
+	var variant_node = root.getNode("sim/model/variant", 1);
+	var name_node = root.getNode("callsign", 1);
+	print("value of name: ", name_node.getValue());
+	var variant = nil;
+	var loopid = 0;
+	var loop = func(id) {
+
+	id == loopid or return;
+
+	if(name_node.getValue()== "Red-Leader"){
+	variant_node.setValue("CCCP");
+	}elsif(name_node.getValue()== "Red-1"){
+	variant_node.setValue("Soviet");
+	}elsif(name_node.getValue()== "Red-2"){
+	variant_node.setValue("USSR");
+	}elsif(name_node.getValue()== "Red-3"){
+	variant_node.setValue("MiG-21-93");
+	}
+
+	var v = variant_node.getValue();
+
+	if (v != nil ) {
+	variant = v;
+	v = "Aircraft/MiG-21bis/Models/Liveries/" ~ variant ~ ".xml";
+	fgcommand("loadxml", props.Node.new({ filename: v, targetnode: root.getPath() }));
+	}
+	}
+
+	loop(loopid);
+
+	#BOMBABLE support
+
+	#check if bombable is installed to prevent errors
+	if(props.globals.getNode("/bombable")==nil) {
+        	print("MiG-21bis: Bombable not installed, ignoring Bombable code...");
+        return;
+	}
+
+        print("Loading MiG-21bis bombable ", cmdarg().getPath());
+
+        var nodeName = cmdarg().getPath();
+
+        ##checks whether it has been initialized already; if so, just return
+        if ( bombable.check_overall_initialized (nodeName) ) return;
+
+
+
+        ############################################
+        #MiG-21bis INITIALIZER
+        var object_init = func() {
+        # Datas of this object are under: cmdarg().getPath()
+        var thisNodeName = cmdarg().getPath();
+        var thisNode = props.globals.getNode(thisNodeName);
+        # Add some useful nodes
+
+
+
+        ########################################################################
+        ########################################################################
+        # INITIALIZE BOMBABLE
+        #
+        # Initialize constants and main routines for maintaining altitude
+        # relative to ground-level, relocating after file/reset, and
+        # creating bombable/shootable objects.
+        #
+        # These routines are found in FG/nasal/bombable.nas
+        #
+        ########################################################################
+        # INITIALIZE BOMBABLE Object
+        # This object will be slurped in the object's node as a child
+        # node named "bombable".
+        # All distances are specified in meters.
+        # All altitudes are relative to current ground level at the object's
+        # location
+        #
+
+        thisNodeName = cmdarg().getPath();
+
+        var bombableObject = {
+
+
+        objectNodeName : thisNodeName,
+        objectNode : props.globals.getNode(thisNodeName),
+        updateTime_s : 1/3, #time, in seconds, between the updates that
+        #keep the object at its AGL. Tradeoff is high-speed updates look more
+        #realistic but slow down the framerate/cause jerkiness.  Faster-moving
+        #objects will need more frequent updates to look realistic.
+        #update time faster than about 1/3 seems to have a noticeable effect
+        #on frame rate
+
+
+        #########################################
+        # ALTITUDE DEFINITIONS
+        #
+        altitudes : {
+        wheelsOnGroundAGL_m : 1 , #altitude correction to add to your aircraft or ship that is needed to put wheels on ground (or, for a ship, make it float in the water at the correct level).  For most objects this is 0 but some models need a small correction to place them exactly at ground level
+
+        minimumAGL_m : 300, #minimum altitude above ground level this object is allowed to fly
+        maximumAGL_m : 15000, #maximum altitude AGL this object is allowed to fly, ie, operational ceiling
+        crashedAGL_m : -0.01, #altitude AGL when crashed.  Ships will sink to this level, aircraft or vehicles will sink into the ground as landing gear collapses or tires deflate. Should be negative, even just -0.001.
+        },
+        #
+        #########################################
+        # VELOCITIES DEFINITIONS
+        #
+        velocities : {
+        maxSpeedReduce_percent : 0.5, #max % to reduce speed, per step, when damaged
+        minSpeed_kt : 170, #minimum speed to reduce to when damaged.  Ground vehicles and ships might stop completely when damaged but aircraft will need a minimum speed so they keep moving until they hit the ground.
+        cruiseSpeed_kt : 450, #cruising speed, typical/optimal cruising speed, V C for aircraft
+
+        attackSpeed_kt : 500, #typical/optimal speed when aggressively attacking or evading, in
+        #level flight for aircraft
+
+        maxSpeed_kt : 1356 , #Maximum possible speed under dive or downhill conditions, V NE for aircraft
+
+        damagedAltitudeChangeMaxRate_meterspersecond : 1000 , #max rate to sink or fly downwards when damaged, in meters/second
+
+        #The terminal velocities are calculated by opening the 'real' AC
+        #in FG, level flight, full throttle, then putting
+        #the AC at different angles of attack with the autopilot,
+        #and noting the terminal airspeed and vertical speed velocities.
+        #For best results, do it near sea level, under 5000 feet altitude.
+        #One or two each of climb and dive velocities are probably sufficient.
+        #However if you do more we may be able to use the more precise
+        #data in the future.
+        #
+        #Note that these are intended to be true airspeed whereas FG's
+        #/velocities/airspeed-kt reports indicated airspeed, so some
+        #conversion or reference to groundspeed-kt is needed.
+        #
+        #In FG /velocities/groundspeed-kt is equal (or close
+        #to equal, except for wind . . .) true airspeed when pitch=0
+        #but as pitch increases or decreases that will change.
+        #
+
+        diveTerminalVelocities: {
+        point1: { airspeed_kt : 625, vertical_speed_fps : -119},
+        point2: { airspeed_kt : 640, vertical_speed_fps : -209},
+        point3: { airspeed_kt : 665, vertical_speed_fps : -370},
+        point4: { airspeed_kt : 700, vertical_speed_fps : -555},
+
+
+
+        },
+
+        climbTerminalVelocities: {
+        point1: { airspeed_kt : 680, vertical_speed_fps : 80},
+        point2: { airspeed_kt : 650, vertical_speed_fps : 160},
+        point3: { airspeed_kt : 600, vertical_speed_fps : 307},
+        point4: { airspeed_kt : 550, vertical_speed_fps : 430},
+
+        },
+
+
+        },
+        #
+        #########################################
+        # EVASION DEFINITIONS
+        #
+        # The evasion system makes the AI aircraft dodge when they come under
+        # fire.
+        evasions : {
+        dodgeDelayMax_sec : 15, #max time to delay/wait between dodges
+        dodgeDelayMin_sec : 5, #minimum time to delay/wait between dodges
+        dodgeMax_deg : 75, #Max amount to turn when dodging
+        #90 degrees = instant turn, unrealistic
+        #up to 80 is usually OK, somewhere in 80-85 starts to be unrealistically fast
+        #>85 is usually very unrealistic.  You must test this in your scenario, however.
+
+        dodgeMin_deg : 40, #minimum amount to turn when dodging
+        rollRateMax_degpersec : 180, #you can figure this out by rolling the corresponding FG aircraft and timing a 180 or 360 deg roll
+        dodgeROverLPreference_percent : 50, # Preference for right turns vs. left when dodging.  90% means 90% right turns, 50% means 50% right turns.
+        dodgeAltMin_m : -1000, #Aircraft will begin to move up or down
+        dodgeAltMax_m : 1000, #Max and Min are relative to current alt
+        dodgeVertSpeedClimb_mps : 100, #Max speed to climb when evading
+        dodgeVertSpeedDive_mps : 150, #Max speed to dive when evading
+        },
+        #
+        #########################################
+        # ATTACK DEFINITIONS
+        #
+        # The attack system makes the AI aircraft turn and fly towards
+        # other aircraft
+        attacks : {
+        maxDistance_m : 40000, #max distance to turn and attack main aircraft
+        minDistance_m : 3000, #min distance to turn and attack main aircraft, ie, fly away this far before turning to attack again
+        continueAttackAngle_deg : 80, #when within minDistance_m, the aircraft will continue to turn towards the main aircraft and attack *if* if the angle is less than this amount from dead ahead
+        altitudeHigherCutoff_m : 13000, # will attack the main aircraft unless this amount higher than it or more
+        altitudeLowerCutoff_m : 5000, # will attack the main aircraft unless this amount lower than it or more
+        climbPower : 6000, # How powerful the aircraft is when climbing during an attack; 4000 would be typical for, say a Zero--scale accordingly for others; higher is stronger
+        divePower : 9000, # How powerful the aircraft is when diving during and attack; 6000 typical of a Zero--could be much more than climbPower if the aircraft is a weak climber but a strong diver
+        rollMin_deg : 40, #when turning on attack, roll to this angle min
+        rollMax_deg : 75, #when turning on attack, roll to this angle max
+        #90 degrees = instant turn, unrealistic
+        #up to 80 might be OK, depending on aircraft and speed; somewhere in 80-85 starts to be unrealistically fast
+        #>85 is usually very unrealistic.  You must test this in your scenario, however.
+        rollRateMax_degpersec : 180, #you can figure this out by rolling the corresponding FG aircraft and timing a 180 or 360 deg roll
+        attackCheckTime_sec : 10, # check for need to attack/correct course this often
+        attackCheckTimeEngaged_sec : 0.7, # once engaged with enemy, check/update course this frequently
+
+        },
+
+        #
+        #########################################
+        # WEAPONS DEFINITIONS
+        #
+        # The weapons system makes the AI aircraft fire on the main aircraft
+        # You can define any number of weapons--just enclose each in curly brackets
+        # and separate with commas (,).
+        weapons : {
+        front_gun :  #internal name - this can be any name you want; must be a valid nasal variable name
+        {
+        name : "GSh-23", # name presented to users, ie in on-screen messages
+        maxDamage_percent : 10, # maximum percentage damage one hit from the aircraft's main weapon/machine guns will do to an opponent
+        maxDamageDistance_m : 1500, # maximum distance at which the aircrafts main weapon/maching guns will be able to damage an opponent
+        weaponAngle_deg  :  { heading: 0, elevation: 0 }, # direction the aircraft's main weapon is aimed.
+        # 0,0 = straight ahead, 90,0=directly right, 0,90=directly up, 0,180=directly back, etc.
+        weaponOffset_m : {x:2.5, y:0, z:0}, # Offset of the weapon from the main aircraft center
+        weaponSize_m : {start:.05, end:.05}, # Visual size of the weapon's projectile, in meters, at start and end of its path
+
+        },
+        },
+
+        #
+        #########################################
+        # DIMENSION DEFINITIONS
+        #
+        dimensions : {
+        width_m : 7.15,  #width of your object, ie, for aircraft, wingspan
+        length_m : 15.76, #length of your object, ie, for aircraft, distance nose to tail
+        height_m : 4.10, #height of your object, ie, for aircraft ground to highest point when sitting on runway
+
+        damageRadius_m : 8, #typically 1/2 the longest dimension of the object. Hits within this distance of the
+        #center of object have some possibility of damage
+        vitalDamageRadius_m : 2, #typically the radius of the fuselage or cockpit or other most
+        # vital area at the center of the object.  Always smaller than damageRadius_m
+
+        crashRadius_m : 6, #It's a crash if the main aircraft hits in this area.
+
+        },
+        #
+        #########################################
+        # VULNERABILITIES DEFINITIONS
+        #
+        vulnerabilities : {
+        damageVulnerability : 15, #Vulnerability to damage from armament, 1=normal M1 tank; higher to make objects easier to kill and lower to make them more difficult.  This is a multiplier, so 5 means 5X easier to kill than an M1, 1/5 means 5X harder to kill.
+
+        engineDamageVulnerability_percent : 8, #Chance that a small-caliber machine-gun round will damage the engine.
+
+        fireVulnerability_percent : 7, #Vulnerability to catching on fire. 100% means even the slightest impact will set it on fire; 20% means quite difficult to set on fire; 0% means set on fire only when completely damaged; -1% means never set on fire.
+
+        fireDamageRate_percentpersecond : .5, #Amount of damage to add, per second, when on fire.  100%=completely damaged. Warthog is relatively damage-resistant.
+
+        fireExtinguishMaxTime_seconds : 80, #Once a fire starts, for this many seconds there is a chance to put out the fire; fires lasting longer than this won't be put out until the object burns out.
+
+        fireExtinguishSuccess_percentage : 50, #Chance of the crew putting out the fire within the MaxTime above. Warthoge is relatively damage-resistant.
+
+        explosiveMass_kg : 15000 , #mass of the object in KG, but give at least a 2-10X bonus to anything carrying flammables or high explosives.
+        },
+        #
+        #########################################
+        # LIVERY DEFINITIONS
+        #
+        # Path to livery files to use at different damage levels.
+        # Path is relative to the AI aircraft's directory.
+        # The object will start with the first livery listed and
+        # change to succeeding liveries as the damage
+        # level increases. The final livery should indicate full damage/
+        # object destroyed.
+        #
+        # If you don't want to specify any special liveries simply set
+        # damageLivery : nil and the object's normal livery will be used.
+        #
+        damageLiveries : {
+        damageLivery : [  ]
+        },
+
+        };
+
+        #########################################
+        # INITIALIZE ROUTINES
+        #
+        # OVERALL INITIALIZER: Needed to make all the others work
+        bombable.initialize ( bombableObject );
+        #
+        # LOCATION: Relocate object to maintain its position after file/reset
+        # (best not used for airplanes)
+        # bombable.location_init ( thisNodeName );
+        #
+        # GROUND: Keep object at altitude relative to ground level
+        bombable.ground_init ( thisNodeName );
+        #
+        # ATTACK: Make the object attack the main aircraft
+        bombable.attack_init ( thisNodeName );
+        #
+        # WEAPONS: Make the object shoot the main aircraft
+        bombable.weapons_init ( thisNodeName );
+        #
+        # BOMBABLE: Make the object bombable/damageable
+        bombable.bombable_init ( thisNodeName );
+        #
+        # SMOKE/CONTRAIL: Start a flare, contrail, smoke trail, or exhaust
+        # trail for the object.
+        # Smoke types available: flare, jetcontrail, pistonexhaust, smoketrail,
+        # damagedengine
+	# uncomment this for a thin contrail (makes them easier to see)
+        #bombable.startSmoke("flare", thisNodeName );
+        #
+        # END INITIALIZE BOMBABLE
+        ########################################################################
+        ########################################################################
+
+
+
+        }
+
+        object_init();
+
+###################
+
+  var rootindex = root.getIndex();
+  var mpPath = "/ai/models/multiplayer["~ rootindex ~"]/";
+
+  #var lightsPath = mpPath~"lightpack/"; #path to the property node, where all internal values are placed
+
+  #props.globals.initNode(mpPath~"sim/is-MP-Aircraft", 1, "BOOL");
+
+  srand();
+  #wherever you want to add randomization of time, use something like:  + rand()*0.05-0.025 (included by default where appropriate)
+
+
+  #list of switches for lights - if you don't intend to use some light, assign it nil value instead, like whateverSwitch = nil; and you don't need to care about anything else
+  #IMPORTANT: don't put / on the start of the string, it's already included in the mpPath property
+  #var navSwitch = mpPath~"controls/lighting/nav-lights-switch";
+  #var beaconSwitch = mpPath~"controls/lighting/beacon-switch";
+  #var strobeSwitch = mpPath~"controls/lighting/strobe-switch";
+  #var landingSwitch = mpPath~"controls/lighting/landing-lights-switch";
+  #var taxiSwitch = mpPath~"controls/lighting/taxi-light-switch";
+  #var probeSwitch = mpPath~"controls/lighting/probe-light-switch";
+  #var whiteSwitch = mpPath~"controls/lighting/white-light-switch";
+
+  #switch this from 1 to 0 if you want to use advanced cyclical fading animation of the the nav lights instead of being stable on when the switch is on
+  #navStillOn = 1;
+
+
+  #I need to set listener on some MP transferred properties; this doesn't seem to work well sometimes, so I mirror them to the original location on any change
+  #This also simplifies work as I can use almost the same code for MP as is the local Nasal. Furthermore, I can use meaningful property names in the model XML files instead of referencing the MP properties.
+  #var mpVar = {
+  #	new: func(propIn, propOut) {
+  #		var m = { parents: [mpVar] };
+  #		m.propIn = propIn;
+  #		m.propOut = propOut;
+  #		if(propIn==nil) return m;
+  #		m.value = getprop(propIn);
+  #		setprop(propOut, m.value);
+  #		return m;
+  #	},
+  #	check: func {
+  #		if(me.propIn==nil) return;
+  #		var newValue = getprop(me.propIn);
+  #		if(newValue != me.value) {
+  #			setprop(me.propOut, newValue);
+  #			me.value = newValue;
+  #			#print("value of "~me.propOut~" changed: "~newValue);
+  #		}
+  #	},
+  #};
+  #init any property copy object needed in this array (anything you need to transfer over MP, but you are using the original paths in your xmls)
+  #also used for properties you are using a listener on, or properties which you maybe want to manipulate during the unload
+  #if you're just using the pack, change the values according to the MP bindings in the -set.xml file
+  #you don't need to delete the entries if the path is nil - it gets skipped automatically and the MP path is just ignored
+  #var mirrorValues = [
+  #	mpVar.new(mpPath~"sim/multiplay/generic/int[7]", mpPath~"sim/crashed"),
+  #	mpVar.new(mpPath~"sim/multiplay/generic/int[0]", navSwitch),
+  #	mpVar.new(mpPath~"sim/multiplay/generic/int[1]", beaconSwitch),
+  #	mpVar.new(mpPath~"sim/multiplay/generic/int[1]", strobeSwitch),
+  #	mpVar.new(mpPath~"sim/multiplay/generic/int[2]", landingSwitch),
+  #	mpVar.new(mpPath~"sim/multiplay/generic/int[3]", taxiSwitch),
+  #	mpVar.new(mpPath~"sim/multiplay/generic/int[3]", probeSwitch),
+  #	mpVar.new(mpPath~"sim/multiplay/generic/int[0]", whiteSwitch),
+  #];
+  #loop at the default MP transfer frequency (10Hz)
+  #var mirrorTimer = maketimer(0.1, func {
+  #	foreach(var mir; mirrorValues) {
+  #		mir.check();
+  #	}
+  #});
+  #mirrorTimer.start();
+
+
+
+  #### NAV LIGHTS ####
+
+  #class for a periodic fade in/out animation - for flashing, use rather standard aircraft.light.new(), as in Beacon and Strobe section
+  #var lightCycle = {
+  #	#constructor
+  #	new: func(propSwitch, propOut) {
+  #		m = { parents: [lightCycle] };
+  #		props.globals.initNode(propOut, 0, "DOUBLE");
+  #		props.globals.initNode(propSwitch, 1, "BOOL");
+  #		m.fadeIn = 0.4 + rand()*0.05-0.025; #fade in time
+  #		m.fadeOut = 0.4 + rand()*0.05-0.025; #fade out time
+  #		m.stayOn = 1.5 + rand()*0.05-0.025; #stable on period
+  #		m.stayOff = 1 + rand()*0.05-0.025; #stable off period
+  #		m.turnOff = 0.12; #fade out time when turned off
+  #		m.phase = 0; #phase to be run on next timer call: 0 -> fade in, 1 -> stay on, 2 -> fade out, 3 -> stay off
+  #		m.cycleTimer = maketimer(0.1, func {
+  #			if(getprop(propSwitch)) {
+  #				if(m.phase == 0) {
+  #					interpolate(propOut, 1, m.fadeIn);
+  #					m.phase = 1;
+  #					m.cycleTimer.restart(m.fadeIn);
+  #				}
+  #				else if(m.phase == 1){
+  #					m.phase = 2;
+  #					m.cycleTimer.restart(m.stayOn);
+  #				}
+  #				else if(m.phase == 2){
+  #					interpolate(propOut, 0, m.fadeOut);
+  #					m.phase = 3;
+  #					m.cycleTimer.restart(m.fadeOut);
+  #				}
+  #				else if(m.phase == 3){
+  #					m.phase = 0;
+  #					m.cycleTimer.restart(m.stayOff);
+  #				}
+  #			}
+  #			else {
+  #				interpolate(propOut, 0, m.turnOff); #kills any currently ongoing interpolation
+  #				m.phase = 0;
+  #			}
+  #		});
+  #		m.cycleTimer.singleShot = 1;
+  #		if(propSwitch==nil) {
+  #			m.listen = nil;
+  #			return m;
+  #		}
+  #		m.listen = setlistener(propSwitch, func{m.cycleTimer.restart(0);}); #handle switch changes
+  #		m.cycleTimer.restart(0); #start the looping
+  #		return m;
+  #	},
+  #	#destructor
+  #	del: func {
+  #		if(me.listen!=nil) removelistener(me.listen);
+  #		me.cycleTimer.stop();
+  #	},
+  #};
+
+  #By default, the switch property is initialized to 1 (only if no value is already assigned). Don't change the class implementation! To override this, set the property manually. You don't need to care if any other code already does it for you.
+  #var navLights = nil;
+  #if(!navStillOn) {
+  #	navLights = lightCycle.new(navSwitch, lightsPath~"nav-lights-intensity");
+  	### Uncomment and tune those to customize times ###
+  	#navLights.fadeIn = 0.4; #fade in time
+  	#navLights.fadeOut = 0.4; #fade out time
+  	#navLights.stayOn = 3 + rand()*0.05-0.025; #stable on period
+  	#navLights.stayOff = 0.6; #stable off period
+  	#navLights.turnOff = 0.12; #fade out time when turned off
+  #}
+
+
+  ### BEACON ###
+  #var beacon = nil;
+  #if(beaconSwitch!=nil) {
+  #	props.globals.initNode(beaconSwitch, 1, "BOOL");
+  #	beacon = aircraft.light.new(lightsPath~"beacon-state",
+  #		[0.0, 1.0 + rand()*0.05-0.025], beaconSwitch);
+  #}
+
+
+  ### STROBE ###
+  #var strobe = nil;
+  #if(strobeSwitch!=nil) {
+  #	props.globals.initNode(strobeSwitch, 1, "BOOL");
+  #	strobe = aircraft.light.new(lightsPath~"strobe-state",
+  #		[0.0, 0.87 + rand()*0.05-0.025], strobeSwitch);
+  #}
+
+
+  ### LIGHT FADING ###
+
+  #class for controlling fade in/out behavior - propIn is a control property (handled as a boolean) and propOut is interpolated
+  #all light brightness animations in xmls depend on propOut (Rembrandt brightness, material emission, flares transparency, ...)
+  #var lightFadeInOut = {
+  	#constructor
+  #	new: func(propSwitch, propOut) {
+  #		m = { parents: [lightFadeInOut] };
+  #		m.fadeIn = 0.3; #some sane defaults
+  #		m.fadeOut = 0.4;
+  #		if(propSwitch==nil) {
+  #			m.listen = nil;
+  #			return m;
+  #		}
+  #		props.globals.initNode(propSwitch, 1, "BOOL");
+  #		m.isOn = getprop(propSwitch);
+  #		props.globals.initNode(propOut, m.isOn, "DOUBLE");
+  #		m.listen = setlistener(propSwitch,
+  #			func {
+  #				if(m.isOn and !getprop(propSwitch)) {
+ #					interpolate(propOut, 0, m.fadeOut);
+ # 					m.isOn = 0;
+ # 				}
+ # 				if(!m.isOn and getprop(propSwitch)) {
+ # 					interpolate(propOut, 1, m.fadeIn);
+ # 					m.isOn = 1;
+ # 				}
+ # 			}
+ # 		);
+ # 		return m;
+ # 	},
+ # 	#destructor
+ # 	del: func {
+ # 		if(me.listen!=nil) removelistener(me.listen);
+ # 	},
+ # };
+#
+#  fadeLanding = lightFadeInOut.new(landingSwitch, lightsPath~"landing-lights-intensity");
+#  fadeTaxi = lightFadeInOut.new(taxiSwitch, lightsPath~"taxi-light-intensity");
+#  fadeProbe = lightFadeInOut.new(probeSwitch, lightsPath~"probe-light-intensity");
+#  fadeWhite = lightFadeInOut.new(whiteSwitch, lightsPath~"white-light-intensity");
+#  if(navStillOn) {
+#  	navLights = lightFadeInOut.new(navSwitch, lightsPath~"nav-lights-intensity");
+#  	navLights.fadeIn = 0.1;
+#  	navLights.fadeOut = 0.12;
+#  }
+  #manipulate times if defaults don't fit your needs:
+  #fadeLanding.fadeIn = 0.5;
+  #fadeLanding.fadeOut = 0.8;
+
+
+  ### the rest of your model load embedded Nasal code ###
+
+      </load>
+      <unload>
+	livery_update.stop();
+#        stopFire();
+#        disintegrated = 0;
+        removelistener(listenCrash);
+
+        #prevent multiple timers and listeners from running and fighting on next connect
+        #cleanly destroy MP property mirroring
+#        mirrorTimer.stop();
+#        mirrorTimer = nil;
+#        mirrorValues = nil;
+
+        #cleanly destroy nav lights
+#        if(navStillOn) {
+#        	navLights.del();
+#        }
+#        else {
+#        	if(navSwitch!=nil) setprop(navSwitch, 0);
+#        	navLights.del();
+#        	if(navSwitch!=nil) navLights.cycleTimer = nil;
+#        	navLights = nil;
+#        }
+
+        #cleanly destroy beacon
+#        if(beaconSwitch!=nil) setprop(beaconSwitch, 0);
+#        beacon.del();
+#        beacon = nil;
+#
+        #cleanly destroy strobe
+#        if(strobeSwitch!=nil) setprop(strobeSwitch, 0);
+#        strobe.del();
+#        strobe = nil;
+
+        #cleanly destroy light fade in/out animation objects
+#        fadeLanding.del();
+#        fadeTaxi.del();
+#        fadeProbe.del();
+#        fadeWhite.del();
+
+        ### the rest of your model unload embedded Nasal code ###
+
+	loopid += 1;
+
+	#check if bombable is installed to prevent errors
+	if(props.globals.getNode("/bombable")==nil) {
+        	print("MiG-21bis: Bombable not installed, ignoring Bombable unload code...");
+        	return;
+	}
+
+	print("Unloading MiG-21bis Bombable", cmdarg().getPath());
+	var nodeName= cmdarg().getPath();
+	bombable.de_overall_initialize( nodeName );
+	bombable.initialize_del( nodeName );
+	bombable.ground_del( nodeName );
+	bombable.location_del (nodeName);
+	bombable.bombable_del( nodeName );
+	bombable.attack_del( nodeName );
+	bombable.weapons_del (nodeName);
+
+      </unload>
+    </nasal>
+
+	<!-- Shaders -->
+
+	<animation>
+		<type>shader</type>
+		<shader>chrome</shader>
+		<texture>Aircraft/Generic/Effects/glass_shader.png</texture>
+		<object-name>glass</object-name>
+		<object-name>canopy_glass</object-name>
+		<object-name>bglass</object-name>
+		<object-name>bcanopy_glass</object-name>
+	</animation>
+
+	<animation>
+		<type>noshadow</type>
+		<object-name>glass</object-name>
+		<object-name>canopy_glass</object-name>
+		<object-name>bglass</object-name>
+		<object-name>bcanopy_glass</object-name>
+	</animation>
+
+    <!-- Parts invisible from internally -->
+
+    <!--animation>
+        <type>select</type>
+		<object-name>glass</object-name>
+		<object-name>canopy_glass</object-name>
+		<condition>
+            <not>
+                <property>sim/current-view/internal</property>
+            </not>
+        </condition>
+    </animation-->
+
+	<!-- MP sound -->
+
+	<sound>
+		<path>Aircraft/MiG-21bis/Sounds/MP-Sound.xml</path>
+	</sound>
+
+	<!-- Stores -->
+
+	<model>
+		<name>Stores</name>
+		<path>Aircraft/MiG-21bis/Models/Stores.xml</path>
+	</model>
+
+	<!-- Effects -->
+
+	<!--model>
+		<name>Effects</name>
+		<path>Aircraft/MiG-21bis/Models/Effects.xml</path>
+	</model-->
+
+	<animation>
+		<type>material</type>
+		<object-name>spoiler</object-name>
+		<object-name>cone</object-name>
+		<object-name>hull</object-name>
+		<object-name>canopy</object-name>
+		<object-name>front-canopy</object-name>
+		<object-name>bcanopy</object-name>
+		<object-name>bfront-canopy</object-name>
+		<object-name>left_ventral_air_brake</object-name>
+		<object-name>right_ventral_air_brake</object-name>
+		<object-name>central_air_brake</object-name>
+		<object-name>left_gill</object-name>
+		<object-name>left_back_gill</object-name>
+		<object-name>right_gill</object-name>
+		<object-name>right_back_gill</object-name>
+		<object-name>rudder</object-name>
+		<object-name>hstab</object-name>
+		<object-name>right_elevator</object-name>
+		<object-name>left_elevator</object-name>
+		<object-name>right_door</object-name>
+		<object-name>left_door</object-name>
+		<object-name>right_inner_door</object-name>
+		<object-name>left_inner_door</object-name>
+		<object-name>right_outer_door</object-name>
+		<object-name>left_outer_door</object-name>
+		<object-name>right_outer_door_up</object-name>
+		<object-name>right_outer_door_down</object-name>
+		<object-name>left_outer_door_up</object-name>
+		<object-name>left_outer_door_down</object-name>
+		<object-name>back_right_door</object-name>
+		<object-name>back_left_door</object-name>
+		<object-name>wings</object-name>
+		<object-name>right_flap</object-name>
+		<object-name>left_flap</object-name>
+		<object-name>right_aileron</object-name>
+		<object-name>left_aileron</object-name>
+		<object-name>pylons</object-name>
+		<object-name>nose_wheel</object-name>
+		<object-name>left_wheel</object-name>
+		<object-name>right_wheel</object-name>
+		<property-base>sim/model/livery</property-base>
+		<texture-prop>texture</texture-prop>
+		<texture>Aircraft/MiG-21bis/Models/Liveries/Default.png</texture>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>heat</object-name>
+		<emission>
+			<red>255</red>
+			<green>255</green>
+			<blue>254</blue>
+		</emission>
+	</animation>
+
+	<!-- Animations -->
+
+	 <!--animation>
+		 <type>translate</type>
+		 <object-name>Pilot</object-name>
+		 <object-name>Seat</object-name>
+		 <property>controls/eject</property>
+		 <factor>20</factor>
+		 <center>
+			 <x-m>0</x-m>
+			 <y-m>0</y-m>
+			 <z-m>0</z-m>
+		 </center>
+		 <axis>
+			 <x>0</x>
+			 <y>0</y>
+			 <z>1</z>
+		 </axis>
+	 </animation-->
+
+         <animation>
+                 <type>select</type>
+                 <object-name>canopy_glass</object-name>
+                 <object-name>canopy</object-name>
+                 <object-name>arch</object-name>
+                 <object-name>glass</object-name>
+                 <object-name>front-canopy</object-name>
+                 <object-name>front-arch</object-name>
+                 <condition>
+			<not>
+                             <equals>
+                                 <property>sim/model/livery/name</property>
+                                 <value>MiG-21-93</value>
+                             </equals>
+			</not>
+                 </condition>
+         </animation>
+
+         <animation>
+                 <type>select</type>
+                 <object-name>bcanopy_glass</object-name>
+                 <object-name>bcanopy</object-name>
+                 <object-name>barch</object-name>
+                 <object-name>bglass</object-name>
+                 <object-name>bfront-canopy</object-name>
+                 <object-name>bfront-arch</object-name>
+                 <condition>
+                             <equals>
+                                 <property>sim/model/livery/name</property>
+                                 <value>MiG-21-93</value>
+                             </equals>
+                 </condition>
+         </animation>
+
+	 <animation>
+		 <type>select</type>
+		 <object-name>canopy_glass</object-name>
+		 <object-name>canopy</object-name>
+		 <object-name>bcanopy_glass</object-name>
+		 <object-name>bcanopy</object-name>
+		 <object-name>arch</object-name>
+		 <object-name>barch</object-name>
+		 <condition>
+			 <not>
+				 <property>controls/eject</property>
+			 </not>
+		 </condition>
+	 </animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>heat</object-name>
+		<condition>
+			<property>/engines/engine[0]/running</property>
+			<not>
+				<property>fdm/jsbsim/systems/crash-detect/crashed</property>
+			</not>
+		</condition>
+	</animation>
+
+	<!--animation>
+		<type>rotate</type>
+		<object-name>canopy_glass</object-name>
+		<object-name>canopy</object-name>
+		<object-name>bcanopy_glass</object-name>
+		<object-name>bcanopy</object-name>
+		<object-name>arch</object-name>
+		<object-name>barch</object-name>
+		<property>canopy/position-norm</property>
+		<factor>80.00</factor>
+		<axis>
+			<x1-m> -3.05</x1-m>
+			<y1-m>  0.37</y1-m>
+			<z1-m>  0.86</z1-m>
+			<x2-m> -3.39</x2-m>
+			<y2-m>  0.39</y2-m>
+			<z2-m>  0.84</z2-m>
+		</axis>
+	</animation-->
+
+	<animation>
+		<type>rotate</type>
+		<object-name>central_air_brake</object-name>
+		<object-name>abhydro</object-name>
+		<property>surface-positions/speedbrake-pos-norm</property>
+		<condition>
+			<equals>
+				<!--property>fdm/jsbsim/systems/armament/station3/released</property>
+				<value>1</value-->
+				<property>sim/multiplay/generic/string[13]</property>
+				<value>none</value>
+			</equals>
+		</condition>
+		<factor>35.00</factor>
+		<axis>
+			<x1-m> 0.88</x1-m>
+			<y1-m>-0.09</y1-m>
+			<z1-m>-0.37</z1-m>
+			<x2-m> 0.88</x2-m>
+			<y2-m> 0.09</y2-m>
+			<z2-m>-0.37</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_ventral_air_brake</object-name>
+		<object-name>right-abhydro</object-name>
+		<property>surface-positions/speedbrake-pos-norm</property>
+		<factor>-35.00</factor>
+		<axis>
+			<x1-m>-2.77</x1-m>
+			<y1-m> 0.50</y1-m>
+			<z1-m>-0.05</z1-m>
+			<x2-m>-2.77</x2-m>
+			<y2-m> 0.26</y2-m>
+			<z2-m>-0.28</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_ventral_air_brake</object-name>
+		<object-name>left-abhydro</object-name>
+		<property>surface-positions/speedbrake-pos-norm</property>
+		<factor>35.00</factor>
+		<axis>
+			<x1-m>-2.77</x1-m>
+			<y1-m>-0.50</y1-m>
+			<z1-m>-0.05</z1-m>
+			<x2-m>-2.77</x2-m>
+			<y2-m>-0.26</y2-m>
+			<z2-m>-0.28</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>rudder</object-name>
+		<property>controls/flight/rudder</property>
+		<factor>25</factor>
+		<axis>
+			<x1-m>5.19</x1-m>
+			<y1-m>0.00</y1-m>
+			<z1-m>1.10</z1-m>
+			<x2-m>6.69</x2-m>
+			<y2-m>0.00</y2-m>
+			<z2-m>2.60</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_elevator</object-name>
+		<object-name>right_elevator</object-name>
+		<property>surface-positions/elevator-pos-norm</property>
+		<factor>15.00</factor>
+		<offset-deg>0.00</offset-deg>
+		<center>
+			<x-m>4.99</x-m>
+			<y-m>0.00</y-m>
+			<z-m>0.30</z-m>
+		</center>
+		<axis>
+			<x>0.00</x>
+			<y>1.00</y>
+			<z>0.00</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_flap</object-name>
+		<property>surface-positions/flap-pos-norm</property>
+		<factor>30.00</factor>
+		<axis>
+			<x1-m> 1.98</x1-m>
+			<y1-m> 0.65</y1-m>
+			<z1-m> 0.14</z1-m>
+			<x2-m> 1.98</x2-m>
+			<y2-m> 1.99</y2-m>
+			<z2-m> 0.09</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_flap</object-name>
+		<property>surface-positions/flap-pos-norm</property>
+		<factor>-30.00</factor>
+		<axis>
+			<x1-m> 1.98</x1-m>
+			<y1-m>-0.65</y1-m>
+			<z1-m> 0.14</z1-m>
+			<x2-m> 1.98</x2-m>
+			<y2-m>-1.99</y2-m>
+			<z2-m> 0.09</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_aileron</object-name>
+		<property>surface-positions/right-aileron-pos-norm</property>
+		<factor>-15.00</factor>
+		<axis>
+			<x1-m> 2.03</x1-m>
+			<y1-m> 2.10</y1-m>
+			<z1-m> 0.09</z1-m>
+			<x2-m> 2.38</x2-m>
+			<y2-m> 3.34</y2-m>
+			<z2-m> 0.04</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_aileron</object-name>
+		<property>surface-positions/left-aileron-pos-norm</property>
+		<factor>-15.00</factor>
+		<axis>
+			<x1-m> 2.03</x1-m>
+			<y1-m>-2.10</y1-m>
+			<z1-m> 0.09</z1-m>
+			<x2-m> 2.38</x2-m>
+			<y2-m>-3.34</y2-m>
+			<z2-m> 0.04</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_door</object-name>
+		<property>gear/gear[0]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>90</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>90</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-5.64</x1-m>
+			<y1-m> 0.17</y1-m>
+			<z1-m>-0.28</z1-m>
+			<x2-m>-4.61</x2-m>
+			<y2-m> 0.18</y2-m>
+			<z2-m>-0.31</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_gill</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>30</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>30</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-5.73</x1-m>
+			<y1-m> 0.55</y1-m>
+			<z1-m> 0.22</z1-m>
+			<x2-m>-5.73</x2-m>
+			<y2-m> 0.52</y2-m>
+			<z2-m> 0.06</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_gill</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>-30</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>-30</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-5.73</x1-m>
+			<y1-m>-0.55</y1-m>
+			<z1-m> 0.22</z1-m>
+			<x2-m>-5.73</x2-m>
+			<y2-m>-0.52</y2-m>
+			<z2-m> 0.06</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_back_gill</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>30</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>30</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-3.40</x1-m>
+			<y1-m> 0.60</y1-m>
+			<z1-m> 0.12</z1-m>
+			<x2-m>-3.40</x2-m>
+			<y2-m> 0.54</y2-m>
+			<z2-m>-0.05</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_back_gill</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>-30</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>-30</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-3.40</x1-m>
+			<y1-m>-0.60</y1-m>
+			<z1-m> 0.12</z1-m>
+			<x2-m>-3.40</x2-m>
+			<y2-m>-0.54</y2-m>
+			<z2-m>-0.05</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_door</object-name>
+		<property>gear/gear[0]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>-90</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>-90</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-5.64</x1-m>
+			<y1-m>-0.17</y1-m>
+			<z1-m>-0.28</z1-m>
+			<x2-m>-4.61</x2-m>
+			<y2-m>-0.18</y2-m>
+			<z2-m>-0.31</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_inner_door</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>-96</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>-96</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-0.64</x1-m>
+			<y1-m> 0.18</y1-m>
+			<z1-m>-0.36</z1-m>
+			<x2-m> 0.54</x2-m>
+			<y2-m> 0.18</y2-m>
+			<z2-m>-0.37</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_inner_door</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>96</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>96</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-0.64</x1-m>
+			<y1-m>-0.18</y1-m>
+			<z1-m>-0.36</z1-m>
+			<x2-m> 0.54</x2-m>
+			<y2-m>-0.18</y2-m>
+			<z2-m>-0.37</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>nose_wheel</object-name>
+		<object-name>front_strut</object-name>
+		<object-name>frontd_strut</object-name>
+		<condition>
+			<greater-than>
+				<property>gear/gear[0]/position-norm</property>
+				<value>0</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>right_strut</object-name>
+		<object-name>left_strut</object-name>
+		<object-name>right_wheel</object-name>
+		<object-name>left_wheel</object-name>
+		<object-name>rightd_strut</object-name>
+		<object-name>leftd_strut</object-name>
+		<object-name>right_scissor</object-name>
+		<object-name>left_scissor</object-name>
+		<object-name>right_inner_strut</object-name>
+		<object-name>left_inner_strut</object-name>
+		<condition>
+			<greater-than>
+				<property>gear/gear[0]/position-norm</property>
+				<value>0.15</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>nose_wheel</object-name>
+		<object-name>front_strut</object-name>
+		<object-name>frontd_strut</object-name>
+		<property>gear/gear[0]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>-110</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>-110</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>-4.43</x-m>
+			<y-m> 0.00</y-m>
+			<z-m> 0.00</z-m>
+		</center>
+		<axis>
+			<x> 0</x>
+			<y>-1</y>
+			<z> 0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>nose_wheel</object-name>
+		<object-name>front_strut</object-name>
+		<object-name>frontd_strut</object-name>
+		<property>surface-positions/rudder-pos-norm</property>
+		<factor>25</factor>
+		<center>
+			<x-m>-4.43</x-m>
+			<y-m> 0.00</y-m>
+			<z-m> 0.04</z-m>
+		</center>
+		<axis>
+			<x>0.0</x>
+			<y>0.0</y>
+			<z>1.0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_strut</object-name>
+		<object-name>rightd_strut</object-name>
+		<object-name>right_scissor</object-name>
+		<object-name>right_wheel</object-name>
+		<object-name>right_inner_strut</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>92</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>92</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m> 0.66</x1-m>
+			<y1-m> 1.59</y1-m>
+			<z1-m> 0.11</z1-m>
+			<x2-m> 0.50</x2-m>
+			<y2-m> 1.75</y2-m>
+			<z2-m> 0.11</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_outer_door_up</object-name>
+		<object-name>right_outer_door_down</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>-92</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m> 0.75</x1-m>
+			<y1-m> 1.72</y1-m>
+			<z1-m> 0.08</z1-m>
+			<x2-m> 0.60</x2-m>
+			<y2-m> 1.87</y2-m>
+			<z2-m> 0.08</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_outer_door_up</object-name>
+		<object-name>right_outer_door_down</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>-25</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m> 0.46</x1-m>
+			<y1-m> 1.54</y1-m>
+			<z1-m> 0.05</z1-m>
+			<x2-m> 0.10</x2-m>
+			<y2-m> 1.15</y2-m>
+			<z2-m> 0.05</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_outer_door_down</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>-45</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>-45</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-0.01</x1-m>
+			<y1-m> 0.86</y1-m>
+			<z1-m> 0.08</z1-m>
+			<x2-m>-0.16</x2-m>
+			<y2-m> 1.01</y2-m>
+			<z2-m> 0.08</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_outer_door_up</object-name>
+		<object-name>left_outer_door_down</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>92</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m> 0.75</x1-m>
+			<y1-m>-1.72</y1-m>
+			<z1-m> 0.08</z1-m>
+			<x2-m> 0.60</x2-m>
+			<y2-m>-1.87</y2-m>
+			<z2-m> 0.08</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_outer_door_up</object-name>
+		<object-name>left_outer_door_down</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>25</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m> 0.46</x1-m>
+			<y1-m>-1.54</y1-m>
+			<z1-m> 0.05</z1-m>
+			<x2-m> 0.10</x2-m>
+			<y2-m>-1.15</y2-m>
+			<z2-m> 0.05</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_outer_door_down</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>45</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>45</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-0.01</x1-m>
+			<y1-m>-0.86</y1-m>
+			<z1-m> 0.08</z1-m>
+			<x2-m>-0.16</x2-m>
+			<y2-m>-1.01</y2-m>
+			<z2-m> 0.08</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_inner_strut</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>-125</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>-125</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m> 0.66</x1-m>
+			<y1-m> 1.59</y1-m>
+			<z1-m>-0.19</z1-m>
+			<x2-m> 0.50</x2-m>
+			<y2-m> 1.75</y2-m>
+			<z2-m>-0.19</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>rightd_strut</object-name>
+		<object-name>right_wheel</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<factor>0.5</factor>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>-0.15</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>-0.15</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>right_wheel</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>92</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>92</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m> 0.60</x1-m>
+			<y1-m> 1.69</y1-m>
+			<z1-m>-1.27</z1-m>
+			<x2-m> 0.68</x2-m>
+			<y2-m> 1.59</y2-m>
+			<z2-m>-1.27</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_strut</object-name>
+		<object-name>leftd_strut</object-name>
+		<object-name>left_scissor</object-name>
+		<object-name>left_wheel</object-name>
+		<object-name>left_inner_strut</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>-92</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>-92</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m> 0.66</x1-m>
+			<y1-m>-1.59</y1-m>
+			<z1-m> 0.11</z1-m>
+			<x2-m> 0.50</x2-m>
+			<y2-m>-1.75</y2-m>
+			<z2-m> 0.11</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_inner_strut</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>125</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>125</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m> 0.66</x1-m>
+			<y1-m>-1.59</y1-m>
+			<z1-m>-0.19</z1-m>
+			<x2-m> 0.50</x2-m>
+			<y2-m>-1.75</y2-m>
+			<z2-m>-0.19</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>leftd_strut</object-name>
+		<object-name>left_wheel</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<factor>0.5</factor>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>-0.15</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>-0.15</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>left_wheel</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0.0</ind>
+				<dep>-92</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>-92</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m> 0.60</x1-m>
+			<y1-m>-1.69</y1-m>
+			<z1-m>-1.27</z1-m>
+			<x2-m> 0.68</x2-m>
+			<y2-m>-1.59</y2-m>
+			<z2-m>-1.27</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>nose_wheel</object-name>
+		<object-name>frontd_strut</object-name>
+		<property>gear/gear[0]/compression-norm[0]</property>
+		<factor>40</factor>
+		<center>
+			<x-m>-4.44</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.92</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>rightd_strut</object-name>
+		<object-name>right_scissor</object-name>
+		<object-name>right_wheel</object-name>
+		<property>gear/gear[2]/compression-norm[0]</property>
+		<factor>0.3</factor>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>leftd_strut</object-name>
+		<object-name>left_scissor</object-name>
+		<object-name>left_wheel</object-name>
+		<property>gear/gear[1]/compression-norm[0]</property>
+		<factor>0.3</factor>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+        <!-- Wheel Spinning-->
+
+        <animation>
+                <type>spin</type>
+                <object-name>nose_wheel</object-name>
+                <property>gear/gear[0]/rollspeed-ms</property>
+                <factor>8.2</factor>
+                <center>
+                        <x-m>-4.21</x-m>
+                        <y-m>0.0</y-m>
+                        <z-m>-1.17</z-m>
+                </center>
+                <axis>
+                        <x>0.0</x>
+                        <y>-1.0</y>
+                        <z>0.0</z>
+                </axis>
+        </animation>
+
+        <animation>
+                <type>spin</type>
+                <object-name>left_wheel</object-name>
+                <property>gear/gear[1]/rollspeed-ms</property>
+                <factor>8.2</factor>
+                <center>
+                        <x-m>0.62</x-m>
+                        <y-m>0.0</y-m>
+                        <z-m>-1.27</z-m>
+                </center>
+                <axis>
+                        <x>0.0</x>
+                        <y>-1.0</y>
+                        <z>0.0</z>
+                </axis>
+        </animation>
+
+        <animation>
+                <type>spin</type>
+                <object-name>right_wheel</object-name>
+                <property>gear/gear[2]/rollspeed-ms</property>
+                <factor>8.2</factor>
+                <center>
+                        <x-m>0.62</x-m>
+                        <y-m>0.0</y-m>
+                        <z-m>-1.27</z-m>
+                </center>
+                <axis>
+                        <x>0.0</x>
+                        <y>-1.0</y>
+                        <z>0.0</z>
+                </axis>
+        </animation>
+
+</PropertyList>

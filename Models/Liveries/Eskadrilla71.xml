@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">71 Eskadrilla</name>
+                <texture>Liveries/Eskadrilla71.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/Eskadrilla71.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>

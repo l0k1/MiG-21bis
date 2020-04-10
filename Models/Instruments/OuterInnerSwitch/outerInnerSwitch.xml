@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>outerinnerswitch.ac</path>
+	
+	
+	
+	<!-- picks and translations -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>outerInnerSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/adf/inbound-outbound-switch</property>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/adf/inbound-outbound-switch</property>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>outerInnerSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/adf/inbound-outbound-switch</property>
+		<factor>60</factor>
+		<offset-deg>-30</offset-deg>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+
+
+</PropertyList>

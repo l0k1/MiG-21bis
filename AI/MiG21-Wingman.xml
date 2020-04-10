@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>MiG-21bis Wingman</name>
+
+	<scenario>
+
+		<description>
+
+			Pair - non-tactical
+
+			This scenario formates 1 MiG-21bis to the
+			parent ac at the position designated by
+			the x,y,z ofsets. 
+
+
+			originally from the Buccaneer by Vivian Meazza
+		</description>
+
+		<entry>
+			<name>Red-3</name>
+			<callsign>Red-3</callsign>
+			<type>wingman</type>
+			<model>Aircraft/MiG-21bis/Models/MiG-21bis-Wingman.xml</model>
+			<x-offset>-35</x-offset>
+			<y-offset>-63</y-offset>
+			<z-offset>0</z-offset>
+			<formate>true</formate>
+			<max-speed-kts>500</max-speed-kts>
+			<coefficients>
+				<heading>5.0</heading>
+				<pitch>4.0</pitch>
+				<bank>4.0</bank>
+				<speed>2.5</speed>
+			</coefficients>
+		</entry>
+
+
+	</scenario>
+
+</PropertyList>

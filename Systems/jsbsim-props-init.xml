@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<PropertyList>
+    <blc type="double">0</blc>
+	<simulation>
+        <sim-time-sec>0</sim-time-sec>
+    </simulation>
+    <systems>
+        <chute>
+            <deploy type="double">0</deploy>
+            <deploy-rqst type="double">0</deploy-rqst>
+        </chute>
+        <dump>
+            <armed type="double">0</armed>
+        </dump>
+        <brakes>
+            <nose-wheel-brake-toggle type="double">0</nose-wheel-brake-toggle>
+        </brakes>
+        <NWS>
+            <engaged type="double">0</engaged>
+        </NWS>
+        <canopy>
+            <command type="double">0</command>
+            <position type="double">0</position>
+        </canopy>
+        <armament>
+            <station1>
+                <selected type="double">0</selected>
+            </station1>
+            <station2>
+                <selected type="double">0</selected>
+            </station2>
+            <station3>
+                <selected type="double">0</selected>
+            </station3>
+            <station4>
+                <selected type="double">0</selected>
+            </station4>
+            <station5>
+                <selected type="double">0</selected>
+            </station5>
+            <cm>
+                <chaff-trigger-0>0</chaff-trigger-0>
+                <chaff-trigger-1>0</chaff-trigger-1>
+                <flare-trigger-0>0</flare-trigger-0>
+                <flare-trigger-1>0</flare-trigger-1>
+                <chaff-firing-0>0</chaff-firing-0>
+                <chaff-firing-1>0</chaff-firing-1>
+                <flare-firing-0>0</flare-firing-0>
+                <flare-firing-1>0</flare-firing-1>
+                <chaff-final-count-0>0</chaff-final-count-0>
+                <chaff-final-count-1>0</chaff-final-count-1>
+            </cm>
+        </armament>
+        <hydraulic n="0">
+            <pump-on>0</pump-on>
+            <pressure>0</pressure>
+            <high-pres-contents>0</high-pres-contents>
+            <tank-contents>1</tank-contents>
+            <usage>
+                <flaps>0</flaps>
+            </usage>
+            <internal>
+                <flaps-last-pos>0</flaps-last-pos>
+            </internal>
+        </hydraulic>
+        <hydraulic n="1">
+            <pump-on>0</pump-on>
+            <pressure>0</pressure>
+            <high-pres-contents>0</high-pres-contents>
+            <tank-contents>1</tank-contents>
+            <usage>
+                <aileron-booster n="0">0</aileron-booster>
+                <aileron-booster n="1">0</aileron-booster>
+            </usage>
+            <internal>
+                <flaps-last-pos>0</flaps-last-pos>
+            </internal>
+        </hydraulic>
+        <gyro-compass>
+            <earth-drift type="double">0.0</earth-drift>
+            <compensation-drift type="double">0.0</compensation-drift>
+            <transport-drift type="double">0.0</transport-drift>
+            <real-drift type="double">0.0</real-drift>
+            <total-drift type="double">0.0</total-drift>
+            <compensation-setting type="double">0.0</compensation-setting>
+            <fds-button type="double">0.0</fds-button>
+            <fds-offset type="double">0.0</fds-offset>
+            <heading-change type="double">0.0</heading-change>
+            <heading-deg-prev type="double">0.0</heading-deg-prev>
+            <heading-deg type="double">0.0</heading-deg>
+        </gyro-compass>
+    </systems>
+    <instrumentation>
+        <pitot-setting type="double">1</pitot-setting>
+        <pitot>
+            <airspeed-kts type="double">0</airspeed-kts>
+        </pitot>
+        <fd>
+            <iterator type="double">0</iterator>
+            <letdown-mode-height-capture type="double">0</letdown-mode-height-capture>
+            <letdown-mode-vs-fps type="double">0</letdown-mode-vs-fps>
+            <letdown-mode-vs-rate type="double">0.5</letdown-mode-vs-rate>
+            <letdown-mode-combined-vs-fps type="double">0</letdown-mode-combined-vs-fps>
+            <letdown-mode-tgt-pitch-prefilter type="double">0</letdown-mode-tgt-pitch-prefilter>
+            <letdown-mode-tgt-pitch type="double">0</letdown-mode-tgt-pitch>
+            <pitch type="double">0</pitch>
+        </fd>
+        <input>
+            <ap-pitch type="double">0</ap-pitch>
+        </input>
+    </instrumentation>
+    <pneumatic>
+        <sources>
+            <bottle-kgfcm type="double">120.0</bottle-kgfcm>
+            <drain-kgfcm type="double">0.0</drain-kgfcm>
+        </sources>
+        <drain>
+            <wheel-stop type="double">0.0</wheel-stop>
+            <chute type="double">0.0</chute>
+        </drain>
+    </pneumatic>
+    <propulsion>
+        <clr type="int">0</clr>
+    </propulsion>
+    <random>
+        <rand-0 type="double">0.0</rand-0>
+        <rand-1 type="double">0.0</rand-1>
+        <rand-2 type="double">0.0</rand-2>
+        <rand-3 type="double">0.0</rand-3>
+    </random>
+    <fcs>
+        <pitch-gearing-enable>1</pitch-gearing-enable>
+        <roll-damping-enable>1</roll-damping-enable>
+        <elevator-ap-cmd-norm type="double">0</elevator-ap-cmd-norm>
+        <aileron-ap-cmd-norm type="double">0</aileron-ap-cmd-norm>
+        <rudder-ap-cmd-norm type="double">0</rudder-ap-cmd-norm>
+        <aileron-manual-override type="bool">false</aileron-manual-override>
+        <elevator-manual-override type="bool">false</elevator-manual-override>
+        <rudder-manual-override type="bool">false</rudder-manual-override>
+        <speedbrake-rear-rate type="double">0</speedbrake-rear-rate>
+    </fcs>
+    <!-- for in-flight FDM tuning -->
+    <tune>
+        <lift>
+            <alpha type="double">1</alpha>
+            <pitch_rate type="double">1</pitch_rate>
+            <alpha_rate type="double">1</alpha_rate>
+            <elevator type="double">1</elevator>
+            <flap type="double">1</flap>
+        </lift>
+        <drag>
+            <minimum type="double">1</minimum>
+            <alpha type="double">1</alpha>
+            <induced type="double">1</induced>
+            <mach type="double">1</mach>
+            <beta type="double">1</beta>
+            <elevator type="double">1</elevator>
+            <gear type="double">1</gear>
+            <flap type="double">1</flap>
+            <speedbrake type="double">1</speedbrake>
+            <chute type="double">1</chute>
+        </drag>
+        <side>
+            <beta type="double">1</beta>
+            <roll_rate type="double">1</roll_rate>
+            <yaw_rate type="double">1</yaw_rate>
+            <rudder type="double">1</rudder>
+        </side>
+        <pitch>
+            <alpha type="double">1</alpha>
+            <elevator type="double">1</elevator>
+            <damp type="double">1</damp>
+            <alphadot type="double">1</alphadot>
+        </pitch>
+        <roll>
+            <beta type="double">1</beta>
+            <damp type="double">1</damp>
+            <yaw type="double">1</yaw>
+            <aileron type="double">1</aileron>
+            <rudder type="double">1</rudder>
+        </roll>
+        <yaw>
+            <alpha type="double">1</alpha>
+            <beta type="double">1</beta>
+            <roll_rate type="double">1</roll_rate>
+            <damp type="double">1</damp>
+            <rudder type="double">1</rudder>
+            <aileron type="double">1</aileron>
+        </yaw>
+    </tune>
+    <warning-lights>
+        <masterwarn-last type="double">0</masterwarn-last>
+    </warning-lights>
+</PropertyList>

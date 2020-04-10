@@ -1,0 +1,37 @@
+<PropertyList>
+
+	<path>Kh-66.ac</path>
+
+	<animation>
+		<type>select</type>
+		<object-name>Kh-66</object-name>
+		<condition>
+			<property>payload/armament/kh-66/flags/msl-id-0</property>
+		</condition>
+	</animation>
+
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/motor-smoke-0.xml</path>
+		<offsets>
+			<x-m>1.44</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<name>explosion</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/KH-66/explosion-0.xml</path>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>Kh-66</object-name>
+		<enable-hot type="bool">false</enable-hot>
+	</animation>
+
+</PropertyList>

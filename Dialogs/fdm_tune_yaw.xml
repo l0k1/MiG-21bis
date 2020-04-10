@@ -1,0 +1,286 @@
+<PropertyList>
+
+   <name>fdm_tune_yaw</name>
+   <modal>false</modal>
+   <layout>vbox</layout>
+   <width>450</width>
+   <height>365</height>
+   <group>
+      <text>
+         <label>Tune dat yaw</label>
+         <x>10</x>
+         <y>340</y>
+      </text>
+      
+      <!-- slider 1 -->
+      
+      <text>
+         <x>10</x>
+         <y>320</y>
+         <label>Yaw_alpha</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>320</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/yaw/alpha</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>320</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/moment/Yaw_alpha</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>295</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/yaw/alpha</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 2 -->
+      
+      <text>
+         <x>10</x>
+         <y>270</y>
+         <label>Yaw_beta</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>270</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/yaw/beta</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>270</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/moment/Yaw_beta</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>245</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/yaw/beta</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 3 -->
+      
+      <text>
+         <x>10</x>
+         <y>220</y>
+         <label>Yaw_roll_rate</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>220</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/yaw/roll_rate</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>220</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/moment/Yaw_roll_rate</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>195</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/yaw/roll_rate</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 4 -->
+      
+      <text>
+         <x>10</x>
+         <y>170</y>
+         <label>Yaw_damp</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>170</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/yaw/damp</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>170</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/moment/Yaw_damp</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>145</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/yaw/damp</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 5 -->
+      
+      <text>
+         <x>10</x>
+         <y>120</y>
+         <label>Yaw_rudder</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>120</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/yaw/rudder</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>120</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/moment/Yaw_rudder</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>95</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/yaw/rudder</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 6 -->
+      
+      <text>
+         <x>10</x>
+         <y>70</y>
+         <label>Yaw_aileron</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>70</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/yaw/aileron</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>70</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/moment/Yaw_aileron</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>45</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/yaw/aileron</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+
+      <!-- buttons -->
+      
+      <button>
+         <legend>Apply</legend>
+         <y>10</y>
+         <x>10</x>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </button>
+      
+      <button>
+         <legend>Close</legend>
+         <y>10</y>
+         <x>400</x>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+         <binding>
+            <command>dialog-close</command>
+         </binding>
+      </button>
+   
+   </group>
+
+</PropertyList>

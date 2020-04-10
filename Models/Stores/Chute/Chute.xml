@@ -1,0 +1,34 @@
+<PropertyList>
+
+    <path>Chute.ac</path>
+
+    <animation>
+        <type>scale</type>
+        <object-name>chute</object-name>
+        <property>sim/multiplay/generic/bool[3]</property>
+        <x-min>1</x-min>
+        <y-min>1</y-min>
+        <z-min>1</z-min>
+        <x-factor>1</x-factor>
+        <y-factor>10</y-factor>
+        <z-factor>10</z-factor>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>chute</object-name>
+        <property>orientation/pitch-deg</property>
+        <factor>-0.10</factor>
+            <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>	
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>	
+    </animation>
+
+</PropertyList>

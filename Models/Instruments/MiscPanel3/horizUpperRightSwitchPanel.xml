@@ -1,0 +1,371 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <path>horizupperrightswitchpanel.ac</path>
+        <animation>
+            <type>material</type>
+              <object-name>horizupperrightswitchpanellabels</object-name>
+            <emission>
+               <red>0.6</red>
+               <green>0.3</green>
+               <blue>0.3</blue>
+              <factor-prop>controls/lighting/instruments-norm</factor-prop>
+            </emission>
+        </animation>
+
+          <animation>
+            <type>pick</type>
+            <object-name>no3TkGpPumpSwitch</object-name>
+            <action>
+              <button>0</button>
+              <button>1</button>
+              <repeatable>false</repeatable>
+              <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rhfsp/no-3-tk-gp-pump</property>
+              </binding>
+            </action>
+          </animation>
+
+          <animation>
+            <object-name>no3TkGpPumpSwitch</object-name>
+            <type>rotate</type>
+            <property>/fdm/jsbsim/electric/switches/rhfsp/no-3-tk-gp-pump</property>
+            <factor>-60</factor>
+            <offset-deg>30</offset-deg>
+            <center>
+              <x-m>-0.07500</x-m>
+              <y-m>-0.02188</y-m>
+              <z-m>-0.00723</z-m>
+            </center>
+            <axis>
+              <x>0</x>
+              <y>1</y>
+              <z>0</z>
+            </axis>
+          </animation>
+
+          <animation>
+            <type>pick</type>
+            <object-name>no1TkGpPumpSwitch</object-name>
+            <action>
+              <button>0</button>
+              <button>1</button>
+              <repeatable>false</repeatable>
+              <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rhfsp/no-1-tk-gp-pump</property>
+              </binding>
+            </action>
+          </animation>
+
+          <animation>
+            <object-name>no1TkGpPumpSwitch</object-name>
+            <type>rotate</type>
+            <property>/fdm/jsbsim/electric/switches/rhfsp/no-1-tk-gp-pump</property>
+            <factor>-60</factor>
+            <offset-deg>30</offset-deg>
+            <center>
+              <x-m>-0.07500</x-m>
+              <y-m> 0.00460</y-m>
+              <z-m>-0.00723</z-m>
+            </center>
+            <axis>
+              <x>0</x>
+              <y>1</y>
+              <z>0</z>
+            </axis>
+          </animation>
+
+          <animation>
+            <type>pick</type>
+            <object-name>serviceTkPumpSwitch</object-name>
+            <action>
+              <button>0</button>
+              <button>1</button>
+              <repeatable>false</repeatable>
+              <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rhfsp/service-tk-pump</property>
+              </binding>
+            </action>
+          </animation>
+
+          <animation>
+            <object-name>serviceTkPumpSwitch</object-name>
+            <type>rotate</type>
+            <property>/fdm/jsbsim/electric/switches/rhfsp/service-tk-pump</property>
+            <factor>-60</factor>
+            <offset-deg>30</offset-deg>
+            <center>
+              <x-m>-0.05888</x-m>
+              <y-m> 0.03166</y-m>
+              <z-m>-0.00723</z-m>
+            </center>
+            <axis>
+              <x>0</x>
+              <y>1</y>
+              <z>0</z>
+            </axis>
+          </animation>
+
+          <animation>
+            <type>pick</type>
+            <object-name>vertGyroSwitch</object-name>
+            <action>
+              <button>0</button>
+              <button>1</button>
+              <repeatable>false</repeatable>
+              <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rhfsp/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig</property>
+              </binding>
+            </action>
+          </animation>
+
+          <animation>
+            <object-name>vertGyroSwitch</object-name>
+            <type>rotate</type>
+            <property>/fdm/jsbsim/electric/switches/rhfsp/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig</property>
+            <factor>-60</factor>
+            <offset-deg>30</offset-deg>
+            <center>
+              <x-m>-0.02769</x-m>
+              <y-m>-0.02188</y-m>
+              <z-m>-0.00723</z-m>
+            </center>
+            <axis>
+              <x>0</x>
+              <y>1</y>
+              <z>0</z>
+            </axis>
+          </animation>
+
+          <animation>
+            <type>pick</type>
+            <object-name>da200Switch</object-name>
+            <action>
+              <button>0</button>
+              <button>1</button>
+              <repeatable>false</repeatable>
+              <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rhfsp/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr</property>
+              </binding>
+            </action>
+          </animation>
+
+          <animation>
+            <object-name>da200Switch</object-name>
+            <type>rotate</type>
+            <property>/fdm/jsbsim/electric/switches/rhfsp/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr</property>
+            <factor>-60</factor>
+            <offset-deg>30</offset-deg>
+            <center>
+              <x-m>-0.02769</x-m>
+              <y-m> 0.00460</y-m>
+              <z-m>-0.00723</z-m>
+            </center>
+            <axis>
+              <x>0</x>
+              <y>1</y>
+              <z>0</z>
+            </axis>
+          </animation>
+
+          <!-- <animation>
+            <type>pick</type>
+            <object-name>invEmerCrsover</object-name>
+            <action>
+              <button>0</button>
+              <button>1</button>
+              <repeatable>false</repeatable>
+              <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rhfsp/inv-emerg-crsovr</property>
+              </binding>
+            </action>
+          </animation> -->
+
+          <animation>
+            <object-name>invEmerCrsover</object-name>
+            <type>rotate</type>
+            <property>/fdm/jsbsim/electric/switches/rhfsp/inv-emerg-crsovr</property>
+            <factor>-60</factor>
+            <offset-deg>30</offset-deg>
+            <center>
+              <x-m>-0.01157</x-m>
+              <y-m> 0.03166</y-m>
+              <z-m>-0.00723</z-m>
+            </center>
+            <axis>
+              <x>0</x>
+              <y>1</y>
+              <z>0</z>
+            </axis>
+          </animation>
+
+          <animation>
+        		<type>pick</type>
+        		<object-name>batExtPwrSupSwitch</object-name>
+        		<action>
+        			<button>0</button>
+          		<button>1</button>
+        			<repeatable>false</repeatable>
+        			<binding>
+        				<command>property-toggle</command>
+        				<property>/fdm/jsbsim/electric/switches/rhfsp/bat-ext-pwr-sup</property>
+        			</binding>
+        		</action>
+        	</animation>
+
+        	<animation>
+        		<object-name>batExtPwrSupSwitch</object-name>
+        		<type>rotate</type>
+        		<property>/fdm/jsbsim/electric/switches/rhfsp/bat-ext-pwr-sup</property>
+        		<factor>-60</factor>
+        		<offset-deg>30</offset-deg>
+        		<center>
+        			<x-m> 0.03203</x-m>
+        			<y-m>-0.02188</y-m>
+        			<z-m>-0.00723</z-m>
+        		</center>
+        		<axis>
+        			<x>0</x>
+        			<y>1</y>
+        			<z>0</z>
+        		</axis>
+        	</animation>
+
+          <animation>
+        		<type>pick</type>
+        		<object-name>dcGenSwitch</object-name>
+        		<action>
+        			<button>0</button>
+          		<button>1</button>
+        			<repeatable>false</repeatable>
+        			<binding>
+        				<command>property-toggle</command>
+        				<property>/fdm/jsbsim/electric/switches/rhfsp/dc-gen</property>
+        			</binding>
+        		</action>
+        	</animation>
+
+        	<animation>
+        		<object-name>dcGenSwitch</object-name>
+        		<type>rotate</type>
+        		<property>/fdm/jsbsim/electric/switches/rhfsp/dc-gen</property>
+        		<factor>-60</factor>
+        		<offset-deg>30</offset-deg>
+        		<center>
+        			<x-m> 0.03203</x-m>
+        			<y-m> 0.00460</y-m>
+        			<z-m>-0.00723</z-m>
+        		</center>
+        		<axis>
+        			<x>0</x>
+        			<y>1</y>
+        			<z>0</z>
+        		</axis>
+        	</animation>
+
+          <animation>
+        		<type>pick</type>
+        		<object-name>jatoStartSwitch</object-name>
+        		<action>
+        			<button>0</button>
+          		<button>1</button>
+        			<repeatable>false</repeatable>
+        			<binding>
+        				<command>property-toggle</command>
+        				<property>/fdm/jsbsim/electric/switches/rhfsp/jato-start</property>
+        			</binding>
+        		</action>
+        	</animation>
+
+        	<animation>
+        		<object-name>jatoStartSwitch</object-name>
+        		<type>rotate</type>
+        		<property>/fdm/jsbsim/electric/switches/rhfsp/jato-start</property>
+        		<factor>-60</factor>
+        		<offset-deg>30</offset-deg>
+        		<center>
+        			<x-m> 0.07183</x-m>
+        			<y-m>-0.02188</y-m>
+        			<z-m>-0.00723</z-m>
+        		</center>
+        		<axis>
+        			<x>0</x>
+        			<y>1</y>
+        			<z>0</z>
+        		</axis>
+        	</animation>
+
+
+          <animation>
+        		<type>pick</type>
+        		<object-name>jatoJettSwitch</object-name>
+        		<action>
+        			<button>0</button>
+          		<button>1</button>
+        			<repeatable>false</repeatable>
+        			<binding>
+        				<command>property-toggle</command>
+        				<property>/fdm/jsbsim/electric/switches/rhfsp/jato-jett</property>
+        			</binding>
+        		</action>
+        	</animation>
+
+        	<animation>
+        		<object-name>jatoJettSwitch</object-name>
+        		<type>rotate</type>
+        		<property>/fdm/jsbsim/electric/switches/rhfsp/jato-jett</property>
+        		<factor>-60</factor>
+        		<offset-deg>30</offset-deg>
+        		<center>
+        			<x-m> 0.07183</x-m>
+        			<y-m> 0.00460</y-m>
+        			<z-m>-0.00723</z-m>
+        		</center>
+        		<axis>
+        			<x>0</x>
+        			<y>1</y>
+        			<z>0</z>
+        		</axis>
+        	</animation>-->
+
+          <animation>
+        		<type>pick</type>
+        		<object-name>acGenExtPwrSwitch</object-name>
+        		<action>
+        			<button>0</button>
+          		<button>1</button>
+        			<repeatable>false</repeatable>
+        			<binding>
+        				<command>property-toggle</command>
+        				<property>/fdm/jsbsim/electric/switches/rhfsp/ac-gen-ext-pwr</property>
+        			</binding>
+        		</action>
+        	</animation>
+
+        	<animation>
+        		<object-name>acGenExtPwrSwitch</object-name>
+        		<type>rotate</type>
+        		<property>/fdm/jsbsim/electric/switches/rhfsp/ac-gen-ext-pwr</property>
+        		<factor>-60</factor>
+        		<offset-deg>30</offset-deg>
+        		<center>
+        			<x-m> 0.07208</x-m>
+        			<y-m> 0.03166</y-m>
+        			<z-m>-0.00723</z-m>
+        		</center>
+        		<axis>
+        			<x>0</x>
+        			<y>1</y>
+        			<z>0</z>
+        		</axis>
+        	</animation>
+
+
+</PropertyList>

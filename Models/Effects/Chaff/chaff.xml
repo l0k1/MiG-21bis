@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PropertyList>
+	<path>blank.ac</path>
+	<animation>
+		<type>range</type>
+		<min-m>0</min-m>
+		<max-m>800</max-m>
+	</animation>
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Effects/Chaff/chaffDynamic.xml</path>
+		<name>chaffDynamic</name>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+</PropertyList>

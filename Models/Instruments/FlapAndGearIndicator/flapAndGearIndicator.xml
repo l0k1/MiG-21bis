@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>flapAndGearIndicator.ac</path>
+
+	<!-- knob -->
+
+		<animation>
+        <type>rotate</type>
+        <object-name>flightandgearindicatorknob</object-name>
+        <property>instrumentation/warning-lights/dimmer[0]</property>
+        <interpolation>
+            <entry>
+                <ind> 	0.0</ind>
+                <dep>   0.0</dep>
+            </entry>
+            <entry>
+                <ind>  1.0</ind>
+                <dep> 330.0</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m> 0.00585</x-m>
+            <y-m> 0.00059</y-m>
+            <z-m>-0.02052</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>flightandgearindicatorknob</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.05</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[0]</property>
+                <step>0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.05</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[0]</property>
+                <step>-0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[0]</property>
+                <step>0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[0]</property>
+                <step>-0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <!-- lights -->
+
+    <animation>
+		<type>material</type>
+		<object-name>gearIndicatorDown</object-name>
+		<emission>
+			 <red>0.0</red>
+			 <green>1.0</green>
+			 <blue>0.0</blue>
+			<factor-prop>fdm/jsbsim/warning-lights/fagp/gear-down</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>gearIndicatorUp</object-name>
+		<emission>
+			 <red>1.0</red>
+			 <green>0.0</green>
+			 <blue>0.0</blue>
+			<factor-prop>fdm/jsbsim/warning-lights/fagp/gear-up</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>extendLGWarning</object-name>
+		<emission>
+			 <red>1.0</red>
+			 <green>0.0</green>
+			 <blue>0.0</blue>
+			<factor-prop>fdm/jsbsim/warning-lights/fagp/extend-lg</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>flapsIndicatorDown</object-name>
+		<emission>
+			 <red>0.0</red>
+			 <green>1.0</green>
+			 <blue>0.0</blue>
+			<factor-prop>fdm/jsbsim/warning-lights/fagp/flaps-down</factor-prop>
+		</emission> 
+	</animation>
+
+    <animation>
+		<type>material</type>
+		<object-name>airbrakesIndicatorExtd</object-name>
+		<emission>
+			 <red>0.0</red>
+			 <green>1.0</green>
+			 <blue>0.0</blue>
+			<factor-prop>fdm/jsbsim/warning-lights/fagp/airbrake-extd</factor-prop>
+		</emission> 
+	</animation>
+
+</PropertyList>

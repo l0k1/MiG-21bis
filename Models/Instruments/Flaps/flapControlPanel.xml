@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>flapControlPanel.ac</path>
+
+    <animation>
+		<type>material</type>
+			<object-name>flapsLabels</object-name>
+			<object-name>flapsUpButtonLight</object-name>
+			<object-name>flapsTakeoffButtonLight</object-name>
+			<object-name>flapsLandingButtonLight</object-name>
+		<emission>
+			 <red>0.6</red>
+			 <green>0.3</green>
+			 <blue>0.3</blue>
+			<factor-prop>controls/lighting/instruments-norm</factor-prop>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>flapsUpButton</object-name>
+		<object-name>flapsUpButtonLight</object-name>
+		<property>/controls/flight/flap-panel/up</property>
+		<factor>0.0075</factor>
+		<offset-m>0</offset-m>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>-1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>flapsUpButton</object-name>
+		<object-name>flapsUpButtonLight</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>mig21.flap_setting(1);</script>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>flapsTakeoffButton</object-name>
+		<object-name>flapsTakeoffButtonLight</object-name>
+		<property>/controls/flight/flap-panel/takeoff</property>
+		<factor>0.0075</factor>
+		<offset-m>0</offset-m>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>-1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>flapsTakeoffButton</object-name>
+		<object-name>flapsTakeoffButtonLight</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>mig21.flap_setting(2);</script>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>flapsLandingButton</object-name>
+		<object-name>flapsLandingButtonLight</object-name>
+		<property>/controls/flight/flap-panel/landing</property>
+		<factor>0.0075</factor>
+		<offset-m>0</offset-m>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>-1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>flapsLandingButton</object-name>
+		<object-name>flapsLandingButtonLight</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>mig21.flap_setting(3);</script>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>flapsOffButton</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>mig21.flap_setting(0);</script>
+			</binding>
+		</action>
+	</animation>
+</PropertyList>

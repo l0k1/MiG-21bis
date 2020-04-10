@@ -1,0 +1,137 @@
+<PropertyList>
+
+   <name>gunsight_settings</name>
+   <modal>false</modal>
+   <layout>vbox</layout>
+   <width>450</width>
+   <height>215</height>
+   <group>
+      <text>
+         <label>Gunsight Settings</label>
+         <x>10</x>
+         <y>190</y>
+      </text>
+      
+      <!-- slider 1 -->
+      
+      <text>
+         <x>10</x>
+         <y>170</y>
+         <label>Red</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>170</y>
+         <label>-9</label>
+         <format>%i</format>
+         <property>/controls/armament/gunsight/red</property>
+         <live>true</live>
+      </text>
+      
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>145</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/controls/armament/gunsight/red</property>
+         <min>0</min>
+         <max>255</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 2 -->
+      
+      <text>
+         <x>10</x>
+         <y>120</y>
+         <label>Green</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>120</y>
+         <label>-9</label>
+         <format>%i</format>
+         <property>/controls/armament/gunsight/green</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>95</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/controls/armament/gunsight/green</property>
+         <min>0</min>
+         <max>255</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 3 -->
+      
+      <text>
+         <x>10</x>
+         <y>70</y>
+         <label>Blue</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>70</y>
+         <label>-9</label>
+         <format>%i</format>
+         <property>/controls/armament/gunsight/blue</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>45</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/controls/armament/gunsight/blue</property>
+         <min>0</min>
+         <max>255</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- buttons -->
+      
+      <button>
+         <legend>Apply</legend>
+         <y>10</y>
+         <x>10</x>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </button>
+      
+      <button>
+         <legend>Close</legend>
+         <y>10</y>
+         <x>400</x>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+         <binding>
+            <command>dialog-close</command>
+         </binding>
+      </button>
+   
+   </group>
+
+</PropertyList>

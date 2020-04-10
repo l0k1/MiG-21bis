@@ -1,0 +1,288 @@
+<?xml version="1.0"?>
+
+<!-- The Mig-21bis radar lasts 45 minutes when on, and 2.5 hours on standby -->
+<!-- 78.37 C is boiling temp of alcohol -->
+<!-- everything but the actual amount of time the radar can run is fictional.
+    this includes temps, coolant amount, and coolant burn off rate -->
+
+<!-- i'm not using q = mcT because it's a tad overkill and i'm being lazy. -->
+
+<!-- if radar coolant isn't up to a certain degree, or there is no coolant,
+    turning on the radar will damage it and make it inoperable. i'm guessing. -->
+    
+<!-- for damage, if deviation between radar/antenna-temp-c and radar/coolant-temp-c is large (say, 30)
+    then break the antenna. it'll run for ~10 seconds before breaking. -->
+
+<system name="radar">
+    <property value="200">radar/coolant-ltr</property> <!-- total guess, cant find actual amount, mig-25 used 300L, so this seems reasonable -->
+    <property value="22">radar/coolant-temp-c</property>
+    <property value="0.31">radar/coolant-temp-c-delta</property> <!-- how much the coolant temp can change per second -->
+    <property value="22">radar/antenna-temp-c</property>
+    <property value="0.36">radar/antenna-temp-c-delta-standby</property>
+    <property value="0.80">radar/antenna-temp-c-delta-active</property>
+    <property value="0">radar/temp-dif</property>
+    <property value="0">radar/mode-last</property>
+
+    <channel name="cooling" execrate="120">
+
+        <fcs_function name="trash/radar/coolant-temp-c">
+            <function>
+                <sum>
+                    <ifthen>
+                        <eq>
+                            <property>radar/mode</property>
+                            <value>0</value>
+                        </eq>
+                        <max>
+                            <min>
+                                <property>radar/coolant-temp-c-delta</property>
+                                <difference>
+                                    <property>/environment/temperature-degc</property>
+                                    <property>radar/coolant-temp-c</property>
+                                </difference>
+                            </min>
+                            <product>
+                                <value>-1</value>
+                                <property>radar/coolant-temp-c-delta</property>
+                            </product>
+                        </max>
+                        <max>
+                            <min>
+                                <property>radar/coolant-temp-c-delta</property>
+                                <difference>
+                                    <property>radar/antenna-temp-c</property>
+                                    <property>radar/coolant-temp-c</property>
+                                </difference>
+                            </min>
+                            <product>
+                                <value>-1</value>
+                                <property>radar/coolant-temp-c-delta</property>
+                            </product>
+                        </max>
+                    </ifthen>
+                    <property>radar/coolant-temp-c</property>
+                </sum>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>110.0</max>
+            </clipto>
+            <output>radar/coolant-temp-c</output>
+        </fcs_function>
+
+        <fcs_function name="trash/radar/coolant-ltr">
+            <!-- coolant burnoff -->
+        <!-- if radar is off, slowly cool to ambient temp -->
+        <!-- no radar coolant burn off below 78.37 -->
+        <!-- if radar is standby, heat to 85 C, burn off at 1.3 ltrs/minute -->
+        <!-- if radar is on, heat to 110 C, burn off at 4.5 ltrs/minute-->
+        <!-- yes, i know a boiling liquid cant get hotter than it's boiling point. -->
+            <function>
+                <sum>
+                    <interpolate1d>
+                        <property>radar/coolant-temp-c</property>
+                        <value>   0.00 </value> <value>  0.00   </value>
+                        <value>  78.37 </value> <value>  0.00   </value>
+                        <value>  85.00 </value> <value> -0.02166 </value>
+                        <value> 110.00 </value> <value> -0.07500 </value>
+                    </interpolate1d>
+                    <property>radar/coolant-ltr</property>
+                </sum>
+            </function>
+            <min>0</min>
+            <max>200</max>
+            <output>radar/coolant-ltr</output>
+        </fcs_function>
+
+    </channel>
+
+    <channel name="antenna" execrate="120">
+        <!-- radars have to warm up their magnetron -->
+        <fcs_function name="trash/radar/antenna-temp-goal">
+            <function>
+                <switch>
+                    <property>radar/mode</property>
+                    <property>/environment/temperature-degc</property>
+                    <value>85</value>
+                    <value>110</value>
+                </switch>
+            </function>
+            <output>radar/antenna-temp-goal</output>
+        </fcs_function>
+
+        <fcs_function name="trash/radar/antenna-temp">
+            <!-- if the mode is 0, temp chases coolant temp at a rate of standby -->
+            <!-- if the mode is 1, temp increases by standby -->
+            <!-- if the mode is 2, temp increases by active -->
+            <function>
+                <sum>
+                    <ifthen>
+                        <eq>
+                            <property>radar/mode</property>
+                            <value>0</value>
+                        </eq>
+                        <max>
+                            <min>
+                                <difference>
+                                    <property>radar/coolant-temp-c</property>
+                                    <property>radar/antenna-temp-c</property>
+                                </difference>
+                                <property>radar/antenna-temp-c-delta-standby</property>
+                            </min>
+                            <product>
+                                <value>-1</value>
+                                <property>radar/antenna-temp-c-delta-standby</property>
+                            </product>
+                        </max>
+                        <max>
+                            <min>
+                                <difference>
+                                    <property>radar/antenna-temp-goal</property>
+                                    <property>radar/antenna-temp-c</property>
+                                </difference>
+                                <ifthen>
+                                    <eq>
+                                        <property>radar/mode</property>
+                                        <value>1</value>
+                                    </eq>
+                                    <property>radar/antenna-temp-c-delta-standby</property>
+                                    <property>radar/antenna-temp-c-delta-active</property>
+                                </ifthen>
+                            </min>
+                            <ifthen>
+                                <eq>
+                                    <property>radar/mode</property>
+                                    <value>1</value>
+                                </eq>
+                                <product>
+                                    <value>-1</value>
+                                    <property>radar/antenna-temp-c-delta-standby</property>
+                                </product>
+                                <product>
+                                    <value>-1</value>
+                                    <property>radar/antenna-temp-c-delta-active</property>
+                                </product>
+                            </ifthen>
+                        </max>
+                    </ifthen>
+                    <property>radar/antenna-temp-c</property>
+                </sum>
+            </function>
+            <output>radar/antenna-temp-c</output>
+        </fcs_function>
+
+    </channel>
+    <channel name="mode-control" execrate="10">
+
+        <fcs_function name="trash/radar/mode">
+            <function>
+                <product>
+                    <gt>
+                        <property>electric/sources/ac-gen</property>
+                        <value>110</value>
+                    </gt>
+                    <property>/controls/radar/power-panel/run</property>
+                </product>
+            </function>
+            <output>radar/mode</output>
+        </fcs_function>
+
+    </channel>
+
+    <channel name="damage" execrate="120">
+
+        <fcs_function name="trash/radar/temp-dif">
+            <function>
+                <difference>
+                    <property>radar/antenna-temp-c</property>
+                    <property>radar/coolant-temp-c</property>
+                </difference>
+            </function>
+            <output>radar/temp-dif</output>
+        </fcs_function>
+
+        <fcs_function name="trash/radar/antenna-damage">
+            <!--tbh i have no idea if theres a safety, or a failsafe, or what have you. but i doubt it. -->
+            <!--as the magnetron differs in coolant temp, it starts damaging things. start damage at 31 degrees, instant death at 60 degrees different -->
+            <function>
+                <sum>
+                    <property>radar/antenna-damage</property>
+                    <ifthen>
+                        <lt>
+                            <property>radar/coolant-ltr</property>
+                            <value>1</value>
+                        </lt>
+                        <value>1.0</value>
+                        <table>
+                            <independentVar lookup="row">radar/temp-dif</independentVar>
+                            <tableData>
+                                0.0  0.00
+                                30.0    0.00
+                                31.0    0.01
+                                40.0    0.10
+                                60.0    1.00
+                            </tableData>
+                        </table>
+                    </ifthen>
+                </sum>
+            </function>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+            <output>radar/antenna-damage</output>
+        </fcs_function>
+    </channel>
+    <channel name="status-light" execrate="10">
+        <!-- light comes on for a couple seconds after switching to active, or upon radar becoming unserviceable (coolant < 50 or damage > 0.7) -->
+
+        <fcs_function name="trash/radar/count">
+            <function>
+                <ifthen>
+                    <or>
+                        <and>
+                            <eq>
+                                <property>radar/mode</property>
+                                <value>2</value>
+                            </eq>
+                            <eq>
+                                <property>radar/mode-last</property>
+                                <value>1</value>
+                            </eq>
+                        </and>
+                        <and>
+                            <gt>
+                                <property>radar/count</property>
+                                <value>0</value>
+                            </gt>
+                            <lt>
+                                <property>radar/count</property>
+                                <value>25</value>
+                            </lt>
+                        </and>
+                    </or>
+                    <sum>
+                        <property>radar/count</property>
+                        <value>1</value>
+                    </sum>
+                    <value>0</value>
+                </ifthen>
+            </function>
+            <output>radar/count</output>
+        </fcs_function>
+
+        <switch name="radar/status-light">
+            <default value="0"/>
+            <test logic="OR" value="1">
+                radar/count gt 0
+                radar/coolant-ltr lt 50
+                radar/antenna-damage gt 0.7
+            </test>
+        </switch>
+
+        <pure_gain name="radar/mode-last">
+            <input>radar/mode</input>
+            <gain>1.0</gain>
+        </pure_gain>
+    </channel>
+</system>

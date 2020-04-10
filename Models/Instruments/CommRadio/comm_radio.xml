@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>commradio.ac</path>
+
+	
+	<!-- channel select knob -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>commChannelKnob</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.3</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/comm-radio/selection</property>
+				<step>1</step>
+				<min>0</min>
+				<max>19</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.3</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/comm-radio/selection</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>19</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>commChannelKnob</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/comm-radio/selection</property>
+		<factor>-15</factor>
+		<offset-deg></offset-deg>
+		<center>
+			<x-m> 0.00873</x-m>
+			<y-m> 0.00049</y-m>
+			<z-m>-0.05517</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>commRadioChannelDisplay</object-name>
+		<property>/instrumentation/comm-radio/selection</property>
+		<bias>0.000001</bias>
+		<factor>-0.05</factor>
+		<step>1.00</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+			<type>material</type>
+			<object-name>commRadioChannelDisplay</object-name>
+			<emission>
+				 <red>0.6</red>
+				 <green>0.3</green>
+				 <blue>0.3</blue>
+				<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			</emission> 
+	</animation>
+
+
+
+	<!-- volume knob -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>commVolume</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.04</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/comm-radio/volume</property>
+				<step>0.02</step>
+				<min>0</min>
+				<max>1.0</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.04</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/comm-radio/volume</property>
+				<step>-0.02</step>
+				<min>0</min>
+				<max>1.0</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>commVolume</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/comm-radio/volume</property>
+		<factor>-270</factor>
+		<offset-deg>135</offset-deg>
+		<center>
+			<x-m> 0.00179</x-m>
+			<y-m> 0.00854</y-m>
+			<z-m> 0.04431</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- rset_comp switch -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>commSource</object-name>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/comm-radio/rset_comp_switch</property>
+				<value>1</value>
+			</binding>
+		</action>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/comm-radio/rset_comp_switch</property>
+				<value>0</value>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>commSource</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/comm-radio/rset_comp_switch</property>
+		<factor>30</factor>
+		<offset-deg>-15</offset-deg>
+		<center>
+			<x-m>-0.00672</x-m>
+			<y-m>-0.01467</y-m>
+			<z-m> 0.00904</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- nsup switch -->
+
+
+	<animation>
+		<type>pick</type>
+		<object-name>commNSup</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/comm[0]/cutoff-signal-quality</property>
+				<value>0.4</value>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/comm[0]/cutoff-signal-quality</property>
+				<value>0.2</value>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>commNSup</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/comm[0]/cutoff-signal-quality</property>
+		<factor>-150</factor>
+		<offset-deg>45</offset-deg>
+		<center>
+			<x-m>-0.00672</x-m>
+			<y-m>-0.01467</y-m>
+			<z-m> 0.00904</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+</PropertyList>

@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!-- this is for the two gyros that power the KPP + NPP and other instruments-->
+
+<system name="gyros">
+<!--
+electric/output/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig
+electric/output/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr
+fed off bus[3] so gt(22)
+
+spin rate of gyro is normalized to 1
+-->
+
+    <channel name="normvolts">
+    
+        <!-- vert gyro -->
+
+        <fcs_function name="trash/systems/gyro/vert-gyro-volts-norm">
+            <function>
+                <quotient>
+                    <property>electric/output/vert-gyro-of-fds-afcs-rdr-gyro-hor-sig</property>
+                    <value>105</value>
+                </quotient>
+            </function>
+            <clipto>
+                <min>0</min>
+                <max>1</max>
+            </clipto>
+            <output>systems/gyro/vert-gyro-volts-norm</output>
+        </fcs_function>
+
+
+        <actuator name="trash/systems/gyro/vert-gyro-norm">
+            <input>systems/gyro/vert-gyro-volts-norm</input>
+            <lag>1</lag>
+            <rate_limit sense="incr">0.12</rate_limit>
+            <rate_limit sense="decr">0.04</rate_limit>
+            <output>systems/gyro/vert-gyro-norm</output>
+        </actuator>
+
+        <!-- da-200 -->
+        
+        <fcs_function name="trash/systems/gyro/da-200-gyro-volts-norm">
+            <function>
+                <quotient>
+                    <property>electric/output/da-200-comb-instr-sig-of-vert-gyro-of-fds-afcs-rdr</property>
+                    <value>105</value>
+                </quotient>
+            </function>
+            <clipto>
+                <min>0</min>
+                <max>1</max>
+            </clipto>
+            <output>systems/gyro/da-200-gyro-volts-norm</output>
+        </fcs_function>
+
+        <actuator name="trash/systems/gyro/da-200-gyro-norm">
+            <input>systems/gyro/da-200-gyro-volts-norm</input>
+            <lag>1</lag>
+            <rate_limit sense="incr">0.12</rate_limit>
+            <rate_limit sense="decr">0.04</rate_limit>
+            <output>systems/gyro/da-200-gyro-norm</output>
+        </actuator>
+
+        <!-- fds -->
+        
+        <fcs_function name="trash/systems/gyro/fds-gyro-volts-norm">
+            <function>
+                <quotient>
+                    <property>electric/output/fds</property>
+                    <value>105</value>
+                </quotient>
+            </function>
+            <clipto>
+                <min>0</min>
+                <max>1</max>
+            </clipto>
+            <output>systems/gyro/fds-gyro-volts-norm</output>
+        </fcs_function>
+
+        <actuator name="trash/systems/gyro/fds-gyro-norm">
+            <input>systems/gyro/fds-gyro-volts-norm</input>
+            <lag>1</lag>
+            <rate_limit sense="incr">0.12</rate_limit>
+            <rate_limit sense="decr">0.04</rate_limit>
+            <output>systems/gyro/fds-gyro-norm</output>
+        </actuator>
+
+    </channel>
+
+</system>

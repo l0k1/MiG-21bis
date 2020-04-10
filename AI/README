@@ -1,0 +1,6 @@
+These need to be copied or symlinked into the $FGDATA/AI directory to be picked up by FlightGear
+
+The Wingmen scaenarios work like the buccaneer wingmen ones - they can work alone or together
+
+The EGOD Incoming MiG-21 scenario has 4 MiG-21 incoming to LLanbedr at 8000ft 500kts - it works with Bombable, 
+but if you don't have bombable installed they'll just fly straight 

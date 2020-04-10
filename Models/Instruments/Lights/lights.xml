@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>lights.ac</path>
+
+	<animation>
+        <type>material</type>
+        <object-name>dangerAltLight</object-name>
+        <ambient>
+            <red>0.1</red>
+            <green>0.0</green>
+            <blue>0.0</blue>
+        </ambient>
+        <emission>
+            <red>1.0</red>
+            <green>0.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/instrumentation/altimeter/danger-alt-light</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>leftMissileLockLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/instrumentation/gunsight/ir-lock[0]</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>rightMissileLockLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/instrumentation/gunsight/ir-lock[1]</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>newIRLockLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/instrumentation/gunsight/ir-lock[2]</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>bombArmedLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/fdm/jsbsim/warning-lights/armament/bomb-arm</factor-prop>
+        </emission>
+    </animation>
+
+    
+
+</PropertyList>

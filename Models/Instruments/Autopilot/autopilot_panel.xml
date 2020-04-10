@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <path>autopilot_panel.ac</path>
+
+    <!-- CMD BUTTON -->
+
+    <animation>
+		<type>pick</type>
+		<object-name>cmdCtrlLight</object-name>
+		<object-name>cmdHousing</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>autopilot.panel_button("cmd");</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>cmdCtrlLight</object-name>
+		<object-name>cmdHousing</object-name>
+		<property>/instrumentation/autopilot/lights/cmd</property>
+		<factor>0.001</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+        <type>material</type>
+        <object-name>cmdCtrlLight</object-name>
+		<ambient>
+			<red>0.0</red>
+			<green>0.1</green>
+			<blue>0.0</blue>
+		</ambient>
+    	<emission>
+            <red>0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/instrumentation/autopilot/lights/cmd</factor-prop>
+        </emission> 
+    </animation>
+
+	<!-- AUTO BUTTON -->
+
+    <animation>
+		<type>pick</type>
+		<object-name>autoCtrlLight</object-name>
+		<object-name>autoHousing</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>autopilot.panel_button("auto");</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>autoCtrlLight</object-name>
+		<object-name>autoHousing</object-name>
+		<property>/instrumentation/autopilot/lights/auto</property>
+		<factor>0.001</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+        <type>material</type>
+        <object-name>autoCtrlLight</object-name>
+		<ambient>
+			<red>0.0</red>
+			<green>0.1</green>
+			<blue>0.0</blue>
+		</ambient>
+    	<emission>
+            <red>0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/instrumentation/autopilot/lights/auto</factor-prop>
+        </emission> 
+    </animation>
+
+	<!-- STAB BUTTON -->
+
+    <animation>
+		<type>pick</type>
+		<object-name>stabilizeLight</object-name>
+		<object-name>stabilizeHousing</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>autopilot.panel_button("stab");</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>stabilizeLight</object-name>
+		<object-name>stabilizeHousing</object-name>
+		<property>/instrumentation/autopilot/lights/stab</property>
+		<factor>0.001</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+        <type>material</type>
+		<object-name>stabilizeLight</object-name>
+		<ambient>
+			<red>0.0</red>
+			<green>0.1</green>
+			<blue>0.0</blue>
+		</ambient>
+    	<emission>
+            <red>0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/instrumentation/autopilot/lights/stab</factor-prop>
+        </emission> 
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>levelLight</object-name>
+		<ambient>
+			<red>0.1</red>
+			<green>0.0</green>
+			<blue>0.0</blue>
+		</ambient>
+        <emission>
+            <red>1.0</red>
+            <green>0.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/instrumentation/autopilot/lights/level</factor-prop>
+        </emission>
+    </animation>
+	
+    <!-- OFF BUTTON -->
+
+    <animation>
+		<type>pick</type>
+		<object-name>offButton</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>autopilot.panel_button("off");</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-assign</command>
+					<property>/instrumentation/autopilot/lights/off</property>
+					<value>0</value>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>offButton</object-name>
+		<property>/instrumentation/autopilot/lights/off</property>
+		<factor>0.001</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- LOW ALT SWITCH -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>limitAltSwitch</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/autopilot/locks/low-alt-mode-armed</property>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>limitAltSwitch</object-name>
+		<type>rotate</type>
+		<property>/autopilot/locks/low-alt-mode-armed</property>
+		<factor>-35</factor>
+		<offset-deg>15</offset-deg>
+		<center>
+			<x-m>-0.00604</x-m>
+			<y-m> 0.02792</y-m>
+			<z-m>-0.00214</z-m>
+		</center>D
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+    
+<!-- Label text -->
+
+<text>
+	<name>LabelText</name>
+	<type type="string">literal</type>
+		<text type="string">SAU Autopilot</text>
+	<draw-text type="bool">true</draw-text>
+	<font>Helvetica.txf</font>
+		<character-size type="double">0.012</character-size>
+		<character-aspect-ratio type="double">1.0</character-aspect-ratio>
+	<axis-alignment>yz-plane</axis-alignment>
+	<max-height>0.2</max-height>
+	<max-width>0.07</max-width>
+	<font-resolution>
+		<width type="int">32</width>
+		<height type="int">32</height>
+	</font-resolution>
+	<alignment>center-center</alignment>
+	<offsets>
+		<x-m> 0.01</x-m>
+		<y-m> 0.0 </y-m>
+		<z-m> 0.0 </z-m>
+	</offsets>
+</text>
+
+<animation>
+	<type>material</type>
+		<object-name>LabelText</object-name>
+	<emission>
+		<red>1.0</red>
+		<green>0.8</green>
+		<blue>0.0</blue>
+	</emission>
+</animation>
+
+<animation>
+	<type>select</type>
+		<object-name>LabelText</object-name>
+	<condition>
+		<property>/sim/panel-hotspots</property>
+	</condition>
+</animation>
+
+</PropertyList>

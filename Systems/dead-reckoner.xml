@@ -1,0 +1,503 @@
+<?xml version="1.0"?>
+ 
+<PropertyList>
+
+    <!--
+       var ambientTemperatureKelvin = getprop("/environment/temperature-degc") + 273.15;
+       var MACH = getprop("/velocities/mach");
+       var TASKnots = 661.47 * MACH * math.sqrt(ambientTemperatureKelvin / 288.15);
+    -->
+
+    <!-- calculate true airspeed -->
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <product>
+                    <value>661.47</value>
+                    <property>/velocities/mach</property>
+                    <sqrt>
+                        <div>
+                            <sum>
+                                <property>/environment/temperature-degc</property>
+                                <value>273.15</value>
+                            </sum>
+                            <value>288.15</value>
+                        </div>
+                    </sqrt>
+                </product>
+            </expression>
+        </input>
+        <output>/velocities/tas-kt</output>
+    </filter>
+    
+    <!-- horizontal-only true airspeed -->
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <product>
+                    <property>/velocities/tas-kt</property>
+                    <cos>
+                        <deg2rad><property>/fdm/jsbsim/instrumentation/input/pitch</property></deg2rad>
+                    </cos>
+                </product>
+            </expression>
+        </input>
+        <output>/velocities/horizontal-tas-kt</output>
+    </filter>
+    
+    <!-- distance travelled in one frame -->
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <product>
+                    <property>/velocities/horizontal-tas-kt</property>
+                    <property>/fdm/jsbsim/systems/delta-hour-4</property> <!-- calculated in gyro-compass.xml -->
+                </product>
+            </expression>
+        </input>
+        <output>/velocities/tas-nm-per-frame</output>
+    </filter>
+
+    <!-- check if azimuth input has changed -->
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <property>/instrumentation/dead-reckoner/azimuth-adjust</property>
+                    <property>/instrumentation/dead-reckoner/internal/azimuth-adjust-last</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/azimuth-change</output>
+    </filter>
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>/instrumentation/dead-reckoner/azimuth-adjust</input>
+        <output>/instrumentation/dead-reckoner/internal/azimuth-adjust-last</output>
+    </filter>
+    
+    <!-- check if distance input has changed -->
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <property>/instrumentation/dead-reckoner/distance-adjust</property>
+                    <property>/instrumentation/dead-reckoner/internal/distance-adjust-last</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/distance-change</output>
+    </filter>
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>/instrumentation/dead-reckoner/distance-adjust</input>
+        <output>/instrumentation/dead-reckoner/internal/distance-adjust-last</output>
+    </filter>
+    
+    <!-- update distance and azimuth to fictional point based on distance travelled 
+    (derived via KTAS above) and heading -->
+    
+    <!-- these first three filters calculate the bearing. positive is right. -->
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <sum>
+                    <difference>
+                        <property>/instrumentation/dead-reckoner/internal/azimuth</property>
+                        <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
+                    </difference>
+                    <property>/instrumentation/dead-reckoner/internal/azimuth-change</property>
+                </sum>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</output>
+    </filter>
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <less-than>
+                    <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                    <value>-180</value>
+                </less-than>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                    <value>360</value>
+                </sum>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</output>
+    </filter>
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <greater-than>
+                    <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                    <value>180</value>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <difference>
+                    <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                    <value>360</value>
+                </difference>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</output>
+    </filter>
+    
+    <!--
+    find new distances and such.
+    the filters for angles can be condensed at a later date if desired.
+    -->
+    
+    <!-- calculate new distance using law of cosines -->
+    <!-- new distance = sqrt(nm_per_frame^2 + distance^2 - 2 * nm_per_frame * distance * cos(bearing_to_azimuth) -->
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <sqrt>
+                    <difference>
+                        <sum>
+                            <pow>
+                                <property>/velocities/tas-nm-per-frame</property>
+                                <value>2</value>
+                            </pow>
+                            <pow>
+                                <sum>
+                                    <property>/instrumentation/dead-reckoner/internal/distance</property>
+                                    <property>/instrumentation/dead-reckoner/internal/distance-change</property>
+                                </sum>
+                                <value>2</value>
+                            </pow>
+                        </sum>
+                        <product>
+                            <value>2</value>
+                            <property>/velocities/tas-nm-per-frame</property>
+                            <sum>
+                                <property>/instrumentation/dead-reckoner/internal/distance</property>
+                                <property>/instrumentation/dead-reckoner/internal/distance-change</property>
+                            </sum>
+                            <cos><deg2rad><property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property></deg2rad></cos>
+                        </product>
+                    </difference>
+                </sqrt>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/distance</output>
+    </filter>
+    
+    <!-- find the small angle first, assumed to be the angle at the imaginary point -->
+    <!-- small_angle = asin( ( sin(bearing_to_azimuth) * nm_per_frame) / internal_distance -->
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <rad2deg>
+                    <asin>
+                        <div>
+                            <product>
+                                <sin><deg2rad><property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property></deg2rad></sin>
+                                <property>/velocities/tas-nm-per-frame</property>
+                            </product>
+                            <property>/instrumentation/dead-reckoner/internal/distance</property>
+                        </div>
+                    </asin>
+                </rad2deg>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/small-angle</output>
+    </filter>
+    
+    <!-- find the remaining angle -->
+    <!-- remaining_angle = 180 - bearing_to_azimuth - small_angle -->
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <difference>
+                        <value>180</value>
+                        <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                    </difference>
+                    <property>/instrumentation/dead-reckoner/internal/small-angle</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/remaining-angle</output>
+    </filter>
+    
+    <!-- find new bearing -->
+    <!-- new_bearing = 180 - remaining_angle -->
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <difference>
+                    <value>180</value>
+                    <property>/instrumentation/dead-reckoner/internal/remaining-angle</property>
+                </difference>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</output>
+    </filter>
+    
+    <!-- translate from bearing to azimuth back to an absolute azimuth value -->
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <expression>
+                <sum>
+                    <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
+                    <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                </sum>
+            </expression>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/azimuth</output>
+    </filter>
+
+    <!-- overwrite the calculated entries if nav/dme is valid -->
+    <!-- also set distance-adjust and azimuth-adjust to 0 if valid or if reset is pressed -->
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <equals>
+                    <property>/instrumentation/nav/data-is-valid</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                    <property>/instrumentation/nav/in-range</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+                	<value>0</value>
+                </equals>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <property>/instrumentation/nav/bearing-to-beacon-deg</property>
+                    <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
+                </sum>
+            </expression>
+            <period>
+                <min>0</min>
+                <max>360</max>
+            </period>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/azimuth</output>
+    </filter>
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <equals>
+                    <property>/instrumentation/adf/in-range</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+                	<value>1</value>
+                </equals>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <property>/instrumentation/adf/indicated-bearing-deg</property>
+                    <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
+                </sum>
+            </expression>
+            <period>
+                <min>0</min>
+                <max>360</max>
+            </period>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/azimuth</output>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <or>
+                    <and>
+                        <equals>
+                            <property>/instrumentation/nav/data-is-valid</property>
+                            <value>1</value>
+                        </equals>
+                        <equals>
+                            <property>/instrumentation/nav/in-range</property>
+                            <value>1</value>
+                        </equals>
+                        <equals>
+		                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+		                	<value>0</value>
+		                </equals>
+                    </and>
+                    <and>
+	                    <equals>
+		                    <property>/instrumentation/adf/in-range</property>
+		                    <value>1</value>
+		                </equals>
+		                <equals>
+		                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+		                	<value>1</value>
+		                </equals>
+		            </and>
+                    <equals>
+                        <property>/instrumentation/dead-reckoner/reset</property>
+                        <value>1</value>
+                    </equals>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output>/instrumentation/dead-reckoner/azimuth-adjust</output>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <equals>
+                    <property>/instrumentation/nav/data-is-valid</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                    <property>/instrumentation/nav/in-range</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                    <property>/instrumentation/nav/dme-in-range</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </enable>
+        <input>
+            <property>/instrumentation/dme/indicated-distance-nm</property>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/distance</output>
+    </filter>
+    
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <or>
+                    <and>
+                        <equals>
+                            <property>/instrumentation/nav/data-is-valid</property>
+                            <value>1</value>
+                        </equals>
+                        <equals>
+                            <property>/instrumentation/nav/in-range</property>
+                            <value>1</value>
+                        </equals>
+                        <equals>
+                            <property>/instrumentation/nav/dme-in-range</property>
+                            <value>1</value>
+                        </equals>
+                    </and>
+                    <equals>
+                        <property>/instrumentation/dead-reckoner/reset</property>
+                        <value>1</value>
+                    </equals>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output>/instrumentation/dead-reckoner/distance-adjust</output>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <equals>
+                    <property>/instrumentation/dead-reckoner/reset</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output>/instrumentation/dead-reckoner/internal/distance</output>
+    </filter>
+
+    <!-- final output -->
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>/instrumentation/dead-reckoner/internal/azimuth</input>
+        <output>/instrumentation/dead-reckoner/azimuth</output>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>/instrumentation/dead-reckoner/internal/distance</input>
+        <output>/instrumentation/dead-reckoner/distance</output>
+    </filter>
+
+</PropertyList>

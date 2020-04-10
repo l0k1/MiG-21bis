@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>radarAltimeterKnob.ac</path>
+
+    <animation>
+        <type>material</type>
+        <object-name>radarAltLimitSelectorFace</object-name>
+        <object-name>radarAltLimitSelectorKnob</object-name>
+        <emission>
+            <red>0.6</red>
+            <green>0.3</green>
+            <blue>0.3</blue>
+            <factor-prop>/controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
+	<animation>
+	    <type>rotate</type>
+	    <object-name>radarAltLimitSelectorKnob</object-name>
+	    <property>/instrumentation/altimeter/altitude-limit-select</property>
+        <interpolation>
+            <entry><ind> 0</ind><dep>  120</dep></entry>
+            <entry><ind> 1</ind><dep>   90</dep></entry>
+            <entry><ind> 2</ind><dep>   60</dep></entry>
+            <entry><ind> 3</ind><dep>   30</dep></entry>
+            <entry><ind> 4</ind><dep>    0</dep></entry>
+            <entry><ind> 5</ind><dep>  -30</dep></entry>
+            <entry><ind> 6</ind><dep>  -60</dep></entry>
+            <entry><ind> 7</ind><dep>  -90</dep></entry>
+            <entry><ind> 8</ind><dep> -120</dep></entry>
+        </interpolation>
+        <axis>
+            <x>1</x>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>radarAltLimitSelectorFace</object-name>
+        <object-name>radarAltLimitSelectorKnob</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/altimeter/altitude-limit-select</property>
+                <step>1</step>
+                <min>0</min>
+                <max>9</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.05</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/altimeter/altitude-limit-select</property>
+                <step>-1</step>
+                <min>0</min>
+                <max>9</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/altimeter/altitude-limit-select</property>
+                <step>1</step>
+                <min>0</min>
+                <max>9</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/altimeter/altitude-limit-select</property>
+                <step>-1</step>
+                <min>0</min>
+                <max>9</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+    </animation>
+
+	<!--lights-->
+
+	<text>
+	<name>LabelText</name>
+	<type type="string">literal</type>
+		<text type="string">Radio Altimeter</text>
+	<draw-text type="bool">true</draw-text>
+	<font>Helvetica.txf</font>
+		<character-size type="double">0.012</character-size>
+		<character-aspect-ratio type="double">1.0</character-aspect-ratio>
+	<axis-alignment>yz-plane</axis-alignment>
+	<max-height>0.2</max-height>
+	<max-width>0.07</max-width>
+	<font-resolution>
+		<width type="int">32</width>
+		<height type="int">32</height>
+	</font-resolution>
+	<alignment>center-center</alignment>
+	<offsets>
+		<x-m> 0.01</x-m>
+		<y-m> 0.0 </y-m>
+		<z-m> 0.0 </z-m>
+	</offsets>
+</text>
+
+<animation>
+	<type>material</type>
+		<object-name>LabelText</object-name>
+	<emission>
+		<red>1.0</red>
+		<green>0.8</green>
+		<blue>0.0</blue>
+	</emission>
+</animation>
+
+<animation>
+	<type>select</type>
+		<object-name>LabelText</object-name>
+	<condition>
+		<property>/sim/panel-hotspots</property>
+	</condition>
+</animation>
+
+</PropertyList>

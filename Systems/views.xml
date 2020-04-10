@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<view n="0">
+		<internal archive="y">true</internal>
+		<config>
+			<pitch-offset-deg>-10.0</pitch-offset-deg>
+			<x-offset-m archive="y"> 0.00</x-offset-m> <!-- right+/left- -->
+			<y-offset-m archive="y"> 1.2813</y-offset-m> <!-- up+/down- -->
+			<z-offset-m archive="y">-3.33</z-offset-m> <!-- back+/forward- -->
+			<default-field-of-view-deg type="double">75</default-field-of-view-deg>
+		</config>
+	</view>
+	
+	<view n="105">
+		<internal archive="y">true</internal>
+		<name>Radar</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-20.0</pitch-offset-deg>
+			<heading-offset-deg>356</heading-offset-deg>
+			<x-offset-m archive="y"> 0.0765</x-offset-m>
+			<y-offset-m archive="y"> 0.9245</y-offset-m>
+			<z-offset-m archive="y">-3.5500</z-offset-m>
+			<default-field-of-view-deg type="double">55</default-field-of-view-deg>
+		</config>
+	</view>
+
+	<view n="104">
+		<internal archive="y">true</internal>
+		<name>Bottom Panel</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-33.15</pitch-offset-deg>
+			<heading-offset-deg>26.81</heading-offset-deg>
+			<x-offset-m archive="y"> 0.1699</x-offset-m>
+			<y-offset-m archive="y"> 0.7192</y-offset-m>
+			<z-offset-m archive="y">-3.5500</z-offset-m>
+			<default-field-of-view-deg type="double">70</default-field-of-view-deg>
+		</config>
+	</view>
+
+	<view n="103">
+		<internal archive="y">true</internal>
+		<name>Right Front</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-11.11</pitch-offset-deg>
+			<heading-offset-deg>284</heading-offset-deg>
+			<x-offset-m archive="y"> 0.0279</x-offset-m>
+			<y-offset-m archive="y"> 0.7833</y-offset-m>
+			<z-offset-m archive="y">-3.5500</z-offset-m>
+			<default-field-of-view-deg type="double">70</default-field-of-view-deg>
+		</config>
+	</view>
+
+	<view n="102">
+		<internal archive="y">true</internal>
+		<name>Right Rear</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-7.2</pitch-offset-deg>
+			<heading-offset-deg>268</heading-offset-deg>
+			<x-offset-m archive="y"> 0.0279</x-offset-m>
+			<y-offset-m archive="y"> 0.7833</y-offset-m>
+			<z-offset-m archive="y">-3.2000</z-offset-m>
+			<default-field-of-view-deg type="double">70</default-field-of-view-deg>
+		</config>
+	</view>
+
+	<view n="101">
+		<internal archive="y">true</internal>
+		<name>Left Front</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-7.74</pitch-offset-deg>
+			<heading-offset-deg>70</heading-offset-deg>
+			<x-offset-m archive="y"> 0.0943</x-offset-m>
+			<y-offset-m archive="y"> 0.7783</y-offset-m>
+			<z-offset-m archive="y">-3.4500</z-offset-m>
+			<default-field-of-view-deg type="double">55</default-field-of-view-deg>
+		</config>
+	</view>
+
+	<!--<view n="102">
+		<internal archive="y">true</internal>
+		<name>livery screenshot</name>
+		<type>lookfrom</type>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<pitch-offset-deg>-3.3</pitch-offset-deg>
+			<heading-offset-deg>92.75</heading-offset-deg>
+			<x-offset-m archive="y"> 13.6783</x-offset-m>
+			<y-offset-m archive="y">  1.3667</y-offset-m>
+			<z-offset-m archive="y"> -0.9643</z-offset-m>
+			<default-field-of-view-deg type="double">55</default-field-of-view-deg>
+		</config>
+	</view>-->
+
+
+</PropertyList>
+

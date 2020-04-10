@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>fdsButton.ac</path>
+
+	<animation>
+		<type>pick</type>
+		<object-name>fdsButton</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>property-assign</command>
+				<property>/fdm/jsbsim/systems/gyro-compass/fds-button</property>
+				<value>1</value>
+			</binding>
+			<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>/fdm/jsbsim/systems/gyro-compass/fds-button</property>
+				<value>0</value>
+			</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>fdsButton</object-name>
+		<property>/fdm/jsbsim/systems/gyro-compass/fds-button</property>
+		<factor>0.001</factor>
+		<offset-m>0</offset-m>
+		<axis>
+			<x>-0.92</x>
+			<y>0.00</y>
+			<z>-0.08</z>
+		</axis>
+	</animation>
+	
+</PropertyList>

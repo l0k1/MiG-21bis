@@ -1,0 +1,452 @@
+<PropertyList>
+   
+   <name>fdm_tune_drag</name>
+   <modal>false</modal>
+   <layout>vbox</layout>
+   <width>450</width>
+   <height>565</height>
+   
+   <group>
+   
+      <text>
+         <label>Tune dat drag</label>
+         <x>10</x>
+         <y>540</y>
+      </text>
+      
+      <!-- slider 0 -->
+      
+      <text>
+         <x>10</x>
+         <y>520</y>
+         <label>Drag_chute</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>520</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/drag/chute</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>520</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/force/Drag_chute</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>495</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/drag/chute</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+
+      <!-- slider 1 -->
+      
+      <text>
+         <x>10</x>
+         <y>470</y>
+         <label>Drag_minimum</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>470</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/drag/minimum</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>470</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/force/Drag_minimum</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>445</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/drag/minimum</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 2 -->
+      
+      <text>
+         <x>10</x>
+         <y>420</y>
+         <label>Drag_alpha</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>420</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/drag/alpha</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>420</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/force/Drag_alpha</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>395</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/drag/alpha</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 3 -->
+      
+      <text>
+         <x>10</x>
+         <y>370</y>
+         <label>Drag_induced</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>370</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/drag/induced</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>370</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/force/Drag_induced</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>345</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/drag/induced</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 4 -->
+      
+      <text>
+         <x>10</x>
+         <y>320</y>
+         <label>Drag_mach</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>320</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/drag/mach</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>320</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/force/Drag_mach</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>295</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/drag/mach</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 5 -->
+      
+      <text>
+         <x>10</x>
+         <y>270</y>
+         <label>Drag_beta</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>270</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/drag/beta</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>270</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/force/Drag_beta</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>245</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/drag/beta</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 6 -->
+      
+      <text>
+         <x>10</x>
+         <y>220</y>
+         <label>Drag_elevator</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>220</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/drag/elevator</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>220</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/force/Drag_elevator</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>195</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/drag/elevator</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 7 -->
+      
+      <text>
+         <x>10</x>
+         <y>170</y>
+         <label>Drag_gear</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>170</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/drag/gear</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>170</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/force/Drag_gear</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>145</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/drag/gear</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 8 -->
+      
+      <text>
+         <x>10</x>
+         <y>120</y>
+         <label>Drag_flap</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>120</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/drag/flap</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>120</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/force/Drag_flap</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>95</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/drag/flap</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- slider 9 -->
+      
+      <text>
+         <x>10</x>
+         <y>70</y>
+         <label>Drag_speedbrake</label>
+      </text>
+      
+      <text>
+         <x>245</x>
+         <y>70</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/tune/drag/speedbrake</property>
+         <live>true</live>
+      </text>
+      
+      <text>
+         <x>400</x>
+         <y>70</y>
+         <label>-9.9999</label>
+         <format>%-0.4f</format>
+         <property>/fdm/jsbsim/aero/force/Drag_speedbrake</property>
+         <live>true</live>
+      </text>
+      
+      <slider>
+         <vertical>false</vertical>
+         <x>10</x>
+         <y>45</y>
+         <width>425</width>
+         <height>25</height>
+         <fraction>0</fraction>
+         <property>/fdm/jsbsim/tune/drag/speedbrake</property>
+         <min>-2</min>
+         <max>2</max>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </slider>
+      
+      <!-- buttons -->
+      
+      <button>
+         <legend>Apply</legend>
+         <y>10</y>
+         <x>10</x>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+      </button>
+      
+      <button>
+         <legend>Close</legend>
+         <y>10</y>
+         <x>400</x>
+         <binding>
+            <command>dialog-apply</command>
+         </binding>
+         <binding>
+            <command>dialog-close</command>
+         </binding>
+      </button>
+   
+   </group>
+
+</PropertyList>

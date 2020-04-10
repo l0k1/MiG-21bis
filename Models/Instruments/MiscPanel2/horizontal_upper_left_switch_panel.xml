@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>horizontal_upper_left_switches.ac</path>
+
+    <animation>
+        <type>material</type>
+          <object-name>aileronBoosterLabel</object-name>
+          <object-name>secondReheatOffLabel</object-name>
+          <object-name>secondReheatLabel</object-name>
+        <emission>
+           <red>0.6</red>
+           <green>0.3</green>
+           <blue>0.3</blue>
+          <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>secondReheatSwitch</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<button>5</button>
+			<repeatable>false</repeatable>
+	  		<binding>
+	  			<command>property-toggle</command>
+	  			<property>/fdm/jsbsim/propulsion/clr</property>
+	  		</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>secondReheatSwitch</object-name>
+		<type>rotate</type>
+		<property>/fdm/jsbsim/propulsion/clr</property>
+		<factor>-60</factor>
+		<offset-deg>30</offset-deg>
+		<center>
+			<x-m> 0.005982</x-m>
+			<y-m> 0.007903</y-m>
+			<z-m>-0.008889</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>aileronBoosterSwitch</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<button>5</button>
+			<repeatable>false</repeatable>
+	  		<binding>
+	  			<command>property-toggle</command>
+	  			<property>/fdm/jsbsim/electric/switches/lhfsp/aileron-booster</property>
+	  		</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>aileronBoosterSwitch</object-name>
+		<type>rotate</type>
+		<property>/fdm/jsbsim/electric/switches/lhfsp/aileron-booster</property>
+		<factor>-60</factor>
+		<offset-deg>30</offset-deg>
+		<center>
+			<x-m> 0.005982</x-m>
+			<y-m>-0.018547</y-m>
+			<z-m>-0.008889</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+</PropertyList>

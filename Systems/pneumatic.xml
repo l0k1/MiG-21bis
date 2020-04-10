@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<!-- pressure is in bars -->
+
+<system name="pneumatic">
+
+    <channel name="sources" execrate="12">
+		<fcs_function name="trash/pneumatic/sources/bottle-kgfcm">
+			<function>
+				<sum>
+					<sum>
+						<ifthen>
+							<and>
+								<gt>
+									<property>propulsion/engine[0]/n1</property>
+									<value>20</value>
+								</gt>
+								<lt>
+									<property>pneumatic/sources/bottle-kgfcm</property>
+									<value>130</value>
+								</lt>
+							</and>
+							<value>0.006</value>
+							<value>0.00</value>
+						</ifthen>
+						<property>pneumatic/sources/drain-kgfcm</property>
+					</sum>
+					<property>pneumatic/sources/bottle-kgfcm</property>
+				</sum>
+			</function>
+			<clipto>
+				<min>0.0</min>
+				<max>200.0</max>
+			</clipto>
+			<output>pneumatic/sources/bottle-kgfcm</output>
+		</fcs_function>
+
+		<!-- the chute is a singleshot drain, so turn it off after it's been drained from the bottle -->
+		<switch name="trash/pneumatic-chute/drain">
+			<default value="systems/chute/pneumatic-drain"/>
+			<test logic="AND" value="0">
+				pneumatic/drain/chute gt 2
+			</test>
+			<output>systems/chute/pneumatic-drain</output>
+		</switch>
+
+    </channel>
+	
+	<channel name="drain">
+	<!-- /controls/gear/requested-setting is 1, and gear/gear-pos-norm > 0.6, drain pneumatic -->
+		<fcs_function name="trash/pneumatic/drain/wheel-stop">
+			<function>
+				<ifthen>
+					<and>
+						<eq>
+							<property>/controls/gear/requested-setting</property>
+							<value>1</value>
+						</eq>
+						<lt>
+							<property>gear/gear-pos-norm</property>
+							<value>0.6</value>
+						</lt>
+					</and>
+					<value>0.05</value>
+					<value>0.00</value>
+				</ifthen>
+			</function>
+			<output>pneumatic/drain/wheel-stop</output>
+		</fcs_function>
+
+		<pure_gain name="pneumatic/drain/chute">
+			<input>systems/chute/pneumatic-drain</input>
+			<gain>40.0</gain>
+		</pure_gain>
+
+		<summer name="pneumatic/sources/drain-kgfcm">
+			<input>-pneumatic/drain/wheel-stop</input>
+			<input>-pneumatic/drain/chute</input>
+		</summer>
+	</channel>
+    
+</system>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>iffsel.ac</path>
+
+	
+	<!-- channel select knob -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>iffKnob</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.3</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/iff/channel-selection</property>
+				<step>1</step>
+				<min>1</min>
+				<max>9</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.3</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/iff/channel-selection</property>
+				<step>-1</step>
+				<min>1</min>
+				<max>9</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>iffKnob</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/iff/channel-selection</property>
+		<factor>-15</factor>
+		<offset-deg></offset-deg>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>iffDisplay</object-name>
+		<property>/instrumentation/iff/channel-selection</property>
+		<bias>-0.000001</bias>
+		<factor>0.1</factor>
+		<step>1.00</step>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+		</axis>
+	</animation>
+
+	<animation>
+			<type>material</type>
+			<object-name>iffDisplay</object-name>
+			<emission>
+				 <red>0.6</red>
+				 <green>0.3</green>
+				 <blue>0.3</blue>
+				<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			</emission> 
+	</animation>
+
+</PropertyList>

@@ -1,0 +1,757 @@
+<?xml version="1.0"?>
+
+<!-- this is for all stuff that needs to happen near-instantly, such as trigger handling -->
+
+<system name="payloads">
+
+	<property value="0">systems/armament/GSh-23-jammed</property>
+	<property value="0">systems/armament/GSh-23-trigger</property>
+	<property value="0">systems/armament/rockets/current-count-left</property>
+	<property value="0">systems/armament/rockets/current-count-right</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[0]</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[1]</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[2]</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[3]</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[4]</property>
+	<property value="22">systems/armament/pylon-heating/pylon-temp[5]</property>
+
+    <channel name="GSh-23">
+
+    	<!--
+    		to fire:
+    		the trigger needs to be pulled
+    		there needs to be ammo (handled by submodels)
+    		it can't be jammed
+
+    		for jamming:
+    		the trigger needs to be pulled
+    		there needs to be ammo
+    		probability > 0.005
+
+    		OR
+
+    		it was already jammed
+    	-->
+    
+    	<!-- cannon jam probability -->
+    	<fcs_function name="systems/armament/GSh-23-jam-probability">
+			<function>
+				<abs>
+					<urandom/>
+				</abs>
+			</function>
+		</fcs_function>
+		
+		<!-- check if it has jammed -->
+		<!-- jammed can be set to 0 via payloads.nas unjam() function -->
+		<!--<switch name="systems/armament/GSh-23-jammed-stage-1">
+			<default value="0"/>
+			<test logic="OR" value="1">
+				systems/armament/GSh-23-jammed == 1
+				
+			</test>
+		</switch>-->
+
+		<switch name="systems/armament/GSh-23-jammed-stage-1">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/fdm/jsbsim/systems/armament/GSh-23-trigger == 1
+				/ai/submodels/submodel[5]/count gt 0
+				/fdm/jsbsim/systems/armament/GSh-23-jam-probability lt 0.0008
+			</test>
+		</switch>
+
+		<switch name="trash/systems/armament/GSh-23-jammed">
+			<default value="0"/>
+			<test logic="OR" value="1">
+				/fdm/jsbsim/systems/armament/GSh-23-jammed == 1
+				/fdm/jsbsim/systems/armament/GSh-23-jammed-stage-1 == 1
+			</test>
+			<output>systems/armament/GSh-23-jammed</output>
+		</switch>
+    
+        <!-- trigger propogation for the cannon. -->
+        
+        <switch name="systems/armament/GSh-23-trigger">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                /controls/armament/trigger == 1
+                electric/output/gun gt 33
+                /fdm/jsbsim/systems/armament/GSh-23-jammed == 0
+            </test>
+        </switch>
+
+        <!-- gun ready light -->
+        <switch name="systems/armament/GSh-23-ready">
+        	<default value="0"/>
+        	<test logic="AND" value="1">
+        		electric/output/gun gt 33
+        		/ai/submodels/submodel[5]/count gt 0
+        	</test>
+        </switch>
+    
+    </channel>
+    
+    <channel name="Countermeasures">
+	    
+	    <!-- 
+	    	how this is going to work:
+	    	flare trigger is pulled
+	    	figure out which flare pod to fire flares from
+	    	if there are flares, set the mp property
+	    	propogate trigger to that pod
+	    	fire 4 from said pod
+	    	when the 4 have been fired (1.5 seconds-ish), set mp property to 0
+	    	also set trigger to 0
+	    -->
+	    
+	    <!-- flare trigger property = /controls/armament/flare-trigger -->
+	    <!-- chaff trigger property = /controls/armament/chaff-trigger -->
+	
+		<!-- flares first -->
+		
+		<!-- figure out which pod to fire from -->
+		
+		<switch name="systems/armament/cm/flare-trigger-0">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/controls/armament/flare-trigger == 1
+				/ai/submodels/submodel[0]/count gt 0
+				/ai/submodels/submodel[0]/count ge /ai/submodels/submodel[1]/count
+				/fdm/jsbsim/systems/armament/cm/flare-firing-0 ne 1
+				/fdm/jsbsim/systems/armament/cm/flare-firing-1 ne 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/flare-trigger-1">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/controls/armament/flare-trigger == 1
+				/ai/submodels/submodel[1]/count gt 0
+				/ai/submodels/submodel[0]/count lt /ai/submodels/submodel[1]/count
+				/fdm/jsbsim/systems/armament/cm/flare-firing-0 ne 1
+				/fdm/jsbsim/systems/armament/cm/flare-firing-1 ne 1
+			</test>
+		</switch>
+		
+		<!-- get count of flares from that pod at the time the trigger is propogated -->
+		
+		<switch name="systems/armament/cm/flares-count-0">
+			<default value="systems/armament/cm/flares-count-0"/>
+			<test logic="AND" value="/ai/submodels/submodel[0]/count">
+				/fdm/jsbsim/systems/armament/cm/flare-trigger-0 == 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/flares-count-1">
+			<default value="systems/armament/cm/flares-count-1"/>
+			<test logic="AND" value="/ai/submodels/submodel[1]/count">
+				/fdm/jsbsim/systems/armament/cm/flare-trigger-1 == 1
+			</test>
+		</switch>
+		
+		<fcs_function name="trash/armament/cm/flares-final-count-0">
+			<function>
+				<max>
+					<difference>
+						<property>systems/armament/cm/flares-count-0</property>
+						<value>2</value>
+					</difference>
+					<value>0</value>
+				</max>
+			</function>
+			<output>systems/armament/cm/flares-final-count-0</output>
+		</fcs_function>
+		
+		<fcs_function name="/trash/armament/cm/flares-final-count-1">
+			<function>
+				<max>
+					<difference>
+						<property>systems/armament/cm/flares-count-1</property>
+						<value>2</value>
+					</difference>
+					<value>0</value>
+				</max>
+			</function>
+			<output>systems/armament/cm/flares-final-count-1</output>
+		</fcs_function>
+		
+		<!-- make sure the trigger is on if number of flares greater than final count -->
+		
+		<switch name="systems/armament/cm/flare-firing-0">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/ai/submodels/submodel[0]/count gt systems/armament/cm/flares-final-count-0
+				/ai/submodels/submodel[0]/count ne 0
+				/fdm/jsbsim/systems/armament/cm/flares-count-0 ne 0
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/flare-firing-1">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/ai/submodels/submodel[1]/count gt systems/armament/cm/flares-final-count-1
+				/ai/submodels/submodel[1]/count ne 0
+				/fdm/jsbsim/systems/armament/cm/flares-count-1 ne 0
+			</test>
+		</switch>
+		
+		<!-- propogate mp property -->
+		<!-- needs to be aliased in the set file -->
+		
+		<switch name="systems/armament/cm/flares-mp-value">
+			<default value="0"/>
+			<test logic="OR" value="/sim/time/elapsed-sec">
+				systems/armament/cm/flare-firing-0 == 1
+				systems/armament/cm/flare-firing-1 == 1
+			</test>
+		</switch>
+		
+		<!-- now chaff -->
+		
+		<!-- figure out which pod to fire from -->
+		
+		<switch name="systems/armament/cm/chaff-trigger-0">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/controls/armament/chaff-trigger == 1
+				/ai/submodels/submodel[2]/count gt 0
+				/ai/submodels/submodel[2]/count ge /ai/submodels/submodel[3]/count
+				/fdm/jsbsim/systems/armament/cm/chaff-firing-0 ne 1
+				/fdm/jsbsim/systems/armament/cm/chaff-firing-1 ne 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/chaff-trigger-1">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/controls/armament/chaff-trigger == 1
+				/ai/submodels/submodel[3]/count gt 0
+				/ai/submodels/submodel[2]/count lt /ai/submodels/submodel[3]/count
+				/fdm/jsbsim/systems/armament/cm/chaff-firing-0 ne 1
+				/fdm/jsbsim/systems/armament/cm/chaff-firing-1 ne 1
+			</test>
+		</switch>
+		
+		<!-- get count of chaff from that pod at the time the trigger is propogated -->
+		
+		<switch name="systems/armament/cm/chaff-count-0">
+			<default value="systems/armament/cm/chaff-count-0"/>
+			<test logic="AND" value="/ai/submodels/submodel[2]/count">
+				/fdm/jsbsim/systems/armament/cm/chaff-trigger-0 == 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/chaff-count-1">
+			<default value="systems/armament/cm/chaff-count-1"/>
+			<test logic="AND" value="/ai/submodels/submodel[3]/count">
+				/fdm/jsbsim/systems/armament/cm/chaff-trigger-1 == 1
+			</test>
+		</switch>
+		
+		<fcs_function name="/trash/armament/cm/chaff-final-count-0">
+			<function>
+				<max>
+					<difference>
+						<property>systems/armament/cm/chaff-count-0</property>
+						<value>1</value>
+					</difference>
+					<value>0</value>
+				</max>
+			</function>
+			<output>systems/armament/cm/chaff-final-count-0</output>
+		</fcs_function>
+		
+		<fcs_function name="/trash/systems/armament/cm/chaff-final-count-1">
+			<function>
+				<max>
+					<difference>
+						<property>systems/armament/cm/chaff-count-1</property>
+						<value>1</value>
+					</difference>
+					<value>0</value>
+				</max>
+			</function>
+			<output>systems/armament/cm/chaff-final-count-1</output>
+		</fcs_function>
+		
+		<!-- make sure the trigger is on if number of chaff greater than final count -->
+		
+		<switch name="systems/armament/cm/chaff-firing-0">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/ai/submodels/submodel[2]/count gt systems/armament/cm/chaff-final-count-0
+				/ai/submodels/submodel[2]/count ne 0
+				/fdm/jsbsim/systems/armament/cm/chaff-count-0 ne 0
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/cm/chaff-firing-1">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				/ai/submodels/submodel[3]/count gt systems/armament/cm/chaff-final-count-1
+				/ai/submodels/submodel[3]/count ne 0
+				/fdm/jsbsim/systems/armament/cm/chaff-count-1 ne 0
+			</test>
+		</switch>
+		
+		<!-- propogate mp property -->
+		<!-- needs to be aliased in the set file -->
+		
+		<switch name="systems/armament/cm/chaff-mp-value">
+			<default value="0"/>
+			<test logic="OR" value="/sim/time/elapsed-sec">
+				systems/armament/cm/chaff-firing-0 == 1
+				systems/armament/cm/chaff-firing-1 == 1
+			</test>
+		</switch>
+	</channel>
+	
+	<channel name="S-5 Rockets">
+		<!--
+		handles rocket firing out of UB-16 and UB-32 pods.
+		trigger should be at /controls/armament/rocket-trigger
+		rocket trigger will need to be reset when main trigger is released.
+		how many rockets to shoot should be at /controls/armament/rocket-setting
+		assumes rockets are submodels 22, 23, 24, and 25, going from left to right on the pylons
+		assumes rocket submodel counts are correct.
+		does not do drugs.
+		-->
+		
+		<!-- switches are using <output> instead of 'name' so multiple switches can write to the same property -->
+		<switch name="trash/systems/armament/rockets/trigger-state-0">
+			<default value="systems/armament/rockets/trigger-state"/>
+			<test logic="AND" value="2">
+				/controls/armament/rocket-trigger == 1
+				systems/armament/rockets/trigger-state == 1
+			</test>
+			<output>systems/armament/rockets/trigger-state</output>
+		</switch>
+		
+		<switch name="trash/systems/armament/rockets/trigger-state-1">
+			<default value="systems/armament/rockets/trigger-state"/>
+			<test logic="AND" value="1">
+				/controls/armament/rocket-trigger == 1
+				systems/armament/rockets/trigger-state == 0
+			</test>
+			<output>systems/armament/rockets/trigger-state</output>
+		</switch>
+		
+		<switch name="trash/systems/armament/rockets/trigger-state-2">
+			<default value="systems/armament/rockets/trigger-state"/>
+			<test logic="AND" value="0">
+				/controls/armament/rocket-trigger == 0
+			</test>
+			<output>systems/armament/rockets/trigger-state</output>
+		</switch>
+		
+		<!-- left side rockets -->
+		
+		<fcs_function name="/trash/systems/armament/rockets/current-count-left">
+			<function>
+				<difference>
+					<property>systems/armament/rockets/max-count-left</property>
+					<property>/controls/armament/rocket-setting</property>
+				</difference>
+			</function>
+			<output>systems/armament/rockets/current-count-left</output>
+		</fcs_function>
+		
+		<fcs_function name="/trash/systems/armament/rockets/total-count-left">
+			<function>
+				<sum>
+					<property>/ai/submodels/submodel[23]/count</property>
+					<property>/ai/submodels/submodel[22]/count</property>
+				</sum>
+			</function>
+			<output>systems/armament/rockets/total-count-left</output>
+		</fcs_function>
+		
+		<switch name="systems/armament/rockets/max-count-left">
+			<default value="systems/armament/rockets/max-count-left"/>
+			<test logic="AND" value="systems/armament/rockets/total-count-left">
+				systems/armament/rockets/trigger-state == 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/rockets/inside-left-trigger">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/armament/rockets/trigger-state gt 0
+				/ai/submodels/submodel[23]/count gt 0
+				electric/output/msl-rgm-rkt-lch gt 32
+				electric/output/pwr-to-pylons[1] gt 32
+				systems/armament/rockets/current-count-left lt systems/armament/rockets/total-count-left
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/rockets/outside-left-trigger">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/armament/rockets/trigger-state gt 0
+				/ai/submodels/submodel[23]/count == 0
+				/ai/submodels/submodel[22]/count gt 0
+				electric/output/msl-rgm-rkt-lch gt 32
+				electric/output/pwr-to-pylons[0] gt 32
+				systems/armament/rockets/current-count-left lt systems/armament/rockets/total-count-left
+			</test>
+		</switch>
+		
+		<!-- right side rockets -->
+		
+		<fcs_function name="/trash/systems/armament/rockets/current-count-right">
+			<function>
+				<difference>
+					<property>systems/armament/rockets/max-count-right</property>
+					<property>/controls/armament/rocket-setting</property>
+				</difference>
+			</function>
+			<output>systems/armament/rockets/current-count-right</output>
+		</fcs_function>
+		
+		<fcs_function name="/trash/systems/armament/rockets/total-count-right">
+			<function>
+				<sum>
+					<property>/ai/submodels/submodel[24]/count</property>
+					<property>/ai/submodels/submodel[25]/count</property>
+				</sum>
+			</function>
+			<output>systems/armament/rockets/total-count-right</output>
+		</fcs_function>
+		
+		<switch name="systems/armament/rockets/max-count-right">
+			<default value="systems/armament/rockets/max-count-right"/>
+			<test logic="AND" value="systems/armament/rockets/total-count-right">
+				systems/armament/rockets/trigger-state == 1
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/rockets/inside-right-trigger">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/armament/rockets/trigger-state gt 0
+				/ai/submodels/submodel[24]/count gt 0
+				electric/output/msl-rgm-rkt-lch gt 32
+				electric/output/pwr-to-pylons[3] gt 32
+				systems/armament/rockets/current-count-right lt systems/armament/rockets/total-count-right
+			</test>
+		</switch>
+		
+		<switch name="systems/armament/rockets/outside-right-trigger">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/armament/rockets/trigger-state gt 0
+				/ai/submodels/submodel[24]/count == 0
+				/ai/submodels/submodel[25]/count gt 0
+				electric/output/msl-rgm-rkt-lch gt 32
+				electric/output/pwr-to-pylons[4] gt 32
+				systems/armament/rockets/current-count-right lt systems/armament/rockets/total-count-right
+			</test>
+		</switch>
+		
+	</channel>
+	
+	<channel name="pylon-heating" execrate="12">
+	
+		<!-- pylon 0 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[0]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[0]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[0]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[0]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[0]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[0]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.00166</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
+							</product>
+						</pow>
+					</product>
+				</sum>	
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[0]</output>
+		</fcs_function>
+		
+		<!-- pylon 1 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[1]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[1]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[1]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[1]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[1]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[1]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.00166</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
+							</product>
+						</pow>
+					</product>
+				</sum>	
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[1]</output>
+		</fcs_function>
+		
+		<!-- pylon 2 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[2]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[2]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[2]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[2]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[2]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[2]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.00166</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
+							</product>
+						</pow>
+					</product>
+				</sum>	
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[2]</output>
+		</fcs_function>
+		
+		<!-- pylon 3 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[3]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[3]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[3]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[3]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[3]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[3]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.00166</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
+							</product>
+						</pow>
+					</product>
+				</sum>	
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[3]</output>
+		</fcs_function>
+		
+		<!-- pylon 4 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[4]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[4]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[4]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[4]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[4]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[4]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.00166</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
+							</product>
+						</pow>
+					</product>
+				</sum>	
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[4]</output>
+		</fcs_function>
+		
+		<!-- pylon 5 -->
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/ambient-temp[5]">
+			<function>
+				<ifthen>
+					<gt>
+						<property>electric/output/msl-rgm-gr-heat</property>
+						<value>32</value>
+					</gt>
+					<value>30</value>
+					<property>/environment/temperature-degc</property>
+				</ifthen>
+			</function>
+			<output>systems/armament/pylon-heating/ambient-temp[5]</output>
+		</fcs_function>
+		
+		<fcs_function name="trash/systems/armament/pylon-heating/pylon-temp[5]">
+			<function>
+				<!-- new_temp = ambient_temp + (old_temp - ambient_temp) * e ^ (-0.000333 * delta_time aka 0.1) -->
+				<sum>
+					<property>systems/armament/pylon-heating/ambient-temp[5]</property>
+					<product>
+						<difference>
+							<property>systems/armament/pylon-heating/pylon-temp[5]</property>
+							<property>systems/armament/pylon-heating/ambient-temp[5]</property>
+						</difference>
+						<pow>
+							<value>2.71828</value>
+							<product>
+								<value>-0.00166</value><!-- this value is the magic -->
+								<value>0.1</value><!-- need to be retuned if execrate changes -->
+								<!-- random value between 0.995 and 1.005 -->
+								<sum>
+									<quotient>
+										<sum>
+											<urandom/>
+											<value>1</value>
+										</sum>
+										<value>200</value>
+									</quotient>
+									<value>0.995</value>
+								</sum>
+							</product>
+						</pow>
+					</product>
+				</sum>
+			</function>
+			<output>systems/armament/pylon-heating/pylon-temp[5]</output>
+		</fcs_function>
+		
+	</channel>
+</system>

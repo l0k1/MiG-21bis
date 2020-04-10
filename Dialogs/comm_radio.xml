@@ -1,0 +1,226 @@
+<PropertyList>
+
+ <name>comm_radio</name>
+ <modal>false</modal>
+ <layout>vbox</layout>
+ <width>260</width>
+ <height>390</height>
+  <group>
+   <text>
+    <label>Comm Radio Presets</label>
+	<x>60</x>
+	<y>365</y>
+  </text>
+  
+  <!-- ********************************* COMM Presets  ************************************ -->
+  
+  <text>
+    <label>Comm Presets</label>
+	<x>75</x>
+   <y>345</y>
+  </text>
+  
+  <input>
+   <x>10</x>
+   <y>320</y>
+   <width>75</width>
+   <height>25</height>
+   <label>01</label>
+   <property>/instrumentation/comm-radio/preset[0]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>320</y>
+   <width>75</width>
+   <height>25</height>
+   <label>02</label>
+   <property>/instrumentation/comm-radio/preset[1]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>290</y>
+   <width>75</width>
+   <height>25</height>
+   <label>03</label>
+   <property>/instrumentation/comm-radio/preset[2]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>290</y>
+   <width>75</width>
+   <height>25</height>
+   <label>04</label>
+   <property>/instrumentation/comm-radio/preset[3]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>260</y>
+   <width>75</width>
+   <height>25</height>
+   <label>05</label>
+   <property>/instrumentation/comm-radio/preset[4]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>260</y>
+   <width>75</width>
+   <height>25</height>
+   <label>06</label>
+   <property>/instrumentation/comm-radio/preset[5]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>230</y>
+   <width>75</width>
+   <height>25</height>
+   <label>07</label>
+   <property>/instrumentation/comm-radio/preset[6]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>230</y>
+   <width>75</width>
+   <height>25</height>
+   <label>08</label>
+   <property>/instrumentation/comm-radio/preset[7]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>200</y>
+   <width>75</width>
+   <height>25</height>
+   <label>09</label>
+   <property>/instrumentation/comm-radio/preset[8]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>200</y>
+   <width>75</width>
+   <height>25</height>
+   <label>10</label>
+   <property>/instrumentation/comm-radio/preset[9]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>170</y>
+   <width>75</width>
+   <height>25</height>
+   <label>11</label>
+   <property>/instrumentation/comm-radio/preset[10]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>170</y>
+   <width>75</width>
+   <height>25</height>
+   <label>12</label>
+   <property>/instrumentation/comm-radio/preset[11]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>140</y>
+   <width>75</width>
+   <height>25</height>
+   <label>13</label>
+   <property>/instrumentation/comm-radio/preset[12]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>140</y>
+   <width>75</width>
+   <height>25</height>
+   <label>14</label>
+   <property>/instrumentation/comm-radio/preset[13]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>110</y>
+   <width>75</width>
+   <height>25</height>
+   <label>15</label>
+   <property>/instrumentation/comm-radio/preset[14]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>110</y>
+   <width>75</width>
+   <height>25</height>
+   <label>16</label>
+   <property>/instrumentation/comm-radio/preset[15]</property>
+  </input>
+  
+  <input>
+   <x>10</x>
+   <y>80</y>
+   <width>75</width>
+   <height>25</height>
+   <label>17</label>
+   <property>/instrumentation/comm-radio/preset[16]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>80</y>
+   <width>75</width>
+   <height>25</height>
+   <label>18</label>
+   <property>/instrumentation/comm-radio/preset[17]</property>
+  </input>
+  
+    <input>
+   <x>10</x>
+   <y>50</y>
+   <width>75</width>
+   <height>25</height>
+   <label>19</label>
+   <property>/instrumentation/comm-radio/preset[18]</property>
+  </input>
+  <input>
+   <x>130</x>
+   <y>50</y>
+   <width>75</width>
+   <height>25</height>
+   <label>20</label>
+   <property>/instrumentation/comm-radio/preset[19]</property>
+  </input>
+  
+  <!-- ********************************* CLOSE BUTTON ************************************* -->
+  
+   <button>
+    <legend>Apply</legend>
+	<y>10</y>
+	<x>30</x>
+    <binding>
+     <command>dialog-apply</command>
+    </binding>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/comm[0]/radio-tune-update</property>
+    </binding>
+   </button>
+  
+  <button>
+    <legend>Close</legend>
+	<y>10</y>
+	<x>150</x>
+    <binding>
+     <command>dialog-apply</command>
+    </binding>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/comm[0]/radio-tune-update</property>
+    </binding>
+	 <binding>
+     <command>dialog-close</command>
+    </binding>
+   </button>
+  
+  </group>
+
+</PropertyList>

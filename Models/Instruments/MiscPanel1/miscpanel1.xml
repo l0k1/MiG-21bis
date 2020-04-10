@@ -1,0 +1,275 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>miscPanel1.ac</path>
+
+	<!--lights-->
+	
+	<animation>
+			<type>material</type>
+				<object-name>miscPanel1ShutConeLabel</object-name>
+				<object-name>miscPanel1HltHeatLabel</object-name>
+				<object-name>miscPanel1ManLabel</object-name>
+				<object-name>miscPanel1HltHeatLabel2</object-name>
+				<object-name>miscPanel1RSBNLabel</object-name>
+				<object-name>miscPanel1OffLabel</object-name>
+				<object-name>miscPanel1ARCLabel</object-name>
+			<emission>
+				 <red>0.6</red>
+				 <green>0.3</green>
+				 <blue>0.3</blue>
+				<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			</emission> 
+	</animation>
+	
+	
+	
+	<!-- picks and translations -->
+
+
+	<!-- <animation>
+		<type>pick</type>
+		<object-name>miscPanel1HltHeatFastButton</object-name>
+		<action>
+			<button>0</button>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/misc-panel-1/fast-heat</property>
+				<value>1</value>
+			</binding>
+			<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>/instrumentation/misc-panel-1/fast-heat</property>
+				<value>0</value>
+			</binding>
+			</mod-up>
+		</action>
+	</animation> -->
+
+	<animation>
+		<type>translate</type>
+		<object-name>miscPanel1HltHeatFastButton</object-name>
+		<property>/instrumentation/misc-panel-1/fast-heat</property>
+		<factor>0.001</factor>
+		<offset-m>0</offset-m>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>miscPanel1RsbnArcSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>miscPanel1RsbnArcSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+		<factor>30</factor>
+		<offset-deg>-15</offset-deg>
+		<center>
+			<x-m>-0.00451</x-m>
+			<y-m>-0.00809</y-m>
+			<z-m>-0.05706</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- <animation>
+		<type>pick</type>
+		<object-name>miscPanel1HltHeatAutoSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/misc-panel-1/auto-off</property>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/misc-panel-1/auto-off</property>
+			</binding>
+		</action>
+	</animation> -->
+
+	<animation>
+		<object-name>miscPanel1HltHeatAutoSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/misc-panel-1/auto-off</property>
+		<factor>30</factor>
+		<offset-deg>-15</offset-deg>
+		<center>
+			<x-m>-0.00451</x-m>
+			<y-m> 0.01165</y-m>
+			<z-m>-0.02330</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>miscPanel1NozzleSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/fdm/jsbsim/systems/air-intake/cone-auto-man</property>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/fdm/jsbsim/systems/air-intake/cone-auto-man</property>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>miscPanel1NozzleSwitch</object-name>
+		<type>rotate</type>
+		<property>/fdm/jsbsim/systems/air-intake/cone-auto-man</property>
+		<factor>30</factor>
+		<offset-deg>-15</offset-deg>
+		<center>
+			<x-m>-0.00451</x-m>
+			<y-m> 0.01480</y-m>
+			<z-m> 0.04237</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- <animation>
+		<type>pick</type>
+		<object-name>miscPanel1HltHeatSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/misc-panel-1/hlt-heat-rqst</property>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/misc-panel-1/hlt-heat-rqst</property>
+			</binding>
+		</action>
+	</animation> -->
+
+	<animation>
+		<object-name>miscPanel1HltHeatSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/misc-panel-1/hlt-heat</property>
+		<factor>45</factor>
+		<offset-deg></offset-deg>
+		<center>
+			<x-m>-0.00451</x-m>
+			<y-m>-0.00392</y-m>
+			<z-m> 0.04237</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- <animation>
+		<type>pick</type>
+		<object-name>miscPanel1SwitchGuard</object-name>
+		<object-name>miscPanel1Chain</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/misc-panel-1/guard</property>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/instrumentation/misc-panel-1/guard</property>
+			</binding>
+		</action>
+	</animation> -->
+
+	<animation>
+		<object-name>miscPanel1SwitchGuard</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/misc-panel-1/guard</property>
+		<factor>-80</factor>
+		<offset-deg></offset-deg>
+		<center>
+			<x-m>-0.00116</x-m>
+			<y-m>-0.00377</y-m>
+			<z-m> 0.05630</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<object-name>miscPanel1Chain</object-name>
+		<type>translate</type>
+		<property>/instrumentation/misc-panel-1/guard</property>
+		<factor>0.019</factor>
+		<axis>
+			<x>-0.579</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+
+</PropertyList>

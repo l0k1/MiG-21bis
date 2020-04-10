@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>lowerLightBank.ac</path>
+
+	<!--dimmer knob-->
+
+	<animation>
+        <type>rotate</type>
+        <object-name>dimmerKnob2</object-name>
+        <property>instrumentation/warning-lights/dimmer[2]</property>
+        <interpolation>
+            <entry>
+                <ind> 	0.0</ind>
+                <dep>   0.0</dep>
+            </entry>
+            <entry>
+                <ind>  1.0</ind>
+                <dep> 330.0</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m> 0.00557</x-m>
+            <y-m>-0.03056</y-m>
+            <z-m>-0.03256</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>dimmerKnob2</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.05</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[2]</property>
+                <step>0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.05</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[2]</property>
+                <step>-0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[2]</property>
+                <step>0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[2]</property>
+                <step>-0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>dimmerKnob3</object-name>
+        <property>instrumentation/warning-lights/dimmer[3]</property>
+        <interpolation>
+            <entry>
+                <ind> 	0.0</ind>
+                <dep>   0.0</dep>
+            </entry>
+            <entry>
+                <ind>  1.0</ind>
+                <dep> 330.0</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m> 0.00557</x-m>
+            <y-m> 0.01689</y-m>
+            <z-m>-0.03256</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>dimmerKnob3</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.05</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[3]</property>
+                <step>0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.05</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[3]</property>
+                <step>-0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[3]</property>
+                <step>0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/warning-lights/dimmer[3]</property>
+                <step>-0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <!-- lights -->
+
+	<animation>
+		<type>material</type>
+		<object-name>no1rocket0light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/no-1-rkt-zero-psn</factor-prop>
+		</emission> 
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>no2rocket0light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/no-2-rkt-zero-psn</factor-prop>
+		</emission> 
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>no3rocket0light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/no-3-rkt-zero-psn</factor-prop>
+		</emission> 
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>no4rocket0light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/no-4-rkt-zero-psn</factor-prop>
+		</emission> 
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>wingDropTanksEmptyLight</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/wg-drop-tks-empty</factor-prop>
+		</emission> 
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>ventralDropTankAttached</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/vent-drop-tk-attchd</factor-prop>
+		</emission> 
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>inboardStation1Light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/inboard-station-1</factor-prop>
+		</emission> 
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>inboardStation2Light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/inboard-station-2</factor-prop>
+		</emission>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>outboardStation3Light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/outboard-station-3</factor-prop>
+		</emission> 
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>outboardStation4Light</object-name>
+		<emission>
+			<red>0.0</red>
+			<green>1.0</green>
+			<blue>0.0</blue>
+			<factor-prop>/fdm/jsbsim/warning-lights/outboard-station-4</factor-prop>
+		</emission> 
+	</animation>
+	
+</PropertyList>

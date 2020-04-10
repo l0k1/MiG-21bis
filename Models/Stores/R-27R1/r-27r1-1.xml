@@ -1,0 +1,61 @@
+<PropertyList>
+
+	<path>R-27R1.ac</path>
+
+	<animation>
+		<type>select</type>
+		<object-name>Cylinder</object-name>
+		<object-name>Plane</object-name>
+		<object-name>Plane.001</object-name>
+		<object-name>Plane.002</object-name>
+		<object-name>Plane.003</object-name>
+		<object-name>Plane.004</object-name>
+		<object-name>Plane.005</object-name>
+		<object-name>Plane.006</object-name>
+		<object-name>Plane.007</object-name>
+		<object-name>Plane.008</object-name>
+		<object-name>Plane.009</object-name>
+		<object-name>Plane.010</object-name>
+		<object-name>Plane.011</object-name>
+		<condition>
+			<property>payload/armament/r-27r1/flags/msl-id-1</property>
+		</condition>
+	</animation>
+
+	<model>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/motor-smoke-1.xml</path>
+		<offsets>
+			<x-m>1.44</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<name>explosion</name>
+		<path>Aircraft/MiG-21bis/Models/Stores/R-27R1/explosion-1.xml</path>
+		<offsets>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</offsets>
+	</model>
+
+	<animation>
+		<object-name>Cylinder</object-name>
+		<object-name>Plane</object-name>
+		<object-name>Plane.001</object-name>
+		<object-name>Plane.002</object-name>
+		<object-name>Plane.003</object-name>
+		<object-name>Plane.004</object-name>
+		<object-name>Plane.005</object-name>
+		<object-name>Plane.006</object-name>
+		<object-name>Plane.007</object-name>
+		<object-name>Plane.008</object-name>
+		<object-name>Plane.009</object-name>
+		<object-name>Plane.010</object-name>
+		<object-name>Plane.011</object-name>
+		<enable-hot type="bool">false</enable-hot>
+	</animation>
+
+</PropertyList>

@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<!--
+
+this file, in combo with headmove.nas, creates the head shaking movement.
+this file will process the variables and output the severity of headshaking.
+the nasal file does the actual movement.
+
+-->
+
+<system name="headshake">
+
+    <channel name="severity">
+
+        <!-- shaking due to rolling -->
+
+        <fcs_function name="trash/systems/headshake/gear">
+            <function>
+                <interpolate1d>
+                    <product>
+                        <avg>
+                            <property>gear/unit/wheel-speed-fps</property>
+                            <property>gear/unit[1]/wheel-speed-fps</property>
+                            <property>gear/unit[2]/wheel-speed-fps</property>
+                        </avg>
+                        <or>
+                            <property>gear/unit/WOW</property>
+                            <property>gear/unit[1]/WOW</property>
+                            <property>gear/unit[2]/WOW</property>
+                        </or>
+                    </product>
+                    <value> 0.0 </value> <value> 0.0 </value>
+                    <value> 50.0 </value> <value> 0.2 </value>
+                    <value> 200.0 </value> <value> 1.25 </value>
+                    <value> 400.0 </value> <value> 2.0 </value>
+                </interpolate1d>
+            </function>
+            <output>systems/headshake/gear</output>
+        </fcs_function>
+
+        <!-- shaking due to alpha/prestall buffet -->
+
+        <fcs_function name="trash/systems/headshake/alpha">
+            <function>
+                <product>
+                    <interpolate1d>
+                        <property>aero/alpha-corrected-deg</property>
+                        <value> 0.0 </value> <value> 0.0 </value>
+                        <value> 10.0 </value> <value> 0.1 </value>
+                        <value> 20.0 </value> <value> 0.7 </value>
+                        <value> 25.0 </value> <value> 1.2 </value>
+                        <value> 30.0 </value> <value> 2.3 </value>
+                        <value> 35.0 </value> <value> 5.0 </value>
+                    </interpolate1d>
+                    <interpolate1d>
+                        <property>aero/qbar-psf</property>
+                        <value> 40.0 </value> <value> 0.0 </value>
+                        <value> 200.0 </value> <value> 1.0 </value>
+                        <value> 1000.0 </value> <value> 1.5 </value>
+                    </interpolate1d>
+                </product>
+            </function>
+            <output>systems/headshake/alpha</output>
+        </fcs_function>
+
+        <!-- shaking due to gun firing -->
+
+        <fcs_function name="trash/systems/headshake/gun">
+            <function>
+                <product>
+                    <and>
+                        <property>systems/armament/GSh-23-trigger</property>
+                        <gt>
+                            <property>/ai/submodels/submodel[5]/count</property>
+                            <value>0</value>
+                        </gt>
+                    </and>
+                    <value>2.0</value>
+                </product>
+            </function>
+            <output>systems/headshake/gun</output>
+        </fcs_function>
+
+        <!-- shaking due to engine surge -->
+        <pure_gain name="trash/systems/headshake/surge">
+            <input>systems/air-intake/surging</input>
+            <gain>4.0</gain>
+            <output>systems/headshake/surge</output>
+        </pure_gain>
+
+        <!-- shaking due to speedbrakes -->
+        <fcs_function name="trash/systems/headshake/speedbrakes">
+            <function>
+                <product>
+                    <avg>
+                        <property>fcs/speedbrake-front-left-pos-norm</property>
+                        <property>fcs/speedbrake-front-right-pos-norm</property>
+                        <property>fcs/speedbrake-rear-pos-norm</property>
+                    </avg>
+                    <interpolate1d>
+                        <property>aero/qbar-psf</property>
+                        <value> 40.0 </value> <value> 0.0 </value>
+                        <value> 200.0 </value> <value> 1.0 </value>
+                        <value> 1000.0 </value> <value> 1.5 </value>
+                    </interpolate1d>
+                </product>
+            </function>
+            <output>systems/headshake/speedbrakes</output>
+        </fcs_function>
+
+        <!-- shaking due to damage -->
+
+        <!-- final sum -->
+        <fcs_function name="trash/systems/headshake/severity">
+            <function>
+                <max>
+                    <property>systems/headshake/gear</property>
+                    <property>systems/headshake/alpha</property>
+                    <property>systems/headshake/gun</property>
+                    <property>systems/headshake/surge</property>
+                    <property>systems/headshake/speedbrakes</property>
+                </max>
+            </function>
+            <output>systems/headshake/severity</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/headshake/actual-output">
+            <input>systems/headshake/severity</input>
+            <gain>1.0</gain>
+            <output>/sim/current-view/headshake-severity</output>
+        </pure_gain>
+
+    </channel>
+</system>

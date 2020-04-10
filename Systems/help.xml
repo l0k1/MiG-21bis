@@ -1,0 +1,121 @@
+<PropertyList>
+	<key>
+		<name>s</name>
+		<desc>Press starter button</desc>
+	</key>
+	<key>
+		<name>Shift-q</name>
+		<desc>Flare release</desc>
+	</key>
+	<key>
+		<name>c</name>
+		<desc>Toggle canopy</desc>
+	</key>
+	<key>
+		<name>m</name>
+		<desc>Nose wheel steering</desc>
+	</key>
+	<key>
+		<name>Ctrl-b</name>
+		<desc>Toggle air brakes</desc>
+	</key>
+	<key>
+		<name>Ctrl-f</name>
+		<desc>Engage Second Reheat Afterburner</desc>
+	</key>
+	<key>
+		<name>Ctrl-d</name>
+		<desc>Deploy drag parachute</desc>
+	</key>
+	<key>
+		<name>Ctrl-t</name>
+		<desc>Jettison drag parachute</desc>
+	</key>
+	<key>
+		<name>Ctrl-g</name>
+		<desc>Toggle gear safety</desc>
+	</key>
+	<key>
+		<name>Ctrl-a</name>
+		<desc>Autoleveller autopilot</desc>
+	</key>
+	<key>
+		<name>Ctrl-z</name>
+		<desc>Center tank jettison</desc>
+	</key>
+	<key>
+		<name>W</name>
+		<desc>Autopilot off</desc>
+	</key>
+	<key>
+		<name>f</name>
+		<desc>Fire GSh-23 Cannon</desc>
+	</key>
+	<key>
+		<name>q</name>
+		<desc>Fire selected pylon(s)</desc>
+	</key>
+	<key>
+		<name>n</name>
+		<desc>Lock radar target</desc>
+	</key>
+	<key>
+		<name>N</name>
+		<desc>Unlock radar target</desc>
+	</key>
+	<key>
+		<name>i</name>
+		<desc>Lockbox up/Pipper scale in (gross)</desc>
+	</key>
+	<key>
+		<name>I</name>
+		<desc>Lockbox up/Pipper scale in (fine)</desc>
+	</key>
+	<key>
+		<name>k</name>
+		<desc>Lockbox down/Pipper scale out (gross)</desc>
+	</key>
+	<key>
+		<name>K</name>
+		<desc>Lockbox down/Pipper scale out (fine)</desc>
+	</key>
+	<key>
+		<name>S</name>
+		<desc>Activate smokepod</desc>
+	</key>
+	<key>
+		<name>r</name>
+		<desc>Select next pylon</desc>
+	</key>
+	<key>
+		<name>R</name>
+		<desc>Select previous pylon</desc>
+	</key>
+	<key>
+		<name>F5</name>
+		<desc>GCI Request Picture</desc>
+	</key>
+	<key>
+		<name>F6</name>
+		<desc>GCI Bogey Dope</desc>
+	</key>
+	<key>
+		<name>F7</name>
+		<desc>GCI Request Cutoff</desc>
+	</key>
+	<text><![CDATA[
+	STARTUP
+	---------
+	If using the automatic startup, you still should do a couple things:
+	1) Set the fuel guage - the fuel gauge does not automatically set to the level in the tank, you need to set the initial level.
+	2) Slave the gyrocompass - hold down the FDS button until the HI compass settles. The compass will drift over time, press the FDS button every now and again to reslave.
+	2b) Set the magnetic declination instrument to your current latitude to help minimize gyro error.
+	INFO
+	3) Turn on the auxilary hydraulics for full aileron control.
+	---------
+	- Check the installation directory for a how-to guide on weapons employment.
+	- Second reheat (ctrl-f) is only effective below 15,000 feet MSL, and use should be limited to 3 minutes.
+	- Smokepod colors are available in the dropdown menu.
+	- The gunsight has fully customizable colors via the dropdown menu.
+	]]></text>
+</PropertyList>

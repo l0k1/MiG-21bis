@@ -1,0 +1,56 @@
+<PropertyList>
+
+ <name>smoke_color</name>
+ <modal>false</modal>
+ <layout>vbox</layout>
+ <width>220</width>
+ <height>100</height>
+  <group>
+   <text>
+    <label>Select Color for Smokepod</label>
+	<x>10</x>
+	<y>75</y>
+  </text>
+  
+  <combo>
+   <x>10</x>
+   <y>47</y>
+   <width>200</width>
+   <height>25</height>
+   <property>/controls/smokepod/color</property>
+   <value>white</value>
+   <value>red</value>
+   <value>orange</value>
+   <value>yellow</value>
+   <value>green</value>
+   <value>blue</value>
+   <value>purple</value>
+   <value>black</value>
+   <value>rainbow (2 sec)</value>
+   <value>rainbow (4 sec)</value>
+  </combo>
+  
+     <button>
+    <legend>Apply</legend>
+	<y>10</y>
+	<x>10</x>
+    <binding>
+     <command>dialog-apply</command>
+    </binding>
+   </button>
+  
+  <button>
+    <legend>Close</legend>
+	<y>10</y>
+	<x>167</x>
+    <binding>
+     <command>dialog-apply</command>
+    </binding>
+	<binding>
+     <command>dialog-close</command>
+    </binding>
+   </button>
+  
+  </group>
+
+</PropertyList>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">Calavera (fictional)</name>
+                <texture>Liveries/Calavera.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/Calavera.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>

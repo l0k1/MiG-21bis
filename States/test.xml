@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PropertyList>
+  <name type="string" n="1">test</name>
+  <overlay>
+
+  	<position>
+  		<altitude-ft>20000</altitude-ft>
+  	</position>
+  	<velocities>
+  		<airspeed-kt>300</airspeed-kt>
+  	</velocities>
+  	<controls>
+  		<engines>
+  			<engine n="0">
+  				<throttle>0.8</throttle>
+  				<starting-switch>1</starting-switch>
+  			</engine>
+  		</engines>
+  	</controls>
+	<engines>
+		<engine n="0">
+			<running>true</running>
+		</engine>
+	</engines>
+	<fdm>
+		<jsbsim>
+			<electric>
+				<switches>
+					<rhfsp>
+						<ac-get-ext-pwr>1</ac-get-ext-pwr>
+						<bat-ext-pwr-sup>1</bat-ext-pwr-sup>
+						<dc-gen>1</dc-gen>
+						<no-1-tk-gp-pump>1</no-1-tk-gp-pump>
+						<no-3-tk-gp-pump>1</no-3-tk-gp-pump>
+						<service-tk-pump>1</service-tk-pump>
+					</rhfsp>
+				</switches>
+			</electric>
+		</jsbsim>
+	</fdm>
+
+  </overlay>
+</PropertyList>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <path>radar_altimeter.ac</path>
+
+
+    <animation>
+        <type>material</type>
+        <object-name>radarAltimeterFace</object-name>
+        <object-name>radarAltimeterNeedle</object-name>
+        <emission>
+            <red>0.6</red>
+            <green>0.3</green>
+            <blue>0.3</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission> 
+    </animation> 
+
+    <animation>
+    <type>rotate</type>
+    <object-name>radarAltimeterNeedle</object-name>
+    <property>fdm/jsbsim/instrumentation/radar-alt/radar-altimeter-ft-filtered</property>
+        <interpolation>
+            <entry><ind>  0</ind><dep>     120</dep></entry>
+            <entry><ind> 65.6</ind><dep>    90</dep></entry>
+            <entry><ind> 131.23</ind><dep>   60</dep></entry>
+            <entry><ind> 196.85</ind><dep>   30</dep></entry>
+            <entry><ind> 328.08</ind><dep>    0</dep></entry>
+            <entry><ind> 656.17</ind><dep>  -45</dep></entry>
+            <entry><ind> 984.25</ind><dep>  -90</dep></entry>
+            <entry><ind> 1312.34</ind><dep>  -105</dep></entry>
+            <entry><ind> 1968.5</ind><dep>  -120</dep></entry>
+        </interpolation>
+        <axis>
+            <x>1</x>
+        </axis>
+    </animation> 
+    
+<!-- Label text -->
+
+<text>
+	<name>LabelText</name>
+	<type type="string">literal</type>
+		<text type="string">Radio Altimeter</text>
+	<draw-text type="bool">true</draw-text>
+	<font>Helvetica.txf</font>
+		<character-size type="double">0.012</character-size>
+		<character-aspect-ratio type="double">1.0</character-aspect-ratio>
+	<axis-alignment>yz-plane</axis-alignment>
+	<max-height>0.2</max-height>
+	<max-width>0.07</max-width>
+	<font-resolution>
+		<width type="int">32</width>
+		<height type="int">32</height>
+	</font-resolution>
+	<alignment>center-center</alignment>
+	<offsets>
+		<x-m> 0.01</x-m>
+		<y-m> 0.0 </y-m>
+		<z-m> 0.0 </z-m>
+	</offsets>
+</text>
+
+<animation>
+	<type>material</type>
+		<object-name>LabelText</object-name>
+	<emission>
+		<red>1.0</red>
+		<green>0.8</green>
+		<blue>0.0</blue>
+	</emission>
+</animation>
+
+<animation>
+	<type>select</type>
+		<object-name>LabelText</object-name>
+	<condition>
+		<property>/sim/panel-hotspots</property>
+	</condition>
+</animation>
+
+</PropertyList>
