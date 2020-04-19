@@ -55,7 +55,7 @@ var rcs_database = {
     "uh1":                      30,     #guess
     "212-TwinHuey":             25,     #guess
     "412-Griffin":              25,     #guess
-    "QF-4E":                    1,      #actual: 6
+    "QF-4E":                    6,      #actual: 6
     "depot":                    170,    #estimated with blender
     "buk-m2":                   7,      #estimated with blender
     "truck":                    1.5,    #estimated with blender

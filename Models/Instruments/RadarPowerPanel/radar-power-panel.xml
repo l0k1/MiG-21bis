@@ -66,14 +66,14 @@
             <red>1</red>
             <green>0</green>
             <blue>0</blue>
-            <factor-prop>controls/radar/power-panel/low-alt</factor-prop>
+            <factor-prop>fdm/jsbsim/radar/filter-light</factor-prop>
         </emission> 
     </animation>
 	
 	<animation>
         <type>textranslate</type>
         <object-name>lightLowAlt</object-name>
-        <property>controls/radar/power-panel/low-alt</property>
+        <property>fdm/jsbsim/radar/filter-light</property>
 		<bias>0.0001</bias>
 		<factor>0.01757</factor>
 		  <step>1</step>

@@ -285,4 +285,14 @@
             <gain>1.0</gain>
         </pure_gain>
     </channel>
+    <channel name="radar-filter" execrate="10">
+        <!-- light should come on if radar mode gt 1 and controls/radar/power-panel/low-alt gt 1 -->
+        <switch name="radar/filter-light">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                radar/mode gt 0
+                /controls/radar/power-panel/low-alt gt 0
+            </test>
+        </switch>
+    </channel>
 </system>

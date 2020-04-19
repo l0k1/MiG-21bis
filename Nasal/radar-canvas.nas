@@ -6,6 +6,10 @@ var TRUE  = 1;
 
 var update_rate = 0.1;
 
+var interp = func(x,x0,y0,x1,y1) {
+    return y0 + ( x - x0 ) * ((y1 - y0) / (x1 - x0))
+}
+
 var RADAR_SCREEN = {
     new: func(placement,name){
         var m = {parents: [RADAR_SCREEN]};
@@ -31,14 +35,18 @@ var RADAR_SCREEN = {
         m.lL = 80;    #line length (it's a little case L, not a [one])
         m.lW = 4;     #line width
 
-        me.lscale = 0;
-        me.lpos = 0;
+        m.lscale = 0;
+        m.lpos = 0;
         
         m.contact_line_length = 60;
         m.contact_array = [];
 
         m.font = "LiberationFonts/LiberationMono-Regular.ttf";
 
+        m.colorset = [0,0,0,0];
+        m.colorset[0] = m.aec[0];
+        m.colorset[1] = m.aec[1];
+        m.colorset[2] = m.aec[2];
         # properties
         m.lock_bars_scale = "/controls/radar/lock-bars-scale";
         m.lock_bars_pos = "/controls/radar/lock-bars-pos";
@@ -62,6 +70,8 @@ var RADAR_SCREEN = {
         m.lockbar_group = m.radar_canvas.createGroup();
         m.locked_group = m.radar_canvas.createGroup();
         m.contact_group = m.radar_canvas.createGroup();
+        m.noise_group = m.radar_canvas.createGroup();
+        m.test_group = m.radar_canvas.createGroup();
         
         ##### radar screen text objects ########################################
         
@@ -401,8 +411,35 @@ var RADAR_SCREEN = {
         # with the members vert, horiz, and friend
         # vert will have to be moved up and down
         # these are hidden by default
+
+        ##### noise ############################################################
+
+        m.groundnoise = [];
+        m.gnoisesize = 10;
+
+        for (m.i = 0; m.i < m.gnoisesize; m.i = m.i + 1) {
+            append(m.groundnoise, m.noise_group.createChild("path","noise")
+                                    .setStrokeLineWidth((914/m.gnoisesize)*1.20));
+        }
+
+        ##### testing stuff ####################################################
+
+        m.testnoise = m.test_group.createChild("path","tofu")
+            .setStrokeLineWidth(4)
+            .setColor(1,1,1,1.0);
         
         return m;
+    },
+
+    test_mode_update: func() {
+        me.testnoise.reset();
+        me.r0 = int(rand() * 500);
+        for(me.i = 0; me.i < me.r0; me.i = me.i + 1) {
+            me.r1 = int(rand() * 1024);
+            me.r2 = int(rand() * 1024);
+            me.testnoise.moveTo(me.r1, 0);
+            me.testnoise.lineTo(me.r1, 1024);
+        }
     },
     
     off_mode_init: func() {
@@ -410,6 +447,7 @@ var RADAR_SCREEN = {
         me.lockbar_group.hide();
         me.locked_group.hide();
         me.contact_group.hide();
+        me.noise_group.hide();
     },
     
     off_mode_update: func() {
@@ -421,6 +459,7 @@ var RADAR_SCREEN = {
         me.lockbar_group.show();
         me.locked_group.hide();
         me.contact_group.hide();
+        me.noise_group.hide();
         me.lscale = clamp(getprop(me.lock_bars_scale), 50, 250);
         me.lpos = clamp(getprop(me.lock_bars_pos), 0, 473);
         me.draw_lockbars();
@@ -437,6 +476,7 @@ var RADAR_SCREEN = {
         me.lockbar_group.show();
         me.locked_group.hide();
         me.contact_group.hide();
+        me.noise_group.hide();
     },
 
     broken_mode_update: func() {
@@ -448,13 +488,14 @@ var RADAR_SCREEN = {
         me.lockbar_group.show();
         me.locked_group.hide();
         me.contact_group.show();
+        me.noise_group.show();
         me.lscale = clamp(getprop(me.lock_bars_scale), 50, 250);
         me.lpos = clamp(getprop(me.lock_bars_pos), 0, 473);
         me.draw_lockbars();
     },
     
     scan_mode_update: func() {
-
+        me.ground_noise_draw();
         # make sure our lock bars dont go out of bounds
 
         me.lscale = clamp(getprop(me.lock_bars_scale), 50, 250);
@@ -507,6 +548,7 @@ var RADAR_SCREEN = {
         me.lockbar_group.hide();
         me.locked_group.show();
         me.contact_group.show();
+        me.noise_group.hide();
         for (me.i = 1; me.i < size(me.contact_array); me.i = me.i + 1) {
             me.contact_array[me.i].horiz.hide();
             me.contact_array[me.i].vert.hide();
@@ -564,6 +606,7 @@ var RADAR_SCREEN = {
         me.lockbar_group.show();
         me.locked_group.hide();
         me.contact_group.show();
+        me.noise_group.hide();
         for (me.i = 1; me.i < size(me.contact_array); me.i = me.i + 1) {
             me.contact_array[me.i].horiz.hide();
             me.contact_array[me.i].vert.hide();
@@ -670,6 +713,45 @@ var RADAR_SCREEN = {
         me.r5_left.setText(int(me.radarRange10k/3/2));
         me.r10_right.setText(int(me.radarRange10k/3));
         me.r5_right.setText(int(me.radarRange10k/3/2));
+    },
+
+    ground_noise_draw: func() {
+        # ground noise caused by side lobe interference
+        # at agl = 0, noise pretty much covers the radar screen
+        # at agl = maxalt, noise has finally gone away
+        # pilot reports indicate that this was approx ~3000m agl
+        # i should do this by shooting beams out in front of the mig, but i am lazy right now
+
+        # 96 is left limit
+        # 918 is right limit
+        me.minalt = 150 + (rand() * 95); # pulled this number out of my butt to prevent this from being used as a psuedo radar-altimeter
+        me.maxalt = 10000 + (rand() * 76); # pulled this number out of my butt to prevent this from being used as a psuedo radar-altimeter
+        me.agl = getprop("/position/altitude-agl-ft");
+        me.width = (918-96) / (size(me.groundnoise)-2);
+        me.width2 = me.width / 2;
+        me.lineheight = 950 * ((me.maxalt - (me.agl + me.minalt)) / me.maxalt);
+        me.filter = getprop("controls/radar/power-panel/low-alt");
+        if (me.filter == 0) {
+            me.r1 = 0.85;
+            me.r2 = 1.00;
+        } elsif (me.filter == 1) {
+            me.r1 = 0.55;
+            me.r2 = 0.70;
+        } else {
+            me.r1 = 0.25;
+            me.r2 = 0.35;
+        }
+        if (me.lineheight <= 0) {
+            return;
+        }
+        for (me.i = 0; me.i < size(me.groundnoise); me.i = me.i + 1) {
+            me.colorset[3] = interp(rand(),0,me.r1,1,me.r2);
+            #debug.dump(me.colorset);
+            me.groundnoise[me.i].reset()
+                                .setTranslation(96 + me.width2 + (me.width * me.i), 950)
+                                .line(0,-me.lineheight)
+                                .setColor(me.colorset);
+        }
     },
     
     change_state: func(state) {

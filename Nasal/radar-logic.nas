@@ -75,7 +75,8 @@ var input = {
         lookThrough:      "/instrumentation/radar/look-through-terrain",
         dopplerOn:        "/instrumentation/radar/doppler-enabled",
         dopplerSpeed:     "/instrumentation/radar/min-doppler-speed-kt",
-        radarMode:        "/controls/radar/mode"
+        radarMode:        "/controls/radar/mode",
+        slFilterMode:     "/controls/radar/power-panel/low-alt",
 };
 
 foreach(var name; keys(input)) {
@@ -404,7 +405,14 @@ var RadarLogic = {
 
         me.contact = Contact.new(node, type);
 
-        if (rcs.inRadarRange(me.contact, radarPowerRange * M2NM, radarPowerRCS) == TRUE) {
+        # modify power range by filter amount
+        me.rpower = radarPowerRange;
+        if (input.slFilterMode.getValue() == 1) {
+          me.rpower = me.rpower * 0.666;
+        } elsif (input.slFilterMode.getValue() == 2) {
+          me.rpower = me.rpower * 0.400;
+        }
+        if (rcs.inRadarRange(me.contact, me.rpower * M2NM, radarPowerRCS) == TRUE) {
           #print("rcs: TRUE");
           return me.contact;
         } else {
