@@ -877,4 +877,7 @@ var radar_beamed    = {parents: [state_arch],  main_func: RADAR_SCREEN.beamed_mo
 #var hud_switch_gs_m = {parents: [state_arch], main_func: hud_ref.groundspeed_mach_switch, temp: 1};
 
 radarscreen.change_state(radar_off);
-radarscreen.main_loop();
+
+setlistener("/sim/signals/fdm-initialized", func() {
+    radarscreen.main_loop();
+});
