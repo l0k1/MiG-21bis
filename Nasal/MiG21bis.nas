@@ -315,7 +315,7 @@ var load_radios = func(path) {
 }
 
 var get_radio_file_gui = func() {
-    var file_selector = gui.FileSelector.new(callback: load_radios, title: "Select Radio Config File", button: "Load");
+    var file_selector = gui.FileSelector.new(dir: getprop("/sim/fg-home"), callback: load_radios, title: "Select Radio Config File", button: "Load");
     file_selector.open();
     file_selector.close();
 }
