@@ -50,6 +50,8 @@
                 <chaff-final-count-0>0</chaff-final-count-0>
                 <chaff-final-count-1>0</chaff-final-count-1>
             </cm>
+            <GSh-23-jammed>1</GSh-23-jammed>
+            <GSh-23-ready>0</GSh-23-ready>
         </armament>
         <hydraulic n="0">
             <pump-on>0</pump-on>

@@ -86,6 +86,7 @@
         	<default value="0"/>
         	<test logic="AND" value="1">
         		electric/output/gun gt 33
+                systems/armament/GSh-23-jammed == 0
         		/ai/submodels/submodel[5]/count gt 0
         	</test>
         </switch>
