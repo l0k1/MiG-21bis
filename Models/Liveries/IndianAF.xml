@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!-- Made By Thorium -->
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">Indian Air Force(2)</name>
+                <texture>Liveries/IndianAF.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/IndianAF.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>
