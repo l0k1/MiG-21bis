@@ -717,6 +717,17 @@
     </model>
 
     <model>
+        <name>Misc Panel 8</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/MiscPanel8/verticalForwardRightPanel.xml</path>
+        <offsets>
+            <heading-deg>-82</heading-deg>
+            <x-m>-3.78015</x-m>
+            <y-m> 0.424114</y-m>
+            <z-m> 0.611399</z-m>
+        </offsets>
+    </model>
+
+    <model>
         <name>Lower Center Pedestal Panel</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/PanelCenterLower/panel_center_lower.xml</path>
         <offsets>
