@@ -1072,6 +1072,30 @@
          <output>warning-lights/armament/bomb-arm</output>
       </fcs_function>
 
+      <fcs_function name="trash/warning-lights/stallwarn">
+         <!-- also triggers the sound -->
+         <function>
+            <product>
+               <and>
+                  <gt>
+                     <property>/orientation/alpha-deg</property>
+                     <value>22.5</value>
+                  </gt>
+                  <eq>
+                     <property>/gear/gear[0]/wow</property>
+                     <value>0</value>
+                  </eq>
+               </and>
+               <property>warning-lights/lights-dc</property>
+            </product>
+         </function>
+         <clipto>
+            <min>0</min>
+            <max>1</max>
+         </clipto>
+         <output>warning-lights/stallwarn</output>
+      </fcs_function>
+
    </channel>
 
 </system>

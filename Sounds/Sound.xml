@@ -496,16 +496,9 @@
             <path>Aircraft/MiG-21bis/Sounds/Samples/stall.wav</path>
             <condition>
             <greater-than>
-                <property>orientation/alpha-deg</property>
-                <value>22.5</value>
+                <property>/fdm/jsbsim/warning-lights/stallwarn</property>
+                <value>0</value>
             </greater-than>
-            <not>
-                <property>/gear/gear[0]/wow</property>
-            </not>
-            <property>/sim/current-view/internal</property>
-            <not>
-            <property>fdm/jsbsim/systems/crash-detect/crashed</property>
-            </not>
             </condition>
             <volume><factor>0.6</factor></volume>
         </stall>

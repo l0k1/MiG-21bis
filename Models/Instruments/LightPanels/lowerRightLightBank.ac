@@ -1,5 +1,5 @@
 AC3Db
-MATERIAL "light.001" rgb 0.916 0.916 0.916  amb 0.200 0.200 0.200  emis 0.000 0.000 0.000  spec 0.186 0.186 0.186  shi 69 trans 0.000
+MATERIAL "light.001" rgb 0.640 0.640 0.640  amb 0.050 0.050 0.050  emis 0.000 0.000 0.000  spec 0.000 0.000 0.000  shi 24 trans 0.000
 MATERIAL "knob.001" rgb 0.916 0.916 0.916  amb 0.750 0.750 0.750  emis 0.000 0.000 0.000  spec 0.410 0.410 0.410  shi 91 trans 0.000
 MATERIAL "surface.001" rgb 0.916 0.916 0.916  amb 0.750 0.750 0.750  emis 0.000 0.000 0.000  spec 0.186 0.186 0.186  shi 69 trans 0.000
 OBJECT world

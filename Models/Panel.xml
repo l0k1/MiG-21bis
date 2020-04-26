@@ -793,5 +793,16 @@
             <z-m>0.476061</z-m>
         </offsets>
     </model>
+    <model>
+        <name>Stall Warning Lights</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/StallWarning/stallwarning.xml</path>
+        <offsets>
+            <heading-deg>0</heading-deg>
+            <roll-deg>0</roll-deg>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </offsets>
+    </model>
 
 </PropertyList>
