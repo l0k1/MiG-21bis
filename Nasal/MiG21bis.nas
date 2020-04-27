@@ -10,7 +10,11 @@ var a = 0;
 var main_loop = func (){
     #performance();
     logTime();
-    a = getprop("/orientation/alpha-deg");
+    if (getprop("/gear/gear/wow") == 1) {
+        a = getprop("/orientation/pitch-deg");
+    } else {
+        a = getprop("/orientation/alpha-deg");
+    }
     a = a > 170 ? a - 180 : a;
     a = math.abs(a) > 20 ? 20 * math.sgn(a) * -1 : a * -1;
     setprop("/instrumentation/magnetic-compass/pitch-offset-deg",a);
