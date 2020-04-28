@@ -326,7 +326,7 @@ check for Low Altitude Mode
             <value>1</value>
         </enable>
         <input>
-            <property>/velocities/vertical-speed-fps</property>
+            <property>/instrumentation/gps/indicated-vertical-speed</property>
         </input>
         <reference>
             <property>/autopilot/internal/target-vs</property>
@@ -445,7 +445,7 @@ check for Low Altitude Mode
             <value>2</value>
         </enable>
         <input>
-            <property>/velocities/vertical-speed-fps</property>
+            <property>/instrumentation/gps/indicated-vertical-speed</property>
         </input>
         <reference>
             <value>0</value>
@@ -454,8 +454,8 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-pitch</property>
         </output>
         <config>
-            <Kp>0.01</Kp>
-            <Ti>1.5</Ti>
+            <Kp>0.0005</Kp>
+            <Ti>0.5</Ti>
             <Td>0.0001</Td>
             <u_min>-20</u_min>
             <u_max>45</u_max>
@@ -1003,7 +1003,7 @@ check for Low Altitude Mode
             <value>4</value>
         </enable>
         <input>
-            <property>/velocities/vertical-speed-fps</property>
+            <property>/instrumentation/gps/indicated-vertical-speed</property>
         </input>
         <reference>
             <property>/autopilot/internal/nav1-rate-of-climb</property>

@@ -19,13 +19,13 @@
     <animation>
         <type>rotate</type>
         <object-name>vspeedneedle</object-name>
-        <property>velocities/vertical-speed-fps</property>
+        <property>instrumentation/gps/indicated-vertical-speed</property>
         <interpolation>
-            <entry><ind>656.168</ind><dep>136.0</dep></entry>
-            <entry><ind>-65.6168</ind><dep>-68.0</dep></entry>
+            <entry><ind>-39370.08</ind><dep>-136.0</dep></entry>
+            <entry><ind>-3937.008</ind><dep>-68.0</dep></entry>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>65.6168</ind><dep>68.0</dep></entry>
-            <entry><ind>656.168</ind><dep>136.0</dep></entry>
+            <entry><ind>3937.008</ind><dep>68.0</dep></entry>
+            <entry><ind>39370.08</ind><dep>136.0</dep></entry>
         </interpolation>
         <center>
             <x-m>-0.0060</x-m>
