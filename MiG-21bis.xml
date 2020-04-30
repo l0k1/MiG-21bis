@@ -45,7 +45,7 @@
    <ixy unit="SLUG*FT2">         0 </ixy>
    <ixz unit="SLUG*FT2">         0 </ixz>
    <iyz unit="SLUG*FT2">         0 </iyz>
-   <emptywt unit="LBS" >     12996 </emptywt> <!-- source: http://www.mig-21.de/english/technicaldata.htm -->
+   <emptywt unit="LBS" >     13457 </emptywt> <!-- source: mig-21 weight and balance document -->
 
    <location name="CG" unit="M"> <!-- source: mig21bis weight and balance document -->
      <x>  -0.03445 </x>
@@ -141,7 +141,7 @@
    </location>
    <static_friction>  0.80 </static_friction>
    <dynamic_friction> 0.50 </dynamic_friction>
-   <rolling_friction> 0.026 </rolling_friction>
+   <rolling_friction> 0.02 </rolling_friction>
    <spring_coeff unit="LBS/FT">      16000.00 </spring_coeff>
    <damping_coeff unit="LBS/FT/SEC">  4000.00 </damping_coeff>
    <brake_group>LEFT</brake_group>
@@ -156,7 +156,7 @@
    </location>
    <static_friction>  0.80 </static_friction>
    <dynamic_friction> 0.50 </dynamic_friction>
-   <rolling_friction> 0.026 </rolling_friction>
+   <rolling_friction> 0.02 </rolling_friction>
    <spring_coeff unit="LBS/FT">      16000.00 </spring_coeff>
    <damping_coeff unit="LBS/FT/SEC">  4000.00 </damping_coeff>
    <brake_group>RIGHT</brake_group>

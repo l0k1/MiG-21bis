@@ -265,9 +265,18 @@
                     <item>
                         <label>Dump Prop Tree</label>
                         <binding>
-                            <command>nasal</command><![CDATA[some stuff]]>
+                            <command>nasal</command>
                             <script>
                                 io.write_properties( path: getprop("/sim/fg-home") ~ "/Export/MiG-21bis/prop_tree_dump.xml", prop: "/" );
+                            </script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Perfmon</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                monitor.PerformanceMonitor.instance().start();
                             </script>
                         </binding>
                     </item>
@@ -1701,6 +1710,8 @@
         <headshake>         <file>Aircraft/MiG-21bis/Nasal/headmove.nas</file>          </headshake>        <!-- shaking the head around -->
         <canvas_window>     <file>Aircraft/MiG-21bis/Nasal/canvas_windows.nas</file>    </canvas_window>
         <mig28>             <file>Aircraft/MiG-21bis/Nasal/mig28.nas</file>             </mig28>
+        <monitor>           <file>Aircraft/MiG-21bis/Nasal/dialog-perf.nas</file>
+                            <file>Aircraft/MiG-21bis/Nasal/performance.nas</file>       </monitor>
 
     </nasal>
 

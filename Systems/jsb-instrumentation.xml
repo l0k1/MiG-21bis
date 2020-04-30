@@ -457,4 +457,179 @@ clock
         </switch>
     </channel>
 
+    <channel name="non-instrument-info">
+
+        <!-- taken from ja-37 -->
+
+        <!--<fcs_function name="systems/flight/axial-force-lb">
+            <function>
+                <sum>
+                    <property>aero/coefficient/CAtakeoff</property>
+                    <property>aero/coefficient/CACanopy</property>
+                    <property>aero/coefficient/CABrake</property>
+                    <property>aero/coefficient/CATurbine</property>                    
+                    <property>aero/coefficient/CACanopyOff</property>
+                    <property>aero/coefficient/CAElevonLeft</property>
+                    <property>aero/coefficient/CAElevonRight</property>
+                    <property>aero/coefficient/CARudder</property>
+                    <property>aero/coefficient/CAMissile1</property>
+                    <property>aero/coefficient/CAMissile2</property>
+                    <property>aero/coefficient/CAMissile3</property>
+                    <property>aero/coefficient/CAMissile4</property>
+                    <property>aero/coefficient/CAMissile5</property>
+                    <property>aero/coefficient/CAMissile6</property>
+                    <property>aero/coefficient/CAMissile7</property>
+                    <property>aero/coefficient/CATank</property>
+                    <property>aero/coefficient/CA</property>
+                    <property>aero/coefficient/CAwave</property>
+                    <property>aero/coefficient/CABrake</property>
+                </sum>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="systems/flight/normal-force-lb">
+            <function>
+                <sum>
+                    <property>aero/coefficient/CN</property>
+                    <property>aero/coefficient/CNGnd</property>
+                    <property>aero/coefficient/CNGndElevator</property>
+                    <property>aero/coefficient/CNflaps</property>
+                    <property>aero/coefficient/CNgear</property>
+                    <property>aero/coefficient/CNwave</property>
+                    <property>aero/coefficient/CNBrake</property>
+                    <property>aero/coefficient/CNTurbine</property>
+                    <property>aero/coefficient/CNCanopy</property>
+                </sum>
+            </function>
+        </fcs_function>-->
+
+        <fcs_function name="metrics/aero-rp-shift-mac">
+            <function >
+                <value>1</value>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="systems/flight/lift-force-lb">
+            <function>
+                <sum>
+                    <property>aero/force/Lift_alpha</property>
+                    <property>aero/force/Lift_pitch_rate</property>
+                    <property>aero/force/Lift_alpha_rate</property>
+                    <property>aero/force/Lift_elevator</property>
+                    <property>aero/force/Lift_flap</property>
+                    <property>aero/force/Lift_groundeffect</property>
+                </sum>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="systems/flight/drag-force-lb">
+            <function>
+                <sum>
+                    <property>aero/force/Drag_minimum</property>
+                    <property>aero/force/Drag_alpha</property>
+                    <property>aero/force/Drag_induced</property>
+                    <property>aero/force/Drag_mach</property>
+                    <property>aero/force/Drag_beta</property>
+                    <property>aero/force/Drag_elevator</property>
+                    <property>aero/force/Drag_gear</property>
+                    <property>aero/force/Drag_flap</property>
+                    <property>aero/force/Drag_speedbrake_fl</property>
+                    <property>aero/force/Drag_speedbrake_fr</property>
+                    <property>aero/force/Drag_speedbrake_rear</property>
+                    <property>aero/force/Drag_chute</property>
+                    <property>aero/force/Drag_CAMissile0</property>
+                    <property>aero/force/Drag_CAMissile1</property>
+                    <property>aero/force/Drag_CAMissile2</property>
+                    <property>aero/force/Drag_CAMissile3</property>
+                    <property>aero/force/Drag_CAMissile4</property>
+                    <property>aero/force/Drag_groundeffect</property>
+                </sum>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="systems/flight/turning-radius-nm">
+            <function>
+                <abs>
+                    <quotient>
+                        <quotient>
+                            <product>
+                                <property>velocities/vg-fps</property>
+                                <quotient>
+                                    <value>360</value>
+                                    <todegrees><property>velocities/psidot-rad_sec</property></todegrees>
+                                </quotient>
+                            </product>
+                            <pi/>
+                        </quotient>
+                        <value>2</value>
+                    </quotient>
+                    <!--<quotient>
+                        <product>
+                            <product>
+                                <property>velocities/vg-fps</property>
+                                <value>0.000164578834</value>
+                            </product>
+                            <quotient>
+                                <product>
+                                    <pi/>
+                                    <value>2.0</value>
+                                </product>
+                                <property>velocities/psidot-rad_sec</property>
+                            </quotient>
+                        </product>
+                        <product>
+                            <pi/>
+                            <value>0.5</value>
+                        </product>
+                    </quotient>-->
+                </abs>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="systems/flight/excess-thrust-lb">
+            <function>
+                <difference>
+                    <property>propulsion/engine/thrust-lbs</property>
+                    <property>systems/flight/drag-force-lb</property>
+                </difference>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="systems/flight/lift-drag-ratio">
+            <function>
+                <quotient>
+                    <property>systems/flight/lift-force-lb</property>
+                    <property>systems/flight/drag-force-lb</property>
+                </quotient>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="systems/flight/thrust-weight-ratio">
+            <function>
+                <quotient>
+                    <property>propulsion/engine/thrust-lbs</property>
+                    <property>inertia/weight-lbs</property>
+                </quotient>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="systems/flight/lift-weight-ratio">
+            <function>
+                <quotient>
+                    <property>systems/flight/lift-force-lb</property>
+                    <property>inertia/weight-lbs</property>
+                </quotient>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="systems/flight/thrust-drag-ratio">
+            <function>
+                <quotient>
+                    <property>propulsion/engine/thrust-lbs</property>
+                    <property>systems/flight/drag-force-lb</property>
+                </quotient>
+            </function>
+        </fcs_function>
+    </channel>
+
 </system>

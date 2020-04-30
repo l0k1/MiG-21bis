@@ -455,7 +455,7 @@ check for Low Altitude Mode
         </output>
         <config>
             <Kp>0.0005</Kp>
-            <Ti>0.5</Ti>
+            <Ti>1.5</Ti>
             <Td>0.0001</Td>
             <u_min>-20</u_min>
             <u_max>45</u_max>

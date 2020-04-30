@@ -1,0 +1,492 @@
+item("1 TK GP PUMP") {
+    state("ON");
+}
+
+item("150-200km/h") {
+    state("SHIFT CONTROL STICK 3/4 BACK");
+}
+
+item("2-PSN Nozzle EMRG. CTL.") {
+    state("OFF");
+}
+
+item("250-270km/h") {
+    state("REDUCE CONTROL STICK BACKWARD DEFLECTION");
+}
+
+item("3 TK GP PUMP") {
+    state("ON");
+}
+
+item("340-360km/h") {
+    state("TAKEOFF");
+}
+
+item("AC GEN., EXT. PWR") {
+    state("ON");
+}
+
+item("AIR/GND switch") {
+    state("AIR");
+    state("GND");
+}
+
+item("ALT MKR REC") {
+    state("ON");
+}
+
+item("ANT./COMP. switch") {
+    state("COMP.");
+}
+
+item("ARC") {
+    state("ON");
+}
+
+item("ATC IDENT.") {
+    state("HOLD FOR 1 SECOND");
+}
+
+item("Air relight") {
+    state("OFF");
+}
+
+item("Altimeter") {
+    state("SET TO QFE");
+}
+
+item("Anti skid unit") {
+    state("ON");
+}
+
+item("Armament selector") {
+    state("S-24 RKT (for S-24 rockets)");
+    state("B RKT (for bombs and rocket pods)");
+    state("IR-SAR");
+}
+
+item("BAT, EXT. PWR SUP.") {
+    state("ON");
+}
+
+item("BLC") {
+    state("ON");
+}
+
+item("CONE/OFF") {
+    state("CONE");
+}
+
+item("CP30 IFF") {
+    state("ON");
+}
+
+item("Cabin heat selector") {
+    state("AUTO");
+}
+
+item("Canopy") {
+    state("SEALED");
+}
+
+item("Clock") {
+    state("CHECK");
+}
+
+item("Cone mode of operation") {
+    state("AUTO");
+}
+
+item("DC GEN") {
+    state("ON");
+}
+
+item("Distress switch") {
+    state("OFF");
+}
+
+item("Drag chute JETT.") {
+    state("CLOSED");
+}
+
+item("Engine Start-Cold cranking") {
+    state("ON");
+}
+
+item("Engine starting unit") {
+    state("ON");
+}
+
+item("FDS") {
+    state("ON");
+}
+
+item("FDS button") {
+    state("HOLD FOR 5 SECONDS");
+}
+
+item("FDS circuit breaker") {
+    state("ON");
+}
+
+item("FIRE-FTG EQPT") {
+    state("ON");
+}
+
+item("FIXED BEAM/OFF switch") {
+    state("OFF");
+}
+
+item("Fixed net") {
+    state("ON");
+}
+
+item("Flaps") {
+    state("SET");
+    state("SET FOR LANDING");
+    state("UP");
+}
+
+item("Flight navigational instruments") {
+    state("CHECK");
+}
+
+item("Fuel gauge (490-L ventral drop tank)") {
+    state("SET TO 3250L");
+}
+
+item("Fuel gauge (800-L ventral drop tank)") {
+    state("SET TO 3500L");
+}
+
+item("Fuel gauge (no external stores)") {
+    state("SET TO 2750L");
+}
+
+item("Fuel gauge (three 490-L drop tanks)") {
+    state("SET TO 4200L");
+}
+
+item("Fuel gauge (two wing drop tanks)") {
+    state("SET TO 3750L");
+}
+
+item("Full throttle") {
+    state("ON");
+}
+
+item("GUN/LNC switch") {
+    state("LNC");
+}
+
+item("GYRO HOR") {
+    state("ON");
+}
+
+item("GYRO/MSL knob") {
+    state("MSL");
+    state("GYRO");
+}
+
+item("GYRO/MSL switch") {
+    state("MSL");
+}
+
+item("Gear lever") {
+    state("DOWN");
+    state("NEUTRAL");
+}
+
+item("Ground starting button") {
+    state("HOLD FOR 3-4 SECONDS");
+}
+
+item("Gun switch") {
+    state("OFF");
+}
+
+item("Gunsight") {
+    state("ON");
+}
+
+item("IFF DEST. button") {
+    state("OFF");
+}
+
+item("IR/SAR switch") {
+    state("SAR (for R-27R1 missiles)");
+    state("IR (for IR missiles)");
+    state("NEUTRAL");
+}
+
+item("Landing chute") {
+    state("DEPLOY AFTER TOUCHDOWN");
+}
+
+item("Landing gear lever") {
+    state("UP");
+    state("NEUTRAL");
+}
+
+item("Landing gear pin") {
+    state("CLOSED");
+    state("OPEN");
+}
+
+item("Limit altitude selector switch") {
+    state("OFF");
+}
+
+item("MSL, RGM, RKT LCH circuit breaker") {
+    state("OFF");
+}
+
+item("Magnetic declination setting") {
+    state("SET LATITUDE");
+}
+
+item("N. SUP.") {
+    state("ON");
+}
+
+item("NAVIG/LETDOWN./LDG. switch") {
+    state("NAVIG");
+}
+
+item("Nosewheel brake") {
+    state("OFF");
+}
+
+item("Nosewheel break") {
+    state("OFF");
+}
+
+item("OFF/H SIGNAL/LOW ALT switch") {
+    state("OFF");
+}
+
+item("OFF/STANDBY/RUN ON switch") {
+    state("OFF");
+}
+
+item("OUTER/INNER beacon selector") {
+    state("OUTER");
+}
+
+item("P-S Tube") {
+    state("MAIN");
+}
+
+item("Preset ALT. switch") {
+    state("AS REQUIRED");
+}
+
+item("Primary communication channel") {
+    state("SELECTED");
+}
+
+item("R/SET/COMP switch") {
+    state("R/SET");
+}
+
+item("RAD") {
+    state("ON");
+}
+
+item("RDR ILL. WARN. SET") {
+    state("ON");
+}
+
+item("RDR ILL. WARN. SET. switch") {
+    state("RDR ILL. WARN. SET. position");
+}
+
+item("Radar") {
+    state("RUN ON");
+}
+
+item("Recorder") {
+    state("ON");
+}
+
+item("Reheat") {
+    state("ON");
+}
+
+item("SHOOT/BOMB switch") {
+    state("BOMB (only when using bombs)");
+    state("SHOOT");
+}
+
+item("Service TK pump") {
+    state("ON");
+}
+
+item("TAXI/LDG lamp") {
+    state("RETR.");
+}
+
+item("TRIM.") {
+    state("ON");
+}
+
+item("Tactical RLS") {
+    state("OFF");
+}
+
+item("Takeoff (no external load or two missiles)") {
+    state("FULL THROTTLE NON-REHEAT POWER");
+}
+
+item("Target size") {
+    state("SET TO TARGET WINGSPAN");
+    state("SET TO TARGET SIZE");
+}
+
+item("Throttle lever") {
+    state("SHUT-OFF");
+    state("IDLE");
+}
+
+item("VERT. GYRO of FDS, AFCS, RDR, QYRO HOR. SIG. circuit breaker") {
+    state("ON");
+}
+
+item("Voltage in aircraft mains") {
+    state("CHECK");
+}
+
+checklist("Aircraft readiness check pt.1") {
+    check("Cabin heat selector", "AUTO");
+    check("Engine Start-Cold cranking", "ON");
+    check("2-PSN Nozzle EMRG. CTL.", "OFF");
+    check("BLC", "ON");
+    check("Preset ALT. switch", "AS REQUIRED");
+    check("Cone mode of operation", "AUTO");
+    check("Drag chute JETT.", "CLOSED");
+    check("Anti skid unit", "ON");
+    check("Air relight", "OFF");
+    check("Full throttle", "ON");
+    check("Reheat", "ON");
+    check("Engine starting unit", "ON");
+    check("FIRE-FTG EQPT", "ON");
+    check("Throttle lever", "SHUT-OFF");
+    check("TAXI/LDG lamp", "RETR.");
+    check("GYRO/MSL switch", "MSL");
+    check("NAVIG/LETDOWN./LDG. switch", "NAVIG");
+    check("OUTER/INNER beacon selector", "OUTER");
+    check("Nosewheel break", "OFF");
+    check("Clock", "CHECK");
+    check("Tactical RLS", "OFF");
+    check("Gun switch", "OFF");
+    check("MSL, RGM, RKT LCH circuit breaker", "OFF");
+    check("P-S Tube", "MAIN");
+    check("OFF/STANDBY/RUN ON switch", "OFF");
+    check("FIXED BEAM/OFF switch", "OFF");
+    check("OFF/H SIGNAL/LOW ALT switch", "OFF");
+    check("Limit altitude selector switch", "OFF");
+    check("ANT./COMP. switch", "COMP.");
+}
+
+checklist("Aircraft readiness check pt.2") {
+    check("RDR ILL. WARN. SET. switch", "RDR ILL. WARN. SET. position");
+    check("Distress switch", "OFF");
+    check("IFF DEST. button", "OFF");
+    check("Primary communication channel", "SELECTED");
+    check("R/SET/COMP switch", "R/SET");
+    check("CONE/OFF", "CONE");
+    check("N. SUP.", "ON");
+}
+
+checklist("Before Engine Start") {
+    check("Altimeter", "SET TO QFE");
+    check("Fuel gauge (no external stores)", "SET TO 2750L");
+    check("Fuel gauge (490-L ventral drop tank)", "SET TO 3250L");
+    check("Fuel gauge (800-L ventral drop tank)", "SET TO 3500L");
+    check("Fuel gauge (two wing drop tanks)", "SET TO 3750L");
+    check("Fuel gauge (three 490-L drop tanks)", "SET TO 4200L");
+    check("BAT, EXT. PWR SUP.", "ON");
+    check("VERT. GYRO of FDS, AFCS, RDR, QYRO HOR. SIG. circuit breaker", "ON");
+    check("FDS circuit breaker", "ON");
+    check("Magnetic declination setting", "SET LATITUDE");
+    check("FDS button", "HOLD FOR 5 SECONDS");
+    check("Voltage in aircraft mains", "CHECK");
+    check("ATC IDENT.", "HOLD FOR 1 SECOND");
+}
+
+checklist("Engine start") {
+    check("DC GEN", "ON");
+    check("Service TK pump", "ON");
+    check("Throttle lever", "IDLE");
+    check("Ground starting button", "HOLD FOR 3-4 SECONDS");
+    check("AC GEN., EXT. PWR", "ON");
+    check("3 TK GP PUMP", "ON");
+    check("1 TK GP PUMP", "ON");
+    check("RDR ILL. WARN. SET", "ON");
+    check("Recorder", "ON");
+    check("TRIM.", "ON");
+    check("ARC", "ON");
+    check("RAD", "ON");
+    check("ALT MKR REC", "ON");
+    check("FDS", "ON");
+    check("GYRO HOR", "ON");
+    check("CP30 IFF", "ON");
+}
+
+checklist("Taxi") {
+    check("Canopy", "SEALED");
+    check("Nosewheel brake", "OFF");
+    check("Flaps", "SET");
+    check("Flight navigational instruments", "CHECK");
+}
+
+checklist("Takeoff") {
+    check("Takeoff (no external load or two missiles)", "FULL THROTTLE NON-REHEAT POWER");
+    check("150-200km/h", "SHIFT CONTROL STICK 3/4 BACK");
+    check("250-270km/h", "REDUCE CONTROL STICK BACKWARD DEFLECTION");
+    check("340-360km/h", "TAKEOFF");
+}
+
+checklist("Climb") {
+    check("Landing gear pin", "OPEN");
+    check("Landing gear lever", "UP");
+    check("Landing gear lever", "NEUTRAL");
+    check("Landing gear pin", "CLOSED");
+    check("Flaps", "UP");
+    text();
+}
+
+checklist("Landing") {
+    check("Flaps", "SET FOR LANDING");
+    check("Gear lever", "DOWN");
+    check("Gear lever", "NEUTRAL");
+    check("Landing chute", "DEPLOY AFTER TOUCHDOWN");
+}
+
+checklist("Air to Air situation") {
+    check("AIR/GND switch", "AIR");
+    check("IR/SAR switch", "IR (for IR missiles)");
+    check("IR/SAR switch", "SAR (for R-27R1 missiles)");
+    check("Armament selector", "IR-SAR");
+    check("Gunsight", "ON");
+    check("GYRO/MSL knob", "GYRO");
+    check("GUN/LNC switch", "LNC");
+    check("Target size", "SET TO TARGET WINGSPAN");
+    check("SHOOT/BOMB switch", "SHOOT");
+    check("Radar", "RUN ON");
+    text();
+}
+
+checklist("Air to Ground situation") {
+    check("AIR/GND switch", "GND");
+    check("IR/SAR switch", "NEUTRAL");
+    check("Armament selector", "B RKT (for bombs and rocket pods)");
+    check("Armament selector", "S-24 RKT (for S-24 rockets)");
+    check("Gunsight", "ON");
+    check("GYRO/MSL knob", "MSL");
+    check("Fixed net", "ON");
+    check("Target size", "SET TO TARGET SIZE");
+    check("SHOOT/BOMB switch", "BOMB (only when using bombs)");
+    text();
+}
+
