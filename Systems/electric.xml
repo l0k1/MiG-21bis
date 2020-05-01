@@ -866,12 +866,18 @@
 
 		-->
 
-		<switch name="electric/output/seat-height">
-			<default value="0"/>
-			<test logic="AND" value="electric/buses/bus[0]">
-				electric/switches/lvmsp/seat-height == 1
-			</test>
-		</switch>
+		<fcs_function name="trash/electric/output/seat-height">
+			<function>
+				<product>
+					<gt>
+						<property>electric/buses/bus[0]</property>
+						<value>40</value>
+					</gt>
+					<property>electric/switches/lvmsp/seat-height</property>
+				</product>
+			</function>
+			<output>electric/output/seat-height</output>
+		</fcs_function>
 
 		<switch name="electric/output/psn-nozzle-emerg-ctl">
 			<default value="0"/>

@@ -14,6 +14,8 @@ var cv_z_offset_path = "/sim/current-view/z-offset-m";
 
 var severity_path = "/sim/current-view/headshake-severity";
 
+var seatheight_path = "/fdm/jsbsim/electric/output/seat-height";
+
 setprop(severity_path, 0);
 
 var cv_x = 0;
@@ -28,6 +30,7 @@ var z_ratio = 0.000150; #ratio 300 = .04 (up/down, g's)
 
 var view = "Cockpit View";
 
+var sm = 0;
 
 var movement = func {
 	#jsbsim x = -flightgear z
@@ -35,6 +38,12 @@ var movement = func {
 	#jsbsim z = flightgear y
 	cv = getprop("/sim/current-view/name");
 	if ( cv == view ) {
+		cv_y = cv_y + (getprop(seatheight_path) * 0.001);
+		if (cv_y < 1.13) {
+			cv_y = 1.13;
+		} elsif (cv_y > 1.35) {
+			cv_y = 1.35;
+		}
 		sev = getprop(severity_path);
 		setprop(cv_x_offset_path, cv_x + ((rand() * 2 - 1) * x_ratio * sev));
 		setprop(cv_y_offset_path, cv_y + ((rand() * 2 - 1) * y_ratio * sev));

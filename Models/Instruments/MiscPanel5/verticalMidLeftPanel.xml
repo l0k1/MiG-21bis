@@ -119,6 +119,61 @@
     </action>
   </animation>
 
+  <animation>
+    <type>rotate</type>
+    <object-name>seatPosSwitch</object-name>
+    <property>/fdm/jsbsim/electric/switches/lvmsp/seat-height</property>
+    <factor>-35</factor>
+    <offset-deg>0</offset-deg>
+    <center>
+      <x-m>-0.008107</x-m>
+      <y-m> 0.114866</y-m>
+      <z-m>-0.00485</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>seatPosSwitch</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-assign</command>
+        <property>/fdm/jsbsim/electric/switches/lvmsp/seat-height</property>
+        <value>1</value>
+      </binding>
+      <mod-up>
+        <binding>
+          <command>property-assign</command>
+          <property>/fdm/jsbsim/electric/switches/lvmsp/seat-height</property>
+          <value>0</value>
+        </binding>
+      </mod-up>
+    </action>
+    <action>
+      <button>1</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-assign</command>
+        <property>/fdm/jsbsim/electric/switches/lvmsp/seat-height</property>
+        <value>-1</value>
+      </binding>
+      <mod-up>
+        <binding>
+          <command>property-assign</command>
+          <property>/fdm/jsbsim/electric/switches/lvmsp/seat-height</property>
+          <value>0</value>
+        </binding>
+      </mod-up>
+    </action>
+  </animation>
+
 
 
 </PropertyList>
