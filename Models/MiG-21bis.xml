@@ -618,12 +618,19 @@
 		<path>Aircraft/MiG-21bis/Sounds/MP-Sound.xml</path>
 	</sound>
 
-	<!-- Stores -->
+    <!-- Stores -->
 
-	<model>
-		<name>Stores</name>
-		<path>Aircraft/MiG-21bis/Models/Stores.xml</path>
-	</model>
+    <model>
+        <name>Stores</name>
+        <path>Aircraft/MiG-21bis/Models/Stores.xml</path>
+    </model>
+
+    <!-- Selectable Center Panel -->
+
+    <model>
+        <name>Center Panels</name>
+        <path>Aircraft/MiG-21bis/Models/CenterPanels.xml</path>
+    </model>
 
 	<!-- Effects -->
 

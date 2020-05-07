@@ -306,6 +306,8 @@
                 <int n="10" alias="/controls/armament/trigger" />
                 <!-- Smokepod -->
                 <int n="19" type="int">0</int>
+                <!-- hmcs -->
+                <int n="20" type="int" alias="/fdm/jsbsim/systems/hmcs/deploying"/>
                 <float n="8" alias="/engines/engine[0]/augmentation" /> <!-- Reheat  -->
                 <float n="9" alias="/engines/engine[0]/nozzle-pos-norm" /> <!-- Reheat  -->
                 <float n="10" alias="/fdm/jsbsim/propulsion/clr" /> <!-- Reheat  -->
@@ -1059,6 +1061,13 @@
             <hlt-heat-rqst type="bool">false</hlt-heat-rqst>
             <guard type="bool">false</guard>
         </misc-panel-1>
+        <center-console>
+            <selected type="string">none</selected>
+            <!--
+                none
+                hmcs
+            -->
+        </center-console>
     </instrumentation>
 
     <ai>

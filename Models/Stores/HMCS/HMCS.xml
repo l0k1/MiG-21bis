@@ -1,0 +1,40 @@
+<PropertyList>
+
+    <path>sprayer.ac</path>
+    <animation>
+        <type>rotate</type>
+        <object-name>rightarm</object-name>
+        <property>/fdm/jsbsim/systems/hmcs/arm-pos-norm</property>
+        <factor>30</factor>
+        <offset-deg>0</offset-deg>
+        <center>
+            <x-m>-1.02079</x-m>
+            <y-m>0.204168</y-m>
+            <z-m>0.013836</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>leftarm</object-name>
+        <property>/fdm/jsbsim/systems/hmcs/arm-pos-norm</property>
+        <factor>-30</factor>
+        <offset-deg>0</offset-deg>
+        <center>
+            <x-m>-1.02079</x-m>
+            <y-m>-0.204168</y-m>
+            <z-m>0.013836</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+    
+</PropertyList>

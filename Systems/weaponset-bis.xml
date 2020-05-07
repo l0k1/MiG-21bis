@@ -193,6 +193,11 @@
             <lbs>1200</lbs>
             <weight-lb>1200</weight-lb>
         </opt>
+        <opt>
+            <name>HMCS</name>
+            <lbs>420</lbs>
+            <weight-lb>1200</weight-lb>
+        </opt>
     </weight>
     <weight n="3">
         <name>Right wing inboard pylon (#2)</name>

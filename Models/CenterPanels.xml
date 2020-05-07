@@ -1,0 +1,27 @@
+<PropertyList>
+
+    <!-- hmcs -->
+
+    <model>
+        <name>HMCSControl</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/HMCSControl/hmcscontrol.xml</path>
+        <offsets>
+                <x-m>-3.90937</x-m>
+                <y-m>-0.001762</y-m>
+                <z-m>1.22885</z-m>
+                <pitch-deg>12.00</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <type>select</type>
+        <object-name>HMCSControl</object-name>
+        <condition>
+            <equals>
+                  <property>instrumentation/center-console/selected</property>
+                  <value>HMCS Control</value>
+            </equals>
+        </condition>
+    </animation>
+
+</PropertyList>

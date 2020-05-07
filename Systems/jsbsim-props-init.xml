@@ -91,6 +91,18 @@
             <heading-deg-prev type="double">0.0</heading-deg-prev>
             <heading-deg type="double">0.0</heading-deg>
         </gyro-compass>
+        <hmcs>
+            <power type="double">0</power>
+            <quantity type="double">0</quantity>
+            <arm-pos-cmd type="double">0</arm-pos-cmd>
+            <arm-pos-norm type="double">0</arm-pos-norm>
+            <deploying type="double">0</deploying>
+            <lights>
+                <power type="double">0</power>
+                <arm type="double">0</arm>
+                <status type="double">0</status>
+            </lights>
+        </hmcs>
     </systems>
     <instrumentation>
         <pitot-setting type="double">1</pitot-setting>

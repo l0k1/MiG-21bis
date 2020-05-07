@@ -3,17 +3,6 @@
   <particlesystem>
     <name>white smoke</name>
 
-	    <condition>
-	  <equals>
-		<property>sim/multiplay/generic/int[19]</property>
-		<value>1</value>
-	</equals>
-	  <equals>
-            <property>sim/multiplay/generic/short[2]</property>
-            <value>29</value>
-       </equals>
-    </condition>
-
 	
     <texture>smoke.png</texture>
 

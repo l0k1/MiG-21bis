@@ -139,6 +139,30 @@
             </equals>
         </condition>
     </animation>
+
+    <!-- Sprayer -->
+
+    <model>
+        <name>HMCS</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/HMCS/HMCS.xml</path>
+        <offsets>
+                <x-m>-0.278152</x-m>
+                <y-m>0.00</y-m>
+                <z-m>-0.85</z-m>
+                <pitch-deg>0.00</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <type>select</type>
+        <object-name>HMCS</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[2]</property>
+                  <value>31</value>
+            </equals>
+        </condition>
+    </animation>
     
     <!-- GSh-23 -->
 

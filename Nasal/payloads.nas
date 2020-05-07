@@ -105,6 +105,8 @@ var payloads = {
     "Smokepod":          pos_arm.new("Smokepod","Smokepod",157,"tank",29,0),
     # countermeasures
     "Conformal CM":      pos_arm.new("Conformal CM","Conformal CM",210,"cm",30,0),
+    # joke
+    "HMCS":              pos_arm.new("HMCS", "HMCS",420,"tank",31,0),
 };
 
 # add in virtual pylons too
@@ -169,6 +171,10 @@ var update_pylons = func(pylon) {
                 setprop("/payload/virtual/weight["~pylon~"]/selected","none");
             }
         }
+    }
+
+    if (payload.name == "HMCS") {
+        setprop("fdm/jsbsim/systems/hmcs/quantity",100);
     }
     
     # JSBSIM weight
@@ -375,6 +381,8 @@ var empty_pylon = func(pylon) {
         setprop("/ai/submodels/submodel[81]/count",0);
         setprop("/ai/submodels/submodel[82]/count",0);
         setprop("/ai/submodels/submodel[83]/count",0);
+    } elsif (pylon == 2) {
+        setprop("/fdm/jsbsim/systems/hmcs/quantity",0);
     } elsif (pylon == 3) {
         setprop("/ai/submodels/submodel[24]/count",0);
         setprop("/ai/submodels/submodel[36]/count",0);

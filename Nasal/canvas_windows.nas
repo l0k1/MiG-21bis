@@ -79,6 +79,7 @@ var stores = {
                                 "PTB-800 Droptank",]],
                     ["Misc",
                                 ["Smokepod",
+                                "HMCS",
                                 "RN-28"]],
         ];
         m.p2opt = m.p1opt;
@@ -93,6 +94,8 @@ var stores = {
         m.cconopt = [
                     ["None",     
                                 ["none"]],
+                    ["Consoles",
+                                ["HMCS Control"]],
         ];
 
         # do the line splits manually
@@ -268,6 +271,26 @@ var stores = {
                         "sync with a CM pod",
                         "on the opposing side",
                         "of the fuselage.",
+                        ],
+            "HMCS"      : [
+                        #12345678901234567890
+                        "A fancy smoke pod,",
+                        "or water vapor",
+                        "generator. Nothing",
+                        "to see here.",
+                        "Most certainly not a",
+                        "Human Mentality",
+                        "Control System."
+                        ],
+            "HMCS Control"   : [
+                        #12345678901234567890
+                        "A fancy smoke pod,",
+                        "or water vapor",
+                        "generator. Nothing",
+                        "to see here.",
+                        "Most certainly not a",
+                        "Human Mentality",
+                        "Control System."
                         ],
 
         };
@@ -469,7 +492,7 @@ var stores = {
                     .setFont("LiberationFonts/LiberationMono-Regular.ttf")
                     .setFontSize(m.font_size, 1.0)
                     .setColor(m.font_color)
-                    .setText("none");
+                    .setText(getprop("/instrumentation/center-console/selected"));
 
         m.cconclick = m.root.createChild("path")
                     .setTranslation(10,425)
@@ -477,7 +500,8 @@ var stores = {
                     .vert(50)
                     .horiz(-180)
                     .close()
-                    .setColor(1,1,1,1);
+                    .setColor(1,1,1,1)
+                    .addEventListener("click",func(){m.pylon_click(7)});
 
         m.outerselectiongroup = [];
         m.innerselectiongroup = [];
@@ -907,7 +931,11 @@ var stores = {
     # run this with opt being the internal pylon number
     # if a new outer group is selected, update with both opt and out being the outer group name
     selections_update: func(opt = 0, out = -1) {
-        me.selected = getprop("/payload/weight["~opt~"]/selected");
+        if (opt == 7) {
+            me.selected = getprop("/instrumentation/center-console/selected");
+        } else {
+            me.selected = getprop("/payload/weight["~opt~"]/selected");
+        }
         if (out == -1) {
             me.outer_selected = me.find_payload_og(opt, me.selected);
         } else {
@@ -917,6 +945,10 @@ var stores = {
         foreach(var og; me.selection_map[opt]) {
             me.i = me.i + 1;
             me.outerselectiongroup[me.i].setText(og[0]);
+            #debug.dump(og);
+            #print(me.selected);
+            #print(me.outer_selected);
+            #print(opt);
             if(og[0] == me.selection_map[opt][me.outer_selected][0]) {
                 me.outerselectiongroup[me.i].setColor(me.selected_color);
                 me.j = -1;
@@ -957,7 +989,11 @@ var stores = {
     },
 
     outer_click: func(out) {
-        me.selected = getprop("/payload/weight["~me.pylon_selected~"]/selected");
+        if (me.pylon_selected == 7) {
+            me.selected = getprop("/instrumentation/center-console/selected");
+        } else {
+            me.selected = getprop("/payload/weight["~me.pylon_selected~"]/selected");
+        }
         if (out >= size(me.selection_map[me.pylon_selected])) {
             return;
         }
@@ -988,9 +1024,13 @@ var stores = {
             return;
         }
         me.sel = me.selection_map[me.pylon_selected][me.outer_selected][1][ig];
-        me.weight = payloads.payloads[me.sel].weight;
-        setprop("/payload/weight["~me.pylon_selected~"]/selected",me.sel);
-        setprop("/payload/weight["~me.pylon_selected~"]/weight-lb",me.weight);
+        if (me.pylon_selected == 7) {
+            setprop("/instrumentation/center-console/selected",me.sel)
+        } else {
+            me.weight = payloads.payloads[me.sel].weight;
+            setprop("/payload/weight["~me.pylon_selected~"]/selected",me.sel);
+            setprop("/payload/weight["~me.pylon_selected~"]/weight-lb",me.weight);
+        }
         me.pylon_map[me.pylon_selected][1].setText(me.sel);
         me.write_info(me.sel);
         me.outer_click(me.outer_selected);

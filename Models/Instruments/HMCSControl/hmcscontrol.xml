@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>hmcscontrol.ac</path>
+
+    <!--lights-->
+    
+    <animation>
+            <type>material</type>
+                <object-name>labels</object-name>
+                <object-name>quantityNeedle</object-name>
+            <emission>
+                 <red>0.6</red>
+                 <green>0.3</green>
+                 <blue>0.3</blue>
+                <factor-prop>controls/lighting/instruments-norm</factor-prop>
+            </emission> 
+    </animation>
+    
+    
+    
+    <!-- picks and translations -->
+
+    <animation>
+        <type>knob</type>
+        <object-name>powerSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/cc/hmcs/power</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.010276</x-m>
+            <y-m>-0.075939</y-m>
+            <z-m>-0.007877</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/cc/hmcs/power</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>knob</type>
+        <object-name>deploySwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/cc/hmcs/deploy</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.010276</x-m>
+            <y-m>-0.045939</y-m>
+            <z-m>-0.007877</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/cc/hmcs/deploy</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>knob</type>
+        <object-name>rlsSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/cc/hmcs/rls</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.010276</x-m>
+            <y-m>-0.015939</y-m>
+            <z-m>-0.007877</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/cc/hmcs/rls</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>powerLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/fdm/jsbsim/systems/hmcs/lights/power</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>armLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/fdm/jsbsim/systems/hmcs/lights/arm</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>statusLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/fdm/jsbsim/systems/hmcs/lights/status</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>quantityNeedle</object-name>
+        <property>fdm/jsbsim/systems/hmcs/quantity</property>
+        <factor>3</factor>
+        <offset-deg>0</offset-deg>
+        <center>
+            <x-m>-0.008776</x-m>
+            <y-m>0.021662</y-m>
+            <z-m>0.013836</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+</PropertyList>

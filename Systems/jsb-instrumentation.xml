@@ -632,4 +632,93 @@ clock
         </fcs_function>
     </channel>
 
+    <channel name="hmcs controls" execrate="4">
+        <!--
+            control properties
+            electric/output/hmcs/power
+            electric/switches/cc/hmcs/deploy
+            electric/switches/cc/hmcs/rls
+        -->
+        <!--
+            status properties
+            systems/hmcs/quantity (normed to 100)
+        -->
+        <!--
+            output properties
+            systems/hmcs/lights/power
+            systems/hmcs/lights/arm
+            systems/hmcs/lights/status
+            systems/hmcs/arm-pos-cmd
+            systems/hmcs/arm-pos-norm
+            systems/hmcs/deploying
+        -->
+        <switch name="systems/hmcs/lights/power">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                electric/output/hmcs/power gt 15
+            </test>
+        </switch>
+
+        <switch name="systems/hmcs/lights/arm">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                electric/output/hmcs/power gt 15
+                systems/hmcs/arm-pos-norm gt 0.98
+            </test>
+        </switch>
+
+        <switch name="systems/hmcs/lights/status">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                electric/output/hmcs/power gt 15
+                systems/hmcs/quantity gt 0.05
+                systems/hmcs/deploying == 1
+            </test>
+        </switch>
+
+        <switch name="systems/hmcs/arm-pos-cmd">
+            <default value="systems/hmcs/arm-pos-cmd"/>
+            <test logic="AND" value="electric/switches/cc/hmcs/deploy">
+                electric/output/hmcs/power gt 15
+            </test>
+        </switch>
+
+        <lag_filter name="trash/systems/hmcs/arm-pos-norm">
+            <input>systems/hmcs/arm-pos-cmd</input>
+            <c1>2</c1>
+            <clipto>
+                <min>0</min>
+                <max>1</max>
+            </clipto>
+            <output>systems/hmcs/arm-pos-norm</output>
+        </lag_filter>
+
+        <switch name="systems/hmcs/deploying">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                electric/output/hmcs/power gt 15
+                electric/switches/cc/hmcs/rls == 1
+                systems/hmcs/quantity gt 0.02
+                systems/hmcs/arm-pos-norm gt 0.95
+            </test>
+        </switch>
+
+        <fcs_function name="trash/systems/hmcs/quantity">
+            <function>
+                <sum>
+                    <property>systems/hmcs/quantity</property>
+                    <product>
+                        <value>-0.0017</value><!-- roughly 30 minutes of drop time -->
+                        <property>systems/hmcs/deploying</property>
+                    </product>
+                </sum>
+            </function>
+            <clipto>
+                <min>0</min>
+                <max>100</max>
+            </clipto>
+            <output>systems/hmcs/quantity</output>
+        </fcs_function>
+    </channel>
+
 </system>

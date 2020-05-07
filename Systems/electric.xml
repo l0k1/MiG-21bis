@@ -111,6 +111,14 @@
 	<property value="0">electric/switches/lvmsp/apu-ctlr-hi-spd-low</property>
 	<property value="0">electric/switches/lvmsp/lockon-hi-lo</property>
 
+	<!--
+	center console
+	        or
+	cc for short
+	-->
+	<property value="0">electric/switches/cc/hmcs/power</property>
+	<property value="0">electric/switches/cc/hmcs/deploy</property>
+	<property value="0">electric/switches/cc/hmcs/rls</property>
 
 	<property value="0">electric/sources/dc-gen-damage</property>
 	<property value="0">electric/sources/ac-gen-damage</property>
@@ -994,6 +1002,16 @@
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[3]">
 				electric/switches/rhfsp/jato-jett == 1
+			</test>
+		</switch>
+
+		<!-- center consoles -->
+
+
+		<switch name="electric/output/hmcs/power">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/cc/hmcs/power == 1
 			</test>
 		</switch>
 		
