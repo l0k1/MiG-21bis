@@ -1327,6 +1327,7 @@ var main_init = func {
     setprop("/consumables/fuel/tank[13]/jettisoned", FALSE);
 
     setlistener("/fdm/jsbsim/systems/armament/release", trigger_propogation);
+    setlistener("/controls/armament/pickle", trigger_propogation);
     setlistener("/fdm/jsbsim/systems/armament/heavy-release", heavy_release_listener);
 
     # pylon handling listeners
