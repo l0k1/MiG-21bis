@@ -189,7 +189,7 @@ var incoming_listener = func {
                         #print("Incoming!");
                         #print("author: |" ~ author ~ "|");
                         if ( author != nil ) {
-                            foreach ( var cx; arm_locking.cx_master_list) {
+                            foreach ( var cx; mpdb.cx_master_list) {
                                 if ( cx.get_Callsign() == author ) {
                                     var myCoord         = geo.aircraft_position();
                                     var vectorToEcho    = vector.Math.eulerToCartesian2(myCoord.course_to(cx.get_Coord()), vector.Math.getPitch(myCoord,cx.get_Coord()));

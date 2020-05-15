@@ -169,6 +169,10 @@ var Contact = {
         } else {
             obj.info = aircraft_lookup["default"];
         }
+
+        obj.tacobj = {parents: [tacview.tacobj]};
+        obj.tacobj.tacviewID = 1000 + int(math.floor(rand()*10000));
+        obj.tacobj.valid = 1;
         
         return obj;
     },

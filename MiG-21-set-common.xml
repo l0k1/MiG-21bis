@@ -213,6 +213,28 @@
                             </script>
                         </binding>
                     </item>
+                    <item>
+                        <label>Toggle Damage</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                mig21.toggle_damage();
+                            </script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Tacview Record</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                if (tacview.starttime == 0) {
+                                    tacview.startwrite();
+                                } else {
+                                    tacview.stopwrite();
+                                }
+                            </script>
+                        </binding>
+                    </item>
                 </menu>
                 <menu n="101">
                     <label>Dev</label>
@@ -1722,6 +1744,7 @@
         <mig28>             <file>Aircraft/MiG-21bis/Nasal/mig28.nas</file>             </mig28>
         <monitor>           <file>Aircraft/MiG-21bis/Nasal/dialog-perf.nas</file>
                             <file>Aircraft/MiG-21bis/Nasal/performance.nas</file>       </monitor>
+        <tacview>           <file>Aircraft/MIG-21bis/Nasal/tacview.nas</file>           </tacview>
 
     </nasal>
 
