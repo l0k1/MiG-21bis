@@ -31,6 +31,7 @@ var roll = 0;
 var pitch = 0;
 var heading = 0;
 var speed = 0;
+var mutexWrite = thread.newlock();
 
 var startwrite = func() {
     timestamp = getprop("/sim/time/utc/year") ~ "-" ~ getprop("/sim/time/utc/month") ~ "-" ~ getprop("/sim/time/utc/day") ~ "T";
@@ -40,9 +41,11 @@ var startwrite = func() {
     # create the file
     f = io.open(output_file, "w+");
     io.close(f);
+    thread.lock(mutexWrite);
     write("FileType=text/acmi/tacview\nFileVersion=2.1\n");
     write("0,ReferenceTime=" ~ timestamp ~ "\n#0\n");
     write(myplaneID ~ ",T=" ~ getLon() ~ "|" ~ getLat() ~ "|" ~ getAlt() ~ "|" ~ getRoll() ~ "|" ~ getPitch() ~ "|" ~ getHeading() ~ ",Name=MiG-21bis,CallSign="~getprop("/sim/multiplay/callsign")~"\n"); #
+    thread.unlock(mutexWrite);
     starttime = systime();
     setprop("/sim/screen/black","Starting tacview recording");
     settimer(func(){mainloop();}, main_update_rate);
@@ -62,10 +65,13 @@ var mainloop = func() {
     if (systime() - writetime > write_rate) {
         writetofile();
     }
+    thread.lock(mutexWrite);
     write("#" ~ (systime() - starttime)~"\n");
     writeMyPlanePos();
     writeMyPlaneAttributes();
+    thread.unlock(mutexWrite);
     foreach (var cx; mpdb.cx_master_list) {
+        thread.lock(mutexWrite);
         if (find_in_array(seen_ids, cx.tacobj.tacviewID) == -1) {
             append(seen_ids, cx.tacobj.tacviewID);
             write(cx.tacobj.tacviewID ~ ",Name="~cx.get_model2() ~ ",CallSign=" ~ cx.get_Callsign() ~"\n")
@@ -115,15 +121,20 @@ var mainloop = func() {
             }
             write("\n");
         }
+        thread.unlock(mutexWrite);
     }
 }
 
 var writeMyPlanePos = func() {
+    thread.lock(mutexWrite);
     write(myplaneID ~ ",T=" ~ getLon() ~ "|" ~ getLat() ~ "|" ~ getAlt() ~ "|" ~ getRoll() ~ "|" ~ getPitch() ~ "|" ~ getHeading() ~ "\n");
+    thread.unlock(mutexWrite);
 }
 
 var writeMyPlaneAttributes = func() {
+    thread.lock(mutexWrite);
     write(myplaneID ~ ",TAS="~getTas()~",MACH="~getMach()~",AOA="~getAoA()~",HDG="~getHeading()~",Throttle="~getThrottle()~",Afterburner="~getAfterburner()~"\n");
+    thread.unlock(mutexWrite);
 }
 
 
@@ -208,19 +219,37 @@ setlistener("/controls/armament/pickle", func() {
     if (!starttime) {
         return;
     }
+    thread.lock(mutexWrite);
     write("#" ~ (systime() - starttime)~"\n");
     write("0,Event=Message|"~ myplaneID ~ "|Pickle, selection at " ~ (getprop("controls/armament/pylon-knob") + 1) ~ "\n");
+    thread.unlock(mutexWrite);
 },0,0);
 
 setlistener("/controls/armament/trigger", func(p) {
     if (!starttime) {
         return;
     }
+    thread.lock(mutexWrite);
     if (p.getValue()) {
         write("#" ~ (systime() - starttime)~"\n");
         write("0,Event=Message|"~ myplaneID ~ "|Trigger pressed.\n");
     } else {
         write("#" ~ (systime() - starttime)~"\n");
         write("0,Event=Message|"~ myplaneID ~ "|Trigger released.\n");
+    }
+    thread.unlock(mutexWrite);
+},0,0);
+
+setlistener("/sim/multiplay/chat-history", func(p) {
+    if (!starttime) {
+        return;
+    }
+    var hist_vector = split("\n",p.getValue());
+    if (size(hist_vector) > 0) {
+        var last = hist_vector[size(hist_vector)-1];
+        thread.lock(mutexWrite);
+        write("#" ~ (systime() - tacview.starttime)~"\n");
+        write("0,Event=Message|Chat ["~hist_vector[size(hist_vector)-1]~"]\n");
+        thread.unlock(mutexWrite);
     }
 },0,0);

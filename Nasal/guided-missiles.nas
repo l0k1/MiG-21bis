@@ -744,8 +744,11 @@ var AIM = {
 		if (me.status == MISSILE_FLYING) {
 			delete(AIM.flying, me.flyID);
 			if (tacview.starttime) {
+				thread.lock(tacview.mutexWrite);
 				tacview.write("#" ~ (systime() - tacview.starttime)~"\n");
-				tacview.write("0,Event=Destroyed|"~me.tacviewID~!"\n");
+				tacview.write("0,Event=Destroyed|"~me.tacviewID~"\n");
+				tacview.write("-"~me.tacviewID~"\n");
+				thread.unlock(tacview.mutexWrite);
 			}
 		} else {
 			delete(AIM.active, me.ID);
@@ -1926,8 +1929,10 @@ var AIM = {
 		#setprop("/logging/missile/t-altitude-ft", me.t_coord.alt()*M2FT);
 
 		if (tacview.starttime) {
+			thread.lock(tacview.mutexWrite);
 			tacview.write("#" ~ (systime() - tacview.starttime)~"\n");
 			tacview.write(me.tacviewID~",T="~me.coord.lon()~"|"~me.coord.lat()~"|"~(me.alt_ft*FT2M)~",Name="~me.typeShort~",Type=Weapon+Missile\n");
+			thread.unlock(tacview.mutexWrite);
 		}
 
 		##############################
