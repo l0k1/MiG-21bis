@@ -214,15 +214,6 @@
                         </binding>
                     </item>
                     <item>
-                        <label>Toggle Damage</label>
-                        <binding>
-                            <command>nasal</command>
-                            <script>
-                                mig21.toggle_damage();
-                            </script>
-                        </binding>
-                    </item>
-                    <item>
                         <label>Tacview Record</label>
                         <binding>
                             <command>nasal</command>
