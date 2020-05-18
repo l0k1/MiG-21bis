@@ -515,7 +515,7 @@ var pylon_to_tank_array = [12,-1,11,-1,13];
 var charge_used = [0,0,0];
 
 var unjam = func(button) {
-    if ( charge_used[button] == 0 ) {
+    if ( charge_used[button] == 0 and getprop("/fdm/jsbsim/electric/output/gun") > 33) {
         charge_used[button] = 1;
         setprop("/fdm/jsbsim/systems/armament/GSh-23-jammed",0);
     }
