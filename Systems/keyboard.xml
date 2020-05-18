@@ -455,4 +455,75 @@
 		</binding>
 	</key>
 
+	<key n="86">
+		<name>V</name>
+		<desc>Scroll in reverse through views</desc>
+		<binding>
+			<command>nasal</command>
+			<script><![CDATA[    
+				    var step = -1;
+				    var n = view.index;
+				    for (var i = 0; i < size(view.views); i += 1) {
+				        n += step;
+				        if (n < 0)
+				            n = size(view.views) - 1;
+				        elsif (n >= size(view.views))
+				            n = 0;
+				        var e = view.views[n].getNode("enabled");
+				        var internal = view.views[n].getNode("internal");
+				        if ((e == nil or e.getBoolValue()) and (view.views[n].getNode("name")!=nil)){
+					        if (getprop("/payload/armament/msg")){
+					        	if (internal != nil and internal.getBoolValue()) {
+					        		break;
+					        	}
+					        } else {
+				            	break;
+				            }
+				        }
+				    }
+				    view.setView(n);
+
+				    # And pop up a nice reminder
+				    var popup=getprop("/sim/view-name-popup");
+				    if(popup == 1 or popup==nil) gui.popupTip(view.views[n].getNode("name").getValue());
+				]]></script>
+		</binding>
+	</key>
+
+	<key n="118">
+	<name>v</name>
+	<desc>Scroll through views</desc>
+	<binding>
+		<command>nasal</command>
+		<script><![CDATA[    
+				    var step = 1;
+				    var n = view.index;
+				    for (var i = 0; i < size(view.views); i += 1) {
+				        n += step;
+				        if (n < 0)
+				            n = size(view.views) - 1;
+				        elsif (n >= size(view.views))
+				            n = 0;
+				        var e = view.views[n].getNode("enabled");
+				        var internal = view.views[n].getNode("internal");
+				        if ((e == nil or e.getBoolValue()) and (view.views[n].getNode("name")!=nil)){
+					        if (getprop("/payload/armament/msg")){
+					        	if (internal != nil and internal.getBoolValue()) {
+					        		break;
+					        	}
+					        } else {
+				            	break;
+				            }
+				        }
+				    }
+				    view.setView(n);
+
+				    # And pop up a nice reminder
+				    var popup=getprop("/sim/view-name-popup");
+				    if(popup == 1 or popup==nil) gui.popupTip(view.views[n].getNode("name").getValue());
+				]]></script>
+	</binding>
+	</key>
+
+
 </PropertyList>
