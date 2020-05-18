@@ -318,10 +318,10 @@ var load_radios = func(path) {
     #debug.dump(data);
 }
 
+#var file_selector = gui.FileSelector.new(dir: getprop("/sim/fg-home"), callback: load_radios, title: "Select Radio Config File", button: "Load");
+var file_selector = nil;
 var get_radio_file_gui = func() {
-    var file_selector = gui.FileSelector.new(dir: getprop("/sim/fg-home"), callback: load_radios, title: "Select Radio Config File", button: "Load");
     file_selector.open();
-    file_selector.close();
 }
 
 var jsbsim_random = func() {
@@ -410,6 +410,9 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
     settimer( load_interior, 0 );
     setprop("/sim/current-view/view-number", 1);
     setprop("/sim/gui/tooltips-enabled", TRUE);
+
+
+    file_selector = gui.FileSelector.new(dir: getprop("/sim/fg-home"), callback: load_radios, title: "Select Radio Config File", button: "Load");
 
     screen.log.write("Welcome to MiG-21bis!", 1.0, 0.2, 0.2);
     dmg = getprop("payload/armament/msg");
