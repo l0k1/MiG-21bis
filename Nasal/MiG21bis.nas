@@ -358,6 +358,12 @@ var toggle_damage = func{
         setprop("sim/menubar/default/menu[5]/item[2]/enabled",1);
         setprop("sim/menubar/default/menu[7]/item[4]/enabled",1);
     }
+    # taken from Colin and his work on the Viggen
+    var internal = view.current.getNode("internal");
+    if (internal == nil or !internal.getBoolValue()) {
+        view.setView(0);
+        screen.log.write("External views are disabled with damage on");
+    }
 }
 
 var wow_menu_change = func{
@@ -401,6 +407,30 @@ var wow_menu_change = func{
     } else {
         setprop("sim/menubar/default/menu[100]/item[13]/enabled",1);
     }
+}
+
+view.stepView = func(step, force = 0) {
+    step = step > 0 ? 1 : -1;
+    var n = view.index;
+    for (var i = 0; i < size(view.views); i += 1) {
+        n += step;
+        if (n < 0)
+            n = size(view.views) - 1;
+        elsif (n >= size(view.views))
+            n = 0;
+        var e = view.views[n].getNode("enabled");
+        var internal = view.views[n].getNode("internal");
+
+        if ((force or e == nil or e.getBoolValue())
+            and view.views[n].getNode("name") != nil
+            and ((internal != nil and internal.getBoolValue()) or !getprop("/payload/armament/msg")))
+            break;
+    }
+    view.setView(n);
+
+    # And pop up a nice reminder
+    var popup=getprop("/sim/view-name-popup");
+    if(popup == 1 or popup==nil) gui.popupTip(view.views[n].getNode("name").getValue());
 }
 
 var init = setlistener("/sim/signals/fdm-initialized", func() {

@@ -1112,12 +1112,25 @@ var impact_listener = func {
         #print("woo");
         var typeNode = ballistic.getNode("impact/type");
         typeOrdName = ballistic.getNode("name").getValue();
+        var dropgeo = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue());
+
+        if (tacview.starttime) {
+            var radius = 0.5;
+            if (typeOrdName == "S-5") {
+                radius = 2;
+            } elsif(payloads[typeOrdName] != nil) {
+                radius = int(payloads[typeOrdName].hit_max_distance * 0.6);
+            }
+            thread.lock(tacview.mutexWrite);
+            tacview.writeExplosion(dropgeo.lat(),dropgeo.lon(),dropgeo.alt(),radius);
+            thread.unlock(tacview.mutexWrite);
+        }
+
         if ( cr_typeord[typeOrdName] != nil and (cr_typeord[typeOrdName].inc_terrain == TRUE or ballistic.getNode("impact/type").getValue() != "terrain") ) {
             #print("its a gun hit");
             var typeOrd = cr_typeord[typeOrdName];
             typeOrd.closest_distance = 35;
             
-            var dropgeo = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue());
             foreach(var mp; mpdb.cx_master_list){
                 #print("Submodel impact - hit: " ~ typeNode.getValue());
                 #var mlat = mp.getNode("position/latitude-deg").getValue();
@@ -1149,7 +1162,6 @@ var impact_listener = func {
             }
         } elsif (payloads[typeOrdName] != nil and ( payloads[typeOrdName].type == "bomb" or payloads[typeOrdName].type == "heavy" or payloads[typeOrdName].type == "heavyrocket" ))  {
             #print("a bomb dropped");
-            var dropgeo = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue());
             foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
                 distance = dropgeo.direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
                 if (distance < payloads[typeOrdName].hit_max_distance) {
