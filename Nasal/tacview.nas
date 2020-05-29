@@ -93,6 +93,9 @@ var startwrite = func() {
 
 var stopwrite = func() {
     setprop("/sim/screen/black","Stopping tacview recording");
+    thread.lock();
+    write("-"~myplaneID);
+    thread.unlock;
     writetofile();
     starttime = 0;
     seen_ids = [];
@@ -110,74 +113,76 @@ var mainloop = func() {
     }
     thread.lock(mutexWrite);
     write("#" ~ (systime() - starttime)~"\n");
+    thread.unlock(mutexWrite);
     writeMyPlanePos();
     writeMyPlaneAttributes();
-    thread.unlock(mutexWrite);
-    foreach (var cx; mpdb.cx_master_list) {
-        var mm = cx.get_model2();
-        var inf = nil;
-        if (mm == "depot" or mm == "struct" or mm == "point" or mm == "rig") {
-            inf = depot_db[cx.node.getNode("sim/multiplay/generic/int[17]").getValue()];
-        }
-        thread.lock(mutexWrite);
-        if (find_in_array(seen_ids, cx.tacobj.tacviewID) == -1) {
-            append(seen_ids, cx.tacobj.tacviewID);
-            write(cx.tacobj.tacviewID ~ ",Name="~cx.get_model2() ~ ",CallSign=" ~ cx.get_Callsign());
-            if (inf != nil) {
-                if (inf.w) {
-                    write(",Length="~inf.l~",Width="~inf.w~",Height="~inf.h);
+    if (getprop("/sim/multiplay/selected-server") != "mpserver.opredflag.com") {
+        foreach (var cx; mpdb.cx_master_list) {
+            var mm = cx.get_model2();
+            var inf = nil;
+            if (mm == "depot" or mm == "struct" or mm == "point" or mm == "rig") {
+                inf = depot_db[cx.node.getNode("sim/multiplay/generic/int[17]").getValue()];
+            }
+            thread.lock(mutexWrite);
+            if (find_in_array(seen_ids, cx.tacobj.tacviewID) == -1) {
+                append(seen_ids, cx.tacobj.tacviewID);
+                write(cx.tacobj.tacviewID ~ ",Name="~cx.get_model2() ~ ",CallSign=" ~ cx.get_Callsign());
+                if (inf != nil) {
+                    if (inf.w) {
+                        write(",Length="~inf.l~",Width="~inf.w~",Height="~inf.h);
+                    }
+                    write(",Type="~inf.type);
                 }
-                write(",Type="~inf.type);
+                mm = colors[math.floor(rand() * size(colors))];
+                write(",Color="~mm~"\n");
             }
-            mm = colors[math.floor(rand() * size(colors))];
-            write(",Color="~mm~"\n");
+            if (cx.tacobj.valid) {
+                lon = cx.get_Longitude();
+                lat = cx.get_Latitude();
+                alt = cx.get_altitude() * FT2M;
+                roll = cx.get_Roll();
+                pitch = cx.get_Pitch();
+                heading = cx.get_heading();
+                speed = cx.get_Speed()*KT2MPS;
+                
+                write(cx.tacobj.tacviewID ~ ",T=");
+                if (lon != cx.tacobj.lon) {
+                    write(lon);
+                    cx.tacobj.lon = lon;
+                }
+                write("|");
+                if (lat != cx.tacobj.lat) {
+                    write(lat);
+                    cx.tacobj.lat = lat;
+                }
+                write("|");
+                if (alt != cx.tacobj.alt) {
+                    write(alt);
+                    cx.tacobj.alt = alt;
+                }
+                write("|");
+                if (roll != cx.tacobj.roll) {
+                    write(roll);
+                    cx.tacobj.roll = roll;
+                }
+                write("|");
+                if (pitch != cx.tacobj.pitch) {
+                    write(pitch);
+                    cx.tacobj.pitch = pitch;
+                }
+                write("|");
+                if (heading != cx.tacobj.heading) {
+                    write(heading);
+                    cx.tacobj.heading = heading;
+                }
+                if (speed != cx.tacobj.speed) {
+                    write(",TAS="~speed);
+                    cx.tacobj.speed = speed;
+                }
+                write("\n");
+            }
+            thread.unlock(mutexWrite);
         }
-        if (cx.tacobj.valid) {
-            lon = cx.get_Longitude();
-            lat = cx.get_Latitude();
-            alt = cx.get_altitude() * FT2M;
-            roll = cx.get_Roll();
-            pitch = cx.get_Pitch();
-            heading = cx.get_heading();
-            speed = cx.get_Speed()*KT2MPS;
-            
-            write(cx.tacobj.tacviewID ~ ",T=");
-            if (lon != cx.tacobj.lon) {
-                write(lon);
-                cx.tacobj.lon = lon;
-            }
-            write("|");
-            if (lat != cx.tacobj.lat) {
-                write(lat);
-                cx.tacobj.lat = lat;
-            }
-            write("|");
-            if (alt != cx.tacobj.alt) {
-                write(alt);
-                cx.tacobj.alt = alt;
-            }
-            write("|");
-            if (roll != cx.tacobj.roll) {
-                write(roll);
-                cx.tacobj.roll = roll;
-            }
-            write("|");
-            if (pitch != cx.tacobj.pitch) {
-                write(pitch);
-                cx.tacobj.pitch = pitch;
-            }
-            write("|");
-            if (heading != cx.tacobj.heading) {
-                write(heading);
-                cx.tacobj.heading = heading;
-            }
-            if (speed != cx.tacobj.speed) {
-                write(",TAS="~speed);
-                cx.tacobj.speed = speed;
-            }
-            write("\n");
-        }
-        thread.unlock(mutexWrite);
     }
     explosion_timeout_loop();
 }
@@ -339,4 +344,14 @@ setlistener("/sim/multiplay/chat-history", func(p) {
         write("0,Event=Message|Chat ["~hist_vector[size(hist_vector)-1]~"]\n");
         thread.unlock(mutexWrite);
     }
+},0,0);
+
+
+setlistener("/sim/signals/exit", func(p) {
+    if (!starttime) {
+        return;
+    }
+    thread.lock();
+    write("-"~myplaneID);
+    thread.unlock;
 },0,0);
