@@ -505,6 +505,7 @@ var armament_loop = func() {
     missile_arming_loop();
     drop_tank_handling_loop();
     ir_lock_inform();
+    model_timeout();
     settimer(armament_loop, UPDATE_PERIOD);
 }
 
@@ -1103,6 +1104,8 @@ var cr_typeord = {
 var inside_callsign = "";
 var distance = 0;
 var typeOrdName = "";
+var lastgeod = 0;
+var lastgeodtime = 0;
 
 var impact_listener = func {
     var ballistic = props.globals.getNode(getprop("/ai/models/model-impact"), 0);
@@ -1110,7 +1113,7 @@ var impact_listener = func {
     #print("inside listener");
     if (ballistic != nil and ballistic.getNode("name") != nil and ballistic.getNode("impact/type") != nil) {
         #print("woo");
-        var typeNode = ballistic.getNode("impact/type");
+        var type = ballistic.getNode("impact/type").getValue();
         typeOrdName = ballistic.getNode("name").getValue();
         var dropgeo = geo.Coord.new().set_latlon(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue());
 
@@ -1175,6 +1178,33 @@ var impact_listener = func {
             }
             sounds.boom(distance);
         }
+
+        if (lastgeodtime + 0.1 < systime()) {
+            lastgeodtime = systime();
+            lastgeod = geodinfo(dropgeo.lat(), dropgeo.lon());
+        }
+
+        if (lastgeod != nil) {
+            if (lastgeod[1] != nil) {
+                
+            }
+        }
+
+        if (typeOrdName == "GSh-23") {
+            if (type == "terrain") {
+                if (!lastgeod[1].solid) {
+                    place_model("Aircraft/MiG-21bis/Models/Effects/GSh-23/GSh-23-watercloud.xml",dropgeo.lat(), dropgeo.lon(), dropgeo.alt() * M2FT,0.1);
+                    place_model("Aircraft/MiG-21bis/Models/Effects/GSh-23/GSh-23-waterburst.xml",dropgeo.lat(), dropgeo.lon(), dropgeo.alt() * M2FT,0.1);
+                    #place_model("Aircraft/MiG-21bis/Models/Effects/GSh-23/GSh-23-dirtclod.xml",dropgeo.lat(), dropgeo.lon(), dropgeo.alt() * M2FT,0.2);
+                } else {
+                    place_model("Aircraft/MiG-21bis/Models/Effects/GSh-23/GSh-23-dirtcloud.xml",dropgeo.lat(), dropgeo.lon(), dropgeo.alt() * M2FT,0.1);
+                    place_model("Aircraft/MiG-21bis/Models/Effects/GSh-23/GSh-23-dirtclod.xml",dropgeo.lat(), dropgeo.lon(), dropgeo.alt() * M2FT,0.2);
+                }
+            } else {
+                place_model("Aircraft/MiG-21bis/Models/Effects/GSh-23/GSh-23-shrap.xml",dropgeo.lat(), dropgeo.lon(), dropgeo.alt() * M2FT,0.2);
+            }
+        }
+
         if (typeOrdName == "BETAB-500ShP" and ballistic.getNode("impact/type").getValue() == "terrain") {
             #var x = geo.put_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue());
             place_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue() * M2FT);
@@ -1291,7 +1321,9 @@ var spamLoop = func {
     settimer(spamLoop, 1.20);
 }
 
-var place_model = func(path, lat, lon, ele) {
+var model_exp = [];
+
+var place_model = func(path, lat, lon, ele, time = 0) {
     #print(path);
     #print(lat);
     #print(lon);
@@ -1327,7 +1359,44 @@ var place_model = func(path, lat, lon, ele) {
     objModel.getNode("latitude").setDoubleValue(lat);
     objModel.getNode("longitude").setDoubleValue(lon);
     objModel.getNode("elevation").setDoubleValue(ele);
+
+    if (time) {
+        append(model_exp,{
+            n: objModel,
+            t: systime() + time,
+            });
+    }
 }
+
+var model_timeout = func() {
+    foreach (var m; model_exp) {
+        if (m.t and systime() > m.t) {
+            m.n.remove();
+            m.t = 0;
+            model_exp = mpdb.remove_from_array(model_exp, m);
+        }
+    }
+}
+
+var water_materials = {
+    "Ocean": "water",
+    "Lake": "water",
+    "Pond": "water",
+    "Reservoir": "water",
+    "Stream": "water",
+    "Canal": "water",
+    "Lagoon": "water",
+    "Estuary": "water",
+    "Watercourse": "water",
+    "Saline": "water",
+    "DryLake": "water",
+    "IntermittentReservoir": "water",
+    "IntermittentLake": "water",
+    "IntermittentStream": "water",
+    "Marsh": "water",
+    "FloodLand": "water",
+    "SaltMarsh": "water",
+};
 
 ############################# main init ###############
 

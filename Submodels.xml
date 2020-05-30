@@ -251,7 +251,6 @@
         <collision-report>sim/ai/aircraft/collision/bullet</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bullet</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Stores/Bullet-Submodel.xml</submodel-path>
     </submodel>
     <!-- 6 -->
     <submodel>
@@ -295,7 +294,6 @@
         <collision-report>sim/ai/aircraft/collision/bullet</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bullet</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Stores/Bullet-Submodel.xml</submodel-path>
     </submodel>
     <!-- 8 -->
     <submodel>
