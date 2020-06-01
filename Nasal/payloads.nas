@@ -1177,8 +1177,15 @@ var hitmessage = func(typeOrd) {
     } else {
         var ordname = typeOrd.name;
     }
-    message = ordname ~ " hit: " ~ typeOrd.hit_callsign ~ ": " ~ typeOrd.hit_count ~ " hits";
-    defeatSpamFilter(message);
+    var msg = notifications.ArmamentNotification.new("mhit", 4, 151+damage.shells[typeOrd][0]);
+                msg.RelativeAltitude = 0;
+                msg.Bearing = 0;
+                msg.Distance = hits_count;
+                msg.RemoteCallsign = hit_callsign;
+                f14.hitBridgedTransmitter.NotifyAll(msg);
+    damage.damageLog.push("You hit "~hit_callsign~" with "~ordname~", "~hits_count~" times.");
+    #message = ordname ~ " hit: " ~ typeOrd.hit_callsign ~ ": " ~ typeOrd.hit_count ~ " hits";
+    #defeatSpamFilter(message);
     typeOrd.hit_callsign = "";
     typeOrd.hit_timer = 0;
     typeOrd.hit_count = 0;
