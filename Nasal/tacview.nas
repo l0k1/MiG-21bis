@@ -73,7 +73,9 @@ var heading = 0;
 var speed = 0;
 var mutexWrite = thread.newlock();
 
-var startwrite = func() {
+var stop_on_prop = 0;
+
+var startwrite = func(propfired = 0) {
     timestamp = getprop("/sim/time/utc/year") ~ "-" ~ getprop("/sim/time/utc/month") ~ "-" ~ getprop("/sim/time/utc/day") ~ "T";
     timestamp = timestamp ~ getprop("/sim/time/utc/hour") ~ ":" ~ getprop("/sim/time/utc/minute") ~ ":" ~ getprop("/sim/time/utc/second") ~ "Z";
     filetimestamp = string.replace(timestamp,":","-");
@@ -87,12 +89,17 @@ var startwrite = func() {
     write(myplaneID ~ ",T=" ~ getLon() ~ "|" ~ getLat() ~ "|" ~ getAlt() ~ "|" ~ getRoll() ~ "|" ~ getPitch() ~ "|" ~ getHeading() ~ ",Name=MiG-21bis,CallSign="~getprop("/sim/multiplay/callsign")~"\n"); #
     thread.unlock(mutexWrite);
     starttime = systime();
-    setprop("/sim/screen/black","Starting tacview recording");
+    stop_on_prop = propfired;
+    if (!stop_on_prop) {
+        setprop("/sim/screen/black","Starting tacview recording");
+    }
     settimer(func(){mainloop();}, main_update_rate);
 }
 
 var stopwrite = func() {
-    setprop("/sim/screen/black","Stopping tacview recording");
+    if (!stop_on_prop) {
+        setprop("/sim/screen/black","Stopping tacview recording");
+    }
     thread.lock();
     write("-"~myplaneID);
     thread.unlock;
@@ -346,6 +353,15 @@ setlistener("/sim/multiplay/chat-history", func(p) {
     }
 },0,0);
 
+############### MIG21 SPECIFIC ##################
+
+setlistener("/fdm/jsbsim/electric/output/recorder", func(p) {
+    if (p.getValue() > 105) {
+        startwrite(1);
+    } elsif (stop_on_prop == 1) {
+        stopwrite();
+    }
+},0,0);
 
 setlistener("/sim/signals/exit", func(p) {
     if (!starttime) {
