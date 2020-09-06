@@ -324,14 +324,6 @@ var get_radio_file_gui = func() {
     file_selector.open();
 }
 
-var jsbsim_random = func() {
-    setprop("/fdm/jsbsim/random/rand-0",rand());
-    setprop("/fdm/jsbsim/random/rand-1",rand());
-    setprop("/fdm/jsbsim/random/rand-2",rand());
-    setprop("/fdm/jsbsim/random/rand-3",rand());
-    settimer(jsbsim_random,0);
-}
-
 var load_interior = func{
     setprop("/sim/current-view/view-number", 0);
     #print("..Done!");
@@ -457,7 +449,6 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
     
     test_support();
     main_loop();
-    jsbsim_random();
     #
     setlistener("gear/gear[0]/wow",func(){wow_menu_change()},nil,0);
     setlistener("gear/gear[1]/wow",func(){wow_menu_change()},nil,0);

@@ -2,10 +2,13 @@ var Math = {
     #
     # Author: Nikolai V. Chr.
     #
-    # Version 1.5
+    # Version 1.9
     #
     # When doing euler coords. to cartesian: +x = forw, +y = left,  +z = up.
     # FG struct. coords:                     +x = back, +y = right, +z = up.
+    #
+    # If euler to cartesian (with inverted heading) then:
+    # cartesian vector will be x: north, y: west, z: skyward
     #
     # When doing euler angles (from pilots point of view):  yaw     = yaw left,  pitch = rotate up, roll = roll right.
     # FG rotations:                                         heading = yaw right, pitch = rotate up, roll = roll right.
@@ -18,6 +21,30 @@ var Math = {
 
     convertAngles: func (heading,pitch,roll) {
         return [-heading, pitch, roll];
+    },
+    
+    # returns direction in geo coordinate system
+    vectorToGeoVector: func (a, coord) {
+        me.handp = me.cartesianToEuler(a);
+        me.end_dist_m = 100;# not too low for floating point precision. Not too high to get into earth curvature stuff.
+        me.tgt_coord = geo.Coord.new(coord);
+        if (me.handp[0] != nil) {
+            me.tgt_coord.apply_course_distance(me.handp[0],me.end_dist_m);
+            me.upamount = me.end_dist_m * math.tan(me.handp[1]*D2R);
+        } elsif (me.handp[1] == 90) {
+            me.upamount = me.end_dist_m;
+        } else {
+            me.upamount = -me.end_dist_m;
+        }
+        me.tgt_coord.set_alt(coord.alt()+me.upamount);
+        
+        return {"x":me.tgt_coord.x()-coord.x(),  "y":me.tgt_coord.y()-coord.y(), "z":me.tgt_coord.z()-coord.z()};
+    },
+    
+    # When observing another MP aircraft the groundspeed velocity info is in body frame, this method will convert it to cartesian vector.
+    getCartesianVelocity: func (yaw_deg, pitch_deg, roll_deg, uBody_fps, vBody_fps, wBody_fps) {
+        me.bodyVelocity = [uBody_fps, -vBody_fps, -wBody_fps];
+        return me.yawPitchRollVector(yaw_deg, pitch_deg, roll_deg, me.bodyVelocity);
     },
 
     # angle between 2 vectors. Returns 0-180 degrees.
@@ -43,7 +70,7 @@ var Math = {
         me.rollM  = me.rollMatrix(roll);
         me.pitchM = me.pitchMatrix(pitch);
         me.yawM   = me.yawMatrix(yaw);
-        me.rotation = me.multiplyMatrices(me.multiplyMatrices(me.yawM, me.pitchM), me.rollM);
+        me.rotation = me.multiplyMatrices(me.rollM, me.multiplyMatrices(me.pitchM, me.yawM));
         return me.multiplyMatrixWithVector(me.rotation, vector);
     },
 
@@ -52,7 +79,7 @@ var Math = {
         me.rollM  = me.rollMatrix(roll);
         me.pitchM = me.pitchMatrix(pitch);
         me.yawM   = me.yawMatrix(yaw);
-        me.rotation = me.multiplyMatrices(me.multiplyMatrices(me.rollM, me.pitchM), me.yawM);
+        me.rotation = me.multiplyMatrices(me.yawM, me.multiplyMatrices(me.pitchM, me.rollM));
         return me.multiplyMatrixWithVector(me.rotation, vector);
     },
 
@@ -92,6 +119,29 @@ var Math = {
         return [math.cos(yaw),-math.sin(yaw),0,
                 math.sin(yaw),math.cos(yaw),0,
                 0,0,1];
+    },
+
+    # vector to heading/pitch
+    cartesianToEuler: func (vector) {
+        me.horz  = math.sqrt(vector[0]*vector[0]+vector[1]*vector[1]);
+        if (me.horz != 0) {
+            me.pitch = math.atan2(vector[2],me.horz)*R2D;
+            me.hdg = math.asin(-vector[1]/me.horz)*R2D;
+
+            if (vector[0] < 0) {
+                # south
+                if (me.hdg >= 0) {
+                    me.hdg = 180-me.hdg;
+                } else {
+                    me.hdg = -180-me.hdg;
+                }
+            }
+            me.hdg = geo.normdeg(me.hdg);
+        } else {
+            me.pitch = vector[2]>=0?90:-90;
+            me.hdg = nil;
+        }
+        return [me.hdg, me.pitch];
     },
 
     # gives an vector that points up from fuselage
@@ -245,36 +295,3 @@ var Math = {
 #
 
 };
-
-# Fix for geo.Coord: (not needed in FG 2017.4+)
-geo.Coord.set_x = func(x) { me._cupdate(); me._pdirty = 1; me._x = x; me };
-geo.Coord.set_y = func(y) { me._cupdate(); me._pdirty = 1; me._y = y; me };
-geo.Coord.set_z = func(z) { me._cupdate(); me._pdirty = 1; me._z = z; me };
-geo.Coord.set_lat = func(lat) { me._pupdate(); me._cdirty = 1; me._lat = lat * D2R; me };
-geo.Coord.set_lon = func(lon) { me._pupdate(); me._cdirty = 1; me._lon = lon * D2R; me };
-geo.Coord.set_alt = func(alt) { me._pupdate(); me._cdirty = 1; me._alt = alt; me };
-geo.Coord.apply_course_distance2 = func(course, dist) {# this method in geo is not bad, just wanted to see if this way of doing it worked better.
-        me._pupdate();
-        course *= D2R;
-        var nc = geo.Coord.new();
-        nc.set_xyz(0,0,0);        # center of earth
-        dist /= me.direct_distance_to(nc);# current distance to earth center
-        
-        if (dist < 0.0) {
-          dist = abs(dist);
-          course = course - math.pi;        
-        }
-        
-        me._lat2 = math.asin(math.sin(me._lat) * math.cos(dist) + math.cos(me._lat) * math.sin(dist) * math.cos(course));
-
-        me._lon = me._lon + math.atan2(math.sin(course)*math.sin(dist)*math.cos(me._lat),math.cos(dist)-math.sin(me._lat)*math.sin(me._lat2));
-
-        while (me._lon <= -math.pi)
-            me._lon += math.pi*2;
-        while (me._lon > math.pi)
-            me._lon -= math.pi*2;
-
-        me._lat = me._lat2;
-        me._cdirty = 1;
-        me;
-    };

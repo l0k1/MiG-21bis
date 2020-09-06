@@ -659,6 +659,7 @@
  <system file="electric"/>
  <system file="fuel"/>
  <system file="propulsion"/>
+ <system file="gyros"/>
  <system file="air_intake"/>
  <system file="payloads"/>
  <system file="hydraulic"/>
@@ -669,6 +670,8 @@
  <system file="radar-cooling"/>
  <system file="external-animation"/>
  <system file="headmove"/>
+ <system file="gyro-compass"/>
+ <system file="flightdirector"/>
 
  <flight_control name="none"/>
 
