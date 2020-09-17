@@ -677,4 +677,43 @@
 
  <aerodynamics file="mig-21-aero-aeromatic-v3_3_10.xml"/>
 
+ <external_reactions>
+  <force name="propulsion/sprd99right" frame="BODY">
+    <function>
+      <product>
+        <property>propulsion/sprd99/activate</property>
+        <value>5507</value>
+      </product>
+    </function>
+    <location unit="M">
+     <x>     3.3 </x>
+     <y>     0.56 </y>
+     <z>     -0.2 </z>
+    </location>
+    <direction>
+      <x>0.7</x> <!-- 1 is back -->
+      <y>0.1</y> <!-- 1 is right -->
+      <z>-0.2</z> <!-- 1 is down -->
+    </direction>
+  </force>
+  <force name="propulsion/sprd99left" frame="BODY">
+    <function>
+      <product>
+        <property>propulsion/sprd99/activate</property>
+        <value>5507</value>
+      </product>
+    </function>
+    <location unit="M">
+     <x>     3.3 </x>
+     <y>     -0.56 </y>
+     <z>     -0.2 </z>
+    </location>
+    <direction>
+      <x>0.7</x> <!-- 1 is back -->
+      <y>-0.1</y> <!-- 1 is right -->
+      <z>-0.2</z> <!-- 1 is down -->
+    </direction>
+  </force>
+</external_reactions>
+
 </fdm_config>

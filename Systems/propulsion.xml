@@ -271,4 +271,43 @@ ignition, a delay of up to 9 seconds was experienced.
         </pure_gain>
 
     </channel>
+
+    <channel name="sprd99" execrate="12">
+        <fcs_function name="trash/propulsion/sprd99/activate">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>instrumentation/pitot/airspeed-kts</property>
+                            <value>45</value>
+                        </gt>
+                        <lt>
+                            <property>propulsion/sprd99/timeout</property>
+                            <value>70</value>
+                        </lt>
+                    </and>
+                    <value>1</value>
+                    <value>0</value>
+                </ifthen>
+            </function>
+            <output>propulsion/sprd99/activate</output>
+        </fcs_function>
+
+        <fcs_function name="trash/propulsion/sprd99/activate">
+            <function>
+                <sum>
+                    <property>propulsion/sprd99/timeout</property>
+                    <ifthen>
+                        <gt>
+                            <property>propulsion/sprd99/activate</property>
+                            <value>0</value>
+                        </gt>
+                        <value>1</value>
+                        <value>0</value>
+                    </ifthen>
+                </sum>
+            </function>
+            <output>propulsion/sprd99/timeout</output>
+        </fcs_function>
+    </channel>
 </system>

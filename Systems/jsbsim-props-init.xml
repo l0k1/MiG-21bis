@@ -135,6 +135,10 @@
     </pneumatic>
     <propulsion>
         <clr type="int">0</clr>
+        <sprd99>
+            <activate type="double">0</activate>
+            <timeout type="double">0</timeout>
+        </sprd99>
     </propulsion>
     <random>
         <rand-0 type="double">0.0</rand-0>
