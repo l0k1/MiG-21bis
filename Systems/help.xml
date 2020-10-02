@@ -104,18 +104,32 @@
 		<desc>GCI Request Cutoff</desc>
 	</key>
 	<text><![CDATA[
-	STARTUP
-	---------
-	If using the automatic startup, you still should do a couple things:
-	1) Set the fuel guage - the fuel gauge does not automatically set to the level in the tank, you need to set the initial level.
-	2) Slave the gyrocompass - hold down the FDS button until the HI compass settles. The compass will drift over time, press the FDS button every now and again to reslave.
-	2b) Set the magnetic declination instrument to your current latitude to help minimize gyro error.
-	INFO
-	3) Turn on the auxilary hydraulics for full aileron control.
-	---------
-	- Check the installation directory for a how-to guide on weapons employment.
-	- Second reheat (ctrl-f) is only effective below 15,000 feet MSL, and use should be limited to 3 minutes.
-	- Smokepod colors are available in the dropdown menu.
-	- The gunsight has fully customizable colors via the dropdown menu.
-	]]></text>
+WEIGHTS
+---------
+Maximum takeoff weight in nominal conditions is 9800 kg.
+Maximum takeoff weight when temps are below 15 degrees celcius is 10500 kg.
+Maximum takeoff weight with JATO is 9100 kg.
+Takeoff weight on dirt runways is 8800 kg.
+
+Landing weight is 6800 kg.
+Emergency landing weight is 7300 kg.
+
+Empty weight is 6100 kg.
+Empty weight plus full internal fuel is ~8250 kg.
+
+STARTUP
+---------
+If using the automatic startup, you still should do a couple things:
+1) Set the fuel guage - the fuel gauge does not automatically set to the level in the tank, you need to set the initial level.
+2) Slave the gyrocompass - hold down the FDS button until the HI compass settles. The compass will drift over time, press the FDS button every now and again to reslave.
+2b) Set the magnetic declination instrument to your current latitude to help minimize gyro error.
+INFO
+3) Turn on the auxilary hydraulics for full aileron control.
+
+---------
+- Check the installation directory for a how-to guide on weapons employment.
+- Second reheat (ctrl-f) is only effective below 15,000 feet MSL, and use should be limited to 3 minutes.
+- Smokepod colors are available in the dropdown menu.
+- The gunsight has fully customizable colors via the dropdown menu.
+]]></text>
 </PropertyList>
