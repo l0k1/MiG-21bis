@@ -106,25 +106,35 @@ var stores = {
         # 21 lines for info
         m.store_info = {
             "none"  :   [
-                        #12345678901234567890 
+                        #12345678901234567890
+                        "",
                         "There is nothing",
                         "selected on this",
                         "pylon.",
                         ],
             "FAB-100" : [
                         #12345678901234567890
+                        "",
+                        "100 kg",
+                        "",
                         "A 100 kilogram free-",
                         "fall bomb.",
                         ],
             "FAB-100x4" : [
                         #12345678901234567890
+                        "",
+                        "435 kg",
+                        "",
                         "Four FAB-100's on a",
                         "specially designed",
                         "launcher rail.",
                         ],
             "P-100"     : [
                         #12345678901234567890
+                        "",
+                        "100 kg",
                         "A practice bomb",
+                        "",
                         "which emits a white",
                         "smoke upon impact.",
                         "Has the same",
@@ -133,22 +143,34 @@ var stores = {
                         ],
             "P-100x4" : [
                         #12345678901234567890
+                        "",
+                        "435 kg",
+                        "",
                         "Four P-100's on a",
                         "specially designed",
                         "launcher rail.",
                         ],
             "FAB-250"   : [
                         #12345678901234567890
+                        "",
+                        "250 kg",
+                        "",
                         "A 250 kilogram free-",
                         "fall bomb.",
                         ],
             "FAB-500"   : [
                         #12345678901234567890
+                        "",
+                        "500 kg",
+                        "",
                         "A 500 kilogram free-",
                         "fall bomb.",
                         ],
             "BETAB-500ShP" : [
                         #12345678901234567890
+                        "",
+                        "526 kg",
+                        "",
                         "A 500 kilogram high",
                         "drag bunker buster",
                         "designed for runway",
@@ -158,6 +180,9 @@ var stores = {
                         ],
             "R-3S"   : [
                         #12345678901234567890
+                        "",
+                        "75 kg",
+                        "",
                         "A short range, heat-",
                         "seeking missile that",
                         "entered service in  ",
@@ -166,6 +191,9 @@ var stores = {
                         ],
             "R-3R"   : [
                         #12345678901234567890
+                        "",
+                        "76 kg",
+                        "",
                         "A short range, radar",
                         "guided missile that",
                         "entered service in",
@@ -174,6 +202,9 @@ var stores = {
                         ],
             "R-60"   : [
                         #12345678901234567890
+                        "",
+                        "44 kg",
+                        "",
                         "A short range, heat-",
                         "seeking missile that",
                         "entered service in  ",
@@ -182,12 +213,18 @@ var stores = {
                         ],
             "R-60x2"   : [
                         #12345678901234567890
+                        "",
+                        "88 kg",
+                        "",
                         "Two R-60's mounted",
                         "on a specially",
                         "designed launcher.",
                         ],
             "R-27R1"   : [
                         #12345678901234567890
+                        "",
+                        "254 kg",
+                        "",
                         "A long range, radar",
                         "guided missile, that",
                         "entered service in",
@@ -196,6 +233,9 @@ var stores = {
                         ],
             "R-27T1"   : [
                         #12345678901234567890
+                        "",
+                        "250 kg",
+                        "",
                         "A long range, heat",
                         "seeking missile that",
                         "entered service in",
@@ -204,6 +244,9 @@ var stores = {
                         ],
             "Kh-66"   : [
                         #12345678901234567890
+                        "",
+                        "287 kg",
+                        "",
                         "A short range beam-",
                         "riding missile,",
                         "used to attack",
@@ -215,6 +258,9 @@ var stores = {
                         ],
             "Kh-25MP"   : [
                         #12345678901234567890
+                        "",
+                        "315 kg",
+                        "",
                         "A medium range anti-",
                         "radiation missile",
                         "used to attack",
@@ -226,33 +272,53 @@ var stores = {
                         ],
             "UB-16"   : [
                         #12345678901234567890
+                        "",
+                        "64 kg",
+                        "",
                         "A rocket pod which",
                         "contains 16 S-5",
                         "rockets.",
                         ],
             "UB-32"   : [
                         #12345678901234567890
+                        "",
+                        "264 kg",
+                        "",
                         "A rocket pod which",
                         "contains 32 S-5",
                         "rockets.",
                         ],
             "S-24"   : [
                         #12345678901234567890
+                        "",
+                        "235 kg",
+                        "",
                         "A large diameter",
                         "rocket.",
                         ],
             "PTB-490 Droptank"   : [
                         #12345678901234567890
+                        "",
+                        "82 kg empty",
+                        "~468 kg full",
+                        "",
                         "A 490 liter drop",
                         "tank.",
                         ],
             "PTB-800 Droptank"   : [
                         #12345678901234567890
+                        "",
+                        "104 kg empty",
+                        "~740 kg full",
+                        "",
                         "A 800 liter drop",
                         "tank.",
                         ],
             "Smokepod"   : [
                         #12345678901234567890
+                        "",
+                        "72 kg",
+                        "",
                         "A missile-shaped",
                         "smokepod for use in",
                         "training and aerial",
@@ -260,12 +326,18 @@ var stores = {
                         ],
             "RN-28"   : [
                         #12345678901234567890
+                        "",
+                        "545 kg",
+                        "",
                         "An inert, static",
                         "nuclear device for",
                         "training and display",
                         ],
             "Conformal CM"   : [
                         #12345678901234567890
+                        "",
+                        "95 kg",
+                        "",
                         "A conformal counter-",
                         "measure pod.",
                         "Contains 9 chaff and",
@@ -276,23 +348,26 @@ var stores = {
                         ],
             "HMCS"      : [
                         #12345678901234567890
+                        "",
+                        "190 kg",
+                        "",
                         "A fancy smoke pod,",
                         "or water vapor",
                         "generator. Nothing",
                         "to see here.",
                         "Most certainly not a",
                         "Human Mentality",
-                        "Control System."
+                        "Control System.",
+                        "Needs the HMCS",
+                        "center console",
+                        "selected to operate."
                         ],
             "HMCS Control"   : [
                         #12345678901234567890
-                        "A fancy smoke pod,",
-                        "or water vapor",
-                        "generator. Nothing",
-                        "to see here.",
-                        "Most certainly not a",
-                        "Human Mentality",
-                        "Control System."
+                        "",
+                        "Center control",
+                        "console for the HMCS",
+                        "system."
                         ],
 
         };
