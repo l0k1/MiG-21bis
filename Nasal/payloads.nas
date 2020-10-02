@@ -234,6 +234,14 @@ var create_pylon = func(pylon, payload, selected) {
     if (payload.type == "bomb") {
         setprop("/payload/released/"~payload.name~"["~pylon~"]",FALSE);
     }
+
+    if (payload.type == "tank") {
+        if (selected == "PTB-800") {
+            setprop("/consumables/fuel/tank["~pylon_to_tank_array[pylon]~"]/level-norm",1400);
+        } else {
+            setprop("/consumables/fuel/tank["~pylon_to_tank_array[pylon]~"]/level-norm",850);
+        }
+    }
     
     if (selected == "FAB-100x4") {
         if (pylon == 1) {
