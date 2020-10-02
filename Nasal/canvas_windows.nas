@@ -25,6 +25,8 @@ var stores = {
         };
         m.root = m.stores_canvas.createGroup();
 
+        m.mtow = 9800; # max takeoff weight in KG at normal conditions
+
         m.p3opt = [
                     ["None",     
                                 ["none"]],
@@ -301,6 +303,8 @@ var stores = {
 
         m.font_size = 18;
         m.font_color = [1,1,1];
+        m.green_color = [0,1,0];
+        m.red_color = [1,0,0];
         m.selected_color = [0,1,0];
 
         m.p3 = m.root.createChild("text", "p3label")
@@ -506,7 +510,7 @@ var stores = {
         m.outerselectiongroup = [];
         m.innerselectiongroup = [];
         m.infobox = [];
-        for ( var i = 0; i < 23; i = i + 1 ) {
+        for ( var i = 0; i < 20; i = i + 1 ) {
             append(m.outerselectiongroup, m.root.createChild("text")
                     .setTranslation(200,20 + (20 * i))
                     .setAlignment("left-center")
@@ -698,30 +702,6 @@ var stores = {
                     .close()
                     .setColor(1,1,1,1)
                     .addEventListener("click",func(){m.outer_click(19);}),
-            m.root.createChild("path")
-                    .setTranslation(200,7 + (20 * 20))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.outer_click(20);}),
-            m.root.createChild("path")
-                    .setTranslation(200,7 + (20 * 21))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.outer_click(21);}),
-            m.root.createChild("path")
-                    .setTranslation(200,7 + (20 * 22))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.outer_click(22);}),
         ];
 
         m.innerselectionclick = [
@@ -885,31 +865,27 @@ var stores = {
                     .close()
                     .setColor(1,1,1,1)
                     .addEventListener("click",func(){m.inner_click(19);}),
-            m.root.createChild("path")
-                    .setTranslation(400,7 + (20 * 20))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.inner_click(20);}),
-            m.root.createChild("path")
-                    .setTranslation(400,7 + (20 * 21))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.inner_click(21);}),
-            m.root.createChild("path")
-                    .setTranslation(400,7 + (20 * 22))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.inner_click(22);}),
         ];
+
+        m.mtow_text = m.root.createChild("text")
+                    .setTranslation(200,20 + (20 * 21))
+                    .setAlignment("left-center")
+                    .setFont("LiberationFonts/LiberationMono-Regular.ttf")
+                    .setFontSize(m.font_size, 1.0)
+                    .setText("MTOW: " ~ m.mtow);
+
+        m.cweight_text = m.root.createChild("text")
+                    .setTranslation(200,20 + (20 * 22))
+                    .setAlignment("left-center")
+                    .setFont("LiberationFonts/LiberationMono-Regular.ttf")
+                    .setFontSize(m.font_size, 1.0)
+                    .setText("WEIGHT: " ~ int(getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG));
+
+        if (getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG > m.mtow ) {
+            m.mtow_text.setColor(m.red_color);
+        } else {
+            m.mtow_text.setColor(m.green_color);
+        }
 
         m.selection_map = [m.p3opt, m.p1opt, m.copt, m.p2opt, m.p4opt, m.oblopt, m.obropt, m.cconopt];
         m.pylon_map = [   [m.p3,m.p3store],
@@ -922,6 +898,7 @@ var stores = {
                           [m.ccon,m.cconstore],
                         ];
         m.pylon_click(0);
+
         return m;
     },
     get_canvas: func() {
@@ -965,12 +942,13 @@ var stores = {
                 me.outerselectiongroup[me.i].setColor(me.font_color);
             }
         }
-        for (var i = me.i + 1; i < 23; i = i + 1) {
+        for (var i = me.i + 1; i < 20; i = i + 1) {
             me.outerselectiongroup[i].setText("");
         }
-        for (var i = me.j + 1; i < 23; i = i + 1) {
+        for (var i = me.j + 1; i < 20; i = i + 1) {
             me.innerselectiongroup[i].setText("");
         }
+        me.weightset();
     },
 
     pylon_click: func(pyl) {
@@ -986,6 +964,7 @@ var stores = {
         me.pylon_selected = pyl;
         me.selections_update(pyl);
         me.write_info(me.selected);
+        me.weightset();
     },
 
     outer_click: func(out) {
@@ -1005,7 +984,7 @@ var stores = {
                 me.outerselectiongroup[i].setColor(me.font_color);
             }
         }
-        for (var i = 0; i < 23; i = i + 1) {
+        for (var i = 0; i < 20; i = i + 1) {
             me.innerselectiongroup[i].setText("");
         }
         for (var i = 0; i < size(me.selection_map[me.pylon_selected][out][1]); i = i + 1) {
@@ -1034,6 +1013,7 @@ var stores = {
         me.pylon_map[me.pylon_selected][1].setText(me.sel);
         me.write_info(me.sel);
         me.outer_click(me.outer_selected);
+        settimer(func(){ me.weightset(); } ,0.1);
     },
 
     find_payload_og: func(opt, search) {
@@ -1063,4 +1043,15 @@ var stores = {
         }
 
     },
+
+    weightset: func() {
+        me.cweight_text.setText("WEIGHT: " ~ int(getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG));
+
+        if (getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG > me.mtow ) {
+            me.mtow_text.setColor(me.red_color);
+        } else {
+            me.mtow_text.setColor(me.green_color);
+        }
+
+        },
 };
