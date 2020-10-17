@@ -1178,7 +1178,7 @@ var hitmessage = func(typeOrd) {
     } else {
         var ordname = typeOrd.name;
     }
-    var msg = notifications.ArmamentNotification.new("mhit", 4, 111+damage.shells[typeOrd][0]);
+    var msg = notifications.ArmamentNotification.new("mhit", 4, -1*(damage.shells[ordname][0]+1));
                 msg.RelativeAltitude = 0;
                 msg.Bearing = 0;
                 msg.Distance = hits_count;
