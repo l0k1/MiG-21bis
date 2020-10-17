@@ -1153,13 +1153,22 @@ var impact_listener = func {
             foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
                 distance = dropgeo.direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
                 if (distance < payloads[typeOrdName].hit_max_distance) {
-                    defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
+                    var msg = notifications.ArmamentNotification.new("mhit", 4, -1*(damage.shells[typeOrdName][0]+1));
+                                msg.RelativeAltitude = 0;
+                                msg.Bearing = 0;
+                                msg.Distance = distance;
+                                msg.RemoteCallsign = mp.getNode("callsign").getValue();
+                    notifications.hitBridgedTransmitter.NotifyAll(msg);
+                    damage.damageLog.push(sprintf("You hit %s with %s, %.1f meters distance.",mp.getNode("callsign").getValue(),typeOrdName,distance));
+                    #defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
                 }
             }
             distance = dropgeo.direct_distance_to(geo.aircraft_position()) * 0.8; # blasts should be more lethal going up, right?
             if (distance < payloads[typeOrdName].hit_max_distance * 2) {
                 var myc = getprop("sim/multiplay/callsign");
-                defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ myc);
+                
+                damage.damageLog.push(sprintf("You hit yourself with %s, %.1f meters.",typeOrdName,distance));
+                #defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ myc);
             }
             sounds.boom(distance);
         }
