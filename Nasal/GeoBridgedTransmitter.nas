@@ -36,7 +36,7 @@ emesary_mp_bridge.IncomingMPBridge.startMPBridge(geoRoutedNotifications, 18, eme
 
 
 #----- bridge hit (armament) notifications
-var hitRoutedNotifications = [notifications.ArmamentNotification.new(),notifications.StaticNotification.new(nil)];
+var hitRoutedNotifications = [notifications.ArmamentNotification.new(),notifications.StaticNotification.new()];
 var hitBridgedTransmitter = emesary.Transmitter.new("armamentNotificationBridge");
 var hitoutgoingBridge = emesary_mp_bridge.OutgoingMPBridge.new("mig21mp.hit",hitRoutedNotifications, 19, "", hitBridgedTransmitter);
 
