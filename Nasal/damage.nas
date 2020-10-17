@@ -145,6 +145,7 @@ var warheads = {
     "S530D":             [91,   66.00,0,0],
     "S48N6":             [92,  330.00,0,0],# 48N6 from S-300pmu
     "pilot":             [93,    0.00,1,0],# ejected pilot
+    "BETAB-500ShP":      [94, 1160.00,1,0],
 };
 
 var id2warhead = [];
@@ -310,10 +311,10 @@ var DamageRecipient =
                     callsign = size(callsign) < 8 ? callsign : left(callsign,7);
                     if (notification.RemoteCallsign == callsign and getprop("payload/armament/msg") == 1) {
                         #damage enabled and were getting hit
-                        if (notification.SecondaryKind > 110 and hitable_by_cannon) {
+                        if (notification.SecondaryKind < 0 and hitable_by_cannon) {
                             # cannon hit
-                            var probability = id2shell[notification.SecondaryKind - 111][1];
-                            var typ = id2shell[notification.SecondaryKind - 111][2];
+                            var probability = id2shell[-1*notification.SecondaryKind-1][1];
+                            var typ = id2shell[-1*notification.SecondaryKind-1][2];
                             var hit_count = notification.Distance;
                             if (hit_count != nil) {
                                 var damaged_sys = 0;
