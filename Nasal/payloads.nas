@@ -1181,10 +1181,10 @@ var hitmessage = func(typeOrd) {
     var msg = notifications.ArmamentNotification.new("mhit", 4, -1*(damage.shells[ordname][0]+1));
                 msg.RelativeAltitude = 0;
                 msg.Bearing = 0;
-                msg.Distance = hits_count;
-                msg.RemoteCallsign = hit_callsign;
-                f14.hitBridgedTransmitter.NotifyAll(msg);
-    damage.damageLog.push("You hit "~hit_callsign~" with "~ordname~", "~hits_count~" times.");
+                msg.Distance = typeOrd.hit_count;
+                msg.RemoteCallsign = typeOrd.hit_callsign;
+                notifications.hitBridgedTransmitter.NotifyAll(msg);
+    damage.damageLog.push("You hit "~typeOrd.hit_callsign~" with "~ordname~", "~typeOrd.hit_count~" times.");
     #message = ordname ~ " hit: " ~ typeOrd.hit_callsign ~ ": " ~ typeOrd.hit_count ~ " hits";
     #defeatSpamFilter(message);
     typeOrd.hit_callsign = "";
