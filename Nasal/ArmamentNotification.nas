@@ -138,3 +138,70 @@ var ArmamentInFlightNotification =
     },
 };
 
+
+
+var StaticNotification_Id = 25;
+var StaticNotification =
+{
+# new:
+# _ident - the identifier for the notification. not bridged.
+# _kind - created, moved, deleted (see below). This is the activity that the  notification represents, called kind to avoid confusion with notification type.
+# _secondary_kind - This is the entity on which the activity is being performed. See below for predefined types.
+#
+# UniqueIdentity - an identity that is unique to the sending instance of FG. Can be combined with the callsign to create an MP unique ID.
+##
+    new: func(_ident="stat", _unique=0, _kind=0, _secondary_kind=0)
+    {
+        var new_class = emesary.Notification.new("StaticNotification", _ident, StaticNotification_Id);
+                                                       # _ident -> "stat"
+        new_class.UniqueIdentity = _unique;            # random from 0 to 15000000 that identifies each static object
+        new_class.Kind = _kind;                        # 1=create, 2=move, 3=delete
+        new_class.SecondaryKind = _secondary_kind;     # 0 = small crater, 1 = big crater
+        new_class.IsDistinct = 0;                      # keep it 0
+        new_class.Callsign = nil;                      # populated automatically by the incoming bridge when routed
+        
+        new_class.Position = geo.aircraft_position();  # position
+        new_class.Heading = 360;                       # heading
+        new_class.Flags1 = 0;                          # 7 bits for whatever.
+        new_class.Flags2 = 0;                          # 7 bits for whatever.        
+
+        new_class.GetBridgeMessageNotificationTypeKey = func {
+            return new_class.NotificationType~"."~new_class.Ident~"."~new_class.UniqueIdentity;
+        };
+        new_class.bridgeProperties = func
+        {
+            return
+            [
+             {
+            getValue:func{return emesary.TransferCoord.encode(new_class.Position);},
+            setValue:func(v,root,pos){var dv=emesary.TransferCoord.decode(v, pos);new_class.Position=dv.value;return dv},
+             },
+             {
+            getValue:func{return emesary.TransferByte.encode(new_class.Kind);},
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Kind=dv.value;return dv},
+             },
+             {
+            getValue:func{return emesary.TransferByte.encode(new_class.SecondaryKind);},
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.SecondaryKind=dv.value;return dv},
+             },
+             {
+            getValue:func{return emesary.TransferFixedDouble.encode(geo.normdeg180(new_class.Heading),1,1.54);},#1.0/0.65
+            setValue:func(v,root,pos){var dv=emesary.TransferFixedDouble.decode(v,1,1.54,pos);new_class.Heading=geo.normdeg(dv.value);return dv},
+             },
+             {
+            getValue:func{return emesary.TransferByte.encode(new_class.Flags1);},
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Flags1=dv.value;return dv},
+             },
+             {
+            getValue:func{return emesary.TransferByte.encode(new_class.Flags2);},
+            setValue:func(v,root,pos){var dv=emesary.TransferByte.decode(v,pos);new_class.Flags2=dv.value;return dv},
+             },
+             {
+            getValue:func{return emesary.TransferInt.encode(new_class.UniqueIdentity,3);},
+            setValue:func(v,root,pos){var dv=emesary.TransferInt.decode(v,3,pos);new_class.UniqueIdentity=dv.value;return dv},
+             },
+            ];
+          };
+        return new_class;
+    },
+};
