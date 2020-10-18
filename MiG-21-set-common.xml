@@ -1736,7 +1736,7 @@
         <mig28>             <file>Aircraft/MiG-21bis/Nasal/mig28.nas</file>             </mig28>
         <monitor>           <file>Aircraft/MiG-21bis/Nasal/dialog-perf.nas</file>
                             <file>Aircraft/MiG-21bis/Nasal/performance.nas</file>       </monitor>
-        <tacview>           <file>Aircraft/MIG-21bis/Nasal/tacview.nas</file>           </tacview>
+        <tacview>           <file>Aircraft/MiG-21bis/Nasal/tacview.nas</file>           </tacview>
 
     </nasal>
 
