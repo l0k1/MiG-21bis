@@ -341,6 +341,7 @@ var IncomingMPBridge =
                     var bridged_notification = new_class.NotificationsToBridge_Lookup[msg_type_id];
                     if (bridged_notification == nil) {
                         print("Error: emesary.IncomingBridge.ProcessIncoming invalid type_id ",msg_type_id);
+                        print("TEST TEST TEST                             !!!!!!!!!");
                     } else {
                             bridged_notification.FromIncomingBridge = 1;
                             bridged_notification.Callsign = me.GetCallsign();
