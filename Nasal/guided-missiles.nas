@@ -2250,10 +2250,10 @@ var AIM = {
 		#setprop("/logging/missile/t-longitude-deg", me.t_coord.lon());
 		#setprop("/logging/missile/t-altitude-ft", me.t_coord.alt()*M2FT);
 		
-		if (tacview.starttime) {
+		if (tacview.starttime and math.mod(me.counter, 3) == 0) {
 			thread.lock(tacview.mutexWrite);
 			tacview.write("#" ~ (systime() - tacview.starttime)~"\n");
-			tacview.write(me.tacviewID~",T="~me.coord.lon()~"|"~me.coord.lat()~"|"~(me.alt_ft*FT2M)~",Name="~me.type~",Type=Weapon+Missile\n");
+			tacview.write(me.tacviewID~",T="~me.coord.lon()~"|"~me.coord.lat()~"|"~(me.alt_ft*FT2M)~",Name="~me.type~",Parent="~tacview.myplaneID~",Type=Weapon+Missile\n");
 			thread.unlock(tacview.mutexWrite);
 		}
 
@@ -3860,12 +3860,17 @@ var AIM = {
 			}
 		}
 		me.coord = explosion_coord;
+		thread.lock(mutexTimer);
+		append(AIM.timerQueue, [AIM, AIM.notifyInFlight, [me.coord.lat(), me.coord.lon(), me.coord.alt(),0,me.typeID,me.type,me.unique_id,0,"", me.hdg, me.pitch, 0], 0]);
+		thread.unlock(mutexTimer);
 		
-		thread.lock(tacview.mutexWrite);
-        tacview.writeExplosion(coord.lat(),coord.lon(),coord.alt(),me.reportDist);
-		thread.unlock(tacview.mutexWrite);
-
 		var wh_mass = (event == "exploded" and !me.inert)?me.weight_whead_lbm:0;#will report 0 mass if did not have time to arm
+		
+		if (wh_mass > 0) {
+			thread.lock(tacview.mutexWrite);
+	        tacview.writeExplosion(coord.lat(),coord.lon(),coord.alt(),wh_mass*0.5);
+			thread.unlock(tacview.mutexWrite);
+		}
 
 		thread.lock(mutexTimer);
 		append(AIM.timerQueue, [me,impact_report,[me.coord, wh_mass, "munition", me.type, me.new_speed_fps*FT2M],0]);
