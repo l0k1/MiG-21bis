@@ -745,11 +745,11 @@ var missile_release = func(pylon) {
             setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
             setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
             var phrase = brevity ~ " at: " ~ callsign;
-            if (getprop("payload/armament/msg")) {
-                defeatSpamFilter(phrase);
-            } else {
+            #if (getprop("payload/armament/msg")) {
+                #defeatSpamFilter(phrase);
+            #} else {
                 setprop("/sim/messages/atc", phrase);
-            }
+            #}
         } elsif ( armament.AIM.active[pylon] != nil and (selected == "R-27T1" or selected == "R-27R1")) {
             var prs_inhg = getprop("/environment/pressure-inhg");
             if ( prs_inhg > 25 ) {
@@ -768,11 +768,11 @@ var missile_release = func(pylon) {
             setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
             setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
             var phrase = brevity ~ " Maddog released";
-            if (getprop("payload/armament/msg")) {
-                defeatSpamFilter(phrase);
-            } else {
+            #if (getprop("payload/armament/msg")) {
+            #    defeatSpamFilter(phrase);
+            #} else {
                 setprop("/sim/messages/atc", phrase);
-            }
+            #}
 
         } elsif ( armament.AIM.active[pylon] != nil and selected == "Kh-66" ) {
 
@@ -790,11 +790,11 @@ var missile_release = func(pylon) {
             
             setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
             setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
-            if (getprop("payload/armament/msg")) {
-                defeatSpamFilter(phrase);
-            } else {
+            #if (getprop("payload/armament/msg")) {
+            #    defeatSpamFilter(phrase);
+            #} else {
                 setprop("/sim/messages/atc", phrase);
-            }
+            #}
         } elsif (armament.AIM.active[pylon] != nil and selected == "Kh-25MP") {
 
             var brevity = armament.AIM.active[pylon].brevity;
@@ -806,11 +806,11 @@ var missile_release = func(pylon) {
             setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
 
             var phrase = brevity ~ " Maddog released";
-            if (getprop("payload/armament/msg")) {
-                defeatSpamFilter(phrase);
-            } else {
+            #if (getprop("payload/armament/msg")) {
+            #    defeatSpamFilter(phrase);
+            #} else {
                 setprop("/sim/messages/atc", phrase);
-            }
+            #}
         }
     }
 }
@@ -892,11 +892,11 @@ var bomb_release = func(pylon,type="bomb") {
         setprop("payload/released/"~selected~"["~pylon~"]",1);
         sounds.disconnect();
         var phrase = payloads[selected].brevity ~ " released.";
-        if (getprop("payload/armament/msg")) {
-            defeatSpamFilter(phrase);
-        } else {
+        #if (getprop("payload/armament/msg")) {
+        #    defeatSpamFilter(phrase);
+        #} else {
             setprop("/sim/messages/atc", phrase);
-        }
+        #}
         return_trigger(selected,pylon);
     }
 }
