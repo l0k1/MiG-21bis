@@ -318,18 +318,10 @@ var load_radios = func(path) {
     #debug.dump(data);
 }
 
+#var file_selector = gui.FileSelector.new(dir: getprop("/sim/fg-home"), callback: load_radios, title: "Select Radio Config File", button: "Load");
+var file_selector = nil;
 var get_radio_file_gui = func() {
-    var file_selector = gui.FileSelector.new(dir: getprop("/sim/fg-home"), callback: load_radios, title: "Select Radio Config File", button: "Load");
     file_selector.open();
-    file_selector.close();
-}
-
-var jsbsim_random = func() {
-    setprop("/fdm/jsbsim/random/rand-0",rand());
-    setprop("/fdm/jsbsim/random/rand-1",rand());
-    setprop("/fdm/jsbsim/random/rand-2",rand());
-    setprop("/fdm/jsbsim/random/rand-3",rand());
-    settimer(jsbsim_random,0);
 }
 
 var load_interior = func{
@@ -357,6 +349,12 @@ var toggle_damage = func{
         setprop("sim/menubar/default/menu[5]/item[1]/enabled",1);
         setprop("sim/menubar/default/menu[5]/item[2]/enabled",1);
         setprop("sim/menubar/default/menu[7]/item[4]/enabled",1);
+    }
+    # taken from Colin and his work on the Viggen
+    var internal = view.current.getNode("internal");
+    if (internal == nil or !internal.getBoolValue()) {
+        view.setView(0);
+        screen.log.write("External views are disabled with damage on");
     }
 }
 
@@ -403,6 +401,30 @@ var wow_menu_change = func{
     }
 }
 
+view.stepView = func(step, force = 0) {
+    step = step > 0 ? 1 : -1;
+    var n = view.index;
+    for (var i = 0; i < size(view.views); i += 1) {
+        n += step;
+        if (n < 0)
+            n = size(view.views) - 1;
+        elsif (n >= size(view.views))
+            n = 0;
+        var e = view.views[n].getNode("enabled");
+        var internal = view.views[n].getNode("internal");
+
+        if ((force or e == nil or e.getBoolValue())
+            and view.views[n].getNode("name") != nil
+            and ((internal != nil and internal.getBoolValue()) or !getprop("/payload/armament/msg")))
+            break;
+    }
+    view.setView(n);
+
+    # And pop up a nice reminder
+    var popup=getprop("/sim/view-name-popup");
+    if(popup == 1 or popup==nil) gui.popupTip(view.views[n].getNode("name").getValue());
+}
+
 var init = setlistener("/sim/signals/fdm-initialized", func() {
     # Load exterior at startup to avoid stale sim at first external view selection. ( taken from TU-154B )
     # print("Loading exterior, wait...");
@@ -410,6 +432,9 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
     settimer( load_interior, 0 );
     setprop("/sim/current-view/view-number", 1);
     setprop("/sim/gui/tooltips-enabled", TRUE);
+
+
+    file_selector = gui.FileSelector.new(dir: getprop("/sim/fg-home"), callback: load_radios, title: "Select Radio Config File", button: "Load");
 
     screen.log.write("Welcome to MiG-21bis!", 1.0, 0.2, 0.2);
     dmg = getprop("payload/armament/msg");
@@ -424,7 +449,6 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
     
     test_support();
     main_loop();
-    jsbsim_random();
     #
     setlistener("gear/gear[0]/wow",func(){wow_menu_change()},nil,0);
     setlistener("gear/gear[1]/wow",func(){wow_menu_change()},nil,0);

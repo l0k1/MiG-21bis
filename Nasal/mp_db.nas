@@ -688,11 +688,11 @@ var update_cx_master_list = func() {
     if (cx.isValid() == 0) {
       #print("removing");
       if (tacview.starttime) {
-        thread.lock(mutexWrite);
+        thread.lock(tacview.mutexWrite);
         tacview.write("#" ~ (systime() - tacview.starttime)~"\n");
         tacview.write("0,Event=LeftArea|"~cx.tacobj.tacviewID~"|\n");
         tacview.write("-"~cx.tacobj.tacviewID~"\n");
-        thread.unlock(mutexWrite);
+        thread.unlock(tacview.mutexWrite);
       }
       cx_master_list = remove_from_array(cx_master_list, cx);
     }

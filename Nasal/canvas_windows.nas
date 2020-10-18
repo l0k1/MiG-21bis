@@ -25,6 +25,8 @@ var stores = {
         };
         m.root = m.stores_canvas.createGroup();
 
+        m.mtow = 9800; # max takeoff weight in KG at normal conditions
+
         m.p3opt = [
                     ["None",     
                                 ["none"]],
@@ -104,25 +106,35 @@ var stores = {
         # 21 lines for info
         m.store_info = {
             "none"  :   [
-                        #12345678901234567890 
+                        #12345678901234567890
+                        "",
                         "There is nothing",
                         "selected on this",
                         "pylon.",
                         ],
             "FAB-100" : [
                         #12345678901234567890
+                        "",
+                        "100 kg",
+                        "",
                         "A 100 kilogram free-",
                         "fall bomb.",
                         ],
             "FAB-100x4" : [
                         #12345678901234567890
+                        "",
+                        "435 kg",
+                        "",
                         "Four FAB-100's on a",
                         "specially designed",
                         "launcher rail.",
                         ],
             "P-100"     : [
                         #12345678901234567890
+                        "",
+                        "100 kg",
                         "A practice bomb",
+                        "",
                         "which emits a white",
                         "smoke upon impact.",
                         "Has the same",
@@ -131,22 +143,34 @@ var stores = {
                         ],
             "P-100x4" : [
                         #12345678901234567890
+                        "",
+                        "435 kg",
+                        "",
                         "Four P-100's on a",
                         "specially designed",
                         "launcher rail.",
                         ],
             "FAB-250"   : [
                         #12345678901234567890
+                        "",
+                        "250 kg",
+                        "",
                         "A 250 kilogram free-",
                         "fall bomb.",
                         ],
             "FAB-500"   : [
                         #12345678901234567890
+                        "",
+                        "500 kg",
+                        "",
                         "A 500 kilogram free-",
                         "fall bomb.",
                         ],
             "BETAB-500ShP" : [
                         #12345678901234567890
+                        "",
+                        "526 kg",
+                        "",
                         "A 500 kilogram high",
                         "drag bunker buster",
                         "designed for runway",
@@ -156,6 +180,9 @@ var stores = {
                         ],
             "R-3S"   : [
                         #12345678901234567890
+                        "",
+                        "75 kg",
+                        "",
                         "A short range, heat-",
                         "seeking missile that",
                         "entered service in  ",
@@ -164,6 +191,9 @@ var stores = {
                         ],
             "R-3R"   : [
                         #12345678901234567890
+                        "",
+                        "76 kg",
+                        "",
                         "A short range, radar",
                         "guided missile that",
                         "entered service in",
@@ -172,6 +202,9 @@ var stores = {
                         ],
             "R-60"   : [
                         #12345678901234567890
+                        "",
+                        "44 kg",
+                        "",
                         "A short range, heat-",
                         "seeking missile that",
                         "entered service in  ",
@@ -180,12 +213,18 @@ var stores = {
                         ],
             "R-60x2"   : [
                         #12345678901234567890
+                        "",
+                        "88 kg",
+                        "",
                         "Two R-60's mounted",
                         "on a specially",
                         "designed launcher.",
                         ],
             "R-27R1"   : [
                         #12345678901234567890
+                        "",
+                        "254 kg",
+                        "",
                         "A long range, radar",
                         "guided missile, that",
                         "entered service in",
@@ -194,6 +233,9 @@ var stores = {
                         ],
             "R-27T1"   : [
                         #12345678901234567890
+                        "",
+                        "250 kg",
+                        "",
                         "A long range, heat",
                         "seeking missile that",
                         "entered service in",
@@ -202,6 +244,9 @@ var stores = {
                         ],
             "Kh-66"   : [
                         #12345678901234567890
+                        "",
+                        "287 kg",
+                        "",
                         "A short range beam-",
                         "riding missile,",
                         "used to attack",
@@ -213,6 +258,9 @@ var stores = {
                         ],
             "Kh-25MP"   : [
                         #12345678901234567890
+                        "",
+                        "315 kg",
+                        "",
                         "A medium range anti-",
                         "radiation missile",
                         "used to attack",
@@ -224,33 +272,53 @@ var stores = {
                         ],
             "UB-16"   : [
                         #12345678901234567890
+                        "",
+                        "64 kg",
+                        "",
                         "A rocket pod which",
                         "contains 16 S-5",
                         "rockets.",
                         ],
             "UB-32"   : [
                         #12345678901234567890
+                        "",
+                        "264 kg",
+                        "",
                         "A rocket pod which",
                         "contains 32 S-5",
                         "rockets.",
                         ],
             "S-24"   : [
                         #12345678901234567890
+                        "",
+                        "235 kg",
+                        "",
                         "A large diameter",
                         "rocket.",
                         ],
             "PTB-490 Droptank"   : [
                         #12345678901234567890
+                        "",
+                        "82 kg empty",
+                        "~468 kg full",
+                        "",
                         "A 490 liter drop",
                         "tank.",
                         ],
             "PTB-800 Droptank"   : [
                         #12345678901234567890
+                        "",
+                        "104 kg empty",
+                        "~740 kg full",
+                        "",
                         "A 800 liter drop",
                         "tank.",
                         ],
             "Smokepod"   : [
                         #12345678901234567890
+                        "",
+                        "72 kg",
+                        "",
                         "A missile-shaped",
                         "smokepod for use in",
                         "training and aerial",
@@ -258,12 +326,18 @@ var stores = {
                         ],
             "RN-28"   : [
                         #12345678901234567890
+                        "",
+                        "545 kg",
+                        "",
                         "An inert, static",
                         "nuclear device for",
                         "training and display",
                         ],
             "Conformal CM"   : [
                         #12345678901234567890
+                        "",
+                        "95 kg",
+                        "",
                         "A conformal counter-",
                         "measure pod.",
                         "Contains 9 chaff and",
@@ -274,23 +348,26 @@ var stores = {
                         ],
             "HMCS"      : [
                         #12345678901234567890
+                        "",
+                        "190 kg",
+                        "",
                         "A fancy smoke pod,",
                         "or water vapor",
                         "generator. Nothing",
                         "to see here.",
                         "Most certainly not a",
                         "Human Mentality",
-                        "Control System."
+                        "Control System.",
+                        "Needs the HMCS",
+                        "center console",
+                        "selected to operate."
                         ],
             "HMCS Control"   : [
                         #12345678901234567890
-                        "A fancy smoke pod,",
-                        "or water vapor",
-                        "generator. Nothing",
-                        "to see here.",
-                        "Most certainly not a",
-                        "Human Mentality",
-                        "Control System."
+                        "",
+                        "Center control",
+                        "console for the HMCS",
+                        "system."
                         ],
 
         };
@@ -301,6 +378,8 @@ var stores = {
 
         m.font_size = 18;
         m.font_color = [1,1,1];
+        m.green_color = [0,1,0];
+        m.red_color = [1,0,0];
         m.selected_color = [0,1,0];
 
         m.p3 = m.root.createChild("text", "p3label")
@@ -506,7 +585,7 @@ var stores = {
         m.outerselectiongroup = [];
         m.innerselectiongroup = [];
         m.infobox = [];
-        for ( var i = 0; i < 23; i = i + 1 ) {
+        for ( var i = 0; i < 20; i = i + 1 ) {
             append(m.outerselectiongroup, m.root.createChild("text")
                     .setTranslation(200,20 + (20 * i))
                     .setAlignment("left-center")
@@ -698,30 +777,6 @@ var stores = {
                     .close()
                     .setColor(1,1,1,1)
                     .addEventListener("click",func(){m.outer_click(19);}),
-            m.root.createChild("path")
-                    .setTranslation(200,7 + (20 * 20))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.outer_click(20);}),
-            m.root.createChild("path")
-                    .setTranslation(200,7 + (20 * 21))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.outer_click(21);}),
-            m.root.createChild("path")
-                    .setTranslation(200,7 + (20 * 22))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.outer_click(22);}),
         ];
 
         m.innerselectionclick = [
@@ -885,31 +940,27 @@ var stores = {
                     .close()
                     .setColor(1,1,1,1)
                     .addEventListener("click",func(){m.inner_click(19);}),
-            m.root.createChild("path")
-                    .setTranslation(400,7 + (20 * 20))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.inner_click(20);}),
-            m.root.createChild("path")
-                    .setTranslation(400,7 + (20 * 21))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.inner_click(21);}),
-            m.root.createChild("path")
-                    .setTranslation(400,7 + (20 * 22))
-                    .horiz(180)
-                    .vert(20)
-                    .horiz(-180)
-                    .close()
-                    .setColor(1,1,1,1)
-                    .addEventListener("click",func(){m.inner_click(22);}),
         ];
+
+        m.mtow_text = m.root.createChild("text")
+                    .setTranslation(200,20 + (20 * 21))
+                    .setAlignment("left-center")
+                    .setFont("LiberationFonts/LiberationMono-Regular.ttf")
+                    .setFontSize(m.font_size, 1.0)
+                    .setText("MTOW: " ~ m.mtow);
+
+        m.cweight_text = m.root.createChild("text")
+                    .setTranslation(200,20 + (20 * 22))
+                    .setAlignment("left-center")
+                    .setFont("LiberationFonts/LiberationMono-Regular.ttf")
+                    .setFontSize(m.font_size, 1.0)
+                    .setText("WEIGHT: " ~ int(getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG));
+
+        if (getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG > m.mtow ) {
+            m.mtow_text.setColor(m.red_color);
+        } else {
+            m.mtow_text.setColor(m.green_color);
+        }
 
         m.selection_map = [m.p3opt, m.p1opt, m.copt, m.p2opt, m.p4opt, m.oblopt, m.obropt, m.cconopt];
         m.pylon_map = [   [m.p3,m.p3store],
@@ -922,6 +973,7 @@ var stores = {
                           [m.ccon,m.cconstore],
                         ];
         m.pylon_click(0);
+
         return m;
     },
     get_canvas: func() {
@@ -965,12 +1017,13 @@ var stores = {
                 me.outerselectiongroup[me.i].setColor(me.font_color);
             }
         }
-        for (var i = me.i + 1; i < 23; i = i + 1) {
+        for (var i = me.i + 1; i < 20; i = i + 1) {
             me.outerselectiongroup[i].setText("");
         }
-        for (var i = me.j + 1; i < 23; i = i + 1) {
+        for (var i = me.j + 1; i < 20; i = i + 1) {
             me.innerselectiongroup[i].setText("");
         }
+        me.weightset();
     },
 
     pylon_click: func(pyl) {
@@ -986,6 +1039,7 @@ var stores = {
         me.pylon_selected = pyl;
         me.selections_update(pyl);
         me.write_info(me.selected);
+        me.weightset();
     },
 
     outer_click: func(out) {
@@ -1005,7 +1059,7 @@ var stores = {
                 me.outerselectiongroup[i].setColor(me.font_color);
             }
         }
-        for (var i = 0; i < 23; i = i + 1) {
+        for (var i = 0; i < 20; i = i + 1) {
             me.innerselectiongroup[i].setText("");
         }
         for (var i = 0; i < size(me.selection_map[me.pylon_selected][out][1]); i = i + 1) {
@@ -1034,6 +1088,7 @@ var stores = {
         me.pylon_map[me.pylon_selected][1].setText(me.sel);
         me.write_info(me.sel);
         me.outer_click(me.outer_selected);
+        settimer(func(){ me.weightset(); } ,0.1);
     },
 
     find_payload_og: func(opt, search) {
@@ -1063,4 +1118,15 @@ var stores = {
         }
 
     },
+
+    weightset: func() {
+        me.cweight_text.setText("WEIGHT: " ~ int(getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG));
+
+        if (getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG > me.mtow ) {
+            me.mtow_text.setColor(me.red_color);
+        } else {
+            me.mtow_text.setColor(me.green_color);
+        }
+
+        },
 };

@@ -247,12 +247,10 @@
         <weight>0.1069</weight>
         <cd>0.193</cd>
         <eda>0.00136354</eda>
-        <external-force>true</external-force>
         <collision>true</collision>
         <collision-report>sim/ai/aircraft/collision/bullet</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bullet</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Stores/Bullet-Submodel.xml</submodel-path>
     </submodel>
     <!-- 6 -->
     <submodel>
@@ -293,11 +291,9 @@
         <cd>0.193</cd>
         <eda>0.00136354</eda>
         <collision>true</collision>
-        <external-force>true</external-force>
         <collision-report>sim/ai/aircraft/collision/bullet</collision-report>
         <impact>true</impact>
         <impact-report>sim/ai/aircraft/impact/bullet</impact-report>
-        <submodel-path>Aircraft/MiG-21bis/Models/Stores/Bullet-Submodel.xml</submodel-path>
     </submodel>
     <!-- 8 -->
     <submodel>

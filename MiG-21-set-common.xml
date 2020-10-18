@@ -327,7 +327,6 @@
                 <!-- Smokepod -->
                 <int n="19" type="int">0</int>
                 <!-- hmcs -->
-                <int n="20" type="int" alias="/fdm/jsbsim/systems/hmcs/deploying"/>
                 <float n="8" alias="/engines/engine[0]/augmentation" /> <!-- Reheat  -->
                 <float n="9" alias="/engines/engine[0]/nozzle-pos-norm" /> <!-- Reheat  -->
                 <float n="10" alias="/fdm/jsbsim/propulsion/clr" /> <!-- Reheat  -->
@@ -357,6 +356,7 @@
                 <bool n="1" alias ="/instrumentation/gci/bogeydope"/> <!-- gci request -->
                 <bool n="2" alias ="/instrumentation/gci/cutoff"/> <!-- gci request -->
                 <bool n="3" alias ="/fdm/jsbsim/systems/chute/deploy"/>
+                <bool n="4" alias="/fdm/jsbsim/systems/hmcs/deploying"/>
             </generic>
         </multiplay>
 
@@ -801,6 +801,7 @@
             <inbound-outbound-switch type="int">0</inbound-outbound-switch>
             <in-out-state type="int">0</in-out-state>
             <overhead type="double">0</overhead>
+            <ident-audible type="bool">true</ident-audible>
         </adf>
         <armament>
             <msl-emergency-release>

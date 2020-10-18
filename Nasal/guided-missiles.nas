@@ -3860,6 +3860,10 @@ var AIM = {
 			}
 		}
 		me.coord = explosion_coord;
+		
+		thread.lock(tacview.mutexWrite);
+        tacview.writeExplosion(coord.lat(),coord.lon(),coord.alt(),me.reportDist);
+		thread.unlock(tacview.mutexWrite);
 
 		var wh_mass = (event == "exploded" and !me.inert)?me.weight_whead_lbm:0;#will report 0 mass if did not have time to arm
 

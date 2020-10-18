@@ -1009,10 +1009,20 @@
       <fcs_function name="trash/warning-lights/fagp/airbrake-extd">
          <function>
             <product>
-               <gt>
-                  <property>fcs/speedbrake-pos-norm</property>
-                  <value>0.1</value>
-               </gt>
+               <or>
+                  <gt>
+                     <property>fcs/speedbrake-rear-pos-norm</property>
+                     <value>0.1</value>
+                  </gt>
+                  <gt>
+                     <property>fcs/speedbrake-front-right-pos-norm</property>
+                     <value>0.1</value>
+                  </gt>
+                  <gt>
+                     <property>fcs/speedbrake-front-left-pos-norm</property>
+                     <value>0.1</value>
+                  </gt>
+               </or>
                <property>/instrumentation/warning-lights/dimmer[0]</property>
                <property>warning-lights/lights-dc</property>
             </product>

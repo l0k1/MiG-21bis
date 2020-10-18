@@ -259,7 +259,7 @@
         <path>Aircraft/MiG-21bis/Models/Effects/Smokepod/smoke white.xml</path>
         <condition>
         	<equals>
-        		<property>/fdm/jsbsim/systems/hmcs/deploying</property>
+                <property>sim/multiplay/generic/bool[4]</property>
         		<value>1</value>
         	</equals>
         </condition>
@@ -275,7 +275,7 @@
         <path>Aircraft/MiG-21bis/Models/Effects/Smokepod/smoke white.xml</path>
         <condition>
         	<equals>
-        		<property>sim/multiplay/generic/int[20]</property>
+        		<property>sim/multiplay/generic/bool[4]</property>
         		<value>1</value>
         	</equals>
         </condition>
