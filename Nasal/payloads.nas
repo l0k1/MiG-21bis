@@ -1153,12 +1153,14 @@ var impact_listener = func {
             foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
                 distance = dropgeo.direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
                 if (distance < payloads[typeOrdName].hit_max_distance) {
-                    var msg = notifications.ArmamentNotification.new("mhit", 4, -1*(damage.shells[typeOrdName][0]+1));
+                    if (getprop("paylod/armament/msg")) {
+                        var msg = notifications.ArmamentNotification.new("mhit", 4, -1*(damage.shells[typeOrdName][0]+1));
                                 msg.RelativeAltitude = 0;
                                 msg.Bearing = 0;
                                 msg.Distance = distance;
                                 msg.RemoteCallsign = mp.getNode("callsign").getValue();
-                    notifications.hitBridgedTransmitter.NotifyAll(msg);
+                        notifications.hitBridgedTransmitter.NotifyAll(msg);
+                    }
                     damage.damageLog.push(sprintf("You hit %s with %s, %.1f meters distance.",mp.getNode("callsign").getValue(),typeOrdName,distance));
                     #defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
                 }
@@ -1175,7 +1177,10 @@ var impact_listener = func {
         if (typeOrdName == "BETAB-500ShP" and ballistic.getNode("impact/type").getValue() == "terrain") {
             #var x = geo.put_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue());
             place_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue() * M2FT);
-            armament.AIM.notifyCrater(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue(),1, 0);# send the crater out on emesary so others can see it
+            if (getprop("paylod/armament/msg")) {
+                # send the crater out on emesary so others can see it
+                armament.AIM.notifyCrater(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue(),1, 0);
+            }
         }
     }
 }
@@ -1187,12 +1192,14 @@ var hitmessage = func(typeOrd) {
     } else {
         var ordname = typeOrd.name;
     }
-    var msg = notifications.ArmamentNotification.new("mhit", 4, -1*(damage.shells[ordname][0]+1));
+    if (getprop("paylod/armament/msg")) {
+        var msg = notifications.ArmamentNotification.new("mhit", 4, -1*(damage.shells[ordname][0]+1));
                 msg.RelativeAltitude = 0;
                 msg.Bearing = 0;
                 msg.Distance = typeOrd.hit_count;
                 msg.RemoteCallsign = typeOrd.hit_callsign;
-                notifications.hitBridgedTransmitter.NotifyAll(msg);
+        notifications.hitBridgedTransmitter.NotifyAll(msg);
+    }
     damage.damageLog.push("You hit "~typeOrd.hit_callsign~" with "~ordname~", "~typeOrd.hit_count~" times.");
     #message = ordname ~ " hit: " ~ typeOrd.hit_callsign ~ ": " ~ typeOrd.hit_count ~ " hits";
     #defeatSpamFilter(message);

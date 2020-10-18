@@ -672,7 +672,7 @@ var code_ct = func () {
       setprop("/sim/speed-up", 1);
       setprop("/gui/map/draw-traffic", 0);
       setprop("/sim/gui/dialogs/map-canvas/draw-TFC", 0);
-      fgcommand("timeofday", props.Node.new({"timeofday": "real"}));
+      #fgcommand("timeofday", props.Node.new({"timeofday": "real"}));
       #setprop("/sim/rendering/als-filters/use-filtering", 1);
       call(func{var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance();
       interfaceController.stop();},nil,var err2=[]);      
