@@ -1199,6 +1199,7 @@
             <station-name type="string">station</station-name>
             <models type="string">Aircraft/MiG-21bis/Models/Stores/</models>
             <msg type="bool">true</msg>
+            <tacview type="bool">true</tacview>
             <damage type="bool">true</damage>
             <GSh-30>
                 <ammo type="double">200</ammo>
