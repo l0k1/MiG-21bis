@@ -750,6 +750,7 @@ var missile_release = func(pylon) {
             #} else {
                 setprop("/sim/messages/atc", phrase);
             #}
+            damage.damageLog.push(phrase);
         } elsif ( armament.AIM.active[pylon] != nil and (selected == "R-27T1" or selected == "R-27R1")) {
             var prs_inhg = getprop("/environment/pressure-inhg");
             if ( prs_inhg > 25 ) {
@@ -773,7 +774,7 @@ var missile_release = func(pylon) {
             #} else {
                 setprop("/sim/messages/atc", phrase);
             #}
-
+            damage.damageLog.push(phrase);
         } elsif ( armament.AIM.active[pylon] != nil and selected == "Kh-66" ) {
 
             var brevity = armament.AIM.active[pylon].brevity;
@@ -795,6 +796,7 @@ var missile_release = func(pylon) {
             #} else {
                 setprop("/sim/messages/atc", phrase);
             #}
+            damage.damageLog.push(phrase);
         } elsif (armament.AIM.active[pylon] != nil and selected == "Kh-25MP") {
 
             var brevity = armament.AIM.active[pylon].brevity;
@@ -811,6 +813,7 @@ var missile_release = func(pylon) {
             #} else {
                 setprop("/sim/messages/atc", phrase);
             #}
+            damage.damageLog.push(phrase);
         }
     }
 }
@@ -897,6 +900,7 @@ var bomb_release = func(pylon,type="bomb") {
         #} else {
             setprop("/sim/messages/atc", phrase);
         #}
+        damage.damageLog.push(phrase);
         return_trigger(selected,pylon);
     }
 }
