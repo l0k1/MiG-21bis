@@ -1181,7 +1181,7 @@ var impact_listener = func {
                 distance = dropgeo.direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
                 if (distance < payloads[typeOrdName].hit_max_distance) {
                     if (getprop("paylod/armament/msg")) {
-                        var msg = notifications.ArmamentNotification.new("mhit", 4, -1*(damage.shells[typeOrdName][0]+1));
+                        var msg = notifications.ArmamentNotification.new("mhit", 4, damage.warheads[typeOrdName][0]+21);
                                 msg.RelativeAltitude = 0;
                                 msg.Bearing = 0;
                                 msg.Distance = distance;
@@ -1195,7 +1195,15 @@ var impact_listener = func {
             distance = dropgeo.direct_distance_to(geo.aircraft_position()) * 0.8; # blasts should be more lethal going up, right?
             if (distance < payloads[typeOrdName].hit_max_distance * 2) {
                 var myc = getprop("sim/multiplay/callsign");
-                
+                var msg = notifications.ArmamentNotification.new("mhit", 4, damage.warheads[typeOrdName][0]+21);
+                msg.RelativeAltitude = 0;
+                msg.Bearing = 0;
+                msg.Distance = distance;
+                msg.RemoteCallsign = myc;
+                msg.Callsign = myc;
+                msg.FromIncomingBridge = 1;
+                damage.damage_recipient.Receive(msg);
+                notifications.hitBridgedTransmitter.NotifyAll(msg);
                 damage.damageLog.push(sprintf("You hit yourself with %s, %.1f meters.",typeOrdName,distance));
                 #defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ myc);
             }
@@ -1231,7 +1239,7 @@ var impact_listener = func {
         if (typeOrdName == "BETAB-500ShP" and ballistic.getNode("impact/type").getValue() == "terrain") {
             #var x = geo.put_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue());
             place_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue() * M2FT);
-            if (getprop("paylod/armament/msg")) {
+            if (getprop("payload/armament/msg")) {
                 # send the crater out on emesary so others can see it
                 armament.AIM.notifyCrater(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue(),1, 0, nil);
             }
