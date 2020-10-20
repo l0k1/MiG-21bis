@@ -1180,7 +1180,7 @@ var impact_listener = func {
             foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
                 distance = dropgeo.direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
                 if (distance < payloads[typeOrdName].hit_max_distance) {
-                    if (getprop("paylod/armament/msg")) {
+                    if (getprop("payload/armament/msg")) {
                         var msg = notifications.ArmamentNotification.new("mhit", 4, damage.warheads[typeOrdName][0]+21);
                                 msg.RelativeAltitude = 0;
                                 msg.Bearing = 0;
@@ -1254,7 +1254,7 @@ var hitmessage = func(typeOrd) {
     } else {
         var ordname = typeOrd.name;
     }
-    if (getprop("paylod/armament/msg")) {
+    if (getprop("payload/armament/msg")) {
         var msg = notifications.ArmamentNotification.new("mhit", 4, -1*(damage.shells[ordname][0]+1));
                 msg.RelativeAltitude = 0;
                 msg.Bearing = 0;
