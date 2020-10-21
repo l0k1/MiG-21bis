@@ -17,7 +17,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>digit1</object-name>
-		<property>/instrumentation/dead-reckoner/distance</property>
+		<property>/fdm/jsbsim/systems/deadreckoner/distance-final</property>
 		<bias>0.000001</bias>
 		<factor>-0.1852</factor>
 		<step>0.539957</step>
@@ -30,7 +30,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>digit10</object-name>
-		<property>/instrumentation/dead-reckoner/distance</property>
+		<property>/fdm/jsbsim/systems/deadreckoner/distance-final</property>
 		<bias>0.000001</bias>
 		<factor>-0.01852</factor>
 		<step>5.39957</step>
@@ -43,7 +43,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>digit100</object-name>
-		<property>/instrumentation/dead-reckoner/distance</property>
+		<property>/fdm/jsbsim/systems/deadreckoner/distance-final</property>
 		<bias>0.000001</bias>
 		<factor>-0.001852</factor>
 		<step>53.9957</step>
@@ -58,7 +58,7 @@
 <text>
 	<name>LabelText</name>
 	<type type="string">literal</type>
-		<text type="string">PPD1M Range Finder NOT WORKING</text>
+		<text type="string">PPD1M Range Finder</text>
 	<draw-text type="bool">true</draw-text>
 	<font>Helvetica.txf</font>
 		<character-size type="double">0.012</character-size>

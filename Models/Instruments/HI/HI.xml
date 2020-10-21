@@ -47,7 +47,7 @@
     <animation>
         <type>rotate</type>
         <object-name>bearingNeedle</object-name>
-        <property>/instrumentation/dead-reckoner/azimuth</property>
+        <property>/fdm/jsbsim/systems/deadreckoner/azimuth-final</property>
         <factor>-1</factor>
         <axis>
             <x>1</x>
