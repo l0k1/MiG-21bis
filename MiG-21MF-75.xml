@@ -671,6 +671,7 @@
  <system file="external-animation"/>
  <system file="headmove"/>
  <system file="gyro-compass"/>
+ <system file="dead-reckoner"/>
  <system file="flightdirector"/>
 
  <flight_control name="none"/>
