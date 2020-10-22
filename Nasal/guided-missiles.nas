@@ -3953,6 +3953,10 @@ var AIM = {
 			}
 		}
 		me.coord = explosion_coord;
+		
+		thread.lock(tacview.mutexWrite);
+        tacview.writeExplosion(coord.lat(),coord.lon(),coord.alt(),me.reportDist);
+		thread.unlock(tacview.mutexWrite);
 
 		thread.lock(mutexTimer);
 		append(AIM.timerQueue, [AIM, AIM.notifyInFlight, [me.coord.lat(), me.coord.lon(), me.coord.alt(),0,me.typeID,me.type,me.unique_id,0,"", me.hdg, me.pitch, 0], 0]);
