@@ -1,6 +1,7 @@
 # ID Scheme
 # currently using ints, but it accepts hex
 # 999 - my plane
+# 998 - dead reckoner
 # 1000 - 11000 - other planes
 # 11000 - 21000 - missiles
 # 21000 - 41000 - explosions
@@ -87,6 +88,7 @@ var startwrite = func(propfired = 0) {
     write("FileType=text/acmi/tacview\nFileVersion=2.1\n");
     write("0,ReferenceTime=" ~ timestamp ~ "\n#0\n");
     write(myplaneID ~ ",T=" ~ getLon() ~ "|" ~ getLat() ~ "|" ~ getAlt() ~ "|" ~ getRoll() ~ "|" ~ getPitch() ~ "|" ~ getHeading() ~ ",Name=MiG-21bis,CallSign="~getprop("/sim/multiplay/callsign")~"\n"); #
+    write("998,Name=DeadReckoner,CallSign=DeadReckoner\n"); #
     thread.unlock(mutexWrite);
     starttime = systime();
     stop_on_prop = propfired;
@@ -123,6 +125,7 @@ var mainloop = func() {
     thread.unlock(mutexWrite);
     writeMyPlanePos();
     writeMyPlaneAttributes();
+    writeDeadReckoner();
     if (getprop("/sim/multiplay/selected-server") != "mpserver.opredflag.com") {
         foreach (var cx; mpdb.cx_master_list) {
             var mm = cx.get_model2();
@@ -203,6 +206,13 @@ var writeMyPlanePos = func() {
 var writeMyPlaneAttributes = func() {
     thread.lock(mutexWrite);
     write(myplaneID ~ ",TAS="~getTas()~",MACH="~getMach()~",AOA="~getAoA()~",HDG="~getHeading()~",Throttle="~getThrottle()~",Afterburner="~getAfterburner()~"\n");
+    thread.unlock(mutexWrite);
+}
+
+var writeDeadReckoner = func() {
+    var drpos = geo.Coord.new().set_latlon(getLat(),getLon()).apply_course_distance(getDRAzimuth(), getDRRange());
+    thread.lock(mutexWrite);
+    write("998,T=" ~ drpos.lon() ~ "|" ~ drpos.lat() ~ "|" ~ getAlt() ~"\n");
     thread.unlock(mutexWrite);
 }
 
@@ -294,6 +304,14 @@ var getThrottle = func() {
 
 var getAfterburner = func() {
     return getprop("/fdm/jsbsim/fcs/aug-active");
+}
+
+var getDRAzimuth = func() {
+    var offset = getprop("/orientation/true-heading-deg") - getprop("/fdm/jsbsim/systems/gyro-compass/heading-deg");
+    return rounder(getprop("/fdm/jsbsim/systems/deadreckoner/azimuth-final")+offset,0.01);
+}
+var getDRRange = func() {
+    return rounder(getprop("/fdm/jsbsim/systems/deadreckoner/distance-final")*NM2M,0.01);
 }
 
 var rounder = func(x, p) {

@@ -39,7 +39,7 @@ else they are centered.-->
         <fcs_function name="trash/instrumentation/fd/letdown-mode-height">
             <function>
                 <table>
-                    <independentVar lookup="row">/instrumentation/dead-reckoner/distance</independentVar>
+                    <independentVar lookup="row">systems/deadreckoner/distance</independentVar>
                     <tableData>
                         10.7991 1968.5
                         21.5983 9842.52

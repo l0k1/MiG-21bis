@@ -29,10 +29,6 @@
                 <name>radar-altimeter</name>
                 <path>Aircraft/MiG-21bis/Systems/radar-altimeter.xml</path>
             </property-rule>
-            <property-rule n="102">
-                <name>dead-reckoner</name>
-                <path>Aircraft/MiG-21bis/Systems/dead-reckoner.xml</path>
-            </property-rule>
         </systems>
 
         <state include="States/test.xml" n="0"/>
@@ -352,11 +348,11 @@
                 <short n="9" alias="/payload/rail[2]/id"/>
                 <short n="10" alias="/payload/rail[3]/id"/>
                 <short n="11" alias="/payload/rail[4]/id"/>
-                <bool n="0" alias ="/instrumentation/gci/picture"/> <!-- gci request -->
-                <bool n="1" alias ="/instrumentation/gci/bogeydope"/> <!-- gci request -->
-                <bool n="2" alias ="/instrumentation/gci/cutoff"/> <!-- gci request -->
-                <bool n="3" alias ="/fdm/jsbsim/systems/chute/deploy"/>
-                <bool n="4" alias="/fdm/jsbsim/systems/hmcs/deploying"/>
+                <bool n="0" type="bool" alias ="/instrumentation/gci/picture"/> <!-- gci request -->
+                <bool n="1" type="bool" alias ="/instrumentation/gci/bogeydope"/> <!-- gci request -->
+                <bool n="2" type="bool" alias ="/instrumentation/gci/cutoff"/> <!-- gci request -->
+                <bool n="3" type="bool" alias ="/fdm/jsbsim/systems/chute/deploy"/>
+                <bool n="4" type="bool" alias="/fdm/jsbsim/systems/hmcs/deploying"/>
             </generic>
         </multiplay>
 
@@ -818,16 +814,6 @@
         <marker-beacon>
             <volume type="double" archive="y">0.0</volume>
         </marker-beacon>
-        <dead-reckoner>
-            <azimuth type="double">0.0001</azimuth>
-            <distance type="double">0.0001</distance>
-            <distance-adjust type="double">0.0</distance-adjust>
-            <azimuth-adjust type="double">0.0</azimuth-adjust>
-            <internal>
-                <azimuth type="double">0.0001</azimuth>
-                <distance type="double">0.0001</distance>
-            </internal>
-        </dead-reckoner>
         <gyro-compass>
             <gyro-heading-deg type="double" userarchive="y">0.0</gyro-heading-deg>
         </gyro-compass>
@@ -1764,7 +1750,7 @@
         <mig28>             <file>Aircraft/MiG-21bis/Nasal/mig28.nas</file>             </mig28>
         <monitor>           <file>Aircraft/MiG-21bis/Nasal/dialog-perf.nas</file>
                             <file>Aircraft/MiG-21bis/Nasal/performance.nas</file>       </monitor>
-        <tacview>           <file>Aircraft/MIG-21bis/Nasal/tacview.nas</file>           </tacview>
+        <tacview>           <file>Aircraft/MiG-21bis/Nasal/tacview.nas</file>           </tacview>
 
     </nasal>
 

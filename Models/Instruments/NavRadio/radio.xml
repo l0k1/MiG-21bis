@@ -42,7 +42,7 @@
             <red>0</red>
             <green>1</green>
             <blue>0</blue>
-        </emission> 
+        </emission>
     </animation>
 
     <animation>
@@ -260,13 +260,13 @@
 			<interval-sec>0.2</interval-sec>
 			<binding>
 				<command>property-assign</command>
-				<property>/instrumentation/dead-reckoner/reset</property>
+				<property>/fdm/jsbsim/systems/deadreckoner/reset</property>
 				<value>1</value>
 			</binding>
 			<mod-up>
 			<binding>
 				<command>property-assign</command>
-				<property>/instrumentation/dead-reckoner/reset</property>
+				<property>/fdm/jsbsim/systems/deadreckoner/reset</property>
 				<value>0</value>
 			</binding>
 			</mod-up>
@@ -276,7 +276,7 @@
 	<animation>
 		<type>translate</type>
 		<object-name>buttonreset</object-name>
-		<property>/instrumentation/dead-reckoner/reset</property>
+		<property>/fdm/jsbsim/systems/deadreckoner/reset</property>
 		<factor>0.001</factor>
 		<offset-m>0</offset-m>
 		<axis>
@@ -300,7 +300,7 @@
 			</binding>
 			<binding>
 				<command>property-adjust</command>
-				<property>/instrumentation/dead-reckoner/distance-adjust</property>
+				<property>/fdm/jsbsim/systems/deadreckoner/distance-adjust</property>
 				<step>0.45</step>
 			</binding>
 			<mod-up>
@@ -322,7 +322,7 @@
 			</binding>
 			<binding>
 				<command>property-adjust</command>
-				<property>/instrumentation/dead-reckoner/distance-adjust</property>
+				<property>/fdm/jsbsim/systems/deadreckoner/distance-adjust</property>
 				<step>-0.45</step>
 			</binding>
 			<mod-up>
@@ -367,7 +367,7 @@
 			</binding>
 			<binding>
 				<command>property-adjust</command>
-				<property>/instrumentation/dead-reckoner/azimuth-adjust</property>
+				<property>/fdm/jsbsim/systems/deadreckoner/azimuth-adjust</property>
 				<step>1</step>
 			</binding>
 			<mod-up>
@@ -389,7 +389,7 @@
 			</binding>
 			<binding>
 				<command>property-adjust</command>
-				<property>/instrumentation/dead-reckoner/azimuth-adjust</property>
+				<property>/fdm/jsbsim/systems/deadreckoner/azimuth-adjust</property>
 				<step>-1</step>
 			</binding>
 			<mod-up>
