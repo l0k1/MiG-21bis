@@ -1,6 +1,7 @@
 # ID Scheme
 # currently using ints, but it accepts hex
 # 999 - my plane
+# 998 - dead reckoner
 # 1000 - 11000 - other planes
 # 11000 - 21000 - missiles
 # 21000 - 41000 - explosions
@@ -73,7 +74,9 @@ var heading = 0;
 var speed = 0;
 var mutexWrite = thread.newlock();
 
-var startwrite = func() {
+var stop_on_prop = 0;
+
+var startwrite = func(propfired = 0) {
     timestamp = getprop("/sim/time/utc/year") ~ "-" ~ getprop("/sim/time/utc/month") ~ "-" ~ getprop("/sim/time/utc/day") ~ "T";
     timestamp = timestamp ~ getprop("/sim/time/utc/hour") ~ ":" ~ getprop("/sim/time/utc/minute") ~ ":" ~ getprop("/sim/time/utc/second") ~ "Z";
     filetimestamp = string.replace(timestamp,":","-");
@@ -85,14 +88,20 @@ var startwrite = func() {
     write("FileType=text/acmi/tacview\nFileVersion=2.1\n");
     write("0,ReferenceTime=" ~ timestamp ~ "\n#0\n");
     write(myplaneID ~ ",T=" ~ getLon() ~ "|" ~ getLat() ~ "|" ~ getAlt() ~ "|" ~ getRoll() ~ "|" ~ getPitch() ~ "|" ~ getHeading() ~ ",Name=MiG-21bis,CallSign="~getprop("/sim/multiplay/callsign")~"\n"); #
+    write("998,Name=DeadReckoner,CallSign=DeadReckoner\n"); #
     thread.unlock(mutexWrite);
     starttime = systime();
-    setprop("/sim/screen/black","Starting tacview recording");
+    stop_on_prop = propfired;
+    if (!stop_on_prop) {
+        setprop("/sim/screen/black","Starting tacview recording");
+    }
     settimer(func(){mainloop();}, main_update_rate);
 }
 
 var stopwrite = func() {
-    setprop("/sim/screen/black","Stopping tacview recording");
+    if (!stop_on_prop) {
+        setprop("/sim/screen/black","Stopping tacview recording");
+    }
     thread.lock();
     write("-"~myplaneID);
     thread.unlock;
@@ -116,6 +125,7 @@ var mainloop = func() {
     thread.unlock(mutexWrite);
     writeMyPlanePos();
     writeMyPlaneAttributes();
+    writeDeadReckoner();
     if (getprop("/sim/multiplay/selected-server") != "mpserver.opredflag.com") {
         foreach (var cx; mpdb.cx_master_list) {
             var mm = cx.get_model2();
@@ -196,6 +206,13 @@ var writeMyPlanePos = func() {
 var writeMyPlaneAttributes = func() {
     thread.lock(mutexWrite);
     write(myplaneID ~ ",TAS="~getTas()~",MACH="~getMach()~",AOA="~getAoA()~",HDG="~getHeading()~",Throttle="~getThrottle()~",Afterburner="~getAfterburner()~"\n");
+    thread.unlock(mutexWrite);
+}
+
+var writeDeadReckoner = func() {
+    var drpos = geo.Coord.new().set_latlon(getLat(),getLon()).apply_course_distance(getDRAzimuth(), getDRRange());
+    thread.lock(mutexWrite);
+    write("998,T=" ~ drpos.lon() ~ "|" ~ drpos.lat() ~ "|" ~ getAlt() ~"\n");
     thread.unlock(mutexWrite);
 }
 
@@ -289,6 +306,14 @@ var getAfterburner = func() {
     return getprop("/fdm/jsbsim/fcs/aug-active");
 }
 
+var getDRAzimuth = func() {
+    var offset = getprop("/orientation/true-heading-deg") - getprop("/fdm/jsbsim/systems/gyro-compass/heading-deg");
+    return rounder(getprop("/fdm/jsbsim/systems/deadreckoner/azimuth-final")+offset,0.01);
+}
+var getDRRange = func() {
+    return rounder(getprop("/fdm/jsbsim/systems/deadreckoner/distance-final")*NM2M,0.01);
+}
+
 var rounder = func(x, p) {
     v = math.mod(x, p);
     if ( v <= (p * 0.5) ) {
@@ -343,6 +368,16 @@ setlistener("/sim/multiplay/chat-history", func(p) {
         write("#" ~ (systime() - tacview.starttime)~"\n");
         write("0,Event=Message|Chat ["~hist_vector[size(hist_vector)-1]~"]\n");
         thread.unlock(mutexWrite);
+    }
+},0,0);
+
+############### MIG21 SPECIFIC ##################
+
+setlistener("/fdm/jsbsim/electric/output/recorder", func(p) {
+    if (p.getValue() > 105) {
+        startwrite(1);
+    } elsif (stop_on_prop == 1) {
+        stopwrite();
     }
 },0,0);
 

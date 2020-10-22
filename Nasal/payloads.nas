@@ -234,6 +234,14 @@ var create_pylon = func(pylon, payload, selected) {
     if (payload.type == "bomb") {
         setprop("/payload/released/"~payload.name~"["~pylon~"]",FALSE);
     }
+
+    if (payload.type == "tank") {
+        if (selected == "PTB-800") {
+            setprop("/consumables/fuel/tank["~pylon_to_tank_array[pylon]~"]/level-norm",1400);
+        } else {
+            setprop("/consumables/fuel/tank["~pylon_to_tank_array[pylon]~"]/level-norm",850);
+        }
+    }
     
     if (selected == "FAB-100x4") {
         if (pylon == 1) {
@@ -737,11 +745,12 @@ var missile_release = func(pylon) {
             setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
             setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
             var phrase = brevity ~ " at: " ~ callsign;
-            if (getprop("payload/armament/msg")) {
-                defeatSpamFilter(phrase);
-            } else {
+            #if (getprop("payload/armament/msg")) {
+                #defeatSpamFilter(phrase);
+            #} else {
                 setprop("/sim/messages/atc", phrase);
-            }
+            #}
+            damage.damageLog.push(phrase);
         } elsif ( armament.AIM.active[pylon] != nil and (selected == "R-27T1" or selected == "R-27R1")) {
             var prs_inhg = getprop("/environment/pressure-inhg");
             if ( prs_inhg > 25 ) {
@@ -760,12 +769,12 @@ var missile_release = func(pylon) {
             setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
             setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
             var phrase = brevity ~ " Maddog released";
-            if (getprop("payload/armament/msg")) {
-                defeatSpamFilter(phrase);
-            } else {
+            #if (getprop("payload/armament/msg")) {
+            #    defeatSpamFilter(phrase);
+            #} else {
                 setprop("/sim/messages/atc", phrase);
-            }
-
+            #}
+            damage.damageLog.push(phrase);
         } elsif ( armament.AIM.active[pylon] != nil and selected == "Kh-66" ) {
 
             var brevity = armament.AIM.active[pylon].brevity;
@@ -782,11 +791,12 @@ var missile_release = func(pylon) {
             
             setprop("fdm/jsbsim/inertia/pointmass-weight-lbs["~pylon~"]",0);
             setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
-            if (getprop("payload/armament/msg")) {
-                defeatSpamFilter(phrase);
-            } else {
+            #if (getprop("payload/armament/msg")) {
+            #    defeatSpamFilter(phrase);
+            #} else {
                 setprop("/sim/messages/atc", phrase);
-            }
+            #}
+            damage.damageLog.push(phrase);
         } elsif (armament.AIM.active[pylon] != nil and selected == "Kh-25MP") {
 
             var brevity = armament.AIM.active[pylon].brevity;
@@ -798,11 +808,12 @@ var missile_release = func(pylon) {
             setprop("payload"~virtual~"weight["~(pylon)~"]/selected", "none");
 
             var phrase = brevity ~ " Maddog released";
-            if (getprop("payload/armament/msg")) {
-                defeatSpamFilter(phrase);
-            } else {
+            #if (getprop("payload/armament/msg")) {
+            #    defeatSpamFilter(phrase);
+            #} else {
                 setprop("/sim/messages/atc", phrase);
-            }
+            #}
+            damage.damageLog.push(phrase);
         }
     }
 }
@@ -884,11 +895,12 @@ var bomb_release = func(pylon,type="bomb") {
         setprop("payload/released/"~selected~"["~pylon~"]",1);
         sounds.disconnect();
         var phrase = payloads[selected].brevity ~ " released.";
-        if (getprop("payload/armament/msg")) {
-            defeatSpamFilter(phrase);
-        } else {
+        #if (getprop("payload/armament/msg")) {
+        #    defeatSpamFilter(phrase);
+        #} else {
             setprop("/sim/messages/atc", phrase);
-        }
+        #}
+        damage.damageLog.push(phrase);
         return_trigger(selected,pylon);
     }
 }
@@ -1168,13 +1180,32 @@ var impact_listener = func {
             foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")){
                 distance = dropgeo.direct_distance_to(geo.Coord.new().set_latlon(mp.getNode("position/latitude-deg").getValue(), mp.getNode("position/longitude-deg").getValue(), mp.getNode("position/altitude-ft").getValue() * FT2M));
                 if (distance < payloads[typeOrdName].hit_max_distance) {
-                    defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
+                    if (getprop("payload/armament/msg")) {
+                        var msg = notifications.ArmamentNotification.new("mhit", 4, damage.warheads[typeOrdName][0]+21);
+                                msg.RelativeAltitude = 0;
+                                msg.Bearing = 0;
+                                msg.Distance = distance;
+                                msg.RemoteCallsign = mp.getNode("callsign").getValue();
+                        notifications.hitBridgedTransmitter.NotifyAll(msg);
+                    }
+                    damage.damageLog.push(sprintf("You hit %s with %s, %.1f meters distance.",mp.getNode("callsign").getValue(),typeOrdName,distance));
+                    #defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ mp.getNode("callsign").getValue());
                 }
             }
             distance = dropgeo.direct_distance_to(geo.aircraft_position()) * 0.8; # blasts should be more lethal going up, right?
             if (distance < payloads[typeOrdName].hit_max_distance * 2) {
                 var myc = getprop("sim/multiplay/callsign");
-                defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ myc);
+                var msg = notifications.ArmamentNotification.new("mhit", 4, damage.warheads[typeOrdName][0]+21);
+                msg.RelativeAltitude = 0;
+                msg.Bearing = 0;
+                msg.Distance = distance;
+                msg.RemoteCallsign = myc;
+                msg.Callsign = myc;
+                msg.FromIncomingBridge = 1;
+                damage.damage_recipient.Receive(msg);
+                notifications.hitBridgedTransmitter.NotifyAll(msg);
+                damage.damageLog.push(sprintf("You hit yourself with %s, %.1f meters.",typeOrdName,distance));
+                #defeatSpamFilter(sprintf( typeOrdName~" exploded: %01.1f", distance) ~ " meters from: " ~ myc);
             }
             sounds.boom(distance);
         }
@@ -1208,7 +1239,10 @@ var impact_listener = func {
         if (typeOrdName == "BETAB-500ShP" and ballistic.getNode("impact/type").getValue() == "terrain") {
             #var x = geo.put_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue());
             place_model("Aircraft/MiG-21bis/Models/Effects/Crater/crater.xml",ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue() * M2FT);
-            armament.AIM.notifyCrater(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue(),1, 0);# send the crater out on emesary so others can see it
+            if (getprop("payload/armament/msg")) {
+                # send the crater out on emesary so others can see it
+                armament.AIM.notifyCrater(ballistic.getNode("impact/latitude-deg").getValue(), ballistic.getNode("impact/longitude-deg").getValue(),ballistic.getNode("impact/elevation-m").getValue(),1, 0, nil);
+            }
         }
     }
 }
@@ -1220,13 +1254,15 @@ var hitmessage = func(typeOrd) {
     } else {
         var ordname = typeOrd.name;
     }
-    var msg = notifications.ArmamentNotification.new("mhit", 4, 111+damage.shells[typeOrd][0]);
+    if (getprop("payload/armament/msg")) {
+        var msg = notifications.ArmamentNotification.new("mhit", 4, -1*(damage.shells[ordname][0]+1));
                 msg.RelativeAltitude = 0;
                 msg.Bearing = 0;
-                msg.Distance = hits_count;
-                msg.RemoteCallsign = hit_callsign;
-                f14.hitBridgedTransmitter.NotifyAll(msg);
-    damage.damageLog.push("You hit "~hit_callsign~" with "~ordname~", "~hits_count~" times.");
+                msg.Distance = typeOrd.hit_count;
+                msg.RemoteCallsign = typeOrd.hit_callsign;
+        notifications.hitBridgedTransmitter.NotifyAll(msg);
+    }
+    damage.damageLog.push("You hit "~typeOrd.hit_callsign~" with "~ordname~", "~typeOrd.hit_count~" times.");
     #message = ordname ~ " hit: " ~ typeOrd.hit_callsign ~ ": " ~ typeOrd.hit_count ~ " hits";
     #defeatSpamFilter(message);
     typeOrd.hit_callsign = "";

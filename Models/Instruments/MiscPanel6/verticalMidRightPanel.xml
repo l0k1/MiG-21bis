@@ -412,7 +412,32 @@
                 <property>/fdm/jsbsim/electric/switches/rvmsp/rsbn</property>
             </binding>
         </action>
-    </animation>    
+    </animation>
+
+    <animation>
+        <type>knob</type>
+        <object-name>recorderSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvmsp/recorder</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.007692</x-m>
+            <y-m> 0.101516</y-m>
+            <z-m>-0.001469</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvmsp/recorder</property>
+            </binding>
+        </action>
+    </animation>
 
     <animation>
         <type>material</type>

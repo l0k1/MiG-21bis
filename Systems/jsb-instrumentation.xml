@@ -108,13 +108,7 @@ clock
                             1.10    0.0
                         </tableData>
                     </table>
-                    <difference>
-                        <product>
-                            <property>random/rand-0</property>
-                            <value>2</value>
-                        </product>
-                        <value>1</value>
-                    </difference>
+                    <urandom/>
                     <value>30</value>
                 </product>
             </function>

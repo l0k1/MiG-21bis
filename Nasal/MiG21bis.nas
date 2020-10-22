@@ -324,14 +324,6 @@ var get_radio_file_gui = func() {
     file_selector.open();
 }
 
-var jsbsim_random = func() {
-    setprop("/fdm/jsbsim/random/rand-0",rand());
-    setprop("/fdm/jsbsim/random/rand-1",rand());
-    setprop("/fdm/jsbsim/random/rand-2",rand());
-    setprop("/fdm/jsbsim/random/rand-3",rand());
-    settimer(jsbsim_random,0);
-}
-
 var load_interior = func{
     setprop("/sim/current-view/view-number", 0);
     #print("..Done!");
@@ -457,7 +449,6 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
     
     test_support();
     main_loop();
-    jsbsim_random();
     #
     setlistener("gear/gear[0]/wow",func(){wow_menu_change()},nil,0);
     setlistener("gear/gear[1]/wow",func(){wow_menu_change()},nil,0);
@@ -470,7 +461,7 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
     # randomize startup values for DME, radial setting, compass, and fuel
     setprop("/instrumentation/fuel/knob-level",int((rand() * 1600) + 169)); # fuel
     setprop("/fdm/jsbsim/systems/gyro-compass/heading-change",getprop("/orientation/heading-deg") + int((rand() * 100) - 50)); # gyro compass heading
-    setprop("/instrumentation/dead-reckoner/distance-adjust",int(rand() * 30)); # dme
-    setprop("/instrumentation/dead-reckoner/azimuth-adjust",math.periodic(0, 360, int(rand() * 360))); #ins azimuth
+    setprop("/fdm/jsbsim/systems/deadreckoner/distance-adjust",int(rand() * 30)); # dme
+    setprop("/fdm/jsbsim/systems/deadreckoner/azimuth-adjust",math.periodic(0, 360, int(rand() * 360))); #ins azimuth
     setprop("/instrumentation/nav/radials/selected-deg",math.periodic(0, 360, int(rand() * 360)))
 });

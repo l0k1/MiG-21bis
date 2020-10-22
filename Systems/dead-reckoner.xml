@@ -1,503 +1,425 @@
 <?xml version="1.0"?>
- 
-<PropertyList>
 
-    <!--
-       var ambientTemperatureKelvin = getprop("/environment/temperature-degc") + 273.15;
-       var MACH = getprop("/velocities/mach");
-       var TASKnots = 661.47 * MACH * math.sqrt(ambientTemperatureKelvin / 288.15);
-    -->
+<system name="dead-reckoner">
 
-    <!-- calculate true airspeed -->
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
+    <channel name="dr-nav-system" execrate="4">
+
+        <!--
+           var ambientTemperatureKelvin = getprop("/environment/temperature-degc") + 273.15;
+           var MACH = getprop("/velocities/mach");
+           var TASKnots = 661.47 * MACH * math.sqrt(ambientTemperatureKelvin / 288.15);
+        -->
+
+        <!-- calculate true airspeed -->
+        <fcs_function name="trash/velocities/tas-kt">
+            <function>
                 <product>
                     <value>661.47</value>
                     <property>/velocities/mach</property>
                     <sqrt>
-                        <div>
+                        <quotient>
                             <sum>
                                 <property>/environment/temperature-degc</property>
                                 <value>273.15</value>
                             </sum>
                             <value>288.15</value>
-                        </div>
+                        </quotient>
                     </sqrt>
                 </product>
-            </expression>
-        </input>
-        <output>/velocities/tas-kt</output>
-    </filter>
-    
-    <!-- horizontal-only true airspeed -->
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
+            </function>
+            <output>/velocities/tas-kt</output> <!-- relied upon by tacview.nas and flightdirector.xml -->
+        </fcs_function>
+
+        <!-- horizontal-only true airspeed -->
+        <fcs_function name="trash/deadreckoner/horizontal-tas-kt">
+            <function>
                 <product>
                     <property>/velocities/tas-kt</property>
                     <cos>
-                        <deg2rad><property>/fdm/jsbsim/instrumentation/input/pitch</property></deg2rad>
+                        <difference>
+                            <toradians>
+                                <property>instrumentation/input/pitch</property>
+                            </toradians>
+                            <product>
+                                <toradians>
+                                    <property>aero/alpha-corrected-deg</property>
+                                </toradians>
+                                <cos>
+                                    <toradians>
+                                        <abs>
+                                            <property>instrumentation/input/roll</property>
+                                        </abs>
+                                    </toradians>
+                                </cos>
+                            </product>
+                        </difference>
                     </cos>
+                    <property>systems/delta-hour-4</property> <!-- calc'd in gyro-compass.xml -->
                 </product>
-            </expression>
-        </input>
-        <output>/velocities/horizontal-tas-kt</output>
-    </filter>
-    
-    <!-- distance travelled in one frame -->
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
-                <product>
-                    <property>/velocities/horizontal-tas-kt</property>
-                    <property>/fdm/jsbsim/systems/delta-hour-4</property> <!-- calculated in gyro-compass.xml -->
-                </product>
-            </expression>
-        </input>
-        <output>/velocities/tas-nm-per-frame</output>
-    </filter>
+            </function>
+            <output>systems/deadreckoner/horizontal-tas-nm-per-frame</output>
+        </fcs_function>
 
-    <!-- check if azimuth input has changed -->
+        <!-- check if azimuth input has changed -->
+        <fcs_function name="trash/deadreckoner/azimuth-change">
+            <function>
+                <difference>
+                    <property>systems/deadreckoner/azimuth-adjust</property>
+                    <property>systems/deadreckoner/azimuth-adjust-last</property>
+                </difference>
+            </function>
+            <output>systems/deadreckoner/azimuth-change</output>
+        </fcs_function>
 
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
+        <pure_gain name="trash/systems/deadreckoner/azimuth-adjust-last">
+            <input>systems/deadreckoner/azimuth-adjust</input>
+            <gain>1</gain>
+            <output>systems/deadreckoner/azimuth-adjust-last</output>
+        </pure_gain>
+
+        <!-- check if distance input has changed -->
+        <fcs_function name="trash/systems/deadreckoner/distance-change">
+            <function>
                 <difference>
-                    <property>/instrumentation/dead-reckoner/azimuth-adjust</property>
-                    <property>/instrumentation/dead-reckoner/internal/azimuth-adjust-last</property>
+                    <property>systems/deadreckoner/distance-adjust</property>
+                    <property>systems/deadreckoner/distance-adjust-last</property>
                 </difference>
-            </expression>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/azimuth-change</output>
-    </filter>
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>/instrumentation/dead-reckoner/azimuth-adjust</input>
-        <output>/instrumentation/dead-reckoner/internal/azimuth-adjust-last</output>
-    </filter>
-    
-    <!-- check if distance input has changed -->
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
-                <difference>
-                    <property>/instrumentation/dead-reckoner/distance-adjust</property>
-                    <property>/instrumentation/dead-reckoner/internal/distance-adjust-last</property>
-                </difference>
-            </expression>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/distance-change</output>
-    </filter>
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>/instrumentation/dead-reckoner/distance-adjust</input>
-        <output>/instrumentation/dead-reckoner/internal/distance-adjust-last</output>
-    </filter>
-    
-    <!-- update distance and azimuth to fictional point based on distance travelled 
-    (derived via KTAS above) and heading -->
-    
-    <!-- these first three filters calculate the bearing. positive is right. -->
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
+            </function>
+            <output>systems/deadreckoner/distance-change</output>
+        </fcs_function>
+
+        <pure_gain name="trash/systems/deadreckoner/distance-adjust-last">
+            <input>systems/deadreckoner/distance-adjust</input>
+            <gain>1</gain>
+            <output>systems/deadreckoner/distance-adjust-last</output>
+        </pure_gain>
+
+        <!-- update distance and azimuth to fictional point based on distance travelled 
+        (derived via KTAS above) and heading -->
+        
+        <!-- these first three filters calculate the bearing. positive is right. -->
+        <fcs_function name="trash/systems/deadreckoner/bearing-to-azimuth1">
+            <function>
                 <sum>
                     <difference>
-                        <property>/instrumentation/dead-reckoner/internal/azimuth</property>
-                        <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
+                        <property>systems/deadreckoner/azimuth</property>
+                        <property>systems/gyro-compass/heading-deg</property>
                     </difference>
-                    <property>/instrumentation/dead-reckoner/internal/azimuth-change</property>
+                    <property>systems/deadreckoner/azimuth-change</property>
                 </sum>
-            </expression>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</output>
-    </filter>
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <enable>
-            <condition>
-                <less-than>
-                    <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
-                    <value>-180</value>
-                </less-than>
-            </condition>
-        </enable>
-        <input>
-            <expression>
-                <sum>
-                    <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
-                    <value>360</value>
-                </sum>
-            </expression>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</output>
-    </filter>
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <enable>
-            <condition>
-                <greater-than>
-                    <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
-                    <value>180</value>
-                </greater-than>
-            </condition>
-        </enable>
-        <input>
-            <expression>
-                <difference>
-                    <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
-                    <value>360</value>
-                </difference>
-            </expression>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</output>
-    </filter>
-    
-    <!--
-    find new distances and such.
-    the filters for angles can be condensed at a later date if desired.
-    -->
-    
-    <!-- calculate new distance using law of cosines -->
-    <!-- new distance = sqrt(nm_per_frame^2 + distance^2 - 2 * nm_per_frame * distance * cos(bearing_to_azimuth) -->
+            </function>
+            <output>systems/deadreckoner/bearing-to-azimuth</output>
+        </fcs_function>
 
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
+        <!-- normalize it to -180 to 180 -->
+        <fcs_function name="trash/systems/deadreckoner/bearing-to-azimuth2">
+            <function>
+                <ifthen>
+                    <and>
+                        <gt>
+                            <property>systems/deadreckoner/bearing-to-azimuth</property>
+                            <value>-180</value>
+                        </gt>
+                        <lt>
+                            <property>systems/deadreckoner/bearing-to-azimuth</property>
+                            <value>180</value>
+                        </lt>
+                    </and>
+                    <property>systems/deadreckoner/bearing-to-azimuth</property>
+                    <ifthen>
+                        <lt>
+                            <property>systems/deadreckoner/bearing-to-azimuth</property>
+                            <value>-180</value>
+                        </lt>
+                        <sum>
+                            <property>systems/deadreckoner/bearing-to-azimuth</property>
+                            <value>360</value>
+                        </sum>
+                        <difference>
+                            <property>systems/deadreckoner/bearing-to-azimuth</property>
+                            <value>360</value>
+                        </difference>
+                    </ifthen>
+                </ifthen>
+            </function>
+            <output>systems/deadreckoner/bearing-to-azimuth</output>
+        </fcs_function>
+
+        <!--
+        find new distances and such.
+        the filters for angles can be condensed at a later date if desired.
+        -->
+        
+        <!-- calculate new distance using law of cosines -->
+        <!-- new distance = sqrt(nm_per_frame^2 + distance^2 - 2 * nm_per_frame * distance * cos(bearing_to_azimuth) -->
+
+        <fcs_function name="trash/systems/deadreckoner/distance">
+            <function>
                 <sqrt>
                     <difference>
                         <sum>
                             <pow>
-                                <property>/velocities/tas-nm-per-frame</property>
+                                <property>systems/deadreckoner/horizontal-tas-nm-per-frame</property>
                                 <value>2</value>
                             </pow>
                             <pow>
                                 <sum>
-                                    <property>/instrumentation/dead-reckoner/internal/distance</property>
-                                    <property>/instrumentation/dead-reckoner/internal/distance-change</property>
+                                    <property>systems/deadreckoner/distance</property>
+                                    <property>systems/deadreckoner/distance-change</property>
                                 </sum>
                                 <value>2</value>
                             </pow>
                         </sum>
                         <product>
                             <value>2</value>
-                            <property>/velocities/tas-nm-per-frame</property>
+                            <property>systems/deadreckoner/horizontal-tas-nm-per-frame</property>
                             <sum>
-                                <property>/instrumentation/dead-reckoner/internal/distance</property>
-                                <property>/instrumentation/dead-reckoner/internal/distance-change</property>
+                                <property>systems/deadreckoner/distance</property>
+                                <property>systems/deadreckoner/distance-change</property>
                             </sum>
-                            <cos><deg2rad><property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property></deg2rad></cos>
+                            <cos><toradians><property>systems/deadreckoner/bearing-to-azimuth</property></toradians></cos>
                         </product>
                     </difference>
                 </sqrt>
-            </expression>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/distance</output>
-    </filter>
-    
-    <!-- find the small angle first, assumed to be the angle at the imaginary point -->
-    <!-- small_angle = asin( ( sin(bearing_to_azimuth) * nm_per_frame) / internal_distance -->
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
-                <rad2deg>
+            </function>
+            <output>systems/deadreckoner/distance</output>
+        </fcs_function>
+
+        <!-- find the small angle first, assumed to be the angle at the imaginary point -->
+        <!-- small_angle = asin( ( sin(bearing_to_azimuth) * nm_per_frame) / internal_distance -->
+
+        <fcs_function name="trash/systems/deadreckoner/small-angle">
+            <function>
+                <todegrees>
                     <asin>
-                        <div>
+                        <quotient>
                             <product>
-                                <sin><deg2rad><property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property></deg2rad></sin>
-                                <property>/velocities/tas-nm-per-frame</property>
+                                <sin><toradians><property>systems/deadreckoner/bearing-to-azimuth</property></toradians></sin>
+                                <property>systems/deadreckoner/horizontal-tas-nm-per-frame</property>
                             </product>
-                            <property>/instrumentation/dead-reckoner/internal/distance</property>
-                        </div>
+                            <property>systems/deadreckoner/distance</property>
+                        </quotient>
                     </asin>
-                </rad2deg>
-            </expression>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/small-angle</output>
-    </filter>
+                </todegrees>
+            </function>
+            <output>systems/deadreckoner/small-angle</output>
+        </fcs_function>
     
-    <!-- find the remaining angle -->
-    <!-- remaining_angle = 180 - bearing_to_azimuth - small_angle -->
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
+        <!-- find the remaining angle -->
+        <!-- remaining_angle = 180 - bearing_to_azimuth - small_angle -->
+
+        <fcs_function name="trash/systems/deadreckoner/remaining-angle">
+            <function>
                 <difference>
                     <difference>
                         <value>180</value>
-                        <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                        <property>systems/deadreckoner/bearing-to-azimuth</property>
                     </difference>
-                    <property>/instrumentation/dead-reckoner/internal/small-angle</property>
+                    <property>systems/deadreckoner/small-angle</property>
                 </difference>
-            </expression>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/remaining-angle</output>
-    </filter>
+            </function>
+            <output>systems/deadreckoner/remaining-angle</output>
+        </fcs_function>
     
-    <!-- find new bearing -->
-    <!-- new_bearing = 180 - remaining_angle -->
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
+        <!-- find new bearing -->
+        <!-- new_bearing = 180 - remaining_angle -->
+        <fcs_function name="trash/systems/deadreckoner/bearing-to-azimuth">
+            <function>
                 <difference>
                     <value>180</value>
-                    <property>/instrumentation/dead-reckoner/internal/remaining-angle</property>
+                    <property>systems/deadreckoner/remaining-angle</property>
                 </difference>
-            </expression>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</output>
-    </filter>
+            </function>
+            <output>systems/deadreckoner/bearing-to-azimuth</output>
+        </fcs_function>
     
-    <!-- translate from bearing to azimuth back to an absolute azimuth value -->
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>
-            <expression>
+        <!-- translate from bearing to azimuth back to an absolute azimuth value -->
+        <fcs_function name="trash">
+            <function>
                 <sum>
-                    <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
-                    <property>/instrumentation/dead-reckoner/internal/bearing-to-azimuth</property>
+                    <property>systems/gyro-compass/heading-deg</property>
+                    <property>systems/deadreckoner/bearing-to-azimuth</property>
                 </sum>
-            </expression>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/azimuth</output>
-    </filter>
+            </function>
+            <output>systems/deadreckoner/azimuth</output>
+        </fcs_function>
 
-    <!-- overwrite the calculated entries if nav/dme is valid -->
-    <!-- also set distance-adjust and azimuth-adjust to 0 if valid or if reset is pressed -->
+        <!-- overwrite the calculated entries if nav/dme is valid -->
+        <!-- also set distance-adjust and azimuth-adjust to 0 if valid or if reset is pressed -->
 
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <enable>
-            <condition>
-                <equals>
-                    <property>/instrumentation/nav/data-is-valid</property>
-                    <value>1</value>
-                </equals>
-                <equals>
-                    <property>/instrumentation/nav/in-range</property>
-                    <value>1</value>
-                </equals>
-                <equals>
-                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
-                	<value>0</value>
-                </equals>
-            </condition>
-        </enable>
-        <input>
-            <expression>
-                <sum>
-                    <property>/instrumentation/nav/bearing-to-beacon-deg</property>
-                    <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
-                </sum>
-            </expression>
-            <period>
-                <min>0</min>
-                <max>360</max>
-            </period>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/azimuth</output>
-    </filter>
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <enable>
-            <condition>
-                <equals>
-                    <property>/instrumentation/adf/in-range</property>
-                    <value>1</value>
-                </equals>
-                <equals>
-                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
-                	<value>1</value>
-                </equals>
-            </condition>
-        </enable>
-        <input>
-            <expression>
-                <sum>
-                    <property>/instrumentation/adf/indicated-bearing-deg</property>
-                    <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
-                </sum>
-            </expression>
-            <period>
-                <min>0</min>
-                <max>360</max>
-            </period>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/azimuth</output>
-    </filter>
-
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <enable>
-            <condition>
-                <or>
+        <fcs_function name="trash/systems/deadreckoner/azimuth1">
+            <function>
+                <ifthen>
                     <and>
-                        <equals>
+                        <eq>
                             <property>/instrumentation/nav/data-is-valid</property>
                             <value>1</value>
-                        </equals>
-                        <equals>
+                        </eq>
+                        <eq>
                             <property>/instrumentation/nav/in-range</property>
                             <value>1</value>
-                        </equals>
-                        <equals>
-		                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
-		                	<value>0</value>
-		                </equals>
+                        </eq>
+                        <eq>
+                            <property>/instrumentation/misc-panel-1/rsbn-arc</property>
+                            <value>0</value>
+                        </eq>
                     </and>
-                    <and>
-	                    <equals>
-		                    <property>/instrumentation/adf/in-range</property>
-		                    <value>1</value>
-		                </equals>
-		                <equals>
-		                	<property>/instrumentation/misc-panel-1/rsbn-arc</property>
-		                	<value>1</value>
-		                </equals>
-		            </and>
-                    <equals>
-                        <property>/instrumentation/dead-reckoner/reset</property>
-                        <value>1</value>
-                    </equals>
-                </or>
-            </condition>
-        </enable>
-        <input>
-            <value>0</value>
-        </input>
-        <output>/instrumentation/dead-reckoner/azimuth-adjust</output>
-    </filter>
+                    <sum>
+                        <property>/instrumentation/nav/bearing-to-beacon-deg</property>
+                        <property>systems/gyro-compass/heading-deg</property>
+                    </sum>
+                    <property>systems/deadreckoner/azimuth</property>
+                </ifthen>
+                <!-- limit to 0 to 360? -->
+            </function>
+            <output>systems/deadreckoner/azimuth</output>
+        </fcs_function>
 
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <enable>
-            <condition>
-                <equals>
-                    <property>/instrumentation/nav/data-is-valid</property>
-                    <value>1</value>
-                </equals>
-                <equals>
-                    <property>/instrumentation/nav/in-range</property>
-                    <value>1</value>
-                </equals>
-                <equals>
-                    <property>/instrumentation/nav/dme-in-range</property>
-                    <value>1</value>
-                </equals>
-            </condition>
-        </enable>
-        <input>
-            <property>/instrumentation/dme/indicated-distance-nm</property>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/distance</output>
-    </filter>
-    
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <enable>
-            <condition>
-                <or>
+        <fcs_function name="trash/systems/deadreckoner/azimuth2">
+            <function>
+                <ifthen>
                     <and>
-                        <equals>
+                        <eq>
+                            <property>/instrumentation/adf/in-range</property>
+                            <value>1</value>
+                        </eq>
+                        <eq>
+                            <property>/instrumentation/misc-panel-1/rsbn-arc</property>
+                            <value>1</value>
+                        </eq>
+                    </and>
+                    <sum>
+                        <property>/instrumentation/adf/indicated-bearing-deg</property>
+                        <property>systems/gyro-compass/heading-deg</property>
+                    </sum>
+                    <property>systems/deadreckoner/azimuth</property>
+                </ifthen>
+            </function>
+            <output>systems/deadreckoner/azimuth</output>
+        </fcs_function>
+
+        <fcs_function name="trash/systems/deadreckoner/azimuth-adjust">
+            <function>
+                <ifthen>
+                    <or>
+                        <and>
+                            <eq>
+                                <property>/instrumentation/nav/data-is-valid</property>
+                                <value>1</value>
+                            </eq>
+                            <eq>
+                                <property>/instrumentation/nav/in-range</property>
+                                <value>1</value>
+                            </eq>
+                            <eq>
+                                <property>/instrumentation/misc-panel-1/rsbn-arc</property>
+                                <value>0</value>
+                            </eq>
+                        </and>
+                        <and>
+                            <eq>
+                                <property>/instrumentation/adf/in-range</property>
+                                <value>1</value>
+                            </eq>
+                            <eq>
+                                <property>/instrumentation/misc-panel-1/rsbn-arc</property>
+                                <value>1</value>
+                            </eq>
+                        </and>
+                        <eq>
+                            <property>systems/deadreckoner/reset</property>
+                            <value>1</value>
+                        </eq>
+                    </or>
+                    <value>0.001</value>
+                    <property>systems/deadreckoner/azimuth-adjust</property>
+                </ifthen>
+            </function>
+            <output>systems/deadreckoner/azimuth-adjust</output>
+        </fcs_function>
+
+        <fcs_function name="trash/systems/deadreckoner/distance">
+            <function>
+                <ifthen>
+                    <and>
+                        <eq>
                             <property>/instrumentation/nav/data-is-valid</property>
                             <value>1</value>
-                        </equals>
-                        <equals>
+                        </eq>
+                        <eq>
                             <property>/instrumentation/nav/in-range</property>
                             <value>1</value>
-                        </equals>
-                        <equals>
+                        </eq>
+                        <eq>
                             <property>/instrumentation/nav/dme-in-range</property>
                             <value>1</value>
-                        </equals>
+                        </eq>
                     </and>
-                    <equals>
-                        <property>/instrumentation/dead-reckoner/reset</property>
+                    <property>/instrumentation/dme/indicated-distance-nm</property>
+                    <property>systems/deadreckoner/distance</property>
+                </ifthen>
+            </function>
+            <output>systems/deadreckoner/distance</output>
+        </fcs_function>
+
+        <fcs_function name="trash/systems/deadreckoner/distance-adjust">
+            <function>
+                <ifthen>
+                    <or>
+                        <and>
+                            <eq>
+                                <property>/instrumentation/nav/data-is-valid</property>
+                                <value>1</value>
+                            </eq>
+                            <eq>
+                                <property>/instrumentation/nav/in-range</property>
+                                <value>1</value>
+                            </eq>
+                            <eq>
+                                <property>/instrumentation/nav/dme-in-range</property>
+                                <value>1</value>
+                            </eq>
+                        </and>
+                        <eq>
+                            <property>systems/deadreckoner/reset</property>
+                            <value>1</value>
+                        </eq>
+                    </or>
+                    <value>0.001</value>
+                    <property>systems/deadreckoner/distance-adjust</property>
+                </ifthen>
+            </function>
+            <output>systems/deadreckoner/distance-adjust</output>
+        </fcs_function>
+
+        <fcs_function name="trash">
+            <function>
+                <ifthen>
+                    <eq>
+                        <property>systems/deadreckoner/reset</property>
                         <value>1</value>
-                    </equals>
-                </or>
-            </condition>
-        </enable>
-        <input>
-            <value>0</value>
-        </input>
-        <output>/instrumentation/dead-reckoner/distance-adjust</output>
-    </filter>
+                    </eq>
+                    <value>0.001</value>
+                    <property>systems/deadreckoner/distance</property>
+                </ifthen>
+            </function>
+            <output>systems/deadreckoner/distance</output>
+        </fcs_function>
 
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <enable>
-            <condition>
-                <equals>
-                    <property>/instrumentation/dead-reckoner/reset</property>
-                    <value>1</value>
-                </equals>
-            </condition>
-        </enable>
-        <input>
-            <value>0</value>
-        </input>
-        <output>/instrumentation/dead-reckoner/internal/distance</output>
-    </filter>
+        <!-- final output -->
 
-    <!-- final output -->
+        <pure_gain name="trash/systems/deadreckoner/azimuth-final">
+            <input>systems/deadreckoner/azimuth</input>
+            <gain>1</gain>
+            <output>systems/deadreckoner/azimuth-final</output>
+        </pure_gain>
 
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>/instrumentation/dead-reckoner/internal/azimuth</input>
-        <output>/instrumentation/dead-reckoner/azimuth</output>
-    </filter>
 
-    <filter>
-        <type>gain</type>
-        <gain>1</gain>
-        <input>/instrumentation/dead-reckoner/internal/distance</input>
-        <output>/instrumentation/dead-reckoner/distance</output>
-    </filter>
+        <pure_gain name="trash/systems/deadreckoner/distance-adjust-last-final">
+            <input>systems/deadreckoner/distance</input>
+            <gain>1</gain>
+            <output>systems/deadreckoner/distance-final</output>
+        </pure_gain>
 
-</PropertyList>
+    </channel>
+</system>
