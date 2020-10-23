@@ -43,33 +43,10 @@ hitoutgoingBridge.TransmitFrequencySeconds = 1.5;
 hitoutgoingBridge.MPStringMaxLen = 180;
 emesary_mp_bridge.IncomingMPBridge.startMPBridge(hitRoutedNotifications, 19, emesary.GlobalTransmitter);
 
-#
-# debug all messages - this can be removed when testing isn't required.
-var debugRecipient = emesary.Recipient.new("Debug");
-debugRecipient.Receive = func(notification)
-{
-    if (notification.NotificationType != "FrameNotification")  {
-        print ("recv(0): type=",notification.NotificationType, " fromIncoming=",notification.FromIncomingBridge);
-
-        if (notification.NotificationType == "ArmamentInFlightNotification") {
-            print("recv(1): ",notification.NotificationType, " ", notification.Ident);
-            debug.dump(notification);
-
-        } else if (notification.NotificationType == "ArmamentNotification") {
-            if (notification.FromIncomingBridge) {
-                print("recv(2): ",notification.NotificationType, " ", notification.Ident,
-                      " Kind=",notification.Kind,
-                      " SecondaryKind=",notification.SecondaryKind,
-                      " RelativeAltitude=",notification.RelativeAltitude,
-                      " Distance=",notification.Distance,
-                      " Bearing=",notification.Bearing,
-                      " RemoteCallsign=",notification.RemoteCallsign);
-                debug.dump(notification);
-            }
-        }
-    }
-    return emesary.Transmitter.ReceiptStatus_NotProcessed; # we're not processing it, just looking
-}
-# uncomment next line to activate debug recipient.
-#emesary.GlobalTransmitter.Register(debugRecipient);
-
+#----- bridge object notifications
+var objectRoutedNotifications = [notifications.ObjectInFlightNotification.new()];
+var objectBridgedTransmitter = emesary.Transmitter.new("objectNotificationBridge");
+var objectoutgoingBridge = emesary_mp_bridge.OutgoingMPBridge.new("mig21mp.object",objectRoutedNotifications, 17, "", objectBridgedTransmitter);
+objectoutgoingBridge.TransmitFrequencySeconds = 0.75;
+objectoutgoingBridge.MPStringMaxLen = 180;
+emesary_mp_bridge.IncomingMPBridge.startMPBridge(objectRoutedNotifications, 17, emesary.GlobalTransmitter);
