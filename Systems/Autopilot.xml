@@ -326,7 +326,7 @@ check for Low Altitude Mode
             <value>1</value>
         </enable>
         <input>
-            <property>/instrumentation/gps/indicated-vertical-speed</property>
+            <property>/instrumentation/gps/indicated-vertical-speed-fps</property>
         </input>
         <reference>
             <property>/autopilot/internal/target-vs</property>
@@ -370,6 +370,11 @@ check for Low Altitude Mode
 
         <state>
             <name>active</name>
+            <enter>
+                <command>property-assign</command>
+                <property>/autopilot/internal/target-pitch</property>
+                <value>1</value>
+            </enter>
         </state>
 
         <transition>
@@ -995,6 +1000,17 @@ check for Low Altitude Mode
         <max>0</max>
     </filter>
 
+    <filter>
+        <name>GPS Indicated Speed FPS</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <property>/instrumentation/gps/indicated-vertical-speed</property>
+        </input>
+        <output>/instrumentation/gps/indicated-vertical-speed-fps</output>
+        <gain>0.0166666666666</gain>
+    </filter>
+
     <pid-controller>
         <name>Glideslope FPS</name>
         <debug>false</debug>
@@ -1003,7 +1019,7 @@ check for Low Altitude Mode
             <value>4</value>
         </enable>
         <input>
-            <property>/instrumentation/gps/indicated-vertical-speed</property>
+            <property>/instrumentation/gps/indicated-vertical-speed-fps</property>
         </input>
         <reference>
             <property>/autopilot/internal/nav1-rate-of-climb</property>
@@ -1012,11 +1028,11 @@ check for Low Altitude Mode
             <property>/autopilot/internal/target-pitch</property>
         </output>
         <config>
-            <Kp>0.055</Kp>
-            <Ti>2.0</Ti>
+            <Kp>0.2</Kp>
+            <Ti>1.0</Ti>
             <Td>0.0001</Td>
-            <u_min>-15</u_min>
-            <u_max>45</u_max>
+            <u_min>-10</u_min>
+            <u_max>10</u_max>
         </config>
     </pid-controller>
 
