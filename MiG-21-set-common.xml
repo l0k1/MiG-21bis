@@ -222,6 +222,13 @@
                             </script>
                         </binding>
                     </item>
+                    <item>
+                        <label>Event Log</label>
+                        <binding>
+                            <command>dialog-show</command>
+                            <dialog-name>flightlog</dialog-name>
+                        </binding>
+                    </item>
                 </menu>
                 <menu n="101">
                     <label>Dev</label>
@@ -237,7 +244,7 @@
                         <binding>
                             <command>nasal</command>
                             <script>dialog.tuner_lift_dialog.open()</script>
-                        </binding>
+                        </bindin
                     </item>
                     <item>
                         <label>Tune Pitch</label>
@@ -1172,21 +1179,29 @@
             <MP-lat type="string">rotors/main/blade[0]/flap-deg</MP-lat>
             <MP-lon type="string">rotors/main/blade[1]/flap-deg</MP-lon>
             <MP-alt type="string">rotors/main/blade[2]/flap-deg</MP-alt>
-            <hit-interpolation type="bool">true</hit-interpolation>
             <pylon-offset type="int">0</pylon-offset>
             <pylon-stations>controls/armament</pylon-stations>
             <station-name type="string">station</station-name>
             <models type="string">Aircraft/MiG-21bis/Models/Stores/</models>
             <msg type="bool">true</msg>
+            <tacview type="bool">true</tacview>
             <damage type="bool">true</damage>
             <GSh-30>
                 <ammo type="double">200</ammo>
                 <trigger type="bool">false</trigger>
                 <jammed type="bool">false</jammed>
             </GSh-30>
+            <enable-craters type="bool">true</enable-craters>
+            <MLW-bearing type="double">0</MLW-bearing>
+            <MLW-count type="int">0</MLW-count>
+            <MLW-launcher type="string"></MLW-launcher>
+            <MAW-bearing type="double">0</MAW-bearing>
+            <MAW-active type="bool">false</MAW-active>
+            <spike type="bool">false</spike>
 
             <r-3s>
                 <!--name-->
+                <type-id type="int">78</type-id>
                 <long-name type="string">Vympel R-3S</long-name> <!--Longer name of the weapon-->
                 <short-name type="string">R-3S</short-name> <!--Shorter name of the weapon-->
                 <!--detection and firing-->
@@ -1243,6 +1258,7 @@
 
             <r-3r>
                 <!--name-->
+                <type-id type="int">77</type-id>
                 <long-name type="string">Vympel R-3R</long-name> <!--Longer name of the weapon-->
                 <short-name type="string">R-3R</short-name> <!--Shorter name of the weapon-->
                 <!--detection and firing-->
@@ -1301,6 +1317,7 @@
                 <!-- launch reference: https://www.liveleak.com/view?i=879_1404076874 @ 2:25 -->
                 <!-- info on Komar seeker head: http://www.ausairpower.net/APA-Legacy-SAM-Upgrades.html -->
                 <!--detection and firing-->
+                <type-id type="int">80</type-id>
                 <max-fire-range-nm type="double">4.32</max-fire-range-nm> <!-- max range that the FCS allows firing -->
                 <min-fire-range-nm type="double">0.001</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
                 <FCS-field-deg type="int">24</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
@@ -1360,6 +1377,7 @@
 
              <r-27r1>
                  <!--detection and firing-->
+                <type-id type="int">75</type-id>
                 <max-fire-range-nm type="double">39.41</max-fire-range-nm> <!-- max range that the FCS allows firing -->
                 <min-fire-range-nm type="double">1.0</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
                 <FCS-field-deg type="int">35</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
@@ -1421,6 +1439,7 @@
             </r-27r1>
             <r-27t1>
                  <!--detection and firing-->
+                 <type-id type="int">76</type-id>
                 <max-fire-range-nm type="double">39.41</max-fire-range-nm> <!-- max range that the FCS allows firing -->
                 <min-fire-range-nm type="double">0.01</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
                 <FCS-field-deg type="int">35</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
@@ -1483,6 +1502,7 @@
 
             <kh-66>                <!-- lots of info at http://survincity.com/2012/08/x-66-the-product-66-the-first-russian-tactical/ -->
                 <!--detection and firing-->
+                <type-id type="int">27</type-id>
                 <max-fire-range-nm type="double">100.0</max-fire-range-nm> <!-- max range that the FCS allows firing -->
                 <min-fire-range-nm type="double">0.5</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
                 <FCS-field-deg type="int">15</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
@@ -1544,6 +1564,7 @@
 
             <kh-25mp>
                 <!--detection and firing-->
+                <type-id type="int">26</type-id>
                 <max-fire-range-nm type="double">100.0</max-fire-range-nm> <!-- max range that the FCS allows firing -->
                 <min-fire-range-nm type="double">0.5</min-fire-range-nm> <!-- it wont get solid lock before the target has this range -->
                 <FCS-field-deg type="int">15</FCS-field-deg> <!-- fire control system total field of view diameter for when searching and getting lock before launch. -->
@@ -1609,6 +1630,7 @@
 
             <template>
                 <!--name-->
+                <type-id type="int"></type-id><!-- must match the ID in damage.nas -->
                 <long-name type="string"></long-name> <!--Longer name of the weapon-->
                 <short-name type="string"></short-name> <!--Shorter name of the weapon-->
                 <!--detection and firing-->
@@ -1686,7 +1708,12 @@
 
     <!-- Nasal Scripts -->
     <nasal>
-
+        <emesary><file>Aircraft/MiG-21bis/Nasal/emesary.nas</file></emesary>
+        <emesary_mp_bridge><file>Aircraft/MiG-21bis/Nasal/emesary_mp_bridge.nas</file></emesary_mp_bridge>
+        <notifications>
+            <file>Aircraft/MiG-21bis/Nasal/ArmamentNotification.nas</file>
+            <file>Aircraft/MiG-21bis/Nasal/GeoBridgedTransmitter.nas</file>
+        </notifications>
         <mig21>             <file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>          </mig21>            <!-- odds and sods -->
         <MiG-21bis>         <file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>          </MiG-21bis>        <!-- liveries -->
         <mpdb>              <file>Aircraft/MiG-21bis/Nasal/mp_db.nas</file>             </mpdb>

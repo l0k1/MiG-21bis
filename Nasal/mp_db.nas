@@ -136,6 +136,10 @@ var Contact = {
         obj.painted         = c.getNode("painted");
         obj.unique          = c.getNode("unique");
         obj.validTree       = 0;
+        
+        obj.ubody           = c.getNode("velocities/uBody-fps");
+        obj.vbody           = c.getNode("velocities/vBody-fps");
+        obj.wbody           = c.getNode("velocities/wBody-fps");
 
         obj.eta             = c.getNode("ETA");
         obj.hit             = c.getNode("hit");
@@ -204,6 +208,39 @@ var Contact = {
 
     isVirtual: func {
       return 0;
+    },
+    
+    get_uBody: func {
+      var body = nil;
+      if (me.ubody != nil) {
+        body = me.ubody.getValue();
+      }
+      if(body == nil) {
+        body = me.get_Speed()*KT2FPS;
+      }
+      return body;
+    },  
+      
+    get_vBody: func {
+      var body = nil;
+      if (me.ubody != nil) {
+        body = me.vbody.getValue();
+      }
+      if(body == nil) {
+        body = 0;
+      }
+      return body;
+    },  
+      
+    get_wBody: func {
+      var body = nil;
+      if (me.ubody != nil) {
+        body = me.wbody.getValue();
+      }
+      if(body == nil) {
+        body = 0;
+      }
+      return body;
     },
 
     isRadarActive: func {

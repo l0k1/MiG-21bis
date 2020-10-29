@@ -606,6 +606,9 @@ var Contact = {
         obj.velProp         = c.getNode("velocities");
         obj.posProp         = c.getNode("position");
         obj.heading         = obj.oriProp.getNode("true-heading-deg");
+        obj.ubody           = c.getNode("velocities/uBody-fps");
+        obj.vbody           = c.getNode("velocities/vBody-fps");
+        obj.wbody           = c.getNode("velocities/wBody-fps");
 #});
 #debug.benchmark("radar process2", func {
         obj.alt             = obj.posProp.getNode("altitude-ft");
@@ -668,6 +671,37 @@ var Contact = {
         obj.cartesian       = [0,0];
         
         return obj;
+    },
+    
+    get_uBody: func {
+      var body = nil;
+      if (me.ubody != nil) {
+        body = me.ubody.getValue();
+      }
+      if(body == nil) {
+        body = me.get_Speed()*KT2FPS;
+      }
+      return body;
+    },    
+    get_vBody: func {
+      var body = nil;
+      if (me.ubody != nil) {
+        body = me.vbody.getValue();
+      }
+      if(body == nil) {
+        body = 0;
+      }
+      return body;
+    },    
+    get_wBody: func {
+      var body = nil;
+      if (me.ubody != nil) {
+        body = me.wbody.getValue();
+      }
+      if(body == nil) {
+        body = 0;
+      }
+      return body;
     },
 
     getETA: func {

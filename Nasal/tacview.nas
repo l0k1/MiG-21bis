@@ -381,6 +381,7 @@ setlistener("/fdm/jsbsim/electric/output/recorder", func(p) {
     }
 },0,0);
 
+
 setlistener("/sim/signals/exit", func(p) {
     if (!starttime) {
         return;
