@@ -7,81 +7,122 @@
 
   <channel name="Flaps">
 
+
+    <!-- air pressure will push the flaps up into a not-deployed state.
+        this function defines the maximum normed flaps setting allowed. -->
     <fcs_function name="flap-max-setting-norm">
-      <function>
-        <table>
-          <independentVar lookup="row">velocities/mach</independentVar>
-          <tableData>
-            0.0   1.0
-            0.23  1.0
-            0.30  0.8
-            0.46  0.5
-            0.47  0.0
-          </tableData>
-        </table>
-      </function>
+        <function>
+            <table>
+                <independentVar lookup="row">velocities/mach</independentVar>
+                <tableData>
+                    0.0   1.0
+                    0.40  1.0
+                    0.45  0.8
+                    0.56  0.5
+                    0.60  0.0
+                </tableData>
+            </table>
+        </function>
     </fcs_function>
 
+    <!-- if the powers out, keep the current position of the flaps
+        else use the commanded position -->
     <switch name="trash/fcs/flap-cmd-norm-hydr">
-      <default value="fcs/flap-pos-norm"/>
-      <test logic="AND" value="fcs/flap-cmd-norm">
-        systems/hydraulic[0]/pressure gt 0
-        electric/output/lg-wg-flaps gt 105
-      </test>
-      <output>fcs/flap-cmd-norm-hydr</output>
+        <default value="fcs/flap-pos-norm"/>
+        <test logic="AND" value="fcs/flap-cmd-norm">
+            systems/hydraulic[0]/pressure gt 0
+            electric/output/lg-wg-flaps gt 105
+        </test>
+        <output>fcs/flap-cmd-norm-hydr</output>
     </switch>
 
-    <fcs_function name="trash/fcs/flap-actual-norm">
-      <function>
-        <ifthen>
-          <lt>
-            <property>fcs/flap-max-setting-norm</property>
-            <property>fcs/flap-cmd-norm-hydr</property>
-          </lt>
-          <property>fcs/flap-max-setting-norm</property>
-          <property>fcs/flap-cmd-norm-hydr</property>
-        </ifthen>
-      </function>
-      <output>fcs/flap-cmd-norm-hydr</output>
+    <!-- override position with max aerodynamic position if needed -->
+    <switch name="trash/fcs/flap-cmd-norm-hydr2">
+        <default value="fcs/flap-cmd-norm-hydr"/>
+        <test logic="AND" value="fcs/flap-max-setting-norm">
+            fcs/flap-max-setting-norm lt fcs/flap-cmd-norm-hydr
+        </test>
+        <output>fcs/flap-cmd-norm-hydr</output>
+    </switch>
+
+    <!-- get pressures from air and hydraulics. pulling numbers out of my butt. -->
+    <fcs_function name="trash/fcs/flap-backpress">
+        <function>
+            <table>
+                <independentVar lookup="row">velocities/mach</independentVar>
+                <tableData>
+                    0.0   0.0
+                    0.40  0.0
+                    0.45  0.1
+                    0.56  0.3
+                    0.60  1.0
+                </tableData>
+            </table>
+        </function>
+        <output>fcs/flap-backpress-norm</output>
     </fcs_function>
 
-    <pure_gain name="trash/fcs/flaps_out_to_fg">
-      <input>fcs/flap-cmd-norm-hydr</input>
+    <fcs_function name="trash/fcs/flap-hydrpress">
+        <function>
+            <table>
+                <independentVar lookup="row">systems/hydraulic[0]/pressure</independentVar>
+                <tableData>
+                    0.0   0.00
+                    50.0  0.07
+                    150.0 0.17
+                </tableData>
+            </table>
+        </function>
+        <output>fcs/flap-hydrpress-norm</output>
+    </fcs_function>
+
+    <!-- determine if hydr or aero pressure is greater -->
+    <!-- 0 = hydr, 1 = aero -->
+    <switch name="trash/fcs/flap-sense">
+        <default value="0"/>
+        <test logic="AND" value="1">
+            fcs/flap-hydrpress-norm lt fcs/flap-backpress-norm
+        </test>
+        <output>fcs/flap-sense</output>
+    </switch>
+
+    <!-- get rate -->
+    <fcs_function name="trash/fcs/flap-rate">
+        <function>
+            <abs>
+                <difference>
+                    <property>fcs/flap-backpress-norm</property>
+                    <property>fcs/flap-hydrpress-norm</property>
+                </difference>
+            </abs>
+        </function>
+        <output>fcs/flap-rate</output>
+    </fcs_function>
+
+    <actuator name="trash/fcs/flap-pos-final-norm">
+        <input>fcs/flap-cmd-norm-hydr</input>
+        <rate_limit>fcs/flap-rate</rate_limit>
+        <output>fcs/flap-pos-norm</output>
+    </actuator>
+
+    <!--<pure_gain name="trash/fcs/flaps_out_to_fg">
+      <input>fcs/flap-pos-norm</input>
       <gain>1.0</gain>
       <output>/controls/flight/flaps</output>
-    </pure_gain>
+    </pure_gain>-->
 
-   <kinematic name="Flaps Control">
-     <input>fcs/flap-cmd-norm-hydr</input>
-     <traverse>
-       <setting>
-          <position>  0 </position>
-          <time>      0 </time>
-       </setting>
-       <setting>
-          <position> 25 </position>
-          <time>      4 </time>
-       </setting>
-       <setting>
-          <position> 45 </position>
-          <time>      3 </time>
-       </setting>
-     </traverse>
-     <output>fcs/flap-pos-deg</output>
-   </kinematic>
-
-   <aerosurface_scale name="flap normalization">
-      <input>fcs/flap-pos-deg</input>
-      <domain>
-        <min>  0 </min>
-        <max> 45 </max>
-      </domain>
-      <range>
-        <min> 0 </min>
-        <max> 1 </max>
-      </range>
-      <output>fcs/flap-pos-norm</output>
-   </aerosurface_scale>
+    <aerosurface_scale name="flap normalization">
+        <input>fcs/flap-pos-norm</input>
+        <domain>
+            <min>0.0</min>
+            <max>1.0</max>
+        </domain>
+        <range>
+            <min>0.0</min>
+            <max>45.0</max>
+        </range>
+        <output>fcs/flap-pos-deg</output>
+    </aerosurface_scale>
 
   </channel>
 
