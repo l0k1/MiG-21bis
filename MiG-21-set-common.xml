@@ -1708,8 +1708,6 @@
 
     <!-- Nasal Scripts -->
     <nasal>
-        <emesary><file>Aircraft/MiG-21bis/Nasal/emesary.nas</file></emesary>
-        <emesary_mp_bridge><file>Aircraft/MiG-21bis/Nasal/emesary_mp_bridge.nas</file></emesary_mp_bridge>
         <notifications>
             <file>Aircraft/MiG-21bis/Nasal/ArmamentNotification.nas</file>
             <file>Aircraft/MiG-21bis/Nasal/GeoBridgedTransmitter.nas</file>
