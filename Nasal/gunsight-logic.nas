@@ -149,7 +149,7 @@ var AFALCOS = {
         me.W3 = -me.C1 * me.ALA + me.C3 * 
                 (me.BXAN3 - (me.AY.getValue() * me.ELA + me.AZ.getValue() * me.ALA) * me.B3 +
                 (me.AX.getValue() * me.B1 + me.AY.getValue() * me.B2 + me.AZ.getValue() * me.B3) * me.ALA);
-        me.W2 = me.W2 + (-me.SL1 * me.SL3 + me.C7 * me.SL3) * me._getP() + 
+        me.W2 = me.W2 + (-me.SL1 * me.SL2 + me.C7 * me.SL3) * me._getP() + 
                 (1.0 - math.pow(me.SL2,2)) * me._getQ() - 
                 (me.SL2 * me.SL3 + me.C7 * me.SL1) * me._getR();
         me.W3 = me.W3 - (me.SL1 * me.SL3 + me.C7 * me.SL2) * me._getP() + 
