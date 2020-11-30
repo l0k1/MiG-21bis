@@ -182,26 +182,26 @@ for (i = 0; 1==1; i += 1) {
 	}
 }
 
-var objModel = n.getChild("model",i,1);
-
-objModel.getNode("elevation",1).setDoubleValue(-999);
-objModel.getNode("latitude",1).setDoubleValue(0);
-objModel.getNode("longitude",1).setDoubleValue(0);
-objModel.getNode("elevation-ft-prop",1).setValue(objModel.getPath()~"/elevation");
-objModel.getNode("latitude-deg-prop",1).setValue(objModel.getPath()~"/latitude");
-objModel.getNode("longitude-deg-prop",1).setValue(objModel.getPath()~"/longitude");
-objModel.getNode("heading",1).setDoubleValue(0);
-objModel.getNode("pitch",1).setDoubleValue(0);
-objModel.getNode("roll",1).setDoubleValue(0);
-objModel.getNode("heading-deg-prop",1).setValue(objModel.getPath()~"/heading");
-objModel.getNode("pitch-deg-prop",1).setValue(objModel.getPath()~"/pitch");
-objModel.getNode("roll-deg-prop",1).setValue(objModel.getPath()~"/roll");
-
-objModel.getNode("path",1).setValue("Aircraft/MiG-21bis/Models/tgtsphere.xml"); # this is the model to be loaded.
-
-var loadNode = objModel.getNode("load", 1);
-loadNode.setBoolValue(1);
-loadNode.remove();
+#var objModel = n.getChild("model",i,1);
+#
+#objModel.getNode("elevation",1).setDoubleValue(-999);
+#objModel.getNode("latitude",1).setDoubleValue(0);
+#objModel.getNode("longitude",1).setDoubleValue(0);
+#objModel.getNode("elevation-ft-prop",1).setValue(objModel.getPath()~"/elevation");
+#objModel.getNode("latitude-deg-prop",1).setValue(objModel.getPath()~"/latitude");
+#objModel.getNode("longitude-deg-prop",1).setValue(objModel.getPath()~"/longitude");
+#objModel.getNode("heading",1).setDoubleValue(0);
+#objModel.getNode("pitch",1).setDoubleValue(0);
+#objModel.getNode("roll",1).setDoubleValue(0);
+#objModel.getNode("heading-deg-prop",1).setValue(objModel.getPath()~"/heading");
+#objModel.getNode("pitch-deg-prop",1).setValue(objModel.getPath()~"/pitch");
+#objModel.getNode("roll-deg-prop",1).setValue(objModel.getPath()~"/roll");
+#
+#objModel.getNode("path",1).setValue("Aircraft/MiG-21bis/Models/tgtsphere.xml"); # this is the model to be loaded.
+#
+#var loadNode = objModel.getNode("load", 1);
+#loadNode.setBoolValue(1);
+#loadNode.remove();
 
 var beam_target_lock = func() {
 	if ( radar_canvas.radarscreen.cur_state == radar_canvas.radar_beamed ) {
