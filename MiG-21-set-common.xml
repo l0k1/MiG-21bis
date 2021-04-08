@@ -229,6 +229,13 @@
                             <dialog-name>flightlog</dialog-name>
                         </binding>
                     </item>
+                    <item>
+                        <label>Toggle Headshake</label>
+                        <binding>
+                            <command>property-toggle</command>
+                            <property>/sim/enable-headshake</property>
+                        </binding>
+                    </item>
                 </menu>
                 <menu n="101">
                     <label>Dev</label>
@@ -530,6 +537,7 @@
                 <enabled type="bool" userarchive="y">true</enabled>
             </headshake>
         </rendering>
+        <enable-headshake type="bool" userarchive="y">true</enable-headshake>
 
     </sim>
 

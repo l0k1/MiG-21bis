@@ -16,12 +16,14 @@ var severity_path = "/sim/current-view/headshake-severity";
 
 var seatheight_path = "/fdm/jsbsim/electric/output/seat-height";
 
+var cv_path = "/sim/current-view/name";
+var enable_path = "/sim/enable-headshake";
+
 setprop(severity_path, 0);
 
 var cv_x = 0;
 var cv_y = 1.2813;
 var cv_z = -3.33;
-var cv = "";
 var mv = 0;
 
 var x_ratio = 0.000175; #ratio: 30 = 0.035 (fwd/back, speed)
@@ -34,10 +36,9 @@ var sm = 0;
 
 var movement = func {
 	#jsbsim x = -flightgear z
-	#jsbsim y = flightgear x
+	#jsbsim y = flightgear x/
 	#jsbsim z = flightgear y
-	cv = getprop("/sim/current-view/name");
-	if ( cv == view ) {
+	if ( getprop(cv_path) == view and getprop(enable_path) ) {
 		cv_y = cv_y + (getprop(seatheight_path) * 0.001);
 		if (cv_y < 1.13) {
 			cv_y = 1.13;
