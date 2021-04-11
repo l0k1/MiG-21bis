@@ -44,11 +44,11 @@ var isInRadarRange = func (contact, myRadarDistance_nm, myRadarStrength_rcs) {
 var targetRCSSignal = func(targetCoord, targetModel, targetHeading, targetPitch, targetRoll, myCoord, myRadarDistance_m, myRadarStrength_rcs = 5) {
     #print(targetModel);
     var target_front_rcs = nil;
-    if ( contains(mpdb.aircraftlookup,targetModel) ) {
-        target_front_rcs = mpdb.aircraftlookup[targetModel].rcs;
+    if ( contains(mpdb.aircraft_lookup,targetModel) ) {
+        target_front_rcs = mpdb.aircraft_lookup[targetModel].rcs;
     } else {
         return 1;
-        target_front_rcs = mpdb.aircraftlookup["default"].rcs;
+        target_front_rcs = mpdb.aircraft_lookup["default"].rcs;
     }
     var target_rcs = getRCS(targetCoord, targetHeading, targetPitch, targetRoll, myCoord, target_front_rcs);
     var target_distance = myCoord.direct_distance_to(targetCoord);
