@@ -33,7 +33,7 @@
 
   <function name="N1SpoolUp">
     <table>
-      <independentVar lookup="row">/engines/engine[0]/n1</independentVar>
+      <independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
       <tableData>
         30  18
         50  26
@@ -46,7 +46,7 @@
 
   <function name="N1SpoolDown">
     <table>
-      <independentVar lookup="row">/engines/engine[0]/n1</independentVar>
+      <independentVar lookup="row">propulsion/engine[0]/n1</independentVar>
       <tableData>
         30  18
         50  24
@@ -59,7 +59,7 @@
 
   <function name="N2SpoolUp">
     <table>
-      <independentVar lookup="row">/engines/engine[0]/n2</independentVar>
+      <independentVar lookup="row">propulsion/engine[0]/n2</independentVar>
       <tableData>
         30  1.8
         50  3.7
@@ -72,7 +72,7 @@
 
   <function name="N2SpoolDown">
     <table>
-      <independentVar lookup="row">/engines/engine[0]/n2</independentVar>
+      <independentVar lookup="row">propulsion/engine[0]/n2</independentVar>
       <tableData>
         30  1.8
         50  3.7
@@ -132,12 +132,12 @@
           <value>0.1</value>
         </max>
 
-       <!-- if not /engines/engine[0]/augmentation and nozzle position is open, severely hamper the mil thrust -->
+       <!-- if not propulsion/engine[0]/augmentation and nozzle position is open, severely hamper the mil thrust -->
        <!-- this was used prior to full engine nozzle simulation. keeping for posterity.
           <ifthen>
             <and>
                 <eq>
-                    <property>/engines/engine[0]/augmentation</property>
+                    <property>propulsion/engine[0]/augmentation</property>
                     <value>0</value>
                 </eq>
                 <eq>
