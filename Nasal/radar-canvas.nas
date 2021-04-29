@@ -419,7 +419,7 @@ var RADAR_SCREEN = {
 
         for (m.i = 0; m.i < m.gnoisesize; m.i = m.i + 1) {
             append(m.groundnoise, m.noise_group.createChild("path","noise")
-                                    .setStrokeLineWidth((914/m.gnoisesize)*1.20));
+                                    .setStrokeLineWidth((914/m.gnoisesize)*1.15));
         }
 
         ##### testing stuff ####################################################
