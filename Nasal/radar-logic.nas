@@ -77,6 +77,7 @@ var input = {
         dopplerSpeed:     "/instrumentation/radar/min-doppler-speed-kt",
         radarMode:        "/controls/radar/mode",
         slFilterMode:     "/controls/radar/power-panel/low-alt",
+        lowSpeedLimit:    "/instrumentation/radar/low-speed-limit"
 };
 
 foreach(var name; keys(input)) {
@@ -390,7 +391,7 @@ var RadarLogic = {
       if(me.ya_rad > RADAR_BOTTOM_LIMIT * D2R and me.ya_rad < RADAR_TOP_LIMIT * D2R and me.xa_rad > RADAR_LEFT_LIMIT * D2R and me.xa_rad < RADAR_RIGHT_LIMIT * D2R) {
         #is within the radar cone
         
-        if (mp == TRUE) {
+        if (0 == 1) {
           me.shrtr = node.getChild("model-shorter")==nil?"nil":node.getChild("model-shorter").getValue();
           if (me.doppler(aircraftPos, node) == TRUE) {
             # doppler picks it up, must be an aircraft
@@ -403,6 +404,7 @@ var RadarLogic = {
           }
         }
 
+        type = AIR; # this radar cannot see ground targets
         me.contact = Contact.new(node, type);
 
         # modify power range by filter amount
@@ -412,7 +414,7 @@ var RadarLogic = {
         } elsif (input.slFilterMode.getValue() == 2) {
           me.rpower = me.rpower * 0.400;
         }
-        if (rcs.inRadarRange(me.contact, me.rpower * M2NM, radarPowerRCS) == TRUE) {
+        if (rcs.inRadarRange(me.contact, me.rpower * M2NM, radarPowerRCS) and me.doppler(aircraftPos, node) and me.checkspeed(node) ) {
           #print("rcs: TRUE");
           return me.contact;
         } else {
@@ -462,27 +464,45 @@ var RadarLogic = {
   doppler: func(t_coord, t_node) {
     # Test to check if the target can hide below us
     # Or Hide using anti doppler movements
+    me.InDoppler = FALSE;
 
     if (input.dopplerOn.getValue() == FALSE or 
         (t_node.getNode("velocities/true-airspeed-kt") != nil and t_node.getNode("velocities/true-airspeed-kt").getValue() != nil
          and t_node.getNode("radar/range-nm") != nil and t_node.getNode("radar/range-nm").getValue() != nil
          and math.atan2(t_node.getNode("velocities/true-airspeed-kt").getValue(), t_node.getNode("radar/range-nm").getValue()*1000) > 0.025)# if aircraft traverse speed seen from me is high
         ) {
+      print("early return true");
+      print(math.atan2(t_node.getNode("velocities/true-airspeed-kt").getValue(), t_node.getNode("radar/range-nm").getValue()*1000));
       return TRUE;
     }
 
     me.DopplerSpeedLimit = input.dopplerSpeed.getValue();
-    me.InDoppler = 0;
     me.groundNotbehind = me.isGroundNotBehind(t_coord, t_node);
 
-    if(me.groundNotbehind)
+    #if(me.groundNotbehind)
+    if(1 == 0)
     {
-        me.InDoppler = 1;
+        me.InDoppler = TRUE;
     } elsif(abs(me.get_closure_rate_from_Coord(t_coord, t_node)) > me.DopplerSpeedLimit)
     {
-        me.InDoppler = 1;
+        me.InDoppler = TRUE;
     }
+    print("doppler return: " ~ me.InDoppler);
     return me.InDoppler;
+  },
+
+  checkspeed: func(t_node){
+    me.tas = t_node.getNode("velocities/true-airspeed-kt").getValue();
+    if (me.tas == nil) {
+      print("checkspeed: false");
+      return FALSE;
+    } elsif (me.tas < input.lowSpeedLimit.getValue()) {
+      print("checkspeed: false");
+      return FALSE;
+    } else {
+      print("checkspeed: true");
+      return TRUE;
+    }
   },
 
   isGroundNotBehind: func(t_coord, t_node){

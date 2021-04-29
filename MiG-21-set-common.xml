@@ -849,7 +849,8 @@
             <serviceable type="bool">true</serviceable>
             <look-through-terrain type="bool">false</look-through-terrain>
             <doppler-enabled type="bool">true</doppler-enabled>
-            <min-doppler-speed-kt type="int">80</min-doppler-speed-kt>
+            <min-doppler-speed-kt type="int">60</min-doppler-speed-kt>
+            <low-speed-limit type="int">60</low-speed-limit>
         </radar>
         <rdmi-mode type="int">0</rdmi-mode> <!-- 0=TAC, 1=VOR, 2=ADF -->
         <radar2>
