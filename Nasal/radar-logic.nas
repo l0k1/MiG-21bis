@@ -471,8 +471,8 @@ var RadarLogic = {
          and t_node.getNode("radar/range-nm") != nil and t_node.getNode("radar/range-nm").getValue() != nil
          and math.atan2(t_node.getNode("velocities/true-airspeed-kt").getValue(), t_node.getNode("radar/range-nm").getValue()*1000) > 0.025)# if aircraft traverse speed seen from me is high
         ) {
-      print("early return true");
-      print(math.atan2(t_node.getNode("velocities/true-airspeed-kt").getValue(), t_node.getNode("radar/range-nm").getValue()*1000));
+      #print("early return true");
+      #print(math.atan2(t_node.getNode("velocities/true-airspeed-kt").getValue(), t_node.getNode("radar/range-nm").getValue()*1000));
       return TRUE;
     }
 
@@ -487,20 +487,20 @@ var RadarLogic = {
     {
         me.InDoppler = TRUE;
     }
-    print("doppler return: " ~ me.InDoppler);
+    #print("doppler return: " ~ me.InDoppler);
     return me.InDoppler;
   },
 
   checkspeed: func(t_node){
     me.tas = t_node.getNode("velocities/true-airspeed-kt").getValue();
     if (me.tas == nil) {
-      print("checkspeed: false");
+      #print("checkspeed: false");
       return FALSE;
     } elsif (me.tas < input.lowSpeedLimit.getValue()) {
-      print("checkspeed: false");
+      #print("checkspeed: false");
       return FALSE;
     } else {
-      print("checkspeed: true");
+      #print("checkspeed: true");
       return TRUE;
     }
   },
