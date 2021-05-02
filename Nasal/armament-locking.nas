@@ -1,6 +1,7 @@
 
 var ir_sar_switch = "/controls/armament/panel/ir-sar-switch";
 var fixed_beam_switch = "/controls/radar/power-panel/fixed-beam";
+var lockHash = props.globals.getNode("/sim/multiplay/generic/string[6]");
 var TRUE = 1;
 var FALSE = 0;
 
@@ -69,6 +70,7 @@ var lockTarget = func(c_most,mode) {
 	radar_logic.selection = c_most;
 	radar_logic.radarLogic.paint(c_most.getNode(), TRUE);
 	armament.contact = radar_logic.selection;
+	lockHash.setValue(left(md5(c_most.get_Callsign()),4));
 	lock_mode = mode;
 	#print("locked target");
 }
@@ -78,6 +80,7 @@ var lock_mode = "none";
 var unlockTarget = func() {
 	if ( radar_logic.selection != nil ) {
 		lock_mode = "none";
+		lockHash.setValue("");
 		radar_logic.radarLogic.paint(radar_logic.selection.getNode(), FALSE);
 		radar_logic.selection = nil;
 		armament.contact = nil;

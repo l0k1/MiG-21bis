@@ -168,6 +168,7 @@ var Contact = {
 
         obj.acType          = c.getNode("sim/model/ac-type");
         obj.rdrAct          = c.getNode("sim/multiplay/generic/int[2]");
+        obj.rdrLock         = c.getNode("sim/multiplay/generic/string[6]");
         obj.type            = c.getName();
         obj.index           = c.getIndex();
         obj.string          = "ai/models/" ~ obj.type ~ "[" ~ obj.index ~ "]";
@@ -199,6 +200,14 @@ var Contact = {
         obj.tacobj.valid = 1;
         
         return obj;
+    },
+
+    getLockHash: func {
+      if (me.rdrLock.getValue() != nil) {
+        return me.rdrLock.getValue();
+      } else {
+        return "----";
+      }
     },
 
     getETA: func {

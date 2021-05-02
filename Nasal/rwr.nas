@@ -2,6 +2,7 @@
 var my_heading = props.globals.getNode("/orientation/heading-deg");
 var my_pitch = props.globals.getNode("/orientation/pitch-deg");
 var my_roll = props.globals.getNode("/orientation/roll-deg");
+var my_callsign = props.globals.getNode("/sim/multiplay/callsign");
 
 # loop through all contacts
 # get radar strenght into sensor
@@ -50,7 +51,7 @@ var sensor_update = func() {
             continue;
         }
         #print("distance good");
-        if (distance > cx.info.rwr_strength * 0.05) {
+        if (distance > cx.info.rwr_strength * 0.01 and cx.getLockHash() != left(md5(my_callsign.getValue()), 4)) {
             # check if we are in the scan pattern
             var expanded = expand_string(cx.info.rwr_pattern, distance / 15);
             #print(expanded);
@@ -63,13 +64,15 @@ var sensor_update = func() {
                 continue;
             }
             #print("past the substr n");
-            # chance of not receiving radio signal between 85% and max distance
-            if ( distance > cx.info.rwr_strength * 0.85 and rand() < math.clamp((distance - (cx.info.rwr_strength * 0.85))/(cx.info.rwr_strength-(cx.info.rwr_strength * 0.85)),0,1) ) {
-                continue;
-            }
             #print("past the far future");
         }
-        
+
+        # check max distance
+        # chance of not receiving radio signal between 85% and max distance
+        if ( distance > cx.info.rwr_strength * 0.85 and rand() < math.clamp((distance - (cx.info.rwr_strength * 0.85))/(cx.info.rwr_strength-(cx.info.rwr_strength * 0.85)),0,1) ) {
+            continue;
+        }
+    
         #check if hidden by terrain
         if (!radar_logic.RadarLogic.isNotBehindTerrain(cx.get_Coord())) {
             continue;
@@ -160,64 +163,6 @@ var sensor_readout = func() {
     }
 }
 
-var incoming_listener = func {
-    var history = getprop("/sim/multiplay/chat-history");
-    var hist_vector = split("\n", history);
-    if (size(hist_vector) > 0) {
-        var last = hist_vector[size(hist_vector)-1];
-        var last_vector = split(":", last);
-        var author = last_vector[0];
-        var callsign = getprop("sim/multiplay/callsign");
-        if (size(last_vector) > 1 and author != callsign) {
-            # not myself
-            #print("not me");
-            var m2000 = 0;
-            if (find(" at " ~ callsign ~ ". Release ", last_vector[1]) != -1) {
-            # a m2000 is firing at us
-                m2000 = 1;
-            }
-            if (last_vector[1] == " FOX2 at" or last_vector[1] == " Fox 1 at" or last_vector[1] == " Fox 2 at" or last_vector[1] == " Fox 3 at"
-                    or last_vector[1] == " Greyhound at" or last_vector[1] == " Bombs away at" or last_vector[1] == " Bruiser at" or last_vector[1] == " Rifle at" or last_vector[1] == " Bird away at"
-                    or last_vector[1] == " aim7 at" or last_vector[1] == " aim9 at"
-                    or last_vector[1] == " aim120 at"
-                    or m2000 == 1) {
-                # air2air being fired
-                if (size(last_vector) > 2 or m2000 == 1) {
-                    #print("Missile launch detected at"~last_vector[2]~" from "~author);
-                    if (m2000 == 1 or last_vector[2] == " "~callsign) {
-                        # its being fired at me
-                        #print("Incoming!");
-                        #print("author: |" ~ author ~ "|");
-                        if ( author != nil ) {
-                            foreach ( var cx; mpdb.cx_master_list) {
-                                if ( cx.get_Callsign() == author ) {
-                                    var myCoord         = geo.aircraft_position();
-                                    var vectorToEcho    = vector.Math.eulerToCartesian2(myCoord.course_to(cx.get_Coord()), vector.Math.getPitch(myCoord,cx.get_Coord()));
-                                    var vectorSide      = vector.Math.eulerToCartesian3Y(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue());
-                                    var rel_pitch       = math.abs(vector.Math.angleBetweenVectors(vectorToEcho, vector.Math.projVectorOnPlane(vector.Math.eulerToCartesian3Z(my_heading.getValue(), my_pitch.getValue(), my_roll.getValue()),vectorToEcho)));
-                                    var bearing         = get_bearing(vectorToEcho, vectorSide);
-                                    
-                                    for (var i = 0; i < size(sensors); i = i + 1) {
-                                        if (sensors[i].max_pitch < rel_pitch) {
-                                            continue;
-                                        }
-                                        if (sensors[i].min_bearing < sensors[i].max_bearing and bearing > sensors[i].min_bearing and bearing < sensors[i].max_bearing) {
-                                            sensors[i].missile = systime();
-                                            #print('set sensor ' ~ i);
-                                        } elsif (sensors[i].min_bearing > sensors[i].max_bearing and (bearing > sensors[i].min_bearing or bearing < sensors[i].max_bearing)) {
-                                            sensors[i].missile = systime();
-                                            #print('set sensor ' ~ i);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 
 var get_bearing = func(vectorToEcho, vectorSide) {
     #roll adjusted bearing
@@ -280,5 +225,4 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
     readout_timer.start();
     update_timer.start();
     iff_timer.start();
-    setlistener("/sim/multiplay/chat-history", incoming_listener, 0, 0);
 });

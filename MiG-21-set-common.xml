@@ -333,6 +333,7 @@
                 <float n="8" alias="/engines/engine[0]/augmentation" /> <!-- Reheat  -->
                 <float n="9" alias="/engines/engine[0]/nozzle-pos-norm" /> <!-- Reheat  -->
                 <float n="10" alias="/fdm/jsbsim/propulsion/clr" /> <!-- Reheat  -->
+                <string n="6" type="string"/> <!-- radar lock -->
                 <string n="9" type="string"/>
                 <!--<string n="11" alias="/payload/weight[0]/selected"/>
                 <string n="12" alias="/payload/weight[1]/selected"/>
