@@ -27,7 +27,7 @@
 		<path>Aircraft/MiG-21bis/Models/Panel.xml</path>
 	</model>
 
-	<effect>
+	<!--<effect>
 		<inherits-from>Aircraft/MiG-21bis/Models/Effects/cockpit/mig21-cockpit</inherits-from>
 		<object-name>panelMain</object-name>
 		<object-name>panelTopRightMid</object-name>
@@ -38,6 +38,6 @@
 		<object-name>panelBottom</object-name>
 		<object-name>panelRadarGuard</object-name>
 		<object-name>panelRight</object-name>
-	</effect>
+	</effect>-->
 
 </PropertyList>
