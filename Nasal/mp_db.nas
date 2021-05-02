@@ -32,7 +32,7 @@ var aircraft_arch = {
 
 var aircraft_lookup = {
     "default":           {parents: [aircraft_arch]},
-    "F-14b":             {parents: [aircraft_arch], rcs: 12,  rwr_strength: 200, rwr_bearing: 65,  rwr_pitch: 65, class: AIR,},
+    "f-14b":             {parents: [aircraft_arch], rcs: 12,  rwr_strength: 200, rwr_bearing: 65,  rwr_pitch: 65, class: AIR,},
     "F-14D":             {parents: [aircraft_arch], rcs: 12,  rwr_strength: 200, rwr_bearing: 65,  rwr_pitch: 65, class: AIR,},
     "f-14b-bs":          {parents: [aircraft_arch], rcs: 0.0000001},
     "F-15C":             {parents: [aircraft_arch], rcs: 10,  rwr_strength: 150, rwr_bearing: 65,  rwr_pitch: 65, class: AIR,},
