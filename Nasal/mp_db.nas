@@ -38,7 +38,7 @@ var aircraft_lookup = {
     "F-15C":             {parents: [aircraft_arch], rcs: 10,  rwr_strength: 150, rwr_bearing: 65,  rwr_pitch: 65, class: AIR,},
     "F-15D":             {parents: [aircraft_arch], rcs: 11,  rwr_strength: 150, rwr_bearing: 65,  rwr_pitch: 65, class: AIR,},
     "f15-bs":            {parents: [aircraft_arch], rcs: 0.0000001},
-    "F-16":              {parents: [aircraft_arch], rcs: 2,   rwr_strength: 100, rwr_bearing: 60,  rwr_pitch: 60, class: AIR,},
+    "F-16":              {parents: [aircraft_arch], rcs: 2,   rwr_strength: 100, rwr_bearing: 60,  rwr_pitch: 60, class: AIR,rwr_pattern: "sssssnnssn"},
     "MiG-29":            {parents: [aircraft_arch], rcs: 6,   rwr_strength: 100, rwr_bearing: 60,  rwr_pitch: 60, class: AIR,},
     "SU-27":             {parents: [aircraft_arch], rcs: 15,   rwr_strength: 100, rwr_bearing: 60,  rwr_pitch: 60, class: AIR,},
     "JA37-Viggen":       {parents: [aircraft_arch], rcs: 3,   rwr_strength: 150, rwr_bearing: 70,  rwr_pitch: 70, class: AIR,},
