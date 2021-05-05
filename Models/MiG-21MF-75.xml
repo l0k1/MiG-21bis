@@ -635,7 +635,7 @@
 		<path>Aircraft/MiG-21bis/Models/Effects.xml</path>
 	</model>
 
-	<effect>
+	<!--<effect>
         <inherits-from>Aircraft/MiG-21bis/Models/Effects/fuselage/mig21-fuselage</inherits-from>
 		<object-name>spoiler</object-name>
 		<object-name>cone</object-name>
@@ -676,7 +676,7 @@
 		<object-name>nose_wheel</object-name>
 		<object-name>left_wheel</object-name>
 		<object-name>right_wheel</object-name>
-	</effect>
+	</effect>-->
 
 	<animation>
 		<type>material</type>
