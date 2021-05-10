@@ -1254,6 +1254,16 @@ var ContactGPS = {
       var n = me.get_bearing_from_Coord(geo.aircraft_position());
       return n;
   },
+    
+  get_uBody: func {
+    return 0;
+  },    
+  get_vBody: func {
+    return 0;
+  },    
+  get_wBody: func {
+    return 0;
+  },
 
   get_bearing_from_Coord: func(MyAircraftCoord){
       var myBearing = 0;
