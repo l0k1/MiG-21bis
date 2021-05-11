@@ -83,7 +83,6 @@ var gun_sight = {
 
         # for scaling later
         m.base_distance = input.viewX.getValue() - m.gsight_x;
-        m.px_per_meter = 
         m.old_sca = 0;
 
         # logic
@@ -342,6 +341,9 @@ var gun_sight = {
         me.pipper_x = me.center_x + me.view_offset_x + me.gyro_x;
         me.pipper_y = me.center_y + me.view_offset_y + me.gyro_y;
 
+        #me.pipper_x = getprop("__x");
+        #me.pipper_y = getprop("__y");
+
         # translations
         me.pipper.setTranslation(me.pipper_x, me.pipper_y);
 
@@ -421,7 +423,8 @@ var gun_sight = {
         return math.clamp(val / 255,0,1);
     },
 };
-
+#setprop("__x",0);
+#setprop("__y",0);
 var gs = 0;
 
 var init = setlistener("/sim/signals/fdm-initialized", func() {

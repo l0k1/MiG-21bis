@@ -158,8 +158,10 @@ var beam_search = func(myPos) {
 	#var beam_z = 15000*math.sin(-1.5*D2R);
 	#var beam = getGPS(beam_x, beam_y, beam_z, myPos);
 
-	var beam = getGPS(-100000*math.cos(-1.5*D2R), 0, 100000*math.sin(-1.5*D2R), myPos);
-	
+	var pos = aircraftToCart({x:100000*math.cos(-1.5*D2R), y:0, z:-100000*math.sin(-1.5*D2R)});
+	var beam = geo.Coord.new();
+	beam.set_xyz(pos.x, pos.y, pos.z);
+
 	#we now find the vector the beam is pointed in:
 	v = get_cart_ground_intersection({"x":myPos.x(), "y":myPos.y(), "z":myPos.z()}, {"x":beam.x()-myPos.x(), "y":beam.y()-myPos.y(), "z":beam.z()-myPos.z()});
 	if (v != nil) {
@@ -177,16 +179,17 @@ var closest_dist = 100000;
 var closest_track = nil;
 var gps_contact = radar_logic.ContactGPS.new("BEAMTGT", gps_lock_geo);
 
-var n = props.globals.getNode("models",1);
-var i = 0;
-for (i = 0; 1==1; i += 1) {
-	if (n.getChild("model",i,0) == nil) {
-		break;
-	}
-}
 
+###### tgtsphere for checking beam tgt
+
+#var n = props.globals.getNode("models",1);
+#var i = 0;
+#for (i = 0; 1==1; i += 1) {
+#	if (n.getChild("model",i,0) == nil) {
+#		break;
+#	}
+#}
 #var objModel = n.getChild("model",i,1);
-#
 #objModel.getNode("elevation",1).setDoubleValue(-999);
 #objModel.getNode("latitude",1).setDoubleValue(0);
 #objModel.getNode("longitude",1).setDoubleValue(0);
@@ -199,12 +202,13 @@ for (i = 0; 1==1; i += 1) {
 #objModel.getNode("heading-deg-prop",1).setValue(objModel.getPath()~"/heading");
 #objModel.getNode("pitch-deg-prop",1).setValue(objModel.getPath()~"/pitch");
 #objModel.getNode("roll-deg-prop",1).setValue(objModel.getPath()~"/roll");
-#
-#objModel.getNode("path",1).setValue("Aircraft/MiG-21bis/Models/tgtsphere.xml"); # this is the model to be loaded.
-#
+#objModel.getNode("path",1).setValue("Aircraft/MiG-21bis/Models/tgtsphere.ac"); # this is the model to be loaded.
 #var loadNode = objModel.getNode("load", 1);
 #loadNode.setBoolValue(1);
 #loadNode.remove();
+
+##################
+
 
 var beam_target_lock = func() {
 	if ( radar_canvas.radarscreen.cur_state == radar_canvas.radar_beamed ) {
@@ -223,6 +227,15 @@ var beam_target_lock = func() {
 		#print('lat: ' ~ gps_contact.get_Latitude());
 		#print('lon: ' ~ gps_contact.get_Longitude());
 		#print('alt: ' ~ gps_contact.get_altitude());
+		
+		### tgtphere
+
+		#objModel.getNode("latitude").setValue(gps_contact.get_Latitude());
+		#objModel.getNode("longitude").setValue(gps_contact.get_Longitude());
+		#objModel.getNode("elevation").setValue(gps_contact.get_altitude());
+
+		###
+
 		settimer(func(){beam_target_lock();},beam_update_rate);
 	}
 }
