@@ -72,6 +72,9 @@
 	</text>
 
 	<textbox>
+        <halign>fill</halign>
+        <valign>fill</valign>
+        <stretch>true</stretch>
 	    <!-- position -->
 	    <!--<x>100</x>
 	    <y>100</y>-->
