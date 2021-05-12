@@ -372,6 +372,7 @@ var stores = {
 
         };
 
+
         m.pylon_selected = 0;
         m.outer_group_selected = 0;
         m.inner_group_selected = 0;
@@ -974,6 +975,9 @@ var stores = {
                         ];
         m.pylon_click(0);
 
+        # uncomment to do a dump of weapon info to a text file
+        #m.store_info_txt_output();
+
         return m;
     },
     get_canvas: func() {
@@ -1128,5 +1132,22 @@ var stores = {
             me.mtow_text.setColor(me.green_color);
         }
 
-        },
+    },
+
+    store_info_txt_output: func() {
+        me.outstr = "";
+        foreach(var info; keys(me.store_info)) {
+            me.outstr = me.outstr ~ "\n# " ~ info ~ "\n";
+            for (me.i = 0; me.i < size(me.store_info[info]); me.i = me.i + 1) {
+                if (me.store_info[info][me.i] != "") {
+                    me.outstr = me.outstr ~ me.store_info[info][me.i] ~ " ";
+                }
+            }
+            me.outstr = me.outstr ~ "\n-----\n";
+        }
+        me.f = io.open(getprop("/sim/fg-home") ~ "/Export/mig-21-stores.txt", "w+");
+        io.write(me.f, me.outstr);
+        io.close(me.f);
+        print("weapon data dump performed");
+    },
 };
