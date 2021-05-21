@@ -722,7 +722,7 @@
            <property>aero/ci2vel</property>
            <property>velocities/q-aero-rad_sec</property>
            <product>
-             <value> -6.4484 </value>
+             <value> -2.4484 </value>
              <property>tune/pitch/damp</property>
            </product>
        </product>
@@ -929,7 +929,7 @@
            <property>aero/bi2vel</property>
            <property>velocities/r-aero-rad_sec</property>
            <product>
-             <value> -1.3 </value>
+             <value> -0.6 </value>
              <property>tune/yaw/damp</property>
            </product>
        </product>
