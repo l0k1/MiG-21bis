@@ -10,7 +10,7 @@ var main_update_rate = 0.3;
 var write_rate = 10;
 
 var outstr = "";
-
+var GAL2LT = 3.78541;
 var timestamp = "";
 var output_file = "";
 var f = "";
@@ -204,8 +204,14 @@ var writeMyPlanePos = func() {
 }
 
 var writeMyPlaneAttributes = func() {
+    if (radar_logic.selection != nil) {
+        radar_logic.selection.get_cartesian();
+    }
     thread.lock(mutexWrite);
-    write(myplaneID ~ ",TAS="~getTas()~",MACH="~getMach()~",AOA="~getAoA()~",HDG="~getHeading()~",Throttle="~getThrottle()~",Afterburner="~getAfterburner()~"\n");
+    write(myplaneID ~ ",TAS="~getTas()~",MACH="~getMach()~",AOA="~getAoA()~",HDG="~getHeading()~",Throttle="~getThrottle());
+    write(",Afterburner="~getAfterburner()~",FuelWeight="~getTotalFuelWeight());
+    write(",IAS="~getIAS()~",RadarMode="~getRadarMode()~",LockedTargetMode="~getLockedMode());
+    write(",LockedTargetAzimuth="~getTgtAzimuth()~",LockedTargetElevation="~getTgtElev()~",LockedTargetRange="~getTgtRange()~"\n");
     thread.unlock(mutexWrite);
 }
 
@@ -313,6 +319,55 @@ var getDRAzimuth = func() {
 var getDRRange = func() {
     return rounder(getprop("/fdm/jsbsim/systems/deadreckoner/distance-final")*NM2M,0.01);
 }
+
+var getLockedMode = func() {
+    if (radar_logic.selection == nil) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+var getTgtAzimuth = func() {
+
+    if (radar_logic.selection == nil) {
+        return 0;
+    } else {
+        return radar_logic.selection.dir_x;
+    }
+}
+
+var getTgtElev = func() {
+
+    if (radar_logic.selection == nil) {
+        return 0;
+    } else {
+        return -radar_logic.selection.dir_y;
+    }
+}
+
+var getTgtRange = func() {
+    if (radar_logic.selection == nil) {
+        return 0;
+    } else {
+        return radar_logic.selection.get_range() * NM2M;
+    }
+}
+
+var getTotalFuelWeight = func() {
+    return getprop("/consumables/fuel/total-fuel-kg");
+}
+
+var getIAS = func() {
+    #should be IAS in knots
+    return getprop("/fdm/jsbsim/instrumentation/pitot/airspeed-kts") * KT2MPS;
+}
+
+var getRadarMode = func() {
+    return !getprop("/sim/multiplay/generic/int[2]");
+}
+
+
 
 var rounder = func(x, p) {
     v = math.mod(x, p);
