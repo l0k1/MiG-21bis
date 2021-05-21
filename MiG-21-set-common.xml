@@ -239,7 +239,7 @@
                 </menu>
                 <menu n="101">
                     <label>Dev</label>
-                    <!--<item>
+                    <item>
                         <label>Tune Drag</label>
                         <binding>
                             <command>nasal</command>
@@ -251,7 +251,7 @@
                         <binding>
                             <command>nasal</command>
                             <script>dialog.tuner_lift_dialog.open()</script>
-                        </bindin
+                        </binding>
                     </item>
                     <item>
                         <label>Tune Pitch</label>
@@ -284,7 +284,7 @@
                     <item>
                         <name>a-submenu</name>
                         <enabled>false</enabled>
-                    </item>-->
+                    </item>
                     <item>
                         <label>Dump Prop Tree</label>
                         <binding>
