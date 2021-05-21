@@ -388,17 +388,17 @@
 
  <propulsion>
    <engine file="Tumansky-R25-300">
-    <location unit="IN">
-      <x> 263.40 </x>
+    <location unit="M">
+      <x> 6.69 </x>
       <y>   0.00 </y>
-      <z>   0.00 </z>
+     <z>  0.17160 </z>
     </location>
     <feed>14</feed>
     <thruster file="direct">
-     <location unit="IN">
-       <x> 263.40 </x>
+     <location unit="M">
+      <x> 6.69 </x>
        <y>   0.00 </y>
-       <z>   0.00 </z>
+     <z>  0.17160 </z>
      </location>
      <orient unit="DEG">
        <pitch> 0.00 </pitch>
