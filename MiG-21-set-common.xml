@@ -1133,7 +1133,7 @@
     <autopilot>
         <settings>
             <roll-final>
-                <kp type="double">0.20</kp>
+                <kp type="double">0.175</kp>
                 <ti type="double">0.45</ti>
                 <td type="double">0.001</td>
                 <u_min type="double">-1.0</u_min>
