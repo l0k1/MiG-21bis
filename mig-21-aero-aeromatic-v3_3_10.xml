@@ -23,50 +23,7 @@
       <property>aero/beta-deg</property>
     </ifthen>
   </function>
-
-      <function name="sin/direction">
-        <ifthen>
-          <eq>
-            <property>sin/input</property>
-            <value>0</value>
-          </eq>
-          <value>1</value>
-          <ifthen>
-            <eq>
-              <property>sin/input</property>
-              <value>90</value>
-            </eq>
-            <value>0</value>
-            <property>sin/direction</property>
-          </ifthen>
-        </ifthen>
-      </function>
-
-      <function name="sin/input">
-        <ifthen>
-          <eq>
-            <property>sin/direction</property>
-            <value>1</value>
-          </eq>
-          <sum>
-            <property>sin/input</property>
-            <value>3</value>
-          </sum>
-          <difference>
-            <property>sin/input</property>
-            <value>3</value>
-          </difference>
-        </ifthen>
-      </function>
-
-      <function name="sin/output">
-        <sin>
-          <toradians>
-            <property>sin/input</property>
-          </toradians>
-        </sin>
-      </function>
-
+  
   <axis name="LIFT">
 
     <function name="aero/force/Lift_alpha">
