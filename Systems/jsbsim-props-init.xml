@@ -199,6 +199,7 @@
             <yaw type="double">1</yaw>
             <aileron type="double">1</aileron>
             <rudder type="double">1</rudder>
+            <osc type="double">1</osc>
         </roll>
         <yaw>
             <alpha type="double">1</alpha>
@@ -212,9 +213,4 @@
     <warning-lights>
         <masterwarn-last type="double">0</masterwarn-last>
     </warning-lights>
-    <sin>
-        <input type="double">0</input>
-        <direction type="double">1</direction>
-        <output type="double">0</output>
-    </sin>
 </PropertyList>

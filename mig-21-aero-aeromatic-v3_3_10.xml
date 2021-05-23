@@ -23,7 +23,16 @@
       <property>aero/beta-deg</property>
     </ifthen>
   </function>
-  
+
+  <function name="aero/sin8">
+    <sin>
+      <product>
+        <property>sim-time-sec</property>
+        <value>8</value>
+      </product>
+    </sin>
+  </function>
+
   <axis name="LIFT">
 
     <function name="aero/force/Lift_alpha">
@@ -850,6 +859,28 @@
            <product>
             <value> 0.0058 </value>
             <property>tune/roll/rudder</property>
+           </product>
+       </product>
+    </function>
+
+    <function name="aero/moment/Roll_osc">
+       <description>Roll moment due to low speed</description>
+       <product>
+           <property>aero/qbar-psf</property>
+           <property>metrics/Sw-sqft</property>
+           <property>metrics/bw-ft</property>
+           <property>aero/sin8</property>
+           <product>
+             <table>
+              <independentVar lookup="row">velocities/mach</independentVar>
+              <tableData>
+                0.0    1.0
+                0.20   0.6
+                0.22   0.0
+              </tableData>
+            </table>
+            <value> 0.04 </value>
+            <property>tune/roll/osc</property>
            </product>
        </product>
     </function>
