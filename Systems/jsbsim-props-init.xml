@@ -212,4 +212,9 @@
     <warning-lights>
         <masterwarn-last type="double">0</masterwarn-last>
     </warning-lights>
+    <sin>
+        <input type="double">0</input>
+        <direction type="double">1</direction>
+        <output type="double">0</output>
+    </sin>
 </PropertyList>

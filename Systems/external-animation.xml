@@ -3,68 +3,9 @@
 
 <system name="pitotmast">
 
-	<property value="0">systems/animations/sin/input</property>
-	<property value="1">systems/animations/sin/direction</property>
-	<property value="0">systems/animations/sin/output</property>
 	<property value="0.004">systems/animations/pitot/mast-movement-mod</property>
 	<property value="1">systems/animations/pitot/fin-movement-mod</property>
 
-
-	<channel name="sin">
-
-		<fcs_function name="trash/systems/animations/sin/direction">
-			<function>
-				<ifthen>
-					<eq>
-						<property>systems/animations/sin/input</property>
-						<value>0</value>
-					</eq>
-					<value>1</value>
-					<ifthen>
-						<eq>
-							<property>systems/animations/sin/input</property>
-							<value>90</value>
-						</eq>
-						<value>0</value>
-						<property>systems/animations/sin/direction</property>
-					</ifthen>
-				</ifthen>
-			</function>
-			<output>systems/animations/sin/direction</output>
-		</fcs_function>
-
-		<fcs_function name="trash/systems/animations/sin/input">
-			<function>
-				<ifthen>
-					<eq>
-						<property>systems/animations/sin/direction</property>
-						<value>1</value>
-					</eq>
-					<sum>
-						<property>systems/animations/sin/input</property>
-						<value>3</value>
-					</sum>
-					<difference>
-						<property>systems/animations/sin/input</property>
-						<value>3</value>
-					</difference>
-				</ifthen>
-			</function>
-			<output>systems/animations/sin/input</output>
-		</fcs_function>
-
-		<fcs_function name="trash/systems/animations/sin/output">
-			<function>
-				<sin>
-					<toradians>
-						<property>systems/animations/sin/input</property>
-					</toradians>
-				</sin>
-			</function>
-			<output>systems/animations/sin/output</output>
-		</fcs_function>
-
-	</channel>
 
 	<channel name="mastmove">
 
@@ -77,7 +18,7 @@
 			<function>
 				<product>
 					<property>accelerations/wdot-ft_sec2</property>
-					<property>systems/animations/sin/output</property>
+					<property>sin/output</property>
 					<property>systems/animations/pitot/mast-movement-mod</property>
 				</product>
 			</function>
@@ -87,7 +28,7 @@
 			<function>
 				<product>
 					<property>accelerations/vdot-ft_sec2</property>
-					<property>systems/animations/sin/output</property>
+					<property>sin/output</property>
 					<property>systems/animations/pitot/mast-movement-mod</property>
 				</product>
 			</function>

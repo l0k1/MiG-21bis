@@ -24,6 +24,49 @@
     </ifthen>
   </function>
 
+      <function name="sin/direction">
+        <ifthen>
+          <eq>
+            <property>sin/input</property>
+            <value>0</value>
+          </eq>
+          <value>1</value>
+          <ifthen>
+            <eq>
+              <property>sin/input</property>
+              <value>90</value>
+            </eq>
+            <value>0</value>
+            <property>sin/direction</property>
+          </ifthen>
+        </ifthen>
+      </function>
+
+      <function name="sin/input">
+        <ifthen>
+          <eq>
+            <property>sin/direction</property>
+            <value>1</value>
+          </eq>
+          <sum>
+            <property>sin/input</property>
+            <value>3</value>
+          </sum>
+          <difference>
+            <property>sin/input</property>
+            <value>3</value>
+          </difference>
+        </ifthen>
+      </function>
+
+      <function name="sin/output">
+        <sin>
+          <toradians>
+            <property>sin/input</property>
+          </toradians>
+        </sin>
+      </function>
+
   <axis name="LIFT">
 
     <function name="aero/force/Lift_alpha">
@@ -671,12 +714,12 @@
                   0.175 -0.1000
                   0.262 -0.1100
                   0.349 -0.1200
-                  0.436 -0.1300
-                  0.524 -0.1400
-                  0.576 -0.1100
+                  0.436 -0.1200
+                  0.524 -0.1300
+                  0.576 -0.0800
                   0.611 -0.0600
-                  0.698 -0.0235
-                  0.785 -0.0100
+                  0.698 -0.0300
+                  0.785  0.0000
                   0.873  0.0150
                   0.960  0.0300
                   1.050  0.0550
@@ -700,11 +743,11 @@
               <independentVar lookup="row">velocities/mach</independentVar>
               <independentVar lookup="column">aero/alpha-rad</independentVar>
               <tableData>
-                        0.0         0.26    0.436         0.61    1.5
-                0.0    -1.26134155  -1.23   -1.15        -0.72   0.0
-                0.2    -1.086193     -0.98   -0.82       -0.43   0.0
-                0.3    -0.53205     -0.65   -0.58        -0.38   0.0
-                2.0    -0.1300      -0.14   -0.12        -0.10  0.0
+                        0.0     0.26    0.44    0.57     0.67    1.5
+                0.0    -1.261  -1.23   -1.15   -0.95    -0.42   0.0
+                0.2    -1.086  -0.98   -0.82   -0.70    -0.31   0.0
+                0.3    -0.532  -0.70   -0.62   -0.45    -0.20   0.0
+                2.0    -0.130  -0.15   -0.13   -0.11    -0.04   0.0
               </tableData>
             </table>
             <property>tune/pitch/elevator</property>
