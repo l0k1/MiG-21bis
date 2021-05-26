@@ -37,6 +37,7 @@ var stores = {
                     ["A/A Missile", 
                                 ["R-3S",
                                 "R-3R",
+                                "R-3U",
                                 "R-60",
                                 "R-60x2",]],
                     ["A/G Missile",
@@ -62,6 +63,7 @@ var stores = {
                     ["A/A Missile", 
                                 ["R-3S",
                                 "R-3R",
+                                "R-3U",
                                 "R-60",
                                 "R-27T1",
                                 "R-27R1",]],
@@ -188,6 +190,19 @@ var stores = {
                         "entered service in  ",
                         "1961. Manufactured  ",
                         "by Vympel."
+                        ],
+            "R-3U"   : [
+                        #12345678901234567890
+                        "",
+                        "75 kg",
+                        "",
+                        "A practice missile",
+                        "containing nothing",
+                        "but the seeker head",
+                        "found in an R-3S,",
+                        "for practice and",
+                        "familiarization in",
+                        "getting an IR lock.",
                         ],
             "R-3R"   : [
                         #12345678901234567890

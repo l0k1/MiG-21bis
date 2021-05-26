@@ -773,6 +773,97 @@
         </condition>
     </animation>
     
+    
+    <!-- R-3U -->
+
+    <model>
+        <name>R-3U Missile Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3U/R-3U.xml</path>
+        <offsets>
+            <x-m> 1.03545</x-m>
+            <y-m>-2.73227</y-m>
+            <z-m>-0.405888</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3U Missile Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[0]</property>
+                  <value>39</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <model>
+        <name>R-3U Missile Inner Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3U/R-3U.xml</path>
+        <offsets>
+            <x-m> 0.101503</x-m>
+            <y-m>-2.10897</y-m>
+            <z-m>-0.372696</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3U Missile Inner Left</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>39</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <model>
+        <name>R-3U Missile Inner Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3U/R-3U.xml</path>
+        <offsets>
+            <x-m> 0.101503</x-m>
+            <y-m>2.10897</y-m>
+            <z-m>-0.372696</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3U Missile Inner Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>39</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <model>
+        <name>R-3U Missile Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/R-3U/R-3U.xml</path>
+        <offsets>
+            <x-m> 1.03545</x-m>
+            <y-m> 2.73227</y-m>
+            <z-m>-0.405888</z-m>
+            <pitch-deg>0.0</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <object-name>R-3U Missile Right</object-name>
+        <type>select</type>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[4]</property>
+                  <value>39</value>
+            </equals>
+        </condition>
+    </animation>
+    
     <!-- R-3R -->
 
     <model>

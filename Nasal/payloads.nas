@@ -71,6 +71,7 @@ var payloads = {
     "RS-2US":            pos_arm.new("RS-2US","RS-2US",182,"ir",1,0),
     "R-55S":             pos_arm.new("R-55S","R-55S",199,"ir",2,2),
     "R-3S":              pos_arm.new("R-3S","R-3S",165,"ir",3,3),
+    "R-3U":              pos_arm.new("R-3U","R-3U",165,"ir",39,3),
     "R-13M":             pos_arm.new("R-13M","R-13M",194,"ir",4,3),
     "R-60":              pos_arm.new("R-60","R-60",96,"ir",31,0),
     "R-60x2":            pos_arm.new("R-60","R-60",96,"ir",32,0,,2), # 32 if 2 missiles loaded, 31 if 1
@@ -491,6 +492,7 @@ var ir_lock_inform = func() {
                     if (selected == "RS-2US" or
                         selected == "R-55S" or
                         selected == "R-3S" or
+                        selected == "R-3U" or
                         selected == "R-13M") {
                         if (pylon < 2 ) {
                             pylon_status[0] = 1;
@@ -709,6 +711,8 @@ var missile_release = func(pylon) {
         #print("power good");
         # check temprature, will begin failing at 5*C and guaranteed failure at -5*c
         if ( interp( getprop("/fdm/jsbsim/systems/armament/pylon-heating/pylon-temp",t_p), -5,0,5,1) < rand() ) { return;    }
+        # dont fire if a practice missile
+        if ( selected == "R-3U" ) { return; }
         #print("temp good");
         # trigger is pulled, a pylon is selected, the pylon has a missile that is locked on.
         #print("power and temp is good");
