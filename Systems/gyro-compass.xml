@@ -2,6 +2,32 @@
 
 <system name="gyro-compass">
 
+    <channel name="compass-deviation">
+        <fcs_function name="trash/systems/gyro-compass/mag-after-deviation">
+            <function>
+              <table>
+                <independentVar lookup="row">/instrumentation/magnetic-compass/indicated-heading-deg</independentVar>
+                <tableData>
+                    0.0 0.0
+                    30.0 31.0
+                    60.0 59.0
+                    90.0 92.0
+                    120.0 120.0
+                    150.0 149.0
+                    180.0 180.0
+                    210.0 209.0
+                    240.0 241.0
+                    270.0 268.0
+                    300.0 300.0
+                    330.0 331.0
+                    360.0 360.0
+                </tableData>
+              </table>
+          </function>
+          <output>systems/gyro-compass/mag-after-deviation</output>
+      </fcs_function>
+  </channel>
+
     <channel name="gyro-driven-compass" execrate="4">
 
         <!-- gyro compass drift calculations
@@ -161,7 +187,7 @@
                                         <!-- adding 1000 so dont have to norm to 360 -->
                                         <!-- programmers hate him! -->
                                         <sum>
-                                            <property>/instrumentation/magnetic-compass/indicated-heading-deg</property>
+                                            <property>systems/gyro-compass/mag-after-deviation</property>
                                             <value>1000</value>
                                         </sum>
                                         <sum>
