@@ -182,13 +182,13 @@ var gps_contact = radar_logic.ContactGPS.new("BEAMTGT", gps_lock_geo);
 
 ###### tgtsphere for checking beam tgt
 
-#var n = props.globals.getNode("models",1);
-#var i = 0;
-#for (i = 0; 1==1; i += 1) {
-#	if (n.getChild("model",i,0) == nil) {
-#		break;
-#	}
-#}
+var n = props.globals.getNode("models",1);
+var i = 0;
+for (i = 0; 1==1; i += 1) {
+	if (n.getChild("model",i,0) == nil) {
+		break;
+	}
+}
 #var objModel = n.getChild("model",i,1);
 #objModel.getNode("elevation",1).setDoubleValue(-999);
 #objModel.getNode("latitude",1).setDoubleValue(0);
