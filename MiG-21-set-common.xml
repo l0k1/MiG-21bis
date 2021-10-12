@@ -785,8 +785,8 @@
                 <position-deg alias="/gear/gear[2]/rollspeed-ms"/>
             </blade>
             <blade n="3">
-                <flap-deg type="double" alias="/fdm/jsbsim/systems/armament/cm/flares-mp-value"/>        <!-- used for releasing flares -->
-                <position-deg type="double" alias="/fdm/jsbsim/systems/armament/cm/chaff-mp-value"/><!-- used for releasing chaff  -->
+                <flap-deg type="double" alias="/fdm/jsbsim/systems/armament/aso2m/flares-mp-value"/>        <!-- used for releasing flares -->
+                <position-deg type="double" alias="/fdm/jsbsim/systems/armament/aso2m/chaff-mp-value"/><!-- used for releasing chaff  -->
             </blade>
         </main>
     </rotors>

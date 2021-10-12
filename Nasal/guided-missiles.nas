@@ -5266,6 +5266,19 @@ var deviation_normdeg = func(our_heading, target_bearing) {
 	return dev_norm;
 }
 
+var check = func() {
+	var st_time = systime();
+	folder = getprop("/sim/aircraft-dir")~"/";
+	out = "";
+	out = out ~ io.readfile(folder~"Nasal/guided-missiles.nas");
+	out = out ~ io.readfile(folder~"mig-21-aero-aeromatic-v3_3_10.xml");
+	out = out ~ io.readfile(folder~"mig-21-aero-vsp.xml");
+	out = out ~ io.readfile(folder~"MiG-21-set-common.xml");
+	out = md5(out);
+	print(out);
+	print(systime() - st_time);
+}
+
 #
 # this code make sure messages don't trigger the MP spam filter:
 

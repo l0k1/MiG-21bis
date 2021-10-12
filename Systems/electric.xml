@@ -120,6 +120,14 @@
 	<property value="0">electric/switches/cc/hmcs/deploy</property>
 	<property value="0">electric/switches/cc/hmcs/rls</property>
 
+	<property value="0">electric/switches/cc/aso2m/power</property>
+	<property value="0">electric/switches/cc/aso2m/arm</property>
+	<property value="0">electric/switches/cc/aso2m/auto4g</property>
+	<property value="0">electric/switches/cc/aso2m/rls</property>
+	<property value="0">electric/switches/cc/aso2m/chaffrls</property>
+	<property value="0">electric/switches/cc/aso2m/flarerls</property>
+	<property value="0">electric/switches/cc/aso2m/rst</property>
+
 	<property value="0">electric/sources/dc-gen-damage</property>
 	<property value="0">electric/sources/ac-gen-damage</property>
 	<property value="90">electric/sources/batteries-a</property>
@@ -1012,6 +1020,13 @@
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[3]">
 				electric/switches/cc/hmcs/power == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/aso2m/power">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/cc/aso2m/power == 1
 			</test>
 		</switch>
 		

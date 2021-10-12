@@ -99,7 +99,8 @@ var stores = {
                     ["None",     
                                 ["none"]],
                     ["Consoles",
-                                ["HMCS Control"]],
+                                ["HMCS Control",
+                                "ASO-2M Control"]],
         ];
 
         # do the line splits manually
@@ -383,6 +384,14 @@ var stores = {
                         "Center control",
                         "console for the HMCS",
                         "system."
+                        ],
+            "ASO-2M Control"  : [
+                        #12345678901234567890
+                        "",
+                        "Center control",
+                        "console for the",
+                        "ASO-2M conformal",
+                        "countermeasure pods."
                         ],
 
         };

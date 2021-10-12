@@ -715,4 +715,122 @@ clock
         </fcs_function>
     </channel>
 
+    <channel name="aso2m controls" execrate="4">
+
+        <switch name="systems/armament/aso2m/aso2m-armed">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                electric/output/aso2m/power gt -1
+                electric/switches/cc/aso2m/arm == 1
+            </test>
+        </switch>
+
+        <switch name="systems/armament/aso2m/aso2m-autog">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/aso2m/aso2m-armed == 1
+                electric/switches/cc/aso2m/auto4g == 1
+            </test>
+        </switch>
+
+        <switch name="systems/armament/aso2m/aso2m-autofire">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/aso2m/aso2m-autog == 1
+                accelerations/Nz > 4
+            </test>
+        </switch>
+
+        <!-- 4g autofire -->
+
+        <!-- this runs 30 times per second
+            if autofire is on, and we are over 4g, then
+            release a flare every 40 runs -->
+
+        <fcs_function name="trash/systems/armament/aso2m/autofire-timer">
+            <function>
+                <ifthen>
+                    <eq>
+                        <property>systems/armament/aso2m/aso2m-autofire</property>
+                        <value>1</value>
+                    </eq>
+                    <ifthen>
+                        <gt>
+                            <property>systems/armament/aso2m/autofire-timer</property>
+                            <value>39</value>
+                        </gt>
+                        <value>0</value>
+                        <sum>
+                            <property>systems/armament/aso2m/autofire-timer</property>
+                            <value>1</value>
+                        </sum>
+                    </ifthen>
+                    <value>0</value>
+                </ifthen>
+            </function>
+            <output>systems/armament/aso2m/autofire-timer</output>
+        </fcs_function>
+
+        <!-- final stage trigger-->
+
+        <switch name="systems/armament/aso2m/master-trigger">
+            <default value="0"/>
+            <test logic="OR" value="1">
+                /controls/armament/cm-trigger == 1
+                systems/armament/aso2m/autofire-timer eq 10
+            </test>
+        </switch>
+        <!-- should also be able to fire these triggers direct -->
+        <switch name="trash/systems/armament/aso2m/flare-trigger">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/aso2m/aso2m-armed == 1
+                systems/armament/aso2m/master-trigger == 1
+            </test>
+            <output>systems/armament/aso2m/flare-trigger</output>
+        </switch>
+
+        <switch name="trash/systems/armament/aso2m/chaff-trigger">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/aso2m/aso2m-armed == 1
+                systems/armament/aso2m/master-trigger == 1
+            </test>
+            <output>systems/armament/aso2m/chaff-trigger</output>
+        </switch>
+
+        <!-- lights -->
+
+        <switch name="systems/aso2m/lights/power">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                electric/output/aso2m/power gt -1
+            </test>
+        </switch>
+
+        <switch name="systems/aso2m/lights/arm">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/aso2m/aso2m-armed == 1
+            </test>
+        </switch>
+
+        <switch name="systems/aso2m/lights/AutoLight">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/aso2m/aso2m-autog == 1
+            </test>
+        </switch>
+
+        <switch name="systems/aso2m/lights/releaseLight">
+            <default value="0"/>
+            <test logic="OR" value="1">
+                systems/armament/aso2m/chaff-firing-0 == 1
+                systems/armament/aso2m/chaff-firing-1 == 1
+                systems/armament/aso2m/flare-firing-0 == 1
+                systems/armament/aso2m/flare-firing-1 == 1
+            </test>
+        </switch>
+
+    </channel>
 </system>

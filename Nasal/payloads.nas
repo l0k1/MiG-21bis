@@ -1049,20 +1049,43 @@ var jettison = func(pylons) {
     }
 }
 
-var countermeasure_trigger = func() {
-    #print("in func");
-    #print("trig set to: |" ~getprop("/controls/armament/cm-trigger")~"|");
-    if (getprop("/controls/armament/cm-trigger") == 0) { 
-        #print("setting trigs to 0");
-        setprop("/controls/armament/chaff-trigger",0);
-        setprop("/controls/armament/flare-trigger",0);
+#var countermeasure_trigger = func() {
+#    #print("in func");
+#    #print("trig set to: |" ~getprop("/controls/armament/cm-trigger")~"|");
+#    if (getprop("/controls/armament/cm-trigger") == 0) { 
+#        #print("setting trigs to 0");
+#        setprop("/controls/armament/chaff-trigger",0);
+#        setprop("/controls/armament/flare-trigger",0);
+#        return;
+#    }
+#    if (getprop("/fdm/jsbsim/electric/output/jato-start") < 20) { return; }
+#    if (getprop("/fdm/jsbsim/electric/output/jato-jett") < 20) { return; }
+#    #print("setting trigs to 1");
+#    setprop("/controls/armament/chaff-trigger",1);
+#    setprop("/controls/armament/flare-trigger",1);
+#}
+
+var aso2mcounter = func() {
+    #kinda ugly but whatever
+    # if the submodel[0]/count <> 20 then we know it decreased.
+    # if it does == 20, then we know it got loaded.
+    var cnt = getprop("/ai/submodels/submodel[0]/count");
+    if (cnt == 20) {
         return;
+    } else {
+        var chfL = getprop("/fdm/jsbsim/systems/armament/aso2m/chaff-left");
+        var chfR = getprop("/fdm/jsbsim/systems/armament/aso2m/chaff-right");
+        var flrL = getprop("/fdm/jsbsim/systems/armament/aso2m/flares-left");
+        var flrR = getprop("/fdm/jsbsim/systems/armament/aso2m/flares-right");
+        chfL = chfL - 1 < 0 ? 0 : chfL - 1;
+        chfR = chfR - 1 < 0 ? 0 : chfR - 1;
+        flrL = flrL - 1 < 0 ? 0 : flrL - 1;
+        flrR = flrR - 1 < 0 ? 0 : flrR - 1;
+        setprop("/fdm/jsbsim/systems/armament/aso2m/chaff-left",chfL);
+        setprop("/fdm/jsbsim/systems/armament/aso2m/chaff-right",chfR);
+        setprop("/fdm/jsbsim/systems/armament/aso2m/flares-left",flrL);
+        setprop("/fdm/jsbsim/systems/armament/aso2m/flares-right",flrR);
     }
-    if (getprop("/fdm/jsbsim/electric/output/jato-start") < 20) { return; }
-    if (getprop("/fdm/jsbsim/electric/output/jato-jett") < 20) { return; }
-    #print("setting trigs to 1");
-    setprop("/controls/armament/chaff-trigger",1);
-    setprop("/controls/armament/flare-trigger",1);
 }
 
 var _ret_trig_arr = [];
@@ -1471,7 +1494,13 @@ var main_init = func {
     setlistener("/payload/virtual/weight[7]/selected",func{update_pylons(7);});
     setlistener("/payload/virtual/weight[8]/selected",func{update_pylons(8);});
 
-    setlistener("/controls/armament/cm-trigger",func{countermeasure_trigger();});
+    #setlistener("/controls/armament/cm-trigger",func{countermeasure_trigger();});
+
+    # flares/chaff counter
+    setlistener("/ai/submodels/submodel[0]/count",func{aso2mcounter();});
+    setlistener("/ai/submodels/submodel[1]/count",func{aso2mcounter();});
+    setlistener("/ai/submodels/submodel[2]/count",func{aso2mcounter();});
+    setlistener("/ai/submodels/submodel[3]/count",func{aso2mcounter();});
 
     # setup impact listener
     setlistener("/ai/models/model-impact", impact_listener, 0, 0);

@@ -115,7 +115,7 @@
     <submodel>
         <name>flaresL</name>
         <model>Aircraft/MiG-21bis/Models/Effects/Flare/flare.xml</model>
-        <trigger>/fdm/jsbsim/systems/armament/cm/flare-firing-0</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
+        <trigger>/fdm/jsbsim/systems/armament/aso2m/flare-firing-0</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
         <speed>700.0</speed>        <!-- ft/sec -->
         <repeat>true</repeat>
         <delay>0.25</delay>
@@ -139,7 +139,7 @@
     <submodel>
         <name>flaresR</name>
         <model>Aircraft/MiG-21bis/Models/Effects/Flare/flare.xml</model>
-        <trigger>/fdm/jsbsim/systems/armament/cm/flare-firing-1</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
+        <trigger>/fdm/jsbsim/systems/armament/aso2m/flare-firing-1</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
         <speed>700.0</speed>        <!-- ft/sec -->
         <repeat>true</repeat>
         <delay>0.25</delay>
@@ -163,7 +163,7 @@
     <submodel>
         <name>chaffL</name>
         <model>Aircraft/MiG-21bis/Models/Effects/Chaff/chaff.xml</model>
-        <trigger>/fdm/jsbsim/systems/armament/cm/chaff-firing-0</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
+        <trigger>/fdm/jsbsim/systems/armament/aso2m/chaff-firing-0</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
         <speed>0.0</speed>        <!-- ft/sec -->
         <repeat>true</repeat>
         <delay>0.25</delay>
@@ -188,7 +188,7 @@
     <submodel>
         <name>chaffR</name>
         <model>Aircraft/MiG-21bis/Models/Effects/Chaff/chaff.xml</model>
-        <trigger>/fdm/jsbsim/systems/armament/cm/chaff-firing-1</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
+        <trigger>/fdm/jsbsim/systems/armament/aso2m/chaff-firing-1</trigger>        <!-- ai/submodels/submodel[0]/flare-release -->
         <speed>0.0</speed>        <!-- ft/sec -->
         <repeat>true</repeat>
         <delay>0.25</delay>

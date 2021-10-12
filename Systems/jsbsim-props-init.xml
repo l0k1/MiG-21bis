@@ -38,7 +38,7 @@
             <station5>
                 <selected type="double">0</selected>
             </station5>
-            <cm>
+            <aso2m>
                 <chaff-trigger-0>0</chaff-trigger-0>
                 <chaff-trigger-1>0</chaff-trigger-1>
                 <flare-trigger-0>0</flare-trigger-0>
@@ -49,7 +49,12 @@
                 <flare-firing-1>0</flare-firing-1>
                 <chaff-final-count-0>0</chaff-final-count-0>
                 <chaff-final-count-1>0</chaff-final-count-1>
-            </cm>
+                <flares-right type="double">0</flares-right>
+                <flares-left type="double">0</flares-left>
+                <chaff-right type="double">0</chaff-right>
+                <chaff-left type="double">0</chaff-left>
+                <reset type="double">0</reset>
+            </aso2m>
             <GSh-23-jammed>1</GSh-23-jammed>
             <GSh-23-ready>0</GSh-23-ready>
         </armament>
