@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <PropertyList>
     <blc type="double">0</blc>
-	<simulation>
+    <simulation>
         <sim-time-sec>0</sim-time-sec>
     </simulation>
     <systems>
@@ -115,6 +115,9 @@
             <azimuth-adjust type="double">0.0</azimuth-adjust>
             <reset type="double">0</reset>
         </deadreckoner>
+        <air-intake>
+            <surging type="double">0</surging>
+        </air-intake>
     </systems>
     <instrumentation>
         <pitot-setting type="double">1</pitot-setting>
