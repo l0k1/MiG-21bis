@@ -727,6 +727,7 @@ var update_cx_master_list = func() {
     }
   }
 
+
   # loop through master list looking for new nodes
   foreach(var mp; temp) {
     matching = 0;
@@ -741,11 +742,13 @@ var update_cx_master_list = func() {
     }
   }
 
-  settimer(func() {
-    update_cx_master_list();
-  },3);
 }
-update_cx_master_list();
+
+
+var cx_array_build_timer = maketimer(1, func() {
+  update_cx_master_list();
+});
+cx_array_build_timer.start();
 
 var remove_from_array = func(arr, item) {
   # get index of item

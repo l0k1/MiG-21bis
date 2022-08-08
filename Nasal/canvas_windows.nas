@@ -26,6 +26,7 @@ var stores = {
         m.root = m.stores_canvas.createGroup();
 
         m.mtow = 9800; # max takeoff weight in KG at normal conditions
+        m.mtow_spec = 10500;
 
         m.p3opt = [
                     ["None",     
@@ -405,6 +406,7 @@ var stores = {
         m.font_color = [1,1,1];
         m.green_color = [0,1,0];
         m.red_color = [1,0,0];
+        m.yellow_color = [1,1,0];
         m.selected_color = [0,1,0];
 
         m.p3 = m.root.createChild("text", "p3label")
@@ -981,10 +983,33 @@ var stores = {
                     .setFontSize(m.font_size, 1.0)
                     .setText("WEIGHT: " ~ int(getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG));
 
-        if (getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG > m.mtow ) {
+        m.mtow_warning = m.root.createChild("text")
+                    .setTranslation(200,20 + (20 * 20))
+                    .setAlignment("left-center")
+                    .setFont("LiberationFonts/LiberationMono-Regular.ttf")
+                    .setFontSize(m.font_size/1.75, 1.0)
+                    .setColor(m.yellow_color)
+                    .hide();
+
+        m.tempc = getprop("/environment/temperature-degc");
+        m.weightkg = getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG;
+        if (m.weightkg > m.mtow and m.weightkg > m.mtow_spec) {
             m.mtow_text.setColor(m.red_color);
+            m.mtow_warning.hide();
+        } elsif (m.weightkg > m.mtow and m.weightkg < m.mtow_spec) {
+            if (m.tempc < 15) {
+                m.mtow_warning.setText("WEIGHT VALID")
+            } else {
+                m.tempc = m.tempc - 15;
+                m.tempc = math.floor(m.tempc/10)+1;
+                m.tempc = int(m.tempc * 3 * MPS2KT);
+                m.mtow_warning.setText("WEIGHT VALID WITH T/O HEADWIND OF " ~ m.tempc ~ " KT")
+            }
+            m.mtow_text.setColor(m.yellow_color);
+            m.mtow_warning.show();
         } else {
             m.mtow_text.setColor(m.green_color);
+            m.mtow_warning.hide();
         }
 
         m.selection_map = [m.p3opt, m.p1opt, m.copt, m.p2opt, m.p4opt, m.oblopt, m.obropt, m.cconopt];
@@ -1148,12 +1173,28 @@ var stores = {
     },
 
     weightset: func() {
-        me.cweight_text.setText("WEIGHT: " ~ int(getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG));
+        me.tempc = getprop("/environment/temperature-degc");
+        me.weightkg = getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG;
 
-        if (getprop("/fdm/jsbsim/inertia/weight-lbs") * LB2KG > me.mtow ) {
+        me.cweight_text.setText("WEIGHT: " ~ int(me.weightkg));
+
+        if (me.weightkg > me.mtow and me.weightkg > me.mtow_spec) {
             me.mtow_text.setColor(me.red_color);
+            me.mtow_warning.hide();
+        } elsif (me.weightkg > me.mtow and me.weightkg < me.mtow_spec) {
+            if (me.tempc < 15) {
+                me.mtow_warning.setText("WEIGHT VALID")
+            } else {
+                me.tempc = me.tempc - 15;
+                me.tempc = math.floor(me.tempc/10)+1;
+                me.tempc = int(me.tempc * 3 * MPS2KT);
+                me.mtow_warning.setText("WEIGHT VALID WITH T/O HEADWIND OF " ~ me.tempc ~ " KT")
+            }
+            me.mtow_text.setColor(me.yellow_color);
+            me.mtow_warning.show();
         } else {
             me.mtow_text.setColor(me.green_color);
+            me.mtow_warning.hide();
         }
 
     },
