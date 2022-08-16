@@ -171,6 +171,19 @@
         <path>Aircraft/MiG-21bis/Models/Stores/GSh-23/GSh-23.xml</path>
     </model>
     
+    <animation>
+        <type>select</type>
+        <object-name>GSh-23 Gun</object-name>
+        <condition>
+            <equals>
+                <not>
+                  <property>sim/aero</property>
+                  <value>MiG-21I</value>
+                </not>
+            </equals>
+        </condition>
+    </animation>
+    
     <!-- FABs -->
     
     <model>
