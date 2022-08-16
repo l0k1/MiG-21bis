@@ -1,0 +1,77 @@
+<PropertyList>
+    <weight n="0">
+        <name>Left wing outboard pylon (#3)</name>
+        <selected>none</selected>
+        <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]"/>
+        <opt>
+            <name>none</name>
+            <lbs>0</lbs>
+            <weight-lb>0</weight-lb>
+        </opt>
+    </weight>
+    <weight n="1">
+        <name>Left wing inboard pylon (#1)</name>
+        <selected>none</selected>
+        <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]"/>
+        <opt>
+            <name>none</name>
+            <lbs>0</lbs>
+            <weight-lb>0</weight-lb>
+        </opt>
+    </weight>
+    <weight n="2">
+        <name>Fuselage pylon (#5)</name>
+        <selected>none</selected>
+        <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]"/>
+        <opt>
+            <name>none</name>
+            <lbs>0</lbs>
+            <weight-lb>0</weight-lb>
+        </opt>
+        <opt>
+            <name>PTB-490 Droptank</name>
+            <lbs>180</lbs>
+            <weight-lb>180</weight-lb>
+        </opt>
+    </weight>
+    <weight n="3">
+        <name>Right wing inboard pylon (#2)</name>
+        <selected>none</selected>
+        <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[3]"/>
+        <opt>
+            <name>none</name>
+            <lbs>0</lbs>
+            <weight-lb>0</weight-lb>
+        </opt>
+    </weight>
+    <weight n="4">
+        <name>Right wing outboard pylon (#4)</name>
+        <selected>none</selected>
+        <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[4]"/>
+        <opt>
+            <name>none</name>
+            <lbs>0</lbs>
+            <weight-lb>0</weight-lb>
+        </opt>
+    </weight>
+    <weight n="5">
+        <name>Left Fuselage Attachment Point</name>
+        <selected>none</selected>
+        <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[5]"/>
+        <opt>
+            <name>none</name>
+            <lbs>0</lbs>
+            <weight-lb>0</weight-lb>
+        </opt>
+    </weight>
+    <weight n="6">
+        <name>Right Fuselage Attachment Point</name>
+        <selected>none</selected>
+        <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[6]"/>
+        <opt>
+            <name>none</name>
+            <lbs>0</lbs>
+            <weight-lb>0</weight-lb>
+        </opt>
+    </weight>
+</PropertyList>
