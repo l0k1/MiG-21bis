@@ -90,6 +90,34 @@
         </model>
     </sim>
 
+    <!-- Nasal Scripts -->
+    <nasal>
+        <mig21>             <file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>          </mig21>            <!-- odds and sods -->
+        <MiG-21bis>         <file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>          </MiG-21bis>        <!-- liveries -->
+        <mpdb>              <file>Aircraft/MiG-21bis/Nasal/mp_db.nas</file>             </mpdb>
+        <engine>            <file>Aircraft/MiG-21bis/Nasal/engine.nas</file>            </engine>            <!-- liveries -->
+        <sounds>            <file>Aircraft/MiG-21bis/Nasal/sounds.nas</file>            </sounds>            <!-- liveries -->
+        <lights>            <file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>            </lights>
+        <payloads>          <file>Aircraft/MiG-21bis/Nasal/mig21i-payloads.nas</file>          </payloads>            <!-- store handling -->
+        <Eject>             <file>Aircraft/MiG-21bis/Nasal/eject.nas</file>             </Eject>            <!-- depreciated -->
+        <tyresmoke>         <file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>         </tyresmoke>
+        <blackout>          <file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>          </blackout>            <!-- legacy blackout code -->
+        <crashandstress>    <file>Aircraft/MiG-21bis/Nasal/crash-and-stress.nas</file>  </crashandstress>    <!-- plane go boom when crash -->
+        <vector>            <file>Aircraft/MiG-21bis/Nasal/vector.nas</file>            </vector>            <!-- vector math library -->
+        <formation>         <file>Aircraft/Generic/formation.nas</file>                 </formation>        <!-- dont support -->
+        <dialog>            <file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>           </dialog>            <!-- dialogs -->
+        <radar_altimeter>   <file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>   </radar_altimeter>    <!-- r-alt pitch offsets -->
+        <radio>             <file>Aircraft/MiG-21bis/Nasal/radios.nas</file>            </radio>            <!-- radio freq remapping -->
+        <gyro_compass>      <file>Aircraft/MiG-21bis/Nasal/gyro-compass.nas</file>      </gyro_compass>        <!-- listener for gyrocompass display -->
+        <radio_canvas>      <file>Aircraft/MiG-21bis/Nasal/radio_canvas.nas</file>      </radio_canvas>        <!-- canvas for the paper note on the gunsight -->
+        <headshake>         <file>Aircraft/MiG-21bis/Nasal/headmove.nas</file>          </headshake>        <!-- shaking the head around -->
+        <canvas_window>     <file>Aircraft/MiG-21bis/Nasal/canvas_windows.nas</file>    </canvas_window>
+        <monitor>           <file>Aircraft/MiG-21bis/Nasal/dialog-perf.nas</file>
+                            <file>Aircraft/MiG-21bis/Nasal/performance.nas</file>       </monitor>
+        <tacview>           <file>Aircraft/MiG-21bis/Nasal/tacview.nas</file>           </tacview>
+
+    </nasal>
+
     <payload include="Systems/weaponset-bis.xml"/>
 
 </PropertyList>
