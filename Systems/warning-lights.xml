@@ -8,6 +8,7 @@
    <property value="1">/instrumentation/warning-lights/dimmer[5]</property>
    <property value="1">/instrumentation/warning-lights/dimmer[6]</property>
    <property value="0">/consumables/fuel/tank[11]/selected</property>
+   <property>fcs/blc</property>
    
    <channel name="masterwarn" execrate="3">
       <!-- until i can find an actual list, im going to use these warnings for master warning:
