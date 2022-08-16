@@ -21,10 +21,10 @@
    <htailarm  unit="FT" >   20.68 </htailarm>
    <vtailarea unit="FT2">   29.70 </vtailarea>
    <vtailarm  unit="FT" >   20.68 </vtailarm>
-   <location name="AERORP" unit="IN">
-     <x> 10.00 </x>
+   <location name="AERORP" unit="M">
+     <x> 0.010 </x>
      <y>   0.00 </y>
-     <z>  -3.00 </z>
+     <z>  0.19160 </z>
    </location>
    <location name="EYEPOINT" unit="M">
      <x>-3.28217 </x>
@@ -39,20 +39,20 @@
  </metrics>
 
  <mass_balance>
-   <ixx unit="SLUG*FT2">      8500 </ixx>
-   <iyy unit="SLUG*FT2">     42000 </iyy>
-   <izz unit="SLUG*FT2">     35000 </izz>
+   <ixx unit="SLUG*FT2">      4534 </ixx> <!-- source: https://forums.eagle.ru/showthread.php?t=194892 -->
+   <iyy unit="SLUG*FT2">     49792 </iyy>
+   <izz unit="SLUG*FT2">     56859 </izz>
    <ixy unit="SLUG*FT2">         0 </ixy>
    <ixz unit="SLUG*FT2">         0 </ixz>
    <iyz unit="SLUG*FT2">         0 </iyz>
-   <emptywt unit="LBS" >     12545 </emptywt> <!-- source: http://www.mig-21.de/english/technicaldata.htm -->
-   
-   <location name="CG" unit="IN">
-     <x>  15.64 </x>
+   <emptywt unit="LBS" >     13457 </emptywt> <!-- source: mig-21 weight and balance document -->
+
+   <location name="CG" unit="M"> <!-- source: mig21bis weight and balance document -->
+     <x>  -0.03445 </x>
      <y>   0.00 </y>
-     <z>  -4.00 </z>
+     <z>  0.19160 </z>
    </location>
-   
+ 
    <pointmass name="station1"><!-- left wing outboard pylon pointmass 0 -->
       <weight unit="LBS"> 0 </weight>
       <location name="POINTMASS" unit="IN">
@@ -110,10 +110,10 @@
    <static_friction>  0.80 </static_friction>
    <dynamic_friction> 0.50 </dynamic_friction>
    <rolling_friction> 0.02 </rolling_friction>
-   <spring_coeff unit="LBS/FT">       20000.00 </spring_coeff>
-   <damping_coeff unit="LBS/FT/SEC">  10000.00 </damping_coeff>
-   <max_steer unit="DEG"> 15.00 </max_steer>
-   <brake_group>NONE</brake_group>
+   <spring_coeff unit="LBS/FT">       12000.00 </spring_coeff>
+   <damping_coeff unit="LBS/FT/SEC">  3000.00 </damping_coeff>
+   <max_steer unit="DEG">360</max_steer>
+   <brake_group>CENTER</brake_group>
    <retractable>1</retractable>
  </contact>
 
