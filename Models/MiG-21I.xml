@@ -853,84 +853,40 @@
 		</axis>
 	</animation>
 
-	<animation>
-		<type>rotate</type>
-		<object-name>left_elevator</object-name>
-		<object-name>right_elevator</object-name>
-		<property>surface-positions/elevator-pos-norm</property>
-		<factor>15.00</factor>
-		<offset-deg>0.00</offset-deg>
-		<center>
-			<x-m>4.99</x-m>
-			<y-m>0.00</y-m>
-			<z-m>0.30</z-m>
-		</center>
-		<axis>
-			<x>0.00</x>
-			<y>1.00</y>
-			<z>0.00</z>
-		</axis>
-	</animation>
-
-	<animation>
-		<type>rotate</type>
-		<object-name>right_flap</object-name>
-		<property>surface-positions/flap-pos-norm</property>
-		<factor>30.00</factor>
-		<axis>
-			<x1-m> 1.98</x1-m>
-			<y1-m> 0.65</y1-m>
-			<z1-m> 0.14</z1-m>
-			<x2-m> 1.98</x2-m>
-			<y2-m> 1.99</y2-m>
-			<z2-m> 0.09</z2-m>
-		</axis>
-	</animation>
-
-	<animation>
-		<type>rotate</type>
-		<object-name>left_flap</object-name>
-		<property>surface-positions/flap-pos-norm</property>
-		<factor>-30.00</factor>
-		<axis>
-			<x1-m> 1.98</x1-m>
-			<y1-m>-0.65</y1-m>
-			<z1-m> 0.14</z1-m>
-			<x2-m> 1.98</x2-m>
-			<y2-m>-1.99</y2-m>
-			<z2-m> 0.09</z2-m>
-		</axis>
-	</animation>
-
-	<animation>
-		<type>rotate</type>
-		<object-name>right_aileron</object-name>
-		<property>surface-positions/right-aileron-pos-norm</property>
-		<factor>-15.00</factor>
-		<axis>
-			<x1-m> 2.03</x1-m>
-			<y1-m> 2.10</y1-m>
-			<z1-m> 0.09</z1-m>
-			<x2-m> 2.38</x2-m>
-			<y2-m> 3.34</y2-m>
-			<z2-m> 0.04</z2-m>
-		</axis>
-	</animation>
-
-	<animation>
-		<type>rotate</type>
-		<object-name>left_aileron</object-name>
-		<property>surface-positions/left-aileron-pos-norm</property>
-		<factor>-15.00</factor>
-		<axis>
-			<x1-m> 2.03</x1-m>
-			<y1-m>-2.10</y1-m>
-			<z1-m> 0.09</z1-m>
-			<x2-m> 2.38</x2-m>
-			<y2-m>-3.34</y2-m>
-			<z2-m> 0.04</z2-m>
-		</axis>
-	</animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>elevonR1</object-name>
+        <object-name>elevonR2</object-name>
+        <object-name>elevonR3</object-name>
+        <object-name>elevonR4</object-name>
+        <property>fdm/jsbsim/fcs/right-elevon-pos-norm</property>
+        <factor>15.00</factor>
+        <axis>
+            <x1-m> 3.27</x1-m>
+            <y1-m> 3.31</y1-m>
+            <z1-m> 0.19</z1-m>
+            <x2-m> 3.27</x2-m>
+            <y2-m>-3.31</y2-m>
+            <z2-m> 0.19</z2-m>
+        </axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>elevonL1</object-name>
+        <object-name>elevonL2</object-name>
+        <object-name>elevonL3</object-name>
+        <object-name>elevonL4</object-name>
+        <property>fdm/jsbsim/fcs/left-elevon-pos-norm</property>
+        <factor>15.00</factor>
+        <axis>
+            <x1-m> 3.27</x1-m>
+            <y1-m> 3.31</y1-m>
+            <z1-m> 0.19</z1-m>
+            <x2-m> 3.27</x2-m>
+            <y2-m>-3.31</y2-m>
+            <z2-m> 0.19</z2-m>
+        </axis>
+    </animation>
 
 	<animation>
 		<type>rotate</type>
