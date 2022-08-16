@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+
+<PropertyList include="MiG-21-set-common.xml">
+    <sim include="Systems/views.xml">
+
+        <!-- Info -->
+
+        <description>Mikoyan-Gurevich MiG-21bis</description>
+        <author>Petar Jedvaj, David Culp, Raptor, Stuart Cassie, Gary Brown, Brendan Black, bugman, Tomaskom, and pinto</author>
+
+        <long-description>The Mikoyan-Gurevich MiG-21bis Fishbed L/N is a 3rd generation supersonic jet interceptor/fighter aircraft. Made by the Mikoyan-Gurevich Design Bureau, Soviet Union. Nicknamed "balalaika". This variant has Tumanskiy R25-300 engines and was introduced in 1972.</long-description>
+
+        <rating>
+            <FDM type="int">3</FDM>
+            <systems type="int">2</systems>
+            <cockpit type="int">2</cockpit>
+            <model type="int">2</model>
+        </rating>
+
+        <flight-model>jsb</flight-model>
+        <aero>MiG-21bis</aero>
+
+        <gui>
+            <style>
+                <colors>
+                    <splash-font>
+                        <red>1.0</red>
+                        <green>1.00</green>
+                        <blue>1.00</blue>
+                    </splash-font>
+                    <splash-screen>
+                        <red>0.9</red>
+                        <green>0.2</green>
+                        <blue>0.15</blue>
+                    </splash-screen>
+                </colors>
+            </style>
+        </gui>
+
+        <previews>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Splash.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Splash2.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Splash3.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Splash4.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Splash5.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Splash6.png</path>
+            </preview>
+        </previews>
+
+
+        <startup>
+            <splash-title>МиГ-21БИС САУ (75Б)</splash-title>
+            <splash-texture>Aircraft/MiG-21bis/Splash.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash2.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash3.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash4.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash5.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash6.png</splash-texture>
+        </startup>
+
+        <checklists include="Docs/checklists-bis.xml"/>
+
+        <!-- Models -->
+
+        <model>
+            <path>Aircraft/MiG-21bis/Models/MiG-21I.xml</path>
+        </model>
+    </sim>
+
+    <payload include="Systems/weaponset-bis.xml"/>
+
+</PropertyList>
