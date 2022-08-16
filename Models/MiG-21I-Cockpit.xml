@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+    <path>Cockpit.ac</path>
+    
+	<!-- Submodels -->
+
+	<model>
+		<name>Pilot</name>
+		<path>Aircraft/MiG-21bis/Models/Pilot/Pilot.xml</path>
+		<offsets>
+			<x-m>-3.25</x-m>
+			<y-m> 0.00 </y-m>
+			<z-m> 0.59</z-m>
+			<pitch-deg>0.0</pitch-deg>
+		</offsets>
+		<condition>
+			<not>
+				<property>/sim/current-view/internal</property>
+			</not>
+		</condition>
+	</model>
+
+	<model>
+		<name>Panel</name>
+		<path>Aircraft/MiG-21bis/Models/MiG-21I-Panel.xml</path>
+	</model>
+
+	<!--<effect>
+		<inherits-from>Aircraft/MiG-21bis/Models/Effects/cockpit/mig21-cockpit</inherits-from>
+		<object-name>panelMain</object-name>
+		<object-name>panelTopRightMid</object-name>
+		<object-name>panelLeft</object-name>
+		<object-name>panelTopLeftMid</object-name>
+		<object-name>panelTopRight</object-name>
+		<object-name>panelTopLeft</object-name>
+		<object-name>panelBottom</object-name>
+		<object-name>panelRadarGuard</object-name>
+		<object-name>panelRight</object-name>
+	</effect>-->
+
+</PropertyList>

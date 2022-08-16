@@ -1,8 +1,8 @@
 AC3Db
 MATERIAL "labelTestMat.001" rgb 1.000 1.000 1.000  amb 0.963 0.963 0.963  emis 0.000 0.000 0.000  spec 0.251 0.251 0.251  shi 10 trans 0.000
 OBJECT world
-name "Blender_exporter_v2.26__labels.ac"
-kids 61
+name "Blender_exporter_v2.26__labels-mig21i.ac"
+kids 63
 OBJECT poly
 name "labelAngle"
 data 8
@@ -1485,6 +1485,27 @@ refs 4
 2 0.604342 0.89371
 kids 0
 OBJECT poly
+name "labelLock"
+data 8
+Cube.164
+crease 35.0
+texture "labels.png"
+texrep 1 1
+numvert 4
+-0.01793 0.00056 -0.1676
+-0.01857 0.00056 -0.15558
+-0.01793 0.0642 -0.1676
+-0.01857 0.0642 -0.15558
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+3 0.673692 1.000122
+1 0.673692 0.83149
+0 0.702108 0.83149
+2 0.702108 1.000122
+kids 0
+OBJECT poly
 name "labelMain"
 data 8
 Cube.166
@@ -1567,6 +1588,59 @@ refs 4
 1 0.541471 0.927992
 0 0.541471 0.909579
 2 0.615495 0.909579
+kids 0
+OBJECT poly
+name "labelNeutback.001"
+data 8
+Cube.174
+crease 35.0
+texture "labels.png"
+texrep 1 1
+numvert 8
+-0.0185 0.00056 -0.16772
+-0.01915 0.00056 -0.15569
+-0.0185 0.0642 -0.16772
+-0.01915 0.0642 -0.15569
+-0.0257 0.00056 -0.16717
+-0.02634 0.00056 -0.15514
+-0.0257 0.0642 -0.16717
+-0.02634 0.0642 -0.15514
+numsurf 5
+SURF 0X0
+mat 0
+refs 4
+3 0.925251 0.082348
+1 0.928314 0.048822
+0 0.91529 0.049471
+2 0.912498 0.08006
+SURF 0X0
+mat 0
+refs 4
+2 0.912498 0.08006
+6 0.896134 0.10786
+7 0.942757 0.104373
+3 0.925251 0.082348
+SURF 0X0
+mat 0
+refs 4
+1 0.928314 0.048822
+5 0.94339 0.028459
+4 0.896134 0.017829
+0 0.91529 0.049471
+SURF 0X0
+mat 0
+refs 4
+0 0.91529 0.049471
+4 0.896134 0.017829
+6 0.896134 0.10786
+2 0.912498 0.08006
+SURF 0X0
+mat 0
+refs 4
+3 0.925251 0.082348
+7 0.942757 0.104373
+5 0.94339 0.028459
+1 0.928314 0.048822
 kids 0
 OBJECT poly
 name "labelNeutback.004"

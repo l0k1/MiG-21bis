@@ -14,7 +14,7 @@
 
 	<model>
 		<!--usage>interior</usage-->
-		<path>Aircraft/MiG-21bis/Models/Cockpit.xml</path>
+		<path>Aircraft/MiG-21bis/Models/MiG-21I-Cockpit.xml</path>
 	</model>
 
     <!-- Rembrandt auto switching for glass -->
