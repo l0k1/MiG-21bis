@@ -550,8 +550,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 308 </capacity>
-     <contents unit="LBS"> 225 </contents>
+     <capacity unit="LBS"> 453 </capacity>
+     <contents unit="LBS"> 450 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
   
@@ -563,8 +563,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 193.6 </capacity>
-     <contents unit="LBS"> 100 </contents>
+     <capacity unit="LBS"> 293.6 </capacity>
+     <contents unit="LBS"> 290 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
   
@@ -576,8 +576,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 308 </capacity>
-     <contents unit="LBS"> 225 </contents>
+     <capacity unit="LBS"> 453 </capacity>
+     <contents unit="LBS"> 450 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
   
@@ -589,8 +589,8 @@
      </location>
      <priority>2</priority>
      <density>6.5</density>
-     <capacity unit="LBS"> 193.6 </capacity>
-     <contents unit="LBS"> 100 </contents>
+     <capacity unit="LBS"> 293.6 </capacity>
+     <contents unit="LBS"> 290 </contents>
      <standpipe unit="LBS"> 0 </standpipe> 
   </tank>
 
@@ -649,14 +649,13 @@
  </propulsion>
 
  <system file="gear"/>
- <system file="flaps"/>
  <system file="speedbrakes"/>
  <system file="FCS-Yaw"/>
  <system file="FCS-Elevon"/>
  <system file="chute"/>
  <system file="canopy"/>
  <system file="electric"/>
- <system file="fuel"/>
+ <system file="mig21i-fuel"/>
  <system file="propulsion"/>
  <system file="gyros"/>
  <system file="air_intake"/>

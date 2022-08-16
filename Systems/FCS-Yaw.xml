@@ -20,18 +20,9 @@
     output
     --> 
 
-    <property>fcs/rudder-ap-override</property>
-
 
   <channel name="Yaw">
   
-    <switch name="rudder-ap-override">
-        <default value="0"/>
-        <test logic="AND" value="1">
-            /autopilot/locks/mode gt 0
-            fcs/rudder-manual-override == 0
-        </test>
-    </switch>
 
    <fcs_function name="trash/fcs/yaw-trim-pos-norm">
       <function>
@@ -50,20 +41,7 @@
     <fcs_function name="trash/fcs/yaw-trim-sum">
         <function>
             <sum>
-                <product>
-                    <property>fcs/rudder-cmd-norm</property>
-                    <sum>
-                        <product>
-                            <property>fcs/rudder-ap-override</property>
-                            <value>-1</value>
-                        </product>
-                        <value>1</value>
-                    </sum>
-                </product>
-                <product>
-                    <property>fcs/rudder-ap-cmd-norm</property>
-                    <property>fcs/rudder-ap-override</property>
-                </product>
+                <property>fcs/rudder-cmd-norm</property>
                 <property>fcs/yaw-trim-pos-norm</property>
             </sum>
         </function>
@@ -75,6 +53,22 @@
     </fcs_function>
    
 
+   <fcs_function name="rudder-damping">
+    <!--This isn't present in the real aircraft. But as the high roll rate + small joystick can make things unsteady, this should help.-->
+    <!--set to two for the real mccoy-->
+    <function>
+      <table>
+        <independentVar lookup="column">fcs/yaw-trim-sum</independentVar>
+        <independentVar lookup="row">fcs/damping-enable</independentVar>
+         <tableData breakPoint="0">
+                -1.0    -0.50 -0.25 -0.10 0.00    0.10    0.25    0.50    1.0
+          0.0   -1.0    -0.50 -0.25 -0.10 0.00    0.10    0.25    0.50    1.0
+          1.0   -1.0    -0.50 -0.25 -0.10 0.00    0.10    0.25    0.50    1.0
+          2.0   -0.16   -0.08 -0.04 -0.016 0.00  0.016    0.04    0.08    0.16
+        </tableData>
+      </table>
+    </function>
+  </fcs_function>
 
     <fcs_function name="rudder-gain">
         <function>
@@ -93,7 +87,7 @@
     </fcs_function>
 
     <actuator name="yaw-delay-act">
-        <input>fcs/yaw-trim-sum</input>
+        <input>fcs/rudder-damping</input>
         <rate_limit>fcs/rudder-gain</rate_limit>
         <output>fcs/rudder-delay</output>
     </actuator>
