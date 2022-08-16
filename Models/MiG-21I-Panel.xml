@@ -715,4 +715,15 @@
         </offsets>
     </model>
 
+    <model>
+        <name>Damper Switch</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/DamperSwitch/damperSwitch.xml</path>
+        <offsets>
+            <heading-deg>9</heading-deg>
+            <x-m>-3.95283</x-m>
+            <y-m>-0.34782</y-m>
+            <z-m> 0.82019</z-m>
+        </offsets>
+    </model>
+
 </PropertyList>
