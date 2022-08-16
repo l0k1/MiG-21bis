@@ -5,10 +5,10 @@
 
         <!-- Info -->
 
-        <description>Mikoyan-Gurevich MiG-21bis</description>
+        <description>Mikoyan-Gurevich MiG-21I/2</description>
         <author>Petar Jedvaj, David Culp, Raptor, Stuart Cassie, Gary Brown, Brendan Black, bugman, Tomaskom, and pinto</author>
 
-        <long-description>The Mikoyan-Gurevich MiG-21bis Fishbed L/N is a 3rd generation supersonic jet interceptor/fighter aircraft. Made by the Mikoyan-Gurevich Design Bureau, Soviet Union. Nicknamed "balalaika". This variant has Tumanskiy R25-300 engines and was introduced in 1972.</long-description>
+        <long-description>The Mikoyan-Gurevich MiG-21I Analogue, also known as the A-144, was a prototype for the double-delta wings of the Tu-144, and was intended as a pilot trainer. Made by the Mikoyan-Gurevich Design Bureau, Soviet Union. This is the second prototype, the first having different LERX geometry.</long-description>
 
         <rating>
             <FDM type="int">3</FDM>
