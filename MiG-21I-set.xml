@@ -118,6 +118,6 @@
 
     </nasal>
 
-    <payload include="Systems/weaponset-bis.xml"/>
+    <payload include="Systems/weaponset-analogue.xml"/>
 
 </PropertyList>
