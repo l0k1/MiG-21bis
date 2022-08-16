@@ -340,10 +340,12 @@ var asp_pfd = {
             }
         }
         
-        if (radar_logic.selection != nil and arm_locking.lock_mode == "radar" and gunsight_power.getValue() > 32) {
-            lock_light.setValue(1);
-        }else{
-            lock_light.setValue(0);
+        if (getprop("/sim/aero") != "MiG-21I"){ #kek
+            if (radar_logic.selection != nil and arm_locking.lock_mode == "radar" and gunsight_power.getValue() > 32) {
+                lock_light.setValue(1);
+            }else{
+                lock_light.setValue(0);
+            }
         }
                 
                 

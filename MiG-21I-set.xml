@@ -231,6 +231,8 @@
         <sounds>            <file>Aircraft/MiG-21bis/Nasal/sounds.nas</file>            </sounds>            <!-- liveries -->
         <lights>            <file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>            </lights>
         <payloads>          <file>Aircraft/MiG-21bis/Nasal/mig21i-payloads.nas</file>          </payloads>            <!-- store handling -->
+        <gunsight_logic>    <file>Aircraft/MiG-21bis/Nasal/gunsight-logic.nas</file>    </gunsight_logic>    <!-- gunsight logic -->
+        <gunsight_canvas>   <file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>   </gunsight_canvas>    <!-- gunsight canvas -->
         <Eject>             <file>Aircraft/MiG-21bis/Nasal/eject.nas</file>             </Eject>            <!-- depreciated -->
         <tyresmoke>         <file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>         </tyresmoke>
         <blackout>          <file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>          </blackout>            <!-- legacy blackout code -->
