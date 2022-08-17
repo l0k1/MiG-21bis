@@ -737,22 +737,24 @@ var clean_cx_master_list = func() {
 var update_cx_master_list = func() {
   # loop through master list looking for new nodes
   var start_time = systime();
-  while (systime() - start_time < max_update_time) {
-    if(idx >= size(temp)-1){
-      idx = 0;
-    } else {
-      idx = idx + 1
-    }
-    mp = temp[idx];
-    matching = 0;
-    foreach(var cx; cx_master_list){
-      if ( mp.getPath() == cx.getNode().getPath() ) {
-        matching = 1;
-        break;
+  if(size(temp)>0){
+    while (systime() - start_time < max_update_time) {
+      if(idx >= size(temp)-1){
+        idx = 0;
+      } else {
+        idx = idx + 1
       }
-    }
-    if (matching == 0) {
-      append(cx_master_list,Contact.new(mp,0));
+      mp = temp[idx];
+      matching = 0;
+      foreach(var cx; cx_master_list){
+        if ( mp.getPath() == cx.getNode().getPath() ) {
+          matching = 1;
+          break;
+        }
+      }
+      if (matching == 0) {
+        append(cx_master_list,Contact.new(mp,0));
+      }
     }
   }
 }
