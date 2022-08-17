@@ -497,7 +497,7 @@
 
     <model>
         <name>Labels</name>
-        <path>Aircraft/MiG-21bis/Models/Instruments/Cockpit/labels.xml</path>
+        <path>Aircraft/MiG-21bis/Models/Instruments/Cockpit/labels-mig21i.xml</path>
         <offsets>
             <heading-deg></heading-deg>
             <x-m>-3.96832</x-m>

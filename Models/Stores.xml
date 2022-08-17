@@ -175,12 +175,10 @@
         <type>select</type>
         <object-name>GSh-23 Gun</object-name>
         <condition>
-            <equals>
-                <not>
-                  <property>sim/aero</property>
-                  <value>MiG-21I</value>
-                </not>
-            </equals>
+            <not-equals>
+              <property>/sim/aircraft</property>
+              <value><![CDATA[MiG-21I]]></value>
+            </not-equals>
         </condition>
     </animation>
     

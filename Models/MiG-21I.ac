@@ -60221,9 +60221,9 @@ refs 4
 14 0.168706 0.038986
 kids 0
 OBJECT poly
-name "left_inner_door.001"
+name "left_inner_door"
 data 24
-left_inner_door.mesh.001
+left_inner_door.mesh
 crease 45.0
 texture "Default.png"
 texrep 1 1
