@@ -755,7 +755,6 @@ var update_cx_master_list = func() {
       append(cx_master_list,Contact.new(mp,0));
     }
   }
-  print(idx ~ " out of " ~ int(size(temp)-1));
 }
 
 
