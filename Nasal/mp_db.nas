@@ -670,8 +670,12 @@ var Contact = {
 };
 
 var matching = 0;
+var idx = -1;
+var temp = [];
 
-var update_cx_master_list = func() {
+var max_update_time = 0.0075;
+
+var build_cx_list = func() {
 
   # get a list of all possible contact nodes into a vector
   temp = [];
@@ -711,7 +715,9 @@ var update_cx_master_list = func() {
       append(temp,mp);
     }
   }
+}
 
+var clean_cx_master_list = func() {
   # clean out cx_master_list
   foreach(var cx; cx_master_list) {
     if (cx.isValid() == 0) {
@@ -726,12 +732,20 @@ var update_cx_master_list = func() {
       cx_master_list = remove_from_array(cx_master_list, cx);
     }
   }
+}
 
-
+var update_cx_master_list = func() {
   # loop through master list looking for new nodes
-  foreach(var mp; temp) {
+  var start_time = systime();
+  while (systime() - start_time < max_update_time) {
+    if(idx >= size(temp)-1){
+      idx = 0;
+    } else {
+      idx = idx + 1
+    }
+    mp = temp[idx];
     matching = 0;
-    foreach(var cx; cx_master_list) {
+    foreach(var cx; cx_master_list){
       if ( mp.getPath() == cx.getNode().getPath() ) {
         matching = 1;
         break;
@@ -741,11 +755,13 @@ var update_cx_master_list = func() {
       append(cx_master_list,Contact.new(mp,0));
     }
   }
-
+  print(idx ~ " out of " ~ int(size(temp)-1));
 }
 
 
 var cx_array_build_timer = maketimer(1, func() {
+  build_cx_list();
+  clean_cx_master_list();
   update_cx_master_list();
 });
 cx_array_build_timer.start();
