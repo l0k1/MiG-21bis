@@ -54,14 +54,50 @@
       <output>fcs/pitch-trim-sum</output>
    </fcs_function>
 
+   <fcs_function name="aru-actual">
+    <!--This isn't present in the real aircraft. But as the high roll rate + small joystick can make things unsteady, this should help.-->
+    <!--set to two for the real mccoy-->
+    <function>
+      <table>
+        <independentVar lookup="row">fcs/aru-setting-pos</independentVar>
+         <tableData breakPoint="0">
+          0.3  0.735
+          1.0  1.59
+        </tableData>
+      </table>
+    </function>
+  </fcs_function>
 
+   <!-- a hack, to make the animations still work -->
+   <fcs_function name="aru">
+    <!--This isn't present in the real aircraft. But as the high roll rate + small joystick can make things unsteady, this should help.-->
+    <!--set to two for the real mccoy-->
+    <function>
+      <table>
+        <independentVar lookup="row">fcs/aru-setting-pos</independentVar>
+         <tableData breakPoint="0">
+          0.3  0.68
+          1.0  1.0
+        </tableData>
+      </table>
+    </function>
+  </fcs_function>
    
+   <fcs_function name="elevator-post-aru">
+      <function>
+         <product>
+            <property>fcs/pitch-trim-sum</property>
+            <property>fcs/aru-actual</property>
+         </product>
+      </function>
+   </fcs_function>
+
    <fcs_function name="pitch-damping">
     <!--This isn't present in the real aircraft. But as the high roll rate + small joystick can make things unsteady, this should help.-->
     <!--set to two for the real mccoy-->
     <function>
       <table>
-        <independentVar lookup="column">fcs/pitch-trim-sum</independentVar>
+        <independentVar lookup="column">fcs/elevator-post-aru</independentVar>
         <independentVar lookup="row">fcs/damping-enable</independentVar>
          <tableData breakPoint="0">
                 -1.0    -0.50 -0.25 -0.10 0.00    0.10    0.25    0.50    1.0
@@ -274,8 +310,8 @@
     <fcs_function name="left-elevon-pos-norm">
       <function>
         <avg>
-          <property>-fcs/left-aileron-pos-norm</property>
-          <property>fcs/elevator-pos-norm</property>
+          <property>fcs/left-aileron-pos-norm</property>
+          <property>-fcs/elevator-pos-norm</property>
         </avg>
       </function>
     </fcs_function>
@@ -283,8 +319,8 @@
     <fcs_function name="right-elevon-pos-norm">
       <function>
         <avg>
-          <property>fcs/right-aileron-pos-norm</property>
-          <property>fcs/elevator-pos-norm</property>
+          <property>-fcs/right-aileron-pos-norm</property>
+          <property>-fcs/elevator-pos-norm</property>
         </avg>
       </function>
     </fcs_function>
