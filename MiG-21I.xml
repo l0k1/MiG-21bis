@@ -45,7 +45,7 @@
    <ixy unit="SLUG*FT2">         0 </ixy>
    <ixz unit="SLUG*FT2">         0 </ixz>
    <iyz unit="SLUG*FT2">         0 </iyz>
-   <emptywt unit="LBS" >     13457 </emptywt> <!-- source: mig-21 weight and balance document -->
+   <emptywt unit="LBS" >     10520 </emptywt> <!-- source: midland mig-21 -->
 
    <location name="CG" unit="M"> <!-- source: mig21bis weight and balance document -->
      <x>  -0.03445 </x>
