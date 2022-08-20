@@ -117,7 +117,7 @@
                     <independentVar lookup="row">systems/hydraulic[0]/pressure</independentVar>
                     <tableData breakPoint="0">
                         0.0   0.2   0.5   0.8   1.2   2.0
-                        0.0   1.0   0.6   0.2   0.05  0.0   0.0
+                        0.0   0.0   0.0   0.0   0.0  0.0   0.0
                         50.0   2.0   1.8   1.2   0.8   0.1   0.0
                         150.0   4.0   4.0   4.0   4.0   4.0   4.0
                     </tableData>
@@ -127,7 +127,7 @@
                     <independentVar lookup="row">systems/hydraulic[1]/pressure</independentVar>
                     <tableData breakPoint="0">
                         0.0   0.2   0.5   0.8   1.2   2.0
-                        0.0   1.0   0.6   0.2   0.05  0.0   0.0
+                        0.0   0.0   0.0   0.0   0.0  0.0   0.0
                         50.0   2.0   1.8   1.2   0.8   0.1   0.0
                         150.0   4.0   4.0   4.0   4.0   4.0   4.0
                     </tableData>
@@ -230,7 +230,7 @@
         <independentVar lookup="row">systems/hydraulic[1]/pressure</independentVar>
          <tableData breakPoint="0">
                 0.0   0.2   0.5   0.8   1.2   2.0
-          0.0   1.0   0.6   0.2   0.05  0.0   0.0
+          0.0   0.0   0.0   0.0   0.0   0.0   0.0
          50.0   2.0   1.8   1.2   0.8   0.1   0.0
         150.0   4.0   4.0   4.0   4.0   4.0   4.0
         </tableData>
@@ -324,6 +324,106 @@
         </avg>
       </function>
     </fcs_function>
+
+  </channel>
+
+
+
+  <channel name="Yaw">
+  
+
+   <fcs_function name="trash/fcs/yaw-trim-pos-norm">
+      <function>
+         <product>
+            <gt>
+               <property>electric/output/trim</property>
+               <value>100</value>
+            </gt>
+            <property>fcs/yaw-trim-cmd-norm</property>
+         </product>
+      </function>
+      <output>fcs/yaw-trim-pos-norm</output>
+   </fcs_function>
+
+    <!-- if AP not overriding, combine sum of yaw cmd and yaw trim cmd, else use AP value -->
+    <fcs_function name="trash/fcs/yaw-trim-sum">
+        <function>
+            <sum>
+                <property>fcs/rudder-cmd-norm</property>
+                <property>fcs/yaw-trim-pos-norm</property>
+            </sum>
+        </function>
+        <clipto>
+            <min> -1 </min>
+            <max>  1 </max>
+        </clipto>
+        <output>fcs/yaw-trim-sum</output>
+    </fcs_function>
+   
+
+   <fcs_function name="rudder-damping">
+    <!--This isn't present in the real aircraft. But as the high roll rate + small joystick can make things unsteady, this should help.-->
+    <!--set to two for the real mccoy-->
+    <function>
+      <table>
+        <independentVar lookup="column">fcs/yaw-trim-sum</independentVar>
+        <independentVar lookup="row">fcs/damping-enable</independentVar>
+         <tableData breakPoint="0">
+                -1.0    -0.50 -0.25 -0.10 0.00    0.10    0.25    0.50    1.0
+          0.0   -1.0    -0.50 -0.25 -0.10 0.00    0.10    0.25    0.50    1.0
+          1.0   -1.0    -0.50 -0.25 -0.10 0.00    0.10    0.25    0.50    1.0
+          2.0   -0.16   -0.08 -0.04 -0.016 0.00  0.016    0.04    0.08    0.16
+        </tableData>
+      </table>
+    </function>
+  </fcs_function>
+
+    <fcs_function name="rudder-gain">
+      <function>
+      <table>
+        <independentVar lookup="column">velocities/mach</independentVar>
+        <independentVar lookup="row">systems/hydraulic[1]/pressure</independentVar>
+         <tableData breakPoint="0">
+                0.0   0.2   0.5   0.8   1.2   2.0
+          0.0   0.0   0.0   0.0   0.0   0.0   0.0
+         50.0   2.0   1.2   0.8   0.6   0.1   0.0
+        150.0   3.0   2.8   2.4   2.0   1.5   0.5
+        </tableData>
+      </table>
+      </function>
+    </fcs_function>
+
+    <actuator name="yaw-delay-act">
+        <input>fcs/rudder-damping</input>
+        <rate_limit>fcs/rudder-gain</rate_limit>
+        <output>fcs/rudder-delay</output>
+    </actuator>
+
+   <aerosurface_scale name="Rudder Control">
+      <input>fcs/rudder-delay</input>
+      <domain>
+        <min>-1.0</min>
+        <max> 1.0</max>
+      </domain>
+      <range>
+        <min> -0.436332 </min>
+        <max>  0.436332 </max>
+      </range>
+      <output>fcs/rudder-pos-rad</output>
+   </aerosurface_scale>
+
+   <aerosurface_scale name="rudder normalized">
+      <input>fcs/rudder-pos-rad</input>
+      <domain>
+        <min> -0.436332 </min>
+        <max>  0.436332 </max>
+      </domain>
+      <range>
+        <min>-1</min>
+        <max> 1</max>
+      </range>
+      <output>fcs/rudder-pos-norm</output>
+   </aerosurface_scale>
 
   </channel>
 

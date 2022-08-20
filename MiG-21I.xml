@@ -650,7 +650,6 @@
 
  <system file="gear"/>
  <system file="speedbrakes"/>
- <system file="FCS-Yaw"/>
  <system file="FCS-Elevon"/>
  <system file="chute"/>
  <system file="canopy"/>
