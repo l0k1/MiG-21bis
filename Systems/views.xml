@@ -5,7 +5,7 @@
 	<view n="0">
 		<internal type="bool">true</internal>
 		<config>
-			<pitch-offset-deg type="double">-10.0</pitch-offset-deg>
+			<pitch-offset-deg type="double">0.0</pitch-offset-deg>
 			<x-offset-m type="double"> 0.00</x-offset-m> <!-- right+/left- -->
 			<y-offset-m type="double"> 1.2813</y-offset-m> <!-- up+/down- -->
 			<z-offset-m type="double">-3.33</z-offset-m> <!-- back+/forward- -->

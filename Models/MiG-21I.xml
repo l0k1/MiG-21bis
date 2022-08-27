@@ -36,7 +36,7 @@
 
     <nasal>
       <load>
-        var livery_update = aircraft.livery_update.new("Aircraft/MiG-21bis/Models/Liveries");
+        var livery_update = aircraft.livery_update.new("Aircraft/MiG-21bis/Models/Liveries/MiG-21I");
 
         print("Loading MiG-21bis bombable", cmdarg().getPath());
 
@@ -711,17 +711,25 @@
 		<object-name>back_right_door</object-name>
 		<object-name>back_left_door</object-name>
 		<object-name>wings</object-name>
-		<object-name>right_flap</object-name>
-		<object-name>left_flap</object-name>
-		<object-name>right_aileron</object-name>
-		<object-name>left_aileron</object-name>
-		<object-name>pylons</object-name>
+        <object-name>pylons</object-name>
+        <object-name>elevonL1</object-name>
+        <object-name>elevonL2</object-name>
+        <object-name>elevonL3</object-name>
+        <object-name>elevonL4</object-name>
+        <object-name>elevonR1</object-name>
+        <object-name>elevonR2</object-name>
+        <object-name>elevonR3</object-name>
+        <object-name>elevonR4</object-name>
+        <object-name>Cylinder</object-name>
+        <object-name>Cube</object-name>
 		<object-name>nose_wheel</object-name>
 		<object-name>left_wheel</object-name>
-		<object-name>right_wheel</object-name>
+        <object-name>right_wheel</object-name>
+        <object-name>pitotMast</object-name>
+        <object-name>pitotMastBase</object-name>
 		<property-base>sim/model/livery</property-base>
 		<texture-prop>texture</texture-prop>
-		<texture>Aircraft/MiG-21bis/Models/Liveries/Default.png</texture>
+		<texture>Aircraft/MiG-21bis/Models/Liveries/MiG-21I/Clean.png</texture>
 	</animation>
 
 	<animation>
