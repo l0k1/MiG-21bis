@@ -774,9 +774,9 @@
                <independentVar lookup="row">aero/alpha-rad</independentVar>
                <independentVar lookup="column">aero/Re</independentVar>
                <tableData>
-                           15043185 16547504 22564778 30305826
-                   -0.0349  -0.3916  -0.0751  -0.0465  -0.0167
-                    0.3491  -0.9058  -0.1678  -0.0587  -0.0313
+                              10000 14000000 16547504 22564778 30305826
+                   -0.0349  -0.3916 -0.0900  -0.0751  -0.0465  -0.0167
+                    0.3491  -0.9058 -0.2300  -0.1678  -0.0587  -0.0313
                </tableData>
              </table>
              <property>tune/roll/beta</property>
@@ -910,8 +910,8 @@
              <table>
                <independentVar lookup="row">aero/Re</independentVar>
                <tableData>
-                  10000000  -0.280
-                  15043185  -0.125
+                  100000    -0.280
+                  15043185  -0.0950
                   16547504  -0.0237
                   22564778  -0.0105
                   30305826  -0.0058
