@@ -86,6 +86,13 @@
 	<property value="0">electric/switches/rvmsp/recorder</property>
 
 	<!--
+	right vertical mid switch panel
+			or
+	rvfsp for short
+	-->
+	<property value="0">electric/switches/rvfsp/rwr-ill-warn-set</property>
+
+	<!--
 	left vertical front switch panel
 			or
 	lvfsp for short
@@ -128,6 +135,10 @@
 	<property value="0">electric/switches/cc/aso2m/flarerls</property>
 	<property value="0">electric/switches/cc/aso2m/rst</property>
 
+	<!--
+		misc
+	-->
+
 	<property value="0">electric/sources/dc-gen-damage</property>
 	<property value="0">electric/sources/ac-gen-damage</property>
 	<property value="90">electric/sources/batteries-a</property>
@@ -141,6 +152,7 @@
 	<property value="0">electric/buses/bus1-damage</property>
 	<property value="0">electric/buses/bus2-damage</property>
 	<property value="0">electric/buses/bus3-damage</property>
+
 
 	<!--
 	left horizontal front switch panel
@@ -876,6 +888,19 @@
 			</test>
 		</switch>
 
+		<!--
+
+		right vertical forward switch panel
+
+		-->
+
+		<switch name="electric/output/rwr-ill-warn-set">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[1]">
+				electric/switches/rvfsp/rwr-ill-warn-set == 1
+			</test>
+		</switch>
+		
 		<!--
 
 		left vertical mid switch panel

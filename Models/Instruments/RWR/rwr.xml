@@ -238,6 +238,12 @@
     <animation>
         <type>pick</type>
         <object-name>rwrTestButton</object-name>
+        <condition>
+            <greater-than>
+                <property>/fdm/jsbsim/electric/output/rwr-ill-warn-set</property>
+                <value>105</value>
+            </greater-than>
+        </condition>
         <action>
             <button>0</button>
             <button>1</button>

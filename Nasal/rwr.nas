@@ -3,6 +3,7 @@ var my_heading = props.globals.getNode("/orientation/heading-deg");
 var my_pitch = props.globals.getNode("/orientation/pitch-deg");
 var my_roll = props.globals.getNode("/orientation/roll-deg");
 var my_callsign = props.globals.getNode("/sim/multiplay/callsign");
+var rwr_power = props.globals.getNode("/fdm/jsbsim/electric/output/rwr-ill-warn-set");
 
 # loop through all contacts
 # get radar strenght into sensor
@@ -154,7 +155,7 @@ var sensor_readout = func() {
                 sensor.missile = 0;
             }
         } else {
-            if (sensor.strength == 1) {
+            if (sensor.strength == 1 and rwr_power.getValue() > 105) {
                 setprop(sensor.prop,1);
             } else {
                 setprop(sensor.prop,0);

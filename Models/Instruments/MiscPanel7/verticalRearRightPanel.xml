@@ -3,4 +3,579 @@
 <PropertyList>
 
       <path>vertrearrightswitchpanel.ac</path>
+
+     <animation>
+        <type>knob</type>
+        <object-name>airBrakesSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/air-brake</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.163235</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/air-brake</property>
+            </binding>
+        </action>
+    </animation>
+
+
+    <animation>
+        <type>knob</type>
+        <object-name>lgWgFlapsSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/lg-wg-flaps</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.132835</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/lg-wg-flaps</property>
+            </binding>
+        </action>
+    </animation>
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>lgSigNavLtsSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/lg-sig-nav-lts</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.102435</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/lg-sig-nav-lts</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+    <animation>
+        <type>knob</type>
+        <object-name>cpmeAmdASShuttersCtlSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/cone-and-as-shutters-gtl</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.072035</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/cone-and-as-shutters-gtl</property>
+            </binding>
+        </action>
+    </animation>
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>mslRgmEmergLchLchrRktBombsJettSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/msl-rgm-emer-lcn-lchr-rkt-bombs-jett</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.041635</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/msl-rgm-emer-lcn-lchr-rkt-bombs-jett</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>oxyEqHeatExtLampWhtLtSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/oxy-eq-heat-extn-lamp-wht-lt</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.011235</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/oxy-eq-heat-extn-lamp-wht-lt</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>dragChuteSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/drag-chute</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>0.019165</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/drag-chute</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>dropTanksJettSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/drop-tanks-jett</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>0.049565</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/drop-tanks-jett</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>aruSystManCtlSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/aru-syst-man-ctl</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>0.079966</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/aru-syst-man-ctl</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>taxLdgLtsLgExtSigSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/taxi-ldg-lts-lg-ext-sig</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>0.110365</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/taxi-ldg-lts-lg-ext-sig</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>boosterSystemOffHydSystSigSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/booster-system-off-hyd-syst-sig</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>0.140765</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/booster-system-off-hyd-syst-sig</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>hydrPresGaugeTanksSigSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/hydr-pres-gauge-tanks-sig</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>0.171166</y-m>
+            <z-m> 0.025675</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/hydr-pres-gauge-tanks-sig</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>anmPnlLampsTestCopuWarnSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/anh-pnl-lampst-test-copu-warn-syst</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.163235</y-m>
+            <z-m>-0.030704</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/anh-pnl-lampst-test-copu-warn-syst</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>extStoresSigSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/ext-stores-sig</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.132835</y-m>
+            <z-m>-0.030704</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/ext-stores-sig</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+    <animation>
+        <type>knob</type>
+        <object-name>blcSystShuttersControlLeftSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/blc-syst-shutters-control-1</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.102435</y-m>
+            <z-m>-0.030704</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/blc-syst-shutters-control-1</property>
+            </binding>
+        </action>
+    </animation>
+
+
+    <animation>
+        <type>knob</type>
+        <object-name>blcSystShuttersControlRightSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/blc-syst-shutters-control-2</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.072035</y-m>
+            <z-m>-0.030704</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/blc-syst-shutters-control-2</property>
+            </binding>
+        </action>
+    </animation>
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>tacRls12Switch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/tac-rls-1-2</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.041635</y-m>
+            <z-m>-0.030704</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/tac-rls-1-2</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>cabinAirSupSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/cabin-air-sup</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>-0.011235</y-m>
+            <z-m>-0.030704</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/cabin-air-sup</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>firingButtonSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/firing-button</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>0.019165</y-m>
+            <z-m>-0.030704</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/firing-button</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>codAtcXponderSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/cdr-atc-xponder</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>0.049565</y-m>
+            <z-m>-0.030704</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/cdr-atc-xponder</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>aruSystAutoCtlSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/aru-syst-auto-ctl</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>0.079966</y-m>
+            <z-m>-0.030704</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/aru-syst-auto-ctl</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>tacRls34Switch</object-name>
+        <property>/fdm/jsbsim/electric/switches/rvrsp/tac-rls-3-4</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>0.110365</y-m>
+            <z-m>-0.030704</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/rvrsp/tac-rls-3-4</property>
+            </binding>
+        </action>
+    </animation> -->
+
+
+<!--    <animation>
+        <type>knob</type>
+        <object-name>no3BusbarSwitch</object-name>
+        <property>/fdm/jsbsim/electric/buses/bus-switch[2]</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.000522</x-m>
+            <y-m>0.140765</y-m>
+            <z-m>-0.030704</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/buses/bus-switch[2]</property>
+            </binding>
+        </action>
+    </animation> -->
+
 </PropertyList>
