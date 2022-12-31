@@ -93,7 +93,13 @@
    <fcs_function name="aru-prefilter">
       <function>
          <ifthen>
-            <property>fcs/aru-override-switch</property>
+            <and>
+              <property>fcs/aru-override-switch</property>
+              <gt>
+                <property>electric/switches/rvrsp/aru-syst-man-ctl</property>
+                <value>110</value>
+              </gt>
+            </and>
             <property>fcs/aru-setting-pos</property>
             <ifthen>
                <gt>

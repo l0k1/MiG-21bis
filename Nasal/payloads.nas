@@ -567,6 +567,8 @@ var trigger_propogation = func() {
     # 4: order is 4,1,2,3
     # if pylon is unpowered, skip it
     # if pylon is powered but fails, don't skip it
+
+    if (getprop("electric/output/firing-button") < 110) { return; }
     
     if ( getprop("/fdm/jsbsim/systems/armament/release") != 1 ) {
         setprop("/controls/armament/rocket-trigger",0);
@@ -708,6 +710,9 @@ var missile_release = func(pylon) {
     if(selected != "none") {
         # check power
         if ( getprop("/fdm/jsbsim/electric/output/pwr-to-pylons",t_p) < 32 ) { return; }
+        # check arming power
+        if ((t_p == 0 or t_p == 4) and getprop("/fdm/jsbsim/electric/output/tac-rls-1-2") < 110) { return; }
+        if ((t_p == 1 or t_p == 3) and getprop("/fdm/jsbsim/electric/output/tac-rls-3-4") < 110) { return; }
         #print("power good");
         # check temprature, will begin failing at 5*C and guaranteed failure at -5*c
         if ( interp( getprop("/fdm/jsbsim/systems/armament/pylon-heating/pylon-temp",t_p), -5,0,5,1) < rand() ) { return;    }
@@ -921,7 +926,7 @@ var jettison = func(pylons) {
         if (getprop("/fdm/jsbsim/electric/output/drop-tanks-jett") < 110) {return;}
         foreach (var pylon; [0,4]) {
             selected = getprop("payload/weight[" ~ pylon ~ "]/selected");
-            if (payloads[selected].type == "tank") {
+            if (payloads[selected].type == "tank" and getprop("fdm/jsbsim/electric/output/drop-tanks-jett") > 110) {
                 selected = selected == "PTB-490 Droptank" ? "PTB-490" : "PTB-800";
                 setprop("payload/jettison/pyro/"~selected~"["~pylon~"]",1);
                 setprop("payload/weight[" ~ pylon ~ "]/selected","none");
@@ -934,7 +939,7 @@ var jettison = func(pylons) {
         # center tank jettison button
         if (getprop("/fdm/jsbsim/electric/output/drop-tanks-jett") < 110) {return;}
         selected = getprop("payload/weight[2]/selected");
-        if (payloads[selected].type == "tank") {
+        if (payloads[selected].type == "tank" and getprop("fdm/jsbsim/electric/output/drop-tanks-jett") > 110) {
             selected = selected == "PTB-490 Droptank" ? "PTB-490" : "PTB-800";
             setprop("payload/jettison/pyro/"~selected~"[2]",1);
             setprop("payload/weight[2]/selected","none");

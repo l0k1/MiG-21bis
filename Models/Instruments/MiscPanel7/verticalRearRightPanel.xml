@@ -104,7 +104,7 @@
     </animation>
 
 
-<!--    <animation>
+    <animation>
         <type>knob</type>
         <object-name>mslRgmEmergLchLchrRktBombsJettSwitch</object-name>
         <property>/fdm/jsbsim/electric/switches/rvrsp/msl-rgm-emer-lcn-lchr-rkt-bombs-jett</property>
@@ -126,7 +126,7 @@
                 <property>/fdm/jsbsim/electric/switches/rvrsp/msl-rgm-emer-lcn-lchr-rkt-bombs-jett</property>
             </binding>
         </action>
-    </animation> -->
+    </animation>
 
 
 <!--    <animation>
@@ -179,7 +179,7 @@
     </animation> -->
 
 
-<!--    <animation>
+    <animation>
         <type>knob</type>
         <object-name>dropTanksJettSwitch</object-name>
         <property>/fdm/jsbsim/electric/switches/rvrsp/drop-tanks-jett</property>
@@ -201,10 +201,10 @@
                 <property>/fdm/jsbsim/electric/switches/rvrsp/drop-tanks-jett</property>
             </binding>
         </action>
-    </animation> -->
+    </animation>
 
 
-<!--    <animation>
+    <animation>
         <type>knob</type>
         <object-name>aruSystManCtlSwitch</object-name>
         <property>/fdm/jsbsim/electric/switches/rvrsp/aru-syst-man-ctl</property>
@@ -226,7 +226,7 @@
                 <property>/fdm/jsbsim/electric/switches/rvrsp/aru-syst-man-ctl</property>
             </binding>
         </action>
-    </animation> -->
+    </animation>
 
 
 <!--    <animation>
@@ -254,7 +254,7 @@
     </animation> -->
 
 
-<!--    <animation>
+    <animation>
         <type>knob</type>
         <object-name>boosterSystemOffHydSystSigSwitch</object-name>
         <property>/fdm/jsbsim/electric/switches/rvrsp/booster-system-off-hyd-syst-sig</property>
@@ -276,10 +276,10 @@
                 <property>/fdm/jsbsim/electric/switches/rvrsp/booster-system-off-hyd-syst-sig</property>
             </binding>
         </action>
-    </animation> -->
+    </animation>
 
 
-<!--    <animation>
+    <animation>
         <type>knob</type>
         <object-name>hydrPresGaugeTanksSigSwitch</object-name>
         <property>/fdm/jsbsim/electric/switches/rvrsp/hydr-pres-gauge-tanks-sig</property>
@@ -301,7 +301,7 @@
                 <property>/fdm/jsbsim/electric/switches/rvrsp/hydr-pres-gauge-tanks-sig</property>
             </binding>
         </action>
-    </animation> -->
+    </animation>
 
 
 <!--    <animation>
@@ -329,7 +329,7 @@
     </animation> -->
 
 
-<!--    <animation>
+    <animation>
         <type>knob</type>
         <object-name>extStoresSigSwitch</object-name>
         <property>/fdm/jsbsim/electric/switches/rvrsp/ext-stores-sig</property>
@@ -351,7 +351,7 @@
                 <property>/fdm/jsbsim/electric/switches/rvrsp/ext-stores-sig</property>
             </binding>
         </action>
-    </animation> -->
+    </animation>
 
 
     <animation>
@@ -404,7 +404,7 @@
     </animation>
 
 
-<!--    <animation>
+    <animation>
         <type>knob</type>
         <object-name>tacRls12Switch</object-name>
         <property>/fdm/jsbsim/electric/switches/rvrsp/tac-rls-1-2</property>
@@ -426,7 +426,7 @@
                 <property>/fdm/jsbsim/electric/switches/rvrsp/tac-rls-1-2</property>
             </binding>
         </action>
-    </animation> -->
+    </animation>
 
 
 <!--    <animation>
@@ -454,7 +454,7 @@
     </animation> -->
 
 
-<!--    <animation>
+    <animation>
         <type>knob</type>
         <object-name>firingButtonSwitch</object-name>
         <property>/fdm/jsbsim/electric/switches/rvrsp/firing-button</property>
@@ -476,7 +476,7 @@
                 <property>/fdm/jsbsim/electric/switches/rvrsp/firing-button</property>
             </binding>
         </action>
-    </animation> -->
+    </animation>
 
 
 <!--    <animation>
@@ -504,7 +504,7 @@
     </animation> -->
 
 
-<!--    <animation>
+    <animation>
         <type>knob</type>
         <object-name>aruSystAutoCtlSwitch</object-name>
         <property>/fdm/jsbsim/electric/switches/rvrsp/aru-syst-auto-ctl</property>
@@ -526,10 +526,10 @@
                 <property>/fdm/jsbsim/electric/switches/rvrsp/aru-syst-auto-ctl</property>
             </binding>
         </action>
-    </animation> -->
+    </animation>
 
 
-<!--    <animation>
+    <animation>
         <type>knob</type>
         <object-name>tacRls34Switch</object-name>
         <property>/fdm/jsbsim/electric/switches/rvrsp/tac-rls-3-4</property>
@@ -551,10 +551,10 @@
                 <property>/fdm/jsbsim/electric/switches/rvrsp/tac-rls-3-4</property>
             </binding>
         </action>
-    </animation> -->
+    </animation>
 
 
-<!--    <animation>
+    <animation>
         <type>knob</type>
         <object-name>no3BusbarSwitch</object-name>
         <property>/fdm/jsbsim/electric/buses/bus-switch[2]</property>
@@ -576,6 +576,6 @@
                 <property>/fdm/jsbsim/electric/buses/bus-switch[2]</property>
             </binding>
         </action>
-    </animation> -->
+    </animation>
 
 </PropertyList>

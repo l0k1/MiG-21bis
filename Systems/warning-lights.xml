@@ -262,6 +262,10 @@
                      <value>0</value>
                   </eq>
                </or>
+               <gt>
+                  <property>electric/output/ext-stores-sig</property>
+                  <value>110</value>
+               </gt>
                <property>/instrumentation/warning-lights/dimmer[2]</property>
                <property>warning-lights/lights-dc</property>
             </product>
@@ -310,6 +314,10 @@
                      <value>0</value>
                   </eq>
                </or>
+               <gt>
+                  <property>electric/output/ext-stores-sig</property>
+                  <value>110</value>
+               </gt>
                <property>/instrumentation/warning-lights/dimmer[2]</property>
                <property>warning-lights/lights-dc</property>
             </product>
@@ -358,6 +366,10 @@
                      <value>0</value>
                   </eq>
                </or>
+               <gt>
+                  <property>electric/output/ext-stores-sig</property>
+                  <value>110</value>
+               </gt>
                <property>/instrumentation/warning-lights/dimmer[2]</property>
                <property>warning-lights/lights-dc</property>
             </product>
@@ -406,6 +418,10 @@
                      <value>0</value>
                   </eq>
                </or>
+               <gt>
+                  <property>electric/output/ext-stores-sig</property>
+                  <value>110</value>
+               </gt>
                <property>/instrumentation/warning-lights/dimmer[2]</property>
                <property>warning-lights/lights-dc</property>
             </product>
@@ -446,6 +462,10 @@
                      <value>1.5</value>
                   </le>
                </and>
+               <gt>
+                  <property>electric/output/ext-stores-sig</property>
+                  <value>110</value>
+               </gt>
                <property>/instrumentation/warning-lights/dimmer[3]</property>
                <property>warning-lights/lights-dc</property>
             </product>
@@ -464,6 +484,10 @@
                   <property>/consumables/fuel/tank[11]/selected</property>
                   <value>1</value>
                </eq>
+               <gt>
+                  <property>electric/output/ext-stores-sig</property>
+                  <value>110</value>
+               </gt>
                <property>/instrumentation/warning-lights/dimmer[3]</property>
                <property>warning-lights/lights-dc</property>
             </product>
@@ -481,6 +505,10 @@
                <gt>
                   <property>/payload/weight[1]/weight-lb</property>
                   <value>0</value>
+               </gt>
+               <gt>
+                  <property>electric/output/ext-stores-sig</property>
+                  <value>110</value>
                </gt>
                <property>/instrumentation/warning-lights/dimmer[3]</property>
                <property>warning-lights/lights-dc</property>
@@ -500,6 +528,10 @@
                   <property>/payload/weight[3]/weight-lb</property>
                   <value>0</value>
                </gt>
+               <gt>
+                  <property>electric/output/ext-stores-sig</property>
+                  <value>110</value>
+               </gt>
                <property>/instrumentation/warning-lights/dimmer[3]</property>
                <property>warning-lights/lights-dc</property>
             </product>
@@ -518,6 +550,10 @@
                   <property>/payload/weight[0]/weight-lb</property>
                   <value>0</value>
                </gt>
+               <gt>
+                  <property>electric/output/ext-stores-sig</property>
+                  <value>110</value>
+               </gt>
                <property>/instrumentation/warning-lights/dimmer[3]</property>
                <property>warning-lights/lights-dc</property>
             </product>
@@ -535,6 +571,10 @@
                <gt>
                   <property>/payload/weight[4]/weight-lb</property>
                   <value>0</value>
+               </gt>
+               <gt>
+                  <property>electric/output/ext-stores-sig</property>
+                  <value>110</value>
                </gt>
                <property>/instrumentation/warning-lights/dimmer[3]</property>
                <property>warning-lights/lights-dc</property>
@@ -835,6 +875,10 @@
                   <property>systems/hydraulic[1]/pressure</property>
                   <value>165</value>
                </lt>
+               <gt>
+                  <property>electric/output/booster-system-off-hyd-syst-sig</property>
+                  <value>110</value>
+               </gt>
                <property>/instrumentation/warning-lights/dimmer[5]</property>
                <property>warning-lights/lights-dc</property>
             </product>
@@ -887,6 +931,10 @@
                   <property>systems/hydraulic[0]/pressure</property>
                   <value>165</value>
                </lt>
+               <gt>
+                  <property>electric/output/hydr-pres-gauge-tanks-sig</property>
+                  <value>110</value>
+               </gt>
                <property>/instrumentation/warning-lights/dimmer[5]</property>
                <property>warning-lights/lights-dc</property>
             </product>
