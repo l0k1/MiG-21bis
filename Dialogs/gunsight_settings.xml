@@ -119,6 +119,32 @@
             <command>dialog-apply</command>
          </binding>
       </button>
+
+
+      <button>
+         <legend>Reset</legend>
+         <y>10</y>
+         <x>60</x>
+         <binding>
+            <command>property-assign</command>
+            <property>/controls/armament/gunsight/red</property>
+            <value>239</value>
+         </binding>
+         <binding>
+            <command>property-assign</command>
+            <property>/controls/armament/gunsight/green</property>
+            <value>197</value>
+         </binding>
+         <binding>
+            <command>property-assign</command>
+            <property>/controls/armament/gunsight/blue</property>
+            <value>31</value>
+         </binding>
+         <binding>
+            <command>reinit</command>
+            <subsystem>gui</subsystem>
+         </binding>
+      </button>
       
       <button>
          <legend>Close</legend>

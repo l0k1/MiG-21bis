@@ -342,6 +342,9 @@
             <path>/instrumentation/adf-radio/ident[8]</path>
 
             <path>/instrumentation/gyro-compass/gyro-heading-deg</path>
+            <path>/controls/armament/gunsight/red</path>
+            <path>/controls/armament/gunsight/green</path>
+            <path>/controls/armament/gunsight/blue</path>
 
         </aircraft-data>
 
