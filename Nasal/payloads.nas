@@ -568,7 +568,7 @@ var trigger_propogation = func() {
     # if pylon is unpowered, skip it
     # if pylon is powered but fails, don't skip it
 
-    if (getprop("electric/output/firing-button") < 110) { return; }
+    if (getprop("/fdm/jsbsim/electric/output/firing-button") < 110) { return; }
     
     if ( getprop("/fdm/jsbsim/systems/armament/release") != 1 ) {
         setprop("/controls/armament/rocket-trigger",0);
