@@ -208,7 +208,7 @@ var writeMyPlaneAttributes = func() {
         radar_logic.selection.get_cartesian();
     }
     thread.lock(mutexWrite);
-    write(myplaneID ~ ",TAS="~getTas()~",MACH="~getMach()~",AOA="~getAoA()~",HDG="~getHeading()~",Throttle="~getThrottle());
+    write(myplaneID ~ ",TAS="~getTas()~",Mach="~getMach()~",AOA="~getAoA()~",HDG="~getHeading()~",Throttle="~getThrottle());
     write(",Afterburner="~getAfterburner()~",FuelWeight="~getTotalFuelWeight());
     write(",IAS="~getIAS()~",RadarMode="~getRadarMode()~",LockedTargetMode="~getLockedMode());
     write(",LockedTargetAzimuth="~getTgtAzimuth()~",LockedTargetElevation="~getTgtElev()~",LockedTargetRange="~getTgtRange()~"\n");

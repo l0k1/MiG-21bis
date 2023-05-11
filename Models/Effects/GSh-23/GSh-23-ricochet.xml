@@ -1,0 +1,20 @@
+
+    <submodel>
+        <name>GSh-23 Tracer</name>
+        <model>Aircraft/MiG-21bis/Models/Stores/Tracer.xml</model>
+        <trigger>/fdm/jsbsim/systems/armament/GSh-23-trigger</trigger>
+        <speed>2350.0</speed>
+        <repeat>true</repeat>
+        <delay>0.1665</delay>
+        <count>25</count>
+        <x-offset>-9.17880</x-offset>
+        <y-offset>-0.16217</y-offset>
+        <z-offset>-1.28799</z-offset>
+        <yaw-offset>0.0</yaw-offset>
+        <pitch-offset>0.8</pitch-offset>
+        <life>3.0</life>
+        <wind>false</wind>
+        <weight>0.1069</weight>
+        <cd>0.193</cd>
+        <eda>0.00136354</eda>
+    </submodel>
