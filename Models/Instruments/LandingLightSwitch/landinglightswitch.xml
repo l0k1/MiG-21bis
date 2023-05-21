@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>lightswitch.ac</path>
+
+    <animation>
+        <type>knob</type>
+        <object-name>landingLightSwitch</object-name>
+        <property>/a</property>
+        <factor>-30</factor>
+        <offset-deg>30</offset-deg>
+        <center>
+          <x-m>-0.001691</x-m>
+          <y-m>-0.006621</y-m>
+          <z-m>-0.005158</z-m>
+        </center>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+      </axis>
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/a</property>
+            </binding>
+        </action>
+    </animation>
+	
+</PropertyList>
