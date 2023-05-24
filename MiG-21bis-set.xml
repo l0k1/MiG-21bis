@@ -237,6 +237,15 @@
                         </binding>
                     </item>
                     <item>
+                        <label>Reset Damage</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                failures.reset_failures();
+                            </script>
+                        </binding>
+                    </item>
+                    <item>
                         <label>Tacview Record</label>
                         <binding>
                             <command>nasal</command>
@@ -311,6 +320,7 @@
         <monitor>           <file>Aircraft/MiG-21bis/Nasal/dialog-perf.nas</file>
                             <file>Aircraft/MiG-21bis/Nasal/performance.nas</file>       </monitor>
         <tacview>           <file>Aircraft/MiG-21bis/Nasal/tacview.nas</file>           </tacview>
+        <failures>          <file>Aircraft/MiG-21bis/Nasal/failures.nas</file>          </failures>
 
     </nasal>
 

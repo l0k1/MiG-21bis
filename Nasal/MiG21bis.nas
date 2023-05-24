@@ -377,6 +377,7 @@ var wow_menu_change = func{
             setprop("sim/menubar/default/menu[100]/item[8]/enabled",1);
             setprop("sim/menubar/default/menu[100]/item[9]/enabled",1);
             setprop("sim/menubar/default/menu[100]/item[12]/enabled",1);
+            setprop("sim/menubar/default/menu[100]/item[14]/enabled",1);
         } else {
             setprop("sim/menubar/default/menu[2]/item[1]/enabled",0);
             setprop("sim/menubar/default/menu[5]/item[4]/enabled",0);
@@ -392,6 +393,7 @@ var wow_menu_change = func{
             setprop("sim/menubar/default/menu[100]/item[8]/enabled",0);
             setprop("sim/menubar/default/menu[100]/item[9]/enabled",0);
             setprop("sim/menubar/default/menu[100]/item[12]/enabled",0);
+            setprop("sim/menubar/default/menu[100]/item[14]/enabled",0);
         }
     }
     if (!wowstatus) {
