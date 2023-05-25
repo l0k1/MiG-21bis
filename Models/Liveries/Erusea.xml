@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">Erusean Air Force</name>
+                <texture>Liveries/Erusea.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/Erusea.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>
