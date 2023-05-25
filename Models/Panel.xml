@@ -633,10 +633,10 @@
         <name>Gear Handle</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/GearHandle/GearHandle.xml</path>
         <offsets>
-            <heading-deg>62.8</heading-deg>
-            <x-m>-3.89453</x-m>
-            <y-m>-0.36556</y-m>
-            <z-m> 0.59979</z-m>
+            <heading-deg>58.6   </heading-deg>
+            <x-m>-3.90781</x-m>
+            <y-m>-0.361197</y-m>
+            <z-m> 0.590811</z-m>
         </offsets>
     </model>
 
