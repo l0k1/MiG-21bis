@@ -5,6 +5,10 @@
 <system name="payloads">
 
     <property value="0">systems/armament/GSh-23-trigger</property>
+    <property value="0">systems/armament/UPK-23-trigger-outer-left</property>
+    <property value="0">systems/armament/UPK-23-trigger-inner-left</property>
+    <property value="0">systems/armament/UPK-23-trigger-inner-right</property>
+    <property value="0">systems/armament/UPK-23-trigger-outer-right</property>
     <property value="0">systems/armament/rockets/current-count-left</property>
     <property value="0">systems/armament/rockets/current-count-right</property>
     <property value="22">systems/armament/pylon-heating/pylon-temp[0]</property>
@@ -13,6 +17,40 @@
     <property value="22">systems/armament/pylon-heating/pylon-temp[3]</property>
     <property value="22">systems/armament/pylon-heating/pylon-temp[4]</property>
     <property value="22">systems/armament/pylon-heating/pylon-temp[5]</property>
+    <property value="0">systems/armament/upk-23-sound</property>
+    <property value="0">systems/armament/gsh-23-sound</property>
+    <property value="0">systems/armament/gun-sound</property>
+
+    <channel name="triggerprop">
+
+        <!-- 
+        take in:
+            /controls/armament/trigger
+            and
+            systems/armament/guntriggerselect
+
+            if guntriggerselect = 0, use GSh
+            if guntriggerselect = 1, use GSh and UPK
+            if guntriggerselect = 2, use UPK
+        -->
+
+        <switch name="systems/armament/gsh-trigger-propo">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                /controls/armament/trigger == 1
+                systems/armament/guntriggerselect lt 2
+            </test>
+        </switch>
+        <switch name="systems/armament/upk-trigger-propo">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                /controls/armament/trigger == 1
+                systems/armament/guntriggerselect gt 0
+            </test>
+        </switch>
+
+    </channel>
+
 
     <channel name="GSh-23">
 
@@ -56,7 +94,7 @@
             <test logic="AND" value="1">
                 /fdm/jsbsim/systems/armament/GSh-23-trigger == 1
                 /ai/submodels/submodel[5]/count gt 0
-                /fdm/jsbsim/systems/armament/GSh-23-jam-probability lt 0.0008
+                /fdm/jsbsim/systems/armament/GSh-23-jam-probability lt 0.0003
             </test>
         </switch>
 
@@ -74,7 +112,7 @@
         <switch name="systems/armament/GSh-23-trigger">
             <default value="0"/>
             <test logic="AND" value="1">
-                /controls/armament/trigger == 1
+                systems/armament/gsh-trigger-propo == 1
                 electric/output/gun gt 33
                 /fdm/jsbsim/systems/armament/GSh-23-jammed == 0
             </test>
@@ -91,6 +129,244 @@
         </switch>
     
     </channel>
+
+    <channel name="UPK-23-OL">
+    
+        <!-- cannon jam probability -->
+        <fcs_function name="systems/armament/UPK-23-OL-jam-probability">
+            <function>
+                <abs>
+                    <urandom/>
+                </abs>
+            </function>
+        </fcs_function>
+        
+        <!-- check if it has jammed -->
+
+        <switch name="systems/armament/UPK-23-OL-jammed-stage-1">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                /fdm/jsbsim/systems/armament/UPK-23-trigger-outer-left == 1
+                /ai/submodels/submodel[107]/count gt 0
+                /fdm/jsbsim/systems/armament/UPK-23-OL-jam-probability lt 0.0003
+            </test>
+        </switch>
+
+        <switch name="trash/systems/armament/UPK-23-OL-jammed">
+            <default value="0"/>
+            <test logic="OR" value="1">
+                /fdm/jsbsim/systems/armament/UPK-23-OL-jammed == 1
+                /fdm/jsbsim/systems/armament/UPK-23-OL-jammed-stage-1 == 1
+            </test>
+            <output>systems/armament/UPK-23-OL-jammed</output>
+        </switch>
+    
+        <!-- trigger propogation for the cannon. -->
+        
+        <switch name="systems/armament/UPK-23-trigger-outer-left">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/upk-trigger-propo == 1
+                electric/output/upk23/power gt 33
+                /fdm/jsbsim/systems/armament/UPK-23-OL-jammed == 0
+            </test>
+        </switch>
+
+        <!-- gun ready light -->
+        <switch name="systems/armament/UPK-23-ready">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                electric/output/upk23/power gt 33
+                /ai/submodels/submodel[107]/count gt 0
+                <test logic="OR">
+                    systems/armament/UPK-23-OL-jammed == 0
+                    systems/armament/UPK-23-IL-jammed == 0
+                    systems/armament/UPK-23-IR-jammed == 0
+                    systems/armament/UPK-23-OR-jammed == 0
+                </test>
+            </test>
+        </switch>
+    
+    </channel>
+
+    <channel name="UPK-23-IL">
+    
+        <!-- cannon jam probability -->
+        <fcs_function name="systems/armament/UPK-23-IL-jam-probability">
+            <function>
+                <abs>
+                    <urandom/>
+                </abs>
+            </function>
+        </fcs_function>
+        
+        <!-- check if it has jammed -->
+
+        <switch name="systems/armament/UPK-23-IL-jammed-stage-1">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                /fdm/jsbsim/systems/armament/UPK-23-trigger-outer-left == 1
+                /ai/submodels/submodel[107]/count gt 0
+                /fdm/jsbsim/systems/armament/UPK-23-IL-jam-probability lt 0.0003
+            </test>
+        </switch>
+
+        <switch name="trash/systems/armament/UPK-23-IL-jammed">
+            <default value="0"/>
+            <test logic="OR" value="1">
+                /fdm/jsbsim/systems/armament/UPK-23-IL-jammed == 1
+                /fdm/jsbsim/systems/armament/UPK-23-IL-jammed-stage-1 == 1
+            </test>
+            <output>systems/armament/UPK-23-IL-jammed</output>
+        </switch>
+    
+        <!-- trigger propogation for the cannon. -->
+        
+        <switch name="systems/armament/UPK-23-trigger-inner-left">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/upk-trigger-propo == 1
+                electric/output/upk23/power gt 33
+                /fdm/jsbsim/systems/armament/UPK-23-IL-jammed == 0
+            </test>
+        </switch>
+    
+    </channel>
+
+    <channel name="UPK-23-IR">
+    
+        <!-- cannon jam probability -->
+        <fcs_function name="systems/armament/UPK-23-IR-jam-probability">
+            <function>
+                <abs>
+                    <urandom/>
+                </abs>
+            </function>
+        </fcs_function>
+        
+        <!-- check if it has jammed -->
+
+        <switch name="systems/armament/UPK-23-IR-jammed-stage-1">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                /fdm/jsbsim/systems/armament/UPK-23-trigger-outer-left == 1
+                /ai/submodels/submodel[107]/count gt 0
+                /fdm/jsbsim/systems/armament/UPK-23-IR-jam-probability lt 0.0003
+            </test>
+        </switch>
+
+        <switch name="trash/systems/armament/UPK-23-IR-jammed">
+            <default value="0"/>
+            <test logic="OR" value="1">
+                /fdm/jsbsim/systems/armament/UPK-23-IR-jammed == 1
+                /fdm/jsbsim/systems/armament/UPK-23-IR-jammed-stage-1 == 1
+            </test>
+            <output>systems/armament/UPK-23-IR-jammed</output>
+        </switch>
+    
+        <!-- trigger propogation for the cannon. -->
+        
+        <switch name="systems/armament/UPK-23-trigger-inner-right">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/upk-trigger-propo == 1
+                electric/output/upk23/power gt 33
+                /fdm/jsbsim/systems/armament/UPK-23-IR-jammed == 0
+            </test>
+        </switch>
+    
+    </channel>
+
+    <channel name="UPK-23-OR">
+    
+        <!-- cannon jam probability -->
+        <fcs_function name="systems/armament/UPK-23-OR-jam-probability">
+            <function>
+                <abs>
+                    <urandom/>
+                </abs>
+            </function>
+        </fcs_function>
+        
+        <!-- check if it has jammed -->
+
+        <switch name="systems/armament/UPK-23-OR-jammed-stage-1">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                /fdm/jsbsim/systems/armament/UPK-23-trigger-outer-left == 1
+                /ai/submodels/submodel[107]/count gt 0
+                /fdm/jsbsim/systems/armament/UPK-23-OR-jam-probability lt 0.0003
+            </test>
+        </switch>
+
+        <switch name="trash/systems/armament/UPK-23-OR-jammed">
+            <default value="0"/>
+            <test logic="OR" value="1">
+                /fdm/jsbsim/systems/armament/UPK-23-OR-jammed == 1
+                /fdm/jsbsim/systems/armament/UPK-23-OR-jammed-stage-1 == 1
+            </test>
+            <output>systems/armament/UPK-23-OR-jammed</output>
+        </switch>
+    
+        <!-- trigger propogation for the cannon. -->
+        
+        <switch name="systems/armament/UPK-23-trigger-outer-right">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/upk-trigger-propo == 1
+                electric/output/upk23/power gt 33
+                /fdm/jsbsim/systems/armament/UPK-23-OR-jammed == 0
+            </test>
+        </switch>
+    
+    </channel>
+
+    <channel name="gunsound">
+        <switch name="systems/armament/gsh-23-sound">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/GSh-23-trigger == 1
+                systems/armament/GSh-23-ready == 1
+                <test logic="OR">
+                    /ai/submodels/submodel[5]/count gt 0
+                    /ai/submodels/submodel[7]/count gt 0
+                </test>
+            </test>
+        </switch>
+
+        <switch name="systems/armament/upk-23-sound">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                systems/armament/UPK-23-ready == 1
+                <test logic="OR">
+                    systems/armament/UPK-23-trigger-outer-left == 1
+                    systems/armament/UPK-23-trigger-inner-left == 1
+                    systems/armament/UPK-23-trigger-inner-right == 1
+                    systems/armament/UPK-23-trigger-outer-right == 1
+                </test>
+                <test logic="OR">
+                    /ai/submodels/submodel[107]/count gt 0
+                    /ai/submodels/submodel[109]/count gt 0
+                    /ai/submodels/submodel[111]/count gt 0
+                    /ai/submodels/submodel[113]/count gt 0
+                    /ai/submodels/submodel[115]/count gt 0
+                    /ai/submodels/submodel[117]/count gt 0
+                    /ai/submodels/submodel[119]/count gt 0
+                    /ai/submodels/submodel[121]/count gt 0
+                </test>
+            </test>
+        </switch>
+
+        <switch name="systems/armament/gun-sound">
+            <default value="0"/>
+            <test logic="OR" value="1">
+                systems/armament/upk-23-sound == 1
+                systems/armament/gsh-23-sound == 1
+            </test>
+        </switch>
+
+    </channel>
+
     
     <channel name="Countermeasures">
         

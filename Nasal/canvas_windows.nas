@@ -47,6 +47,8 @@ var stores = {
                                 ["UB-16",
                                 "UB-32",
                                 "S-24",]],
+                    ["Gun", 
+                                ["UPK-23-250",]],
                     ["Droptank",
                                 ["PTB-490 Droptank",]],
         ];
@@ -75,6 +77,8 @@ var stores = {
                                 ["UB-16",
                                 "UB-32",
                                 "S-24",]],
+                    ["Gun", 
+                                ["UPK-23-250",]],
         ];
         m.copt = [
                     ["None",     
@@ -101,7 +105,8 @@ var stores = {
                                 ["none"]],
                     ["Consoles",
                                 ["HMCS Control",
-                                "ASO-2M Control"]],
+                                "ASO-2M Control",
+                                "UPK-23 Control"]],
         ];
 
         # do the line splits manually
@@ -393,6 +398,25 @@ var stores = {
                         "console for the",
                         "ASO-2M conformal",
                         "countermeasure pods."
+                        ],
+            "UPK-23-250":[
+                        #12345678901234567890
+                        "",
+                        "218 kg",
+                        "",
+                        "An underwing gunpod",
+                        "housing a GSh-23",
+                        "23mm cannon as well",
+                        "as 250 rounds of",
+                        "ammunition. Requires",
+                        "a center console.",
+                        ],
+            "UPK-23 Control"  : [
+                        #12345678901234567890
+                        "",
+                        "Center control",
+                        "console for the",
+                        "UPK-23-250 gun pods.",
                         ],
 
         };

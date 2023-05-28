@@ -135,6 +135,8 @@
 	<property value="0">electric/switches/cc/aso2m/flarerls</property>
 	<property value="0">electric/switches/cc/aso2m/rst</property>
 
+	<property value="0">electric/switches/cc/upk23/power</property>
+
 	<!--
 		misc
 	-->
@@ -1052,6 +1054,14 @@
 			<default value="0"/>
 			<test logic="AND" value="electric/buses/bus[3]">
 				electric/switches/cc/aso2m/power == 1
+			</test>
+		</switch>
+
+		<switch name="electric/output/upk23/power">
+			<default value="0"/>
+			<test logic="AND" value="electric/buses/bus[3]">
+				electric/switches/cc/upk23/power == 1
+				electric/output/gun gt 33
 			</test>
 		</switch>
 		

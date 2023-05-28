@@ -59,7 +59,7 @@ var payloads = {
     #payload format is:
     #name: pos_arm.new(name, brevity code, weight, type/guidance, id for animations, rail id, hit message max distance (not used for guided missiles), ammo count (optional), guidance function (optional)
     #bomb names can NOT have spaces in them.
-    #type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy, cm
+    #type/guidance options: none (dnu),radar, ir, beam, bomb, rocket, tank, antirad, heavy, cm, gun
     #regarding hit distance, the GSh-23 is coded as 35m seperately in this file
     # rail ID's are:
     # 0 - none
@@ -106,6 +106,8 @@ var payloads = {
     "Smokepod":          pos_arm.new("Smokepod","Smokepod",157,"tank",29,0),
     # countermeasures
     "Conformal CM":      pos_arm.new("Conformal CM","Conformal CM",210,"cm",30,0),
+    # guns
+    "UPK-23-250":        pos_arm.new("UPK-23-250","UPK-23",218,"gun",40,0,,250),
     # joke
     "HMCS":              pos_arm.new("HMCS", "HMCS",420,"tank",31,0),
 };
@@ -299,7 +301,30 @@ var create_pylon = func(pylon, payload, selected) {
         } elsif (pylon == 4){
             setprop("/ai/submodels/submodel[25]/count",payload.ammo_count);
         }
-    }elsif (selected == "Conformal CM") {
+    } elsif (payload.type == "gun") {
+        #print('adding ammo for pylon ' ~ pylon);
+        if (pylon == 0) {
+            setprop("/ai/submodels/submodel[106]/count",payload.ammo_count / 5);
+            setprop("/ai/submodels/submodel[107]/count",payload.ammo_count);
+            setprop("/ai/submodels/submodel[108]/count",payload.ammo_count / 5);
+            setprop("/ai/submodels/submodel[109]/count",payload.ammo_count);
+        } elsif (pylon == 1){
+            setprop("/ai/submodels/submodel[110]/count",payload.ammo_count / 5);
+            setprop("/ai/submodels/submodel[111]/count",payload.ammo_count);
+            setprop("/ai/submodels/submodel[112]/count",payload.ammo_count / 5);
+            setprop("/ai/submodels/submodel[113]/count",payload.ammo_count);
+        } elsif (pylon == 3){
+            setprop("/ai/submodels/submodel[114]/count",payload.ammo_count / 5);
+            setprop("/ai/submodels/submodel[115]/count",payload.ammo_count);
+            setprop("/ai/submodels/submodel[116]/count",payload.ammo_count / 5);
+            setprop("/ai/submodels/submodel[117]/count",payload.ammo_count);
+        } elsif (pylon == 4){
+            setprop("/ai/submodels/submodel[118]/count",payload.ammo_count / 5);
+            setprop("/ai/submodels/submodel[119]/count",payload.ammo_count);
+            setprop("/ai/submodels/submodel[120]/count",payload.ammo_count / 5);
+            setprop("/ai/submodels/submodel[121]/count",payload.ammo_count);
+        }
+    } elsif (selected == "Conformal CM") {
         #0 ~ flares left
         #1 ~ flares right
         #2 ~ chaff left
@@ -316,6 +341,11 @@ var create_pylon = func(pylon, payload, selected) {
     } elsif (selected != "FAB-100x4" and selected != "Conformal CM" and selected != "P-100x4") {
         if (pylon == 0) {
             setprop("/ai/submodels/submodel[22]/count",0);
+
+            setprop("/ai/submodels/submodel[106]/count",0);
+            setprop("/ai/submodels/submodel[107]/count",0);
+            setprop("/ai/submodels/submodel[108]/count",0);
+            setprop("/ai/submodels/submodel[109]/count",0);
         } elsif (pylon == 1) {
             setprop("/ai/submodels/submodel[23]/count",0);
 
@@ -328,6 +358,11 @@ var create_pylon = func(pylon, payload, selected) {
             setprop("/ai/submodels/submodel[81]/count",0);
             setprop("/ai/submodels/submodel[82]/count",0);
             setprop("/ai/submodels/submodel[83]/count",0);
+
+            setprop("/ai/submodels/submodel[110]/count",0);
+            setprop("/ai/submodels/submodel[111]/count",0);
+            setprop("/ai/submodels/submodel[112]/count",0);
+            setprop("/ai/submodels/submodel[113]/count",0);
         } elsif (pylon == 3) {
             setprop("/ai/submodels/submodel[24]/count",0);
 
@@ -340,8 +375,18 @@ var create_pylon = func(pylon, payload, selected) {
             setprop("/ai/submodels/submodel[85]/count",0);
             setprop("/ai/submodels/submodel[86]/count",0);
             setprop("/ai/submodels/submodel[87]/count",0);
+
+            setprop("/ai/submodels/submodel[114]/count",0);
+            setprop("/ai/submodels/submodel[115]/count",0);
+            setprop("/ai/submodels/submodel[116]/count",0);
+            setprop("/ai/submodels/submodel[117]/count",0);
         } elsif (pylon == 4) {
             setprop("/ai/submodels/submodel[25]/count",0);
+
+            setprop("/ai/submodels/submodel[118]/count",0);
+            setprop("/ai/submodels/submodel[119]/count",0);
+            setprop("/ai/submodels/submodel[120]/count",0);
+            setprop("/ai/submodels/submodel[121]/count",0);
         } elsif (pylon == 5) {
             setprop("/ai/submodels/submodel[0]/count",0);
             setprop("/ai/submodels/submodel[2]/count",0);
@@ -380,6 +425,10 @@ var empty_pylon = func(pylon) {
     
     if (pylon == 0) {
         setprop("/ai/submodels/submodel[22]/count",0);
+        setprop("/ai/submodels/submodel[106]/count",0);
+        setprop("/ai/submodels/submodel[107]/count",0);
+        setprop("/ai/submodels/submodel[108]/count",0);
+        setprop("/ai/submodels/submodel[109]/count",0);
     } elsif (pylon == 1) {
         setprop("/ai/submodels/submodel[23]/count",0);
         setprop("/ai/submodels/submodel[32]/count",0);
@@ -390,6 +439,10 @@ var empty_pylon = func(pylon) {
         setprop("/ai/submodels/submodel[81]/count",0);
         setprop("/ai/submodels/submodel[82]/count",0);
         setprop("/ai/submodels/submodel[83]/count",0);
+        setprop("/ai/submodels/submodel[110]/count",0);
+        setprop("/ai/submodels/submodel[111]/count",0);
+        setprop("/ai/submodels/submodel[112]/count",0);
+        setprop("/ai/submodels/submodel[113]/count",0);
     } elsif (pylon == 2) {
         setprop("/fdm/jsbsim/systems/hmcs/quantity",0);
     } elsif (pylon == 3) {
@@ -402,8 +455,16 @@ var empty_pylon = func(pylon) {
         setprop("/ai/submodels/submodel[85]/count",0);
         setprop("/ai/submodels/submodel[86]/count",0);
         setprop("/ai/submodels/submodel[87]/count",0);
+        setprop("/ai/submodels/submodel[114]/count",0);
+        setprop("/ai/submodels/submodel[115]/count",0);
+        setprop("/ai/submodels/submodel[116]/count",0);
+        setprop("/ai/submodels/submodel[117]/count",0);
     } elsif (pylon == 4) {
         setprop("/ai/submodels/submodel[25]/count",0);
+        setprop("/ai/submodels/submodel[118]/count",0);
+        setprop("/ai/submodels/submodel[119]/count",0);
+        setprop("/ai/submodels/submodel[120]/count",0);
+        setprop("/ai/submodels/submodel[121]/count",0);
     } elsif (pylon == 5) {
         setprop("/ai/submodels/submodel[0]/count",0);
         setprop("/ai/submodels/submodel[2]/count",0);
@@ -524,6 +585,7 @@ var pylon_to_tank_array = [12,-1,11,-1,13];
 ########### listener for handling unjamming #########
 
 var charge_used = [0,0,0];
+var charge_used_upk = [0,0,0];
 
 var unjam = func(button) {
     if ( charge_used[button] == 0 and getprop("/fdm/jsbsim/electric/output/gun") > 33) {
@@ -531,10 +593,22 @@ var unjam = func(button) {
         setprop("/fdm/jsbsim/systems/armament/GSh-23-jammed",0);
     }
 }
+var unjamupk = func(button) {
+    if ( charge_used_upk[button] == 0 and getprop("/fdm/jsbsim/electric/output/upk23/power") > 33) {
+        charge_used_upk[button] = 1;
+        setprop("/fdm/jsbsim/systems/armament/UPK-23-OL-jammed",0);
+        setprop("/fdm/jsbsim/systems/armament/UPK-23-IL-jammed",0);
+        setprop("/fdm/jsbsim/systems/armament/UPK-23-IR-jammed",0);
+        setprop("/fdm/jsbsim/systems/armament/UPK-23-OR-jammed",0);
+    }
+}
 
 setlistener("controls/armament/panel/reload[0]", func { unjam(0); } );
 setlistener("controls/armament/panel/reload[1]", func { unjam(1); } );
 setlistener("controls/armament/panel/reload[2]", func { unjam(2); } );
+setlistener("controls/armament/panel/upkreload[0]", func { unjamupk(0); } );
+setlistener("controls/armament/panel/upkreload[1]", func { unjamupk(1); } );
+setlistener("controls/armament/panel/upkreload[2]", func { unjamupk(2); } );
 
 ###########  trigger propogation  ###########
 

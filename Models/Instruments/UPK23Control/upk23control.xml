@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>upk23control.ac</path>
+
+    <!--lights-->
+    
+    <animation>
+            <type>material</type>
+            <object-name>labels</object-name>
+            <emission>
+                 <red>0.6</red>
+                 <green>0.3</green>
+                 <blue>0.3</blue>
+                <factor-prop>controls/lighting/instruments-norm</factor-prop>
+            </emission> 
+    </animation>
+    
+    
+    
+    <!-- picks and translations -->
+
+    <animation>
+        <type>knob</type>
+        <object-name>powerSwitch</object-name>
+        <property>/fdm/jsbsim/electric/switches/cc/upk23/power</property>
+        <factor>-50</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.010276</x-m>
+            <y-m>-0.075939</y-m>
+            <z-m>-0.007877</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+
+        <action>
+            <binding>
+                <command>property-toggle</command>
+                <property>/fdm/jsbsim/electric/switches/cc/upk23/power</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>gunSwitch</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>/fdm/jsbsim/systems/armament/guntriggerselect</property>
+                <step>-1</step>
+                <min>0</min>
+                <max>3</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>/fdm/jsbsim/systems/armament/guntriggerselect</property>
+                <step>1</step>
+                <min>0</min>
+                <max>3</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+    </animation>
+    
+    <animation>
+        <object-name>gunSwitch</object-name>
+        <type>rotate</type>
+        <property>/fdm/jsbsim/systems/armament/guntriggerselect</property>
+        <factor>-25</factor>
+        <offset-deg>25</offset-deg>
+        <center>
+            <x-m>-0.010276</x-m>
+            <y-m>-0.045939</y-m>
+            <z-m>-0.007877</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>reload1</object-name>
+        <action>
+            <button>0</button>
+            <button>1</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-assign</command>
+                <property>controls/armament/panel/upkreload[0]</property>
+                <value>1</value>
+            </binding>
+            <mod-up>
+                <binding>
+                    <command>property-assign</command>
+                    <property>controls/armament/panel/upkreload[0]</property>
+                    <value>0</value>
+                </binding>
+            </mod-up>
+        </action>
+    </animation>
+    
+    <animation>
+        <type>translate</type>
+        <object-name>reload1</object-name>
+        <property>controls/armament/panel/upkreload[0]</property>
+        <factor>0.004</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+    
+    <animation>
+        <type>pick</type>
+        <object-name>reload2</object-name>
+        <action>
+            <button>0</button>
+            <button>1</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-assign</command>
+                <property>controls/armament/panel/upkreload[1]</property>
+                <value>1</value>
+            </binding>
+            <mod-up>
+                <binding>
+                    <command>property-assign</command>
+                    <property>controls/armament/panel/upkreload[1]</property>
+                    <value>0</value>
+                </binding>
+            </mod-up>
+        </action>
+    </animation>
+    
+    <animation>
+        <type>translate</type>
+        <object-name>reload2</object-name>
+        <property>controls/armament/panel/upkreload[1]</property>
+        <factor>0.004</factor>
+        <axis>
+            <x>-1</x>
+            <y> 0</y>
+            <z> 0</z>
+        </axis>
+    </animation>
+    
+    <animation>
+        <type>pick</type>
+        <object-name>reload3</object-name>
+        <action>
+            <button>0</button>
+            <button>1</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-cycle</command>
+                <property>controls/armament/panel/upkreload[2]</property>
+                <value>1</value>
+            </binding>
+            <mod-up>
+                <binding>
+                    <command>property-cycle</command>
+                    <property>controls/armament/panel/upkreload[2]</property>
+                    <value>0</value>
+                </binding>
+            </mod-up>
+        </action>
+    </animation>
+    
+    <animation>
+        <type>translate</type>
+        <object-name>reload3</object-name>
+        <property>controls/armament/panel/upkreload[2]</property>
+        <factor>0.004</factor>
+        <axis>
+            <x>-1</x>
+            <y> 0</y>
+            <z> 0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>powerLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/fdm/jsbsim/electric/output/upk23/power</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>readyLight</object-name>
+        <ambient>
+            <red>0.0</red>
+            <green>0.1</green>
+            <blue>0.05</blue>
+        </ambient>
+        <emission>
+            <red>0.0</red>
+            <green>1.0</green>
+            <blue>0.2</blue>
+            <factor-prop>/fdm/jsbsim/systems/armament/UPK-23-ready</factor-prop>
+        </emission>
+    </animation>
+
+</PropertyList>

@@ -557,9 +557,9 @@
             <name>gunfire</name>
             <mode>looped</mode>
             <condition>
-            <property>payload/armament/GSh-30/trigger</property>
+                  <property>fdm/jsbsim/systems/armament/gun-sound</property>
             </condition>
-            <path>Aircraft/MiG-21bis/Sounds/Samples/gun.wav</path>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/gun2.wav</path>
         </guns>
 
 <!-- Missile fire -->

@@ -395,6 +395,7 @@
     <!-- Misc Settings -->
 
     <controls>
+        <gunpitch type="double">1.8</gunpitch>
         <flight>
             <flaps>0</flaps>
             <flap-panel>

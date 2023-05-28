@@ -48,4 +48,28 @@
         </condition>
     </animation>
 
+    <!-- UPK-23 panel -->
+
+    <model>
+        <name>UPK23control</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/UPK23Control/upk23control.xml</path>
+        <offsets>
+                <x-m>-3.90937</x-m>
+                <y-m>-0.001762</y-m>
+                <z-m>1.22885</z-m>
+                <pitch-deg>12.00</pitch-deg>
+        </offsets>
+    </model>
+    
+    <animation>
+        <type>select</type>
+        <object-name>UPK23control</object-name>
+        <condition>
+            <equals>
+                  <property>instrumentation/center-console/selected</property>
+                  <value>UPK-23 Control</value>
+            </equals>
+        </condition>
+    </animation>
+
 </PropertyList>

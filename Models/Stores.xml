@@ -2006,6 +2006,12 @@
         </condition>
     </animation>
 
+    <!--
+
+    P-100
+
+    -->
+
     <model>
         <name>P-100 Left Outer</name>
         <path>Aircraft/MiG-21bis/Models/Stores/P-100/P-100.xml</path>
@@ -2338,6 +2344,12 @@
         </condition>
     </animation>
 
+    <!--
+
+    BETAB-500ShP
+
+    -->
+
     <model>
         <name>BETAB-500ShP Left</name>
         <path>Aircraft/MiG-21bis/Models/Stores/BETAB-500ShP/BETAB-500ShP.xml</path>
@@ -2383,5 +2395,117 @@
             </equals>
         </condition>
     </animation>
+
+    <model>
+        <name>BETAB-500ShP Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/BETAB-500ShP/BETAB-500ShP.xml</path>
+        <offsets>
+            <x-m>0.689786</x-m>
+            <y-m>2.1046</y-m>
+            <z-m>-0.305351</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>0.0</roll-deg>
+        </offsets>
+    </model>
+
+
+    <!--
+
+    BETAB-500ShP
+
+    -->
+
+    
+    <animation>
+        <type>select</type>
+        <object-name>UPK-23-250 Left</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[0]</property>
+                  <value>40</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <model>
+        <name>UPK-23-250 Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UPK-23-250/upk-23-250.xml</path>
+        <offsets>
+            <x-m>1.69562</x-m>
+            <y-m>-2.73243</y-m>
+            <z-m>-0.3286</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>0.0</roll-deg>
+        </offsets>
+    </model>
+
+    <animation>
+        <type>select</type>
+        <object-name>UPK-23-250 Inner Left</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[1]</property>
+                  <value>40</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <model>
+        <name>UPK-23-250 Inner Left</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UPK-23-250/upk-23-250.xml</path>
+        <offsets>
+            <x-m>0.784204</x-m>
+            <y-m>-2.10909</y-m>
+            <z-m>-0.294967</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>0.0</roll-deg>
+        </offsets>
+    </model>
+
+    <animation>
+        <type>select</type>
+        <object-name>UPK-23-250 Inner Right</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[3]</property>
+                  <value>40</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <model>
+        <name>UPK-23-250 Inner Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UPK-23-250/upk-23-250.xml</path>
+        <offsets>
+            <x-m>0.784204</x-m>
+            <y-m>2.10909</y-m>
+            <z-m>-0.294967</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>0.0</roll-deg>
+        </offsets>
+    </model>
+
+    <animation>
+        <type>select</type>
+        <object-name>UPK-23-250 Right</object-name>
+        <condition>
+            <equals>
+                  <property>sim/multiplay/generic/short[4]</property>
+                  <value>40</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <model>
+        <name>UPK-23-250 Right</name>
+        <path>Aircraft/MiG-21bis/Models/Stores/UPK-23-250/upk-23-250.xml</path>
+        <offsets>
+            <x-m>1.69562</x-m>
+            <y-m>2.73243</y-m>
+            <z-m>-0.3286</z-m>
+            <pitch-deg>0.0</pitch-deg>
+            <roll-deg>0.0</roll-deg>
+        </offsets>
+    </model>
 
 </PropertyList>
