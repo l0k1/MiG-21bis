@@ -18,8 +18,8 @@
 				<property>/instrumentation/comm-radio/selection</property>
 				<step>1</step>
 				<min>0</min>
-				<max>19</max>
-				<wrap>false</wrap>
+				<max>20</max>
+				<wrap>true</wrap>
 			</binding>
 		</action>
 		<action>
@@ -31,8 +31,8 @@
 				<property>/instrumentation/comm-radio/selection</property>
 				<step>-1</step>
 				<min>0</min>
-				<max>19</max>
-				<wrap>false</wrap>
+				<max>20</max>
+				<wrap>true</wrap>
 			</binding>
 		</action>
 	</animation>
