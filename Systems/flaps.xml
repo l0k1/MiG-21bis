@@ -136,6 +136,15 @@
             <property>electric/output/blc</property>
             <value>105</value>
           </gt>
+          <table>
+            <independentVar lookup="row">fcs/flap-pos-deg</independentVar>
+            <tableData>
+               0.0  0.00
+              29.5  0.00
+              30.5  1.00
+              99.0  1.00
+            </tableData>
+          </table>
           <avg>
             <gt>
               <property>electric/output/blc-syst-shutters-control-1</property>
@@ -150,9 +159,9 @@
             <independentVar lookup="row">propulsion/engine/n1</independentVar>
             <tableData>
                0.0  0.00
-              70.0  0.00
-              75.0  0.15
-              80.0  0.92
+              50.0  0.00
+              55.0  0.15
+              65.0  0.92
               83.0  1.00
             </tableData>
           </table>
