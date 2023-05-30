@@ -178,12 +178,10 @@
             <test logic="AND" value="1">
                 electric/output/upk23/power gt 33
                 /ai/submodels/submodel[107]/count gt 0
-                <test logic="OR">
-                    systems/armament/UPK-23-OL-jammed == 0
-                    systems/armament/UPK-23-IL-jammed == 0
-                    systems/armament/UPK-23-IR-jammed == 0
-                    systems/armament/UPK-23-OR-jammed == 0
-                </test>
+                systems/armament/UPK-23-OL-jammed == 0
+                systems/armament/UPK-23-IL-jammed == 0
+                systems/armament/UPK-23-IR-jammed == 0
+                systems/armament/UPK-23-OR-jammed == 0
             </test>
         </switch>
     
