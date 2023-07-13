@@ -132,6 +132,9 @@
           <value>0.1</value>
         </max>
 
+        <!-- hamper thrust if engine is damaged -->
+        <property>propulsion/engine[0]/damage-norm</property>
+
        <!-- if not propulsion/engine[0]/augmentation and nozzle position is open, severely hamper the mil thrust -->
        <!-- this was used prior to full engine nozzle simulation. keeping for posterity.
           <ifthen>
@@ -209,6 +212,7 @@
           </difference>
           <value>0.1</value>
         </max>
+        <property>propulsion/engine[0]/damage-norm</property>
 		</product>
 	</function>
 

@@ -830,11 +830,11 @@
                     <property>/sim/current-view/internal</property>
                 </and>
             </condition>
-                <position>
-                    <x>-3.94524</x>
-                    <y> -0.301</y>
-                    <z> 0.75779</z>
-                </position>
+            <position>
+                <x>-3.94524</x>
+                <y> -0.301</y>
+                <z> 0.75779</z>
+            </position>
             <volume>
                 <property>/instrumentation/rwr/volume</property>
             </volume>
@@ -847,14 +847,6 @@
             <condition>
                 <property>/fdm/jsbsim/systems/air-intake/surging</property>
             </condition>
-            <position>
-                <x>0.01</x>
-                <y>0.01</y>
-                <z>0.01</z>
-            </position>
-            <volume>
-                <factor>1</factor>
-            </volume>
         </enginesurge>
 
         <masterwarn>
@@ -873,6 +865,40 @@
                 <factor>0.8</factor>
             </volume>
         </masterwarn>
+
+        <enginedamageclick>
+            <name>metalclick1</name>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/metalclick_1.wav</path>
+            <mode>looped</mode>
+            <condition>
+                <equals>
+                    <property>engines/engine/running</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <volume>
+                <property>/sounds/engineclick1</property>
+                <min>0.0</min>
+                <max>0.6</max>
+            </volume>
+        </enginedamageclick>
+
+        <enginedamageclick>
+            <name>metalclick2</name>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/metalclick_2.wav</path>
+            <mode>looped</mode>
+            <condition>
+                <equals>
+                    <property>engines/engine/running</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <volume>
+                <property>/sounds/engineclick2</property>
+                <min>0.0</min>
+                <max>0.75</max>
+            </volume>
+        </enginedamageclick>
 
     </fx>
 

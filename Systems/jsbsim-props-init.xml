@@ -158,6 +158,9 @@
     </pneumatic>
     <propulsion>
         <clr type="int">0</clr>
+        <engine n="0">
+            <damage-norm type="double">1.0</damage-norm>
+        </engine>
     </propulsion>
     <random>
         <rand-0 type="double">0.0</rand-0>
