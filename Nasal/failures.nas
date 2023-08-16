@@ -6,7 +6,7 @@ var reset_failures = func() {
 	} else {
 		screen.log.write("Airframe damage reset.");
 		crashandstress.repair();
-		setprop("/fdm/jsbsim/propulsion/engine[0]/damage-norm",0);
+		setprop("/fdm/jsbsim/propulsion/engine[0]/damage-norm",1);
 	}
 };
 
@@ -20,6 +20,16 @@ var set_value = func(path, value) {
         get_failure_level: func { getprop(path) == default ? 0 : 1 }
     }
 };
+
+var partial_failure = func(path) {
+	var default = getprop(path);
+	return {
+		parents: [FailureMgr.FailureActuator],
+        set_failure_level: func(level) setprop(path, level > 0 ? default + level : default),
+        get_failure_level: func { return default; }
+
+	}
+}
 
 
 # random failure code:
