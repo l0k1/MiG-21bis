@@ -1508,7 +1508,7 @@
                 <self-destruct-time-sec type="double">180</self-destruct-time-sec> <!-- time before selfdestruct -->
                 <self-destruct-at-lock-lost type="bool">false</self-destruct-at-lock-lost> <!-- selfdestruct if lose target -->
                 <max-report-distance type="double">65</max-report-distance> <!-- Interpolation hit: max distance from target it report it exploded, not passed. Trig hit: Distance where it will trigger. -->
-                <hit-everything-nearby type="bool">false</hit-everything-nearby> <!-- acts like a bomb, will check for nearby targets if true (99% of the time should be false) -->
+                <hit-everything-nearby type="bool">true</hit-everything-nearby> <!-- acts like a bomb, will check for nearby targets if true (99% of the time should be false) -->
                 <!--avionics sounds-->
                 <vol-search type="double">0.0</vol-search> <!-- sound volume when searcing -->
                 <vol-track type="double">0.0</vol-track> <!-- sound volume when having lock -->
