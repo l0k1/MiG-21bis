@@ -1,32 +1,32 @@
 #
 # Install: Include this code into an aircraft to make it damagable. (remember to add it to the -set file)
-#          for damage to be recognised, the property /payload/armament/msg must be 1
+#          if /payload/armament/spectator is 1 and damage off, missile trails, craters, flares,
+#          and missile warnings will be received, but not actual damage.
 #
-# Authors: Nikolai V. Chr., Pinto and Richard (with improvement by Onox)
+# Authors: Nikolai V. Chr., Pinto, Colin Geniet and Richard (with improvement by Onox)
 #
 #
 
 
 ############################ Config ########################################################################################
-var full_damage_dist_m = 3;# Can vary from aircraft to aircraft depending on how many failure modes it has.
+var full_damage_dist_m = getprop("payload/d-config/full_damage_dist_m");# Can vary from aircraft to aircraft depending on how many failure modes it has.
                            # Many modes (like Viggen) ought to have lower number like zero.
                            # Few modes (like F-14) ought to have larger number such as 3.
                            # For assets this should be average radius of the asset.
-var use_hitpoints_instead_of_failure_modes_bool = 0;# mainly used by assets that don't have failure modes.
-var hp_max = 80;# given a direct hit, how much pounds of warhead is needed to kill. Only used if hitpoints is enabled.
-var hitable_by_air_munitions = 1;   # if anti-air can do damage
-var hitable_by_cannon = 1;          # if cannon can do damage
+var use_hitpoints_instead_of_failure_modes_bool = getprop("payload/d-config/use_hitpoints_instead_of_failure_modes_bool");# bool. mainly used by assets that don't have failure modes.
+var hp_max = getprop("payload/d-config/hp_max");# given a direct hit, how much pounds of warhead is needed to kill. Only used if hitpoints is enabled.
+var hitable_by_air_munitions = getprop("payload/d-config/hitable_by_air_munitions");   # if anti-air can do damage
+var hitable_by_cannon = getprop("payload/d-config/hitable_by_cannon");          # if cannon can do damage
 #var hitable_by_ground_munitions = 1;# if anti-ground/marine can do damage
-var is_fleet = 0;  # Is really 7 ships, 3 of which has offensive missiles.
-var rwr_to_screen=0; # for aircraft that do not yet have proper RWR
-var tacview_supported=1; # For aircraft with tacview support
-var m28_auto=0; # only used by automats
-var mlw_max=2.25; # 
-var auto_flare_caller = 1; # If damage.nas should detect flare releases, or if function is called from somewhere in aircraft
+var is_fleet = getprop("payload/d-config/is_fleet");  # Is really 7 ships, 3 of which has offensive missiles.
+var rwr_to_screen=getprop("payload/d-config/rwr_to_screen"); # for aircraft that do not yet have proper RWR
+var rwr_audio_extended=getprop("payload/d-config/rwr_audio_extended"); # for aircraft that want seperate audio properties for different radar spikes.
+var tacview_supported=getprop("payload/d-config/tacview_supported"); # For aircraft with tacview support
+var m28_auto=getprop("payload/d-config/m28_auto"); # only used by automats
+var mlw_max=getprop("payload/d-config/mlw_max") or 1; #
+var auto_flare_caller = getprop("payload/d-config/auto_flare_caller"); # If damage.nas should detect flare releases, or if function is called from somewhere in aircraft
 ############################################################################################################################
 
-var TRUE  = 1;
-var FALSE = 0;
 
 var hp = hp_max;
 setprop("sam/damage", math.max(0,100*hp/hp_max));#used in HUD
@@ -37,28 +37,36 @@ var shells = {
     # 0.20 means a direct hit will disable 20% of the failure modes on average.
     # or, 0.20 also means a direct hit can do 20 hitpoints damage.
     #
-    "M70 rocket":        [0,0.250], #135mm
-    "S-5 rocket":        [1,0.200], # 55mm
-    "M55 cannon shell":  [2,0.100], # 30mm
-    "KCA cannon shell":  [3,0.100], # 30mm
-    "GSh-30":            [4,0.100], # 30mm
-    "GAU-8/A":           [5,0.100], # 30mm
-    "Mk3Z":              [6,0.100], # 30mm Jaguar
-    "BK27 cannon":       [7,0.070], # 27mm
-    "GSh-23":            [8,0.065], # 23mm
-    "M61A1 shell":       [9,0.050], # 20mm F14, F15, F16
-    "50 BMG":            [10,0.015], # 12.7mm (non-explosive)    
+    # Damage roughly proportional to projectile weight.
+    # If weight isn't listed here, it was estimated from dimensions (proportional to diameter^2 * length).
+    # Approximate formulae for cannons:
+    # damage ~ weight / 3.6 (in g)
+    # or damage ~ diameter^2 * length / 1.6e6 (in mm)
+    #
+    "M70 rocket":        [0,0.500], # 135mm, ~5kg warhead
+    "S-5 rocket":        [1,0.200], # 55mm, ~1-2kg warhead
+    "M55 shell":         [2,0.060], # 30x113mm, 220g
+    "KCA shell":         [3,0.100], # 30x173mm, 360g
+    "GSh-30":            [4,0.095], # 30x165mm mig29/su27
+    "GAU-8/A":           [5,0.100], # 30x173mm, 360g
+    "Mk3Z":              [6,0.060], # 30x113mm Jaguar, 220g
+    "BK27":              [7,0.070], # 27x145mm, 270g
+    "GSh-23":            [8,0.040], # 23x115mm,
+    "M61A1 shell":       [9,0.030], # 20x102mm F14, F15, F16, 100g
+    "50 BMG":            [10,0.015], # 12.7mm (non-explosive)
     "7.62":              [11,0.005], # 7.62mm (non-explosive)
-    "Hydra-70":          [12,0.250], # F-16
-    "SNEB":              [13,0.250], # Jaguar   
-    "DEFA 554":          [14,0.100], # 30mm Mirage
-};    
+    "Hydra-70":          [12,0.500], # 70mm, F-16/A-6 LAU-68 and LAU-61, ~4-6kg warhead
+    "SNEB":              [13,0.500], # 68mm, Jaguar
+    "DEFA 554":          [14,0.060], # 30x113mm Mirage, 220g
+    "20mm APDS":         [15,0.030], # CIWS
+    "LAU-10":            [16,0.500], # 127mm, ~4-7kg warhead
+};
 
 # lbs of warheads is explosive+fragmentation+fuse, so total warhead mass.
 
 var warheads = {
     # [id,lbs,anti surface,cluster,(name)]
-    "AGM-65":            [ 0,  126.00,1,0],
+    "AGM-65B":           [ 0,  126.00,1,0],
     "AGM-84":            [ 1,  488.00,1,0],
     "AGM-88":            [ 2,  146.00,1,0],
     "MK-82SE":           [ 3,  192.00,1,0],# snake eye
@@ -66,13 +74,13 @@ var warheads = {
     "AGM-154A":          [ 5,  493.00,1,0],
     "AGM-158":           [ 6, 1000.00,1,0],
     "ALARM":             [ 7,  450.00,1,0],
-    "AM39-Exocet":       [ 8,  364.00,1,0], 
-    "AS-37-Martel":      [ 9,  330.00,1,0], 
+    "AM 39 Exocet":      [ 8,  364.00,1,0], 
+    "AS 37 Martel":      [ 9,  330.00,1,0],# Also : AJ 168 Martel 
     "AS30L":             [10,  529.00,1,0],
     "BL755":             [11,  100.00,1,1],# 800lb bomblet warhead. Mix of armour piecing and HE. 100 due to need to be able to kill buk-m2.    
     "CBU-87":            [12,  100.00,1,1],# bomblet warhead. Mix of armour piecing and HE. 100 due to need to be able to kill buk-m2.    
     "CBU-105":           [13,  100.00,1,1],# bomblet warhead. Mix of armour piecing and HE. 100 due to need to be able to kill buk-m2.    
-    "Exocet":            [14,  364.00,1,0],
+    "AS 37 Armat":       [14,  330.00,1,0],
     "FAB-100":           [15,   92.59,1,0],
     "FAB-250":           [16,  202.85,1,0],
     "FAB-500":           [17,  564.38,1,0],
@@ -80,7 +88,7 @@ var warheads = {
     "GBU-24":            [19,  945.00,1,0],
     "GBU-31":            [20,  945.00,1,0],
     "GBU-54":            [21,  190.00,1,0],
-    "GBU12":             [22,  190.00,1,0],#deprecated
+    "GBU-10":            [22,  945.00,1,0],
     "GBU-16":            [23,  450.00,1,0],
     "HVAR":              [24,    7.50,1,0],#P51
     "KAB-500":           [25,  564.38,1,0],
@@ -103,32 +111,32 @@ var warheads = {
     "RS-2US":            [42,   28.66,1,0],
     "S-21":              [43,  245.00,1,0],
     "S-24":              [44,  271.00,1,0],
-    "SCALP":             [45,  992.00,1,0],
+    "SCALP EG":          [45,  992.00,1,0],# aka. Storm Shadow
     "Sea Eagle":         [46,  505.00,1,0],
-    "SeaEagle":          [47,  505.00,1,0],
-    "STORMSHADOW":       [48,  850.00,1,0],
+    "MK-82HD":           [47,  192.00,1,0],
+    "MK-20":             [48,  100.00,1,1],#aka CBU-100 # bomblet warhead. 247 x 0.4lb
     "ZB-250":            [49,  236.99,1,0],
     "ZB-500":            [50,  473.99,1,0],
-    "aim-120":           [51,   44.00,0,0],#deprecated
-    "AIM-120":           [52,   44.00,0,0],
+    "AGM-45":            [51,  149.00,1,0],#shrike
+    "AIM-120B":          [52,   44.00,0,0],
     "AIM-54":            [53,  135.00,0,0],
-    "aim-7":             [54,   88.00,0,0],#deprecated
-    "AIM-7":             [55,   88.00,0,0],
-    "aim-9":             [56,   20.80,0,0],#deprecated
-    "AIM-9":             [57,   20.80,0,0],
-    "AIM120":            [58,   44.00,0,0],
-    "AIM132":            [59,   22.05,0,0],
-    "AIM9":              [60,   20.80,0,0],#deprecated
+    "AGM-78":            [54,  215.00,1,0],
+    "AIM-7F":            [55,   88.00,0,0],
+    "AGM-62":            [56, 2000.00,1,0],
+    "AIM-9L":            [57,   20.80,0,0],
+    "AGM-65D":           [58,  126.00,1,0],
+    "AIM-132":           [59,   22.05,0,0],
+    "Apache AP":         [60,  110.23,0,1],# Real mass of bomblet. (x 10). Anti runway.
     "KN-06":             [61,  315.00,0,0],
-    "M317":              [62,  145.00,0,0],
-    "Magic-2":           [63,   27.00,0,0],#deprecated 
-    "Majic":             [64,   26.45,0,0],
-    "Matra MICA":        [65,   30.00,0,0],
-    "Matra R550 Magic 2":[66,   27.00,0,0],
-    "Matra R530":        [67,   55.00,0,0],
-    "MatraMica":         [68,   30.00,0,0],#deprecated
-    "MatraMicaIR":       [69,   30.00,0,0],#deprecated
-    "MatraR550Magic2":   [70,   27.00,0,0],#deprecated 
+    "9M317":             [62,  145.00,0,0],
+    "GEM":               [63,  185.00,0,0],#MIM-104D 
+    "R.550 Magic":       [64,   26.45,0,0],# also called majic
+    "5Ya23":             [65,  414.00,0,0],#Volga-M
+    "R.550 Magic 2":     [66,   27.00,0,0],
+    "R.530":             [67,   55.00,0,0],
+    "MK-82AIR":          [68,  192.00,1,0],
+    "AIM-9M":            [69,   20.80,0,0],
+    "R-73 RMD-1":        [70,   16.31,0,0],# automat Mig29/su27
     "Meteor":            [71,   55.00,0,0],
     "MICA-EM":           [72,   30.00,0,0], 
     "MICA-IR":           [73,   30.00,0,0], 
@@ -149,17 +157,54 @@ var warheads = {
     "RB-71":             [88,   88.00,0,0],
     "RB-74":             [89,   20.80,0,0],
     "RB-99":             [90,   44.00,0,0],
-    "S530D":             [91,   66.00,0,0],
-    "S48N6":             [92,  330.00,0,0],# 48N6 from S-300pmu
+    "Super 530D":        [91,   66.00,0,0],
+    "48N6":              [92,  330.00,0,0],# 48N6 from S-300pmu
     "pilot":             [93,    0.00,1,0],# ejected pilot
     "BETAB-500ShP":      [94, 1160.00,1,0],
     "Flare":             [95,    0.00,0,0],
+    "3M9":               [96,  125.00,0,0],# 3M9M3 Missile used with 2K12/SA-6
+    "5V28V":             [97,  478.00,0,0],# Missile used with S-200D/SA-5
+    "AIM-9X":            [98,   20.80,0,0],
 };
+
+var AIR_RADAR = "air";
+
+var radar_signatures = {
+                "unknown-model":            AIR_RADAR,
+                "f-14b":                    AIR_RADAR,
+                "F-14D":                    AIR_RADAR,
+                "F-15C":                    AIR_RADAR,
+                "F-15D":                    AIR_RADAR,
+                "F-16":                     AIR_RADAR,
+                "AJS37-Viggen":             AIR_RADAR,
+                "JA37Di-Viggen":            AIR_RADAR,
+                "m2000-5":                  AIR_RADAR,
+                "m2000-5B":                 AIR_RADAR,
+                "MiG-21bis":                AIR_RADAR,
+                "MiG-21MF-75":              AIR_RADAR,
+                "MiG-29":                   AIR_RADAR,
+                "SU-27":                    AIR_RADAR,
+                "EC-137R":                  AIR_RADAR,
+                "RC-137R":                  AIR_RADAR,
+                "E-8R":                     AIR_RADAR,
+                "EC-137D":                  AIR_RADAR,
+                "Mig-28":                   AIR_RADAR,
+                "SA-6":                     "gnd-06",#Air radar tone chosen so that there is at least some lock tone until asset-specific is created
+                "s-200":                    "gnd-05",
+                "ZSU-23-4M":                "gnd-23",
+                "S-75":                     "gnd-02",
+                "buk-m2":                   "gnd-11",
+                "s-300":                    "gnd-20",
+                "MIM104D":                  "gnd-p2",
+                "missile_frigate":          "gnd-nk",
+                "fleet":                    "gnd-nk",
+};
+
 
 var id2warhead = [];
 var launched = {};# callsign: elapsed-sec
 var approached = {};# callsign: uniqueID
-var heavy_smoke = [61,62,92];
+var heavy_smoke = [61,62,63,65,92,96,97];
 
 var k = keys(warheads);
 
@@ -197,6 +242,10 @@ for(var myid = 0;myid<size(k);myid+=1) {
   }
 }
 
+var crater_model0 = getprop("payload/armament/models") ~ "crater_small.xml";
+var crater_model1 = getprop("payload/armament/models") ~ "crater_big.xml";
+var crater_model2 = getprop("payload/armament/models") ~ "bomb_hit_smoke.xml";
+
 #==================================================================
 #                       Notification processing
 #==================================================================
@@ -216,12 +265,12 @@ var DamageRecipient =
             }
 #
 #
-# This will be where movement and damage notifications are received. 
-# This can replace MP chat for damage notifications 
+# This will be where movement and damage notifications are received.
+# This can replace MP chat for damage notifications
 # and allow missile visibility globally (i.e. all suitable equipped models) have the possibility
 # to receive notifications from all other suitably equipped models.
             if (notification.NotificationType == "ArmamentInFlightNotification" or notification.NotificationType == "ObjectInFlightNotification") {
-#                print("recv(d1): ",notification.NotificationType, " ", notification.Ident, 
+#                print("recv(d1): ",notification.NotificationType, " ", notification.Ident,
 #                      " UniqueIdentity=",notification.UniqueIdentity,
 #                      " Kind=",notification.Kind,
 #                      " SecondaryKind=",notification.SecondaryKind,
@@ -237,6 +286,7 @@ var DamageRecipient =
 #                      " Flags=",notification.Flags,
 #                      " Radar=",bits.test(notification.Flags, 0),
 #                      " Thrust=",bits.test(notification.Flags, 1));
+#                      " CWI=",bits.test(notification.Flags, 2));
                 #
                 # todo:
                 #   animate missiles
@@ -248,22 +298,23 @@ var DamageRecipient =
                   notification.Flags = 0;
                   notification.RemoteCallsign = "";
                 }
-                if(getprop("payload/armament/msg") == 0 and notification.RemoteCallsign != notification.Callsign) {
+                if(getprop("payload/armament/msg") == 0 and getprop("payload/armament/spectator") != 1 and notification.RemoteCallsign != notification.Callsign) {
                   return emesary.Transmitter.ReceiptStatus_NotProcessed;
                 }
-                                
+
                 var elapsed = getprop("sim/time/elapsed-sec");
                 var ownPos = geo.aircraft_position();
                 var bearing = ownPos.course_to(notification.Position);
                 var radarOn = bits.test(notification.Flags, 0);
                 var thrustOn = bits.test(notification.Flags, 1);
+                var CWIOn = bits.test(notification.Flags, 2);
                 var index = notification.SecondaryKind-21;
                 var typ = id2warhead[index];
-                
+
                 if (notification.Kind == MOVE) {
                   if (thrustOn or index == 93 or index == 95) {
                     # visualize missile smoke trail
-                    
+
                       var smoke = 1;
                       if (index == 93) {
                         smoke = 0;
@@ -281,7 +332,7 @@ var DamageRecipient =
                         }
                       }
                       dynamics["noti_"~notification.Callsign~"_"~notification.UniqueIdentity] = [systime(), notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.u_fps, notification.Heading, notification.Pitch,smoke];
-                                     
+
                   } else {
                     # the +1.5 is the update time that missiles send notifications out in
                     dynamics["noti_"~notification.Callsign~"_"~notification.UniqueIdentity] = [systime()-(time_before_delete-1.6), notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.u_fps, notification.Heading, notification.Pitch,-1]
@@ -289,8 +340,8 @@ var DamageRecipient =
                 } elsif (notification.Kind == DESTROY) {
                   dynamics["noti_"~notification.Callsign~"_"~notification.UniqueIdentity] = [systime()-(time_before_delete-1.6), notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.u_fps, notification.Heading, notification.Pitch,-1]
                 }
-                
-                if (tacview_supported and getprop("sim/multiplay/txhost") == "mpserver.opredflag.com") {
+
+                if (tacview_supported and (getprop("sim/multiplay/txhost") != "mpserver.opredflag.com" or m28_auto)) {
                   if (tacview.starttime) {
                     var tacID = left(md5(notification.Callsign~notification.UniqueIdentity),6);
                     if (notification.Kind == DESTROY) {
@@ -302,8 +353,9 @@ var DamageRecipient =
                       var typp = typ[4]=="pilot"?"Parachutist":typ[4];
                       var extra = typp=="Parachutist"?"|0|0|0":"";
                       var extra2 = typ[2]==0?",Type=Weapon+Missile":",Type=Weapon+Bomb";
+                      extra2 = typ[4]=="Flare"?",Type=Flare":extra2;
                       extra2 = typp=="Parachutist"?"":extra2;
-                      var color = radarOn?",Color=Red":",Color=Yellow";
+                      var color = radarOn or CWIOn?",Color=Red":",Color=Yellow";
                       thread.lock(tacview.mutexWrite);
                       tacview.write("#" ~ (systime() - tacview.starttime)~"\n");
                       tacview.write(tacID~",T="~notification.Position.lon()~"|"~notification.Position.lat()~"|"~notification.Position.alt()~extra~",Name="~typp~color~extra2~"\n");
@@ -311,15 +363,15 @@ var DamageRecipient =
                     }
                   }
                 }
-                
+
                 if (notification.Kind == DESTROY) {
                   return emesary.Transmitter.ReceiptStatus_OK;
                 }
-                
+
                 if (index == 95 or index == 93) {
                   return emesary.Transmitter.ReceiptStatus_OK;
                 }
-                
+
                 # Missile launch warning:
                 if (thrustOn) {
                   var launch = launched[notification.Callsign~notification.UniqueIdentity];
@@ -331,30 +383,41 @@ var DamageRecipient =
                       setprop("payload/armament/MLW-launcher", notification.Callsign);
                       setprop("payload/armament/MLW-count", getprop("payload/armament/MLW-count")+1);
                       var out = sprintf("Missile Launch Warning from %03d degrees.", bearing);
-                      if (rwr_to_screen) screen.log.write(out, 1,1,0);# temporary till someone models a RWR in RIO seat
+                      if (rwr_to_screen) screen.log.write(out, 1,0.5,0);# temporary till someone models a RWR in RIO seat
                       print(out);
                       damageLog.push(sprintf("Missile Launch Warning from %03d degrees from %s.", bearing, notification.Callsign));
+                      if (m28_auto) mig28.missileLaunch();
                     }
                   }
                 }
-                
+
                 # Missile approach warning:
-                var callsign = getprop("sim/multiplay/callsign");
-                callsign = size(callsign) < 8 ? callsign : left(callsign,7);
+                var callsign = processCallsign(getprop("sim/multiplay/callsign"));
                 if (notification.RemoteCallsign != callsign) return emesary.Transmitter.ReceiptStatus_OK;
-                if (!radarOn) return emesary.Transmitter.ReceiptStatus_OK;# this should be little more complex later
-                var heading = getprop("orientation/heading-deg");
-                var clock = geo.normdeg(bearing - heading);
-                setprop("payload/armament/MAW-bearing", bearing);
-                setprop("payload/armament/MAW-active", 1);# resets every 1 seconds
+                if (!radarOn and !CWIOn) return emesary.Transmitter.ReceiptStatus_OK;# this should be little more complex later
+                #var heading = getprop("orientation/heading-deg");
+                #var clock = geo.normdeg(bearing - heading);
+                if (radarOn) {
+                    setprop("payload/armament/MAW-bearing", bearing);
+                    setprop("payload/armament/MAW-active", 1);# resets every 1 seconds
+                } elsif (CWIOn) {
+                    setprop("payload/armament/MAW-semiactive", 1);# resets every 1 seconds
+                    if (notification.Callsign != nil) setprop("payload/armament/MAW-semiactive-callsign", notification.Callsign);# resets every 1 seconds
+                }
                 MAW_elapsed = elapsed;
                 var appr = approached[notification.Callsign~notification.UniqueIdentity];
                 if (appr == nil or elapsed - appr > 450) {
-                  printf("Missile Approach Warning from %03d degrees.", bearing);
-                  damageLog.push(sprintf("Missile Approach Warning from %03d degrees from %s.", bearing, notification.Callsign));
-                  if (rwr_to_screen) screen.log.write(sprintf("Missile Approach Warning from %03d degrees.", bearing), 1,1,0);# temporary till someone models a RWR in RIO seat
+                  if (radarOn) {
+                      #printf("Missile Approach Warning from %03d degrees.", bearing);
+                      damageLog.push(sprintf("Missile Approach Warning from %03d degrees from %s.", bearing, notification.Callsign));
+                      if (rwr_to_screen) screen.log.write(sprintf("Missile Approach Warning from %03d degrees.", bearing), 1,0.5,0);# temporary till someone models a RWR in RIO seat
+                  } else {
+                      #printf("Missile Approach Warning");
+                      damageLog.push(sprintf("Missile Approach Warning from %s.", notification.Callsign));
+                      if (rwr_to_screen) screen.log.write(sprintf("Missile Approach Warning (semi-active)."), 1,0.5,0);# temporary till someone models a RWR in RIO seat
+                  }
                   approached[notification.Callsign~notification.UniqueIdentity] = elapsed;
-                  if (m28_auto) mig28.engagedBy(notification.Callsign);
+                  if (m28_auto) mig28.engagedBy(notification.Callsign, 1);
                 }
                 return emesary.Transmitter.ReceiptStatus_OK;
             }
@@ -371,13 +434,34 @@ var DamageRecipient =
 #                    debug.dump(notification);
                     #
                     #
-                    var callsign = getprop("sim/multiplay/callsign");
-                    callsign = size(callsign) < 8 ? callsign : left(callsign,7);
+                    if (tacview_supported and tacview.starttime and (getprop("sim/multiplay/txhost") != "mpserver.opredflag.com" or m28_auto)) {
+                    var node = getCallsign(notification.RemoteCallsign);
+                      if (node != nil and notification.SecondaryKind > 20) {
+                        # its a warhead
+                        var wh = id2warhead[notification.SecondaryKind - 21];
+                        var lbs = wh[1];
+                        var hitCoord = geo.Coord.new();
+                        hitCoord.set_latlon(node.getNode("position/latitude-deg").getValue(), node.getNode("position/longitude-deg").getValue(), node.getNode("position/altitude-ft").getValue()*FT2M+notification.RelativeAltitude);
+                        if (notification.Distance > math.abs(notification.RelativeAltitude)) {#just a sanity check
+                          hitCoord = hitCoord.apply_course_distance(notification.Bearing, math.sqrt(notification.Distance*notification.Distance-notification.RelativeAltitude*notification.RelativeAltitude));
+                        }
+                        thread.lock(tacview.mutexWrite);
+                        tacview.writeExplosion(hitCoord.lat(),hitCoord.lon(),hitCoord.alt(), lbs*0.5);
+                        thread.unlock(tacview.mutexWrite);
+                      } elsif (node != nil and notification.SecondaryKind < 0) {
+                        # its a cannon or rocket
+                        thread.lock(tacview.mutexWrite);
+                        tacview.writeExplosion(node.getNode("position/latitude-deg").getValue(), node.getNode("position/longitude-deg").getValue(), node.getNode("position/altitude-ft").getValue()*FT2M, 5);
+                        thread.unlock(tacview.mutexWrite);
+                      }
+                    }
+                    var callsign = processCallsign(getprop("sim/multiplay/callsign"));
                     if (notification.RemoteCallsign == callsign and getprop("payload/armament/msg") == 1) {
                         #damage enabled and were getting hit
-                        if (m28_auto) mig28.engagedBy(notification.Callsign);
+                        
                         if (notification.SecondaryKind < 0 and hitable_by_cannon) {
                             # cannon hit
+                            if (m28_auto) mig28.engagedBy(notification.Callsign, 0);
                             var probability = id2shell[-1*notification.SecondaryKind-1][1];
                             var typ = id2shell[-1*notification.SecondaryKind-1][2];
                             var hit_count = notification.Distance;
@@ -393,6 +477,7 @@ var DamageRecipient =
                             }
                         } elsif (notification.SecondaryKind > 20) {
                             # its a warhead
+                            if (m28_auto) mig28.engagedBy(notification.Callsign, 1);
                             var dist     = notification.Distance;
                             var wh = id2warhead[notification.SecondaryKind - 21];
                             var type = wh[4];#test code
@@ -417,10 +502,10 @@ var DamageRecipient =
                             }
 
                             var distance = math.max(dist-full_damage_dist_m, 0);
-              
+
                             var maxDist = 0;# distance where the explosion dont hurt us anymore
                             var lbs = 0;
-                            
+
                             if (wh[2] == 1) {
                               lbs = wh[1];
                               maxDist = maxDamageDistFromWarhead(lbs);#3*sqrt(lbs)
@@ -430,15 +515,15 @@ var DamageRecipient =
                             } else {
                               return;
                             }
-                            
+
                             var diff = maxDist-distance;
                             if (diff < 0) {
                               diff = 0;
                             }
                             diff = diff * diff;
-                                          
+
                             var probability = diff / (maxDist*maxDist);
-                            
+
                             if (use_hitpoints_instead_of_failure_modes_bool) {
                               var hpDist = maxDamageDistFromWarhead(hp_max);
                               probability = (maxDist/hpDist)*probability;
@@ -449,7 +534,7 @@ var DamageRecipient =
                             printf("Took %.1f%% damage from %s at %0.1f meters. %s systems was hit", percent,type,dist,failed);
                             damageLog.push(sprintf("%s hit you with %s, %.1f meters distance.", notification.Callsign, type, dist));
                             nearby_explosion();
-                            
+
                             ####
                             # I don't remember all the considerations that went into our original warhead damage model.
                             # But looking at the formula it looks like they all do 100% damage at 0 meter hit,
@@ -460,46 +545,43 @@ var DamageRecipient =
                             # Anyway, for hitpoint based assets, this is now the case. Maybe we should consider to also do something
                             # similar for failure mode based aircraft. ~Nikolai
                             ####
-                            
+
                             ## example 1: ##
                             # 300 lbs warhead, 50 meters distance
                             # maxDist=52
                             # diff = 52-50 = 2
                             # diff^2 = 4
                             # prob = 4/2700 = 0.15%
-                            
+
                             ## example 2: ##
                             # 300 lbs warhead, 25 meters distance
                             # maxDist=52
                             # diff = 52-25 = 27
                             # diff^2 = 729
                             # prob = 729/2700 = 27%
-                        } 
+                        }
                     }
 #                }
                 return emesary.Transmitter.ReceiptStatus_OK;
             }
             if (notification.NotificationType == "StaticNotification") {
-                if(getprop("payload/armament/msg") == 0) {
+                if(getprop("payload/armament/msg") == 0 and getprop("payload/armament/spectator") != 1) {
                   return emesary.Transmitter.ReceiptStatus_NotProcessed;
                 }
                 if (notification.Kind == CREATE and getprop("payload/armament/enable-craters") == 1 and statics["obj_"~notification.UniqueIdentity] == nil) {
                     if (notification.SecondaryKind == 0) {# TODO: make a hash with all the models
-                        var crater_model = getprop("payload/armament/models") ~ "crater_small.xml";
-                        var static = geo.put_model(crater_model, notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.Heading);
+                        var static = geo.put_model(crater_model0, notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.Heading);
                         if (static != nil) {
                             statics["obj_"~notification.UniqueIdentity] = [static, notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.Heading, notification.SecondaryKind];
                             #static is a PropertyNode inside /models
                         }
                     } elsif (notification.SecondaryKind == 1) {
-                        var crater_model = getprop("payload/armament/models") ~ "crater_big.xml";
-                        var static = geo.put_model(crater_model, notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.Heading);
+                        var static = geo.put_model(crater_model1, notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.Heading);
                         if (static != nil) {
                             statics["obj_"~notification.UniqueIdentity] = [static, notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.Heading, notification.SecondaryKind];
                         }
                     } elsif (notification.SecondaryKind == 2) {
-                        var crater_model = getprop("payload/armament/models") ~ "bomb_hit_smoke.xml";
-                        var static = geo.put_model(crater_model, notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.Heading);
+                        var static = geo.put_model(crater_model2, notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.Heading);
                         if (static != nil) {
                             statics["obj_"~notification.UniqueIdentity] = [static, notification.Position.lat(), notification.Position.lon(), notification.Position.alt(), notification.Heading, notification.SecondaryKind];
                         }
@@ -549,7 +631,7 @@ var deadreckon_updatetime = 0.1;# 1/15 of missile send rate
 var time_before_delete = 2.5;# time since last notification before deleting
 
 var dynamic_loop = func {
-  # This keeps track of flying missiles/parachutes/flares and manages ModelManager.
+  # This keeps track of MP flying missiles/parachutes/flares and manages ModelManager.
   var new_dynamic3d = [];
   var stime = systime();
   foreach (dynamic3d_entry ; dynamic3d) {
@@ -600,7 +682,7 @@ var ModelManager = {
           }
         }
         m.model = n.getChild("model", i, 1);
-        
+
         n = props.globals.getNode("sim/emesary-models", 1);
         for (i = 0; 1==1; i += 1) {
           if (n.getChild("dynamic", i, 0) == nil) {
@@ -608,9 +690,9 @@ var ModelManager = {
           }
         }
         m.ai = n.getChild("dynamic", i, 1);
-        
+
         m.model.getNode("path", 1).setValue(path);
-        
+
         # Create the AI position and orientation properties.
         m.lat   = m.ai.getNode("position/latitude-deg", 1);
         m.lon   = m.ai.getNode("position/longitude-deg", 1);
@@ -618,14 +700,14 @@ var ModelManager = {
         m.heading= m.ai.getNode("orientation/true-heading-deg", 1);
         m.pitch = m.ai.getNode("orientation/pitch-deg", 1);
         m.roll  = m.ai.getNode("orientation/roll-deg", 1);
-        
+
         m.lat.setDoubleValue(lat);
         m.lon.setDoubleValue(lon);
         m.alt_ft.setDoubleValue(alt_ft);
         m.heading.setDoubleValue(heading);
         m.pitch.setDoubleValue(para?0:pitch);
         m.roll.setDoubleValue(0);
-        
+
         m.vLat = lat;
         m.vLon = lon;
         m.vAlt_ft = alt_ft;
@@ -637,22 +719,22 @@ var ModelManager = {
         m.pAlt_ft = m.vAlt_ft;
         m.pHeading = m.vHeading;
         m.pPitch = m.vPitch;
-        
-        
+
+
         m.model.getNode("latitude-deg-prop", 1).setValue(m.lat.getPath());
         m.model.getNode("longitude-deg-prop", 1).setValue(m.lon.getPath());
         m.model.getNode("elevation-ft-prop", 1).setValue(m.alt_ft.getPath());
         m.model.getNode("heading-deg-prop", 1).setValue(m.heading.getPath());
         m.model.getNode("pitch-deg-prop", 1).setValue(m.pitch.getPath());
         m.model.getNode("roll-deg-prop", 1).setValue(m.roll.getPath());
-        
+
         m.coord = geo.Coord.new();
         m.uBody_fps = 0;
         m.last = [geo.Coord.new().set_latlon(lat,lon,alt_ft*FT2M).xyz(),systime()];
         m.past = m.last;
         m.frametime = 0;
-        m.delayTime = 0;        
-        
+        m.delayTime = 0;
+
         return m;
     },
     moveRealtime: func (uBody_fps, dt, factor) {
@@ -661,17 +743,17 @@ var ModelManager = {
         me.uBody_fps  = uBody_fps;
         me.alt_dist   = me.slant_ft*math.sin(me.vPitch*D2R);
         me.horiz_dist = me.slant_ft*math.cos(me.vPitch*D2R);
-        
+
         me.coord.set_latlon(me.vLat, me.vLon, (me.vAlt_ft+me.alt_dist) * FT2M);
-        
+
         me.coord = me.coord.apply_course_distance(me.vHeading, me.horiz_dist*FT2M);
-                
+
         me.latlon = me.coord.latlon();
-        
+
         me.vLat    = me.latlon[0];
         me.vLon    = me.latlon[1];
         me.vAlt_ft = me.latlon[2]*M2FT;
-        
+
         me.lat.setDoubleValue(me.vLat);
         me.lon.setDoubleValue(me.vLon);
         me.alt_ft.setDoubleValue(me.vAlt_ft);
@@ -704,20 +786,20 @@ var ModelManager = {
     translateDelayed: func (lat,lon,alt_ft,heading,pitch, para) {
         me.heading.setDoubleValue(heading);
         me.pitch.setDoubleValue(para?0:pitch);
-        
+
         me.pLat = me.vLat;
         me.pLon = me.vLon;
         me.pAlt_ft = me.vAlt_ft;
         me.pHeading = me.vHeading;
         me.pPitch = me.vPitch;
-        
+
         me.vLat = lat;
         me.vLon = lon;
         me.vAlt_ft = alt_ft;
         me.vHeading = heading;
         me.vPitch = pitch;
         #me.vRoll = 0;
-        
+
         me.past = me.last;
         me.last = [geo.Coord.new().set_latlon(lat,lon,alt_ft*FT2M).xyz(),systime()];
         me.delayTime = 0;
@@ -730,7 +812,7 @@ var ModelManager = {
         me.heading.setDoubleValue(heading);
         me.pitch.setDoubleValue(para?0:pitch);
         #me.roll.setDoubleValue(0);
-                
+
         me.vLat = lat;
         me.vLon = lon;
         me.vAlt_ft = alt_ft;
@@ -745,7 +827,6 @@ var ModelManager = {
 };
 
 var reckon_create = func (kee, dyna, stime) {
-  #print("ES create "~kee);
   var path = getprop("payload/armament/models") ~ "parachutist.xml";
   if (dyna[7]==1) {
     path = getprop("payload/armament/models") ~ "light_smoke.xml";
@@ -753,10 +834,11 @@ var reckon_create = func (kee, dyna, stime) {
     path = getprop("payload/armament/models") ~ "heavy_smoke.xml";
   } elsif (dyna[7] ==3) {
     path = getprop("payload/armament/models") ~ "the-flare.xml";
+  } elsif (dyna[7] == -1) {
+    return nil;
   }
   var static = ModelManager.new(path, dyna[1],dyna[2],dyna[3]*M2FT,dyna[5],dyna[6],dyna[7]==0);#path,lat,lon,alt_m,heading,pitch
   if (static != nil) {
-    #static.place();
     var entry = [kee, stime, static, dyna[4]];
     return entry;
   }
@@ -765,7 +847,6 @@ var reckon_create = func (kee, dyna, stime) {
 }
 
 var reckon_update = func (dyna, entry, stime) {
-  #print("ES update");
   var static = entry[2];
   var dynami2 = [entry[0], stime, static, dyna[4]];
   # translate
@@ -775,7 +856,6 @@ var reckon_update = func (dyna, entry, stime) {
 }
 
 var reckon_move = func (entry, stime) {
-  #print("ES move");
   var static = entry[2];
   var time_then = entry[1];
   var time_now = stime;
@@ -785,7 +865,6 @@ var reckon_move = func (entry, stime) {
 }
 
 var reckon_delete = func (entry) {
-  #print("ES delete");
   entry[2].del();
 }
 
@@ -802,22 +881,20 @@ var flare_update_time = 0.4;
 var flare_duration = 8;
 var flare_terminal_speed = 50;#m/s
 var flares_max_process_per_loop = 4;
+var flare_sequencer = -120;
 
 var flare_sorter = func(a, b) {
     if(a[0] < b[0]){
         return -1; # A should before b in the returned vector
     }elsif(a[0] == b[0]){
-        return 0; # A is equivalent to b 
+        return 0; # A is equivalent to b
     }else{
         return 1; # A should after b in the returned vector
     }
 }
 
 var animate_flare = func {
-  # This detects own flares and send out notifications about their position every 0.75s
-  if (!getprop("payload/armament/msg")) {
-    return;
-  }
+  # Send out notifications about own flare positions every 0.4s
   var stime = systime();
   # old flares
   var old_flares = [];
@@ -835,6 +912,7 @@ var animate_flare = func {
       msg.Heading = 0;
       msg.u_fps = 0;
       notifications.objectBridgedTransmitter.NotifyAll(msg);
+      recordOwnFlare(msg);
       continue;
     }
     if (flares_sent < flares_max_process_per_loop) {
@@ -843,7 +921,7 @@ var animate_flare = func {
       flare = [stime, flare[1], flare[2], flare[3], (flare[4]<flare_terminal_speed)?(flare[4]+flare_dt*9.83*0.5):(flare[4]-flare_dt*3), math.max(0,flare[5]-flare_dt*20), flare[6]];
       flare[2].apply_course_distance(flare[3], flare_dt*flare[5]);
       flare[2].set_alt(flare[2].alt()-flare_dt*flare[4]);
-      
+
       var msg = notifications.ObjectInFlightNotification.new("ffly", flare[6], MOVE, 21+95);
       msg.Flags = 0;
       msg.Position = flare[2];
@@ -854,22 +932,21 @@ var animate_flare = func {
       msg.Heading = 0;
       msg.u_fps = 0;
       notifications.objectBridgedTransmitter.NotifyAll(msg);
+      recordOwnFlare(msg);
       flares_sent += 1;
     }
-    #print("Update flare "~flare[5]);
     append(old_flares, flare);
   }
   flare_list = old_flares;
-  #print(flares_sent~" flares sent, out of "~size(flare_list));
   if(auto_flare_caller) {
     auto_flare_released();
-  }  
+  }
 }
 var flaretimer = maketimer(flare_update_time, animate_flare);
 flaretimer.start();
 
 var auto_flare_released = func {
-  # new flare
+  # This detects own flares releases
   var prop = getprop("rotors/main/blade[3]/flap-deg");
   var stime = systime();
   if (prop != nil and prop != 0 and prop != last_prop and stime-last_release > 1)  {
@@ -880,17 +957,16 @@ var auto_flare_released = func {
 }
 
 var flare_released = func {
-    if (!getprop("payload/armament/msg")) {
-      return;
-    }
-    # new flare
+    # We released a flare. If you call this method manually, then make sure 'auto_flare_caller' is false.
     var stime = systime();
     var flare =[stime, stime,
                 geo.aircraft_position(),
                 getprop("orientation/heading-deg"),
                 FT2M*getprop("velocities/speed-down-fps"),
                 FT2M*math.sqrt(getprop("velocities/speed-north-fps")*getprop("velocities/speed-north-fps")+getprop("velocities/speed-east-fps")*getprop("velocities/speed-east-fps")),
-                int(rand()*200)-100];
+                flare_sequencer];
+    flare_sequencer += 1;
+    if (flare_sequencer > 120) flare_sequencer = -120;
     append(flare_list, flare);
     var msg = notifications.ObjectInFlightNotification.new("ffly", flare[6], MOVE, 21+95);
     msg.Flags = 0;
@@ -902,7 +978,30 @@ var flare_released = func {
     msg.Heading = 0;
     msg.u_fps = 0;
     notifications.objectBridgedTransmitter.NotifyAll(msg);
-    #print("Adding flare "~flare[6]);
+    recordOwnFlare(msg);
+}
+
+var recordOwnFlare = func (msg) {
+    if (tacview_supported) {
+      if (tacview.starttime) {
+        var tacID = left(md5("ownShip"~msg.UniqueIndex),6);
+        if (msg.Kind == DESTROY) {
+          thread.lock(tacview.mutexWrite);
+          tacview.write("#" ~ (systime() - tacview.starttime)~"\n");
+          tacview.write(tacID~",Visible=0\n-"~tacID~"\n");
+          thread.unlock(tacview.mutexWrite);
+        } else {
+          var typp = "Flare";
+          var extra = "";
+          var extra2 = ",Type=Flare";
+          var color = ",Color=Yellow";
+          thread.lock(tacview.mutexWrite);
+          tacview.write("#" ~ (systime() - tacview.starttime)~"\n");
+          tacview.write(tacID~",T="~msg.Position.lon()~"|"~msg.Position.lat()~"|"~msg.Position.alt()~extra~",Name="~typp~color~extra2~"\n");
+          thread.unlock(tacview.mutexWrite);
+        }
+      }
+    }
 }
 
 #==================================================================
@@ -917,19 +1016,21 @@ setlistener("payload/armament/msg", func {
   check_for_Request();
 },0,0);
 
+setlistener("payload/armament/spectator", func {
+  check_for_Request();
+},0,0);
+
 var last_check = -65;
 
 var check_for_Request = func {
   # This sends out a notification to ask other aircraft for all craters
-  if (getprop("payload/armament/enable-craters") == 1 and getprop("sim/multiplay/online") and getprop("payload/armament/msg") and systime()-last_check > 60) {
+  if (getprop("payload/armament/enable-craters") == 1 and getprop("sim/multiplay/online") and (getprop("payload/armament/spectator") or getprop("payload/armament/msg")) and systime()-last_check > 60) {
     last_check = systime();
     var msg = notifications.StaticNotification.new("stat", int(rand()*15000000), REQUEST_ALL, 0);
     msg.IsDistinct = 0;
     msg.Heading = 0;
     notifications.hitBridgedTransmitter.NotifyAll(msg);
-    #print("REQUEST_ALL");
   } else {
-    #print("REQUEST_NONE");
   }
 }
 
@@ -1007,7 +1108,7 @@ var fail_systems = func (probability, factor = 100) {#this factor needs tuning a
               }
           }
       }
-      
+
       return failed;
     }
 };
@@ -1041,7 +1142,7 @@ setlistener("/sim/signals/reinit", repairYasim);
 hp_f = [hp_max,hp_max,hp_max,hp_max,hp_max,hp_max,hp_max];
 
 var fail_fleet_systems = func (probability, factor) {
-  
+
   var sinking_ships = (hp_f[0]<0) + (hp_f[1]<0) + (hp_f[2]<0) + (hp_f[3]<0) + (hp_f[4]<0) + (hp_f[5]<0) + (hp_f[6]<0);
   var hit_sinking = 0;
   if (sinking_ships == 0) {
@@ -1055,9 +1156,9 @@ var fail_fleet_systems = func (probability, factor) {
     armament.defeatSpamFilter("You shot one of our already sinking ships, you are just mean.");
     return;
   }
- 
+
   var no = 0;
-  
+
   for (no=0; no < 7; no+=1) {
     if (hp_f[no] > 0) {
       break;
@@ -1080,7 +1181,7 @@ var fail_fleet_systems = func (probability, factor) {
       armament.defeatSpamFilter("S.O.S. Heeelp");
     } else {
       armament.defeatSpamFilter("This is not over yet..");
-    }    
+    }
   }
   return -1;
 };
@@ -1139,27 +1240,71 @@ var getCallsign = func (callsign) {
 
 var MAW_elapsed = 0;
 
+var radarSpikes = {};
+
+foreach (key ; keys(radar_signatures)) {
+  radarSpikes[radar_signatures[key]] = 0;
+}
+
 var processCallsigns = func () {
   callsign_struct = {};
   var players = props.globals.getNode("ai/models").getChildren();
   var myCallsign = getprop("sim/multiplay/callsign");
   myCallsign = size(myCallsign) < 8 ? myCallsign : left(myCallsign,7);
   var painted = 0;
+  var paint_list = [];
   foreach (var player; players) {
-    if(player.getChild("valid") != nil and player.getChild("valid").getValue() == TRUE and player.getChild("callsign") != nil and player.getChild("callsign").getValue() != "" and player.getChild("callsign").getValue() != nil) {
+    if(player.getChild("valid") != nil and player.getChild("valid").getValue() == 1 and player.getChild("callsign") != nil and player.getChild("callsign").getValue() != "" and player.getChild("callsign").getValue() != nil) {
       var callsign = player.getChild("callsign").getValue();
       callsign_struct[callsign] = player;
       var str6 = player.getNode("sim/multiplay/generic/string[6]");
       if (str6 != nil and str6.getValue() != nil and str6.getValue() != "" and size(""~str6.getValue())==4 and left(md5(myCallsign),4) == str6.getValue()) {
         painted = 1;
+        if (rwr_audio_extended) {
+          append(paint_list, getModel(player.getNode("sim/model/path")));
+        }
       }
     }
   }
-  setprop("payload/armament/spike", painted);
   if (getprop("sim/time/elapsed-sec")-MAW_elapsed > 1.1) {
       setprop("payload/armament/MAW-active", 0);# resets every 1.1 seconds without warning
+      setprop("payload/armament/MAW-semiactive", 0);
+      setprop("payload/armament/MAW-semiactive-callsign", "");
+  }
+
+  # spike handling:
+  setprop("payload/armament/spike", painted);
+  if (!rwr_audio_extended) return;
+  var roundSpike = rand();
+  foreach (var radarModel ; paint_list) {
+    var ref = radar_signatures[radarModel];
+    if (ref != nil) {
+      radarSpikes[ref] = roundSpike;
+    }
+  }
+  foreach(key ; keys(radarSpikes)) {
+    if (radarSpikes[key] == roundSpike) {
+      setprop("payload/armament/spike-"~key, 1);
+    } else {
+      setprop("payload/armament/spike-"~key, 0);
+    }
   }
 }
+var remove_suffix = func(str, suffix) {
+  var len = size(suffix);
+  if (substr(str, -len) == suffix) return substr(str, 0, size(str) - len);
+  else return str;
+};
+var getModel = func (node) {
+  if (node == nil) return "unknown-model";
+  var value = node.getValue();
+  if (value == nil or value == "") return "";
+  var model = split(".", split("/", value)[-1])[0];
+  model = remove_suffix(model, "-model");
+  model = remove_suffix(model, "-anim");
+  return model;
+}
+
 processCallsignsTimer = maketimer(1.5, processCallsigns);
 processCallsignsTimer.simulatedTime = 1;
 processCallsignsTimer.start();
@@ -1171,30 +1316,31 @@ processCallsignsTimer.start();
 var code_ct = func () {
   #ANTIC
   if (getprop("payload/armament/msg")) {
-      setprop("sim/rendering/redout/enabled", TRUE);
+      setprop("sim/rendering/redout/enabled", 1);
       #call(func{fgcommand('dialog-close', multiplayer.dialog.dialog.prop())},nil,var err= []);# props.Node.new({"dialog-name": "location-in-air"}));
-      call(func{multiplayer.dialog.del();},nil,var err= []);
+      if (!m28_auto) call(func{multiplayer.dialog.del();},nil,var err= []);
       if (!getprop("gear/gear[0]/wow")) {
         call(func{fgcommand('dialog-close', props.Node.new({"dialog-name": "WeightAndFuel"}))},nil,var err2 = []);
         call(func{fgcommand('dialog-close', props.Node.new({"dialog-name": "system-failures"}))},nil,var err2 = []);
         call(func{fgcommand('dialog-close', props.Node.new({"dialog-name": "instrument-failures"}))},nil,var err2 = []);
-      }      
+      }
       setprop("sim/freeze/fuel",0);
-      setprop("/sim/speed-up", 1);
+      if (!m28_auto) setprop("/sim/speed-up", 1);
       setprop("/gui/map/draw-traffic", 0);
+      setprop("/sim/marker-pins/traffic", 0);
       setprop("/sim/gui/dialogs/map-canvas/draw-TFC", 0);
       #fgcommand("timeofday", props.Node.new({"timeofday": "real"}));
       #setprop("/sim/rendering/als-filters/use-filtering", 1);
       call(func{var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance();
-      interfaceController.stop();},nil,var err2=[]);      
-  }  
+      interfaceController.stop();},nil,var err2=[]);
+  }
 }
 code_ctTimer = maketimer(1, code_ct);
 code_ctTimer.simulatedTime = 1;
 
 
 
-setprop("/sim/failure-manager/display-on-screen", FALSE);
+setprop("/sim/failure-manager/display-on-screen", 0);
 
 code_ctTimer.start();
 
@@ -1205,14 +1351,31 @@ code_ctTimer.start();
 var re_init = func (node) {
   # repair the aircraft
   if (node.getValue() == 0) return;
-  
+
   var failure_modes = FailureMgr._failmgr.failure_modes;
   var mode_list = keys(failure_modes);
 
   foreach(var failure_mode_id; mode_list) {
     FailureMgr.set_failure_level(failure_mode_id, 0);
   }
+  stopLaunch();
   damageLog.push("Aircraft was repaired due to re-init.");
+
+  # Remove all 3D craters and re-place them. Due to re-init can remove some of them.
+
+  foreach (var thekey ; keys(statics)) {
+    var sta = statics[thekey];
+    if (sta[0] != nil) {
+        sta[0].remove();
+        if (sta[5] == 0) {# TODO: make a hash with all the models
+            sta[0] = geo.put_model(crater_model0, sta[1], sta[2], sta[3], sta[4]);
+        } elsif (sta[5] == 1) {
+            sta[0] = geo.put_model(crater_model1, sta[1], sta[2], sta[3], sta[4]);
+        } elsif (sta[5] == 2) {
+            sta[0] = geo.put_model(crater_model2, sta[1], sta[2], sta[3], sta[4]);
+        }
+    }
+  }
 }
 
 #==================================================================
@@ -1243,6 +1406,20 @@ var printDamageLog = func {
   print();
 }
 
+var processCallsign = func (callsign) {
+    # Convert the callsign to one that emesary can work with.
+    var l = size(callsign);
+    callsign = l < 8?callsign:left(callsign, 7);
+    var newCallsign = "";
+    for(var ii = 0; ii < l; ii += 1) {
+        var ev = emesary.TransferString.getalphanumericchar(substr(callsign,ii,1));
+        if (ev != nil) {
+          newCallsign ~= ev;
+        }
+    }
+    return newCallsign;
+}
+
 #TODO testing:
 
 var writeDamageLog = func {
@@ -1267,7 +1444,18 @@ setlistener("sim/signals/exit", writeDamageLog, 0, 0);
 
 #screen.property_display.add("payload/armament/MAW-bearing");
 #screen.property_display.add("payload/armament/MAW-active");
+#screen.property_display.add("payload/armament/MAW-semiactive");
+#screen.property_display.add("payload/armament/MAW-semiactive-callsign");
 #screen.property_display.add("payload/armament/MLW-bearing");
 #screen.property_display.add("payload/armament/MLW-count");
 #screen.property_display.add("payload/armament/MLW-launcher");
 #screen.property_display.add("payload/armament/spike");
+#screen.property_display.add("payload/armament/spike-air");
+#screen.property_display.add("payload/armament/spike-gnd-20");
+#screen.property_display.add("payload/armament/spike-gnd-02");
+#screen.property_display.add("payload/armament/spike-gnd-05");
+#screen.property_display.add("payload/armament/spike-gnd-06");
+#screen.property_display.add("payload/armament/spike-gnd-11");
+#screen.property_display.add("payload/armament/spike-gnd-23");
+#screen.property_display.add("payload/armament/spike-gnd-p2");
+#screen.property_display.add("payload/armament/spike-gnd-nk");
