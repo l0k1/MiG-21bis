@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <sim>
+        <model>
+            <livery>
+                <name type="string">KPAF-Wonsan</name>
+                <texture>Liveries/MiG21-KPAF-Wonsan.png</texture>
+            </livery>
+            <livery-logo>
+                <texture>Liveries/MiG21-KPAF-Wonsan.png</texture>
+            </livery-logo>
+        </model>
+    </sim>
+
+</PropertyList>
