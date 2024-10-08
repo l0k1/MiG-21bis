@@ -1795,6 +1795,10 @@
         </missile>
     </logging>
 
+    <sound>
+        <introsound>0</introsound>
+    </sound>
+
 
 
 </PropertyList>

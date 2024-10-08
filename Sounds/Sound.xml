@@ -900,6 +900,21 @@
             </volume>
         </enginedamageclick>
 
+        <intro-speech>
+            <name>intro-speech</name>
+            <path>Aircraft/MiG-21bis/Sounds/Samples/introspeech.wav</path>
+            <mode>once</mode>
+            <property>sound/introsound</property>
+            <position>
+                <x>0.01</x>
+                <y>0.01</y>
+                <z>0.01</z>
+            </position>
+            <volume>
+                <factor>1</factor>
+            </volume>
+        </intro-speech>
+
     </fx>
 
 </PropertyList>

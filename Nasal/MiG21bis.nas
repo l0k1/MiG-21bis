@@ -442,6 +442,9 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
     dmg = getprop("payload/armament/msg");
     if (dmg) {
         screen.log.write("Damage enabled!", 1.0, 0.2, 0.2);
+        screen.log.write("External views are disabled while damage is enabled.", 1.0, 0.2, 0.2);
+        screen.log.write("Disable damage in the MiG-21bis in-sim menu.", 1.0, 0.2, 0.2);
+        #settimer(func(){setprop("sound/introsound",1);},10);
         setprop("sim/menubar/default/menu[2]/item[0]/enabled",0);
         setprop("sim/menubar/default/menu[5]/item[0]/enabled",0);
         setprop("sim/menubar/default/menu[5]/item[1]/enabled",0);
