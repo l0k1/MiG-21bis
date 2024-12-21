@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 
 <!-- this is hacky af, but until FG has better brakes in place, it'll do -->
+<!-- wheel brake delay intervals come from a talk given by mig-21 pilot John Mann -->
 
 <system name="brakes">
 
@@ -56,8 +57,20 @@
                 <min>0</min>
                 <max>systems/brakes/max-brake</max>
             </clipto>
-            <output>fcs/left-brake-cmd-norm</output>
+            <output>fcs/left-brake-predelay</output>
         </fcs_function>
+
+        <actuator>
+            <input>fcs/left-brake-predelay</input>
+            <lag>1.3</lag>
+            <rate_limit sense="incr">0.27</rate_limit>
+            <rate_limit sense="decr">0.6</rate_limit>
+            <clipto>
+                <min>0</min>
+                <max>systems/brakes/max-brake</max>
+            </clipto>
+            <output>fcs/left-brake-cmd-norm</output>
+        </actuator>
 
         <fcs_function name="trash/systems/brakes/brake-right">
             <function>
@@ -81,8 +94,20 @@
                 <min>0</min>
                 <max>systems/brakes/max-brake</max>
             </clipto>
-            <output>fcs/right-brake-cmd-norm</output>
+            <output>fcs/right-brake-predelay</output>
         </fcs_function>
+
+        <actuator>
+            <input>fcs/right-brake-predelay</input>
+            <lag>1.3</lag>
+            <rate_limit sense="incr">0.27</rate_limit>
+            <rate_limit sense="decr">0.6</rate_limit>
+            <clipto>
+                <min>0</min>
+                <max>systems/brakes/max-brake</max>
+            </clipto>
+            <output>fcs/right-brake-cmd-norm</output>
+        </actuator>
 
         <fcs_function name="trash/systems/brakes/brake-center">
             <function>
@@ -99,8 +124,20 @@
                 <min>0</min>
                 <max>systems/brakes/max-brake</max>
             </clipto>
-            <output>fcs/center-brake-cmd-norm</output>
+            <output>fcs/center-brake-predelay</output>
         </fcs_function>
+        
+        <actuator>
+            <input>fcs/center-brake-predelay</input>
+            <lag>1.3</lag>
+            <rate_limit sense="incr">0.27</rate_limit>
+            <rate_limit sense="decr">0.6</rate_limit>
+            <clipto>
+                <min>0</min>
+                <max>systems/brakes/max-brake</max>
+            </clipto>
+            <output>fcs/center-brake-cmd-norm</output>
+        </actuator>
     
     </channel>
     
