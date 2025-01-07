@@ -849,7 +849,7 @@
             </condition>
         </enginesurge>
 
-        <masterwarn>
+        <!--<masterwarn>
             <name>masterwarn_buzz</name>
             <path>Aircraft/MiG-21bis/Sounds/Samples/mwarn.wav</path>
             <mode>once</mode>
@@ -864,7 +864,7 @@
             <volume>
                 <factor>0.8</factor>
             </volume>
-        </masterwarn>
+        </masterwarn>-->
 
         <enginedamageclick>
             <name>metalclick1</name>
