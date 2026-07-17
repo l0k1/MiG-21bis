@@ -491,7 +491,7 @@ var missile_arming_loop = func() {
             } elsif ( armament.AIM.active[i].status == MISSILE_STANDBY ) {
                 armament.AIM.active[i].start();
                 if (payloads[payloadName].type == "ir") {
-                    armament.AIM.active[i].setBore(1);
+                    armament.AIM.active[i].commandDir(0,0);
                 }
             }
             if (payloads[payloadName].type == "ir" or payloads[payloadName].type == "antirad") {
