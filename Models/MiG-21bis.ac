@@ -5489,7 +5489,7 @@ name "canopyFrontInside"
 data 9
 Plane.010
 crease 15.4
-texture "cage.png"
+texture "Cockpits/cage.png"
 texrep 1 1
 numvert 536
 -4.63916 0.95339 0.00029
@@ -10476,7 +10476,7 @@ name "canopyInside"
 data 9
 Plane.013
 crease 23.4
-texture "cage.png"
+texture "Cockpits/cage.png"
 texrep 1 1
 numvert 140
 -2.8583 0.94155 0.34835

@@ -12,7 +12,7 @@
         
         <submodels>
             <serviceable type="bool">true</serviceable>
-            <path>Aircraft/MiG-21bis/Submodels.xml</path>
+            <path>Aircraft/MiG-21bis/Models/Submodels.xml</path>
         </submodels>
 
         <minimum-fg-version>2018.1.1</minimum-fg-version>
@@ -30,8 +30,6 @@
                 <path>Aircraft/MiG-21bis/Systems/radar-altimeter.xml</path>
             </property-rule>
         </systems>
-
-        <state include="States/test.xml" n="0"/>
 
         <sound>
             <path>Aircraft/MiG-21bis/Sounds/Sound.xml</path>

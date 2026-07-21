@@ -2,7 +2,7 @@
 
 <PropertyList>
 
-    <path>Cockpit.ac</path>
+    <path>mig-21i-cockpit.ac</path>
     
 	<!-- Submodels -->
 
@@ -24,7 +24,7 @@
 
 	<model>
 		<name>Panel</name>
-		<path>Aircraft/MiG-21bis/Models/MiG-21I-Panel.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Cockpits/MiG-21I-Panel.xml</path>
 	</model>
 
 	<!--<effect>

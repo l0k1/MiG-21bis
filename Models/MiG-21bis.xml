@@ -14,19 +14,8 @@
 
 	<model>
 		<!--usage>interior</usage-->
-		<path>Aircraft/MiG-21bis/Models/Cockpit.xml</path>
+		<path>Aircraft/MiG-21bis/Models/Cockpits/MiG-21bis-Cockpit.xml</path>
 	</model>
-
-    <!-- Rembrandt auto switching for glass -->
-
-    <!--effect>
-        <inherits-from>Effects/model-transparent</inherits-from>
-        <condition>
-        	<property>sim/rendering/rembrandt/enabled</property>
-       	</condition>
-	<object-name>glass</object-name>
-	<object-name>canopy_glass</object-name>
-    </effect-->
 
 	<!-- Lights -->
 
@@ -629,7 +618,7 @@
 
     <model>
         <name>Center Panels</name>
-        <path>Aircraft/MiG-21bis/Models/CenterPanels.xml</path>
+        <path>Aircraft/MiG-21bis/Models/CenterConsoles.xml</path>
     </model>
 
 	<!-- Effects -->

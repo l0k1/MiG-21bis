@@ -18,7 +18,7 @@
         </rating>
 
         <flight-model>jsb</flight-model>
-        <aero>MiG-21bis</aero>
+        <aero>Aero/MiG-21bis</aero>
 
         <gui>
             <style>
@@ -41,32 +41,32 @@
             <preview>
                 <type>exterior</type>
                 <splash type="bool">true</splash>
-                <path>Splash.png</path>
+                <path>gui/Splash/Splash.png</path>
             </preview>
             <preview>
                 <type>exterior</type>
                 <splash type="bool">true</splash>
-                <path>Splash2.png</path>
+                <path>gui/Splash/Splash2.png</path>
             </preview>
             <preview>
                 <type>exterior</type>
                 <splash type="bool">true</splash>
-                <path>Splash3.png</path>
+                <path>gui/Splash/Splash3.png</path>
             </preview>
             <preview>
                 <type>exterior</type>
                 <splash type="bool">true</splash>
-                <path>Splash4.png</path>
+                <path>gui/Splash/Splash4.png</path>
             </preview>
             <preview>
                 <type>exterior</type>
                 <splash type="bool">true</splash>
-                <path>Splash5.png</path>
+                <path>gui/Splash/Splash5.png</path>
             </preview>
             <preview>
                 <type>exterior</type>
                 <splash type="bool">true</splash>
-                <path>Splash6.png</path>
+                <path>gui/Splash/Splash6.png</path>
             </preview>
         </previews>
 
