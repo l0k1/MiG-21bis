@@ -1171,6 +1171,10 @@ var ContactGPS = {
     return TRUE;
   },
 
+  isRadiating: func () {
+    return FALSE;
+  },
+
   getUnique: func () {
     return me.unique;
   },
@@ -1442,6 +1446,10 @@ var ContactGhost = {
 
   isPainted: func () {
     return TRUE;
+  },
+
+  isRadiating: func () {
+    return FALSE;
   },
 
   getUnique: func () {
