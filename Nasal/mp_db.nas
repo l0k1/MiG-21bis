@@ -59,6 +59,7 @@ var aircraft_lookup = {
     "EC-137R":           {parents: [aircraft_arch], rcs: 110, rwr_strength: 400, rwr_bearing: 180, rwr_pitch: 90, class: AIR,rwr_pattern: "sssssnnsnn"},
     "QF-4E":             {parents: [aircraft_arch], rcs: 6,   rwr_strength: 100, rwr_bearing: 70,  rwr_pitch: 70, class: AIR,},
     "buk-m2":            {parents: [aircraft_arch], rcs: 7,   rwr_strength: 75,  rwr_bearing: 180, rwr_pitch: 90, class: SURFACE,rwr_pattern: "snsnnssssn"},
+    "ZSU-23-4M":         {parents: [aircraft_arch], rcs: 7,   rwr_strength: 75,  rwr_bearing: 180, rwr_pitch: 90, class: SURFACE,rwr_pattern: "snsnnssssn"},
     "MIM104D":           {parents: [aircraft_arch], rcs: 7,   rwr_strength: 150, rwr_bearing: 180, rwr_pitch: 90, class: SURFACE,rwr_pattern: "snsnnssssn"},
     "missile_frigate":   {parents: [aircraft_arch], rcs: 450, rwr_strength: 120, rwr_bearing: 180, rwr_pitch: 90, class: MARINE,},
     "frigate":           {parents: [aircraft_arch], rcs: 450, rwr_strength: 75,  rwr_bearing: 180, rwr_pitch: 90, class: MARINE,},
@@ -728,6 +729,12 @@ var build_cx_list = func() {
   }
 
   foreach(var mp; props.globals.getNode("/ai/models").getChildren("Mig-28")){
+    if (mp.getNode("valid").getValue() == 1) {
+      append(temp,mp);
+    }
+  }
+
+  foreach(var mp; props.globals.getNode("/ai/models").getChildren("static")){
     if (mp.getNode("valid").getValue() == 1) {
       append(temp,mp);
     }
