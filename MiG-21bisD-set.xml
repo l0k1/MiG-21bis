@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+
+<PropertyList include="MiG-21-set-common.xml">
+    <sim include="Systems/views.xml">
+
+        <!-- Info -->
+
+        <description>Mikoyan-Gurevich MiG-21bis</description>
+        <author>Petar Jedvaj, David Culp, Raptor, Stuart Cassie, Gary Brown, Brendan Black, bugman, Tomaskom, Steve Brown, JMav-16, NikolaiVChr, Kokos, Rudolf339, alaxeijd, Colin Geniet, AxelPaccalin, Josh (Octal450) and pinto</author>
+
+        <long-description>The Mikoyan-Gurevich MiG-21bis Fishbed L/N is a 3rd generation supersonic jet interceptor/fighter aircraft. Made by the Mikoyan-Gurevich Design Bureau, Soviet Union. Nicknamed "balalaika". This variant has Tumanskiy R25-300 engines and was introduced in 1972.</long-description>
+
+        <rating>
+            <FDM type="int">3</FDM>
+            <systems type="int">2</systems>
+            <cockpit type="int">2</cockpit>
+            <model type="int">2</model>
+        </rating>
+
+        <flight-model>jsb</flight-model>
+        <aero>Aero/MiG-21bis</aero>
+
+        <gui>
+            <style>
+                <colors>
+                    <splash-font>
+                        <red>1.0</red>
+                        <green>1.00</green>
+                        <blue>1.00</blue>
+                    </splash-font>
+                    <splash-screen>
+                        <red>0.9</red>
+                        <green>0.2</green>
+                        <blue>0.15</blue>
+                    </splash-screen>
+                </colors>
+            </style>
+        </gui>
+
+        <previews>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>gui/Splash/Splash.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>gui/Splash/Splash2.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>gui/Splash/Splash3.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>gui/Splash/Splash4.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>gui/Splash/Splash5.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>gui/Splash/Splash6.png</path>
+            </preview>
+        </previews>
+
+
+        <startup>
+            <splash-title>MiG-21bisD</splash-title>
+            <splash-texture>Aircraft/MiG-21bis/Splash.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash2.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash3.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash4.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash5.png</splash-texture>
+            <splash-texture>Aircraft/MiG-21bis/Splash6.png</splash-texture>
+        </startup>
+
+        <checklists include="Docs/checklists-bis.xml"/>
+
+        <!-- Models -->
+
+        <model>
+            <path>Aircraft/MiG-21bis/Models/MiG-21bisD.xml</path>
+        </model>
+
+                <menubar>
+            <default>
+                <menu n="100">
+                    <label>MiG-21</label>
+                    <enabled type="bool">true</enabled>
+                    <item>
+                        <label>Autostart/Shutdown</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>mig21.autostart(1)</script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Select Livery</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>aircraft.livery.dialog.toggle()</script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Show Stores Dialog</label>
+                        <binding>
+                            <command>nasal</command><![CDATA[some stuff]]>
+                            <script>
+                                canvas_window.showStoresDialog();
+                            </script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Select Radio Config File</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>mig21.get_radio_file_gui();</script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>VOR/ILS Radio</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>dialog.nav_radio_dialog.open()</script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Comm Radio</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>dialog.comm_radio_dialog.open()</script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>ADF Radio</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>dialog.adf_radio_dialog.open()</script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Smokepod Color</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>dialog.smokepod_dialog.open()</script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Repack Chute</label>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/controls/flight/chute_jettisoned</property>
+                            <value>0</value>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/fdm/jsbsim/systems/chute/deploy-rqst</property>
+                            <value>0</value>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Reload Flares/Chaff</label>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/ai/submodels/submodel[0]/count</property>
+                            <value>60</value>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/ai/submodels/submodel[1]/count</property>
+                            <value>60</value>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/ai/submodels/submodel[2]/count</property>
+                            <value>60</value>
+                        </binding>
+                        <binding>
+                            <command>property-assign</command>
+                            <property>/ai/submodels/submodel[3]/count</property>
+                            <value>60</value>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Gunsight</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>dialog.gunsight_dialog.open()</script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Training</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>dialog.mig28_dialog.open()</script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Fuel to full</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                if (getprop("/gear/gear/wow") == 1) {
+                                    setprop("/consumables/fuel/tank/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[1]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[2]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[3]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[4]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[5]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[6]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[7]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[8]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[9]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[10]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[11]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[12]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[13]/level-norm", 1);
+                                    setprop("/consumables/fuel/tank[14]/level-norm", 1);
+                                }
+                            </script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Toggle Damage</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                mig21.toggle_damage();
+                            </script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Reset Damage</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                failures.reset_failures();
+                            </script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Tacview Record</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                if (tacview.starttime == 0) {
+                                    tacview.startwrite();
+                                } else {
+                                    tacview.stopwrite();
+                                }
+                            </script>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Event Log</label>
+                        <binding>
+                            <command>dialog-show</command>
+                            <dialog-name>flightlog</dialog-name>
+                        </binding>
+                    </item>
+                    <item>
+                        <label>Toggle Headshake</label>
+                        <binding>
+                            <command>property-toggle</command>
+                            <property>/sim/enable-headshake</property>
+                        </binding>
+                    </item>
+                </menu>
+            </default>
+        </menubar>
+    </sim>
+
+
+    <!-- Nasal Scripts -->
+    <nasal>
+        <notifications>
+            <file>Aircraft/MiG-21bis/Nasal/ArmamentNotification.nas</file>
+            <file>Aircraft/MiG-21bis/Nasal/GeoBridgedTransmitter.nas</file>
+        </notifications>
+        <mig21>             <file>Aircraft/MiG-21bis/Nasal/MiG21bis.nas</file>          </mig21>            <!-- odds and sods -->
+        <MiG-21bis>         <file>Aircraft/MiG-21bis/Nasal/liveries.nas</file>          </MiG-21bis>        <!-- liveries -->
+        <mpdb>              <file>Aircraft/MiG-21bis/Nasal/mp_db.nas</file>             </mpdb>
+        <engine>            <file>Aircraft/MiG-21bis/Nasal/engine.nas</file>            </engine>            <!-- liveries -->
+        <sounds>            <file>Aircraft/MiG-21bis/Nasal/sounds.nas</file>            </sounds>            <!-- liveries -->
+        <lights>            <file>Aircraft/MiG-21bis/Nasal/Lights.nas</file>            </lights>
+        <Eject>             <file>Aircraft/MiG-21bis/Nasal/eject.nas</file>             </Eject>            <!-- depreciated -->
+        <tyresmoke>         <file>Aircraft/MiG-21bis/Nasal/tyresmoke.nas</file>         </tyresmoke>
+        <radar_logic>       <file>Aircraft/MiG-21bis/Nasal/radar-logic.nas</file>       </radar_logic>        <!-- radar logic and missile locking -->
+        <armament>          <file>Aircraft/MiG-21bis/Nasal/guided-missiles.nas</file>   </armament>            <!-- guided missile control, oprf standard -->
+        <arm_locking>       <file>Aircraft/MiG-21bis/Nasal/armament-locking.nas</file>  </arm_locking>        <!-- radar locks and missile in-flight logic -->
+        <radar_canvas>      <file>Aircraft/MiG-21bis/Nasal/radar-canvas.nas</file>      </radar_canvas>        <!-- radar canvas -->
+        <payloads>          <file>Aircraft/MiG-21bis/Nasal/payloads.nas</file>          </payloads>            <!-- store handling -->
+        <gunsight_logic>    <file>Aircraft/MiG-21bis/Nasal/gunsight-logic.nas</file>    </gunsight_logic>    <!-- gunsight logic -->
+        <gunsight_canvas>   <file>Aircraft/MiG-21bis/Nasal/gunsight-canvas.nas</file>   </gunsight_canvas>    <!-- gunsight canvas -->
+        <blackout>          <file>Aircraft/MiG-21bis/Nasal/blackout.nas</file>          </blackout>            <!-- legacy blackout code -->
+        <damage>            <file>Aircraft/MiG-21bis/Nasal/damage.nas</file>            </damage>            <!-- oprf damage code -->
+        <crashandstress>    <file>Aircraft/MiG-21bis/Nasal/crash-and-stress.nas</file>  </crashandstress>    <!-- plane go boom when crash -->
+        <rcs>               <file>Aircraft/MiG-21bis/Nasal/rcs.nas</file>               </rcs>                <!-- rcs calc, used in radar -->
+        <vector>            <file>Aircraft/MiG-21bis/Nasal/vector.nas</file>            </vector>            <!-- vector math library -->
+        <formation>         <file>Aircraft/Generic/formation.nas</file>                 </formation>        <!-- dont support -->
+        <dialog>            <file>Aircraft/MiG-21bis/Nasal/dialogs.nas</file>           </dialog>            <!-- dialogs -->
+        <radar_altimeter>   <file>Aircraft/MiG-21bis/Nasal/radar-altimeter.nas</file>   </radar_altimeter>    <!-- r-alt pitch offsets -->
+        <autopilot>         <file>Aircraft/MiG-21bis/Nasal/autopilot.nas</file>         </autopilot>        <!-- ap button listeners -->
+        <radio>             <file>Aircraft/MiG-21bis/Nasal/radios.nas</file>            </radio>            <!-- radio freq remapping -->
+        <gyro_compass>      <file>Aircraft/MiG-21bis/Nasal/gyro-compass.nas</file>      </gyro_compass>        <!-- listener for gyrocompass display -->
+        <rwr>               <file>Aircraft/MiG-21bis/Nasal/rwr.nas</file>               </rwr>                <!-- rwr -->
+        <iff>               <file>Aircraft/MiG-21bis/Nasal/iff.nas</file>               </iff>                <!-- iff -->
+        <gci>               <file>Aircraft/MiG-21bis/Nasal/gci-listener.nas</file>      </gci>                <!-- gci -->
+        <radio_canvas>      <file>Aircraft/MiG-21bis/Nasal/radio_canvas.nas</file>      </radio_canvas>        <!-- canvas for the paper note on the gunsight -->
+        <headshake>         <file>Aircraft/MiG-21bis/Nasal/headmove.nas</file>          </headshake>        <!-- shaking the head around -->
+        <canvas_window>     <file>Aircraft/MiG-21bis/Nasal/canvas_windows.nas</file>    </canvas_window>
+        <mig28>             <file>Aircraft/MiG-21bis/Nasal/mig28.nas</file>             </mig28>
+        <monitor>           <file>Aircraft/MiG-21bis/Nasal/dialog-perf.nas</file>
+                            <file>Aircraft/MiG-21bis/Nasal/performance.nas</file>       </monitor>
+        <tacview>           <file>Aircraft/MiG-21bis/Nasal/tacview.nas</file>           </tacview>
+        <failures>          <file>Aircraft/MiG-21bis/Nasal/failures.nas</file>          </failures>
+        <g155xltso>         <file>Aircraft/MiG-21bis/Models/Instruments/155XLTSO/155xltso.nas</file></g155xltso>
+        <kfs564a>           <file>Aircraft/MiG-21bis/Models/Instruments/KFS-564A/kfs564a.nas</file></kfs564a>
+
+    </nasal>
+
+    <payload include="Systems/weaponset-bis.xml"/>
+
+</PropertyList>
