@@ -358,4 +358,9 @@ var init = setlistener("/sim/signals/fdm-initialized", func() {
   volume_knob(-0.05);
   update_bottom(sprintf("%.2f",standby_freq.getValue()));
   update_top(sprintf("%.2f",active_freq.getValue()));
+  mode = OFF;
+  KFS_LCD_DISPLAY.displays.hide();
+  prog_timeout.stop();
+  chan_timeout.stop();
+  blink_timer.stop();
 });
