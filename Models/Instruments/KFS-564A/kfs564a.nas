@@ -1,9 +1,11 @@
+# gplv2+
+# pinto
 var FALSE = 0;
 var TRUE = 1;
-var DOWN = 0;
-var UP = 1;
 
 var mil_mode = TRUE;
+
+var required_volts = 107;
 
 #possible modes:
 # standby - frequency entered in the standby window
@@ -11,6 +13,9 @@ var mil_mode = TRUE;
 # channel - frequency is selected via channels
 # program mode - programming channels.
 
+
+var DOWN = 0;
+var UP = 1;
 var OFF = 0;
 var STANDBY = 1;
 var ACTIVE = 2;
@@ -83,9 +88,10 @@ var standby_freq = props.globals.getNode("/instrumentation/nav/frequencies/stand
 var active_freq = props.globals.getNode("/instrumentation/nav/frequencies/selected-mhz");
 var volume = props.globals.initNode("/instrumentation/nav/volume",0.0,"DOUBLE",1);
 var pwrbtn = props.globals.getNode("/instrumentation/nav/power-btn");
+var electricity_source = props.globals.getNode("/fdm/jsbsim/electric/output/rsbn");
 
 var volume_knob = func(amnt) {
-  if ( mode == OFF and volume.getValue() + amnt >= 0 ) {
+  if ( mode == OFF and volume.getValue() + amnt >= 0 and electricity_source.getValue() > required_volts) {
     if ( chan_button and mil_mode ) {
       mode = ACTIVE;
       pwrbtn.setValue(1);
@@ -98,7 +104,7 @@ var volume_knob = func(amnt) {
       mode = STANDBY;
     }
     KFS_LCD_DISPLAY.displays.show();
-  } elsif ( volume.getValue() + amnt < 0 ) {
+  } elsif ( volume.getValue() + amnt < 0 and mode != OFF) {
     mode = OFF;
     pwrbtn.setValue(0);
     KFS_LCD_DISPLAY.displays.hide();
@@ -331,6 +337,18 @@ var update_bottom = func(val) {
   if ( val == 0 ) { val = "---.--" };
   KFS_LCD_DISPLAY.bottomDisplay.setText(val);
 }
+
+var off_listener = setlistener("/instrumentation/nav/power-btn", func() {
+  if (pwrbtn.getValue() == 0 and mode != OFF) {
+    mode = OFF;
+    KFS_LCD_DISPLAY.displays.hide();
+    prog_timeout.stop();
+    chan_timeout.stop();
+    blink_timer.stop();
+  } elsif (pwrbtn.getValue() == 1 and mode == OFF) {
+    volume_knob(0);
+  }
+},0,0);
 
 
 var KFS_LCD_DISPLAY = 0;

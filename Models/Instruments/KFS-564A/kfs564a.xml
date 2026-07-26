@@ -4,6 +4,18 @@
 
   <path>kfs564a.ac</path>
 
+    <animation>
+        <type>material</type>
+        <object-name>kfs564aLCD</object-name>
+        <emission>
+            <red>1,0</red>
+            <green>0.3</green>
+            <blue>0.3</blue>
+            <factor-prop>/instrumentation/nav/power-btn</factor-prop>
+        </emission> 
+    </animation>
+    
+
   <animation>
         <type>knob</type>
         <object-name>kfs564aVolKnob</object-name>
