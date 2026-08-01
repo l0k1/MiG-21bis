@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+  <path>kdi-572.ac</path>
+
+  <animation>
+    <type>material</type>
+    <object-name>kdi572screen</object-name>
+    <emission>
+      <red>   0.45 </red>
+      <green> 0.25 </green>
+      <blue>  0.25 </blue>
+      <factor-prop>/controls/lighting/instrument-lights</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>knob</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>/instrumentation/dme/switch-position</property>
+        <step>1</step>
+        <min>0</min>
+        <max>3</max>
+        <wrap>false</wrap>
+      </binding>
+    </action>
+    <action>
+      <button>1</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>/instrumentation/dme/switch-position</property>
+        <step>-1</step>
+        <min>0</min>
+        <max>3</max>
+        <wrap>false</wrap>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <object-name>knob</object-name>
+    <type>rotate</type>
+    <property>/instrumentation/dme/switch-position</property>
+    <factor>-45</factor>
+    <offset-deg>90</offset-deg>
+    <center>
+      <x-m>-0.000285</x-m>
+      <y-m>0.000308</y-m>
+      <z-m>-0.004188</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+
+</PropertyList>

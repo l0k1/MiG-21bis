@@ -3,186 +3,1323 @@
 
     <path>cbu412.ac</path>
 
-	<!--lights-->
+	<!--displays-->
 	
-	<!--<animation>
-			<type>material</type>
-				<object-name>miscPanel1ShutConeLabel</object-name>
-				<object-name>miscPanel1HltHeatLabel</object-name>
-				<object-name>miscPanel1ManLabel</object-name>
-				<object-name>miscPanel1HltHeatLabel2</object-name>
-				<object-name>miscPanel1RSBNLabel</object-name>
-				<object-name>miscPanel1OffLabel</object-name>
-				<object-name>miscPanel1ARCLabel</object-name>
-			<emission>
-				 <red>0.6</red>
-				 <green>0.3</green>
-				 <blue>0.3</blue>
-				<factor-prop>controls/lighting/instruments-norm</factor-prop>
-			</emission> 
-	</animation> -->
+	<animation>
+		<type>material</type> 
+		<object-name>Display_Left</object-name>
+		<object-name>Display_Right</object-name>
+		<emission>
+			<red>0.8</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/powerknob</factor-prop>
+	</animation>
 	
 	
+	<!-- switches and knobs -->
 	
-	<!-- picks and translations -->
-	<!--
 
 	<animation>
-		<type>translate</type>
-		<object-name>miscPanel1HltHeatFastButton</object-name>
-		<property>/instrumentation/misc-panel-1/fast-heat</property>
-		<factor>0.001</factor>
-		<offset-m>0</offset-m>
+		<type>pick</type>
+		<object-name>dimSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.switch_dim(0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_dim(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_dim(1);</script>
+				</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_dim(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>dimSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/transponder/cbu412/dim</property>
+		<factor>-20</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>0.001725</x-m>
+			<y-m>-0.032982</y-m>
+			<z-m>0.052156</z-m>
+		</center>
 		<axis>
-			<x>-1</x>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+
+	<animation>
+		<type>pick</type>
+		<object-name>diagTestSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.switch_diag(0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_diag(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_diag(1);</script>
+				</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_diag(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>diagTestSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/transponder/cbu412/diag</property>
+		<factor>-20</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>0.001725</x-m>
+			<y-m>-0.033232</y-m>
+			<z-m>0.026435</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>positionIdSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.switch_posid(0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_posid(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_posid(1);</script>
+				</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_posid(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>positionIdSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/transponder/cbu412/posid</property>
+		<factor>-20</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>0.001725</x-m>
+			<y-m>0.045654</y-m>
+			<z-m>0.052215</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>zeroHoldSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.switch_zero(0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_zero(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_zero(1);</script>
+				</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_zero(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>zeroHoldSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/transponder/cbu412/zerohold</property>
+		<factor>-20</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>0.001725</x-m>
+			<y-m>-0.033232</y-m>
+			<z-m>0.000345</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>mode4ABSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.switch_ab(0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_ab(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_ab(1);</script>
+				</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_ab(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>mode4ABSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/transponder/cbu412/mode4ab</property>
+		<factor>-40</factor>
+		<offset-deg>20</offset-deg>
+		<center>
+			<x-m>0.001725</x-m>
+			<y-m>-0.018875</y-m>
+			<z-m>0.000345</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>mode5FLTSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.switch_flt(0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_flt(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_flt(1);</script>
+				</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_flt(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>mode5FLTSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/transponder/cbu412/mode5flt</property>
+		<factor>-40</factor>
+		<offset-deg>20</offset-deg>
+		<center>
+			<x-m>0.001725</x-m>
+			<y-m>-0.004518</y-m>
+			<z-m>0.000345</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>warnSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.switch_warn(0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_warn(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_warn(1);</script>
+				</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_warn(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>warnSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/transponder/cbu412/warnswitch</property>
+		<factor>-20</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>0.001725</x-m>
+			<y-m>0.009993</y-m>
+			<z-m>0.000345</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>opsMaintSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.switch_ops(0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_ops(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_ops(1);</script>
+				</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_ops(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>opsMaintSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/transponder/cbu412/opsmaint</property>
+		<factor>-40</factor>
+		<offset-deg>20</offset-deg>
+		<center>
+			<x-m>0.001725</x-m>
+			<y-m>0.009993</y-m>
+			<z-m>0.000345</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>milCivSwitch</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.switch_mil(0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_mil(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_mil(1);</script>
+				</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.switch_mil(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>milCivSwitch</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/transponder/cbu412/milciv</property>
+		<factor>-20</factor>
+		<offset-deg>0</offset-deg>
+		<center>
+			<x-m>0.001725</x-m>
+			<y-m>0.009993</y-m>
+			<z-m>0.000345</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<animation>
+		<type>pick</type>
+		<object-name>powerKnob</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.knob_power(0);</script>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+		<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.knob_power(1);</script>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<object-name>powerKnob</object-name>
+		<type>rotate</type>
+		<property>/instrumentation/transponder/cbu412/powerknob</property>
+		<factor>-28</factor>
+		<offset-deg>28</offset-deg>
+		<center>
+			<x-m>0.002163</x-m>
+			<y-m>0.044381</y-m>
+			<z-m>0.024994</z-m>
+		</center>
+		<axis>
+			<x>1</x>
 			<y>0</y>
 			<z>0</z>
 		</axis>
 	</animation>
 
+
+	<!-- buttons -->
+
 	<animation>
 		<type>pick</type>
-		<object-name>miscPanel1RsbnArcSwitch</object-name>
+		<object-name>Button_MENU</object-name>
 		<action>
 			<button>0</button>
 			<repeatable>false</repeatable>
 			<binding>
-				<command>property-toggle</command>
-				<property>/instrumentation/misc-panel-1/rsbn-arc</property>
+				<command>nasal</command>
+				<script>cbu412.button_menu(0);</script>
 			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_menu(2);</script>
+				</binding>
+			</mod-up>
 		</action>
-		<action>
-			<button>1</button>
-			<repeatable>false</repeatable>
-			<binding>
-				<command>property-toggle</command>
-				<property>/instrumentation/misc-panel-1/rsbn-arc</property>
-			</binding>
-		</action>
-	</animation>
-
-	<animation>
-		<object-name>miscPanel1RsbnArcSwitch</object-name>
-		<type>rotate</type>
-		<property>/instrumentation/misc-panel-1/rsbn-arc</property>
-		<factor>30</factor>
-		<offset-deg>-15</offset-deg>
-		<center>
-			<x-m>-0.00451</x-m>
-			<y-m>-0.00809</y-m>
-			<z-m>-0.05706</z-m>
-		</center>
-		<axis>
-			<x>0</x>
-			<y>1</y>
-			<z>0</z>
-		</axis>
-	</animation>
-
-	<animation>
-		<object-name>miscPanel1HltHeatAutoSwitch</object-name>
-		<type>rotate</type>
-		<property>/instrumentation/misc-panel-1/auto-off</property>
-		<factor>30</factor>
-		<offset-deg>-15</offset-deg>
-		<center>
-			<x-m>-0.00451</x-m>
-			<y-m> 0.01165</y-m>
-			<z-m>-0.02330</z-m>
-		</center>
-		<axis>
-			<x>0</x>
-			<y>1</y>
-			<z>0</z>
-		</axis>
 	</animation>
 
 	<animation>
 		<type>pick</type>
-		<object-name>miscPanel1NozzleSwitch</object-name>
+		<object-name>Button_ENT</object-name>
 		<action>
 			<button>0</button>
 			<repeatable>false</repeatable>
 			<binding>
-				<command>property-toggle</command>
-				<property>/fdm/jsbsim/systems/air-intake/cone-auto-man</property>
+				<command>nasal</command>
+				<script>cbu412.button_ent(0);</script>
 			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_ent(2);</script>
+				</binding>
+			</mod-up>
 		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>Button_ACAS</object-name>
 		<action>
-			<button>1</button>
+			<button>0</button>
 			<repeatable>false</repeatable>
 			<binding>
-				<command>property-toggle</command>
-				<property>/fdm/jsbsim/systems/air-intake/cone-auto-man</property>
+				<command>nasal</command>
+				<script>cbu412.button_acas(0);</script>
 			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_acas(2);</script>
+				</binding>
+			</mod-up>
 		</action>
 	</animation>
 
 	<animation>
-		<object-name>miscPanel1NozzleSwitch</object-name>
-		<type>rotate</type>
-		<property>/fdm/jsbsim/systems/air-intake/cone-auto-man</property>
-		<factor>30</factor>
-		<offset-deg>-15</offset-deg>
-		<center>
-			<x-m>-0.00451</x-m>
-			<y-m> 0.01480</y-m>
-			<z-m> 0.04237</z-m>
-		</center>
+		<type>pick</type>
+		<object-name>Button_CLR</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.button_clr(0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_clr(2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>Button_1</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.button_number(1,0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_number(1,2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>Button_2</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.button_number(2,0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_number(2,2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>Button_3</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.button_number(3,0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_number(3,2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>Button_4</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.button_number(4,0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_number(4,2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>Button_5</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.button_number(5,0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_number(5,2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>Button_6</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.button_number(6,0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_number(6,2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>Button_7</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.button_number(7,0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_number(7,2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>Button_0</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>cbu412.button_number(0,0);</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>cbu412.button_number(0,2);</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+
+	<!-- LED indicators -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_Warn</object-name>
+		<property>/instrumentation/transponder/cbu412/led/warn</property>
+		<bias>0.0001</bias>
+		<factor>-0.0390625</factor>
+		<step>1</step>
 		<axis>
 			<x>0</x>
 			<y>1</y>
-			<z>0</z>
 		</axis>
 	</animation>
 
 	<animation>
-		<object-name>miscPanel1HltHeatSwitch</object-name>
-		<type>rotate</type>
-		<property>/instrumentation/misc-panel-1/hlt-heat</property>
-		<factor>45</factor>
-		<offset-deg></offset-deg>
-		<center>
-			<x-m>-0.00451</x-m>
-			<y-m>-0.00392</y-m>
-			<z-m> 0.04237</z-m>
-		</center>
+		<type>material</type> 
+		<object-name>LED_Warn</object-name>
+		<emission>
+			<red>1</red>
+			<green>0.4</green>
+			<blue>0.4</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/warn</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_M4Rep</object-name>
+		<property>/instrumentation/transponder/cbu412/led/m4rep</property>
+		<bias>0.0001</bias>
+		<factor>-0.0390625</factor>
+		<step>1</step>
 		<axis>
 			<x>0</x>
 			<y>1</y>
-			<z>0</z>
 		</axis>
 	</animation>
 
 	<animation>
-		<object-name>miscPanel1SwitchGuard</object-name>
-		<type>rotate</type>
-		<property>/instrumentation/misc-panel-1/guard</property>
-		<factor>-80</factor>
-		<offset-deg></offset-deg>
-		<center>
-			<x-m>-0.00116</x-m>
-			<y-m>-0.00377</y-m>
-			<z-m> 0.05630</z-m>
-		</center>
+		<type>material</type> 
+		<object-name>LED_M4Rep</object-name>
+		<emission>
+			<red>1</red>
+			<green>0.4</green>
+			<blue>0.4</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/m4rep</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_M5Rep</object-name>
+		<property>/instrumentation/transponder/cbu412/led/m5rep</property>
+		<bias>0.0001</bias>
+		<factor>-0.0390625</factor>
+		<step>1</step>
 		<axis>
 			<x>0</x>
 			<y>1</y>
-			<z>0</z>
 		</axis>
 	</animation>
 
 	<animation>
-		<object-name>miscPanel1Chain</object-name>
-		<type>translate</type>
-		<property>/instrumentation/misc-panel-1/guard</property>
-		<factor>0.019</factor>
+		<type>material</type> 
+		<object-name>LED_M5Rep</object-name>
+		<emission>
+			<red>1</red>
+			<green>0.4</green>
+			<blue>0.4</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/m5rep</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_Reply</object-name>
+		<property>/instrumentation/transponder/cbu412/led/reply</property>
+		<bias>0.0001</bias>
+		<factor>-0.0390625</factor>
+		<step>1</step>
 		<axis>
-			<x>-0.579</x>
-			<y>0</y>
-			<z>1</z>
+			<x>0</x>
+			<y>1</y>
 		</axis>
-	</animation> -->
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_Reply</object-name>
+		<emission>
+			<red>1</red>
+			<green>0.4</green>
+			<blue>0.4</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/reply</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_Fail</object-name>
+		<property>/instrumentation/transponder/cbu412/led/fail</property>
+		<bias>0.0001</bias>
+		<factor>-0.0390625</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_Fail</object-name>
+		<emission>
+			<red>1</red>
+			<green>0.4</green>
+			<blue>0.4</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/fail</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_1</object-name>
+		<property>/instrumentation/transponder/cbu412/led/l1</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_1</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/l1</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_2</object-name>
+		<property>/instrumentation/transponder/cbu412/led/l2</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_2</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/l2</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_3/A</object-name>
+		<property>/instrumentation/transponder/cbu412/led/l3a</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_3/A</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/l3a</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_C</object-name>
+		<property>/instrumentation/transponder/cbu412/led/c</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_C</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/c</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_S</object-name>
+		<property>/instrumentation/transponder/cbu412/led/s</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_S</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/s</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_SQ</object-name>
+		<property>/instrumentation/transponder/cbu412/led/sq</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_SQ</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/sq</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_4</object-name>
+		<property>/instrumentation/transponder/cbu412/led/l4</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_4</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/l4</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_5</object-name>
+		<property>/instrumentation/transponder/cbu412/led/l5</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_5</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/l5</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_ACC_left</object-name>
+		<property>/instrumentation/transponder/cbu412/led/accleft</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_ACC_left</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/accleft</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_TA</object-name>
+		<property>/instrumentation/transponder/cbu412/led/ta</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_TA</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/ta</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_RA</object-name>
+		<property>/instrumentation/transponder/cbu412/led/ra</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_RA</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/ra</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_ACC_right</object-name>
+		<property>/instrumentation/transponder/cbu412/led/accright</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_ACC_right</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/accright</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_Left</object-name>
+		<property>/instrumentation/transponder/cbu412/led/left</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_Left</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/left</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_FID</object-name>
+		<property>/instrumentation/transponder/cbu412/led/fid</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_FID</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/fid</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_MSA</object-name>
+		<property>/instrumentation/transponder/cbu412/led/msa</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_MSA</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/msa</factor-prop>
+	</animation>
+
+	<!-- **** -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>LED_Right</object-name>
+		<property>/instrumentation/transponder/cbu412/led/right</property>
+		<bias>0.0001</bias>
+		<factor>-0.01953125</factor>
+		<step>1</step>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type> 
+		<object-name>LED_Right</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.6</green>
+			<blue>0.5</blue>
+		</emission>
+		<factor-prop>/instrumentation/transponder/cbu412/led/right</factor-prop>
+	</animation>
 
 
 </PropertyList>
+<!--
+0.01953125
+
+0.0390625
+
+-->

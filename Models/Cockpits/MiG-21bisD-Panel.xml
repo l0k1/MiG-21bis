@@ -70,20 +70,9 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/AI/AI.xml</path>
         <offsets>
             <pitch-deg>-7</pitch-deg>
-            <x-m>-3.95784</x-m>
-            <y-m>-0.14120</y-m>
-            <z-m> 0.66935</z-m>
-        </offsets>
-    </model>
-
-    <model>
-        <name>Heading Indicator</name>
-        <path>Aircraft/MiG-21bis/Models/Instruments/HI/HI.xml</path>
-        <offsets>
-            <pitch-deg>-7</pitch-deg>
-            <x-m>-3.94719</x-m>
-            <y-m>-0.14009</y-m>
-            <z-m> 0.53679</z-m>
+            <x-m>-3.96145</x-m>
+            <y-m>-0.15375</y-m>
+            <z-m> 0.69026</z-m>
         </offsets>
     </model>
 
@@ -92,9 +81,9 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/Mach/Mach.xml</path>
         <offsets>
             <pitch-deg>-7</pitch-deg>
-            <x-m>-3.94531</x-m>
-            <y-m>-0.02813</y-m>
-            <z-m> 0.55852</z-m>
+            <x-m>-3.93767</x-m>
+            <y-m>-0.164445</y-m>
+            <z-m> 0.493286</z-m>
         </offsets>
     </model>
 
@@ -114,9 +103,9 @@
         <path>Aircraft/MiG-21bis/Models/Instruments/VSI/VSI.xml</path>
         <offsets>
             <pitch-deg>-7</pitch-deg>
-            <x-m>-3.96086</x-m>
-            <y-m>-0.02923</y-m>
-            <z-m> 0.65361</z-m>
+            <x-m>-3.94862</x-m>
+            <y-m>-0.08158</y-m>
+            <z-m> 0.547315</z-m>
         </offsets>
     </model>
 
@@ -372,15 +361,9 @@
     </model>
 
     <model>
-        <name>Namako</name>
-        <path>Aircraft/MiG-21bis/Models/Instruments/PanelNamako/screws.xml</path>
-        <offsets>
-            <x-m>-3.93123</x-m>
-            <y-m> 0.00810</y-m>
-            <z-m> 0.60048</z-m>
-        </offsets>
+        <name>screws</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/PanelExtras-bisD/screws-bisd.xml</path>
     </model>
-
 
     <model>
         <name>De-Ice Lever</name>
@@ -436,25 +419,13 @@
     </model>
 
     <model>
-        <name>FDS Button</name>
-        <path>Aircraft/MiG-21bis/Models/Instruments/KnobsandLevers/fdsButton.xml</path>
-        <offsets>
-            <heading-deg></heading-deg>
-            <pitch-deg>-7</pitch-deg>
-            <x-m>-3.95930</x-m>
-            <y-m>-0.06331</y-m>
-            <z-m> 0.73666</z-m>
-        </offsets>
-    </model>
-
-    <model>
         <name>Master Warning Light/Button</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/KnobsandLevers/masterWarningLightButton.xml</path>
         <offsets>
             <heading-deg></heading-deg>
             <x-m>-3.96157</x-m>
             <y-m>-0.11772</y-m>
-            <z-m> 0.76444</z-m>
+            <z-m> 0.77444</z-m>
         </offsets>
     </model>
 
@@ -518,7 +489,7 @@
 
     <model>
         <name>Misc Switches</name>
-        <path>Aircraft/MiG-21bis/Models/Instruments/Switches/switches.xml</path>
+        <path>Aircraft/MiG-21bis/Models/Instruments/Switches/switches-bisd.xml</path>
         <offsets>
             <heading-deg></heading-deg>
             <x-m>-3.96889</x-m>
@@ -830,4 +801,38 @@
         </offsets>
     </model>
 
+    <model>
+        <name>KDI-572</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/KDI-572/kdi572.xml</path>
+        <offsets>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.95329</x-m>
+            <y-m>-0.029435</y-m>
+            <z-m>0.6252</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>KI-206</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/VOR/KI-206-nav1.xml</path>
+        <offsets>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.96369</x-m>
+            <y-m>-0.029405</y-m>
+            <z-m>0.695399</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>ARK-10</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/ARK10/ark-10.xml</path>
+        <offsets>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.94926</x-m>
+            <y-m>-0.167385</y-m>
+            <z-m>0.578051</z-m>
+        </offsets>
+    </model>
+
 </PropertyList>
+

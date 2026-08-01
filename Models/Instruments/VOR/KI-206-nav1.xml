@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<!--
+VOR/LOC/Glideslope Indicator, based on Bendix-King KI-206 model
+http://commerce.honeywell.com/webapp/wcs/stores/servlet/CategoryDisplay?storeId=10101&catalogId=10052&langId=-1&categoryId=10423&cursel=item6&sysId=item6&pCategoryId=10084&pcursel=item6&psysId=item6
+Author: Pavel Cueto, based on the work of Syd Adams
+License: GPL
+-->
+
+<PropertyList>
+
+    <path>KI-206.ac</path>
+    
+<animation>
+	<type>material</type>
+	<object-name>Flag_GS</object-name>
+	<object-name>Flag_NAV</object-name>
+	<object-name>Flag_TO</object-name>
+	<object-name>Flag_FROM</object-name>
+	<object-name>Cross</object-name>
+	<object-name>Ring</object-name>
+	<object-name>Needle_LOC</object-name>
+	<object-name>Needle_GS</object-name>
+	<object-name>Arrows</object-name>
+	<object-name>Knob</object-name>
+	<object-name>Base_02</object-name>
+	<emission>
+		<red>0.7</red>
+		<green>0.7</green>
+		<blue>0.7</blue>
+		<factor-prop>controls/lighting/instruments-norm</factor-prop>  <!-- <factor-prop>systems/electrical/outputs/instrument-lights</factor-prop> -->
+	</emission>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>Flag_NAV</object-name>
+	<condition>
+		<or>
+			<not>
+				<property>instrumentation/nav[0]/data-is-valid</property>
+			</not>
+			<less-than>	
+				<property>systems/electrical/outputs/nav</property>
+				<value>0.1</value>	
+			</less-than>		
+			<not>	
+				<property>instrumentation/nav[0]/in-range</property>
+			</not>
+		</or>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>Flag_GS</object-name>
+	<condition>
+		<or>
+			<not>
+				<property>instrumentation/nav[0]/has-gs</property>
+			</not>
+			<less-than>	
+				<property>systems/electrical/outputs/nav</property>
+				<value>0.1</value>	
+			</less-than>
+			<greater-than>
+				<property>instrumentation/nav[0]/in-range</property>
+				<value>30000</value>
+			</greater-than>
+		</or>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>Flag_TO</object-name>
+	<condition>
+		<property>instrumentation/nav[0]/to-flag</property>
+	</condition>
+</animation>
+
+<animation>
+	<type>select</type>
+	<object-name>Flag_FROM</object-name>
+	<condition>
+		<property>instrumentation/nav[0]/from-flag</property>
+	</condition>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>Ring</object-name>
+	<property>/instrumentation/nav[0]/radials/selected-deg</property>
+	<axis>
+		<x>1</x>
+		<y>0</y>
+		<z>0</z>
+	</axis>
+</animation>
+
+<animation>
+	<type>translate</type>
+	<object-name>Needle_LOC</object-name>
+	<property>instrumentation/nav[0]/heading-needle-deflection</property>
+	<interpolation>
+		<entry><ind>-10.0</ind><dep>-0.0161</dep></entry>
+		<entry><ind>0.0</ind><dep>0.0</dep></entry>
+		<entry><ind>10.0</ind><dep>0.0161</dep></entry>
+	</interpolation>
+	<axis>
+		<x>0.0</x>
+		<y>1.0</y>
+		<z>0.0</z>
+	</axis>
+</animation>
+
+<animation>
+	<type>translate</type>
+	<object-name>Needle_GS</object-name>
+	<property>instrumentation/nav[0]/gs-needle-deflection</property>
+	<interpolation>
+		<entry><ind>-9999.0</ind><dep>-0.0170</dep></entry>
+		<entry><ind>-7.0</ind><dep>-0.0170</dep></entry>
+		<entry><ind>0.0</ind><dep>0.0</dep></entry>
+		<entry><ind>7.0</ind><dep>0.0170</dep></entry>
+		<entry><ind>9999.0</ind><dep>0.0170</dep></entry>
+	</interpolation>
+	<axis>
+		<x>0.0</x>
+		<y>0.0</y>
+		<z>1.0</z>
+	</axis>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>Knob</object-name>
+	<visible>true</visible>
+	<action>
+		<name>Small up</name>
+		<button>0</button>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>property-adjust</command>
+			<property>/instrumentation/nav[0]/radials/selected-deg</property>
+				<step> 1</step>
+				<min>  0</min>
+				<max>360</max>
+				<wrap>1</wrap>
+		</binding>
+	</action>
+	<action>
+		<name>Small down</name>
+		<button>1</button>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>property-adjust</command>
+			<property>/instrumentation/nav[0]/radials/selected-deg</property>
+				<step>-1</step>
+				<min>  0</min>
+				<max>360</max>
+				<wrap>1</wrap>
+		</binding>
+	</action>
+	<action>
+		<name>Big up</name>
+		<button>3</button>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>property-adjust</command>
+			<property>/instrumentation/nav[0]/radials/selected-deg</property>
+				<step> 5</step>
+				<min>  0</min>
+				<max>360</max>
+				<wrap>1</wrap>
+		</binding>
+	</action>
+	<action>
+		<name>Big down</name>
+		<button>4</button>
+		<repeatable>true</repeatable>
+		<binding>
+			<command>property-adjust</command>
+			<property>/instrumentation/nav[0]/radials/selected-deg</property>
+				<step>-5</step>
+				<min>  0</min>
+				<max>360</max>
+				<wrap>1</wrap>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>rotate</type>
+	<object-name>Knob</object-name>
+	<property>instrumentation/nav[0]/radials/selected-deg</property>
+	<center>
+		<x-m> 0     </x-m>
+		<y-m>-0.032 </y-m>
+		<z-m>-0.028 </z-m>
+	</center>
+	<axis>
+		<x>-1 </x>
+		<y> 0 </y>
+		<z> 0 </z>
+	</axis>
+</animation>
+
+<!-- Label Text -->
+
+<text>
+	<name>LabelText</name>
+	<type type="string">literal</type>
+		<text type="string">NAV 1 Indicator</text>
+	<draw-text type="bool">true</draw-text>
+	<font>Helvetica.txf</font>
+		<character-size type="double">0.012</character-size>
+		<character-aspect-ratio type="double">1.0</character-aspect-ratio>
+	<axis-alignment>yz-plane</axis-alignment>
+	<max-height>0.2</max-height>
+	<max-width>0.07</max-width>
+	<font-resolution>
+		<width type="int">32</width>
+		<height type="int">32</height>
+	</font-resolution>
+	<alignment>center-center</alignment>
+	<offsets>
+		<x-m> 0.01</x-m>
+		<y-m> 0.0 </y-m>
+		<z-m> 0.0 </z-m>
+	</offsets>
+</text>
+
+<animation>
+	<type>material</type>
+		<object-name>LabelText</object-name>
+	<emission>
+		<red>1.0</red>
+		<green>0.8</green>
+		<blue>0.0</blue>
+	</emission>
+</animation>
+
+<animation>
+	<type>select</type>
+		<object-name>LabelText</object-name>
+	<condition>
+		<property>/sim/panel-hotspots</property>
+	</condition>
+</animation>
+
+</PropertyList>

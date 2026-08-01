@@ -51,12 +51,6 @@
         <!-- View Settings -->
 
         <chase-distance-m>-20</chase-distance-m>
-        
-        <!-- Custom instrumentation file -->
-
-        <instrumentation>
-            <path>Aircraft/MiG-21bis/Systems/instrumentation.xml</path>
-        </instrumentation>
 
         <!-- Menu -->
 

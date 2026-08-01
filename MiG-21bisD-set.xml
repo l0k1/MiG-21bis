@@ -19,6 +19,12 @@
 
         <flight-model>jsb</flight-model>
         <aero>Aero/MiG-21bis</aero>
+        
+        <!-- Custom instrumentation file -->
+
+        <instrumentation>
+            <path>Aircraft/MiG-21bis/Systems/instrumentation-bisd.xml</path>
+        </instrumentation>
 
         <gui>
             <style>
@@ -323,6 +329,8 @@
         <failures>          <file>Aircraft/MiG-21bis/Nasal/failures.nas</file>          </failures>
         <g155xltso>         <file>Aircraft/MiG-21bis/Models/Instruments/155XLTSO/155xltso.nas</file></g155xltso>
         <kfs564a>           <file>Aircraft/MiG-21bis/Models/Instruments/KFS-564A/kfs564a.nas</file></kfs564a>
+        <kdi572>           <file>Aircraft/MiG-21bis/Models/Instruments/KDI-572/kdi572.nas</file></kdi572>
+        <cbu412>           <file>Aircraft/MiG-21bis/Models/Instruments/CBU412/cbu412.nas</file></cbu412>
 
     </nasal>
 

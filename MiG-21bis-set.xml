@@ -19,6 +19,12 @@
 
         <flight-model>jsb</flight-model>
         <aero>Aero/MiG-21bis</aero>
+        
+        <!-- Custom instrumentation file -->
+
+        <instrumentation>
+            <path>Aircraft/MiG-21bis/Systems/instrumentation.xml</path>
+        </instrumentation>
 
         <gui>
             <style>
