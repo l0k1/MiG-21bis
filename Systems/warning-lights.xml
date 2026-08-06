@@ -158,16 +158,8 @@
          <function>
             <product>
                <gt>
-                  <property>fcs/flap-pos-deg</property>
-                  <value>35</value>
-               </gt>
-               <gt>
-                  <property>fcs/blc</property>
-                  <value>0.7</value>
-               </gt>
-               <gt>
                   <property>fcs/aru</property>
-                  <value>0.85</value>
+                  <value>0.99</value>
                </gt>
                <property>/instrumentation/warning-lights/dimmer[6]</property>
                <property>warning-lights/lights-dc</property>

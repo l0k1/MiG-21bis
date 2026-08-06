@@ -96,7 +96,7 @@
             <and>
               <property>fcs/aru-override-switch</property>
               <gt>
-                <property>electric/switches/rvrsp/aru-syst-man-ctl</property>
+                <property>electric/output/aru-syst-man-ctl</property>
                 <value>110</value>
               </gt>
             </and>
