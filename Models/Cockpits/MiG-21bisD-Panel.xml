@@ -33,6 +33,18 @@
     </model>
 
     <model>
+        <name>FDS Button</name>
+        <path>Aircraft/MiG-21bis/Models/Instruments/KnobsandLevers/fdsButton.xml</path>
+        <offsets>
+            <heading-deg></heading-deg>
+            <pitch-deg>-7</pitch-deg>
+            <x-m>-3.95930</x-m>
+            <y-m>-0.06331</y-m>
+            <z-m> 0.768</z-m>
+        </offsets>
+    </model>
+
+    <model>
         <name>Gunsight</name>
         <path>Aircraft/MiG-21bis/Models/Instruments/Gunsight/Gunsight.xml</path>
         <offsets>

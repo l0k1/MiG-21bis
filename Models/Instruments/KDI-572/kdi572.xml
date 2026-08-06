@@ -8,10 +8,10 @@
     <type>material</type>
     <object-name>kdi572screen</object-name>
     <emission>
-      <red>   0.45 </red>
-      <green> 0.25 </green>
-      <blue>  0.25 </blue>
-      <factor-prop>/controls/lighting/instrument-lights</factor-prop>
+        <red>1,0</red>
+        <green>0.3</green>
+        <blue>0.3</blue>
+      <factor-prop>/instrumentation/dme/switch-position</factor-prop>
     </emission>
   </animation>
 

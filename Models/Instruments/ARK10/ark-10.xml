@@ -18,4 +18,102 @@
         </emission> 
     </animation>
 
+    <animation>
+        <type>rotate</type>
+        <object-name>ark10compass</object-name>
+        <property>/fdm/jsbsim/systems/gyro-compass/heading-deg</property>
+        <factor>-1</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>ark10needle</object-name>
+        <property>/instrumentation/adf[0]/indicated-bearing-deg</property>
+        <factor>-1</factor>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>ark10direction</object-name>
+        <property>/instrumentation/adf[0]/rotation-deg</property>
+        <factor>-1</factor>
+        <axis>
+
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>ark10knob</object-name>
+        <property>/instrumentation/adf[0]/rotation-deg</property>
+        <factor>-1</factor>
+        <center>
+            <x-m>0.002218</x-m>
+            <y-m>-0.033951</y-m>
+            <z-m>-0.034288</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>ark10knob</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/adf[0]/rotation-deg</property>
+                <step>1</step>
+            </binding>
+        </action>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/adf[0]/rotation-deg</property>
+                <step>10</step>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/adf[0]/rotation-deg</property>
+                <step>-1</step>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>/instrumentation/adf[0]/rotation-deg</property>
+                <step>-10</step>
+            </binding>
+        </action>
+    </animation>
 </PropertyList>
