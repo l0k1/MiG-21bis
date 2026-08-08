@@ -43,6 +43,8 @@ mode2id_prop = props.globals.getNode("/instrumentation/transponder/mode-2-id",1)
 mode4id_prop = props.globals.getNode("/instrumentation/transponder/mode-4-id",1);
 mode5id_prop = props.globals.getNode("/instrumentation/transponder/mode-5-id",1);
 
+mode4int_prop = props.globals.getNode("/instrumentation/transponder/mode-4-int");
+
 # not transmitted but required by the transponder code
 tx_knob_mode_prop = props.globals.getNode("/instrumentation/transponder/inputs/knob-mode");
 # 0 = off
@@ -686,6 +688,7 @@ var setmode4 = func() {
   } else {
     mode4id_prop.setValue("-9999");
   }
+  mode4int_prop.setValue(int(msg));
 }
 
 var setmode5 = func() {

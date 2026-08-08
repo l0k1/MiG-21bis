@@ -283,6 +283,18 @@
         </menubar>
     </sim>
 
+    <instrumentation>
+        <iff>
+            <channel_prop type="string">/instrumentation/iff/channel-selection</channel_prop>
+            <power_prop type="string">/instrumentation/iff/power</power_prop>
+            <power type="double">1</power>
+            <channel-selection type="int">1</channel-selection>
+            <!--mig-21bis specific stuff -->
+            <resp-light type="bool">false</resp-light>
+            <imtr-light type="bool">false</imtr-light>
+            <decod-light type="bool">false</decod-light>
+        </iff>
+    </instrumentation>
 
     <!-- Nasal Scripts -->
     <nasal>
