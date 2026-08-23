@@ -92,6 +92,14 @@
 		<desc>Select previous pylon</desc>
 	</key>
 	<key>
+		<name>o/O</name>
+		<desc>Increase/decrease D.R. distance</desc>
+	</key>
+	<key>
+		<name>l/L</name>
+		<desc>Increase/decrease D.R. azimuth</desc>
+	</key>
+	<key>
 		<name>F5</name>
 		<desc>GCI Request Picture</desc>
 	</key>

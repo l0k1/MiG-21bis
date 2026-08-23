@@ -455,4 +455,100 @@
         </binding>
     </key>
 
+    <key n="108">
+        <name>l</name>
+        <desc>Increase Azimuth</desc>
+        <repeatable>true</repeatable>
+        <interval-sec>0.05</interval-sec>
+        <binding>
+            <command>property-assign</command>
+            <property>/instrumentation/dead-reckoner/switch-azm-pos</property>
+            <value>1</value>
+        </binding>
+        <binding>
+            <command>property-adjust</command>
+            <property>/fdm/jsbsim/systems/deadreckoner/azimuth-adjust</property>
+            <step>1</step>
+        </binding>
+        <mod-up>
+            <binding>
+                <command>property-assign</command>
+                <property>/instrumentation/dead-reckoner/switch-azm-pos</property>
+                <value>0</value>
+            </binding>
+        </mod-up>
+    </key>
+
+    <key n="76">
+        <name>L</name>
+        <desc>Decrease Azimuth</desc>
+        <repeatable>true</repeatable>
+        <interval-sec>0.05</interval-sec>
+        <binding>
+            <command>property-assign</command>
+            <property>/instrumentation/dead-reckoner/switch-azm-pos</property>
+            <value>-1</value>
+        </binding>
+        <binding>
+            <command>property-adjust</command>
+            <property>/fdm/jsbsim/systems/deadreckoner/azimuth-adjust</property>
+            <step>-1</step>
+        </binding>
+        <mod-up>
+            <binding>
+                <command>property-assign</command>
+                <property>/instrumentation/dead-reckoner/switch-azm-pos</property>
+                <value>0</value>
+            </binding>
+        </mod-up>
+    </key>
+
+    <key n="111">
+        <name>o</name>
+        <desc>Increase Distance</desc>
+        <repeatable>true</repeatable>
+        <interval-sec>0.05</interval-sec>
+        <binding>
+            <command>property-assign</command>
+            <property>/instrumentation/dead-reckoner/switch-dist-pos</property>
+            <value>1</value>
+        </binding>
+        <binding>
+            <command>property-adjust</command>
+            <property>/fdm/jsbsim/systems/deadreckoner/distance-adjust</property>
+            <step>0.45</step>
+        </binding>
+        <mod-up>
+            <binding>
+                <command>property-assign</command>
+                <property>/instrumentation/dead-reckoner/switch-dist-pos</property>
+                <value>0</value>
+            </binding>
+        </mod-up>
+    </key>
+
+    <key n="79">
+        <name>O</name>
+        <desc>Decrease Distance</desc>
+        <repeatable>true</repeatable>
+        <interval-sec>0.05</interval-sec>
+        <binding>
+            <command>property-assign</command>
+            <property>/instrumentation/dead-reckoner/switch-dist-pos</property>
+            <value>-1</value>
+        </binding>
+        <binding>
+            <command>property-adjust</command>
+            <property>/fdm/jsbsim/systems/deadreckoner/distance-adjust</property>
+            <step>-0.45</step>
+        </binding>
+        <mod-up>
+            <binding>
+                <command>property-assign</command>
+                <property>/instrumentation/dead-reckoner/switch-dist-pos</property>
+                <value>0</value>
+            </binding>
+        </mod-up>
+    </key>
+
 </PropertyList>
