@@ -22,6 +22,8 @@
   <bleed>           0.03</bleed>
   <idlen1>         35.0 </idlen1>
   <idlen2>         50.0 </idlen2>
+  <n1startrate>     1.6 </n1startrate>
+  <n2startrate>     1.9 </n2startrate>
   <maxn1>         103.5 </maxn1> <!-- page 25, powerpland (in flight), line 15(b) [2] -->
   <maxn2>         107.5 </maxn2> <!-- page 25, powerpland (in flight), line 16 [2] -->
   <augmented>         1 </augmented>
