@@ -19,38 +19,38 @@
 <animation>
     <type>rotate</type>
     <object-name>exhaustNeedle</object-name>
-    <property>/engines/engine/egt-degf</property>
+    <property>/fdm/jsbsim/propulsion/engine/egt/egt-degc</property>
     <interpolation>
       <entry>
-        <ind>32</ind>
+        <ind>0</ind>
         <dep>-225</dep>
       </entry>
       <entry>
-        <ind>572</ind>
+        <ind>300</ind>
         <dep>-225</dep>
       </entry>
       <entry>
-        <ind>752</ind>
+        <ind>400</ind>
         <dep>-200</dep>
       </entry>
       <entry>
-        <ind>932</ind>
+        <ind>500</ind>
         <dep>-165</dep>
       </entry>
       <entry>
-        <ind>1112</ind>
+        <ind>600</ind>
         <dep>-130</dep>
       </entry>
       <entry>
-        <ind>1292</ind>
+        <ind>700</ind>
         <dep>-75</dep>
       </entry>
       <entry>
-        <ind>1472</ind>
+        <ind>800</ind>
         <dep>-20</dep>
       </entry>
       <entry>
-        <ind>1652</ind>
+        <ind>900</ind>
         <dep>10</dep>
       </entry>
     </interpolation>

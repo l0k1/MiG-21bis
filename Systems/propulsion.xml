@@ -289,4 +289,254 @@ ignition, a delay of up to 9 seconds was experienced.
         </pure_gain>
 
     </channel>
+
+    <property value="365">propulsion/engine/egt/idle-ideal</property>
+    <property value="680">propulsion/engine/egt/mil-ideal</property>
+    <property value="0.2">propulsion/engine/egt/idle-fuel-flow-ideal</property>
+    <property value="2.25">propulsion/engine/egt/mil-fuel-flow-ideal</property>
+    <property value="0">propulsion/engine/egt/n1-norm</property>
+    <property value="0">propulsion/engine/egt/n1-target</property>
+    <property value="0">propulsion/engine/egt/fuel-norm</property>
+    <property value="0">propulsion/engine/egt/fuel-target</property>
+    <property value="0">propulsion/engine/egt/test-pressure</property>
+    <property value="0">propulsion/engine/egt/target-c</property>
+    <property value="1">propulsion/engine/fuel-flow-rate-change</property>
+    <property value="1">propulsion/engine/fuel-flow-rate-previous</property>
+    <property value="0.14">propulsion/engine/egt/transient-spike-lag-c1</property>
+    <property value="3">propulsion/engine/egt/transient-spike-prelag</property>
+    <property value="0.4">propulsion/engine/egt/final-temp-c1</property>
+    <property value="0.000007">propulsion/engine/egt/density-constant</property>
+
+    <channel name="egt">
+
+        <fcs_function>
+        <!-- get fuel flow at milthrust -->
+        <!-- hacky af -->
+        <!-- basically a workaround to try and ignore some augmented fuel consumption -->
+            <function>
+                <interpolate1d>
+                    <property>position/h-sl-ft</property>
+                    <value>0</value><value>750</value>
+                    <value>60000</value><value>400</value>
+                </interpolate1d>
+            </function>
+            <clipto>
+                <min>400</min>
+                <max>730</max>
+            </clipto>
+            <output>propulsion/engine/egt/mil-ideal</output>
+        </fcs_function>
+
+
+        <fcs_function>
+            <!-- normalized fuel flow -->
+            <!-- ((fuel_flow - fuel_flow_idle) / (fuel_flow_mil - fuel_flow_idle)) ^ scale_factor -->
+            <!-- scale factor arbitrarly set to 1.5 -->
+            <function>
+                <ifthen>
+                    <gt>
+                        <property>propulsion/engine/fuel-flow-rate-pps</property>
+                        <property>propulsion/engine/egt/idle-fuel-flow-ideal</property>
+                    </gt>
+                    <pow>
+                        <quotient>
+                            <difference>
+                                <ifthen>
+                                    <!-- prevent spike due to afterburner using too much fuel -->
+                                    <gt>
+                                        <property>propulsion/engine/fuel-flow-rate-pps</property>
+                                        <property>propulsion/engine/egt/mil-fuel-flow-ideal</property>
+                                    </gt>
+                                    <property>propulsion/engine/egt/mil-fuel-flow-ideal</property>
+                                    <property>propulsion/engine/fuel-flow-rate-pps</property>
+                                </ifthen>
+                                <property>propulsion/engine/egt/idle-fuel-flow-ideal</property>
+                            </difference>
+                            <difference>
+                                <property>propulsion/engine/egt/mil-fuel-flow-ideal</property>
+                                <property>propulsion/engine/egt/idle-fuel-flow-ideal</property>
+                            </difference>
+                        </quotient>
+                        <value>1.5</value>
+                    </pow>
+                    <property>propulsion/engine/egt/idle-fuel-flow-ideal</property>
+                </ifthen>
+            </function>
+            <output>propulsion/engine/egt/fuel-norm</output>
+        </fcs_function>
+
+        <fcs_function>
+            <!-- target EGT based on fuel flow-->
+            <!-- ilde + (mil - idle) * fuel-norm -->
+            <function>
+                <ifthen>
+                    <lt>
+                        <property>propulsion/engine/n1</property>
+                        <value>35</value>
+                    </lt>
+                    <interpolate1d>
+                        <property>propulsion/engine/n1</property>
+                        <value>0</value><value>0</value>
+                        <value>35</value><property>propulsion/engine/egt/idle-ideal</property>
+                    </interpolate1d>
+                    <sum>
+                        <property>propulsion/engine/egt/idle-ideal</property>
+                        <product>
+                            <difference>
+                                <property>propulsion/engine/egt/mil-ideal</property>
+                                <property>propulsion/engine/egt/idle-ideal</property>
+                            </difference>
+                            <property>propulsion/engine/egt/fuel-norm</property>
+                        </product>
+                    </sum>
+                </ifthen>
+            </function>
+            <output>propulsion/engine/egt/fuel-target</output>
+        </fcs_function>
+
+        <lag_filter>
+            <!-- transient spike lag filter -->
+            <input>propulsion/engine/egt/fuel-target</input>
+            <c1>0.25</c1>
+            <output>propulsion/engine/egt/fuel-mod</output>
+        </lag_filter>
+
+        <fcs_function>
+            <!-- modify egt target based on altitude/air pressure. -->
+            <!-- approximating 2C per 1000 ft. i dont have hard data. -->
+            <!-- 2c per 0.0000448 slug/ft^3 -->
+            <!-- iso standard sea level is 0.002377 -->
+            <!-- (0.002377 - current) / 0.0000448 -->
+            <function>
+                <quotient>
+                    <difference>
+                        <value>0.002377</value>
+                        <property>atmosphere/rho-slugs_ft3</property>
+                    </difference>
+                    <property>propulsion/engine/egt/density-constant</property>
+                </quotient>
+            </function>
+            <output>propulsion/engine/egt/density-mod</output>
+        </fcs_function>
+
+        <fcs_function>
+            <!-- afterburner modification -->
+            <!-- 40C with 1st stage, 60C with second -->
+            <function>
+                <sum>
+                    <product>
+                        <property>fcs/aug-active</property>
+                        <property>fcs/throttle-redist-aug</property>
+                        <value>40</value>
+                    </product>
+                    <product>
+                        <property>propulsion/clr</property>
+                        <value>40</value>
+                    </product>
+                </sum>
+            </function>
+            <output>propulsion/engine/egt/afterburner-mod</output>
+        </fcs_function>
+
+        <fcs_function>
+            <!-- mach modification -->
+            <!-- ambient temp * (1 + (0.2 * (mach^2)) -->
+            <function>
+                <difference>
+                    <product>
+                        <sum>
+                            <value>273.15</value>
+                            <property>/environment/temperature-degc</property>
+                        </sum>
+                        <sum>
+                            <value>1</value>
+                            <product>
+                                <value>0.2</value>
+                                <pow>
+                                    <property>velocities/mach</property>
+                                    <value>2</value>
+                                </pow>
+                            </product>
+                        </sum>
+                    </product>
+                    <value>273.15</value>
+                </difference>
+            </function>
+            <output>propulsion/engine/egt/mach-mod</output>
+        </fcs_function>
+<!--
+        <pure_gain>
+            <input>simulation/channel-dt</input>
+            <gain>1.0</gain>
+            <output>propulsion/engine/dt</output>
+        </pure_gain>
+-->
+        <fcs_function>
+            <!-- fuel flow rate change -->
+            <function>
+                <quotient>
+                    <difference>
+                        <property>propulsion/engine/fuel-flow-rate-pps</property>
+                        <property>propulsion/engine/fuel-flow-rate-previous</property>
+                    </difference>
+                    <sum>
+                        <property>simulation/channel-dt</property>
+                        <value>0.00000000001</value>
+                    </sum>
+                </quotient>
+            </function>
+            <output>propulsion/engine/fuel-flow-rate-change</output>
+        </fcs_function>
+
+        <pure_gain>
+            <input>propulsion/engine/fuel-flow-rate-pps</input>
+            <gain>1.0</gain>
+            <output>propulsion/engine/fuel-flow-rate-previous</output>
+        </pure_gain>
+
+        <fcs_function>
+            <!-- transient spike -->
+            <!-- 169 is a randomly chosen number ';,,;' -->
+            <function>
+                <product>
+                    <property>propulsion/engine/fuel-flow-rate-change</property>
+                    <value>69</value>
+                </product>
+            </function>
+            <output>propulsion/engine/egt/transient-spike-prelag</output>
+        </fcs_function>
+
+        <lag_filter>
+            <!-- transient spike lag filter -->
+            <input>propulsion/engine/egt/transient-spike-prelag</input>
+            <c1>propulsion/engine/egt/transient-spike-lag-c1</c1>
+            <output>propulsion/engine/egt/transient-spike</output>
+        </lag_filter>
+
+        <fcs_function>
+            <!-- final target temp -->
+            <function>
+                <sum>
+                    <property>propulsion/engine/egt/fuel-mod</property>
+                    <property>propulsion/engine/egt/density-mod</property>
+                    <property>propulsion/engine/egt/afterburner-mod</property>
+                    <property>propulsion/engine/egt/mach-mod</property>
+                    <property>propulsion/engine/egt/transient-spike</property>
+                </sum>
+            </function>
+            <clipto>
+                <min>0</min>
+                <max>1300</max>
+            </clipto>
+            <output>propulsion/engine/egt/target-c</output>
+        </fcs_function>
+
+        <lag_filter>
+            <!-- transient spike lag filter -->
+            <input>propulsion/engine/egt/target-c</input>
+            <c1>propulsion/engine/egt/final-temp-c1</c1>
+            <output>propulsion/engine/egt/egt-degc</output>
+        </lag_filter>
+
+    </channel>
 </system>
